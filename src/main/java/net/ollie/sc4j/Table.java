@@ -4,19 +4,24 @@ import net.ollie.sc4j.access.Keyed.BiKeyed;
 import net.ollie.sc4j.imposed.Cached;
 
 /**
+ * A cache of values that are {@link #get accessed} by providing a row and
+ * column.
  *
  * @author Ollie
+ * @param <R> row type
+ * @param <C> column type
+ * @param <V> value type
  */
 public interface Table<R, C, V>
         extends BiKeyed<R, C, V>, Cached<java.util.Map.Entry<R, C>, V> {
 
     Set<R> rows();
 
-    Map<C, V> row(R rowKey);
+    Map<C, V> row(R row);
 
     Set<C> columns();
 
-    Map<R, V> column(C columnKey);
+    Map<R, V> column(C column);
 
     @Override
     Table.Mutable<R, C, V> mutable();

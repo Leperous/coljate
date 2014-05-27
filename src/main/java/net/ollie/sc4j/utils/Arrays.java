@@ -45,6 +45,18 @@ public final class Arrays {
         return concatenated;
     }
 
+    public static <V> java.util.List<V> asList(final V... elements) {
+        return java.util.Arrays.asList(elements);
+    }
+
+    public static <V> java.util.List<V> asList(final Iterable<V> iterable) {
+        if (iterable instanceof java.util.List) {
+            return (java.util.List<V>) iterable;
+        } else {
+            throw new UnsupportedOperationException(); //TODO iterable -> list
+        }
+    }
+
     static final class ArrayIterator<V>
             implements Iterator<V> {
 

@@ -14,7 +14,7 @@ import net.ollie.sc4j.utils.Iterables.UnmodifiableIterator;
  * @author Ollie
  */
 public class ImmutableList<V>
-        extends AbstractDelegatedIterable<V>
+        extends AbstractDelegatedIteratable<V>
         implements List.Immutable<V> {
 
     private final List<V> underlying;

@@ -67,10 +67,6 @@ public interface Iteratable<V>
         return defaultValue;
     }
 
-    default boolean equals(final Iterable<?> that) {
-        return Iterables.equals(this, that);
-    }
-
     interface Empty<V>
             extends net.ollie.sc4j.imposed.Empty<V>, Iteratable<V> {
 

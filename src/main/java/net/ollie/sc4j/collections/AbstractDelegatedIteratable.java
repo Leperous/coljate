@@ -3,10 +3,11 @@ package net.ollie.sc4j.collections;
 import net.ollie.sc4j.access.Iteratable;
 
 /**
+ * Delegates operations to some underlying iterable.
  *
  * @author Ollie
  */
-public abstract class AbstractDelegatedIterable<V>
+public abstract class AbstractDelegatedIteratable<V>
         implements Iteratable<V> {
 
     protected abstract Iteratable<V> underlying();

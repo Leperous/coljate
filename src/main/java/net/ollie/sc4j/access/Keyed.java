@@ -12,8 +12,11 @@ import net.ollie.sc4j.Collection;
 import net.ollie.sc4j.imposed.Unique;
 
 /**
+ * A collection of objects that are accessed through providing some kind of key.
  *
  * @author Ollie
+ * @param <K> key type
+ * @param <V> value type
  */
 public interface Keyed<K, V> {
 

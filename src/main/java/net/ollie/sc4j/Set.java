@@ -3,13 +3,14 @@ package net.ollie.sc4j;
 import java.util.function.Function;
 import java.util.function.Predicate;
 
-import javax.annotation.CheckReturnValue;
-
 import net.ollie.sc4j.access.Iteratable;
 import net.ollie.sc4j.access.Traversable;
 import net.ollie.sc4j.imposed.Unique;
 import net.ollie.sc4j.utils.Iterables;
 import net.ollie.sc4j.utils.Iterables.UnmodifiableIterator;
+
+import javax.annotation.CheckReturnValue;
+import javax.annotation.OverridingMethodsMustInvokeSuper;
 
 /**
  * An iterable collection of unique elements.
@@ -36,10 +37,11 @@ public interface Set<V>
     @Override
     Set.Immutable<V> immutable();
 
+    @OverridingMethodsMustInvokeSuper
     default boolean equals(final Set<?> that) {
         return that != null
                 && this.size() == that.size()
-                && this.equals((Iterable<?>) that);
+                && this.containsAll(that);
     }
 
     interface Mutable<V>

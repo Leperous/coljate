@@ -3,10 +3,9 @@ package net.ollie.sc4j.imposed;
 import java.util.Comparator;
 import java.util.NoSuchElementException;
 import java.util.function.Predicate;
-
+import javax.annotation.CheckForNull;
 import javax.annotation.CheckReturnValue;
 import javax.annotation.Nonnull;
-
 import net.ollie.sc4j.access.Traversable;
 
 /**
@@ -18,10 +17,13 @@ import net.ollie.sc4j.access.Traversable;
 public interface Sorted<V>
         extends Traversable<V> {
 
+    @Nonnull
     Comparator<? super V> comparator();
 
+    @CheckForNull
     V first();
 
+    @CheckForNull
     V last();
 
     @Override

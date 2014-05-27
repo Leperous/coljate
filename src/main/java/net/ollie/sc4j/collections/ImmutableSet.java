@@ -12,7 +12,7 @@ import net.ollie.sc4j.utils.Iterables.UnmodifiableIterator;
  * @author Ollie
  */
 public abstract class ImmutableSet<V>
-        extends AbstractDelegatedIterable<V>
+        extends AbstractDelegatedIteratable<V>
         implements Set.Immutable<V> {
 
     private static final long serialVersionUID = 1L;

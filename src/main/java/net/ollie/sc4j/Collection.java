@@ -12,6 +12,7 @@ import net.ollie.sc4j.utils.Iterables;
 /**
  *
  * @author Ollie
+ * @param <V> value type
  * @see java.util.Collection
  */
 public interface Collection<V> {

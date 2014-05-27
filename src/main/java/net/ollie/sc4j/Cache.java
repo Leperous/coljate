@@ -9,6 +9,8 @@ import net.ollie.sc4j.imposed.Computed;
  * A mutable map that may also calculate (and store) values on-demand.
  *
  * @author Ollie
+ * @param <K> key type
+ * @param <V> value type
  */
 public interface Cache<K, V>
         extends Cached.Mutable<K, V>, Computed<K, V> {

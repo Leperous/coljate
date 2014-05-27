@@ -53,12 +53,6 @@ public interface Array<V>
         return this;
     }
 
-    default boolean equals(final Array<?> that) {
-        return that != null
-                && this.size() == that.size()
-                && this.equals((Iterable<?>) that);
-    }
-
     /**
      *
      * @param <V>

@@ -11,6 +11,8 @@ import net.ollie.sc4j.utils.Iterables.UnmodifiableIterator;
 /**
  *
  * @author Ollie
+ * @param <K> key type
+ * @param <V> value type
  */
 public interface Cached<K, V>
         extends Keyed<K, V>, Iteratable<V> {
@@ -50,6 +52,10 @@ public interface Cached<K, V>
     interface Mutable<K, V>
             extends Cached<K, V>, Iteratable.Mutable<V> {
 
+        boolean add(K key, V value);
+
+        boolean addAll(Cached<K, V> keyed);
+
         V put(K key, V value);
 
         Cached<K, V> putAll(Cached<K, V> keyed);
@@ -63,9 +69,9 @@ public interface Cached<K, V>
                     : value;
         }
 
-        boolean replace(K key, V oldValue, V newValue);
-
         V remove(Object key);
+
+        boolean replace(K key, V oldValue, V newValue);
 
     }
 

@@ -7,11 +7,13 @@ import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.stream.Stream;
 
+import net.ollie.sc4j.access.Iteratable;
+import net.ollie.sc4j.utils.Iterables;
+import net.ollie.sc4j.utils.Iterables.UnmodifiableIterator;
+
 import javax.annotation.CheckReturnValue;
 import javax.annotation.Nonnull;
-
-import net.ollie.sc4j.access.Iteratable;
-import net.ollie.sc4j.utils.Iterables.UnmodifiableIterator;
+import javax.annotation.OverridingMethodsMustInvokeSuper;
 
 /**
  * An iterable, sorted collection of objects.
@@ -46,6 +48,13 @@ public interface List<V>
 
     @Override
     List.Immutable<V> immutable();
+
+    @OverridingMethodsMustInvokeSuper
+    default boolean equals(final List<?> that) {
+        return that != null
+                && this.size() == that.size()
+                && Iterables.equals(this, that);
+    }
 
     /**
      * A mutable list.

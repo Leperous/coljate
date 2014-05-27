@@ -7,8 +7,6 @@ import java.util.OptionalInt;
 import java.util.function.Function;
 import java.util.function.Predicate;
 
-import javax.annotation.concurrent.NotThreadSafe;
-
 import net.ollie.sc4j.Array;
 import net.ollie.sc4j.access.Keyed;
 import net.ollie.sc4j.imposed.Unique;
@@ -16,13 +14,15 @@ import net.ollie.sc4j.utils.ArrayLists;
 import net.ollie.sc4j.utils.Arrays;
 import net.ollie.sc4j.utils.Iterables;
 
+import javax.annotation.concurrent.NotThreadSafe;
+
 /**
- * TODO view of an {@code array[]}
- *
  * @author Ollie
+ * @param <V> value type
  */
 @NotThreadSafe
 public abstract class MutableArray<V>
+        extends AbstractArray<V>
         implements Array.Mutable<V> {
 
     public static <V> Array.Mutable<V> empty(final int initialCapacity) {
@@ -46,7 +46,7 @@ public abstract class MutableArray<V>
     }
 
     static class MutableListBackedArray<V>
-            extends AbstractArray<V>
+            extends MutableArray<V>
             implements Array.NonThreadSafeArray<V> {
 
         private final java.util.List<V> underlying;
@@ -198,7 +198,7 @@ public abstract class MutableArray<V>
     }
 
     static class ArrayBackedArray<V>
-            extends AbstractArray<V>
+            extends MutableArray<V>
             implements Array.NonThreadSafeArray<V> {
 
         private V[] array;
@@ -215,7 +215,7 @@ public abstract class MutableArray<V>
             return java.util.Arrays.copyOf(array, size);
         }
 
-        <T> Array.Mutable<T> copy(final T[] array) {
+        <T> Array.Mutable<T> clone(final T[] array) {
             return new ArrayBackedArray<>(array);
         }
 
@@ -280,7 +280,7 @@ public abstract class MutableArray<V>
 
         @Override
         public Array.Mutable<V> mutable() {
-            return this.copy(this.copyArray());
+            return this.clone(this.copyArray());
         }
 
         @Override
@@ -302,7 +302,7 @@ public abstract class MutableArray<V>
 
         @Override
         public Array<V> segment(final int from, final int to) {
-            return this.copy(java.util.Arrays.copyOfRange(array, from, to));
+            return this.clone(java.util.Arrays.copyOfRange(array, from, to));
         }
 
         @Override
