@@ -56,6 +56,10 @@ public interface List<V>
                 && Iterables.equals(this, that);
     }
 
+    default int hash() {
+        return Iterables.productHashCode(this);
+    }
+
     /**
      * A mutable list.
      *

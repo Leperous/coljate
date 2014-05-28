@@ -17,6 +17,13 @@ import net.ollie.sc4j.utils.Iterables.UnmodifiableIterator;
 public interface Cached<K, V>
         extends Keyed<K, V>, Iteratable<V> {
 
+    default V getOrDefault(final Object key, V defaultValue) {
+        final V value = this.get(key);
+        return value == null
+                ? defaultValue
+                : value;
+    }
+
     @Override
     Iteratable<V> values();
 

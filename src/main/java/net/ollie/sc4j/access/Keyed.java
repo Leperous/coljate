@@ -4,12 +4,12 @@ import java.util.Map;
 import java.util.function.Function;
 import java.util.function.Predicate;
 
+import net.ollie.sc4j.Collection;
+import net.ollie.sc4j.imposed.Unique;
+
 import javax.annotation.CheckForNull;
 import javax.annotation.CheckReturnValue;
 import javax.annotation.Nonnull;
-
-import net.ollie.sc4j.Collection;
-import net.ollie.sc4j.imposed.Unique;
 
 /**
  * A collection of objects that are accessed through providing some kind of key.
@@ -21,7 +21,7 @@ import net.ollie.sc4j.imposed.Unique;
 public interface Keyed<K, V> {
 
     @CheckForNull
-    V get(@Nonnull K key);
+    V get(@Nonnull Object key);
 
     @Nonnull
     Unique<K> keys();
@@ -30,6 +30,7 @@ public interface Keyed<K, V> {
         return this.keys().contains(key);
     }
 
+    @Nonnull
     Collection<V> values();
 
     default boolean containsValue(final V value) {
@@ -55,11 +56,16 @@ public interface Keyed<K, V> {
     interface BiKeyed<K1, K2, V>
             extends Keyed<Map.Entry<K1, K2>, V> {
 
-        V get(K1 key1, K2 key2);
+        V get(Object key1, Object key2);
 
         @Override
-        default V get(final Map.Entry<K1, K2> entry) {
-            return this.get(entry.getKey(), entry.getValue());
+        default V get(final Object object) {
+            if (object instanceof Map.Entry) {
+                final Map.Entry<?, ?> that = (Map.Entry) object;
+                return this.get(that.getKey(), that.getValue());
+            } else {
+                return null;
+            }
         }
 
     }

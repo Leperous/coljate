@@ -17,8 +17,8 @@ public interface Indexed<V>
     V get(int index) throws IndexOutOfBoundsException;
 
     @Override
-    default V get(final Integer key) throws IndexOutOfBoundsException {
-        return this.get(key.intValue());
+    default V get(final Object key) throws IndexOutOfBoundsException {
+        return this.get(((Number) key).intValue());
     }
 
     Indexed<V> segment(int from, int to) throws IndexOutOfBoundsException;

@@ -3,19 +3,23 @@ package net.ollie.sc4j;
 import java.util.function.Function;
 import java.util.function.Predicate;
 
-import javax.annotation.CheckReturnValue;
-
 import net.ollie.sc4j.access.Iteratable;
 import net.ollie.sc4j.imposed.Cached;
 import net.ollie.sc4j.utils.Iterables;
 import net.ollie.sc4j.utils.Iterables.UnmodifiableIterator;
 
+import javax.annotation.CheckReturnValue;
+
 /**
  *
  * @author Ollie
+ * @see java.util.Map
  */
 public interface Map<K, V>
         extends Cached<K, V> {
+
+    @Override
+    Map.Mutable<K, V> mutable();
 
     @Override
     Map.Immutable<K, V> immutable();
@@ -43,6 +47,9 @@ public interface Map<K, V>
 
         @CheckReturnValue
         Map.Immutable<K, V> with(K key, V value);
+
+        @CheckReturnValue
+        Map.Immutable<K, V> without(Object key);
 
         @Override
         default Map.Immutable<K, V> immutable() {
@@ -73,7 +80,7 @@ public interface Map<K, V>
         public abstract Iteratable.Empty<V> values();
 
         @Override
-        default V get(final K key) {
+        default V get(final Object key) {
             return null;
         }
 

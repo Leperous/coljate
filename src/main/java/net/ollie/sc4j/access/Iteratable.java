@@ -6,10 +6,10 @@ import java.util.Objects;
 import java.util.function.BiFunction;
 import java.util.function.Predicate;
 
+import net.ollie.sc4j.utils.Iterables;
+
 import javax.annotation.CheckReturnValue;
 import javax.annotation.Nonnull;
-
-import net.ollie.sc4j.utils.Iterables;
 
 /**
  *
@@ -65,6 +65,11 @@ public interface Iteratable<V>
             }
         }
         return defaultValue;
+    }
+
+    default boolean equals(final Iteratable<?> that) {
+        return that != null
+                && Iterables.equals(this, that);
     }
 
     interface Empty<V>

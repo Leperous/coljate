@@ -24,7 +24,7 @@ public interface Interval<V>
     Interval.Immutable<V> immutable();
 
     interface Mutable<V>
-            extends Interval<V>, Sorted.Mutable<V>, Unique.Mutable<V> {
+            extends Interval<V>, Sorted.Mutable<V> {
 
         V setMaximum(V value);
 
@@ -33,7 +33,7 @@ public interface Interval<V>
     }
 
     interface Immutable<V>
-            extends Interval<V>, Sorted.Immutable<V>, Unique.Immutable<V> {
+            extends Interval<V>, Sorted.Immutable<V> {
 
         @Override
         default Interval.Immutable<V> immutable() {

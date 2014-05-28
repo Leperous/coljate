@@ -12,6 +12,8 @@ import javax.annotation.CheckReturnValue;
 import net.ollie.sc4j.Collection;
 import net.ollie.sc4j.access.Iteratable;
 
+import javax.annotation.CheckForNull;
+
 /**
  *
  * @author Ollie
@@ -127,10 +129,18 @@ public final class Iterables {
      * @return
      * @see java.util.Arrays#hashCode(java.lang.Object[])
      */
-    public static int hashCode(final Iterable<?> iterable) {
+    public static int productHashCode(final Iterable<?> iterable) {
         int hash = 1;
         for (final Object element : iterable) {
             hash = 31 * hash + (element == null ? 0 : element.hashCode());
+        }
+        return hash;
+    }
+
+    public static int sumHashCode(final Iterable<?> iterable) {
+        int hash = 0;
+        for (final Object element : iterable) {
+            hash += (element == null ? 0 : element.hashCode());
         }
         return hash;
     }

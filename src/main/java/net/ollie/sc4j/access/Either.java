@@ -11,10 +11,10 @@ public interface Either<V>
     V get(boolean bool);
 
     @Override
-    default V get(final Boolean bool) {
+    default V get(final Object bool) {
         return bool == null
                 ? this.nullValue()
-                : this.get(bool.booleanValue());
+                : this.get(((Boolean) bool).booleanValue());
     }
 
     default V nullValue() {

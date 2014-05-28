@@ -1,5 +1,8 @@
 package net.ollie.sc4j.utils;
 
+import javax.annotation.CheckForNull;
+import javax.annotation.Nonnull;
+
 /**
  *
  * @author Ollie
@@ -7,6 +10,15 @@ package net.ollie.sc4j.utils;
 public final class Conditions {
 
     private Conditions() {
+    }
+
+    @Nonnull
+    public static <T> T checkNotNull(@CheckForNull final T object) {
+        if (object == null) {
+            throw new IllegalArgumentException();
+        } else {
+            return object;
+        }
     }
 
     public static void checkIsPositive(final int i) {

@@ -1,6 +1,5 @@
 package net.ollie.sc4j;
 
-import java.util.Iterator;
 import java.util.function.Function;
 import java.util.function.Predicate;
 
@@ -45,21 +44,49 @@ public interface Set<V>
                 && this.containsAll(that);
     }
 
+    default int hash() {
+        return Iterables.sumHashCode(this);
+    }
+
     interface Mutable<V>
-            extends Set<V>, Traversable.Mutable<V>, Unique.Mutable<V> {
+            extends Set<V>, Traversable.Mutable<V> {
 
         boolean add(V value);
 
-        boolean addAll(Iterable<? extends V> iterable);
-
         boolean remove(Object value);
 
-        boolean removeAll(Iterable<?> iterable);
+        default boolean addAll(final Iterable<? extends V> iterable) {
+            return this.addAll(iterable, V -> true);
+        }
+
+        default boolean addAll(final Iterable<? extends V> iterable, final Predicate<? super V> predicate) {
+            boolean added = false;
+            for (final V value : iterable) {
+                if (predicate.test(value)) {
+                    added |= this.add(value);
+                }
+            }
+            return added;
+        }
+
+        default boolean removeAll(final Iterable<?> iterable) {
+            return this.removeAll(iterable, Object -> true);
+        }
+
+        default <T> boolean removeAll(final Iterable<T> iterable, final Predicate<? super T> predicate) {
+            boolean removed = false;
+            for (final T value : iterable) {
+                if (predicate.test(value)) {
+                    removed |= this.remove(value);
+                }
+            }
+            return removed;
+        }
 
     }
 
     interface Immutable<V>
-            extends Set<V>, Traversable.Immutable<V>, Unique.Immutable<V> {
+            extends Set<V>, Traversable.Immutable<V> {
 
         @CheckReturnValue
         Set.Immutable<V> with(V value);

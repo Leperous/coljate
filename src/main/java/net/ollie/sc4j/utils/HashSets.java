@@ -4,8 +4,6 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.OptionalInt;
 
-import net.ollie.sc4j.utils.Iterables;
-
 /**
  *
  * @author Ollie
