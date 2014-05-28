@@ -12,7 +12,7 @@ import javax.annotation.CheckReturnValue;
 import net.ollie.sc4j.Collection;
 import net.ollie.sc4j.access.Iteratable;
 
-import javax.annotation.CheckForNull;
+import javax.annotation.Nonnull;
 
 /**
  *
@@ -88,11 +88,15 @@ public final class Iterables {
     }
 
     public static <V> UnmodifiableIterator<V> emptyIterator() {
-        return new UnmodifiableIterator<>(Collections.emptyIterator());
+        return new DelegatedUnmodifiableIterator<>(Collections.emptyIterator()); //TODO optimize
+    }
+
+    public static <V> UnmodifiableIterator<V> singletonIterator(@Nonnull final V element) {
+        return new DelegatedUnmodifiableIterator<>(Collections.singleton(element).iterator()); //TODO optimize
     }
 
     public static <V> UnmodifiableIterator<V> unmodifiable(final Iterator<? extends V> iterator) {
-        return new UnmodifiableIterator<>(iterator);
+        return new DelegatedUnmodifiableIterator<>(iterator);
     }
 
     public static OptionalInt indexOf(final Iterable<?> iterable, final Object target) {
@@ -145,12 +149,16 @@ public final class Iterables {
         return hash;
     }
 
-    public static final class UnmodifiableIterator<V>
-            implements Iterator<V> {
+    public interface UnmodifiableIterator<V>
+            extends Iterator<V> {
+    }
+
+    private static class DelegatedUnmodifiableIterator<V>
+            implements UnmodifiableIterator<V> {
 
         private final Iterator<? extends V> iterator;
 
-        protected UnmodifiableIterator(final Iterator<? extends V> iterator) {
+        protected DelegatedUnmodifiableIterator(final Iterator<? extends V> iterator) {
             this.iterator = iterator;
         }
 

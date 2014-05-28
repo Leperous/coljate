@@ -4,7 +4,6 @@ import java.util.function.Function;
 import java.util.function.Predicate;
 
 import net.ollie.sc4j.access.Iteratable;
-import net.ollie.sc4j.access.Traversable;
 import net.ollie.sc4j.imposed.Unique;
 import net.ollie.sc4j.utils.Iterables;
 import net.ollie.sc4j.utils.Iterables.UnmodifiableIterator;
@@ -49,7 +48,7 @@ public interface Set<V>
     }
 
     interface Mutable<V>
-            extends Set<V>, Traversable.Mutable<V> {
+            extends Set<V>, Iteratable.Mutable<V> {
 
         boolean add(V value);
 
@@ -86,7 +85,7 @@ public interface Set<V>
     }
 
     interface Immutable<V>
-            extends Set<V>, Traversable.Immutable<V> {
+            extends Set<V>, Iteratable.Immutable<V> {
 
         @CheckReturnValue
         Set.Immutable<V> with(V value);

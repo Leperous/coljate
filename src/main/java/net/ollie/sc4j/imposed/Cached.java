@@ -1,11 +1,14 @@
 package net.ollie.sc4j.imposed;
 
+import java.util.Iterator;
 import java.util.function.Function;
+import java.util.function.Predicate;
 import java.util.function.Supplier;
 
 import net.ollie.sc4j.Collection;
 import net.ollie.sc4j.access.Iteratable;
 import net.ollie.sc4j.access.Keyed;
+import net.ollie.sc4j.access.Traversable;
 import net.ollie.sc4j.utils.Iterables.UnmodifiableIterator;
 
 /**
@@ -28,6 +31,11 @@ public interface Cached<K, V>
     Iteratable<V> values();
 
     @Override
+    default Iteratable<V> tail() {
+        return this.values().tail();
+    }
+
+    @Override
     default boolean contains(final Object object) {
         return this.values().contains(object);
     }
@@ -38,11 +46,30 @@ public interface Cached<K, V>
     }
 
     @Override
+    Cached<K, V> filterKeys(Predicate<? super K> predicate);
+
+    @Override
+    Cached<K, V> filterValues(Predicate<? super V> predicate);
+
+    @Override
+    default Cached<K, V> filter(final Predicate<? super V> predicate) {
+        return this.filterValues(predicate);
+    }
+
+    @Override
+    <K2> Cached<K2, V> mapKeys(Function<? super K, ? extends K2> function);
+
+    @Override
     <V2> Cached<K, V2> mapValues(Function<? super V, ? extends V2> function);
 
     @Override
     default <V2> Collection<V2> map(final Function<? super V, ? extends V2> function) {
         return this.mapValues(function);
+    }
+
+    @Override
+    default Iterator<V> iterator() {
+        return this.values().iterator();
     }
 
     @Override
@@ -59,9 +86,13 @@ public interface Cached<K, V>
     interface Mutable<K, V>
             extends Cached<K, V>, Iteratable.Mutable<V> {
 
-        boolean add(K key, V value);
+        default boolean add(final K key, final V value) {
+            return this.put(key, value) == null;
+        }
 
-        boolean addAll(Cached<K, V> keyed);
+        default boolean addAll(final Cached<K, V> keyed) {
+            return !this.putAll(keyed).isEmpty();
+        }
 
         V put(K key, V value);
 
@@ -91,7 +122,12 @@ public interface Cached<K, V>
         }
 
         @Override
-        UnmodifiableIterator<V> iterator();
+        Iteratable.Immutable<V> values();
+
+        @Override
+        default UnmodifiableIterator<V> iterator() {
+            return this.values().iterator();
+        }
 
     }
 

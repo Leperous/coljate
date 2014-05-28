@@ -1,10 +1,10 @@
 package net.ollie.sc4j;
 
-import javax.annotation.CheckReturnValue;
-import javax.annotation.Nonnull;
-
 import net.ollie.sc4j.imposed.Sorted;
 import net.ollie.sc4j.imposed.Unique;
+
+import javax.annotation.CheckReturnValue;
+import javax.annotation.Nonnull;
 
 /**
  * A sorted collection of unique elements.
@@ -26,27 +26,27 @@ public interface Interval<V>
     interface Mutable<V>
             extends Interval<V>, Sorted.Mutable<V> {
 
-        V setMaximum(V value);
+        void setFirst(V value);
 
-        V setMinimum(V value);
+        void setLast(V value);
 
     }
 
     interface Immutable<V>
             extends Interval<V>, Sorted.Immutable<V> {
 
+        @CheckReturnValue
+        @Nonnull
+        Interval.Immutable<V> withFirst(V min);
+
+        @CheckReturnValue
+        @Nonnull
+        Interval.Immutable<V> withLast(V max);
+
         @Override
         default Interval.Immutable<V> immutable() {
             return this;
         }
-
-        @CheckReturnValue
-        @Nonnull
-        Interval.Immutable<V> withMaximum(V value);
-
-        @CheckReturnValue
-        @Nonnull
-        Interval.Immutable<V> withMinimum(V value);
 
     }
 

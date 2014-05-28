@@ -1,12 +1,12 @@
 package net.ollie.sc4j.access;
 
-import java.util.Collections;
 import java.util.Iterator;
 import java.util.Objects;
 import java.util.function.BiFunction;
 import java.util.function.Predicate;
 
 import net.ollie.sc4j.utils.Iterables;
+import net.ollie.sc4j.utils.Iterables.UnmodifiableIterator;
 
 import javax.annotation.CheckReturnValue;
 import javax.annotation.Nonnull;
@@ -58,6 +58,9 @@ public interface Iteratable<V>
     }
 
     @Override
+    Iteratable<V> tail();
+
+    @Override
     default V findOrElse(final Predicate<? super V> predicate, final V defaultValue) {
         for (final V element : this) {
             if (predicate.test(element)) {
@@ -72,8 +75,26 @@ public interface Iteratable<V>
                 && Iterables.equals(this, that);
     }
 
+    interface Mutable<V>
+            extends Iteratable<V>, Traversable.Mutable<V> {
+
+    }
+
+    interface Immutable<V>
+            extends Iteratable<V>, Traversable.Immutable<V> {
+
+        @Override
+        UnmodifiableIterator<V> iterator();
+
+        @Override
+        default Iteratable.Immutable<V> immutable() {
+            return this;
+        }
+
+    }
+
     interface Empty<V>
-            extends net.ollie.sc4j.imposed.Empty<V>, Iteratable<V> {
+            extends net.ollie.sc4j.imposed.Empty<V>, Iteratable.Immutable<V> {
 
         @Override
         default boolean isEmpty() {
@@ -101,8 +122,8 @@ public interface Iteratable<V>
         }
 
         @Override
-        default Iterator<V> iterator() {
-            return Collections.emptyIterator();
+        default UnmodifiableIterator<V> iterator() {
+            return Iterables.emptyIterator();
         }
 
         @Override

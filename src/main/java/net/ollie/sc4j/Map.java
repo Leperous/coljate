@@ -19,6 +19,9 @@ public interface Map<K, V>
         extends Cached<K, V> {
 
     @Override
+    Set<K> keys();
+
+    @Override
     Map.Mutable<K, V> mutable();
 
     @Override
@@ -44,6 +47,9 @@ public interface Map<K, V>
      */
     interface Immutable<K, V>
             extends Map<K, V>, Cached.Immutable<K, V> {
+
+        @Override
+        Set.Immutable<K> keys();
 
         @CheckReturnValue
         Map.Immutable<K, V> with(K key, V value);
@@ -77,7 +83,7 @@ public interface Map<K, V>
         }
 
         @Override
-        public abstract Iteratable.Empty<V> values();
+        Iteratable.Empty<V> values();
 
         @Override
         default V get(final Object key) {
@@ -103,18 +109,28 @@ public interface Map<K, V>
         }
 
         @Override
-        default Map<K, V> filterKeys(final Predicate<? super K> predicate) {
+        default Map.Empty<K, V> filter(final Predicate<? super V> predicate) {
             return this;
         }
 
         @Override
-        default Map<K, V> filterValues(Predicate<? super V> predicate) {
+        default Map.Empty<K, V> filterKeys(final Predicate<? super K> predicate) {
+            return this;
+        }
+
+        @Override
+        default Map.Empty<K, V> filterValues(Predicate<? super V> predicate) {
             return this;
         }
 
         @Override
         public default UnmodifiableIterator<V> iterator() {
             return Iterables.emptyIterator();
+        }
+
+        @Override
+        public default Iteratable.Empty<V> tail() {
+            return this.values().tail();
         }
 
     }

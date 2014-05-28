@@ -1,5 +1,7 @@
 package net.ollie.sc4j;
 
+import java.util.function.Function;
+
 import net.ollie.sc4j.access.Keyed.BiKeyed;
 import net.ollie.sc4j.imposed.Cached;
 
@@ -24,6 +26,9 @@ public interface Table<R, C, V>
     Map<R, V> column(C column);
 
     @Override
+    <V2> Table<R, C, V2> mapValues(Function<? super V, ? extends V2> function);
+
+    @Override
     Table.Mutable<R, C, V> mutable();
 
     @Override
@@ -43,6 +48,18 @@ public interface Table<R, C, V>
 
     interface Immutable<R, C, V>
             extends Table<R, C, V>, Cached.Immutable<java.util.Map.Entry<R, C>, V> {
+
+        @Override
+        Map.Immutable<C, V> row(R row);
+
+        @Override
+        Set.Immutable<C> columns();
+
+        @Override
+        Map.Immutable<R, V> column(C column);
+
+        @Override
+        <V2> Table.Immutable<R, C, V2> mapValues(Function<? super V, ? extends V2> function);
 
         @Override
         default Table.Immutable<R, C, V> immutable() {
