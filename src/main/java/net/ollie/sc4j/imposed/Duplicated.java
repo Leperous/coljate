@@ -3,6 +3,8 @@ package net.ollie.sc4j.imposed;
 import net.ollie.sc4j.Collection;
 import net.ollie.sc4j.access.Keyed;
 
+import javax.annotation.Nonnull;
+
 /**
  *
  * @author Ollie
@@ -14,6 +16,7 @@ public interface Duplicated<V>
     int count(V value);
 
     @Override
+    @Nonnull
     default Integer get(final V value) {
         return this.count(value);
     }

@@ -58,7 +58,7 @@ public interface Keyed<K, V> {
         V get(K1 key1, K2 key2);
 
         @Override
-        default V get(Map.Entry<K1, K2> entry) {
+        default V get(final Map.Entry<K1, K2> entry) {
             return this.get(entry.getKey(), entry.getValue());
         }
 

@@ -1,5 +1,6 @@
 package net.ollie.sc4j;
 
+import java.util.Iterator;
 import java.util.function.Function;
 import java.util.function.Predicate;
 
@@ -64,7 +65,7 @@ public interface Set<V>
         Set.Immutable<V> with(V value);
 
         @CheckReturnValue
-        Set.Immutable<V> without(Object object);
+        Set.Immutable<V> without(Object value);
 
         @Override
         Set.Immutable<V> tail();

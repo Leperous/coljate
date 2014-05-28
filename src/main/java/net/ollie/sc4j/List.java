@@ -72,10 +72,10 @@ public interface List<V>
 
         void suffixAll(Iterable<? extends V> values);
 
-        default boolean removeFirst(final Object object) {
+        default boolean removeFirst(final Object value) {
             final Iterator<V> iterator = this.iterator();
             while (iterator.hasNext()) {
-                if (Objects.equals(iterator.next(), object)) {
+                if (Objects.equals(iterator.next(), value)) {
                     iterator.remove();
                     return true;
                 }
@@ -83,11 +83,11 @@ public interface List<V>
             return false;
         }
 
-        default int removeAll(Object object) {
+        default int removeAll(final Object value) {
             int removed = 0;
             for (final Iterator<V> iterator = this.iterator(); iterator.hasNext();) {
                 final V next = iterator.next();
-                if (Objects.equals(next, object)) {
+                if (Objects.equals(next, value)) {
                     iterator.remove();
                     removed++;
                 }
