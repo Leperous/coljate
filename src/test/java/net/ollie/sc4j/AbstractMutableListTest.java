@@ -1,6 +1,9 @@
 package net.ollie.sc4j;
 
 import java.util.Arrays;
+
+import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.assertThat;
 import org.junit.Test;
 
 /**
@@ -9,7 +12,7 @@ import org.junit.Test;
  */
 public abstract class AbstractMutableListTest<C extends List.Mutable<Object>>
         extends AbstractCollectionTest<C> {
-    
+
     @Test
     public void shouldPrefix() {
         final Object o1 = new Object(), o2 = new Object();
@@ -40,6 +43,19 @@ public abstract class AbstractMutableListTest<C extends List.Mutable<Object>>
         final C list = this.create(o1);
         list.suffixAll(Arrays.asList(o2, o3));
         assertContains(list, o1, o2, o3);
+    }
+
+    @Override
+    protected void assertContains(final C collection, final Object... objects) {
+        super.assertContains(collection, objects);
+        if (objects.length > 0) {
+            assertThat(collection.head(), is(objects[0]));
+        }
+        if (objects.length > 1) {
+            final Object[] tail = new Object[objects.length - 1];
+            System.arraycopy(objects, 1, tail, 0, objects.length - 1);
+            assertThat(collection.tail(), is(this.create(tail)));
+        }
     }
 
 }
