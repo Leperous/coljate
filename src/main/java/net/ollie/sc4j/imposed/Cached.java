@@ -8,7 +8,6 @@ import java.util.function.Supplier;
 import net.ollie.sc4j.Collection;
 import net.ollie.sc4j.access.Iteratable;
 import net.ollie.sc4j.access.Keyed;
-import net.ollie.sc4j.access.Traversable;
 import net.ollie.sc4j.utils.Iterables.UnmodifiableIterator;
 
 /**

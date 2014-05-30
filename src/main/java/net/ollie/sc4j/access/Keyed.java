@@ -68,6 +68,10 @@ public interface Keyed<K, V> {
             }
         }
 
+        default V get(final Map.Entry<? extends K1, ? extends V> entry) {
+            return this.get(entry.getKey(), entry.getValue());
+        }
+
     }
 
 }
