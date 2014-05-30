@@ -12,3 +12,5 @@ Inspired by the SLF4J re-working of loggers, this project aims to redefine Java'
   * Unifying hitherto disparate methods and interfaces, such as unifying maps keyed by integers and arrays.
   * Maximizing extensibility and minimizing repetition by taking advantage of mixin.
   * Remaining open for extension.
+
+See https://github.com/Leperous/coljate-native for implementations backed by native Java Collections.
