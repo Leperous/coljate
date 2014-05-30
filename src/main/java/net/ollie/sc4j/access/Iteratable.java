@@ -75,6 +75,10 @@ public interface Iteratable<V>
                 && Iterables.equals(this, that);
     }
 
+    default int hash() {
+        return Iterables.sumHashCode(this); //Ignore order
+    }
+
     interface Mutable<V>
             extends Iteratable<V>, Traversable.Mutable<V> {
 

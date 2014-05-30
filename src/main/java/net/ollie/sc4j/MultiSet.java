@@ -13,7 +13,7 @@ import javax.annotation.Nonnull;
  * @author Ollie
  * @see Set
  */
-public interface Multiset<V>
+public interface MultiSet<V>
         extends Set<V>, Duplicated<V> {
 
     @Override
@@ -23,18 +23,18 @@ public interface Multiset<V>
     Iteratable<NonNegative> values();
 
     @Override
-    Multiset<V> filter(Predicate<? super V> predicate);
+    MultiSet<V> filter(Predicate<? super V> predicate);
 
     @Nonnull
     Map<V, NonNegative> map();
 
     @Override
-    Multiset.Mutable<V> mutable();
+    MultiSet.Mutable<V> mutable();
 
     @Override
-    Multiset.Immutable<V> immutable();
+    MultiSet.Immutable<V> immutable();
 
-    default boolean equals(final Multiset<?> that) {
+    default boolean equals(final MultiSet<?> that) {
         return that != null
                 && this.keys().equals(that.keys())
                 && this.values().equals(that.values());
@@ -46,7 +46,7 @@ public interface Multiset<V>
     }
 
     interface Mutable<V>
-            extends Multiset<V>, Set.Mutable<V> {
+            extends MultiSet<V>, Set.Mutable<V> {
 
         /**
          * Increment the given value by 1. If the value is not present, it is
@@ -69,15 +69,15 @@ public interface Multiset<V>
     }
 
     interface Immutable<V>
-            extends Multiset<V>, Set.Immutable<V> {
+            extends MultiSet<V>, Set.Immutable<V> {
 
         @Override
-        default Multiset.Immutable<V> immutable() {
+        default MultiSet.Immutable<V> immutable() {
             return this;
         }
 
         @Override
-        Multiset.Immutable<V> filter(Predicate<? super V> predicate);
+        MultiSet.Immutable<V> filter(Predicate<? super V> predicate);
 
         @Override
         Map.Immutable<V, NonNegative> map();

@@ -53,6 +53,10 @@ public interface Array<V>
         return this;
     }
 
+    default boolean equals(final Array<?> that) {
+        return List.super.equals(that);
+    }
+
     /**
      *
      * @param <V>

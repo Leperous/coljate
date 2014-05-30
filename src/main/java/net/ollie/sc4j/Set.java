@@ -43,6 +43,7 @@ public interface Set<V>
                 && this.containsAll(that);
     }
 
+    @Override
     default int hash() {
         return Iterables.sumHashCode(this);
     }

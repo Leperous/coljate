@@ -15,7 +15,7 @@ import org.junit.Test;
  * @author Ollie
  */
 @SuppressWarnings("unchecked")
-public abstract class AbstractMutableMultisetTest<C extends Multiset.Mutable<Object>>
+public abstract class AbstractMutableMultisetTest<C extends MultiSet.Mutable<Object>>
         extends AbstractCollectionTest<C> {
 
     @Test
