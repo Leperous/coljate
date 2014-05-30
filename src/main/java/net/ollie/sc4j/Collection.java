@@ -10,6 +10,7 @@ import javax.annotation.Nonnull;
 import net.ollie.sc4j.utils.Iterables;
 
 /**
+ * The super-type of all collections.
  *
  * @author Ollie
  * @param <V> value type
