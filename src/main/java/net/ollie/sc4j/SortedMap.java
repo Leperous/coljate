@@ -26,6 +26,11 @@ public interface SortedMap<K, V>
     @Override
     SortedMap.Immutable<K, V> immutableCopy();
 
+    @Override
+    default int hash() {
+        return Map.super.hash();
+    }
+
     interface Mutable<K, V>
             extends SortedMap<K, V>, Map.Mutable<K, V>, Sorted.Mutable<V> {
 

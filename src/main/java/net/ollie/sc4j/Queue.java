@@ -6,7 +6,7 @@ import javax.annotation.CheckForNull;
 import javax.annotation.Nonnull;
 
 /**
- * A mutable sequence where the head is m
+ * A mutable first-in-first-out sequence.
  *
  * @author Ollie
  * @see java.util.Queue
@@ -21,6 +21,11 @@ public interface Queue<V>
 
     @CheckForNull
     V peek();
+
+    @Override
+    default V first() {
+        return this.peek();
+    }
 
     @Nonnull
     V element() throws NoSuchElementException;

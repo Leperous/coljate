@@ -1,6 +1,7 @@
 package net.ollie.sc4j;
 
 import net.ollie.sc4j.imposed.Sorted;
+import net.ollie.sc4j.utils.Iterables;
 
 /**
  *
@@ -19,6 +20,17 @@ public interface SortedSet<V>
 
     @Override
     SortedSet.Immutable<V> immutableCopy();
+
+    default boolean equals(final SortedSet<?> that) {
+        return that != null
+                && this.size() == that.size()
+                && Iterables.equals(this, that);
+    }
+
+    @Override
+    default int hash() {
+        return Iterables.productHashCode(this);
+    }
 
     interface Mutable<V>
             extends SortedSet<V>, Set.Mutable<V>, Sorted.Mutable<V> {

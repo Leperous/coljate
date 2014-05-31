@@ -2,6 +2,7 @@ package net.ollie.sc4j.imposed;
 
 import java.util.Comparator;
 import java.util.NoSuchElementException;
+import java.util.Objects;
 import java.util.function.Predicate;
 
 import net.ollie.sc4j.access.Traversable;
@@ -56,6 +57,18 @@ public interface Sorted<V>
      */
     @Override
     Sorted.Immutable<V> immutableCopy();
+
+    default boolean equals(final Sorted<?> that) {
+        return that != null && this.isEmpty()
+                ? that.isEmpty()
+                : Objects.equals(this.head(), that.head());
+    }
+
+    default int hash() {
+        return this.isEmpty()
+                ? 1
+                : Objects.hashCode(this.head()) * Objects.hashCode(this.tail());
+    }
 
     /**
      *

@@ -59,6 +59,11 @@ public interface Sequence<V>
             return this;
         }
 
+        @Override
+        default V findOrElse(Predicate<? super V> predicate, V defaultValue) {
+            return net.ollie.sc4j.imposed.Empty.super.findOrElse(predicate, defaultValue);
+        }
+
     }
 
 }
