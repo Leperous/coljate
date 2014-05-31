@@ -4,6 +4,7 @@ import java.util.OptionalInt;
 import java.util.function.Function;
 import java.util.function.Predicate;
 
+import net.ollie.sc4j.SortedSet;
 import net.ollie.sc4j.utils.Iterables;
 
 /**
@@ -24,6 +25,9 @@ public interface Indexed<V>
     }
 
     Indexed<V> segment(int from, int to) throws IndexOutOfBoundsException;
+
+    @Override
+    SortedSet<Integer> keys();
 
     @Override
     Indexed<V> tail();
@@ -78,7 +82,9 @@ public interface Indexed<V>
 
         void insert(int index, V value) throws IndexOutOfBoundsException;
 
-        V remove(int index) throws IndexOutOfBoundsException;
+        default V remove(final int index) throws IndexOutOfBoundsException {
+            return this.set(index, null);
+        }
 
     }
 

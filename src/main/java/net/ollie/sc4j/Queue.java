@@ -6,7 +6,7 @@ import javax.annotation.CheckForNull;
 import javax.annotation.Nonnull;
 
 /**
- * A mutable sequence where the head can be operated on.
+ * A mutable sequence where the head is m
  *
  * @author Ollie
  * @see java.util.Queue
@@ -28,6 +28,13 @@ public interface Queue<V>
     @Nonnull
     V remove() throws NoSuchElementException;
 
+    @Override
+    Queue<V> tail();
+
+    @Nonnull
     Sequence<V> drain();
+
+    @Override
+    Queue<V> mutable();
 
 }

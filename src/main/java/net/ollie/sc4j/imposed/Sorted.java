@@ -3,10 +3,12 @@ package net.ollie.sc4j.imposed;
 import java.util.Comparator;
 import java.util.NoSuchElementException;
 import java.util.function.Predicate;
+
+import net.ollie.sc4j.access.Traversable;
+
 import javax.annotation.CheckForNull;
 import javax.annotation.CheckReturnValue;
 import javax.annotation.Nonnull;
-import net.ollie.sc4j.access.Traversable;
 
 /**
  * Ordered and iterable.
@@ -31,7 +33,8 @@ public interface Sorted<V>
         return this.first();
     }
 
-    default V last(Predicate<? super V> predicate) throws NoSuchElementException {
+    @Nonnull
+    default V last(final Predicate<? super V> predicate) throws NoSuchElementException {
         final V last = this.lastOrElse(predicate, null);
         if (last == null) {
             throw new NoSuchElementException();

@@ -32,10 +32,17 @@ public interface Array<V>
     Array<V> filter(Predicate<? super V> predicate);
 
     @Override
-    Array<V> filterKeys(Predicate<? super Integer> predicate);
+    default Array<V> filterValues(final Predicate<? super V> predicate) {
+        return this.filter(predicate);
+    }
 
     @Override
     <V2> Array<V2> map(Function<? super V, ? extends V2> function);
+
+    @Override
+    default <V2> Array<V2> mapValues(Function<? super V, ? extends V2> function) {
+        return this.map(function);
+    }
 
     @Override
     default Array<V> toArray() {
@@ -64,7 +71,21 @@ public interface Array<V>
     interface Mutable<V>
             extends Array<V>, List.Mutable<V>, Indexed.Mutable<V> {
 
+        @Override
+        default V first() {
+            return this.iterator().next();
+        }
+
         void resize(int size);
+
+        @Override
+        default void prefix(final V value) {
+            this.insert(this.start(), value);
+        }
+
+        default int start() {
+            return 0;
+        }
 
     }
 
