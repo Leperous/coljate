@@ -28,4 +28,6 @@ public interface Queue<V>
     @Nonnull
     V remove() throws NoSuchElementException;
 
+    Sequence<V> drain();
+
 }
