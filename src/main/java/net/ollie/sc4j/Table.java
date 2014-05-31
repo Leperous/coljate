@@ -42,6 +42,18 @@ public interface Table<R, C, V>
 
         V put(R row, C column, V value);
 
+        V remove(Object row, Object column);
+
+        @Override
+        default V remove(final Object object) {
+            if (object instanceof Map.Entry) {
+                final Map.Entry<?, ?> location = (Map.Entry) object;
+                return this.remove(location.key(), location.value());
+            } else {
+                return null;
+            }
+        }
+
         @Override
         default V put(final Map.Entry<R, C> location, final V value) {
             return this.put(location.key(), location.value(), value);

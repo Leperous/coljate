@@ -10,6 +10,9 @@ import net.ollie.sc4j.access.Iteratable;
 import net.ollie.sc4j.access.Keyed;
 import net.ollie.sc4j.utils.Iterables.UnmodifiableIterator;
 
+import javax.annotation.CheckForNull;
+import javax.annotation.Nonnull;
+
 /**
  *
  * @author Ollie
@@ -93,19 +96,24 @@ public interface Cached<K, V>
             return !this.putAll(keyed).isEmpty();
         }
 
+        @CheckForNull
         V put(K key, V value);
 
+        @Nonnull
         Cached<K, V> putAll(Cached<K, V> keyed);
 
+        @CheckForNull
         V putIfAbsent(K key, V value);
 
-        default V putIfAbsent(K key, Supplier<? extends V> supplier) {
+        @CheckForNull
+        default V putIfAbsent(final K key, final Supplier<? extends V> supplier) {
             final V value = this.get(key);
             return value == null
                     ? this.putIfAbsent(key, supplier.get())
                     : value;
         }
 
+        @CheckForNull
         V remove(Object key);
 
         boolean replace(K key, V oldValue, V newValue);
