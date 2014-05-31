@@ -17,7 +17,7 @@ public interface Mutability<V extends Mutability<V>> {
 
     @javax.annotation.concurrent.Immutable
     interface Immutable
-            extends Mutability<Immutable>, ThreadSafe {
+            extends Mutability<Immutable> {
 
         Mutable mutable();
 
