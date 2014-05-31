@@ -40,6 +40,9 @@ public interface Map<K, V>
     Map<K, V> filterValues(Predicate<? super V> predicate);
 
     @Override
+    <V2> Map<K, V2> mapValues(Function<? super V, ? extends V2> function);
+
+    @Override
     Map.Mutable<K, V> mutable();
 
     @Override
@@ -136,6 +139,12 @@ public interface Map<K, V>
 
         @CheckReturnValue
         Map.Immutable<K, V> without(Object key);
+
+        @Override
+        Map.Immutable<K, V> filterKeys(Predicate<? super K> predicate);
+
+        @Override
+        Map.Immutable<K, V> filterValues(Predicate<? super V> predicate);
 
         @Override
         default Map.Immutable<K, V> immutable() {
