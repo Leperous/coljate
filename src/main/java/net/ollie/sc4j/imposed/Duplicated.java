@@ -2,7 +2,7 @@ package net.ollie.sc4j.imposed;
 
 import net.ollie.sc4j.Collection;
 import net.ollie.sc4j.access.Keyed;
-import net.ollie.sc4j.utils.NonNegative;
+import net.ollie.sc4j.utils.NonNegativeInteger;
 
 import javax.annotation.Nonnull;
 
@@ -12,18 +12,14 @@ import javax.annotation.Nonnull;
  * @see Unique
  */
 public interface Duplicated<V>
-        extends Collection<V>, Keyed<V, NonNegative> {
+        extends Collection<V>, Keyed<V, NonNegativeInteger> {
 
-    int rawCount(Object value);
-
-    default NonNegative count(final Object value) {
-        return NonNegative.of(this.rawCount(value));
-    }
+    int count(Object value);
 
     @Override
     @Nonnull
-    default NonNegative get(final Object value) {
-        return this.count(value);
+    default NonNegativeInteger get(final Object value) {
+        return NonNegativeInteger.of(this.count(value));
     }
 
 }

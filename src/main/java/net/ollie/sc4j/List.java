@@ -52,10 +52,10 @@ public interface List<V>
     @OverridingMethodsMustInvokeSuper
     default boolean equals(final List<?> that) {
         return that != null
-                && this.size() == that.size()
                 && Iterables.equals(this, that);
     }
 
+    @Override
     default int hash() {
         return Iterables.productHashCode(this);
     }

@@ -7,7 +7,7 @@ import java.util.function.Predicate;
 import net.ollie.sc4j.utils.Iterables;
 
 /**
- * Keyed by an integer.
+ * Keyed by a number.
  *
  * @author Ollie
  */
@@ -18,7 +18,9 @@ public interface Indexed<V>
 
     @Override
     default V get(final Object key) throws IndexOutOfBoundsException {
-        return this.get(((Number) key).intValue());
+        return key instanceof Number
+                ? this.get(((Number) key).intValue())
+                : null;
     }
 
     Indexed<V> segment(int from, int to) throws IndexOutOfBoundsException;

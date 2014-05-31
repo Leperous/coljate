@@ -14,6 +14,7 @@ import javax.annotation.CheckReturnValue;
  *
  * @author Ollie
  * @see java.util.Map
+ * @see Cache
  */
 public interface Map<K, V>
         extends Cached<K, V> {

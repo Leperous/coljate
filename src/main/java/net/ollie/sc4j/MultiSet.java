@@ -4,7 +4,7 @@ import java.util.function.Predicate;
 
 import net.ollie.sc4j.access.Iteratable;
 import net.ollie.sc4j.imposed.Duplicated;
-import net.ollie.sc4j.utils.NonNegative;
+import net.ollie.sc4j.utils.NonNegativeInteger;
 
 import javax.annotation.Nonnull;
 
@@ -20,13 +20,13 @@ public interface MultiSet<V>
     Set<V> keys();
 
     @Override
-    Iteratable<NonNegative> values();
+    Iteratable<NonNegativeInteger> values();
 
     @Override
     MultiSet<V> filter(Predicate<? super V> predicate);
 
     @Nonnull
-    Map<V, NonNegative> map();
+    Map<V, NonNegativeInteger> map();
 
     @Override
     MultiSet.Mutable<V> mutable();
@@ -59,7 +59,7 @@ public interface MultiSet<V>
          */
         int increment(V value);
 
-        int decrement(Object value);
+        int decrement(V value);
 
         @Override
         default boolean add(final V value) {
@@ -80,7 +80,7 @@ public interface MultiSet<V>
         MultiSet.Immutable<V> filter(Predicate<? super V> predicate);
 
         @Override
-        Map.Immutable<V, NonNegative> map();
+        Map.Immutable<V, NonNegativeInteger> map();
 
     }
 
