@@ -1,8 +1,11 @@
 package net.ollie.sc4j.utils;
 
+import java.util.Collections;
 import java.util.Iterator;
+import java.util.concurrent.atomic.AtomicReferenceArray;
 import java.util.function.Function;
-import java.util.function.Supplier;
+
+import javax.annotation.Nonnull;
 
 /**
  *
@@ -21,8 +24,23 @@ public final class Iterators {
         return new TransformedIterator<>(iterable.iterator(), function);
     }
 
-    public static <V> Iterator<V> yield(final Supplier<Boolean> hasNext, final Supplier<? extends V> next) {
-        return new YieldingIterator<>(hasNext, next);
+    public static <V> Iterator<V> of(final AtomicReferenceArray<? extends V> array) {
+        return new AtomicReferenceArrayIterator<>(array);
+    }
+
+    public static <V> UnmodifiableIterator<V> empty() {
+        return new DelegatedUnmodifiableIterator<>(Collections.emptyIterator()); //TODO optimize
+    }
+
+    public static <V> UnmodifiableIterator<V> singleton(@Nonnull final V element) {
+        return new DelegatedUnmodifiableIterator<>(Collections.singleton(element).iterator()); //TODO optimize
+    }
+
+    @SuppressWarnings("unchecked")
+    public static <V> UnmodifiableIterator<V> unmodifiable(final Iterator<? extends V> iterator) {
+        return iterator instanceof UnmodifiableIterator
+                ? (UnmodifiableIterator<V>) iterator
+                : new DelegatedUnmodifiableIterator<>(iterator);
     }
 
     private static final class ArrayIterator<V>
@@ -75,25 +93,45 @@ public final class Iterators {
 
     }
 
-    private static class YieldingIterator<V>
+    private static final class AtomicReferenceArrayIterator<V>
             implements Iterator<V> {
 
-        private final Supplier<Boolean> hasNext;
-        private final Supplier<? extends V> next;
+        private final AtomicReferenceArray<? extends V> array;
+        int index;
 
-        YieldingIterator(final Supplier<Boolean> hasNext, final Supplier<? extends V> next) {
-            this.hasNext = hasNext;
-            this.next = next;
+        AtomicReferenceArrayIterator(final AtomicReferenceArray<? extends V> array) {
+            this.array = array;
         }
 
         @Override
         public boolean hasNext() {
-            return hasNext.get();
+            return index < array.length();
         }
 
         @Override
         public V next() {
-            return next.get();
+            return array.get(index++);
+        }
+
+    }
+
+    private static class DelegatedUnmodifiableIterator<V>
+            implements UnmodifiableIterator<V> {
+
+        private final Iterator<? extends V> iterator;
+
+        protected DelegatedUnmodifiableIterator(final Iterator<? extends V> iterator) {
+            this.iterator = iterator;
+        }
+
+        @Override
+        public boolean hasNext() {
+            return iterator.hasNext();
+        }
+
+        @Override
+        public V next() {
+            return iterator.next();
         }
 
     }

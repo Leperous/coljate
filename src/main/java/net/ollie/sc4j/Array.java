@@ -16,7 +16,7 @@ import net.ollie.sc4j.utils.IndexedComparator;
  */
 public interface Array<V>
         extends List<V>, Indexed<V> {
-
+    
     @Override
     default Comparator<? super V> comparator() {
         return new IndexedComparator<>(this);

@@ -20,7 +20,7 @@ public final class Arrays {
 
     public static <V> Iterator<V> iterator(final V[] array) {
         return array.length == 0
-                ? Iterables.emptyIterator()
+                ? Iterators.empty()
                 : new ArrayIterator<>(array);
     }
 

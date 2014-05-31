@@ -9,7 +9,7 @@ import java.util.stream.Stream;
 
 import net.ollie.sc4j.access.Iteratable;
 import net.ollie.sc4j.utils.Iterables;
-import net.ollie.sc4j.utils.Iterables.UnmodifiableIterator;
+import net.ollie.sc4j.utils.UnmodifiableIterator;
 
 import javax.annotation.CheckReturnValue;
 import javax.annotation.Nonnull;
@@ -24,7 +24,7 @@ import javax.annotation.OverridingMethodsMustInvokeSuper;
  */
 public interface List<V>
         extends Sequence<V>, Iteratable<V> {
-
+    
     @Override
     default V head() {
         return Sequence.super.head();

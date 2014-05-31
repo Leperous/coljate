@@ -96,6 +96,9 @@ public interface Indexed<V>
             extends Indexed<V>, Iteratable.Immutable<V> {
 
         @Override
+        Indexed.Immutable<V> tail();
+
+        @Override
         default Indexed.Immutable<V> values() {
             return this;
         }

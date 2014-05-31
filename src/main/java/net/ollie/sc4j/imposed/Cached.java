@@ -8,7 +8,7 @@ import java.util.function.Supplier;
 import net.ollie.sc4j.Collection;
 import net.ollie.sc4j.access.Iteratable;
 import net.ollie.sc4j.access.Keyed;
-import net.ollie.sc4j.utils.Iterables.UnmodifiableIterator;
+import net.ollie.sc4j.utils.UnmodifiableIterator;
 
 import javax.annotation.CheckForNull;
 import javax.annotation.Nonnull;
@@ -122,6 +122,11 @@ public interface Cached<K, V>
 
     interface Immutable<K, V>
             extends Cached<K, V>, Iteratable.Immutable<V> {
+
+        @Override
+        default Iteratable.Immutable<V> tail() {
+            return Cached.super.tail().immutableCopy();
+        }
 
         @Override
         default Cached.Immutable<K, V> immutableCopy() {

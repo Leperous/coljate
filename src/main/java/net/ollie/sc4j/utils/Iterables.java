@@ -87,18 +87,6 @@ public final class Iterables {
         throw new UnsupportedOperationException(); //TODO filter iterable
     }
 
-    public static <V> UnmodifiableIterator<V> emptyIterator() {
-        return new DelegatedUnmodifiableIterator<>(Collections.emptyIterator()); //TODO optimize
-    }
-
-    public static <V> UnmodifiableIterator<V> singletonIterator(@Nonnull final V element) {
-        return new DelegatedUnmodifiableIterator<>(Collections.singleton(element).iterator()); //TODO optimize
-    }
-
-    public static <V> UnmodifiableIterator<V> unmodifiable(final Iterator<? extends V> iterator) {
-        return new DelegatedUnmodifiableIterator<>(iterator);
-    }
-
     public static OptionalInt indexOf(final Iterable<?> iterable, final Object target) {
         int index = 0;
         for (final Iterator<?> iterator = iterable.iterator(); iterator.hasNext();) {
@@ -147,31 +135,6 @@ public final class Iterables {
             hash += (element == null ? 0 : element.hashCode());
         }
         return hash;
-    }
-
-    public interface UnmodifiableIterator<V>
-            extends Iterator<V> {
-    }
-
-    private static class DelegatedUnmodifiableIterator<V>
-            implements UnmodifiableIterator<V> {
-
-        private final Iterator<? extends V> iterator;
-
-        protected DelegatedUnmodifiableIterator(final Iterator<? extends V> iterator) {
-            this.iterator = iterator;
-        }
-
-        @Override
-        public boolean hasNext() {
-            return iterator.hasNext();
-        }
-
-        @Override
-        public V next() {
-            return iterator.next();
-        }
-
     }
 
 }

@@ -6,7 +6,7 @@ import java.util.function.Predicate;
 import net.ollie.sc4j.access.Iteratable;
 import net.ollie.sc4j.imposed.Unique;
 import net.ollie.sc4j.utils.Iterables;
-import net.ollie.sc4j.utils.Iterables.UnmodifiableIterator;
+import net.ollie.sc4j.utils.UnmodifiableIterator;
 
 import javax.annotation.CheckReturnValue;
 import javax.annotation.OverridingMethodsMustInvokeSuper;
@@ -108,41 +108,6 @@ public interface Set<V>
 
         @Override
         default Set.Immutable<V> immutableCopy() {
-            return this;
-        }
-
-    }
-
-    /**
-     *
-     * @param <V>
-     */
-    interface Empty<V>
-            extends Iteratable.Empty<V>, Set.Immutable<V> {
-
-        @Override
-        default Set.Empty<V> filter(Predicate<? super V> predicate) {
-            return this;
-        }
-
-        @Override
-        default Set.Empty<V> tail() {
-            return this;
-        }
-
-        @Override
-        default UnmodifiableIterator<V> iterator() {
-            return Iterables.emptyIterator();
-        }
-
-        @Override
-        @SuppressWarnings("unchecked")
-        default <V2> Set.Empty<V2> map(Function<? super V, ? extends V2> function) {
-            return (Set.Empty<V2>) this;
-        }
-
-        @Override
-        default Set.Empty<V> immutableCopy() {
             return this;
         }
 

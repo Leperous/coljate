@@ -3,10 +3,13 @@ package net.ollie.sc4j.access;
 import java.util.Iterator;
 import java.util.Objects;
 import java.util.function.BiFunction;
+import java.util.function.Function;
 import java.util.function.Predicate;
 
+import net.ollie.sc4j.utils.Arrays;
 import net.ollie.sc4j.utils.Iterables;
-import net.ollie.sc4j.utils.Iterables.UnmodifiableIterator;
+import net.ollie.sc4j.utils.Iterators;
+import net.ollie.sc4j.utils.UnmodifiableIterator;
 
 import javax.annotation.CheckReturnValue;
 import javax.annotation.Nonnull;
@@ -95,6 +98,9 @@ public interface Iteratable<V>
             extends Iteratable<V>, Traversable.Immutable<V> {
 
         @Override
+        Iteratable.Immutable<V> tail();
+
+        @Override
         UnmodifiableIterator<V> iterator();
 
         @Override
@@ -104,47 +110,106 @@ public interface Iteratable<V>
 
     }
 
-    interface Empty<V>
-            extends net.ollie.sc4j.imposed.Empty<V>, Iteratable.Immutable<V> {
+    abstract class Empty<V>
+            implements Iteratable.Immutable<V> {
 
         @Override
-        default boolean isEmpty() {
-            return net.ollie.sc4j.imposed.Empty.super.isEmpty();
+        public UnmodifiableIterator<V> iterator() {
+            return Iterators.empty();
         }
 
         @Override
-        default int size() {
-            return 0;
+        public Object[] toRawArray() {
+            return Arrays.empty();
         }
 
         @Override
-        default boolean contains(final Object object) {
-            return net.ollie.sc4j.imposed.Empty.super.contains(object);
-        }
-
-        @Override
-        default V head() {
-            return null;
-        }
-
-        @Override
-        default Empty<V> tail() {
+        public Iteratable.Immutable<V> tail() {
             return this;
         }
 
         @Override
-        default UnmodifiableIterator<V> iterator() {
-            return Iterables.emptyIterator();
+        public V head() {
+            return null;
         }
 
         @Override
-        default <R> R reduce(final BiFunction<R, V, ? extends R> function, final R initial) {
-            return initial;
+        public boolean isEmpty() {
+            return true;
         }
 
         @Override
-        default V findOrElse(Predicate<? super V> predicate, V defaultValue) {
-            return net.ollie.sc4j.imposed.Empty.super.findOrElse(predicate, defaultValue);
+        public boolean contains(final Object object) {
+            return false;
+        }
+
+        @Override
+        public <V2> Iteratable<V2> map(Function<? super V, ? extends V2> function) {
+            return (Iteratable<V2>) this;
+        }
+
+        @Override
+        public Iteratable<V> filter(final Predicate<? super V> predicate) {
+            return this;
+        }
+
+        @Override
+        public V findOrElse(final Predicate<? super V> predicate, final V defaultValue) {
+            return defaultValue;
+        }
+
+    }
+
+    abstract class Singleton<V>
+            implements Iteratable.Immutable<V> {
+
+        private final V value;
+
+        protected Singleton(final V value) {
+            this.value = value;
+        }
+
+        @Override
+        public UnmodifiableIterator<V> iterator() {
+            return Iterators.singleton(value);
+        }
+
+        @Override
+        public Object[] toRawArray() {
+            return new Object[]{value};
+        }
+
+        @Override
+        public V head() {
+            return value;
+        }
+
+        @Override
+        public boolean isEmpty() {
+            return value != null;
+        }
+
+        @Override
+        public boolean contains(final Object object) {
+            return Objects.equals(value, object);
+        }
+
+        @Override
+        public V findOrElse(final Predicate<? super V> predicate, final V defaultValue) {
+            return predicate.test(value)
+                    ? value
+                    : defaultValue;
+        }
+
+        @Override
+        public boolean equals(final Object object) {
+            return object instanceof Iteratable
+                    && this.equals((Iteratable) object);
+        }
+
+        @Override
+        public int hashCode() {
+            return this.hash();
         }
 
     }
