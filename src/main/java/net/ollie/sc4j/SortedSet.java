@@ -15,10 +15,10 @@ public interface SortedSet<V>
     }
 
     @Override
-    SortedSet.Mutable<V> mutable();
+    SortedSet.Mutable<V> mutableCopy();
 
     @Override
-    SortedSet.Immutable<V> immutable();
+    SortedSet.Immutable<V> immutableCopy();
 
     interface Mutable<V>
             extends SortedSet<V>, Set.Mutable<V>, Sorted.Mutable<V> {
@@ -29,7 +29,7 @@ public interface SortedSet<V>
             extends SortedSet<V>, Set.Immutable<V>, Sorted.Immutable<V> {
 
         @Override
-        default SortedSet.Immutable<V> immutable() {
+        default SortedSet.Immutable<V> immutableCopy() {
             return this;
         }
 

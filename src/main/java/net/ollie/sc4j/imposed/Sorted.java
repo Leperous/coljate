@@ -49,13 +49,13 @@ public interface Sorted<V>
      * @return a mutable copy of this collection.
      */
     @Override
-    Sorted.Mutable<V> mutable();
+    Sorted.Mutable<V> mutableCopy();
 
     /**
      * @return an immutable copy of this collection.
      */
     @Override
-    Sorted.Immutable<V> immutable();
+    Sorted.Immutable<V> immutableCopy();
 
     /**
      *
@@ -80,7 +80,7 @@ public interface Sorted<V>
         Sorted.Immutable<V> sort(Comparator<? super V> comparator);
 
         @Override
-        default Sorted.Immutable<V> immutable() {
+        default Sorted.Immutable<V> immutableCopy() {
             return this;
         }
 

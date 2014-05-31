@@ -28,6 +28,6 @@ public interface Cache<K, V>
     <V2> Cache<K, V2> recalculate(Function<? super V, ? extends V2> function);
 
     @Override
-    Map.Immutable<K, V> immutable();
+    Map.Immutable<K, V> immutableCopy();
 
 }

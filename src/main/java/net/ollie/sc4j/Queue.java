@@ -35,6 +35,6 @@ public interface Queue<V>
     Sequence<V> drain();
 
     @Override
-    Queue<V> mutable();
+    Queue<V> mutableCopy();
 
 }

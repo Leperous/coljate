@@ -22,10 +22,10 @@ public interface Sequence<V>
     Sequence<V> filter(Predicate<? super V> predicate);
 
     @Override
-    Sequence.Mutable<V> mutable();
+    Sequence.Mutable<V> mutableCopy();
 
     @Override
-    Sequence.Immutable<V> immutable();
+    Sequence.Immutable<V> immutableCopy();
 
     interface Mutable<V>
             extends Sequence<V>, Sorted.Mutable<V> {
@@ -39,7 +39,7 @@ public interface Sequence<V>
         Sequence.Immutable<V> tail();
 
         @Override
-        default Sequence.Immutable<V> immutable() {
+        default Sequence.Immutable<V> immutableCopy() {
             return this;
         }
 

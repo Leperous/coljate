@@ -50,10 +50,10 @@ public interface Array<V>
     }
 
     @Override
-    Array.Mutable<V> mutable();
+    Array.Mutable<V> mutableCopy();
 
     @Override
-    Array.Immutable<V> immutable();
+    Array.Immutable<V> immutableCopy();
 
     @Override
     default Array<V> values() {
@@ -112,7 +112,7 @@ public interface Array<V>
         }
 
         @Override
-        default Array.Immutable<V> immutable() {
+        default Array.Immutable<V> immutableCopy() {
             return this;
         }
 
@@ -187,7 +187,7 @@ public interface Array<V>
         }
 
         @Override
-        default Array.Empty<V> immutable() {
+        default Array.Empty<V> immutableCopy() {
             return this;
         }
 

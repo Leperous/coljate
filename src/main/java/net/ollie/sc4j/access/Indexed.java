@@ -66,10 +66,10 @@ public interface Indexed<V>
     }
 
     @Override
-    Indexed.Mutable<V> mutable();
+    Indexed.Mutable<V> mutableCopy();
 
     @Override
-    Indexed.Immutable<V> immutable();
+    Indexed.Immutable<V> immutableCopy();
 
     /**
      *
@@ -101,7 +101,7 @@ public interface Indexed<V>
         }
 
         @Override
-        default Indexed.Immutable<V> immutable() {
+        default Indexed.Immutable<V> immutableCopy() {
             return this;
         }
 

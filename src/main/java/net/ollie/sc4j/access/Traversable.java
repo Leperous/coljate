@@ -14,9 +14,9 @@ public interface Traversable<V>
 
     Traversable<V> tail();
 
-    Traversable.Mutable<V> mutable();
+    Traversable.Mutable<V> mutableCopy();
 
-    Traversable.Immutable<V> immutable();
+    Traversable.Immutable<V> immutableCopy();
 
     interface Mutable<V>
             extends Traversable<V>, Mutability.Mutable {
@@ -27,7 +27,7 @@ public interface Traversable<V>
             extends Traversable<V>, Mutability.Immutable {
 
         @Override
-        default Traversable.Immutable<V> immutable() {
+        default Traversable.Immutable<V> immutableCopy() {
             return this;
         }
 

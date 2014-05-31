@@ -21,10 +21,10 @@ public interface SortedMap<K, V>
     }
 
     @Override
-    SortedMap.Mutable<K, V> mutable();
+    SortedMap.Mutable<K, V> mutableCopy();
 
     @Override
-    SortedMap.Immutable<K, V> immutable();
+    SortedMap.Immutable<K, V> immutableCopy();
 
     interface Mutable<K, V>
             extends SortedMap<K, V>, Map.Mutable<K, V>, Sorted.Mutable<V> {
@@ -47,7 +47,7 @@ public interface SortedMap<K, V>
         List.Immutable<V> values();
 
         @Override
-        default SortedMap.Immutable<K, V> immutable() {
+        default SortedMap.Immutable<K, V> immutableCopy() {
             return this;
         }
 

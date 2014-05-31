@@ -43,10 +43,10 @@ public interface Map<K, V>
     <V2> Map<K, V2> mapValues(Function<? super V, ? extends V2> function);
 
     @Override
-    Map.Mutable<K, V> mutable();
+    Map.Mutable<K, V> mutableCopy();
 
     @Override
-    Map.Immutable<K, V> immutable();
+    Map.Immutable<K, V> immutableCopy();
 
     default boolean equals(final Map<?, ?> that) {
         return that != null
@@ -68,11 +68,11 @@ public interface Map<K, V>
 
         @Nonnull
         @CheckReturnValue
-        Map.Mutable.Entry<K, V> mutable();
+        Map.Mutable.Entry<K, V> mutableCopy();
 
         @Nonnull
         @CheckReturnValue
-        Map.Immutable.Entry<K, V> immutable();
+        Map.Immutable.Entry<K, V> immutableCopy();
 
         default boolean equals(final Map.Entry<?, ?> that) {
             return Objects.equals(this.key(), that.key())
@@ -147,7 +147,7 @@ public interface Map<K, V>
         Map.Immutable<K, V> filterValues(Predicate<? super V> predicate);
 
         @Override
-        default Map.Immutable<K, V> immutable() {
+        default Map.Immutable<K, V> immutableCopy() {
             return this;
         }
 
@@ -155,7 +155,7 @@ public interface Map<K, V>
                 extends Map.Entry<K, V>, Mutability.Immutable {
 
             @Override
-            default Map.Immutable.Entry<K, V> immutable() {
+            default Map.Immutable.Entry<K, V> immutableCopy() {
                 return this;
             }
 

@@ -72,10 +72,10 @@ public interface Iteratable<V>
     }
 
     @Override
-    Iteratable.Mutable<V> mutable();
+    Iteratable.Mutable<V> mutableCopy();
 
     @Override
-    Iteratable.Immutable<V> immutable();
+    Iteratable.Immutable<V> immutableCopy();
 
     default boolean equals(final Iteratable<?> that) {
         return that != null
@@ -98,7 +98,7 @@ public interface Iteratable<V>
         UnmodifiableIterator<V> iterator();
 
         @Override
-        default Iteratable.Immutable<V> immutable() {
+        default Iteratable.Immutable<V> immutableCopy() {
             return this;
         }
 

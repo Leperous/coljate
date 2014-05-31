@@ -31,10 +31,10 @@ public interface Set<V>
     Set<V> tail();
 
     @Override
-    Set.Mutable<V> mutable();
+    Set.Mutable<V> mutableCopy();
 
     @Override
-    Set.Immutable<V> immutable();
+    Set.Immutable<V> immutableCopy();
 
     @OverridingMethodsMustInvokeSuper
     default boolean equals(final Set<?> that) {
@@ -107,7 +107,7 @@ public interface Set<V>
         UnmodifiableIterator<V> iterator();
 
         @Override
-        default Set.Immutable<V> immutable() {
+        default Set.Immutable<V> immutableCopy() {
             return this;
         }
 
@@ -142,7 +142,7 @@ public interface Set<V>
         }
 
         @Override
-        default Set.Empty<V> immutable() {
+        default Set.Empty<V> immutableCopy() {
             return this;
         }
 

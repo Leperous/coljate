@@ -44,10 +44,10 @@ public interface List<V>
     Array<V> toArray();
 
     @Override
-    List.Mutable<V> mutable();
+    List.Mutable<V> mutableCopy();
 
     @Override
-    List.Immutable<V> immutable();
+    List.Immutable<V> immutableCopy();
 
     @OverridingMethodsMustInvokeSuper
     default boolean equals(final List<?> that) {
@@ -131,7 +131,7 @@ public interface List<V>
         Array.Immutable<V> toArray();
 
         @Override
-        default List.Immutable<V> immutable() {
+        default List.Immutable<V> immutableCopy() {
             return this;
         }
 
@@ -174,7 +174,7 @@ public interface List<V>
         }
 
         @Override
-        default List.Empty<V> immutable() {
+        default List.Empty<V> immutableCopy() {
             return this;
         }
 

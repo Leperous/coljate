@@ -29,10 +29,10 @@ public interface MultiSet<V>
     Map<V, NonNegativeInteger> map();
 
     @Override
-    MultiSet.Mutable<V> mutable();
+    MultiSet.Mutable<V> mutableCopy();
 
     @Override
-    MultiSet.Immutable<V> immutable();
+    MultiSet.Immutable<V> immutableCopy();
 
     default boolean equals(final MultiSet<?> that) {
         return that != null
@@ -72,7 +72,7 @@ public interface MultiSet<V>
             extends MultiSet<V>, Set.Immutable<V> {
 
         @Override
-        default MultiSet.Immutable<V> immutable() {
+        default MultiSet.Immutable<V> immutableCopy() {
             return this;
         }
 

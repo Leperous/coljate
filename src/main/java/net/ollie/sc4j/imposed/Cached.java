@@ -75,10 +75,10 @@ public interface Cached<K, V>
     }
 
     @Override
-    Cached.Mutable<K, V> mutable();
+    Cached.Mutable<K, V> mutableCopy();
 
     @Override
-    Cached.Immutable<K, V> immutable();
+    Cached.Immutable<K, V> immutableCopy();
 
     /**
      *
@@ -124,7 +124,7 @@ public interface Cached<K, V>
             extends Cached<K, V>, Iteratable.Immutable<V> {
 
         @Override
-        default Cached.Immutable<K, V> immutable() {
+        default Cached.Immutable<K, V> immutableCopy() {
             return this;
         }
 

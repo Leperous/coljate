@@ -6,22 +6,24 @@ package net.ollie.sc4j.imposed;
  */
 public interface Mutability<V extends Mutability<V>> {
 
+    Mutable mutableCopy();
+
+    Immutable immutableCopy();
+
     interface Mutable
             extends Mutability<Mutable> {
-
-        Immutable immutable();
 
         void clear();
 
     }
 
     @javax.annotation.concurrent.Immutable
+    @javax.annotation.concurrent.ThreadSafe
     interface Immutable
             extends Mutability<Immutable> {
 
-        Mutable mutable();
-
-        default Immutable immutable() {
+        @Override
+        default Immutable immutableCopy() {
             return this;
         }
 

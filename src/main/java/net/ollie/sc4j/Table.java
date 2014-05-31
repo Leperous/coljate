@@ -6,6 +6,8 @@ import java.util.function.Predicate;
 import net.ollie.sc4j.access.Keyed.BiKeyed;
 import net.ollie.sc4j.imposed.Cached;
 
+import javax.annotation.Nonnull;
+
 /**
  * A cache of values that are {@link #get accessed} by providing a row and column.
  *
@@ -17,25 +19,37 @@ import net.ollie.sc4j.imposed.Cached;
 public interface Table<R, C, V>
         extends BiKeyed<R, C, V>, Cached<Map.Entry<R, C>, V> {
 
+    @Override
+    V get(Object row, Object column);
+
+    @Nonnull
     Array<R> rows();
 
+    @Nonnull
     Map<C, V> row(R row);
 
+    @Nonnull
     Array<C> columns();
 
+    @Nonnull
     Map<R, V> column(C column);
 
     @Override
     <V2> Table<R, C, V2> mapValues(Function<? super V, ? extends V2> function);
 
     @Override
+    default Table<R, C, V> filter(Predicate<? super V> predicate) {
+        return this.filterValues(predicate);
+    }
+
+    @Override
     Table<R, C, V> filterValues(Predicate<? super V> predicate);
 
     @Override
-    Table.Mutable<R, C, V> mutable();
+    Table.Mutable<R, C, V> mutableCopy();
 
     @Override
-    Table.Immutable<R, C, V> immutable();
+    Table.Immutable<R, C, V> immutableCopy();
 
     interface Mutable<R, C, V>
             extends Table<R, C, V>, Cached.Mutable<Map.Entry<R, C>, V> {
@@ -83,7 +97,7 @@ public interface Table<R, C, V>
         Table.Immutable<R, C, V> filterValues(Predicate<? super V> predicate);
 
         @Override
-        default Table.Immutable<R, C, V> immutable() {
+        default Table.Immutable<R, C, V> immutableCopy() {
             return this;
         }
 
