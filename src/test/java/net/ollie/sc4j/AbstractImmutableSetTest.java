@@ -7,7 +7,7 @@ import org.junit.Test;
  * @author Ollie
  */
 public abstract class AbstractImmutableSetTest
-        extends AbstractCollectionTest<Set.Immutable<Object>> {
+        extends AbstractIteratableTest<Set.Immutable<Object>> {
 
     @Test
     public void shouldAddAndRemove() {

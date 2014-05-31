@@ -15,7 +15,7 @@ import org.junit.Test;
  * @author Ollie
  */
 public abstract class AbstractImmutableArrayTest
-        extends AbstractCollectionTest<Array.Immutable<Object>> {
+        extends AbstractIteratableTest<Array.Immutable<Object>> {
 
     @Test
     public void shouldPrefixAndRemove() {

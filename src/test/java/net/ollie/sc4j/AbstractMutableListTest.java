@@ -11,7 +11,7 @@ import org.junit.Test;
  * @author Ollie
  */
 public abstract class AbstractMutableListTest<C extends List.Mutable<Object>>
-        extends AbstractCollectionTest<C> {
+        extends AbstractIteratableTest<C> {
 
     @Test
     public void shouldPrefix() {

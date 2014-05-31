@@ -16,7 +16,7 @@ import org.junit.Test;
  */
 @SuppressWarnings("unchecked")
 public abstract class AbstractMutableMultisetTest<C extends MultiSet.Mutable<Object>>
-        extends AbstractCollectionTest<C> {
+        extends AbstractIteratableTest<C> {
 
     @Test
     public void shouldIterate() {
