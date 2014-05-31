@@ -10,12 +10,12 @@ import net.ollie.sc4j.imposed.Cached;
  * A cache of values that are {@link #get accessed} by providing a row and column.
  *
  * @author Ollie
- * @param <R> row type
- * @param <C> column type
+ * @param <R> row type, generally an {@link java.lang.Integer integer}.
+ * @param <C> column type, generally an {@link java.lang.Enum enumeration}.
  * @param <V> value type
  */
 public interface Table<R, C, V>
-        extends BiKeyed<R, C, V>, Cached<java.util.Map.Entry<R, C>, V> {
+        extends BiKeyed<R, C, V>, Cached<Map.Entry<R, C>, V> {
 
     Array<R> rows();
 
@@ -38,19 +38,19 @@ public interface Table<R, C, V>
     Table.Immutable<R, C, V> immutable();
 
     interface Mutable<R, C, V>
-            extends Table<R, C, V>, Cached.Mutable<java.util.Map.Entry<R, C>, V> {
+            extends Table<R, C, V>, Cached.Mutable<Map.Entry<R, C>, V> {
 
         V put(R row, C column, V value);
 
         @Override
-        default V put(final java.util.Map.Entry<R, C> location, final V value) {
-            return this.put(location.getKey(), location.getValue(), value);
+        default V put(final Map.Entry<R, C> location, final V value) {
+            return this.put(location.key(), location.value(), value);
         }
 
     }
 
     interface Immutable<R, C, V>
-            extends Table<R, C, V>, Cached.Immutable<java.util.Map.Entry<R, C>, V> {
+            extends Table<R, C, V>, Cached.Immutable<Map.Entry<R, C>, V> {
 
         @Override
         Array.Immutable<R> rows();

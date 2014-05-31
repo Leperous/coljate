@@ -16,7 +16,7 @@ import javax.annotation.Nonnull;
 import javax.annotation.OverridingMethodsMustInvokeSuper;
 
 /**
- * An iterable, sorted collection of objects.
+ * An iterable sequence.
  *
  * @author Ollie
  * @see Array for index-accessible form.
@@ -66,7 +66,7 @@ public interface List<V>
      * @param <V>
      */
     interface Mutable<V>
-            extends List<V>, Sequence.Mutable<V> {
+            extends List<V>, Sequence.Mutable<V>, Iteratable.Mutable<V> {
 
         void prefix(V value);
 
@@ -107,7 +107,7 @@ public interface List<V>
      * @param <V>
      */
     interface Immutable<V>
-            extends List<V>, Sequence.Immutable<V> {
+            extends List<V>, Sequence.Immutable<V>, Iteratable.Immutable<V> {
 
         @Override
         List.Immutable<V> tail();

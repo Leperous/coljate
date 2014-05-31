@@ -10,7 +10,7 @@ import net.ollie.sc4j.utils.Arrays;
 import net.ollie.sc4j.utils.IndexedComparator;
 
 /**
- * A sorted, iterable and indexed collection of objects.
+ * A sorted, indexed collection of objects.
  *
  * @author Ollie
  */

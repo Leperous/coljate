@@ -1,6 +1,7 @@
 package net.ollie.sc4j.utils;
 
 import java.util.Iterator;
+import java.util.function.Function;
 
 /**
  *
@@ -15,11 +16,15 @@ public final class Iterators {
         return new ArrayIterator<>(array);
     }
 
+    public static <F, T> Iterator<T> transform(final Iterator<F> iterator, final Function<? super F, ? extends T> function) {
+        return new TransformedIterator<>(iterator, function);
+    }
+
     private static final class ArrayIterator<V>
             implements Iterator<V> {
 
-        private final V[] array;
-        private int index;
+        final V[] array;
+        int index;
 
         ArrayIterator(final V[] array) {
             this.array = array;
@@ -33,6 +38,34 @@ public final class Iterators {
         @Override
         public V next() {
             return array[index++];
+        }
+
+    }
+
+    private static final class TransformedIterator<F, T>
+            implements Iterator<T> {
+
+        final Iterator<F> iterator;
+        final Function<? super F, ? extends T> function;
+
+        TransformedIterator(final Iterator<F> iterator, final Function<? super F, ? extends T> function) {
+            this.iterator = iterator;
+            this.function = function;
+        }
+
+        @Override
+        public boolean hasNext() {
+            return iterator.hasNext();
+        }
+
+        @Override
+        public T next() {
+            return function.apply(iterator.next());
+        }
+
+        @Override
+        public void remove() {
+            iterator.remove();
         }
 
     }

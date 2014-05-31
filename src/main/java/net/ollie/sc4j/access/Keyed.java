@@ -1,10 +1,10 @@
 package net.ollie.sc4j.access;
 
-import java.util.Map;
 import java.util.function.Function;
 import java.util.function.Predicate;
 
 import net.ollie.sc4j.Collection;
+import net.ollie.sc4j.Map;
 import net.ollie.sc4j.imposed.Unique;
 
 import javax.annotation.CheckForNull;
@@ -62,14 +62,14 @@ public interface Keyed<K, V> {
         default V get(final Object object) {
             if (object instanceof Map.Entry) {
                 final Map.Entry<?, ?> that = (Map.Entry) object;
-                return this.get(that.getKey(), that.getValue());
+                return this.get(that.key(), that.value());
             } else {
                 return null;
             }
         }
 
         default V get(final Map.Entry<? extends K1, ? extends V> entry) {
-            return this.get(entry.getKey(), entry.getValue());
+            return this.get(entry.key(), entry.value());
         }
 
     }

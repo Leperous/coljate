@@ -4,17 +4,20 @@ import java.util.NoSuchElementException;
 import java.util.function.Function;
 import java.util.function.Predicate;
 
+import net.ollie.sc4j.access.Iteratable;
+import net.ollie.sc4j.utils.Iterables;
+
+import javax.annotation.CheckForNull;
 import javax.annotation.CheckReturnValue;
 import javax.annotation.Nonnull;
 
-import net.ollie.sc4j.utils.Iterables;
-
 /**
- * The super-type of all collections.
+ * The super-type of all collections. Supports "contains", "map" and "filter" operations.
  *
  * @author Ollie
  * @param <V> value type
  * @see java.util.Collection
+ * @see Iteratable
  */
 public interface Collection<V> {
 
@@ -32,13 +35,13 @@ public interface Collection<V> {
 
     @CheckReturnValue
     @Nonnull
-    <V2> Collection<V2> map(Function<? super V, ? extends V2> function);
+    <V2> Collection<V2> map(@Nonnull Function<? super V, ? extends V2> function);
 
     @CheckReturnValue
     @Nonnull
-    Collection<V> filter(Predicate<? super V> predicate);
+    Collection<V> filter(@Nonnull Predicate<? super V> predicate);
 
-    default V find(Predicate<? super V> predicate) throws NoSuchElementException {
+    default V find(@Nonnull final Predicate<? super V> predicate) throws NoSuchElementException {
         final V found = this.findOrElse(predicate, null);
         if (found == null) {
             throw new NoSuchElementException();
@@ -47,6 +50,7 @@ public interface Collection<V> {
         }
     }
 
+    @CheckForNull
     V findOrElse(Predicate<? super V> predicate, V defaultValue);
 
 }

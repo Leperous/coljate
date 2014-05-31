@@ -12,6 +12,7 @@ import javax.annotation.CheckReturnValue;
 import javax.annotation.Nonnull;
 
 /**
+ * Iterable collection. Introduces "reduce" method.
  *
  * @author Ollie
  */
@@ -69,6 +70,12 @@ public interface Iteratable<V>
         }
         return defaultValue;
     }
+
+    @Override
+    Iteratable.Mutable<V> mutable();
+
+    @Override
+    Iteratable.Immutable<V> immutable();
 
     default boolean equals(final Iteratable<?> that) {
         return that != null

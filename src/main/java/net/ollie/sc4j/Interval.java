@@ -9,8 +9,7 @@ import javax.annotation.Nonnull;
 /**
  * A sorted collection of unique elements.
  *
- * For example, all doubles in the set {@code [0, 1)}, or all dates in the 20th
- * century.
+ * For example, all doubles in the set {@code [0, 1)}, or all dates in the 20th century.
  *
  * @author Ollie
  */

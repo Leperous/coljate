@@ -25,7 +25,7 @@ public interface Set<V>
     Set<V> filter(Predicate<? super V> predicate);
 
     @Override
-    <V2> Set<V2> map(Function<? super V, ? extends V2> function);
+    <V2> Iteratable<V2> map(Function<? super V, ? extends V2> function);
 
     @Override
     Set<V> tail();

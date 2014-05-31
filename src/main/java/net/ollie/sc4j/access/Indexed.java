@@ -72,7 +72,7 @@ public interface Indexed<V>
      * @param <V>
      */
     interface Mutable<V>
-            extends Indexed<V>, Traversable.Mutable<V> {
+            extends Indexed<V>, Iteratable.Mutable<V> {
 
         V set(int index, V value) throws IndexOutOfBoundsException;
 
@@ -87,7 +87,7 @@ public interface Indexed<V>
      * @param <V>
      */
     interface Immutable<V>
-            extends Indexed<V>, Traversable.Immutable<V> {
+            extends Indexed<V>, Iteratable.Immutable<V> {
 
         @Override
         default Indexed.Immutable<V> values() {
