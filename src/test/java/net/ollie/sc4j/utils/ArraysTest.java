@@ -1,7 +1,11 @@
 package net.ollie.sc4j.utils;
 
+import java.util.Iterator;
+
 import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertThat;
+import static org.junit.Assert.assertTrue;
 import org.junit.Test;
 
 /**
@@ -38,6 +42,21 @@ public class ArraysTest {
         final Object[] prefixed = Arrays.concatenate(array, iterable);
         assertThat(prefixed[0], is(o1));
         assertThat(prefixed[1], is(o2));
+
+    }
+
+    @Test
+    public void testIterator() {
+
+        final Object o1 = new Object(), o2 = new Object();
+        final Object[] array = new Object[]{o1, null, o2};
+        final Iterator<Object> iterator = Arrays.iterator(array);
+
+        assertTrue(iterator.hasNext());
+        assertThat(iterator.next(), is(o1));
+        assertTrue(iterator.hasNext());
+        assertThat(iterator.next(), is(o2));
+        assertFalse(iterator.hasNext());
 
     }
 

@@ -1,6 +1,7 @@
 package net.ollie.sc4j.utils;
 
 import java.util.Iterator;
+import java.util.NoSuchElementException;
 
 /**
  *
@@ -61,7 +62,8 @@ public final class Arrays {
             implements Iterator<V> {
 
         private final V[] array;
-        private int index = -1;
+        private int index = 0;
+        private V next;
 
         ArrayIterator(final V[] array) {
             this.array = array;
@@ -69,12 +71,26 @@ public final class Arrays {
 
         @Override
         public boolean hasNext() {
-            return index < array.length - 1;
+            while (index < array.length) {
+                next = array[index];
+                if (next == null) {
+                    index++;
+                } else {
+                    return true;
+                }
+            }
+            return false;
         }
 
         @Override
         public V next() {
-            return array[++index];
+            if (next == null) {
+                throw new NoSuchElementException();
+            }
+            index++;
+            final V theNext = next;
+            next = null;
+            return theNext;
         }
 
         @Override
