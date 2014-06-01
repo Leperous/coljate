@@ -16,6 +16,14 @@ public abstract class AbstractQueueTest<C extends Queue<Object>>
 
     @Test
     public void shouldOfferPeekPoll() {
+        final Object o1 = new Object();
+        final C queue = this.create(o1);
+        assertContains(queue, o1);
+        assertThat(queue.peek(), is(o1));
+    }
+
+    @Test
+    public void shouldOfferPeekPollFromEmpty() {
         final C queue = this.create();
         final Object o1 = new Object();
         assertTrue(queue.offer(o1));

@@ -76,7 +76,11 @@ public interface List<V>
 
         void suffix(V value);
 
-        void suffixAll(Iterable<? extends V> values);
+        default void suffixAll(final Iterable<? extends V> values) {
+            for (final V value : values) {
+                this.suffix(value);
+            }
+        }
 
         default boolean removeFirst(final Object value) {
             final Iterator<V> iterator = this.iterator();

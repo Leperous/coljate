@@ -1,18 +1,15 @@
 package net.ollie.sc4j.utils;
 
-import java.util.Collections;
 import java.util.Iterator;
 import java.util.Objects;
 import java.util.OptionalInt;
 import java.util.function.Function;
 import java.util.function.Predicate;
 
-import javax.annotation.CheckReturnValue;
-
 import net.ollie.sc4j.Collection;
 import net.ollie.sc4j.access.Iteratable;
 
-import javax.annotation.Nonnull;
+import javax.annotation.CheckReturnValue;
 
 /**
  *
@@ -135,6 +132,29 @@ public final class Iterables {
             hash += (element == null ? 0 : element.hashCode());
         }
         return hash;
+    }
+
+    public static String safelyToString(final Iterable<?> iterable, final Object caller) {
+        final StringBuilder sb = new StringBuilder();
+        final Iterator<?> iterator = iterable.iterator();
+        if (iterator.hasNext()) {
+            sb.append('[');
+        } else {
+            return "[]";
+        }
+        while (iterator.hasNext()) {
+            final Object next = iterator.next();
+            if (Objects.equals(next, caller)) {
+                sb.append("(this)");
+            } else {
+                sb.append(next);
+            }
+            if (iterator.hasNext()) {
+                sb.append(',');
+            }
+        }
+        sb.append(']');
+        return sb.toString();
     }
 
 }

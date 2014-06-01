@@ -16,7 +16,9 @@ import net.ollie.sc4j.utils.IndexedComparator;
  */
 public interface Array<V>
         extends List<V>, Indexed<V> {
-    
+
+    int capacity();
+
     @Override
     default Comparator<? super V> comparator() {
         return new IndexedComparator<>(this);
@@ -71,12 +73,15 @@ public interface Array<V>
     interface Mutable<V>
             extends Array<V>, List.Mutable<V>, Indexed.Mutable<V> {
 
+        void setCapacity(int capacity);
+
+        @Override
+        <V2> Array.Mutable<V2> map(Function<? super V, ? extends V2> function);
+
         @Override
         default V first() {
             return this.iterator().next();
         }
-
-        void resize(int size);
 
         @Override
         default void prefix(final V value) {

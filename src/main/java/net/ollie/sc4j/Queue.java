@@ -16,6 +16,11 @@ public interface Queue<V>
 
     boolean offer(V value);
 
+    /**
+     * Retrieves and removes the head of this queue, or returns {@code null} if this queue is empty.
+     *
+     * @return
+     */
     @CheckForNull
     V poll();
 
