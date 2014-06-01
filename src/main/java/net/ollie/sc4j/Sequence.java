@@ -6,6 +6,7 @@ import java.util.function.Predicate;
 import net.ollie.sc4j.imposed.Sorted;
 
 /**
+ * A sorted collection of objects, that may or may not be infinite in length.
  *
  * @author Ollie
  */

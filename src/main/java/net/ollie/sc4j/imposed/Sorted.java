@@ -26,9 +26,6 @@ public interface Sorted<V>
     @CheckForNull
     V first();
 
-    @CheckForNull
-    V last();
-
     @Override
     default V head() {
         return this.first();

@@ -5,12 +5,12 @@ import java.util.Iterator;
 import java.util.Objects;
 import java.util.function.Function;
 import java.util.function.Predicate;
-import java.util.stream.Stream;
 
 import net.ollie.sc4j.access.Iteratable;
 import net.ollie.sc4j.utils.Iterables;
 import net.ollie.sc4j.utils.UnmodifiableIterator;
 
+import javax.annotation.CheckForNull;
 import javax.annotation.CheckReturnValue;
 import javax.annotation.Nonnull;
 import javax.annotation.OverridingMethodsMustInvokeSuper;
@@ -20,11 +20,10 @@ import javax.annotation.OverridingMethodsMustInvokeSuper;
  *
  * @author Ollie
  * @see Array for index-accessible form.
- * @see Stream for a (potentially) infinitely long list.
  */
 public interface List<V>
         extends Sequence<V>, Iteratable<V> {
-    
+
     @Override
     default V head() {
         return Sequence.super.head();
@@ -32,6 +31,9 @@ public interface List<V>
 
     @Override
     List<V> tail();
+
+    @CheckForNull
+    V last();
 
     @Override
     <V2> List<V2> map(Function<? super V, ? extends V2> function);
