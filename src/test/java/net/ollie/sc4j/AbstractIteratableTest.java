@@ -15,7 +15,7 @@ public abstract class AbstractIteratableTest<C extends Iteratable<Object>>
     @Override
     protected void assertContainsNothing(C collection) {
         super.assertContainsNothing(collection);
-        assertThat(collection.size(), is(0));
+        assertThat(collection.count(), is(0));
     }
 
 }

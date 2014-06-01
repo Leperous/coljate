@@ -23,7 +23,7 @@ public interface SortedSet<V>
 
     default boolean equals(final SortedSet<?> that) {
         return that != null
-                && this.size() == that.size()
+                && this.count() == that.count()
                 && Iterables.equals(this, that);
     }
 

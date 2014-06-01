@@ -20,26 +20,31 @@ public final class Iterables {
     private Iterables() {
     }
 
-    public static int count(final Iterable<?> iterable) {
+    public static int countAll(final Iterable<?> iterable) {
         final OptionalInt count = maybeCount(iterable);
         return count.isPresent()
                 ? count.getAsInt()
-                : doCount(iterable);
+                : doCount(iterable, Object -> true);
     }
 
-    public static int doCount(final Iterable<?> iterable) {
+    public static <T> int doCount(final Iterable<T> iterable) {
+        return doCount(iterable, Object -> true);
+    }
+
+    public static <T> int doCount(final Iterable<T> iterable, final Predicate<? super T> predicate) {
         int size = 0;
-        final Iterator<?> iterator = iterable.iterator();
+        final Iterator<T> iterator = iterable.iterator();
         while (iterator.hasNext()) {
-            iterator.next();
-            size += 1;
+            if (predicate.test(iterator.next())) {
+                size += 1;
+            }
         }
         return size;
     }
 
     public static OptionalInt maybeCount(final Iterable<?> iterable) {
         if (iterable instanceof Iteratable) {
-            return OptionalInt.of(((Iteratable) iterable).size());
+            return OptionalInt.of(((Iteratable) iterable).count());
         } else if (iterable instanceof java.util.Collection) {
             return OptionalInt.of(((java.util.Collection) iterable).size());
         } else if (!iterable.iterator().hasNext()) {

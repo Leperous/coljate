@@ -54,11 +54,11 @@ public abstract class AbstractImmutableArrayTest
     @Override
     protected void assertContainsNothing(Immutable<Object> collection) {
         super.assertContainsNothing(collection);
-        assertThat(collection.size(), is(0));
+        assertThat(collection.count(), is(0));
     }
 
     protected void assertContainsExactly(final Array.Immutable<Object> array, final Object... objects) {
-        assertEquals(objects.length, array.size());
+        assertEquals(objects.length, array.count());
         assertEquals(objects.length == 0, array.isEmpty());
         int i = 0;
         for (final Object object : objects) {

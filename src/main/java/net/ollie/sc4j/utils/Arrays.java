@@ -25,7 +25,7 @@ public final class Arrays {
     }
 
     public static <V> V[] concatenate(final V[] array, final Iterable<? extends V> iterable) {
-        final int size = Iterables.count(iterable);
+        final int size = Iterables.countAll(iterable);
         final V[] concatenated = java.util.Arrays.copyOf(array, array.length + size);
         int index = array.length;
         for (final V value : iterable) {
@@ -35,7 +35,7 @@ public final class Arrays {
     }
 
     public static <V> V[] concatenate(final Iterable<? extends V> iterable, final V[] array) {
-        final int size = Iterables.count(iterable);
+        final int size = Iterables.countAll(iterable);
         final V[] concatenated = java.util.Arrays.copyOf(array, array.length + size);
         System.arraycopy(array, 0, concatenated, size, array.length);
         int index = 0;

@@ -243,12 +243,12 @@ public interface Array<V>
         default V last() {
             return this.isEmpty()
                     ? null
-                    : this.get(this.size() - 1);
+                    : this.get(this.count() - 1);
         }
 
         @Override
         default V lastOrElse(final Predicate<? super V> predicate, final V defaultValue) {
-            for (int i = this.size() - 1; i >= 0; i--) {
+            for (int i = this.count() - 1; i >= 0; i--) {
                 final V element = this.get(i);
                 if (predicate.test(element)) {
                     return element;

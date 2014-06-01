@@ -22,8 +22,12 @@ import javax.annotation.Nonnull;
 public interface Iteratable<V>
         extends Traversable<V>, Iterable<V> {
 
-    default int size() {
-        return Iterables.doCount(this);
+    default int count() {
+        return this.count(Object -> true);
+    }
+
+    default int count(final Predicate<? super V> predicate) {
+        return Iterables.doCount(this, predicate);
     }
 
     @Override

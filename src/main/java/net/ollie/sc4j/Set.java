@@ -39,7 +39,7 @@ public interface Set<V>
     @OverridingMethodsMustInvokeSuper
     default boolean equals(final Set<?> that) {
         return that != null
-                && this.size() == that.size()
+                && this.count() == that.count()
                 && this.containsAll(that);
     }
 
