@@ -1,12 +1,10 @@
 package net.ollie.sc4j;
 
 import java.util.Comparator;
-import java.util.OptionalInt;
 import java.util.function.Function;
 import java.util.function.Predicate;
 
 import net.ollie.sc4j.access.Indexed;
-import net.ollie.sc4j.utils.Arrays;
 import net.ollie.sc4j.utils.IndexedComparator;
 
 /**
@@ -149,86 +147,6 @@ public interface Array<V>
 
     }
 
-    /**
-     *
-     * @param <V>
-     */
-    interface Empty<V>
-            extends List.Empty<V>, Array.Immutable<V> {
-
-        @Override
-        default boolean contains(final Object object) {
-            return List.Empty.super.contains(object);
-        }
-
-        @Override
-        default Object[] toRawArray() {
-            return Arrays.empty();
-        }
-
-        @Override
-        default V get(final int index) {
-            throw new IndexOutOfBoundsException();
-        }
-
-        @Override
-        default Array.Empty<V> segment(int from, int to) throws IndexOutOfBoundsException {
-            throw new IndexOutOfBoundsException();
-        }
-
-        @Override
-        default OptionalInt indexOf(final Object value) {
-            return OptionalInt.empty();
-        }
-
-        @Override
-        default Array.Empty<V> values() {
-            return this;
-        }
-
-        @Override
-        default Array.Empty<V> tail() {
-            return this;
-        }
-
-        @Override
-        default Array.Empty<V> immutableCopy() {
-            return this;
-        }
-
-        @Override
-        default Array.Empty<V> sort(final Comparator<? super V> comparator) {
-            return this;
-        }
-
-        @Override
-        default Array.Empty<V> withoutFirst(Object value) {
-            return this;
-        }
-
-        @Override
-        default Array.Empty<V> withoutAll(Object value) {
-            return this;
-        }
-
-        @Override
-        @SuppressWarnings("unchecked")
-        default <V2> Array.Empty<V2> map(Function<? super V, ? extends V2> function) {
-            return (Array.Empty<V2>) this;
-        }
-
-        @Override
-        default Array.Empty<V> filter(Predicate<? super V> predicate) {
-            return this;
-        }
-
-        @Override
-        default V last() {
-            return List.Empty.super.last();
-        }
-
-    }
-
     interface NonThreadSafeArray<V>
             extends Array.Mutable<V> {
 
@@ -255,6 +173,69 @@ public interface Array<V>
                 }
             }
             return defaultValue;
+        }
+
+    }
+
+    interface Empty<V>
+            extends Array.Immutable<V>, List.Empty<V>, Indexed.Empty<V> {
+        
+        @Override
+        default boolean contains(final Object object) {
+            return List.Empty.super.contains(object);
+        }
+
+        @Override
+        default <V2> Array.Empty<V2> map(Function<? super V, ? extends V2> function) {
+            throw new UnsupportedOperationException("map not supported yet!");
+        }
+
+        @Override
+        default Array.Empty<V> filter(final Predicate<? super V> predicate) {
+            return this;
+        }
+
+        @Override
+        default Array.Empty<V> tail() {
+            return this;
+        }
+
+        @Override
+        default int capacity() {
+            return 0;
+        }
+
+        @Override
+        default Array.Empty<V> immutableCopy() {
+            return this;
+        }
+
+    }
+
+    interface Singleton<V>
+            extends Array.Immutable<V>, List.Singleton<V>, Indexed.Singleton<V> {
+
+        @Override
+        default int capacity() {
+            return 1;
+        }
+
+        @Override
+        default Array.Singleton<V> toArray() {
+            return this;
+        }
+
+        @Override
+        default boolean contains(final Object object) {
+            return List.Singleton.super.contains(object);
+        }
+
+        @Override
+        Array.Empty<V> tail();
+
+        @Override
+        default Array.Singleton<V> immutableCopy() {
+            return this;
         }
 
     }

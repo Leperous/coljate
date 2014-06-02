@@ -1,10 +1,12 @@
 package net.ollie.sc4j;
 
 import java.util.NoSuchElementException;
+import java.util.Objects;
 import java.util.function.Function;
 import java.util.function.Predicate;
 
 import net.ollie.sc4j.access.Iteratable;
+import net.ollie.sc4j.imposed.Mutability;
 import net.ollie.sc4j.utils.Iterables;
 
 import javax.annotation.CheckForNull;
@@ -52,5 +54,80 @@ public interface Collection<V> {
 
     @CheckForNull
     V findOrElse(Predicate<? super V> predicate, V defaultValue);
+
+    Collection.Mutable<V> mutableCopy();
+
+    Collection.Immutable<V> immutableCopy();
+
+    interface Mutable<V>
+            extends Collection<V>, Mutability.Mutable {
+
+    }
+
+    interface Immutable<V>
+            extends Collection<V>, Mutability.Immutable {
+
+        @Override
+        default Collection.Immutable<V> immutableCopy() {
+            return this;
+        }
+
+    }
+
+    interface Empty<V>
+            extends Collection.Immutable<V> {
+
+        @Override
+        default boolean isEmpty() {
+            return true;
+        }
+
+        @Override
+        default boolean contains(final Object object) {
+            return false;
+        }
+
+        @Override
+        @SuppressWarnings("unchecked")
+        default <V2> Collection.Empty<V2> map(Function<? super V, ? extends V2> function) {
+            return (Collection.Empty<V2>) this;
+        }
+
+        @Override
+        default Collection.Empty<V> filter(final Predicate<? super V> predicate) {
+            return this;
+        }
+
+        @Override
+        default V findOrElse(final Predicate<? super V> predicate, final V defaultValue) {
+            return defaultValue;
+        }
+
+    }
+
+    interface Singleton<V>
+            extends Collection.Immutable<V> {
+
+        @Nonnull
+        V value();
+
+        @Override
+        default boolean isEmpty() {
+            return true;
+        }
+
+        @Override
+        default boolean contains(final Object object) {
+            return Objects.equals(this.value(), object);
+        }
+
+        @Override
+        default V findOrElse(final Predicate<? super V> predicate, final V defaultValue) {
+            return predicate.test(this.value())
+                    ? this.value()
+                    : defaultValue;
+        }
+
+    }
 
 }

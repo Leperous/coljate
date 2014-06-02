@@ -1,6 +1,5 @@
 package net.ollie.sc4j;
 
-import java.util.Comparator;
 import java.util.Iterator;
 import java.util.Objects;
 import java.util.function.Function;
@@ -147,16 +146,21 @@ public interface List<V>
     }
 
     interface Empty<V>
-            extends Sequence.Empty<V>, List.Immutable<V> {
+            extends List.Immutable<V>, Sequence.Empty<V>, Iteratable.Empty<V> {
 
         @Override
-        default boolean isEmpty() {
-            return Sequence.Empty.super.isEmpty();
+        default V head() {
+            return Sequence.Empty.super.head();
         }
 
         @Override
-        default boolean contains(Object object) {
-            return Sequence.Empty.super.contains(object);
+        default UnmodifiableIterator<V> iterator() {
+            return Iteratable.Empty.super.iterator();
+        }
+
+        @Override
+        default <V2> List.Empty<V2> map(Function<? super V, ? extends V2> function) {
+            return (List.Empty<V2>) this;
         }
 
         @Override
@@ -165,17 +169,7 @@ public interface List<V>
         }
 
         @Override
-        default List.Empty<V> withoutFirst(final Object value) {
-            return this;
-        }
-
-        @Override
-        default List.Empty<V> withoutAll(final Object value) {
-            return this;
-        }
-
-        @Override
-        default List.Empty<V> filter(Predicate<? super V> predicate) {
+        default List.Empty<V> filter(final Predicate<? super V> predicate) {
             return this;
         }
 
@@ -184,28 +178,30 @@ public interface List<V>
             return this;
         }
 
-        @Override
-        @SuppressWarnings("unchecked")
-        default <V2> List.Empty<V2> map(Function<? super V, ? extends V2> function) {
-            return (List.Empty<V2>) this;
-        }
+    }
+
+    interface Singleton<V>
+            extends List.Immutable<V>, Sequence.Singleton<V>, Iteratable.Singleton<V> {
 
         @Override
-        default V first() {
-            return null;
+        default V head() {
+            return Iteratable.Singleton.super.head();
         }
 
         @Override
         default V last() {
-            return null;
+            return this.value();
         }
 
         @Override
-        List.Empty<V> sort(Comparator<? super V> comparator);
+        List.Empty<V> tail();
 
         @Override
-        public default V findOrElse(Predicate<? super V> predicate, V defaultValue) {
-            return Sequence.Empty.super.findOrElse(predicate, defaultValue);
+        Array.Singleton<V> toArray();
+
+        @Override
+        default UnmodifiableIterator<V> iterator() {
+            return Iteratable.Singleton.super.iterator();
         }
 
     }

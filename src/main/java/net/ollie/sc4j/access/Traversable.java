@@ -3,7 +3,6 @@ package net.ollie.sc4j.access;
 import java.util.function.Predicate;
 
 import net.ollie.sc4j.Collection;
-import net.ollie.sc4j.imposed.Mutability;
 
 /**
  *
@@ -29,21 +28,46 @@ public interface Traversable<V>
         return defaultValue;
     }
 
+    @Override
     Traversable.Mutable<V> mutableCopy();
 
+    @Override
     Traversable.Immutable<V> immutableCopy();
 
     interface Mutable<V>
-            extends Traversable<V>, Mutability.Mutable {
+            extends Traversable<V>, Collection.Mutable<V> {
 
     }
 
     interface Immutable<V>
-            extends Traversable<V>, Mutability.Immutable {
+            extends Traversable<V>, Collection.Immutable<V> {
+
+        @Override
+        Traversable.Immutable<V> tail();
 
         @Override
         default Traversable.Immutable<V> immutableCopy() {
             return this;
+        }
+
+    }
+
+    interface Empty<V>
+            extends Collection.Empty<V>, Traversable.Immutable<V> {
+
+        @Override
+        default V head() {
+            return null;
+        }
+
+        @Override
+        default Traversable.Empty<V> tail() {
+            return this;
+        }
+
+        @Override
+        default V findOrElse(final Predicate<? super V> predicate, V defaultValue) {
+            return Collection.Empty.super.findOrElse(predicate, defaultValue);
         }
 
     }

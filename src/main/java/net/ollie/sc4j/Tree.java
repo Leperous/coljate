@@ -1,0 +1,62 @@
+package net.ollie.sc4j;
+
+import net.ollie.sc4j.imposed.Unique;
+
+import javax.annotation.CheckForNull;
+import javax.annotation.Nonnull;
+
+/**
+ *
+ * @author Ollie
+ */
+public interface Tree<N, V>
+        extends Graph<N, V> {
+
+    @CheckForNull
+    N root();
+
+    @Override
+    default V head() {
+        final N root = this.root();
+        return root == null ? null : this.get(root);
+    }
+
+    @CheckForNull
+    N parent(N node);
+
+    @Nonnull
+    Unique<N> children(N node);
+
+    @Nonnull
+    Unique<? extends Tree<N, V>> subtrees(N node);
+
+    @Override
+    Tree.Mutable<N, V> mutableCopy();
+
+    @Override
+    Tree.Immutable<N, V> immutableCopy();
+
+    @Override
+    default int hash() {
+        throw new UnsupportedOperationException(); //TODO
+    }
+
+    interface Mutable<N, V>
+            extends Tree<N, V>, Graph.Mutable<N, V> {
+
+    }
+
+    interface Immutable<N, V>
+            extends Tree<N, V>, Graph.Immutable<N, V> {
+
+        @Override
+        Unique<? extends Tree.Immutable<N, V>> subtrees(N node);
+
+        @Override
+        default Tree.Immutable<N, V> immutableCopy() {
+            return this;
+        }
+
+    }
+
+}

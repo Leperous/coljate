@@ -113,4 +113,29 @@ public interface Set<V>
 
     }
 
+    interface Empty<V>
+            extends Set.Immutable<V>, Iteratable.Empty<V> {
+
+        @Override
+        public default UnmodifiableIterator<V> iterator() {
+            return Iteratable.Empty.super.iterator();
+        }
+
+        @Override
+        default <V2> Set.Empty<V2> map(final Function<? super V, ? extends V2> function) {
+            return (Set.Empty<V2>) this;
+        }
+
+        @Override
+        default Set.Empty<V> tail() {
+            return this;
+        }
+
+        @Override
+        default Set.Empty<V> filter(final Predicate<? super V> predicate) {
+            return this;
+        }
+
+    }
+
 }

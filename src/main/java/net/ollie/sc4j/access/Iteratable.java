@@ -114,106 +114,89 @@ public interface Iteratable<V>
 
     }
 
-    abstract class Empty<V>
-            implements Iteratable.Immutable<V> {
+    interface Empty<V>
+            extends Traversable.Empty<V>, Iteratable.Immutable<V> {
 
         @Override
-        public UnmodifiableIterator<V> iterator() {
+        default boolean isEmpty() {
+            return Traversable.Empty.super.isEmpty();
+        }
+
+        @Override
+        default boolean contains(final Object object) {
+            return Traversable.Empty.super.contains(object);
+        }
+
+        @Override
+        default UnmodifiableIterator<V> iterator() {
             return Iterators.empty();
         }
 
         @Override
-        public Object[] toRawArray() {
+        default V head() {
+            return Traversable.Empty.super.head();
+        }
+
+        @Override
+        default Object[] toRawArray() {
             return Arrays.empty();
         }
 
         @Override
-        public Iteratable.Immutable<V> tail() {
+        default Iteratable.Empty<V> tail() {
             return this;
         }
 
         @Override
-        public V head() {
-            return null;
+        default <V2> Iteratable.Empty<V2> map(Function<? super V, ? extends V2> function) {
+            return (Iteratable.Empty<V2>) this;
         }
 
         @Override
-        public boolean isEmpty() {
-            return true;
-        }
-
-        @Override
-        public boolean contains(final Object object) {
-            return false;
-        }
-
-        @Override
-        public <V2> Iteratable<V2> map(Function<? super V, ? extends V2> function) {
-            return (Iteratable<V2>) this;
-        }
-
-        @Override
-        public Iteratable<V> filter(final Predicate<? super V> predicate) {
+        default Iteratable.Empty<V> filter(final Predicate<? super V> predicate) {
             return this;
         }
 
         @Override
-        public V findOrElse(final Predicate<? super V> predicate, final V defaultValue) {
-            return defaultValue;
+        default V findOrElse(final Predicate<? super V> predicate, V defaultValue) {
+            return Traversable.Empty.super.findOrElse(predicate, defaultValue);
         }
 
     }
 
-    abstract class Singleton<V>
-            implements Iteratable.Immutable<V> {
+    interface Singleton<V>
+            extends Traversable.Singleton<V>, Iteratable.Immutable<V> {
 
-        private final V value;
-
-        protected Singleton(final V value) {
-            this.value = value;
+        @Override
+        default UnmodifiableIterator<V> iterator() {
+            return Iterators.singleton(value());
         }
 
         @Override
-        public UnmodifiableIterator<V> iterator() {
-            return Iterators.singleton(value);
+        default Object[] toRawArray() {
+            return new Object[]{value()};
         }
 
         @Override
-        public Object[] toRawArray() {
-            return new Object[]{value};
+        default V head() {
+            return value();
         }
 
         @Override
-        public V head() {
-            return value;
+        default boolean isEmpty() {
+            return false;
         }
 
         @Override
-        public boolean isEmpty() {
-            return value != null;
+        default boolean contains(final Object object) {
+            return Objects.equals(value(), object);
         }
 
         @Override
-        public boolean contains(final Object object) {
-            return Objects.equals(value, object);
-        }
-
-        @Override
-        public V findOrElse(final Predicate<? super V> predicate, final V defaultValue) {
-            return predicate.test(value)
-                    ? value
+        default V findOrElse(final Predicate<? super V> predicate, final V defaultValue) {
+            return predicate.test(value())
+                    ? value()
                     : defaultValue;
-        }
-
-        @Override
-        public boolean equals(final Object object) {
-            return object instanceof Iteratable
-                    && this.equals((Iteratable) object);
-        }
-
-        @Override
-        public int hashCode() {
-            return this.hash();
         }
 
     }

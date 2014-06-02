@@ -47,10 +47,14 @@ public interface Sequence<V>
     }
 
     interface Empty<V>
-            extends net.ollie.sc4j.imposed.Empty<V>, Sequence.Immutable<V> {
+            extends Sorted.Empty<V>, Sequence.Immutable<V> {
 
         @Override
-        @SuppressWarnings("unchecked")
+        default V head() {
+            return Sorted.Empty.super.head();
+        }
+
+        @Override
         default <V2> Sequence.Empty<V2> map(Function<? super V, ? extends V2> function) {
             return (Sequence.Empty<V2>) this;
         }
@@ -61,8 +65,23 @@ public interface Sequence<V>
         }
 
         @Override
-        default V findOrElse(Predicate<? super V> predicate, V defaultValue) {
-            return net.ollie.sc4j.imposed.Empty.super.findOrElse(predicate, defaultValue);
+        default Sequence.Empty<V> tail() {
+            return this;
+        }
+
+        @Override
+        default Sequence.Empty<V> immutableCopy() {
+            return this;
+        }
+
+        @Override
+        default V first() {
+            return null;
+        }
+
+        @Override
+        default V lastOrElse(final Predicate<? super V> predicate, final V defaultValue) {
+            return defaultValue;
         }
 
     }
