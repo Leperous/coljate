@@ -8,7 +8,9 @@ import net.ollie.sc4j.imposed.Unique;
 import net.ollie.sc4j.utils.Iterables;
 import net.ollie.sc4j.utils.UnmodifiableIterator;
 
+import javax.annotation.CheckForNull;
 import javax.annotation.CheckReturnValue;
+import javax.annotation.Nonnull;
 import javax.annotation.OverridingMethodsMustInvokeSuper;
 
 /**
@@ -25,10 +27,13 @@ public interface Set<V>
     Set<V> filter(Predicate<? super V> predicate);
 
     @Override
-    <V2> Iteratable<V2> map(Function<? super V, ? extends V2> function);
+    <V2> Set<V2> map(Function<? super V, ? extends V2> function);
 
     @Override
     Set<V> tail();
+
+    @Override
+    <R> Set<R> flatMap(Function<? super V, ? extends Iteratable<R>> function);
 
     @Override
     Set.Mutable<V> mutableCopy();
@@ -89,10 +94,19 @@ public interface Set<V>
             extends Set<V>, Iteratable.Immutable<V> {
 
         @CheckReturnValue
-        Set.Immutable<V> with(V value);
+        @Nonnull
+        Set.Immutable<V> with(@Nonnull V value);
+
+        @Nonnull
+        default Set.Immutable<V> maybeWith(@CheckForNull final V value) {
+            return value == null ? this : this.with(value);
+        }
 
         @CheckReturnValue
         Set.Immutable<V> without(Object value);
+
+        @Override
+        <R> Set.Immutable<R> flatMap(Function<? super V, ? extends Iteratable<R>> function);
 
         @Override
         Set.Immutable<V> tail();

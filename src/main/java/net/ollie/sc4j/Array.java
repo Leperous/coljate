@@ -5,6 +5,7 @@ import java.util.function.Function;
 import java.util.function.Predicate;
 
 import net.ollie.sc4j.access.Indexed;
+import net.ollie.sc4j.access.Iteratable;
 import net.ollie.sc4j.utils.IndexedComparator;
 
 /**
@@ -43,6 +44,9 @@ public interface Array<V>
     default <V2> Array<V2> mapValues(Function<? super V, ? extends V2> function) {
         return this.map(function);
     }
+
+    @Override
+    <R> Array<R> flatMap(Function<? super V, ? extends Iteratable<R>> function);
 
     @Override
     default Array<V> toArray() {
@@ -120,6 +124,9 @@ public interface Array<V>
         }
 
         @Override
+        <R> Array.Immutable<R> flatMap(Function<? super V, ? extends Iteratable<R>> function);
+
+        @Override
         Array.Immutable<V> tail();
 
         @Override
@@ -179,7 +186,7 @@ public interface Array<V>
 
     interface Empty<V>
             extends Array.Immutable<V>, List.Empty<V>, Indexed.Empty<V> {
-        
+
         @Override
         default boolean contains(final Object object) {
             return List.Empty.super.contains(object);

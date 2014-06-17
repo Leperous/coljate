@@ -35,6 +35,10 @@ public interface Iteratable<V>
         return !this.iterator().hasNext();
     }
 
+    @Nonnull
+    @CheckReturnValue
+    <R> Iteratable<R> flatMap(Function<? super V, ? extends Iteratable<R>> function);
+
     @CheckReturnValue
     default <R> R reduce(final BiFunction<R, V, ? extends R> function, final R initial) {
         R current = initial;

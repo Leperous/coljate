@@ -31,6 +31,9 @@ public interface Tree<N, V>
     Unique<? extends Tree<N, V>> subtrees(N node);
 
     @Override
+    Set<N> neighbours(N node);
+
+    @Override
     Tree.Mutable<N, V> mutableCopy();
 
     @Override
@@ -48,6 +51,14 @@ public interface Tree<N, V>
 
     interface Immutable<N, V>
             extends Tree<N, V>, Graph.Immutable<N, V> {
+
+        @Override
+        Set.Immutable<N> children(N node);
+
+        @Override
+        default Set.Immutable<N> neighbours(final N node) {
+            return this.children(node).maybeWith(this.parent(node));
+        }
 
         @Override
         Unique<? extends Tree.Immutable<N, V>> subtrees(N node);

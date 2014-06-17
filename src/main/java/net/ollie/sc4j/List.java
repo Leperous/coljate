@@ -45,6 +45,9 @@ public interface List<V>
     Array<V> toArray();
 
     @Override
+    <R> List<R> flatMap(Function<? super V, ? extends Iteratable<R>> function);
+
+    @Override
     List.Mutable<V> mutableCopy();
 
     @Override
