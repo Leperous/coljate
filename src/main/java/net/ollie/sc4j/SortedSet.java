@@ -3,6 +3,8 @@ package net.ollie.sc4j;
 import net.ollie.sc4j.imposed.Sorted;
 import net.ollie.sc4j.utils.Iterables;
 
+import javax.annotation.CheckForNull;
+
 /**
  *
  * @author Ollie
@@ -14,6 +16,9 @@ public interface SortedSet<V>
     default V head() {
         return Sorted.super.head();
     }
+
+    @CheckForNull
+    V last();
 
     @Override
     SortedSet.Mutable<V> mutableCopy();
