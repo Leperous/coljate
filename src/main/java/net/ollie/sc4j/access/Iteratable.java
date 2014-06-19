@@ -37,7 +37,9 @@ public interface Iteratable<V>
 
     @Nonnull
     @CheckReturnValue
-    <R> Iteratable<R> flatMap(Function<? super V, ? extends Iteratable<R>> function);
+    default <R> Iteratable<R> flatMap(Function<? super V, ? extends Iteratable<R>> function) {
+        throw new UnsupportedOperationException();
+    }
 
     @CheckReturnValue
     default <R> R reduce(final BiFunction<R, V, ? extends R> function, final R initial) {
