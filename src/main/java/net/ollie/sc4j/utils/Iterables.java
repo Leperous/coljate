@@ -178,7 +178,11 @@ public final class Iterables {
 
         @Override
         public int size() {
-            return this.stream().map(e -> 1).reduce(0, Integer::sum);
+            int size = 0;
+            for (final V element : this) {
+                size += 1;
+            }
+            return size;
         }
 
     }
