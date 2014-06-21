@@ -1,5 +1,6 @@
 package net.ollie.sc4j.utils;
 
+import java.util.AbstractCollection;
 import java.util.Iterator;
 import java.util.Objects;
 import java.util.OptionalInt;
@@ -76,7 +77,7 @@ public final class Iterables {
         if (iterable instanceof java.util.Collection) {
             return (java.util.Collection<V>) iterable;
         } else {
-            throw new UnsupportedOperationException(); //TODO iterable -> collection
+            return new IterableCollection<>(iterable);
         }
     }
 
@@ -160,6 +161,31 @@ public final class Iterables {
         }
         sb.append(']');
         return sb.toString();
+    }
+
+    private static final class IterableCollection<V> extends AbstractCollection<V> {
+
+        private final Iterable<V> iterable;
+
+        IterableCollection(final Iterable<V> iterable) {
+            this.iterable = iterable;
+        }
+
+        @Override
+        public Iterator<V> iterator() {
+            return iterable.iterator();
+        }
+
+        @Override
+        public int size() {
+            int size = 0;
+            final Iterator<?> iterator = this.iterator();
+            while (iterator.hasNext()) {
+                size++;
+            }
+            return size;
+        }
+
     }
 
 }
