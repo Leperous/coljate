@@ -179,8 +179,7 @@ public final class Iterables {
         @Override
         public int size() {
             int size = 0;
-            final Iterator<?> iterator = this.iterator();
-            while (iterator.hasNext()) {
+            for (final V element : this) {
                 size++;
             }
             return size;
