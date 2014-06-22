@@ -97,6 +97,16 @@ public interface Set<V>
         @Nonnull
         Set.Immutable<V> with(@Nonnull V value);
 
+        @CheckReturnValue
+        @Nonnull
+        default Set.Immutable<V> withAll(final Iterable<? extends V> values) {
+            Set.Immutable<V> set = this;
+            for (final V value : values) {
+                set = set.with(value);
+            }
+            return set;
+        }
+
         @Nonnull
         default Set.Immutable<V> maybeWith(@CheckForNull final V value) {
             return value == null ? this : this.with(value);
