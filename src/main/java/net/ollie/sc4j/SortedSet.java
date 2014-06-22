@@ -1,5 +1,7 @@
 package net.ollie.sc4j;
 
+import java.util.function.Predicate;
+
 import net.ollie.sc4j.imposed.Sorted;
 import net.ollie.sc4j.utils.Iterables;
 
@@ -19,6 +21,9 @@ public interface SortedSet<V>
 
     @CheckForNull
     V last();
+
+    @Override
+    SortedSet<V> filter(Predicate<? super V> predicate);
 
     @Override
     SortedSet.Mutable<V> mutableCopy();
@@ -44,6 +49,9 @@ public interface SortedSet<V>
 
     interface Immutable<V>
             extends SortedSet<V>, Set.Immutable<V>, Sorted.Immutable<V> {
+
+        @Override
+        SortedSet.Immutable<V> filter(Predicate<? super V> predicate);
 
         @Override
         default SortedSet.Immutable<V> immutableCopy() {
