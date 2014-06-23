@@ -99,6 +99,8 @@ public interface Iteratable<V>
         return Iterables.sumHashCode(this); //Ignore order
     }
 
+    String toString(String separator);
+
     interface Mutable<V>
             extends Iteratable<V>, Traversable.Mutable<V> {
 
