@@ -24,7 +24,7 @@ public interface Map<K, V>
     @Override
     Set<K> keys();
 
-    Set<? extends Entry<? extends K, ? extends V>> entries();
+    Set<? extends Entry<K, V>> entries();
 
     @Override
     Map<K, V> filterKeys(Predicate<? super K> predicate);
@@ -130,7 +130,7 @@ public interface Map<K, V>
         Iteratable.Immutable<V> values();
 
         @Override
-        Set.Immutable<? extends Map.Immutable.Entry<? extends K, ? extends V>> entries();
+        Set.Immutable<? extends Map.Immutable.Entry<K, V>> entries();
 
         @CheckReturnValue
         Map.Immutable<K, V> with(K key, V value);
