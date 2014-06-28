@@ -86,6 +86,15 @@ public interface Iteratable<V>
         return defaultValue;
     }
 
+    default boolean forAny(final Predicate<? super V> predicate) {
+        for (final V element : this) {
+            if (predicate.test(element)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     default boolean forAll(final Predicate<? super V> predicate) {
         for (final V element : this) {
             if (!predicate.test(element)) {
