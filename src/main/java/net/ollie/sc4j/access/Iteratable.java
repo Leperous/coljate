@@ -25,7 +25,7 @@ public interface Iteratable<V>
         extends Traversable<V>, Iterable<V> {
 
     default int count() {
-        return this.count(Object -> true);
+        return this.count(o -> true);
     }
 
     default int count(final Predicate<? super V> predicate) {
