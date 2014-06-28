@@ -86,6 +86,15 @@ public interface Iteratable<V>
         return defaultValue;
     }
 
+    default boolean forAll(final Predicate<? super V> predicate) {
+        for (final V element : this) {
+            if (!predicate.test(element)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
     default <C, A> C collect(final Collector<? super V, A, C> collector) {
         final A into = collector.supplier().get();
         final BiConsumer<A, ? super V> accumulator = collector.accumulator();
