@@ -25,18 +25,17 @@ public final class Iterables {
         final OptionalInt count = maybeCount(iterable);
         return count.isPresent()
                 ? count.getAsInt()
-                : doCount(iterable, Object -> true);
+                : doCount(iterable, o -> true);
     }
 
     public static <T> int doCount(final Iterable<T> iterable) {
-        return doCount(iterable, Object -> true);
+        return doCount(iterable, o -> true);
     }
 
     public static <T> int doCount(final Iterable<T> iterable, final Predicate<? super T> predicate) {
         int size = 0;
-        final Iterator<T> iterator = iterable.iterator();
-        while (iterator.hasNext()) {
-            if (predicate.test(iterator.next())) {
+        for (final T element : iterable) {
+            if (predicate.test(element)) {
                 size += 1;
             }
         }
