@@ -2,9 +2,11 @@ package net.ollie.sc4j.access;
 
 import java.util.Iterator;
 import java.util.Objects;
+import java.util.function.BiConsumer;
 import java.util.function.BiFunction;
 import java.util.function.Function;
 import java.util.function.Predicate;
+import java.util.stream.Collector;
 
 import net.ollie.sc4j.utils.Arrays;
 import net.ollie.sc4j.utils.Iterables;
@@ -82,6 +84,15 @@ public interface Iteratable<V>
             }
         }
         return defaultValue;
+    }
+
+    default <C, A> C collect(final Collector<? super V, A, C> collector) {
+        final A into = collector.supplier().get();
+        final BiConsumer<A, ? super V> accumulator = collector.accumulator();
+        for (final V element : this) {
+            accumulator.accept(into, element);
+        }
+        return collector.finisher().apply(into);
     }
 
     @Override
