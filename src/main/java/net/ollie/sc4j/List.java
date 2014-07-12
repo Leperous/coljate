@@ -135,6 +135,7 @@ public interface List<V>
         @Override
         <V2> List.Immutable<V2> map(Function<? super V, ? extends V2> function);
 
+        @Override
         List.Immutable<V> reverse();
 
         @Override

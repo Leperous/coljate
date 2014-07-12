@@ -133,10 +133,20 @@ public interface Map<K, V>
         Set.Immutable<? extends Map.Immutable.Entry<K, V>> entries();
 
         @CheckReturnValue
+        @Nonnull
         Map.Immutable<K, V> with(K key, V value);
 
         @CheckReturnValue
+        @Nonnull
         Map.Immutable<K, V> without(Object key);
+
+        @CheckReturnValue
+        @Nonnull
+        default Map.Immutable<K, V> replace(K key, V expectedValue, V newValue) {
+            return Objects.equals(expectedValue, this.get(key))
+                    ? this.without(key).with(key, newValue)
+                    : this;
+        }
 
         @Override
         Map.Immutable<K, V> filterKeys(Predicate<? super K> predicate);

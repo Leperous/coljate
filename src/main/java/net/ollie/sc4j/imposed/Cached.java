@@ -116,7 +116,7 @@ public interface Cached<K, V>
         @CheckForNull
         V remove(Object key);
 
-        boolean replace(K key, V oldValue, V newValue);
+        boolean replace(K key, V expectedValue, V newValue);
 
     }
 
