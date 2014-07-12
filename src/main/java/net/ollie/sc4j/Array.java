@@ -49,11 +49,6 @@ public interface Array<V>
     <R> Array<R> flatMap(Function<? super V, ? extends Iteratable<R>> function);
 
     @Override
-    default Array<V> toArray() {
-        return this;
-    }
-
-    @Override
     Array.Mutable<V> mutableCopy();
 
     @Override
@@ -111,11 +106,6 @@ public interface Array<V>
 
         default Array.Immutable<V> resize(int size) {
             return this.segment(0, size);
-        }
-
-        @Override
-        default Array.Immutable<V> toArray() {
-            return this;
         }
 
         @Override
@@ -225,11 +215,6 @@ public interface Array<V>
         @Override
         default int capacity() {
             return 1;
-        }
-
-        @Override
-        default Array.Singleton<V> toArray() {
-            return this;
         }
 
         @Override

@@ -11,7 +11,6 @@ import net.ollie.sc4j.utils.UnmodifiableIterator;
 
 import javax.annotation.CheckForNull;
 import javax.annotation.CheckReturnValue;
-import javax.annotation.Nonnull;
 import javax.annotation.OverridingMethodsMustInvokeSuper;
 
 /**
@@ -40,9 +39,7 @@ public interface List<V>
     @Override
     List<V> filter(Predicate<? super V> predicate);
 
-    @CheckReturnValue
-    @Nonnull
-    Array<V> toArray();
+    List<V> reverse();
 
     @Override
     <R> List<R> flatMap(Function<? super V, ? extends Iteratable<R>> function);
@@ -77,6 +74,9 @@ public interface List<V>
         void prefixAll(Iterable<? extends V> values);
 
         void suffix(V value);
+
+        @Override
+        List.Mutable<V> reverse();
 
         default void suffixAll(final Iterable<? extends V> values) {
             for (final V value : values) {
@@ -135,8 +135,7 @@ public interface List<V>
         @Override
         <V2> List.Immutable<V2> map(Function<? super V, ? extends V2> function);
 
-        @Override
-        Array.Immutable<V> toArray();
+        List.Immutable<V> reverse();
 
         @Override
         default List.Immutable<V> immutableCopy() {
@@ -198,9 +197,6 @@ public interface List<V>
 
         @Override
         List.Empty<V> tail();
-
-        @Override
-        Array.Singleton<V> toArray();
 
         @Override
         default UnmodifiableIterator<V> iterator() {
