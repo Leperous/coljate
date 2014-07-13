@@ -5,7 +5,6 @@ import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
 
-import net.ollie.sc4j.Collection;
 import net.ollie.sc4j.access.Iteratable;
 import net.ollie.sc4j.access.Keyed;
 import net.ollie.sc4j.utils.UnmodifiableIterator;
@@ -65,7 +64,7 @@ public interface Cached<K, V>
     <V2> Cached<K, V2> mapValues(Function<? super V, ? extends V2> function);
 
     @Override
-    default <V2> Collection<V2> map(final Function<? super V, ? extends V2> function) {
+    default <V2> Cached<K, V2> map(final Function<? super V, ? extends V2> function) {
         return this.mapValues(function);
     }
 
@@ -111,6 +110,12 @@ public interface Cached<K, V>
             return value == null
                     ? this.putIfAbsent(key, supplier.get())
                     : value;
+        }
+
+        @CheckForNull
+        default V ensure(final K key, final Supplier<? extends V> supplier) {
+            final V value = this.putIfAbsent(key, supplier);
+            return value == null ? this.get(key) : value;
         }
 
         @CheckForNull

@@ -36,6 +36,9 @@ public interface Iteratable<V>
     default boolean isEmpty() {
         return !this.iterator().hasNext();
     }
+    
+    @Override
+    <R> Iteratable<R> map(Function<? super V, ? extends R> function);
 
     @Nonnull
     @CheckReturnValue
@@ -54,6 +57,9 @@ public interface Iteratable<V>
 
     @Nonnull
     Object[] toRawArray();
+    
+    @Override
+    Iteratable<V> filter(Predicate<? super V> predicate);
 
     @Override
     default boolean contains(final Object object) {

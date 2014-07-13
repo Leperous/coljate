@@ -136,6 +136,9 @@ public interface List<V>
         <V2> List.Immutable<V2> map(Function<? super V, ? extends V2> function);
 
         @Override
+        <R> List.Immutable<R> flatMap(Function<? super V, ? extends Iteratable<R>> function);
+
+        @Override
         List.Immutable<V> reverse();
 
         @Override

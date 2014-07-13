@@ -12,7 +12,7 @@ import javax.annotation.CheckReturnValue;
 import javax.annotation.Nonnull;
 
 /**
- * Ordered and iterable.
+ * Sorted and iterable.
  *
  * @author Ollie
  * @see Ordered

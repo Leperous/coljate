@@ -61,7 +61,7 @@ public interface Set<V>
         boolean remove(Object value);
 
         default boolean addAll(final Iterable<? extends V> iterable) {
-            return this.addAll(iterable, V -> true);
+            return this.addAll(iterable, o -> true);
         }
 
         default boolean addAll(final Iterable<? extends V> iterable, final Predicate<? super V> predicate) {
@@ -75,7 +75,7 @@ public interface Set<V>
         }
 
         default boolean removeAll(final Iterable<?> iterable) {
-            return this.removeAll(iterable, Object -> true);
+            return this.removeAll(iterable, o -> true);
         }
 
         default <T> boolean removeAll(final Iterable<T> iterable, final Predicate<? super T> predicate) {
@@ -146,6 +146,7 @@ public interface Set<V>
         }
 
         @Override
+        @SuppressWarnings("unchecked")
         default <V2> Set.Empty<V2> map(final Function<? super V, ? extends V2> function) {
             return (Set.Empty<V2>) this;
         }
