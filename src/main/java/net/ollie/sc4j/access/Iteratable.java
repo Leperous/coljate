@@ -36,7 +36,7 @@ public interface Iteratable<V>
     default boolean isEmpty() {
         return !this.iterator().hasNext();
     }
-    
+
     @Override
     <R> Iteratable<R> map(Function<? super V, ? extends R> function);
 
@@ -55,9 +55,13 @@ public interface Iteratable<V>
         return current;
     }
 
+    default int sum(final Function<V, Integer> function) {
+        return reduce((i, e) -> i + function.apply(e), 0);
+    }
+
     @Nonnull
     Object[] toRawArray();
-    
+
     @Override
     Iteratable<V> filter(Predicate<? super V> predicate);
 

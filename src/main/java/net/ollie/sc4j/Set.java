@@ -11,6 +11,7 @@ import net.ollie.sc4j.utils.UnmodifiableIterator;
 import javax.annotation.CheckForNull;
 import javax.annotation.CheckReturnValue;
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import javax.annotation.OverridingMethodsMustInvokeSuper;
 
 /**
@@ -58,7 +59,17 @@ public interface Set<V>
 
         boolean add(V value);
 
-        boolean remove(Object value);
+        boolean remove(@Nullable Object value);
+
+        default boolean removeWhere(final Predicate<? super V> predicate) {
+            boolean removed = false;
+            for (final V value : this) {
+                if (predicate.test(value)) {
+                    removed |= this.remove(value);
+                }
+            }
+            return removed;
+        }
 
         default boolean addAll(final Iterable<? extends V> iterable) {
             return this.addAll(iterable, o -> true);
