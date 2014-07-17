@@ -2,6 +2,7 @@ package net.ollie.sc4j.utils;
 
 import java.util.AbstractCollection;
 import java.util.Iterator;
+import java.util.NoSuchElementException;
 import java.util.Objects;
 import java.util.OptionalInt;
 import java.util.function.Function;
@@ -86,7 +87,7 @@ public final class Iterables {
 
     @CheckReturnValue
     public static <V> Iterable<V> filter(final Iterable<V> iterable, final Predicate<? super V> predicate) {
-        throw new UnsupportedOperationException(); //TODO filter iterable
+        return new FilteredIterable<>(predicate, iterable);
     }
 
     public static OptionalInt indexOf(final Iterable<?> iterable, final Object target) {
@@ -182,6 +183,51 @@ public final class Iterables {
                 size += 1;
             }
             return size;
+        }
+
+    }
+
+    private static final class FilteredIterable<V> implements Iterable<V> {
+
+        private final Predicate<? super V> predicate;
+        private final Iterable<V> source;
+
+        FilteredIterable(final Predicate<? super V> predicate, final Iterable<V> source) {
+            this.predicate = predicate;
+            this.source = source;
+        }
+
+        @Override
+        public Iterator<V> iterator() {
+            return new Iterator<V>() {
+
+                final Iterator<V> iterator = source.iterator();
+                V next;
+                boolean hasNext;
+
+                @Override
+                public boolean hasNext() {
+                    while (iterator.hasNext()) {
+                        final V v = iterator.next();
+                        if (predicate.test(v)) {
+                            hasNext = true;
+                            next = v;
+                            return true;
+                        }
+                    }
+                    return false;
+                }
+
+                @Override
+                public V next() {
+                    if (!hasNext) {
+                        throw new NoSuchElementException();
+                    }
+                    hasNext = false;
+                    return next;
+                }
+
+            };
         }
 
     }
