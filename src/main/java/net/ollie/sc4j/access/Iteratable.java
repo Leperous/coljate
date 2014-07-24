@@ -13,6 +13,7 @@ import net.ollie.sc4j.utils.Iterables;
 import net.ollie.sc4j.utils.Iterators;
 import net.ollie.sc4j.utils.UnmodifiableIterator;
 
+import java.math.BigInteger;
 import javax.annotation.CheckReturnValue;
 import javax.annotation.Nonnull;
 
@@ -55,8 +56,12 @@ public interface Iteratable<V>
         return current;
     }
 
-    default int sum(final Function<V, Integer> function) {
-        return reduce((i, e) -> i + function.apply(e), 0);
+    default BigInteger sum(final Function<V, BigInteger> function) {
+        return reduce((i, e) -> i.add(function.apply(e)), BigInteger.ZERO);
+    }
+
+    default int sumExact(final Function<V, Integer> function) {
+        return this.sum(v -> BigInteger.valueOf(function.apply(v))).intValueExact();
     }
 
     @Nonnull
