@@ -22,14 +22,14 @@ public final class Iterables {
     private Iterables() {
     }
 
-    public static int countAll(final Iterable<?> iterable) {
+    public static int count(final Iterable<?> iterable) {
         final OptionalInt count = maybeCount(iterable);
         return count.isPresent()
                 ? count.getAsInt()
                 : doCount(iterable, o -> true);
     }
 
-    public static <T> int doCount(final Iterable<T> iterable) {
+    public static int doCount(final Iterable<?> iterable) {
         return doCount(iterable, o -> true);
     }
 

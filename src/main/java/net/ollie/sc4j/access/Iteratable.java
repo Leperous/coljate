@@ -17,7 +17,7 @@ import javax.annotation.CheckReturnValue;
 import javax.annotation.Nonnull;
 
 /**
- * Iterable collection. Introduces "reduce" method.
+ * Iterable, finite collection. Introduces "reduce" method.
  *
  * @author Ollie
  */
