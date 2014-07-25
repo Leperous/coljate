@@ -21,10 +21,14 @@ import javax.annotation.Nonnull;
 public interface Cached<K, V>
         extends Keyed<K, V>, Iteratable<V> {
 
-    default V getOrDefault(final Object key, V defaultValue) {
+    default V getOrDefault(final Object key, final V defaultValue) {
+        return this.getOrElse(key, () -> defaultValue);
+    }
+
+    default V getOrElse(final Object key, final Supplier<? extends V> supplier) {
         final V value = this.get(key);
         return value == null
-                ? defaultValue
+                ? supplier.get()
                 : value;
     }
 
