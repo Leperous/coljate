@@ -19,7 +19,7 @@ import javax.annotation.Nonnull;
  * @param <V> value type
  */
 public interface Cached<K, V>
-        extends Keyed<K, V>, Iteratable<V> {
+        extends Keyed.Single<K, V>, Iteratable<V> {
 
     default V getOrDefault(final Object key, final V defaultValue) {
         return this.getOrElse(key, () -> defaultValue);
@@ -75,6 +75,11 @@ public interface Cached<K, V>
     @Override
     default Iterator<V> iterator() {
         return this.values().iterator();
+    }
+
+    @Override
+    default boolean isEmpty() {
+        return Keyed.Single.super.isEmpty();
     }
 
     @Override

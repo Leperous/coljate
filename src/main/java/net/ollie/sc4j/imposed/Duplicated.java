@@ -12,7 +12,7 @@ import javax.annotation.Nonnull;
  * @see Unique
  */
 public interface Duplicated<V>
-        extends Collection<V>, Keyed<V, NonNegativeInteger> {
+        extends Collection<V>, Keyed.Single<V, NonNegativeInteger> {
 
     int count(Object value);
 
@@ -20,6 +20,11 @@ public interface Duplicated<V>
     @Nonnull
     default NonNegativeInteger get(final Object value) {
         return NonNegativeInteger.of(this.count(value));
+    }
+
+    @Override
+    default boolean isEmpty() {
+        return Keyed.Single.super.isEmpty();
     }
 
 }

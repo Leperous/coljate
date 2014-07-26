@@ -29,6 +29,11 @@ public interface MultiSet<V>
     Map<V, NonNegativeInteger> map();
 
     @Override
+    default boolean isEmpty() {
+        return Duplicated.super.isEmpty();
+    }
+
+    @Override
     MultiSet.Mutable<V> mutableCopy();
 
     @Override
@@ -46,11 +51,10 @@ public interface MultiSet<V>
     }
 
     interface Mutable<V>
-            extends MultiSet<V>, Set.Mutable<V> {
+            extends MultiSet<V>, Set.Mutable<V>, Duplicated.Mutable<V> {
 
         /**
-         * Increment the given value by 1. If the value is not present, it is
-         * added and 1 is returned.
+         * Increment the given value by 1. If the value is not present, it is added and 1 is returned.
          *
          * TODO do we need to worry about heap pollution if untyped?
          *

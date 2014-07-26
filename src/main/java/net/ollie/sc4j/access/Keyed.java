@@ -12,16 +12,10 @@ import javax.annotation.CheckReturnValue;
 import javax.annotation.Nonnull;
 
 /**
- * A collection of objects that are accessed through providing some kind of key.
  *
  * @author Ollie
- * @param <K> key type
- * @param <V> value type
  */
 public interface Keyed<K, V> {
-
-    @CheckForNull
-    V get(@Nonnull Object key);
 
     @Nonnull
     Unique<K> keys();
@@ -35,6 +29,10 @@ public interface Keyed<K, V> {
 
     default boolean containsValue(final V value) {
         return this.values().contains(value);
+    }
+
+    default boolean isEmpty() {
+        return this.keys().isEmpty() || this.values().isEmpty();
     }
 
     @CheckReturnValue
@@ -53,10 +51,20 @@ public interface Keyed<K, V> {
     @Nonnull
     Keyed<K, V> filterValues(Predicate<? super V> predicate);
 
-    interface BiKeyed<K1, K2, V>
-            extends Keyed<Map.Entry<K1, K2>, V> {
+    interface Single<K, V> extends Keyed<K, V> {
+
+        @CheckForNull
+        V get(@Nonnull Object key);
+
+    }
+
+    interface Dual<K1, K2, V> extends Keyed.Single<Map.Entry<K1, K2>, V> {
 
         V get(Object key1, Object key2);
+
+        default V get(final Map.Entry<? extends K1, ? extends K2> entry) {
+            return this.get(entry.key(), entry.value());
+        }
 
         @Override
         default V get(final Object object) {
@@ -68,9 +76,12 @@ public interface Keyed<K, V> {
             }
         }
 
-        default V get(final Map.Entry<? extends K1, ? extends V> entry) {
-            return this.get(entry.key(), entry.value());
-        }
+    }
+
+    interface Multiple<K, V> extends Keyed<K, V> {
+
+        @CheckForNull
+        Collection<V> get(@Nonnull Object key);
 
     }
 

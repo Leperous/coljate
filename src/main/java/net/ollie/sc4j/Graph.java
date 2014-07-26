@@ -13,12 +13,17 @@ import javax.annotation.Nonnull;
  * @param <V> value type
  */
 public interface Graph<N, V>
-        extends Keyed<N, V>, Iteratable<V> {
+        extends Keyed.Single<N, V>, Iteratable<V> {
 
     boolean adjacent(@Nonnull N node1, @Nonnull N node2);
 
     @Nonnull
     Unique<N> neighbours(N node);
+
+    @Override
+    default boolean isEmpty() {
+        return Iteratable.super.isEmpty();
+    }
 
     @Override
     Graph.Mutable<N, V> mutableCopy();

@@ -3,7 +3,7 @@ package net.ollie.sc4j;
 import java.util.function.Function;
 import java.util.function.Predicate;
 
-import net.ollie.sc4j.access.Keyed.BiKeyed;
+import net.ollie.sc4j.access.Keyed;
 import net.ollie.sc4j.imposed.Cached;
 
 import javax.annotation.Nonnull;
@@ -17,7 +17,7 @@ import javax.annotation.Nonnull;
  * @param <V> value type
  */
 public interface Table<R, C, V>
-        extends BiKeyed<R, C, V>, Cached<Map.Entry<R, C>, V> {
+        extends Keyed.Dual<R, C, V>, Cached<Map.Entry<R, C>, V> {
 
     @Override
     V get(Object row, Object column);

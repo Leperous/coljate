@@ -6,7 +6,7 @@ package net.ollie.sc4j.access;
  * @author Ollie
  */
 public interface Either<V>
-        extends Keyed<Boolean, V> {
+        extends Keyed.Single<Boolean, V> {
 
     V get(boolean bool);
 

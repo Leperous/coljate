@@ -183,6 +183,11 @@ public interface Array<V>
         }
 
         @Override
+        default boolean isEmpty() {
+            return List.Empty.super.isEmpty();
+        }
+
+        @Override
         default <V2> Array.Empty<V2> map(Function<? super V, ? extends V2> function) {
             throw new UnsupportedOperationException("map not supported yet!");
         }
@@ -211,6 +216,11 @@ public interface Array<V>
 
     interface Singleton<V>
             extends Array.Immutable<V>, List.Singleton<V>, Indexed.Singleton<V> {
+
+        @Override
+        default boolean isEmpty() {
+            return List.Singleton.super.isEmpty();
+        }
 
         @Override
         default int capacity() {

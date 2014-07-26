@@ -13,7 +13,7 @@ import net.ollie.sc4j.utils.Iterables;
  * @author Ollie
  */
 public interface Indexed<V>
-        extends Iteratable<V>, Keyed<Integer, V> {
+        extends Iteratable<V>, Keyed.Single<Integer, V> {
 
     V get(int index) throws IndexOutOfBoundsException;
 
@@ -63,6 +63,11 @@ public interface Indexed<V>
     @Override
     default Indexed<V> filterValues(final Predicate<? super V> predicate) {
         return this.filter(predicate);
+    }
+
+    @Override
+    default boolean isEmpty() {
+        return Iteratable.super.isEmpty();
     }
 
     @Override
