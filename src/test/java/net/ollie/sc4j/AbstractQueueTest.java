@@ -11,7 +11,7 @@ import org.junit.Test;
  *
  * @author Ollie
  */
-public abstract class AbstractQueueTest<C extends Queue<Object>>
+public abstract class AbstractQueueTest<C extends Queue.Mutable<Object>>
         extends AbstractCollectionTest<C> {
 
     @Test

@@ -6,7 +6,9 @@ import java.util.function.Predicate;
 import net.ollie.sc4j.Collection;
 import net.ollie.sc4j.Map;
 import net.ollie.sc4j.imposed.Unique;
+import net.ollie.sc4j.utils.Functions;
 
+import static javafx.scene.input.KeyCode.K;
 import javax.annotation.CheckForNull;
 import javax.annotation.CheckReturnValue;
 import javax.annotation.Nonnull;
@@ -18,12 +20,12 @@ import javax.annotation.Nonnull;
  *
  * @author Ollie
  */
-public interface Keyed<K, V> {
+public interface Keyed<V> {
 
     @Nonnull
-    Unique<K> keys();
+    Unique<?> keys();
 
-    default boolean containsKey(final K key) {
+    default boolean containsKey(final Object key) {
         return this.keys().contains(key);
     }
 
@@ -40,24 +42,31 @@ public interface Keyed<K, V> {
 
     @CheckReturnValue
     @Nonnull
-    <K2> Keyed<K2, V> mapKeys(Function<? super K, ? extends K2> function);
+    <V2> Keyed<V2> mapValues(Function<? super V, ? extends V2> function);
 
     @CheckReturnValue
     @Nonnull
-    <V2> Keyed<K, V2> mapValues(Function<? super V, ? extends V2> function);
+    default Keyed<V> filterValues(final Predicate<? super V> predicate) {
+        return this.mapValues(Functions.satisfying(predicate));
+    }
 
-    @CheckReturnValue
-    @Nonnull
-    Keyed<K, V> filterKeys(Predicate<? super K> predicate);
+    interface Single<K, V> extends Keyed<V> {
 
-    @CheckReturnValue
-    @Nonnull
-    Keyed<K, V> filterValues(Predicate<? super V> predicate);
-
-    interface Single<K, V> extends Keyed<K, V> {
+        @Override
+        Unique<K> keys();
 
         @CheckForNull
         V get(@Nonnull Object key);
+
+        @CheckReturnValue
+        @Nonnull
+        <K2> Keyed.Single<K2, V> mapKeys(Function<? super K, ? extends K2> function);
+
+        @CheckReturnValue
+        @Nonnull
+        default Keyed.Single<K, V> filterKeys(final Predicate<? super K> predicate) {
+            return this.mapKeys(Functions.satisfying(predicate));
+        }
 
     }
 
@@ -84,7 +93,10 @@ public interface Keyed<K, V> {
 
     }
 
-    interface Multiple<K, V> extends Keyed<K, V> {
+    interface Multiple<K, V> extends Keyed<V> {
+
+        @Override
+        Unique<K> keys();
 
         @CheckForNull
         Collection<V> get(@Nonnull Object key);

@@ -7,6 +7,7 @@ import java.util.function.Predicate;
 import net.ollie.sc4j.access.Finite;
 import net.ollie.sc4j.access.Indexed;
 import net.ollie.sc4j.imposed.Sorted;
+import net.ollie.sc4j.utils.Functions;
 import net.ollie.sc4j.utils.IndexedComparator;
 
 /**
@@ -34,7 +35,9 @@ public interface Array<V>
     }
 
     @Override
-    Array<V> filter(Predicate<? super V> predicate);
+    default Array<V> filter(Predicate<? super V> predicate) {
+        return this.map(Functions.satisfying(predicate));
+    }
 
     @Override
     default Array<V> filterValues(final Predicate<? super V> predicate) {
