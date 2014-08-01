@@ -1,10 +1,11 @@
 package net.ollie.sc4j;
 
-import java.util.OptionalInt;
 
 import net.ollie.sc4j.Array.Immutable;
+import net.ollie.sc4j.utils.NonNegativeInteger;
 
 import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.CoreMatchers.nullValue;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
@@ -46,7 +47,7 @@ public abstract class AbstractImmutableArrayTest
 
         final Array.Immutable<Object> singleton = duo.withoutFirst(o1);
         assertContainsExactly(singleton, o2);
-        assertThat(singleton.indexOf(o1), is(OptionalInt.empty()));
+        assertThat(singleton.indexOf(o1), nullValue());
         assertContainsExactly(duo, o1, o2);
 
     }
@@ -63,7 +64,9 @@ public abstract class AbstractImmutableArrayTest
         int i = 0;
         for (final Object object : objects) {
             assertTrue(array.contains(object));
-            assertThat("Infex of [" + object + "] inside [" + array + "]", array.indexOf(object), is(OptionalInt.of(i++)));
+            assertThat("Index of [" + object + "] inside [" + array + "]",
+                    array.indexOf(object),
+                    is(NonNegativeInteger.of(i++)));
         }
     }
 

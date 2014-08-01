@@ -121,6 +121,21 @@ public final class NonNegativeInteger
     }
 
     @Override
+    public boolean equals(final Object object) {
+        return object instanceof Number
+                && this.equals((Number) object);
+    }
+
+    public boolean equals(@Nonnull final Number that) {
+        return this.compareTo(that) == 0;
+    }
+
+    @Override
+    public int hashCode() {
+        return value;
+    }
+
+    @Override
     public String toString() {
         return Integer.toString(value);
     }

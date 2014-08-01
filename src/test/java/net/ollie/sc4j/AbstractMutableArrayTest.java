@@ -1,6 +1,7 @@
 package net.ollie.sc4j;
 
-import java.util.OptionalInt;
+
+import net.ollie.sc4j.utils.NonNegativeInteger;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
@@ -19,7 +20,7 @@ public abstract class AbstractMutableArrayTest<C extends Array.Mutable<Object>>
             assertThat(
                     "Object [" + objects[i] + "] should be " + i + "th position in [" + collection + "]",
                     collection.indexOf(objects[i]),
-                    is(OptionalInt.of(i)));
+                    is(NonNegativeInteger.of(i)));
         }
     }
 
