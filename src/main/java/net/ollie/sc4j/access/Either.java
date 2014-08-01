@@ -12,13 +12,13 @@ public interface Either<V>
 
     @Override
     default V get(final Object bool) {
-        return bool == null
-                ? this.nullValue()
+        return bool == null || !(bool instanceof Boolean)
+                ? this.nullValue(bool)
                 : this.get(((Boolean) bool).booleanValue());
     }
 
-    default V nullValue() {
-        throw new IllegalArgumentException();
+    default V nullValue(final Object key) {
+        throw new IllegalArgumentException("Invalud key " + key);
     }
 
 }

@@ -54,7 +54,7 @@ public interface MultiSet<V>
     }
 
     interface Mutable<V>
-            extends MultiSet<V>, Finite.Mutable<V>, Duplicated.Mutable<V> {
+            extends MultiSet<V>, Finite.Mutable<V> {
 
         /**
          * Increment the given value by 1. If the value is not present, it is added and 1 is returned.

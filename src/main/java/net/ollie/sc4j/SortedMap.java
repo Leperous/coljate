@@ -16,11 +16,6 @@ public interface SortedMap<K, V>
     List<V> values();
 
     @Override
-    default V head() {
-        return Sorted.super.head();
-    }
-
-    @Override
     SortedMap.Mutable<K, V> mutableCopy();
 
     @Override
@@ -32,7 +27,7 @@ public interface SortedMap<K, V>
     }
 
     interface Mutable<K, V>
-            extends SortedMap<K, V>, Map.Mutable<K, V>, Sorted.Mutable<V> {
+            extends SortedMap<K, V>, Map.Mutable<K, V> {
 
         @Override
         SortedSet.Mutable<K> keys();
@@ -43,7 +38,7 @@ public interface SortedMap<K, V>
     }
 
     interface Immutable<K, V>
-            extends SortedMap<K, V>, Map.Immutable<K, V>, Sorted.Immutable<V> {
+            extends SortedMap<K, V>, Map.Immutable<K, V> {
 
         @Override
         SortedSet.Immutable<K> keys();

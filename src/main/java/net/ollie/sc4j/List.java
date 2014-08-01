@@ -25,7 +25,7 @@ public interface List<V>
 
     @Override
     default V head() {
-        return Sequence.super.head();
+        return Finite.super.head();
     }
 
     @Override

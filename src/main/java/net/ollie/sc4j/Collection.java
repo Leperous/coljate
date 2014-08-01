@@ -6,7 +6,6 @@ import java.util.function.Function;
 import java.util.function.Predicate;
 
 import net.ollie.sc4j.access.Finite;
-import net.ollie.sc4j.imposed.Mutability;
 import net.ollie.sc4j.utils.Iterables;
 
 import javax.annotation.CheckForNull;
@@ -57,27 +56,8 @@ public interface Collection<V> {
     @CheckForNull
     V findOrElse(Predicate<? super V> predicate, V defaultValue);
 
-    Collection.Mutable<V> mutableCopy();
-
-    Collection.Immutable<V> immutableCopy();
-
-    interface Mutable<V>
-            extends Collection<V>, Mutability.Mutable {
-
-    }
-
-    interface Immutable<V>
-            extends Collection<V>, Mutability.Immutable {
-
-        @Override
-        default Collection.Immutable<V> immutableCopy() {
-            return this;
-        }
-
-    }
-
     interface Empty<V>
-            extends Collection.Immutable<V> {
+            extends Collection<V> {
 
         @Override
         default boolean isEmpty() {

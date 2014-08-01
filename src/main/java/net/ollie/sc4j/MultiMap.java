@@ -93,7 +93,7 @@ public interface MultiMap<K, V>
         Set.Immutable<K> keys();
 
         @Override
-        Collection.Immutable<V> values();
+        Finite.Immutable<V> values();
 
         @Override
         default MultiMap.Immutable<K, V> immutableCopy() {

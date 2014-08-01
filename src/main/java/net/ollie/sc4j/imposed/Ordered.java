@@ -1,11 +1,10 @@
 package net.ollie.sc4j.imposed;
 
 import java.util.NoSuchElementException;
-import java.util.Objects;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
 
-import net.ollie.sc4j.access.Traversable;
+import net.ollie.sc4j.Collection;
 import net.ollie.sc4j.utils.Suppliers;
 
 import javax.annotation.CheckForNull;
@@ -18,15 +17,10 @@ import javax.annotation.Nonnull;
  * @see Sorted
  */
 public interface Ordered<V>
-        extends Traversable<V> {
+        extends Collection<V> {
 
     @CheckForNull
     V first();
-
-    @Override
-    default V head() {
-        return this.first();
-    }
 
     @Nonnull
     default V last(final Predicate<? super V> predicate) throws NoSuchElementException {
@@ -43,47 +37,6 @@ public interface Ordered<V>
         } else {
             return last;
         }
-    }
-
-    @Override
-    Ordered.Mutable<V> mutableCopy();
-
-    @Override
-    Ordered.Immutable<V> immutableCopy();
-
-    default boolean equals(final Ordered<?> that) {
-        return that != null
-                && Objects.equals(this.head(), that.head())
-                && Objects.equals(this.tail(), that.tail());
-    }
-
-    default int hash() {
-        return this.isEmpty()
-                ? 0
-                : Objects.hashCode(this.head()) * Objects.hashCode(this.tail()); //TODO multiplication by zero
-    }
-
-    /**
-     *
-     * @param <V>
-     */
-    interface Mutable<V>
-            extends Ordered<V>, Traversable.Mutable<V> {
-
-    }
-
-    /**
-     *
-     * @param <V>
-     */
-    interface Immutable<V>
-            extends Ordered<V>, Traversable.Immutable<V> {
-
-        @Override
-        default Ordered.Immutable<V> immutableCopy() {
-            return this;
-        }
-
     }
 
 }

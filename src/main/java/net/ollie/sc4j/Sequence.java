@@ -3,8 +3,8 @@ package net.ollie.sc4j;
 import java.util.function.Function;
 import java.util.function.Predicate;
 
+import net.ollie.sc4j.access.Traversable;
 import net.ollie.sc4j.imposed.Ordered;
-import net.ollie.sc4j.imposed.Sorted;
 
 /**
  * A sorted collection of objects, that may or may not be infinite in length.
@@ -12,7 +12,7 @@ import net.ollie.sc4j.imposed.Sorted;
  * @author Ollie
  */
 public interface Sequence<V>
-        extends Ordered<V> {
+        extends Ordered<V>, Traversable<V> {
 
     @Override
     Sequence<V> tail();
@@ -30,12 +30,12 @@ public interface Sequence<V>
     Sequence.Immutable<V> immutableCopy();
 
     interface Mutable<V>
-            extends Sequence<V>, Ordered.Mutable<V> {
+            extends Sequence<V>, Traversable.Mutable<V> {
 
     }
 
     interface Immutable<V>
-            extends Sequence<V>, Ordered.Immutable<V> {
+            extends Sequence<V>, Traversable.Immutable<V> {
 
         @Override
         Sequence.Immutable<V> tail();
@@ -48,11 +48,11 @@ public interface Sequence<V>
     }
 
     interface Empty<V>
-            extends Ordered.Empty<V>, Sequence.Immutable<V> {
+            extends Ordered.Empty<V>, Sequence.Immutable<V>, Traversable.Empty<V> {
 
         @Override
         default V head() {
-            return Sorted.Empty.super.head();
+            return Traversable.Empty.super.head();
         }
 
         @Override

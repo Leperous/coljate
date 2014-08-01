@@ -75,7 +75,9 @@ public interface Array<V>
      * @param <V>
      */
     interface Mutable<V>
-            extends Array<V>, List.Mutable<V>, Indexed.Mutable<V>, Sorted.Mutable<V> {
+            extends Array<V>, List.Mutable<V>, Indexed.Mutable<V> {
+
+        void sort(Comparator<? super V> comparator);
 
         void setCapacity(int capacity);
 
@@ -106,9 +108,8 @@ public interface Array<V>
      * @param <V>
      */
     interface Immutable<V>
-            extends Array<V>, List.Immutable<V>, Indexed.Immutable<V>, Sorted.Immutable<V> {
+            extends Array<V>, List.Immutable<V>, Indexed.Immutable<V> {
 
-        @Override
         Array.Immutable<V> sort(Comparator<? super V> comparator);
 
         @Override

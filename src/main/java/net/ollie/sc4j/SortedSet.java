@@ -1,11 +1,14 @@
 package net.ollie.sc4j;
 
+import java.util.Comparator;
 import java.util.function.Predicate;
 
 import net.ollie.sc4j.imposed.Sorted;
 import net.ollie.sc4j.utils.Iterables;
 
 import javax.annotation.CheckForNull;
+import javax.annotation.CheckReturnValue;
+import javax.annotation.Nonnull;
 
 /**
  *
@@ -13,11 +16,6 @@ import javax.annotation.CheckForNull;
  */
 public interface SortedSet<V>
         extends Set<V>, Sorted<V> {
-
-    @Override
-    default V head() {
-        return Sorted.super.head();
-    }
 
     @CheckForNull
     V last();
@@ -43,12 +41,18 @@ public interface SortedSet<V>
     }
 
     interface Mutable<V>
-            extends SortedSet<V>, Set.Mutable<V>, Sorted.Mutable<V> {
+            extends SortedSet<V>, Set.Mutable<V> {
+
+        void sort(Comparator<? super V> comparator);
 
     }
 
     interface Immutable<V>
-            extends SortedSet<V>, Set.Immutable<V>, Sorted.Immutable<V> {
+            extends SortedSet<V>, Set.Immutable<V> {
+
+        @Nonnull
+        @CheckReturnValue
+        SortedSet.Immutable<V> sort(Comparator<? super V> comparator);
 
         @Override
         SortedSet.Immutable<V> filter(Predicate<? super V> predicate);

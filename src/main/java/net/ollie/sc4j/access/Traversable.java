@@ -3,6 +3,7 @@ package net.ollie.sc4j.access;
 import java.util.function.Predicate;
 
 import net.ollie.sc4j.Collection;
+import net.ollie.sc4j.imposed.Mutability;
 
 import javax.annotation.CheckForNull;
 
@@ -32,19 +33,17 @@ public interface Traversable<V>
         return defaultValue;
     }
 
-    @Override
     Traversable.Mutable<V> mutableCopy();
 
-    @Override
     Traversable.Immutable<V> immutableCopy();
 
     interface Mutable<V>
-            extends Traversable<V>, Collection.Mutable<V> {
+            extends Traversable<V>, Mutability.Mutable {
 
     }
 
     interface Immutable<V>
-            extends Traversable<V>, Collection.Immutable<V> {
+            extends Traversable<V>, Mutability.Immutable {
 
         @Override
         Traversable.Immutable<V> tail();
