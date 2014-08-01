@@ -41,6 +41,9 @@ public interface Sequence<V>
         Sequence.Immutable<V> tail();
 
         @Override
+        Sequence.Immutable<V> filter(Predicate<? super V> predicate);
+
+        @Override
         default Sequence.Immutable<V> immutableCopy() {
             return this;
         }

@@ -6,6 +6,8 @@ import net.ollie.sc4j.Collection;
 import net.ollie.sc4j.imposed.Mutability;
 
 import javax.annotation.CheckForNull;
+import javax.annotation.CheckReturnValue;
+import javax.annotation.Nonnull;
 
 /**
  *
@@ -19,6 +21,10 @@ public interface Traversable<V>
 
     @CheckForNull
     Traversable<V> tail();
+
+    @CheckReturnValue
+    @Nonnull
+    Traversable<V> filter(@Nonnull Predicate<? super V> predicate);
 
     @Override
     default V findOrElse(Predicate<? super V> predicate, V defaultValue) {
@@ -49,6 +55,9 @@ public interface Traversable<V>
         Traversable.Immutable<V> tail();
 
         @Override
+        Traversable.Immutable<V> filter(@Nonnull Predicate<? super V> predicate);
+
+        @Override
         default Traversable.Immutable<V> immutableCopy() {
             return this;
         }
@@ -61,6 +70,11 @@ public interface Traversable<V>
         @Override
         default V head() {
             return null;
+        }
+
+        @Override
+        default Traversable.Empty<V> filter(final Predicate<? super V> predicate) {
+            return this;
         }
 
         @Override

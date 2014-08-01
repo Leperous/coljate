@@ -158,6 +158,9 @@ public interface Finite<V>
         Finite.Immutable<V> tail();
 
         @Override
+        Finite.Immutable<V> filter(Predicate<? super V> predicate);
+
+        @Override
         UnmodifiableIterator<V> iterator();
 
         @Override

@@ -109,6 +109,9 @@ public interface Indexed<V>
         Indexed.Immutable<V> tail();
 
         @Override
+        Indexed.Immutable<V> filter(Predicate<? super V> predicate);
+
+        @Override
         default Indexed.Immutable<V> values() {
             return this;
         }

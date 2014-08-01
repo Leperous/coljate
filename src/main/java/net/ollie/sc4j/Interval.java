@@ -2,9 +2,12 @@ package net.ollie.sc4j;
 
 import net.ollie.sc4j.imposed.Ordered;
 
+import javax.annotation.CheckForNull;
+
 /**
  *
  * @author Ollie
+ * @param <V> a non-parametric type.
  */
 public interface Interval<V>
         extends Ordered<V> {
@@ -13,6 +16,10 @@ public interface Interval<V>
 
     boolean maxInclusive();
 
+    @CheckForNull
     V last();
+
+    @CheckForNull
+    V tryCast(Object object);
 
 }

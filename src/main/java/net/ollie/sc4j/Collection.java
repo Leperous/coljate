@@ -40,10 +40,6 @@ public interface Collection<V> {
     @Nonnull
     <V2> Collection<V2> map(@Nonnull Function<? super V, ? extends V2> function);
 
-    @CheckReturnValue
-    @Nonnull
-    Collection<V> filter(@Nonnull Predicate<? super V> predicate);
-
     default V find(@Nonnull final Predicate<? super V> predicate) throws NoSuchElementException {
         final V found = this.findOrElse(predicate, null);
         if (found == null) {
@@ -73,11 +69,6 @@ public interface Collection<V> {
         @SuppressWarnings("unchecked")
         default <V2> Collection.Empty<V2> map(Function<? super V, ? extends V2> function) {
             return (Collection.Empty<V2>) this;
-        }
-
-        @Override
-        default Collection.Empty<V> filter(final Predicate<? super V> predicate) {
-            return this;
         }
 
         @Override

@@ -5,6 +5,7 @@ import java.util.function.Predicate;
 
 import net.ollie.sc4j.access.Keyed;
 import net.ollie.sc4j.imposed.Cached;
+import net.ollie.sc4j.utils.Functions;
 
 import javax.annotation.Nonnull;
 
@@ -94,7 +95,14 @@ public interface Table<R, C, V>
         <V2> Table.Immutable<R, C, V2> mapValues(Function<? super V, ? extends V2> function);
 
         @Override
-        Table.Immutable<R, C, V> filterValues(Predicate<? super V> predicate);
+        default Table.Immutable<R, C, V> filter(Predicate<? super V> predicate) {
+            return this.filterValues(predicate);
+        }
+
+        @Override
+        default Table.Immutable<R, C, V> filterValues(final Predicate<? super V> predicate) {
+            return this.mapValues(Functions.satisfying(predicate));
+        }
 
         @Override
         default Table.Immutable<R, C, V> immutableCopy() {

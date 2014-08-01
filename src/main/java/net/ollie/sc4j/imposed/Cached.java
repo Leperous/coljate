@@ -159,6 +159,9 @@ public interface Cached<K, V>
         }
 
         @Override
+        Cached.Immutable<K, V> filter(final Predicate<? super V> predicate);
+
+        @Override
         default Cached.Immutable<K, V> immutableCopy() {
             return this;
         }

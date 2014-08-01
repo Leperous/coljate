@@ -155,6 +155,11 @@ public interface Map<K, V>
         @Override
         <V2> Map.Immutable<K, V2> mapValues(Function<? super V, ? extends V2> function);
 
+        @Override
+        default Map.Immutable<K, V> filter(final Predicate<? super V> predicate) {
+            return this.mapValues(Functions.satisfying(predicate));
+        }
+
         @CheckReturnValue
         @Nonnull
         default Map.Immutable<K, V> replace(K key, V expectedValue, V newValue) {
