@@ -5,7 +5,7 @@ import java.util.function.Predicate;
 
 import net.ollie.sc4j.Collection;
 import net.ollie.sc4j.Map;
-import net.ollie.sc4j.imposed.Unique;
+import net.ollie.sc4j.imposed.Distinctness.Unique;
 import net.ollie.sc4j.utils.Functions;
 
 import static javafx.scene.input.KeyCode.K;
@@ -15,8 +15,6 @@ import javax.annotation.Nonnull;
 
 /**
  * Lookup an element {@code V} based on some key {@link K}.
- *
- *
  *
  * @author Ollie
  */

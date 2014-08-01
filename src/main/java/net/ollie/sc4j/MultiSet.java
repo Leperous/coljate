@@ -3,7 +3,7 @@ package net.ollie.sc4j;
 import java.util.function.Predicate;
 
 import net.ollie.sc4j.access.Finite;
-import net.ollie.sc4j.imposed.Duplicated;
+import net.ollie.sc4j.imposed.Distinctness.Duplicated;
 import net.ollie.sc4j.utils.NonNegativeInteger;
 
 import javax.annotation.Nonnull;
@@ -14,7 +14,10 @@ import javax.annotation.Nonnull;
  * @see Set
  */
 public interface MultiSet<V>
-        extends Set<V>, Duplicated<V> {
+        extends Finite<V>, Duplicated<V> {
+
+    @Override
+    Set<V> unique();
 
     @Override
     Set<V> keys();
@@ -51,29 +54,30 @@ public interface MultiSet<V>
     }
 
     interface Mutable<V>
-            extends MultiSet<V>, Set.Mutable<V>, Duplicated.Mutable<V> {
+            extends MultiSet<V>, Finite.Mutable<V>, Duplicated.Mutable<V> {
 
         /**
          * Increment the given value by 1. If the value is not present, it is added and 1 is returned.
          *
-         * TODO do we need to worry about heap pollution if untyped?
-         *
          * @param value
-         * @return
+         * @return the new value.
          */
         int increment(V value);
 
-        int decrement(V value);
+        int decrement(Object value);
 
-        @Override
         default boolean add(final V value) {
             return this.increment(value) == 1;
+        }
+
+        default boolean remove(final Object value) {
+            return this.decrement(value) == 0;
         }
 
     }
 
     interface Immutable<V>
-            extends MultiSet<V>, Set.Immutable<V> {
+            extends MultiSet<V>, Finite.Immutable<V> {
 
         @Override
         default MultiSet.Immutable<V> immutableCopy() {

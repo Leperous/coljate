@@ -2,7 +2,7 @@ package net.ollie.sc4j;
 
 import net.ollie.sc4j.access.Finite;
 import net.ollie.sc4j.access.Keyed;
-import net.ollie.sc4j.imposed.Unique;
+import net.ollie.sc4j.imposed.Distinctness.Unique;
 
 import javax.annotation.Nonnull;
 

@@ -4,7 +4,7 @@ import java.util.function.Function;
 import java.util.function.Predicate;
 
 import net.ollie.sc4j.access.Finite;
-import net.ollie.sc4j.imposed.Unique;
+import net.ollie.sc4j.imposed.Distinctness.Unique;
 import net.ollie.sc4j.utils.Iterables;
 import net.ollie.sc4j.utils.UnmodifiableIterator;
 
