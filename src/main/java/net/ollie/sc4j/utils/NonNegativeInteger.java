@@ -1,8 +1,10 @@
 package net.ollie.sc4j.utils;
 
 import java.util.Optional;
+import java.util.OptionalInt;
 import java.util.function.Predicate;
 
+import javax.annotation.CheckForNull;
 import javax.annotation.CheckReturnValue;
 import javax.annotation.Nonnull;
 
@@ -19,12 +21,7 @@ public final class NonNegativeInteger
     private static final long serialVersionUID = 1L;
     public static final NonNegativeInteger ZERO = new NonNegativeInteger(0), ONE = new NonNegativeInteger(1);
 
-    public static NonNegativeInteger round(final Number number) {
-        return number instanceof NonNegativeInteger
-                ? (NonNegativeInteger) number
-                : of(Math.round(number.floatValue()));
-    }
-
+    @Nonnull
     public static NonNegativeInteger of(final int value) {
         switch (value) {
             case 0:
@@ -36,16 +33,32 @@ public final class NonNegativeInteger
         }
     }
 
-    public static NonNegativeInteger of(final Integer value) {
-        return value == null
-                ? null
-                : of(value.intValue());
+    @Nonnull
+    public static NonNegativeInteger of(final Number number) {
+        return number instanceof NonNegativeInteger
+                ? (NonNegativeInteger) number
+                : of(Math.round(number.floatValue()));
     }
 
-    public static Number maybe(final int value) {
+    @CheckForNull
+    public static NonNegativeInteger maybe(final int value) {
         return value >= 0
                 ? of(value)
-                : Integer.valueOf(value);
+                : null;
+    }
+
+    @CheckForNull
+    public static NonNegativeInteger maybe(final OptionalInt optional) {
+        return optional.isPresent()
+                ? maybe(optional.getAsInt())
+                : null;
+    }
+
+    @CheckForNull
+    public static NonNegativeInteger maybe(final Number number) {
+        return number instanceof NonNegativeInteger
+                ? (NonNegativeInteger) number
+                : maybe(Math.round(number.floatValue()));
     }
 
     public static Predicate<NonNegativeInteger> predicate(final Predicate<? super Integer> integerPredicate) {
@@ -55,9 +68,7 @@ public final class NonNegativeInteger
     private final int value;
 
     private NonNegativeInteger(final int value) {
-        if (value < 0) {
-            throw new IllegalArgumentException("Negative value [" + value + "]!");
-        }
+        Conditions.checkIsNonNegative(value);
         this.value = value;
     }
 
