@@ -12,15 +12,8 @@ import javax.annotation.Nonnull;
  */
 public interface Distinctness<V, D extends Distinctness<V, D>> {
 
-    Unique<V> unique();
-
     interface Unique<V>
             extends Distinctness<V, Unique<V>>, Collection<V> {
-
-        @Override
-        default Unique<V> unique() {
-            return this;
-        }
 
     }
 
@@ -39,6 +32,8 @@ public interface Distinctness<V, D extends Distinctness<V, D>> {
         default boolean isEmpty() {
             return Keyed.Single.super.isEmpty();
         }
+
+        Unique<V> unique();
 
     }
 
