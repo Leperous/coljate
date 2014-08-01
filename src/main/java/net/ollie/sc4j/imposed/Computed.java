@@ -3,6 +3,7 @@ package net.ollie.sc4j.imposed;
 import net.ollie.sc4j.access.Keyed;
 
 /**
+ * Values are computed.
  *
  * @author Ollie
  * @param <K> input (key) type

@@ -4,6 +4,8 @@ import java.util.function.Predicate;
 
 import net.ollie.sc4j.Collection;
 
+import javax.annotation.CheckForNull;
+
 /**
  *
  * @author Ollie
@@ -11,8 +13,10 @@ import net.ollie.sc4j.Collection;
 public interface Traversable<V>
         extends Collection<V> {
 
+    @CheckForNull
     V head();
 
+    @CheckForNull
     Traversable<V> tail();
 
     @Override

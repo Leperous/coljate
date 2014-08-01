@@ -5,7 +5,7 @@ import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
 
-import net.ollie.sc4j.access.Iteratable;
+import net.ollie.sc4j.access.Finite;
 import net.ollie.sc4j.access.Keyed;
 import net.ollie.sc4j.utils.UnmodifiableIterator;
 
@@ -13,13 +13,14 @@ import javax.annotation.CheckForNull;
 import javax.annotation.Nonnull;
 
 /**
+ * Values are stored.
  *
  * @author Ollie
  * @param <K> key type
  * @param <V> value type
  */
 public interface Cached<K, V>
-        extends Keyed.Single<K, V>, Iteratable<V> {
+        extends Keyed.Single<K, V>, Finite<V> {
 
     default V getOrDefault(final Object key, final V defaultValue) {
         return this.getOrElse(key, () -> defaultValue);
@@ -33,10 +34,10 @@ public interface Cached<K, V>
     }
 
     @Override
-    Iteratable<V> values();
+    Finite<V> values();
 
     @Override
-    default Iteratable<V> tail() {
+    default Finite<V> tail() {
         return this.values().tail();
     }
 
@@ -59,6 +60,11 @@ public interface Cached<K, V>
     @Override
     default Cached<K, V> filter(final Predicate<? super V> predicate) {
         return this.filterValues(predicate);
+    }
+
+    @Override
+    default <R> Finite<R> flatMap(Function<? super V, ? extends Finite<R>> function) {
+        return this.values().flatMap(function);
     }
 
     @Override
@@ -94,7 +100,7 @@ public interface Cached<K, V>
      * @param <V>
      */
     interface Mutable<K, V>
-            extends Cached<K, V>, Iteratable.Mutable<V> {
+            extends Cached<K, V>, Finite.Mutable<V> {
 
         default boolean add(final K key, final V value) {
             return this.put(key, value) == null;
@@ -135,10 +141,10 @@ public interface Cached<K, V>
     }
 
     interface Immutable<K, V>
-            extends Cached<K, V>, Iteratable.Immutable<V> {
+            extends Cached<K, V>, Finite.Immutable<V> {
 
         @Override
-        default Iteratable.Immutable<V> tail() {
+        default Finite.Immutable<V> tail() {
             return Cached.super.tail().immutableCopy();
         }
 
@@ -148,7 +154,7 @@ public interface Cached<K, V>
         }
 
         @Override
-        Iteratable.Immutable<V> values();
+        Finite.Immutable<V> values();
 
         @Override
         default UnmodifiableIterator<V> iterator() {

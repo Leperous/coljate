@@ -10,7 +10,8 @@ import javax.annotation.CheckReturnValue;
 import javax.annotation.Nonnull;
 
 /**
- * A mutable map that may also calculate (and store) values on-demand.
+ * A mutable map that may also calculate (and possibly, but not necessarily, store) values on-demand. Keys may or may
+ * not be stored as well.
  *
  * @author Ollie
  * @param <K> key type

@@ -6,6 +6,9 @@ import java.util.function.Predicate;
 
 import net.ollie.sc4j.SortedSet;
 import net.ollie.sc4j.utils.Iterables;
+import net.ollie.sc4j.utils.NonNegativeInteger;
+
+import javax.annotation.CheckForNull;
 
 /**
  * Keyed by a number.
@@ -13,7 +16,7 @@ import net.ollie.sc4j.utils.Iterables;
  * @author Ollie
  */
 public interface Indexed<V>
-        extends Iteratable<V>, Keyed.Single<Integer, V> {
+        extends Finite<V>, Keyed.Single<NonNegativeInteger, V> {
 
     V get(int index) throws IndexOutOfBoundsException;
 
@@ -27,7 +30,7 @@ public interface Indexed<V>
     Indexed<V> segment(int from, int to) throws IndexOutOfBoundsException;
 
     @Override
-    SortedSet<Integer> keys();
+    SortedSet<NonNegativeInteger> keys();
 
     @Override
     Indexed<V> tail();
@@ -37,13 +40,15 @@ public interface Indexed<V>
         return this;
     }
 
-    default OptionalInt indexOf(final Object value) {
-        return Iterables.indexOf(this, value);
+    @CheckForNull
+    default NonNegativeInteger indexOf(final Object value) {
+        final OptionalInt optional = Iterables.indexOf(this, value);
+        return NonNegativeInteger.maybe(optional);
     }
 
     @Override
     default boolean contains(final Object object) {
-        return this.indexOf(object).isPresent();
+        return this.indexOf(object) != null;
     }
 
     @Override
@@ -58,7 +63,7 @@ public interface Indexed<V>
     Indexed<V> filter(Predicate<? super V> predicate);
 
     @Override
-    Indexed<V> filterKeys(Predicate<? super Integer> predicate);
+    Indexed<V> filterKeys(Predicate<? super NonNegativeInteger> predicate);
 
     @Override
     default Indexed<V> filterValues(final Predicate<? super V> predicate) {
@@ -67,7 +72,7 @@ public interface Indexed<V>
 
     @Override
     default boolean isEmpty() {
-        return Iteratable.super.isEmpty();
+        return Finite.super.isEmpty();
     }
 
     @Override
@@ -81,7 +86,7 @@ public interface Indexed<V>
      * @param <V>
      */
     interface Mutable<V>
-            extends Indexed<V>, Iteratable.Mutable<V> {
+            extends Indexed<V>, Finite.Mutable<V> {
 
         V set(int index, V value) throws IndexOutOfBoundsException;
 
@@ -98,7 +103,7 @@ public interface Indexed<V>
      * @param <V>
      */
     interface Immutable<V>
-            extends Indexed<V>, Iteratable.Immutable<V> {
+            extends Indexed<V>, Finite.Immutable<V> {
 
         @Override
         Indexed.Immutable<V> tail();

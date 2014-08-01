@@ -7,6 +7,7 @@ import net.ollie.sc4j.utils.NonNegativeInteger;
 import javax.annotation.Nonnull;
 
 /**
+ * Values are not unique, in that they can exist within this collection any number of times.
  *
  * @author Ollie
  * @see Unique

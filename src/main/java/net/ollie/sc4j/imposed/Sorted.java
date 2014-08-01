@@ -1,47 +1,21 @@
 package net.ollie.sc4j.imposed;
 
 import java.util.Comparator;
-import java.util.NoSuchElementException;
-import java.util.Objects;
-import java.util.function.Predicate;
 
-import net.ollie.sc4j.access.Traversable;
-
-import javax.annotation.CheckForNull;
 import javax.annotation.CheckReturnValue;
 import javax.annotation.Nonnull;
 
 /**
- * Sorted and iterable.
+ * Values are explicitly sorted according to some {@link Comparator}.
  *
  * @author Ollie
  * @see Ordered
  */
 public interface Sorted<V>
-        extends Traversable<V> {
+        extends Ordered<V> {
 
     @Nonnull
     Comparator<? super V> comparator();
-
-    @CheckForNull
-    V first();
-
-    @Override
-    default V head() {
-        return this.first();
-    }
-
-    @Nonnull
-    default V last(final Predicate<? super V> predicate) throws NoSuchElementException {
-        final V last = this.lastOrElse(predicate, null);
-        if (last == null) {
-            throw new NoSuchElementException();
-        } else {
-            return last;
-        }
-    }
-
-    V lastOrElse(Predicate<? super V> predicate, V defaultValue);
 
     /**
      * @return a mutable copy of this collection.
@@ -55,25 +29,18 @@ public interface Sorted<V>
     @Override
     Sorted.Immutable<V> immutableCopy();
 
-    default boolean equals(final Sorted<?> that) {
-        return that != null && this.isEmpty()
-                ? that.isEmpty()
-                : Objects.equals(this.head(), that.head());
-    }
-
-    default int hash() {
-        return this.isEmpty()
-                ? 1
-                : Objects.hashCode(this.head()) * Objects.hashCode(this.tail());
-    }
-
     /**
      *
      * @param <V>
      */
     interface Mutable<V>
-            extends Sorted<V>, Traversable.Mutable<V> {
+            extends Sorted<V>, Ordered.Mutable<V> {
 
+        /**
+         * In-place sort.
+         *
+         * @param comparator
+         */
         void sort(Comparator<? super V> comparator);
 
     }
@@ -83,7 +50,7 @@ public interface Sorted<V>
      * @param <V>
      */
     interface Immutable<V>
-            extends Sorted<V>, Traversable.Immutable<V> {
+            extends Sorted<V>, Ordered.Immutable<V> {
 
         @CheckReturnValue
         @Nonnull

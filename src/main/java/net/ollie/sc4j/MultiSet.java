@@ -2,7 +2,7 @@ package net.ollie.sc4j;
 
 import java.util.function.Predicate;
 
-import net.ollie.sc4j.access.Iteratable;
+import net.ollie.sc4j.access.Finite;
 import net.ollie.sc4j.imposed.Duplicated;
 import net.ollie.sc4j.utils.NonNegativeInteger;
 
@@ -20,7 +20,7 @@ public interface MultiSet<V>
     Set<V> keys();
 
     @Override
-    Iteratable<NonNegativeInteger> values();
+    Finite<NonNegativeInteger> values();
 
     @Override
     MultiSet<V> filter(Predicate<? super V> predicate);

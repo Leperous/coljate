@@ -1,6 +1,5 @@
 package net.ollie.sc4j.utils;
 
-import java.util.Collections;
 import java.util.Iterator;
 import java.util.concurrent.atomic.AtomicReferenceArray;
 import java.util.function.Function;
@@ -29,18 +28,18 @@ public final class Iterators {
     }
 
     public static <V> UnmodifiableIterator<V> empty() {
-        return new DelegatedUnmodifiableIterator<>(Collections.emptyIterator()); //TODO optimize
+        return UnmodifiableIterator.of();
     }
 
     public static <V> UnmodifiableIterator<V> singleton(@Nonnull final V element) {
-        return new DelegatedUnmodifiableIterator<>(Collections.singleton(element).iterator()); //TODO optimize
+        return UnmodifiableIterator.of(element);
     }
 
     @SuppressWarnings("unchecked")
     public static <V> UnmodifiableIterator<V> unmodifiable(final Iterator<? extends V> iterator) {
         return iterator instanceof UnmodifiableIterator
                 ? (UnmodifiableIterator<V>) iterator
-                : new DelegatedUnmodifiableIterator<>(iterator);
+                : UnmodifiableIterator.<V>of(iterator);
     }
 
     private static final class ArrayIterator<V>
@@ -111,27 +110,6 @@ public final class Iterators {
         @Override
         public V next() {
             return array.get(index++);
-        }
-
-    }
-
-    private static class DelegatedUnmodifiableIterator<V>
-            implements UnmodifiableIterator<V> {
-
-        private final Iterator<? extends V> iterator;
-
-        protected DelegatedUnmodifiableIterator(final Iterator<? extends V> iterator) {
-            this.iterator = iterator;
-        }
-
-        @Override
-        public boolean hasNext() {
-            return iterator.hasNext();
-        }
-
-        @Override
-        public V next() {
-            return iterator.next();
         }
 
     }

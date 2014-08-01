@@ -3,6 +3,7 @@ package net.ollie.sc4j;
 import java.util.function.Function;
 import java.util.function.Predicate;
 
+import net.ollie.sc4j.imposed.Ordered;
 import net.ollie.sc4j.imposed.Sorted;
 
 /**
@@ -11,7 +12,7 @@ import net.ollie.sc4j.imposed.Sorted;
  * @author Ollie
  */
 public interface Sequence<V>
-        extends Sorted<V> {
+        extends Ordered<V> {
 
     @Override
     Sequence<V> tail();
@@ -29,12 +30,12 @@ public interface Sequence<V>
     Sequence.Immutable<V> immutableCopy();
 
     interface Mutable<V>
-            extends Sequence<V>, Sorted.Mutable<V> {
+            extends Sequence<V>, Ordered.Mutable<V> {
 
     }
 
     interface Immutable<V>
-            extends Sequence<V>, Sorted.Immutable<V> {
+            extends Sequence<V>, Ordered.Immutable<V> {
 
         @Override
         Sequence.Immutable<V> tail();
@@ -47,7 +48,7 @@ public interface Sequence<V>
     }
 
     interface Empty<V>
-            extends Sorted.Empty<V>, Sequence.Immutable<V> {
+            extends Ordered.Empty<V>, Sequence.Immutable<V> {
 
         @Override
         default V head() {

@@ -1,6 +1,6 @@
 package net.ollie.sc4j;
 
-import net.ollie.sc4j.access.Iteratable;
+import net.ollie.sc4j.access.Finite;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
@@ -9,7 +9,7 @@ import static org.junit.Assert.assertThat;
  *
  * @author Ollie
  */
-public abstract class AbstractIteratableTest<C extends Iteratable<Object>>
+public abstract class AbstractIteratableTest<C extends Finite<Object>>
         extends AbstractCollectionTest<C> {
 
     @Override

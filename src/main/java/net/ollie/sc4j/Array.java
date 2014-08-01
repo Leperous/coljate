@@ -4,30 +4,34 @@ import java.util.Comparator;
 import java.util.function.Function;
 import java.util.function.Predicate;
 
+import net.ollie.sc4j.access.Finite;
 import net.ollie.sc4j.access.Indexed;
-import net.ollie.sc4j.access.Iteratable;
+import net.ollie.sc4j.imposed.Sorted;
 import net.ollie.sc4j.utils.IndexedComparator;
 
 /**
- * A sorted, indexed collection of objects.
+ * An ordered, indexed collection of objects.
  *
  * @author Ollie
  */
 public interface Array<V>
-        extends List<V>, Indexed<V> {
+        extends List<V>, Indexed<V>, Sorted<V> {
 
     int capacity();
-
-    @Override
-    default Comparator<? super V> comparator() {
-        return new IndexedComparator<>(this);
-    }
 
     @Override
     Array<V> segment(int from, int to);
 
     @Override
+    Array<V> reverse();
+
+    @Override
     Array<V> tail();
+
+    @Override
+    default Comparator<? super V> comparator() {
+        return new IndexedComparator<>(this);
+    }
 
     @Override
     Array<V> filter(Predicate<? super V> predicate);
@@ -46,7 +50,7 @@ public interface Array<V>
     }
 
     @Override
-    <R> Array<R> flatMap(Function<? super V, ? extends Iteratable<R>> function);
+    <R> Array<R> flatMap(Function<? super V, ? extends Finite<R>> function);
 
     @Override
     Array.Mutable<V> mutableCopy();
@@ -68,9 +72,12 @@ public interface Array<V>
      * @param <V>
      */
     interface Mutable<V>
-            extends Array<V>, List.Mutable<V>, Indexed.Mutable<V> {
+            extends Array<V>, List.Mutable<V>, Indexed.Mutable<V>, Sorted.Mutable<V> {
 
         void setCapacity(int capacity);
+
+        @Override
+        Array.Mutable<V> reverse();
 
         @Override
         <V2> Array.Mutable<V2> map(Function<? super V, ? extends V2> function);
@@ -96,13 +103,16 @@ public interface Array<V>
      * @param <V>
      */
     interface Immutable<V>
-            extends Array<V>, List.Immutable<V>, Indexed.Immutable<V> {
+            extends Array<V>, List.Immutable<V>, Indexed.Immutable<V>, Sorted.Immutable<V> {
 
         @Override
         Array.Immutable<V> sort(Comparator<? super V> comparator);
 
         @Override
         Array.Immutable<V> segment(int from, int to);
+
+        @Override
+        Array.Immutable<V> reverse();
 
         default Array.Immutable<V> resize(int size) {
             return this.segment(0, size);
@@ -114,7 +124,7 @@ public interface Array<V>
         }
 
         @Override
-        <R> Array.Immutable<R> flatMap(Function<? super V, ? extends Iteratable<R>> function);
+        <R> Array.Immutable<R> flatMap(Function<? super V, ? extends Finite<R>> function);
 
         @Override
         Array.Immutable<V> tail();

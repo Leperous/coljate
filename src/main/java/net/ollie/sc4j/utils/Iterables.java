@@ -9,7 +9,7 @@ import java.util.function.Function;
 import java.util.function.Predicate;
 
 import net.ollie.sc4j.Collection;
-import net.ollie.sc4j.access.Iteratable;
+import net.ollie.sc4j.access.Finite;
 
 import javax.annotation.CheckReturnValue;
 
@@ -44,8 +44,8 @@ public final class Iterables {
     }
 
     public static OptionalInt maybeCount(final Iterable<?> iterable) {
-        if (iterable instanceof Iteratable) {
-            return OptionalInt.of(((Iteratable) iterable).count());
+        if (iterable instanceof Finite) {
+            return OptionalInt.of(((Finite) iterable).count());
         } else if (iterable instanceof java.util.Collection) {
             return OptionalInt.of(((java.util.Collection) iterable).size());
         } else if (!iterable.iterator().hasNext()) {

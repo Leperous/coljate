@@ -5,7 +5,7 @@ import java.util.Objects;
 import java.util.function.Function;
 import java.util.function.Predicate;
 
-import net.ollie.sc4j.access.Iteratable;
+import net.ollie.sc4j.access.Finite;
 import net.ollie.sc4j.imposed.Mutability;
 import net.ollie.sc4j.utils.Iterables;
 
@@ -16,10 +16,12 @@ import javax.annotation.Nonnull;
 /**
  * The super-type of all collections. Supports "contains", "map" and "filter" operations.
  *
+ * This class is different to the {@link java.util.Collection stock collection} in that it is not necessarily finite,
+ * and hence not necessary iterable.
+ *
  * @author Ollie
  * @param <V> value type
- * @see java.util.Collection
- * @see Iteratable
+ * @see Finite
  */
 public interface Collection<V> {
 

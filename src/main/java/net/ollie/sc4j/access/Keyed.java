@@ -12,6 +12,9 @@ import javax.annotation.CheckReturnValue;
 import javax.annotation.Nonnull;
 
 /**
+ * Lookup an element {@code V} based on some key {@link K}.
+ *
+ *
  *
  * @author Ollie
  */
@@ -71,6 +74,9 @@ public interface Keyed<K, V> {
             if (object instanceof Map.Entry) {
                 final Map.Entry<?, ?> that = (Map.Entry) object;
                 return this.get(that.key(), that.value());
+            } else if (object instanceof java.util.Map) {
+                final java.util.Map.Entry<?, ?> that = (java.util.Map.Entry) object;
+                return this.get(that.getKey(), that.getValue());
             } else {
                 return null;
             }

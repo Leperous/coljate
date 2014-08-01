@@ -21,7 +21,7 @@ public final class Conditions {
         }
     }
 
-    public static void checkIsPositive(final int i) {
+    public static void checkIsNonNegative(final int i) {
         if (i < 0) {
             throw new IllegalArgumentException("Value [" + i + "] was not positive!");
         }

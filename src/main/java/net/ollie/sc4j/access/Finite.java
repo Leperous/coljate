@@ -21,8 +21,9 @@ import javax.annotation.Nonnull;
  * Iterable, finite collection. Introduces "reduce" method.
  *
  * @author Ollie
+ * @see java.util.Collection
  */
-public interface Iteratable<V>
+public interface Finite<V>
         extends Traversable<V>, Iterable<V> {
 
     default int count() {
@@ -39,13 +40,11 @@ public interface Iteratable<V>
     }
 
     @Override
-    <R> Iteratable<R> map(Function<? super V, ? extends R> function);
+    <R> Finite<R> map(Function<? super V, ? extends R> function);
 
     @Nonnull
     @CheckReturnValue
-    default <R> Iteratable<R> flatMap(Function<? super V, ? extends Iteratable<R>> function) {
-        throw new UnsupportedOperationException();
-    }
+    <R> Finite<R> flatMap(Function<? super V, ? extends Finite<R>> function);
 
     @CheckReturnValue
     default <R> R reduce(final BiFunction<R, V, ? extends R> function, final R initial) {
@@ -68,7 +67,7 @@ public interface Iteratable<V>
     Object[] toRawArray();
 
     @Override
-    Iteratable<V> filter(Predicate<? super V> predicate);
+    Finite<V> filter(Predicate<? super V> predicate);
 
     @Override
     default boolean contains(final Object object) {
@@ -89,7 +88,7 @@ public interface Iteratable<V>
     }
 
     @Override
-    Iteratable<V> tail();
+    Finite<V> tail();
 
     @Override
     default V findOrElse(final Predicate<? super V> predicate, final V defaultValue) {
@@ -129,12 +128,12 @@ public interface Iteratable<V>
     }
 
     @Override
-    Iteratable.Mutable<V> mutableCopy();
+    Finite.Mutable<V> mutableCopy();
 
     @Override
-    Iteratable.Immutable<V> immutableCopy();
+    Finite.Immutable<V> immutableCopy();
 
-    default boolean equals(final Iteratable<?> that) {
+    default boolean equals(final Finite<?> that) {
         return that != null
                 && Iterables.equals(this, that);
     }
@@ -146,28 +145,28 @@ public interface Iteratable<V>
     String toString(String separator);
 
     interface Mutable<V>
-            extends Iteratable<V>, Traversable.Mutable<V> {
+            extends Finite<V>, Traversable.Mutable<V> {
 
     }
 
     interface Immutable<V>
-            extends Iteratable<V>, Traversable.Immutable<V> {
+            extends Finite<V>, Traversable.Immutable<V> {
 
         @Override
-        Iteratable.Immutable<V> tail();
+        Finite.Immutable<V> tail();
 
         @Override
         UnmodifiableIterator<V> iterator();
 
         @Override
-        default Iteratable.Immutable<V> immutableCopy() {
+        default Finite.Immutable<V> immutableCopy() {
             return this;
         }
 
     }
 
     interface Empty<V>
-            extends Traversable.Empty<V>, Iteratable.Immutable<V> {
+            extends Traversable.Empty<V>, Finite.Immutable<V> {
 
         @Override
         default boolean isEmpty() {
@@ -195,17 +194,17 @@ public interface Iteratable<V>
         }
 
         @Override
-        default Iteratable.Empty<V> tail() {
+        default Finite.Empty<V> tail() {
             return this;
         }
 
         @Override
-        default <V2> Iteratable.Empty<V2> map(Function<? super V, ? extends V2> function) {
-            return (Iteratable.Empty<V2>) this;
+        default <V2> Finite.Empty<V2> map(Function<? super V, ? extends V2> function) {
+            return (Finite.Empty<V2>) this;
         }
 
         @Override
-        default Iteratable.Empty<V> filter(final Predicate<? super V> predicate) {
+        default Finite.Empty<V> filter(final Predicate<? super V> predicate) {
             return this;
         }
 
@@ -217,7 +216,7 @@ public interface Iteratable<V>
     }
 
     interface Singleton<V>
-            extends Traversable.Singleton<V>, Iteratable.Immutable<V> {
+            extends Traversable.Singleton<V>, Finite.Immutable<V> {
 
         @Override
         default UnmodifiableIterator<V> iterator() {

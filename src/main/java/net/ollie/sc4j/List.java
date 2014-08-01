@@ -5,12 +5,13 @@ import java.util.Objects;
 import java.util.function.Function;
 import java.util.function.Predicate;
 
-import net.ollie.sc4j.access.Iteratable;
+import net.ollie.sc4j.access.Finite;
 import net.ollie.sc4j.utils.Iterables;
 import net.ollie.sc4j.utils.UnmodifiableIterator;
 
 import javax.annotation.CheckForNull;
 import javax.annotation.CheckReturnValue;
+import javax.annotation.Nonnull;
 import javax.annotation.OverridingMethodsMustInvokeSuper;
 
 /**
@@ -20,7 +21,7 @@ import javax.annotation.OverridingMethodsMustInvokeSuper;
  * @see Array for index-accessible form.
  */
 public interface List<V>
-        extends Sequence<V>, Iteratable<V> {
+        extends Sequence<V>, Finite<V> {
 
     @Override
     default V head() {
@@ -39,10 +40,11 @@ public interface List<V>
     @Override
     List<V> filter(Predicate<? super V> predicate);
 
+    @Nonnull
     List<V> reverse();
 
     @Override
-    <R> List<R> flatMap(Function<? super V, ? extends Iteratable<R>> function);
+    <R> List<R> flatMap(Function<? super V, ? extends Finite<R>> function);
 
     @Override
     List.Mutable<V> mutableCopy();
@@ -67,7 +69,7 @@ public interface List<V>
      * @param <V>
      */
     interface Mutable<V>
-            extends List<V>, Sequence.Mutable<V>, Iteratable.Mutable<V> {
+            extends List<V>, Sequence.Mutable<V>, Finite.Mutable<V> {
 
         void prefix(V value);
 
@@ -115,7 +117,7 @@ public interface List<V>
      * @param <V>
      */
     interface Immutable<V>
-            extends List<V>, Sequence.Immutable<V>, Iteratable.Immutable<V> {
+            extends List<V>, Sequence.Immutable<V>, Finite.Immutable<V> {
 
         @Override
         List.Immutable<V> tail();
@@ -136,7 +138,7 @@ public interface List<V>
         <V2> List.Immutable<V2> map(Function<? super V, ? extends V2> function);
 
         @Override
-        <R> List.Immutable<R> flatMap(Function<? super V, ? extends Iteratable<R>> function);
+        <R> List.Immutable<R> flatMap(Function<? super V, ? extends Finite<R>> function);
 
         @Override
         List.Immutable<V> reverse();
@@ -152,7 +154,7 @@ public interface List<V>
     }
 
     interface Empty<V>
-            extends List.Immutable<V>, Sequence.Empty<V>, Iteratable.Empty<V> {
+            extends List.Immutable<V>, Sequence.Empty<V>, Finite.Empty<V> {
 
         @Override
         default V head() {
@@ -161,7 +163,7 @@ public interface List<V>
 
         @Override
         default UnmodifiableIterator<V> iterator() {
-            return Iteratable.Empty.super.iterator();
+            return Finite.Empty.super.iterator();
         }
 
         @Override
@@ -187,11 +189,11 @@ public interface List<V>
     }
 
     interface Singleton<V>
-            extends List.Immutable<V>, Sequence.Singleton<V>, Iteratable.Singleton<V> {
+            extends List.Immutable<V>, Sequence.Singleton<V>, Finite.Singleton<V> {
 
         @Override
         default V head() {
-            return Iteratable.Singleton.super.head();
+            return Finite.Singleton.super.head();
         }
 
         @Override
@@ -204,7 +206,7 @@ public interface List<V>
 
         @Override
         default UnmodifiableIterator<V> iterator() {
-            return Iteratable.Singleton.super.iterator();
+            return Finite.Singleton.super.iterator();
         }
 
     }

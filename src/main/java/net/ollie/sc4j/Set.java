@@ -3,7 +3,7 @@ package net.ollie.sc4j;
 import java.util.function.Function;
 import java.util.function.Predicate;
 
-import net.ollie.sc4j.access.Iteratable;
+import net.ollie.sc4j.access.Finite;
 import net.ollie.sc4j.imposed.Unique;
 import net.ollie.sc4j.utils.Iterables;
 import net.ollie.sc4j.utils.UnmodifiableIterator;
@@ -22,7 +22,7 @@ import javax.annotation.OverridingMethodsMustInvokeSuper;
  * @author Ollie
  */
 public interface Set<V>
-        extends Iteratable<V>, Unique<V> {
+        extends Finite<V>, Unique<V> {
 
     @Override
     Set<V> filter(Predicate<? super V> predicate);
@@ -34,7 +34,7 @@ public interface Set<V>
     Set<V> tail();
 
     @Override
-    <R> Set<R> flatMap(Function<? super V, ? extends Iteratable<R>> function);
+    <R> Set<R> flatMap(Function<? super V, ? extends Finite<R>> function);
 
     @Override
     Set.Mutable<V> mutableCopy();
@@ -55,7 +55,7 @@ public interface Set<V>
     }
 
     interface Mutable<V>
-            extends Set<V>, Iteratable.Mutable<V> {
+            extends Set<V>, Finite.Mutable<V> {
 
         boolean add(V value);
 
@@ -102,7 +102,7 @@ public interface Set<V>
     }
 
     interface Immutable<V>
-            extends Set<V>, Iteratable.Immutable<V> {
+            extends Set<V>, Finite.Immutable<V> {
 
         @CheckReturnValue
         @Nonnull
@@ -127,7 +127,7 @@ public interface Set<V>
         Set.Immutable<V> without(Object value);
 
         @Override
-        <R> Set.Immutable<R> flatMap(Function<? super V, ? extends Iteratable<R>> function);
+        <R> Set.Immutable<R> flatMap(Function<? super V, ? extends Finite<R>> function);
 
         @Override
         Set.Immutable<V> tail();
@@ -149,11 +149,11 @@ public interface Set<V>
     }
 
     interface Empty<V>
-            extends Set.Immutable<V>, Iteratable.Empty<V> {
+            extends Set.Immutable<V>, Finite.Empty<V> {
 
         @Override
         public default UnmodifiableIterator<V> iterator() {
-            return Iteratable.Empty.super.iterator();
+            return Finite.Empty.super.iterator();
         }
 
         @Override

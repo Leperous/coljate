@@ -4,7 +4,7 @@ import java.util.Objects;
 import java.util.function.Function;
 import java.util.function.Predicate;
 
-import net.ollie.sc4j.access.Iteratable;
+import net.ollie.sc4j.access.Finite;
 import net.ollie.sc4j.imposed.Cached;
 import net.ollie.sc4j.imposed.Mutability;
 
@@ -13,6 +13,7 @@ import javax.annotation.CheckReturnValue;
 import javax.annotation.Nonnull;
 
 /**
+ * A cache of uniquely-keyed values.
  *
  * @author Ollie
  * @see java.util.Map
@@ -20,7 +21,7 @@ import javax.annotation.Nonnull;
  */
 public interface Map<K, V>
         extends Cached<K, V> {
-    
+
     @Override
     Set<K> keys();
 
@@ -127,7 +128,7 @@ public interface Map<K, V>
         Set.Immutable<K> keys();
 
         @Override
-        Iteratable.Immutable<V> values();
+        Finite.Immutable<V> values();
 
         @Override
         Set.Immutable<? extends Map.Immutable.Entry<K, V>> entries();

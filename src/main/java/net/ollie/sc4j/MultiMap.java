@@ -1,6 +1,6 @@
 package net.ollie.sc4j;
 
-import net.ollie.sc4j.access.Iteratable;
+import net.ollie.sc4j.access.Finite;
 import net.ollie.sc4j.access.Keyed;
 
 import javax.annotation.CheckReturnValue;
@@ -11,7 +11,7 @@ import javax.annotation.Nonnull;
  * @author Ollie
  */
 public interface MultiMap<K, V>
-        extends Keyed.Multiple<K, V>, Iteratable<V> {
+        extends Keyed.Multiple<K, V>, Finite<V> {
 
     @Override
     Set<K> keys();
@@ -28,7 +28,7 @@ public interface MultiMap<K, V>
     MultiMap.Immutable<K, V> immutableCopy();
 
     interface Mutable<K, V>
-            extends MultiMap<K, V>, Iteratable.Mutable<V> {
+            extends MultiMap<K, V>, Finite.Mutable<V> {
 
         boolean put(K key, V value);
 
@@ -55,7 +55,7 @@ public interface MultiMap<K, V>
     }
 
     interface Immutable<K, V>
-            extends MultiMap<K, V>, Iteratable.Immutable<V> {
+            extends MultiMap<K, V>, Finite.Immutable<V> {
 
         @Nonnull
         @CheckReturnValue
@@ -102,7 +102,7 @@ public interface MultiMap<K, V>
 
     }
 
-    interface MultiIterableMap<K, V, C extends Iteratable<V>>
+    interface MultiIterableMap<K, V, C extends Finite<V>>
             extends MultiMap<K, V> {
 
         @Override
