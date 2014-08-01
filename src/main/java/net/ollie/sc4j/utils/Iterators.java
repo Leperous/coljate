@@ -4,6 +4,7 @@ import java.util.Iterator;
 import java.util.concurrent.atomic.AtomicReferenceArray;
 import java.util.function.Function;
 
+import javax.annotation.CheckForNull;
 import javax.annotation.Nonnull;
 
 /**
@@ -27,16 +28,20 @@ public final class Iterators {
         return new AtomicReferenceArrayIterator<>(array);
     }
 
+    @Nonnull
     public static <V> UnmodifiableIterator<V> empty() {
         return UnmodifiableIterator.of();
     }
 
-    public static <V> UnmodifiableIterator<V> singleton(@Nonnull final V element) {
-        return UnmodifiableIterator.of(element);
+    @Nonnull
+    public static <V> UnmodifiableIterator<V> singleton(@CheckForNull final V element) {
+        return element == null
+                ? empty()
+                : UnmodifiableIterator.of(element);
     }
 
     @SuppressWarnings("unchecked")
-    public static <V> UnmodifiableIterator<V> unmodifiable(final Iterator<? extends V> iterator) {
+    public static <V> UnmodifiableIterator<V> unmodifiable(@Nonnull final Iterator<? extends V> iterator) {
         return iterator instanceof UnmodifiableIterator
                 ? (UnmodifiableIterator<V>) iterator
                 : UnmodifiableIterator.<V>of(iterator);
@@ -96,7 +101,7 @@ public final class Iterators {
             implements Iterator<V> {
 
         private final AtomicReferenceArray<? extends V> array;
-        int index;
+        private int index;
 
         AtomicReferenceArrayIterator(final AtomicReferenceArray<? extends V> array) {
             this.array = array;

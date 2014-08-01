@@ -174,4 +174,28 @@ public interface Set<V>
 
     }
 
+    interface Singleton<V>
+            extends Set<V>, Finite.Singleton<V> {
+
+        @Override
+        Set.Empty<V> tail();
+
+        @Override
+        default UnmodifiableIterator<V> iterator() {
+            return Finite.Singleton.super.iterator();
+        }
+
+    }
+
+    interface Binary<V>
+            extends Set<V> {
+
+        @CheckForNull
+        V left();
+
+        @CheckForNull
+        V right();
+
+    }
+
 }

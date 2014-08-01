@@ -1,6 +1,7 @@
 package net.ollie.sc4j.imposed;
 
 import java.util.Iterator;
+import java.util.Objects;
 import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
@@ -10,7 +11,6 @@ import net.ollie.sc4j.access.Keyed;
 import net.ollie.sc4j.utils.UnmodifiableIterator;
 
 import javax.annotation.CheckForNull;
-import javax.annotation.Nonnull;
 
 /**
  * Values are stored.
@@ -106,37 +106,47 @@ public interface Cached<K, V>
             return this.put(key, value) == null;
         }
 
-        default boolean addAll(final Cached<K, V> keyed) {
-            return !this.putAll(keyed).isEmpty();
-        }
-
         @CheckForNull
         V put(K key, V value);
 
-        @Nonnull
-        Cached<K, V> putAll(Cached<K, V> keyed);
-
         @CheckForNull
-        V putIfAbsent(K key, V value);
+        default V putIfAbsent(K key, V value) {
+            V current = this.get(key);
+            if (current == null) {
+                current = this.put(key, value);
+            }
+            return current;
+        }
 
         @CheckForNull
         default V putIfAbsent(final K key, final Supplier<? extends V> supplier) {
-            final V value = this.get(key);
-            return value == null
-                    ? this.putIfAbsent(key, supplier.get())
-                    : value;
+            V value = this.get(key);
+            if (value == null) {
+                value = this.put(key, supplier.get());
+            }
+            return value;
         }
 
         @CheckForNull
         default V ensure(final K key, final Supplier<? extends V> supplier) {
             final V value = this.putIfAbsent(key, supplier);
-            return value == null ? this.get(key) : value;
+            return value == null
+                    ? this.get(key)
+                    : value;
         }
 
         @CheckForNull
         V remove(Object key);
 
-        boolean replace(K key, V expectedValue, V newValue);
+        default boolean replace(K key, V expectedValue, V newValue) {
+            final V currentValue = this.get(expectedValue);
+            if (Objects.equals(expectedValue, currentValue)) {
+                this.put(key, newValue);
+                return true;
+            } else {
+                return false;
+            }
+        }
 
     }
 

@@ -15,10 +15,12 @@ import javax.annotation.Nonnull;
 public interface Graph<N, V>
         extends Keyed.Single<N, V>, Finite<V> {
 
-    boolean adjacent(@Nonnull N node1, @Nonnull N node2);
-
     @Nonnull
     Unique<N> neighbours(N node);
+
+    default boolean adjacent(@Nonnull final N node1, @Nonnull final N node2) {
+        return this.neighbours(node1).contains(node2);
+    }
 
     @Override
     default boolean isEmpty() {

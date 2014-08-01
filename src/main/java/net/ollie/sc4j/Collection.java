@@ -108,7 +108,7 @@ public interface Collection<V> {
     }
 
     interface Singleton<V>
-            extends Collection.Immutable<V> {
+            extends Collection<V> {
 
         @Nonnull
         V value();

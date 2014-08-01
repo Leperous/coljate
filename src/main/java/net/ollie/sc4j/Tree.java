@@ -8,6 +8,8 @@ import javax.annotation.Nonnull;
 /**
  *
  * @author Ollie
+ * @param <N> node type
+ * @param <V> value type
  */
 public interface Tree<N, V>
         extends Graph<N, V> {
@@ -34,15 +36,15 @@ public interface Tree<N, V>
     Set<N> neighbours(N node);
 
     @Override
+    default boolean isEmpty() {
+        return this.root() == null;
+    }
+
+    @Override
     Tree.Mutable<N, V> mutableCopy();
 
     @Override
     Tree.Immutable<N, V> immutableCopy();
-
-    @Override
-    default int hash() {
-        throw new UnsupportedOperationException(); //TODO
-    }
 
     interface Mutable<N, V>
             extends Tree<N, V>, Graph.Mutable<N, V> {

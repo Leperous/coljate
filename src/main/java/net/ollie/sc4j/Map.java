@@ -7,6 +7,7 @@ import java.util.function.Predicate;
 import net.ollie.sc4j.access.Finite;
 import net.ollie.sc4j.imposed.Cached;
 import net.ollie.sc4j.imposed.Mutability;
+import net.ollie.sc4j.utils.Functions;
 
 import javax.annotation.CheckForNull;
 import javax.annotation.CheckReturnValue;
@@ -28,15 +29,22 @@ public interface Map<K, V>
     Set<? extends Entry<K, V>> entries();
 
     @Override
-    Map<K, V> filterKeys(Predicate<? super K> predicate);
+    default Map<K, V> filterKeys(Predicate<? super K> predicate) {
+        return this.mapKeys(Functions.satisfying(predicate));
+    }
 
     @Override
-    default Map<K, V> filter(Predicate<? super V> predicate) {
+    default Map<K, V> filter(final Predicate<? super V> predicate) {
         return this.filterValues(predicate);
     }
 
     @Override
-    Map<K, V> filterValues(Predicate<? super V> predicate);
+    default Map<K, V> filterValues(final Predicate<? super V> predicate) {
+        return this.mapValues(Functions.satisfying(predicate));
+    }
+
+    @Override
+    <K2> Map<K2, V> mapKeys(Function<? super K, ? extends K2> function);
 
     @Override
     <V2> Map<K, V2> mapValues(Function<? super V, ? extends V2> function);
@@ -99,8 +107,8 @@ public interface Map<K, V>
         @Override
         Set.Mutable<? extends Map.Mutable.Entry<K, V>> entries();
 
-        @Override
-        Map<K, V> putAll(Cached<K, V> map);
+        @Nonnull
+        Map<K, V> putAll(Map<K, V> map);
 
         interface Entry<K, V>
                 extends Map.Entry<K, V>, Mutability.Mutable {
@@ -141,6 +149,12 @@ public interface Map<K, V>
         @Nonnull
         Map.Immutable<K, V> without(Object key);
 
+        @Override
+        <K2> Map.Immutable<K2, V> mapKeys(Function<? super K, ? extends K2> function);
+
+        @Override
+        <V2> Map.Immutable<K, V2> mapValues(Function<? super V, ? extends V2> function);
+
         @CheckReturnValue
         @Nonnull
         default Map.Immutable<K, V> replace(K key, V expectedValue, V newValue) {
@@ -150,10 +164,14 @@ public interface Map<K, V>
         }
 
         @Override
-        Map.Immutable<K, V> filterKeys(Predicate<? super K> predicate);
+        default Map.Immutable<K, V> filterKeys(Predicate<? super K> predicate) {
+            return this.mapKeys(Functions.satisfying(predicate));
+        }
 
         @Override
-        Map.Immutable<K, V> filterValues(Predicate<? super V> predicate);
+        default Map.Immutable<K, V> filterValues(Predicate<? super V> predicate) {
+            return this.mapValues(Functions.satisfying(predicate));
+        }
 
         @Override
         default Map.Immutable<K, V> immutableCopy() {

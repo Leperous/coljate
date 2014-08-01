@@ -142,7 +142,9 @@ public interface Finite<V>
         return Iterables.sumHashCode(this); //Ignore order
     }
 
-    String toString(String separator);
+    default String toString(final String separator) {
+        return Iterables.safelyToString(this, this);
+    }
 
     interface Mutable<V>
             extends Finite<V>, Traversable.Mutable<V> {
@@ -216,7 +218,7 @@ public interface Finite<V>
     }
 
     interface Singleton<V>
-            extends Traversable.Singleton<V>, Finite.Immutable<V> {
+            extends Traversable.Singleton<V>, Finite<V> {
 
         @Override
         default UnmodifiableIterator<V> iterator() {
