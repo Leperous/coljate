@@ -12,17 +12,7 @@ import javax.annotation.Nonnull;
  * @see java.util.Queue
  */
 public interface Queue<V>
-        extends Sequence.Mutable<V> {
-
-    boolean offer(V value);
-
-    /**
-     * Retrieves and removes the head of this queue, or returns {@code null} if this queue is empty.
-     *
-     * @return
-     */
-    @CheckForNull
-    V poll();
+        extends Sequence<V> {
 
     @CheckForNull
     V peek();
@@ -35,16 +25,31 @@ public interface Queue<V>
     @Nonnull
     V element() throws NoSuchElementException;
 
-    @Nonnull
-    V remove() throws NoSuchElementException;
-
     @Override
     Queue<V> tail();
 
-    @Nonnull
-    Sequence<V> drain();
-
     @Override
-    Queue<V> mutableCopy();
+    Queue.Mutable<V> mutableCopy();
+
+    interface Mutable<V>
+            extends Queue<V>, Sequence.Mutable<V> {
+
+        boolean offer(V value);
+
+        /**
+         * Retrieves and removes the head of this queue, or returns {@code null} if this queue is empty.
+         *
+         * @return
+         */
+        @CheckForNull
+        V poll();
+
+        @Nonnull
+        V remove() throws NoSuchElementException;
+
+        @Nonnull
+        Sequence<V> drain();
+
+    }
 
 }

@@ -59,8 +59,8 @@ public interface Ordered<V>
 
     default int hash() {
         return this.isEmpty()
-                ? 1
-                : Objects.hashCode(this.head()) * Objects.hashCode(this.tail());
+                ? 0
+                : Objects.hashCode(this.head()) * Objects.hashCode(this.tail()); //TODO multiplication by zero
     }
 
     /**
