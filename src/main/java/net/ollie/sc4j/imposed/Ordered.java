@@ -4,7 +4,6 @@ import java.util.NoSuchElementException;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
 
-import net.ollie.sc4j.Collection;
 import net.ollie.sc4j.utils.Suppliers;
 
 import javax.annotation.CheckForNull;
@@ -16,8 +15,7 @@ import javax.annotation.Nonnull;
  * @author Ollie
  * @see Sorted
  */
-public interface Ordered<V>
-        extends Collection<V> {
+public interface Ordered<V> {
 
     @CheckForNull
     V first();
