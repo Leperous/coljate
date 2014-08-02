@@ -19,7 +19,4 @@ public interface Interval<V>
     @CheckForNull
     V last();
 
-    @CheckForNull
-    V tryCast(Object object);
-
 }

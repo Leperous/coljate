@@ -43,11 +43,24 @@ public interface Map<K, V>
         return this.mapValues(Functions.satisfying(predicate));
     }
 
-    @Override
-    <K2> Map<K2, V> mapKeys(Function<? super K, ? extends K2> function);
+    @Nonnull
+    @CheckReturnValue
+    <K2, V2> Map<K2, V2> mapEntries(Function<? super K, ? extends K2> keyFunction, Function<? super V, ? extends V2> valueFunction);
 
     @Override
-    <V2> Map<K, V2> mapValues(Function<? super V, ? extends V2> function);
+    default <V2> Map<K, V2> map(final Function<? super V, ? extends V2> function) {
+        return this.mapValues(function);
+    }
+
+    @Override
+    default <K2> Map<K2, V> mapKeys(Function<? super K, ? extends K2> function) {
+        return this.mapEntries(function, Function.identity());
+    }
+
+    @Override
+    default <V2> Map<K, V2> mapValues(Function<? super V, ? extends V2> function) {
+        return this.mapEntries(Function.identity(), function);
+    }
 
     @Override
     Map.Mutable<K, V> mutableCopy();
@@ -150,10 +163,17 @@ public interface Map<K, V>
         Map.Immutable<K, V> without(Object key);
 
         @Override
-        <K2> Map.Immutable<K2, V> mapKeys(Function<? super K, ? extends K2> function);
+        default <K2> Map.Immutable<K2, V> mapKeys(Function<? super K, ? extends K2> function) {
+            return this.mapEntries(function, Function.identity());
+        }
 
         @Override
-        <V2> Map.Immutable<K, V2> mapValues(Function<? super V, ? extends V2> function);
+        default <V2> Map.Immutable<K, V2> mapValues(Function<? super V, ? extends V2> function) {
+            return this.mapEntries(Function.identity(), function);
+        }
+
+        @Override
+        <K2, V2> Map.Immutable<K2, V2> mapEntries(Function<? super K, ? extends K2> keyFunction, Function<? super V, ? extends V2> valueFunction);
 
         @Override
         default Map.Immutable<K, V> filter(final Predicate<? super V> predicate) {
