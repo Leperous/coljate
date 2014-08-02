@@ -15,7 +15,7 @@ import javax.annotation.Nullable;
 import javax.annotation.OverridingMethodsMustInvokeSuper;
 
 /**
- * An iterable collection of unique elements.
+ * A finite collection of unique elements.
  *
  * For example, the integers {@code [1,2,3]}.
  *

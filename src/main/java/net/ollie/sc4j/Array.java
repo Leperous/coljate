@@ -1,14 +1,14 @@
 package net.ollie.sc4j;
 
-import java.util.Comparator;
-import java.util.function.Function;
-import java.util.function.Predicate;
-
 import net.ollie.sc4j.access.Finite;
 import net.ollie.sc4j.access.Indexed;
 import net.ollie.sc4j.imposed.Sorted;
 import net.ollie.sc4j.utils.Functions;
 import net.ollie.sc4j.utils.IndexedComparator;
+
+import java.util.Comparator;
+import java.util.function.Function;
+import java.util.function.Predicate;
 
 /**
  * An ordered, indexed collection of objects.
@@ -35,7 +35,7 @@ public interface Array<V>
     }
 
     @Override
-    default Array<V> filter(Predicate<? super V> predicate) {
+    default Array<V> filter(final Predicate<? super V> predicate) {
         return this.map(Functions.satisfying(predicate));
     }
 
@@ -71,7 +71,6 @@ public interface Array<V>
     }
 
     /**
-     *
      * @param <V>
      */
     interface Mutable<V>
@@ -104,7 +103,6 @@ public interface Array<V>
     }
 
     /**
-     *
      * @param <V>
      */
     interface Immutable<V>

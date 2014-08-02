@@ -6,7 +6,6 @@ import java.util.function.Predicate;
 import net.ollie.sc4j.imposed.Sorted;
 import net.ollie.sc4j.utils.Iterables;
 
-import javax.annotation.CheckForNull;
 import javax.annotation.CheckReturnValue;
 import javax.annotation.Nonnull;
 
@@ -15,10 +14,20 @@ import javax.annotation.Nonnull;
  * @author Ollie
  */
 public interface SortedSet<V>
-        extends Set<V>, Sorted<V> {
+        extends Set<V>, Interval<V>, Sorted<V> {
 
-    @CheckForNull
+    @Override
     V last();
+
+    @Override
+    default boolean firstInclusive() {
+        return true;
+    }
+
+    @Override
+    default boolean lastInclusive() {
+        return true;
+    }
 
     @Override
     SortedSet<V> filter(Predicate<? super V> predicate);
