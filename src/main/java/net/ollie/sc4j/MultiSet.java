@@ -4,7 +4,7 @@ import java.util.function.Predicate;
 
 import net.ollie.sc4j.access.Finite;
 import net.ollie.sc4j.imposed.Distinctness.Duplicated;
-import net.ollie.sc4j.utils.NonNegativeInteger;
+import net.ollie.sc4j.utils.numeric.NonNegativeInteger;
 
 import javax.annotation.Nonnull;
 

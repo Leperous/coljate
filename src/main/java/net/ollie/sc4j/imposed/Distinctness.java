@@ -2,7 +2,7 @@ package net.ollie.sc4j.imposed;
 
 import net.ollie.sc4j.Collection;
 import net.ollie.sc4j.access.Keyed;
-import net.ollie.sc4j.utils.NonNegativeInteger;
+import net.ollie.sc4j.utils.numeric.NonNegativeInteger;
 
 import javax.annotation.Nonnull;
 

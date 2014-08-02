@@ -1,12 +1,13 @@
-package net.ollie.sc4j.utils;
+package net.ollie.sc4j.utils.numeric;
 
 import java.util.Optional;
 import java.util.OptionalInt;
 import java.util.function.Predicate;
 
 import javax.annotation.CheckForNull;
-import javax.annotation.CheckReturnValue;
 import javax.annotation.Nonnull;
+
+import net.ollie.sc4j.utils.Conditions;
 
 /**
  * A non-negative integer, including zero.
@@ -14,12 +15,10 @@ import javax.annotation.Nonnull;
  * @author Ollie
  * @see <a href="http://en.wikipedia.org/wiki/Natural_number">Natural number</a>
  */
-public final class NonNegativeInteger
-        extends Number
-        implements Comparable<Number> {
+public final class NonNegativeInt
+        extends NonNegativeInteger {
 
     private static final long serialVersionUID = 1L;
-    public static final NonNegativeInteger ZERO = new NonNegativeInteger(0), ONE = new NonNegativeInteger(1);
 
     @Nonnull
     public static NonNegativeInteger of(final int value) {
@@ -29,7 +28,7 @@ public final class NonNegativeInteger
             case 1:
                 return ONE;
             default:
-                return new NonNegativeInteger(value);
+                return new NonNegativeInt(value);
         }
     }
 
@@ -67,7 +66,7 @@ public final class NonNegativeInteger
 
     private final int value;
 
-    private NonNegativeInteger(final int value) {
+    NonNegativeInt(final int value) {
         Conditions.checkIsNonNegative(value);
         this.value = value;
     }
@@ -78,30 +77,15 @@ public final class NonNegativeInteger
     }
 
     @Override
-    public long longValue() {
-        return value;
-    }
-
-    @Override
-    public float floatValue() {
-        return value;
-    }
-
-    @Override
-    public double doubleValue() {
-        return value;
-    }
-
-    @Nonnull
-    @CheckReturnValue
     public NonNegativeInteger increment() {
-        return new NonNegativeInteger(value + 1);
+        return new NonNegativeInt(value + 1);
     }
 
     public int peekDecrement() {
         return value - 1;
     }
 
+    @Override
     public Optional<NonNegativeInteger> decrement() {
         final int decremented = this.peekDecrement();
         return decremented >= 0
@@ -109,6 +93,7 @@ public final class NonNegativeInteger
                 : Optional.empty();
     }
 
+    @Override
     public boolean isZero() {
         return value == 0;
     }

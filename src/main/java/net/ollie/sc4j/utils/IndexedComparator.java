@@ -1,5 +1,6 @@
 package net.ollie.sc4j.utils;
 
+import net.ollie.sc4j.utils.numeric.NonNegativeInteger;
 import net.ollie.sc4j.access.Indexed;
 
 /**

@@ -1,7 +1,7 @@
 package net.ollie.sc4j;
 
 
-import net.ollie.sc4j.utils.NonNegativeInteger;
+import net.ollie.sc4j.utils.numeric.NonNegativeInteger;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;

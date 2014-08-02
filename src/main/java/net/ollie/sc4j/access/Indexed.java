@@ -6,7 +6,8 @@ import java.util.function.Predicate;
 
 import net.ollie.sc4j.SortedSet;
 import net.ollie.sc4j.utils.Iterables;
-import net.ollie.sc4j.utils.NonNegativeInteger;
+import net.ollie.sc4j.utils.numeric.NonNegativeInt;
+import net.ollie.sc4j.utils.numeric.NonNegativeInteger;
 
 import javax.annotation.CheckForNull;
 
@@ -43,7 +44,7 @@ public interface Indexed<V>
     @CheckForNull
     default NonNegativeInteger indexOf(final Object value) {
         final OptionalInt optional = Iterables.indexOf(this, value);
-        return NonNegativeInteger.maybe(optional);
+        return NonNegativeInt.maybe(optional);
     }
 
     @Override
