@@ -5,12 +5,12 @@ import net.ollie.sc4j.access.Keyed;
 import net.ollie.sc4j.imposed.Distinctness.Unique;
 
 import javax.annotation.Nonnull;
+import java.util.function.Predicate;
 
 /**
- *
- * @author Ollie
  * @param <N> node type
  * @param <V> value type
+ * @author Ollie
  */
 public interface Graph<N, V>
         extends Keyed.Single<N, V>, Finite<V> {
@@ -42,6 +42,12 @@ public interface Graph<N, V>
 
     interface Immutable<N, V>
             extends Graph<N, V>, Finite.Immutable<V> {
+
+        @Override
+        Graph.Immutable<N, V> filter(Predicate<? super V> predicate);
+
+        @Override
+        Graph.Immutable<N, V> tail();
 
         @Override
         default Graph.Immutable<N, V> immutableCopy() {

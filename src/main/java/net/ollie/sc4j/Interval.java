@@ -10,7 +10,7 @@ import javax.annotation.CheckForNull;
  * @param <V> a non-parametric type.
  */
 public interface Interval<V>
-        extends Ordered<V> {
+        extends Ordered<V>, Collection<V> {
 
     boolean minInclusive();
 

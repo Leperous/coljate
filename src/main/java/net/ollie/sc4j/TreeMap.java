@@ -3,6 +3,7 @@ package net.ollie.sc4j;
 import java.util.function.Function;
 import java.util.function.Predicate;
 
+import net.ollie.sc4j.imposed.Sorted;
 import net.ollie.sc4j.utils.Functions;
 
 /**
@@ -10,7 +11,7 @@ import net.ollie.sc4j.utils.Functions;
  * @author Ollie
  */
 public interface TreeMap<K, V>
-        extends Tree<K, V>, Map<K, V> {
+        extends Tree<K, V>, Map<K, V>, Sorted<K> {
 
     @Override
     Set<K> children(K key);
@@ -62,9 +63,17 @@ public interface TreeMap<K, V>
         <V2> TreeMap.Immutable<K, V2> mapValues(Function<? super V, ? extends V2> function);
 
         @Override
+        default TreeMap.Immutable<K, V> filter(final Predicate<? super V> predicate) {
+            return this.filterValues(predicate);
+        }
+
+        @Override
         default TreeMap.Immutable<K, V> filterValues(final Predicate<? super V> predicate) {
             return this.mapValues(Functions.satisfying(predicate));
         }
+
+        @Override
+        TreeMap.Immutable<K, V> tail();
 
         @Override
         default TreeMap.Immutable<K, V> immutableCopy() {

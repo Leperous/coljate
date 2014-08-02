@@ -175,7 +175,6 @@ public interface Array<V>
                     : this.get(this.count() - 1);
         }
 
-        @Override
         default V lastOrElse(final Predicate<? super V> predicate, final V defaultValue) {
             for (int i = this.count() - 1; i >= 0; i--) {
                 final V element = this.get(i);

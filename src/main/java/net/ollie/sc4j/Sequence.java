@@ -51,7 +51,7 @@ public interface Sequence<V>
     }
 
     interface Empty<V>
-            extends Ordered.Empty<V>, Sequence.Immutable<V>, Traversable.Empty<V> {
+            extends Sequence.Immutable<V>, Traversable.Empty<V> {
 
         @Override
         default V head() {
@@ -83,7 +83,6 @@ public interface Sequence<V>
             return null;
         }
 
-        @Override
         default V lastOrElse(final Predicate<? super V> predicate, final V defaultValue) {
             return defaultValue;
         }
