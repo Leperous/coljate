@@ -11,9 +11,12 @@ import java.math.BigInteger;
 public class NonNegativeBigInteger extends NonNegativeInteger {
 
     private static final long serialVersionUID = 1L;
+    private static final NonNegativeBigInteger BI_ZERO = new NonNegativeBigInteger(BigInteger.ZERO);
 
     public static NonNegativeBigInteger of(final BigInteger value) {
-        return new NonNegativeBigInteger(value);
+        return value.signum() == 0
+                ? BI_ZERO
+                : new NonNegativeBigInteger(value);
     }
 
     private final BigInteger value;
@@ -44,23 +47,13 @@ public class NonNegativeBigInteger extends NonNegativeInteger {
     }
 
     @Override
-    public int intValue() {
-        return value.intValueExact();
+    public BigInteger bigIntegerValue() {
+        return value;
     }
 
     @Override
-    public double doubleValue() {
-        return value.doubleValue();
-    }
-
-    @Override
-    public float floatValue() {
-        return value.floatValue();
-    }
-
-    @Override
-    public long longValue() {
-        return value.longValueExact();
+    public String toString() {
+        return value.toString();
     }
 
 }

@@ -9,6 +9,8 @@ import javax.annotation.Nonnull;
 
 import net.ollie.sc4j.utils.Conditions;
 
+import java.math.BigInteger;
+
 /**
  * A non-negative integer, including zero.
  *
@@ -65,10 +67,19 @@ public final class NonNegativeInt
     }
 
     private final int value;
+    private transient BigInteger bigInt;
 
     NonNegativeInt(final int value) {
         Conditions.checkIsNonNegative(value);
         this.value = value;
+    }
+
+    @Override
+    public BigInteger bigIntegerValue() {
+        if (bigInt == null) {
+            BigInteger.valueOf(value);
+        }
+        return bigInt;
     }
 
     @Override
@@ -96,28 +107,6 @@ public final class NonNegativeInt
     @Override
     public boolean isZero() {
         return value == 0;
-    }
-
-    @Override
-    public int compareTo(final Number that) {
-        final double d1 = this.doubleValue();
-        final double d2 = that.doubleValue();
-        return Double.compare(d1, d2);
-    }
-
-    @Override
-    public boolean equals(final Object object) {
-        return object instanceof Number
-                && this.equals((Number) object);
-    }
-
-    public boolean equals(@Nonnull final Number that) {
-        return this.compareTo(that) == 0;
-    }
-
-    @Override
-    public int hashCode() {
-        return value;
     }
 
     @Override

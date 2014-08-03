@@ -2,6 +2,8 @@ package net.ollie.sc4j.utils.numeric;
 
 import java.util.Optional;
 
+import java.math.BigInteger;
+import javax.annotation.CheckForNull;
 import javax.annotation.CheckReturnValue;
 import javax.annotation.Nonnull;
 
@@ -23,8 +25,19 @@ public abstract class NonNegativeInteger
         return NonNegativeInt.of(value);
     }
 
+    @Nonnull
+    public static NonNegativeInteger of(final BigInteger value) {
+        return NonNegativeBigInteger.of(value);
+    }
+
+    @CheckForNull
     public static NonNegativeInteger maybe(final int value) {
         return NonNegativeInt.maybe(value);
+    }
+
+    @CheckForNull
+    public static NonNegativeInteger maybe(final BigInteger value) {
+        return NonNegativeBigInteger.maybe(value);
     }
 
     @Nonnull
@@ -33,28 +46,51 @@ public abstract class NonNegativeInteger
 
     public abstract Optional<NonNegativeInteger> decrement();
 
-    public abstract boolean isZero();
+    public abstract BigInteger bigIntegerValue();
+
+    @Override
+    public int intValue() {
+        return this.bigIntegerValue().intValueExact();
+    }
 
     @Override
     public long longValue() {
-        return this.intValue();
+        return this.bigIntegerValue().longValueExact();
     }
 
     @Override
     public float floatValue() {
-        return this.intValue();
+        return this.bigIntegerValue().floatValue();
     }
 
     @Override
     public double doubleValue() {
-        return this.intValue();
+        return this.bigIntegerValue().doubleValue();
+    }
+
+    public boolean isZero() {
+        return this.bigIntegerValue().signum() == 0;
     }
 
     @Override
     public int compareTo(final Number that) {
-        final double d1 = this.doubleValue();
-        final double d2 = that.doubleValue();
-        return Double.compare(d1, d2);
+        if (that instanceof NonNegativeInteger) {
+            return this.compareTo((NonNegativeInteger) that);
+        } else if (that instanceof BigInteger) {
+            return this.compareTo((BigInteger) that);
+        } else {
+            final double d1 = this.doubleValue();
+            final double d2 = that.doubleValue();
+            return Double.compare(d1, d2);
+        }
+    }
+
+    public int compareTo(final NonNegativeInteger that) {
+        return this.compareTo(that.bigIntegerValue());
+    }
+
+    public int compareTo(final BigInteger that) {
+        return this.bigIntegerValue().compareTo(that);
     }
 
     @Override
