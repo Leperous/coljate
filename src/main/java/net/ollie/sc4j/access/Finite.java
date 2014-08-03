@@ -12,6 +12,7 @@ import net.ollie.sc4j.utils.Arrays;
 import net.ollie.sc4j.utils.Iterables;
 import net.ollie.sc4j.utils.Iterators;
 import net.ollie.sc4j.utils.UnmodifiableIterator;
+import net.ollie.sc4j.utils.numeric.NonNegativeInteger;
 
 import java.math.BigInteger;
 import javax.annotation.CheckReturnValue;
@@ -26,12 +27,12 @@ import javax.annotation.Nonnull;
 public interface Finite<V>
         extends Traversable<V>, Iterable<V> {
 
-    default int count() {
+    default NonNegativeInteger count() {
         return this.count(o -> true);
     }
 
-    default int count(final Predicate<? super V> predicate) {
-        return Iterables.doCount(this, predicate);
+    default NonNegativeInteger count(final Predicate<? super V> predicate) {
+        return NonNegativeInteger.of(Iterables.doCount(this, predicate));
     }
 
     @Override

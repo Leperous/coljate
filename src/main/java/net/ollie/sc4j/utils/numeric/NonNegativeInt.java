@@ -7,8 +7,6 @@ import java.util.function.Predicate;
 import javax.annotation.CheckForNull;
 import javax.annotation.Nonnull;
 
-import net.ollie.sc4j.utils.Conditions;
-
 import java.math.BigInteger;
 
 /**
@@ -23,7 +21,7 @@ public final class NonNegativeInt
     private static final long serialVersionUID = 1L;
 
     @Nonnull
-    public static NonNegativeInteger of(final int value) {
+    public static NonNegativeInteger of(final int value) throws NonNegativeException {
         switch (value) {
             case 0:
                 return ZERO;
@@ -35,7 +33,7 @@ public final class NonNegativeInt
     }
 
     @Nonnull
-    public static NonNegativeInteger of(final Number number) {
+    public static NonNegativeInteger of(final Number number) throws NonNegativeException {
         return number instanceof NonNegativeInteger
                 ? (NonNegativeInteger) number
                 : of(Math.round(number.floatValue()));
@@ -69,15 +67,17 @@ public final class NonNegativeInt
     private final int value;
     private transient BigInteger bigInt;
 
-    NonNegativeInt(final int value) {
-        Conditions.checkIsNonNegative(value);
+    NonNegativeInt(final int value) throws NonNegativeException {
+        if (value < 0) {
+            throw new NonNegativeException(value);
+        }
         this.value = value;
     }
 
     @Override
     public BigInteger bigIntegerValue() {
         if (bigInt == null) {
-            BigInteger.valueOf(value);
+            bigInt = BigInteger.valueOf(value);
         }
         return bigInt;
     }

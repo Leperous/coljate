@@ -2,6 +2,7 @@ package net.ollie.sc4j.utils;
 
 import java.util.Iterator;
 import java.util.NoSuchElementException;
+import java.util.function.Predicate;
 
 /**
  *
@@ -23,6 +24,16 @@ public final class Arrays {
         return array.length == 0
                 ? Iterators.empty()
                 : new ArrayIterator<>(array);
+    }
+
+    public static <T> int count(final T[] array, final Predicate<? super T> predicate) {
+        int count = 0;
+        for (final T element : array) {
+            if (predicate.test(element)) {
+                count++;
+            }
+        }
+        return count;
     }
 
     public static <V> V[] concatenate(final V[] array, final Iterable<? extends V> iterable) {

@@ -1,6 +1,6 @@
 package net.ollie.sc4j;
 
-import net.ollie.sc4j.imposed.Sorted;
+import net.ollie.sc4j.imposed.sorting.Sorted;
 
 /**
  *

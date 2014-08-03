@@ -1,6 +1,5 @@
 package net.ollie.sc4j;
 
-
 import net.ollie.sc4j.Array.Immutable;
 import net.ollie.sc4j.utils.numeric.NonNegativeInteger;
 
@@ -55,11 +54,11 @@ public abstract class AbstractImmutableArrayTest
     @Override
     protected void assertContainsNothing(Immutable<Object> collection) {
         super.assertContainsNothing(collection);
-        assertThat(collection.count(), is(0));
+        assertThat(collection.count().intValue(), is(0));
     }
 
     protected void assertContainsExactly(final Array.Immutable<Object> array, final Object... objects) {
-        assertEquals(objects.length, array.count());
+        assertEquals(objects.length, array.count().intValue());
         assertEquals(objects.length == 0, array.isEmpty());
         int i = 0;
         for (final Object object : objects) {

@@ -2,6 +2,8 @@ package net.ollie.sc4j.utils.numeric;
 
 import java.util.Optional;
 
+import net.ollie.sc4j.imposed.sorting.Sortable;
+
 import java.math.BigInteger;
 import javax.annotation.CheckForNull;
 import javax.annotation.CheckReturnValue;
@@ -10,24 +12,43 @@ import javax.annotation.Nonnull;
 /**
  * A non-negative integer, including zero.
  *
+ * Likely either a wrapper around an int (so similar in cost to an {@link Integer}) or a {@link BigInteger}.
+ *
  * @author Ollie
  * @see <a href="http://en.wikipedia.org/wiki/Natural_number">Natural number</a>
+ * @see Integer
  */
 public abstract class NonNegativeInteger
         extends Number
-        implements Comparable<Number> {
+        implements Sortable<Number> {
 
     private static final long serialVersionUID = 1L;
     public static final NonNegativeInteger ZERO = new NonNegativeInt(0), ONE = new NonNegativeInt(1);
 
     @Nonnull
-    public static NonNegativeInteger of(final int value) {
+    public static NonNegativeInteger of(final int value) throws NonNegativeException {
         return NonNegativeInt.of(value);
     }
 
     @Nonnull
-    public static NonNegativeInteger of(final BigInteger value) {
+    public static NonNegativeInteger of(final long value) throws NonNegativeException {
         return NonNegativeBigInteger.of(value);
+    }
+
+    @Nonnull
+    public static NonNegativeInteger of(final BigInteger value) throws NonNegativeException {
+        return NonNegativeBigInteger.of(value);
+    }
+
+    @Nonnull
+    public static NonNegativeInteger of(final Number number) throws NonNegativeException {
+        if (number instanceof NonNegativeInteger) {
+            return (NonNegativeInteger) number;
+        } else if (number instanceof BigInteger) {
+            return of((BigInteger) number);
+        } else {
+            return of(number.intValue());
+        }
     }
 
     @CheckForNull
@@ -73,7 +94,7 @@ public abstract class NonNegativeInteger
     }
 
     @Override
-    public int compareTo(final Number that) {
+    public Sorting sortWith(final Number that) {
         if (that instanceof NonNegativeInteger) {
             return this.compareTo((NonNegativeInteger) that);
         } else if (that instanceof BigInteger) {
@@ -81,16 +102,16 @@ public abstract class NonNegativeInteger
         } else {
             final double d1 = this.doubleValue();
             final double d2 = that.doubleValue();
-            return Double.compare(d1, d2);
+            return Sorting.from(Double.compare(d1, d2));
         }
     }
 
-    public int compareTo(final NonNegativeInteger that) {
+    public Sorting compareTo(final NonNegativeInteger that) {
         return this.compareTo(that.bigIntegerValue());
     }
 
-    public int compareTo(final BigInteger that) {
-        return this.bigIntegerValue().compareTo(that);
+    public Sorting compareTo(final BigInteger that) {
+        return Sorting.from(this.bigIntegerValue().compareTo(that));
     }
 
     @Override
@@ -99,8 +120,9 @@ public abstract class NonNegativeInteger
                 && this.equals((Number) object);
     }
 
-    public boolean equals(@Nonnull final Number that) {
-        return this.compareTo(that) == 0;
+    public boolean equals(final Number that) {
+        return that != null
+                && this.compareTo(that) == 0;
     }
 
     @Override

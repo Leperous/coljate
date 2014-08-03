@@ -45,7 +45,7 @@ public final class Iterables {
 
     public static OptionalInt maybeCount(final Iterable<?> iterable) {
         if (iterable instanceof Finite) {
-            return OptionalInt.of(((Finite) iterable).count());
+            return OptionalInt.of((((Finite) iterable).count()).intValue());
         } else if (iterable instanceof java.util.Collection) {
             return OptionalInt.of(((java.util.Collection) iterable).size());
         } else if (!iterable.iterator().hasNext()) {

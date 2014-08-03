@@ -2,6 +2,7 @@ package net.ollie.sc4j;
 
 import net.ollie.sc4j.access.Finite;
 import net.ollie.sc4j.access.Keyed;
+import net.ollie.sc4j.utils.numeric.NonNegativeInteger;
 
 import javax.annotation.CheckReturnValue;
 import javax.annotation.Nonnull;
@@ -108,7 +109,7 @@ public interface MultiMap<K, V>
         @Override
         C get(Object object);
 
-        default int count(final Object key) {
+        default NonNegativeInteger count(final Object key) {
             return this.get(key).count();
         }
 

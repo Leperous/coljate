@@ -3,6 +3,8 @@ package net.ollie.sc4j.utils.numeric;
 import java.util.Optional;
 
 import java.math.BigInteger;
+import javax.annotation.CheckForNull;
+import javax.annotation.Nonnull;
 
 /**
  *
@@ -13,17 +15,30 @@ public class NonNegativeBigInteger extends NonNegativeInteger {
     private static final long serialVersionUID = 1L;
     private static final NonNegativeBigInteger BI_ZERO = new NonNegativeBigInteger(BigInteger.ZERO);
 
-    public static NonNegativeBigInteger of(final BigInteger value) {
+    @Nonnull
+    public static NonNegativeBigInteger of(final long value) throws NonNegativeException {
+        return new NonNegativeBigInteger(BigInteger.valueOf(value));
+    }
+
+    @Nonnull
+    public static NonNegativeBigInteger of(final BigInteger value) throws NonNegativeException {
         return value.signum() == 0
                 ? BI_ZERO
                 : new NonNegativeBigInteger(value);
     }
 
+    @CheckForNull
+    public static NonNegativeBigInteger maybe(final BigInteger value) {
+        return value.signum() < 0
+                ? null
+                : new NonNegativeBigInteger(value);
+    }
+
     private final BigInteger value;
 
-    protected NonNegativeBigInteger(final BigInteger value) {
+    protected NonNegativeBigInteger(final BigInteger value) throws NonNegativeException {
         if (value.signum() < 0) {
-            throw new IllegalArgumentException("Value is negative: " + value);
+            throw new NonNegativeException(value);
         }
         this.value = value;
     }

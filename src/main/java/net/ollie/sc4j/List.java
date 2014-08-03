@@ -192,7 +192,7 @@ public interface List<V>
     }
 
     interface Singleton<V>
-            extends List.Immutable<V>, Sequence.Singleton<V>, Finite.Singleton<V> {
+            extends List<V>, Sequence.Singleton<V>, Finite.Singleton<V> {
 
         @Override
         default V head() {

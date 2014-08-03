@@ -3,7 +3,7 @@ package net.ollie.sc4j;
 import java.util.function.Function;
 import java.util.function.Predicate;
 
-import net.ollie.sc4j.imposed.Sorted;
+import net.ollie.sc4j.imposed.sorting.Sorted;
 import net.ollie.sc4j.utils.Functions;
 
 /**

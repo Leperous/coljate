@@ -1,6 +1,5 @@
 package net.ollie.sc4j;
 
-
 import net.ollie.sc4j.utils.numeric.NonNegativeInteger;
 
 import static org.hamcrest.CoreMatchers.is;
