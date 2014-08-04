@@ -2,16 +2,13 @@ package net.ollie.sc4j;
 
 import net.ollie.sc4j.Array.Immutable;
 import net.ollie.sc4j.utils.numeric.NonNegativeInteger;
+import org.junit.Test;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.nullValue;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertThat;
-import static org.junit.Assert.assertTrue;
-import org.junit.Test;
+import static org.junit.Assert.*;
 
 /**
- *
  * @author Ollie
  */
 public abstract class AbstractImmutableArrayTest
@@ -63,7 +60,7 @@ public abstract class AbstractImmutableArrayTest
         int i = 0;
         for (final Object object : objects) {
             assertTrue(array.contains(object));
-            assertThat("Index of [" + object + "] inside [" + array + "]",
+            assertThat("Index create [" + object + "] inside [" + array + "]",
                     array.indexOf(object),
                     is(NonNegativeInteger.of(i++)));
         }

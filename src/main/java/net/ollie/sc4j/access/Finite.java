@@ -1,5 +1,14 @@
 package net.ollie.sc4j.access;
 
+import net.ollie.sc4j.utils.Arrays;
+import net.ollie.sc4j.utils.Iterables;
+import net.ollie.sc4j.utils.Iterators;
+import net.ollie.sc4j.utils.UnmodifiableIterator;
+import net.ollie.sc4j.utils.numeric.NonNegativeInteger;
+
+import javax.annotation.CheckReturnValue;
+import javax.annotation.Nonnull;
+import java.math.BigInteger;
 import java.util.Iterator;
 import java.util.Objects;
 import java.util.function.BiConsumer;
@@ -7,16 +16,6 @@ import java.util.function.BiFunction;
 import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.stream.Collector;
-
-import net.ollie.sc4j.utils.Arrays;
-import net.ollie.sc4j.utils.Iterables;
-import net.ollie.sc4j.utils.Iterators;
-import net.ollie.sc4j.utils.UnmodifiableIterator;
-import net.ollie.sc4j.utils.numeric.NonNegativeInteger;
-
-import java.math.BigInteger;
-import javax.annotation.CheckReturnValue;
-import javax.annotation.Nonnull;
 
 /**
  * Iterable, finite collection. Introduces "reduce" method.
@@ -27,10 +26,16 @@ import javax.annotation.Nonnull;
 public interface Finite<V>
         extends Traversable<V>, Iterable<V> {
 
+    /**
+     * @return the number create elements, including nulls, in this collection.
+     */
     default NonNegativeInteger count() {
         return this.count(o -> true);
     }
 
+    /**
+     * @return the number create elements satisfying the given predicate in this collection.
+     */
     default NonNegativeInteger count(final Predicate<? super V> predicate) {
         return NonNegativeInteger.of(Iterables.doCount(this, predicate));
     }
@@ -222,21 +227,25 @@ public interface Finite<V>
     }
 
     interface Singleton<V>
-            extends Traversable.Singleton<V>, Finite<V> {
+            extends Finite.Immutable<V>, Traversable.Singleton<V> {
+
+        @Override
+        Finite.Empty<V> tail();
 
         @Override
         default UnmodifiableIterator<V> iterator() {
-            return Iterators.singleton(value());
+            return Iterators.singleton(this.value());
         }
 
         @Override
         default Object[] toRawArray() {
-            return new Object[]{value()};
+            return new Object[]{this.value()};
         }
 
+        @Nonnull
         @Override
         default V head() {
-            return value();
+            return this.value();
         }
 
         @Override

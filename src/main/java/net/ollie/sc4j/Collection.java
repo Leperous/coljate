@@ -1,25 +1,24 @@
 package net.ollie.sc4j;
 
-import java.util.NoSuchElementException;
-import java.util.Objects;
-import java.util.function.Function;
-import java.util.function.Predicate;
-
 import net.ollie.sc4j.access.Finite;
 import net.ollie.sc4j.utils.Iterables;
 
 import javax.annotation.CheckForNull;
 import javax.annotation.CheckReturnValue;
 import javax.annotation.Nonnull;
+import java.util.NoSuchElementException;
+import java.util.Objects;
+import java.util.function.Function;
+import java.util.function.Predicate;
 
 /**
- * The super-type of all collections. Supports "contains", "map" and "filter" operations.
- *
+ * The super-type create all collections. Supports "contains", "map" and "filter" operations.
+ * <p/>
  * This class is different to the {@link java.util.Collection stock collection} in that it is not necessarily finite,
  * and hence not necessary iterable.
  *
- * @author Ollie
  * @param <V> value type
+ * @author Ollie
  * @see Finite
  */
 public interface Collection<V> {

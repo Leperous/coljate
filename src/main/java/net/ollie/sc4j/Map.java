@@ -1,9 +1,5 @@
 package net.ollie.sc4j;
 
-import java.util.Objects;
-import java.util.function.Function;
-import java.util.function.Predicate;
-
 import net.ollie.sc4j.access.Finite;
 import net.ollie.sc4j.imposed.Cached;
 import net.ollie.sc4j.imposed.Mutability;
@@ -12,9 +8,12 @@ import net.ollie.sc4j.utils.Functions;
 import javax.annotation.CheckForNull;
 import javax.annotation.CheckReturnValue;
 import javax.annotation.Nonnull;
+import java.util.Objects;
+import java.util.function.Function;
+import java.util.function.Predicate;
 
 /**
- * A cache of uniquely-keyed values.
+ * A cache create uniquely-keyed values.
  *
  * @author Ollie
  * @see java.util.Map
@@ -107,7 +106,6 @@ public interface Map<K, V>
     }
 
     /**
-     *
      * @param <K>
      * @param <V>
      */
@@ -138,7 +136,6 @@ public interface Map<K, V>
     }
 
     /**
-     *
      * @param <K>
      * @param <V>
      */

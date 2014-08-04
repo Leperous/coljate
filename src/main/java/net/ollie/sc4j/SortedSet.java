@@ -1,16 +1,15 @@
 package net.ollie.sc4j;
 
-import java.util.Comparator;
-import java.util.function.Predicate;
-
 import net.ollie.sc4j.imposed.sorting.Sorted;
+import net.ollie.sc4j.imposed.sorting.Sorter;
 import net.ollie.sc4j.utils.Iterables;
 
 import javax.annotation.CheckReturnValue;
 import javax.annotation.Nonnull;
+import java.util.Comparator;
+import java.util.function.Predicate;
 
 /**
- *
  * @author Ollie
  */
 public interface SortedSet<V>
@@ -59,9 +58,12 @@ public interface SortedSet<V>
     interface Immutable<V>
             extends SortedSet<V>, Set.Immutable<V> {
 
+        @Override
+        SortedSet.Immutable<V> tail();
+
         @Nonnull
         @CheckReturnValue
-        SortedSet.Immutable<V> sort(Comparator<? super V> comparator);
+        SortedSet.Immutable<V> sort(Sorter<? super V> comparator);
 
         @Override
         SortedSet.Immutable<V> filter(Predicate<? super V> predicate);
@@ -70,6 +72,42 @@ public interface SortedSet<V>
         default SortedSet.Immutable<V> immutableCopy() {
             return this;
         }
+
+    }
+
+    interface Empty<V>
+            extends SortedSet.Immutable<V>, Set.Empty<V> {
+
+        default V first() {
+            return null;
+        }
+
+        @Override
+        default V last() {
+            return null;
+        }
+
+        default SortedSet.Empty<V> tail() {
+            return this;
+        }
+
+        @Override
+        default SortedSet.Empty<V> sort(final Sorter<? super V> comparator) {
+            return this;
+        }
+
+        @Override
+        default SortedSet.Empty<V> filter(final Predicate<? super V> predicate) {
+            return this;
+        }
+
+    }
+
+    interface Singleton<V>
+            extends SortedSet.Immutable<V>, Set.Singleton<V> {
+
+        @Override
+        SortedSet.Empty<V> tail();
 
     }
 

@@ -1,11 +1,10 @@
 package net.ollie.sc4j.imposed.sorting;
 
-import java.util.Comparator;
-
 import net.ollie.sc4j.imposed.sorting.Sortable.Sorting;
 
-import java.io.Serializable;
 import javax.annotation.Nonnull;
+import java.io.Serializable;
+import java.util.Comparator;
 
 /**
  * An enumerated {@link Comparator}.
@@ -16,10 +15,14 @@ import javax.annotation.Nonnull;
 public interface Sorter<T>
         extends java.util.Comparator<T>, Serializable {
 
-    static <T> Sorter<T> of(final java.util.Comparator<T> comparator) {
+    static <T> Sorter<T> create(final java.util.Comparator<T> comparator) {
         return comparator instanceof Sorter
                 ? (Sorter<T>) comparator
                 : new SorterBridge<>(comparator);
+    }
+
+    static <T extends Comparable<? super T>> Sorter<T> natural() {
+        return create(Comparator.<T>naturalOrder()); //TODO cache
     }
 
     @Nonnull

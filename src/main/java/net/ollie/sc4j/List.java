@@ -1,10 +1,5 @@
 package net.ollie.sc4j;
 
-import java.util.Iterator;
-import java.util.Objects;
-import java.util.function.Function;
-import java.util.function.Predicate;
-
 import net.ollie.sc4j.access.Finite;
 import net.ollie.sc4j.utils.Iterables;
 import net.ollie.sc4j.utils.UnmodifiableIterator;
@@ -13,6 +8,10 @@ import javax.annotation.CheckForNull;
 import javax.annotation.CheckReturnValue;
 import javax.annotation.Nonnull;
 import javax.annotation.OverridingMethodsMustInvokeSuper;
+import java.util.Iterator;
+import java.util.Objects;
+import java.util.function.Function;
+import java.util.function.Predicate;
 
 /**
  * An iterable sequence.
@@ -99,7 +98,7 @@ public interface List<V>
 
         default int removeAll(final Object value) {
             int removed = 0;
-            for (final Iterator<V> iterator = this.iterator(); iterator.hasNext();) {
+            for (final Iterator<V> iterator = this.iterator(); iterator.hasNext(); ) {
                 final V next = iterator.next();
                 if (Objects.equals(next, value)) {
                     iterator.remove();
@@ -151,9 +150,6 @@ public interface List<V>
             return this;
         }
 
-        @Override
-        UnmodifiableIterator<V> iterator();
-
     }
 
     interface Empty<V>
@@ -165,11 +161,30 @@ public interface List<V>
         }
 
         @Override
+        List.Singleton<V> withPrefix(V value);
+
+        @Override
+        default List.Singleton<V> withSuffix(final V value) {
+            return this.withPrefix(value);
+        }
+
+        @CheckReturnValue
+        default List.Empty<V> withoutFirst(final Object value) {
+            return this;
+        }
+
+        @CheckReturnValue
+        default List.Empty<V> withoutAll(final Object value) {
+            return this;
+        }
+
+        @Override
         default UnmodifiableIterator<V> iterator() {
             return Finite.Empty.super.iterator();
         }
 
         @Override
+        @SuppressWarnings("unchecked")
         default <V2> List.Empty<V2> map(Function<? super V, ? extends V2> function) {
             return (List.Empty<V2>) this;
         }
@@ -180,8 +195,24 @@ public interface List<V>
         }
 
         @Override
+        default V last() {
+            return null;
+        }
+
+        @Override
+        default List.Empty<V> reverse() {
+            return this;
+        }
+
+        @Override
         default List.Empty<V> filter(final Predicate<? super V> predicate) {
             return this;
+        }
+
+        @Override
+        @SuppressWarnings("unchecked")
+        default <R> List.Empty<R> flatMap(final Function<? super V, ? extends Finite<R>> function) {
+            return (List.Empty<R>) this;
         }
 
         @Override
@@ -192,11 +223,16 @@ public interface List<V>
     }
 
     interface Singleton<V>
-            extends List<V>, Sequence.Singleton<V>, Finite.Singleton<V> {
+            extends List.Immutable<V>, Sequence.Singleton<V>, Finite.Singleton<V> {
+
+        @Override
+        default V first() {
+            return this.value();
+        }
 
         @Override
         default V head() {
-            return Finite.Singleton.super.head();
+            return this.first();
         }
 
         @Override
@@ -208,8 +244,16 @@ public interface List<V>
         List.Empty<V> tail();
 
         @Override
-        default UnmodifiableIterator<V> iterator() {
-            return Finite.Singleton.super.iterator();
+        default List.Immutable<V> withoutAll(final Object value) {
+            return this.withoutFirst(value);
+        }
+
+        @Override
+        <V2> List.Singleton<V2> map(Function<? super V, ? extends V2> function);
+
+        @Override
+        default List.Singleton<V> reverse() {
+            return this;
         }
 
     }

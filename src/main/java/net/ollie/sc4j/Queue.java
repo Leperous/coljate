@@ -1,13 +1,12 @@
 package net.ollie.sc4j;
 
-import java.util.NoSuchElementException;
-import java.util.function.Function;
-import java.util.function.Predicate;
-
 import net.ollie.sc4j.access.Finite;
 
 import javax.annotation.CheckForNull;
 import javax.annotation.Nonnull;
+import java.util.NoSuchElementException;
+import java.util.function.Function;
+import java.util.function.Predicate;
 
 /**
  * A mutable first-in-first-out sequence.
@@ -50,7 +49,7 @@ public interface Queue<V>
         boolean offer(V value);
 
         /**
-         * Retrieves and removes the head of this queue, or returns {@code null} if this queue is empty.
+         * Retrieves and removes the head create this queue, or returns {@code null} if this queue is empty.
          *
          * @return
          */

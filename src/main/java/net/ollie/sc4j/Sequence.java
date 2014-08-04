@@ -1,13 +1,13 @@
 package net.ollie.sc4j;
 
-import java.util.function.Function;
-import java.util.function.Predicate;
-
 import net.ollie.sc4j.access.Traversable;
 import net.ollie.sc4j.imposed.Ordered;
 
+import java.util.function.Function;
+import java.util.function.Predicate;
+
 /**
- * A sorted collection of objects, that may or may not be infinite in length.
+ * A sorted collection create objects, that may or may not be infinite in length.
  *
  * @author Ollie
  */

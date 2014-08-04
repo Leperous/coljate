@@ -1,9 +1,5 @@
 package net.ollie.sc4j.access;
 
-import java.util.OptionalInt;
-import java.util.function.Function;
-import java.util.function.Predicate;
-
 import net.ollie.sc4j.SortedSet;
 import net.ollie.sc4j.utils.Iterables;
 import net.ollie.sc4j.utils.numeric.NonNegativeInt;
@@ -12,6 +8,9 @@ import net.ollie.sc4j.utils.numeric.NonNegativeInteger;
 import javax.annotation.CheckForNull;
 import javax.annotation.CheckReturnValue;
 import javax.annotation.Nonnull;
+import java.util.OptionalInt;
+import java.util.function.Function;
+import java.util.function.Predicate;
 
 /**
  * Keyed by a number.
@@ -80,7 +79,6 @@ public interface Indexed<N extends Number, V>
     Indexed.Immutable<N, V> immutableCopy();
 
     /**
-     *
      * @param <V>
      */
     interface Mutable<N extends Number, V>
@@ -97,7 +95,6 @@ public interface Indexed<N extends Number, V>
     }
 
     /**
-     *
      * @param <V>
      */
     interface Immutable<N extends Number, V>
@@ -110,6 +107,9 @@ public interface Indexed<N extends Number, V>
         Indexed.Immutable<N, V> filter(Predicate<? super V> predicate);
 
         @Override
+        <V2> Indexed.Immutable<N, V2> map(Function<? super V, ? extends V2> function);
+
+        @Override
         default Indexed.Immutable<N, V> values() {
             return this;
         }
@@ -117,6 +117,36 @@ public interface Indexed<N extends Number, V>
         @Override
         default Indexed.Immutable<N, V> immutableCopy() {
             return this;
+        }
+
+    }
+
+    interface Empty<N extends Number, V>
+            extends Indexed.Immutable<N, V>, Finite.Empty<V> {
+
+        @Override
+        default boolean isEmpty() {
+            return Finite.Empty.super.isEmpty();
+        }
+
+        @Override
+        default boolean contains(final Object object) {
+            return Finite.Empty.super.contains(object);
+        }
+
+        @Override
+        default Indexed.Empty<N, V> tail() {
+            return this;
+        }
+
+        @Override
+        default Indexed.Empty<N, V> filter(Predicate<? super V> predicate) {
+            return this;
+        }
+
+        @Override
+        default <V2> Indexed.Empty<N, V2> map(Function<? super V, ? extends V2> function) {
+            return (Indexed.Empty<N, V2>) this;
         }
 
     }

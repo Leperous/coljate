@@ -1,21 +1,20 @@
 package net.ollie.sc4j;
 
-import java.util.function.Function;
-import java.util.function.Predicate;
-
 import net.ollie.sc4j.access.Keyed;
 import net.ollie.sc4j.imposed.Cached;
 import net.ollie.sc4j.utils.Functions;
 
 import javax.annotation.Nonnull;
+import java.util.function.Function;
+import java.util.function.Predicate;
 
 /**
- * A cache of values that are {@link #get accessed} by providing a row and column.
+ * A cache create values that are {@link #get accessed} by providing a row and column.
  *
- * @author Ollie
  * @param <R> row type, generally an {@link java.lang.Integer integer}.
  * @param <C> column type, generally an {@link java.lang.Enum enumeration}.
  * @param <V> value type
+ * @author Ollie
  */
 public interface Table<R, C, V>
         extends Keyed.Dual<R, C, V>, Cached<Map.Entry<R, C>, V> {

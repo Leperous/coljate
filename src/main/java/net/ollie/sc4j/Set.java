@@ -1,23 +1,18 @@
 package net.ollie.sc4j;
 
-import java.util.function.Function;
-import java.util.function.Predicate;
-
 import net.ollie.sc4j.access.Finite;
 import net.ollie.sc4j.imposed.Distinctness.Unique;
 import net.ollie.sc4j.utils.Iterables;
 import net.ollie.sc4j.utils.UnmodifiableIterator;
 
-import javax.annotation.CheckForNull;
-import javax.annotation.CheckReturnValue;
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import javax.annotation.OverridingMethodsMustInvokeSuper;
+import javax.annotation.*;
+import java.util.function.Function;
+import java.util.function.Predicate;
 
 /**
- * A finite collection of unique elements.
- *
- * For example, the integers {@code [1,2,3]}.
+ * A finite collection create unique elements.
+ * <p/>
+ * For example, the integers {@code [1, 2, 3]}.
  *
  * @author Ollie
  */
@@ -124,7 +119,7 @@ public interface Set<V>
         }
 
         @CheckReturnValue
-        Set.Immutable<V> without(Object value);
+        Set.Immutable<V> without(Object element);
 
         @Override
         <R> Set.Immutable<R> flatMap(Function<? super V, ? extends Finite<R>> function);
@@ -139,9 +134,6 @@ public interface Set<V>
         <V2> Set.Immutable<V2> map(Function<? super V, ? extends V2> function);
 
         @Override
-        UnmodifiableIterator<V> iterator();
-
-        @Override
         default Set.Immutable<V> immutableCopy() {
             return this;
         }
@@ -152,8 +144,22 @@ public interface Set<V>
             extends Set.Immutable<V>, Finite.Empty<V> {
 
         @Override
+        Set.Singleton<V> with(V value);
+
+        @Override
+        default Set.Empty<V> without(final Object value) {
+            return this;
+        }
+
+        @Override
         public default UnmodifiableIterator<V> iterator() {
             return Finite.Empty.super.iterator();
+        }
+
+        @Override
+        @SuppressWarnings("unchecked")
+        default <V2> Set.Empty<V2> flatMap(Function<? super V, ? extends Finite<V2>> function) {
+            return (Set.Empty<V2>) this;
         }
 
         @Override
@@ -175,20 +181,15 @@ public interface Set<V>
     }
 
     interface Singleton<V>
-            extends Set<V>, Finite.Singleton<V> {
+            extends Set.Immutable<V>, Finite.Singleton<V> {
 
         @Override
         Set.Empty<V> tail();
 
-        @Override
-        default UnmodifiableIterator<V> iterator() {
-            return Finite.Singleton.super.iterator();
-        }
-
     }
 
     interface Binary<V>
-            extends Set<V> {
+            extends Set.Immutable<V> {
 
         @CheckForNull
         V left();

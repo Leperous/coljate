@@ -1,16 +1,14 @@
 package net.ollie.sc4j.access;
 
-import java.util.function.Predicate;
-
 import net.ollie.sc4j.Collection;
 import net.ollie.sc4j.imposed.Mutability;
 
 import javax.annotation.CheckForNull;
 import javax.annotation.CheckReturnValue;
 import javax.annotation.Nonnull;
+import java.util.function.Predicate;
 
 /**
- *
  * @author Ollie
  */
 public interface Traversable<V>
@@ -19,7 +17,7 @@ public interface Traversable<V>
     @CheckForNull
     V head();
 
-    @CheckForNull
+    @Nonnull
     Traversable<V> tail();
 
     @CheckReturnValue
@@ -65,7 +63,7 @@ public interface Traversable<V>
     }
 
     interface Empty<V>
-            extends Collection.Empty<V>, Traversable.Immutable<V> {
+            extends Traversable.Immutable<V>, Collection.Empty<V> {
 
         @Override
         default V head() {
@@ -85,6 +83,24 @@ public interface Traversable<V>
         @Override
         default V findOrElse(final Predicate<? super V> predicate, V defaultValue) {
             return Collection.Empty.super.findOrElse(predicate, defaultValue);
+        }
+
+    }
+
+    interface Singleton<V>
+            extends Traversable.Immutable<V>, Collection.Singleton<V> {
+
+        @Override
+        default V head() {
+            return this.value();
+        }
+
+        @Override
+        Traversable.Empty<V> tail();
+
+        @Override
+        default V findOrElse(Predicate<? super V> predicate, V defaultValue) {
+            return Collection.Singleton.super.findOrElse(predicate, defaultValue);
         }
 
     }

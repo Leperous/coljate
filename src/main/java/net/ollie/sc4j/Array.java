@@ -1,10 +1,5 @@
 package net.ollie.sc4j;
 
-import java.util.Comparator;
-import java.util.Optional;
-import java.util.function.Function;
-import java.util.function.Predicate;
-
 import net.ollie.sc4j.access.Finite;
 import net.ollie.sc4j.access.Indexed;
 import net.ollie.sc4j.imposed.Ordered;
@@ -13,16 +8,20 @@ import net.ollie.sc4j.utils.numeric.NonNegativeInteger;
 
 import javax.annotation.CheckReturnValue;
 import javax.annotation.Nonnull;
+import java.util.Comparator;
+import java.util.Optional;
+import java.util.function.Function;
+import java.util.function.Predicate;
 
 /**
- * An ordered, indexed collection of objects.
+ * An ordered, indexed collection create objects.
  *
  * @author Ollie
  */
 public interface Array<V>
         extends List<V>, Indexed<NonNegativeInteger, V>, Ordered<V> {
 
-    V get(int index);
+    V get(int index) throws IndexOutOfBoundsException;
 
     @Override
     default V get(final Object key) throws IndexOutOfBoundsException {
@@ -47,6 +46,8 @@ public interface Array<V>
         return this.segment(from.intValue(), to.intValue());
     }
 
+    @Nonnull
+    @CheckReturnValue
     Array<V> segment(final int from, final int to) throws IndexOutOfBoundsException;
 
     @Override
@@ -154,6 +155,9 @@ public interface Array<V>
         Array.Immutable<V> sort(Comparator<? super V> comparator);
 
         @Override
+        SortedSet.Immutable<NonNegativeInteger> keys();
+
+        @Override
         default Array.Immutable<V> segment(final NonNegativeInteger from, final NonNegativeInteger to) {
             return this.segment(from.intValue(), to.intValue());
         }
@@ -248,25 +252,72 @@ public interface Array<V>
     }
 
     interface Empty<V>
-            extends Array.Immutable<V>, List.Empty<V>, Indexed.Empty<V> {
+            extends Array.Immutable<V>, List.Empty<V>, Indexed.Empty<NonNegativeInteger, V> {
 
         @Override
-        default boolean contains(final Object object) {
-            return List.Empty.super.contains(object);
+        default V get(final int index) {
+            throw new ArrayIndexOutOfBoundsException();
         }
 
         @Override
-        default boolean isEmpty() {
-            return List.Empty.super.isEmpty();
+        SortedSet.Empty<NonNegativeInteger> keys();
+
+        @Override
+        default Array.Empty<V> sort(final Comparator<? super V> comparator) {
+            return this;
         }
 
         @Override
+        Array.Singleton<V> withPrefix(V value);
+
+        @Override
+        default Array.Empty<V> withoutFirst(final Object value) {
+            return this;
+        }
+
+        @Override
+        default Array.Empty<V> withoutAll(final Object value) {
+            return this;
+        }
+
+        @Override
+        default Array.Empty<V> reverse() {
+            return this;
+        }
+
+        @Override
+        default Array.Singleton<V> withSuffix(final V value) {
+            return this.withPrefix(value);
+        }
+
+        @Override
+        default Array.Empty<V> segment(final int from, final int to) {
+            if (from == 0 && to == 0) {
+                return this;
+            } else {
+                throw new IndexOutOfBoundsException();
+            }
+        }
+
+        @Override
+        @SuppressWarnings("unchecked")
         default <V2> Array.Empty<V2> map(Function<? super V, ? extends V2> function) {
-            throw new UnsupportedOperationException("map not supported yet!");
+            return (Array.Empty<V2>) this;
+        }
+
+        @Override
+        @SuppressWarnings("unchecked")
+        default <V2> Array.Empty<V2> flatMap(Function<? super V, ? extends Finite<V2>> function) {
+            return (Array.Empty<V2>) this;
         }
 
         @Override
         default Array.Empty<V> filter(final Predicate<? super V> predicate) {
+            return this;
+        }
+
+        @Override
+        default Array.Empty<V> filterKeys(final Predicate<? super NonNegativeInteger> predicate) {
             return this;
         }
 
@@ -288,16 +339,30 @@ public interface Array<V>
     }
 
     interface Singleton<V>
-            extends Array<V>, List.Singleton<V>, Indexed.Singleton<V> {
+            extends Array.Immutable<V>, List.Singleton<V> {
 
         @Override
-        default boolean isEmpty() {
-            return List.Singleton.super.isEmpty();
+        default V get(final int i) {
+            if (i == 0) {
+                return this.value();
+            } else {
+                throw new ArrayIndexOutOfBoundsException();
+            }
         }
 
         @Override
-        default NonNegativeInteger capacity() {
-            return NonNegativeInteger.ONE;
+        default Array.Singleton<V> sort(final Comparator<? super V> comparator) {
+            return this;
+        }
+
+        @Override
+        default Array.Immutable<V> withSuffix(final V value) {
+            return this.withPrefix(value).reverse();
+        }
+
+        @Override
+        default Array.Immutable<V> withoutAll(Object value) {
+            return this.withoutFirst(value);
         }
 
         @Override
@@ -306,7 +371,25 @@ public interface Array<V>
         }
 
         @Override
+        default boolean isEmpty() {
+            return List.Singleton.super.isEmpty();
+        }
+
+        @Override
         Array.Empty<V> tail();
+
+        @Override
+        default Array.Singleton<V> reverse() {
+            return this;
+        }
+
+        @Override
+        <V2> Array.Singleton<V2> map(Function<? super V, ? extends V2> function);
+
+        @Override
+        default NonNegativeInteger capacity() {
+            return NonNegativeInteger.ONE;
+        }
 
     }
 
