@@ -22,7 +22,7 @@ public interface Sorter<T>
     }
 
     static <T extends Comparable<? super T>> Sorter<T> natural() {
-        return create(Comparator.<T>naturalOrder()); //TODO cache
+        return SorterBridge.NATURAL;
     }
 
     @Nonnull
@@ -36,7 +36,8 @@ public interface Sorter<T>
     class SorterBridge<T> implements Sorter<T> {
 
         private static final long serialVersionUID = 1L;
-        final java.util.Comparator<T> comparator;
+        private static final SorterBridge NATURAL = new SorterBridge(Comparator.naturalOrder());
+        private final java.util.Comparator<T> comparator;
 
         protected SorterBridge(final Comparator<T> comparator) {
             this.comparator = comparator;
