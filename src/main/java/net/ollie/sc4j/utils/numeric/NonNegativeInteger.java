@@ -69,6 +69,10 @@ public abstract class NonNegativeInteger
 
     public abstract BigInteger bigIntegerValue();
 
+    public NonNegativeInteger add(final NonNegativeInteger that) {
+        return NonNegativeBigInteger.of(this.bigIntegerValue().add(that.bigIntegerValue()));
+    }
+
     @Override
     public int intValue() {
         return this.bigIntegerValue().intValueExact();

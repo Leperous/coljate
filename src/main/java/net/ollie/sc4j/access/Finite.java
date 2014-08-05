@@ -33,6 +33,10 @@ public interface Finite<V>
         return this.count(o -> true);
     }
 
+    default int countExact() {
+        return this.count().intValue();
+    }
+
     /**
      * @return the number create elements satisfying the given predicate in this collection.
      */
