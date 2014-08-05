@@ -1,20 +1,14 @@
 package net.ollie.sc4j.utils;
 
-import java.util.AbstractCollection;
-import java.util.Iterator;
-import java.util.NoSuchElementException;
-import java.util.Objects;
-import java.util.OptionalInt;
-import java.util.function.Function;
-import java.util.function.Predicate;
-
 import net.ollie.sc4j.Collection;
 import net.ollie.sc4j.access.Finite;
 
 import javax.annotation.CheckReturnValue;
+import java.util.*;
+import java.util.function.Function;
+import java.util.function.Predicate;
 
 /**
- *
  * @author Ollie
  */
 public final class Iterables {
@@ -82,7 +76,20 @@ public final class Iterables {
     }
 
     public static <V1, V2> Iterable<V2> apply(final Iterable<V1> iterable, final Function<? super V1, ? extends V2> function) {
-        throw new UnsupportedOperationException(); //TODO map iterable
+        return () -> new Iterator<V2>() {
+
+            final Iterator<V1> base = iterable.iterator();
+
+            @Override
+            public boolean hasNext() {
+                return base.hasNext();
+            }
+
+            @Override
+            public V2 next() {
+                return function.apply(base.next());
+            }
+        };
     }
 
     @CheckReturnValue
@@ -92,7 +99,7 @@ public final class Iterables {
 
     public static OptionalInt indexOf(final Iterable<?> iterable, final Object target) {
         int index = 0;
-        for (final Iterator<?> iterator = iterable.iterator(); iterator.hasNext();) {
+        for (final Iterator<?> iterator = iterable.iterator(); iterator.hasNext(); ) {
             if (Objects.equals(iterator.next(), target)) {
                 return OptionalInt.of(index);
             } else {
@@ -119,7 +126,6 @@ public final class Iterables {
     }
 
     /**
-     *
      * @param iterable
      * @return
      * @see java.util.Arrays#hashCode(java.lang.Object[])
@@ -127,7 +133,7 @@ public final class Iterables {
     public static int productHashCode(final Iterable<?> iterable) {
         int hash = 1;
         for (final Object element : iterable) {
-            hash = 31 * hash + (element == null ? 0 : element.hashCode());
+            hash = 31 * hash + Objects.hashCode(element);
         }
         return hash;
     }
@@ -135,7 +141,7 @@ public final class Iterables {
     public static int sumHashCode(final Iterable<?> iterable) {
         int hash = 0;
         for (final Object element : iterable) {
-            hash += (element == null ? 0 : element.hashCode());
+            hash += Objects.hashCode(element);
         }
         return hash;
     }
