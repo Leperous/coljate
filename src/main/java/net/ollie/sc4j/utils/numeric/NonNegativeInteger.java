@@ -69,8 +69,12 @@ public abstract class NonNegativeInteger
 
     public abstract BigInteger bigIntegerValue();
 
-    public NonNegativeInteger add(final NonNegativeInteger that) {
+    public NonNegativeInteger plus(final NonNegativeInteger that) {
         return NonNegativeBigInteger.of(this.bigIntegerValue().add(that.bigIntegerValue()));
+    }
+
+    public NonNegativeInteger times(final NonNegativeInteger that) {
+        return NonNegativeBigInteger.of(this.bigIntegerValue().multiply(that.bigIntegerValue()));
     }
 
     @Override

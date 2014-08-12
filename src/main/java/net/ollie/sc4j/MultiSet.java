@@ -3,6 +3,7 @@ package net.ollie.sc4j;
 import java.util.function.Predicate;
 
 import net.ollie.sc4j.access.Finite;
+import net.ollie.sc4j.access.Keyed;
 import net.ollie.sc4j.imposed.Distinctness.Duplicated;
 import net.ollie.sc4j.utils.numeric.NonNegativeInteger;
 
@@ -14,7 +15,12 @@ import javax.annotation.Nonnull;
  * @see Set
  */
 public interface MultiSet<V>
-        extends Finite<V>, Duplicated<V> {
+        extends Finite<V>, Keyed.Single<V, NonNegativeInteger>, Duplicated<V> {
+
+    @Override
+    default NonNegativeInteger get(final Object object) {
+        return this.count(object);
+    }
 
     @Override
     Set<V> unique();
@@ -33,7 +39,7 @@ public interface MultiSet<V>
 
     @Override
     default boolean isEmpty() {
-        return Duplicated.super.isEmpty();
+        return Keyed.Single.super.isEmpty();
     }
 
     @Override
