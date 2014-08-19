@@ -49,6 +49,7 @@ public interface Set<V>
         return Iterables.sumHashCode(this);
     }
 
+    @javax.annotation.concurrent.NotThreadSafe
     interface Mutable<V>
             extends Set<V>, Finite.Mutable<V> {
 
@@ -96,6 +97,13 @@ public interface Set<V>
 
     }
 
+    @javax.annotation.concurrent.ThreadSafe
+    interface Concurrent<V>
+            extends Set.Mutable<V> {
+
+    }
+
+    @javax.annotation.concurrent.Immutable
     interface Immutable<V>
             extends Set<V>, Finite.Immutable<V> {
 
@@ -140,6 +148,7 @@ public interface Set<V>
 
     }
 
+    @javax.annotation.concurrent.Immutable
     interface Empty<V>
             extends Set.Immutable<V>, Finite.Empty<V> {
 
@@ -180,6 +189,7 @@ public interface Set<V>
 
     }
 
+    @javax.annotation.concurrent.Immutable
     interface Singleton<V>
             extends Set.Immutable<V>, Finite.Singleton<V> {
 
@@ -188,6 +198,7 @@ public interface Set<V>
 
     }
 
+    @javax.annotation.concurrent.Immutable
     interface Binary<V>
             extends Set.Immutable<V> {
 

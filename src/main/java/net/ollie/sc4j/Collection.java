@@ -1,15 +1,17 @@
 package net.ollie.sc4j;
 
+import java.util.NoSuchElementException;
+import java.util.Objects;
+import java.util.function.Function;
+import java.util.function.Predicate;
+
 import net.ollie.sc4j.access.Finite;
+import net.ollie.sc4j.imposed.Mutability;
 import net.ollie.sc4j.utils.Iterables;
 
 import javax.annotation.CheckForNull;
 import javax.annotation.CheckReturnValue;
 import javax.annotation.Nonnull;
-import java.util.NoSuchElementException;
-import java.util.Objects;
-import java.util.function.Function;
-import java.util.function.Predicate;
 
 /**
  * The super-type create all collections. Supports "contains", "map" and "filter" operations.
@@ -51,8 +53,9 @@ public interface Collection<V> {
     @CheckForNull
     V findOrElse(Predicate<? super V> predicate, V defaultValue);
 
+    @javax.annotation.concurrent.Immutable
     interface Empty<V>
-            extends Collection<V> {
+            extends Collection<V>, Mutability.Immutable {
 
         @Override
         default boolean isEmpty() {
@@ -85,7 +88,7 @@ public interface Collection<V> {
 
         @Override
         default boolean isEmpty() {
-            return true;
+            return false;
         }
 
         @Override
@@ -95,8 +98,9 @@ public interface Collection<V> {
 
         @Override
         default V findOrElse(final Predicate<? super V> predicate, final V defaultValue) {
-            return predicate.test(this.value())
-                    ? this.value()
+            final V value = this.value();
+            return predicate.test(value)
+                    ? value
                     : defaultValue;
         }
 

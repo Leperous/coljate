@@ -1,12 +1,14 @@
 package net.ollie.sc4j.access;
 
 import net.ollie.sc4j.Collection;
-import net.ollie.sc4j.imposed.Mutability;
 
 import javax.annotation.CheckForNull;
 import javax.annotation.CheckReturnValue;
 import javax.annotation.Nonnull;
+
 import java.util.function.Predicate;
+
+import net.ollie.sc4j.imposed.Mutability;
 
 /**
  * @author Ollie
@@ -41,11 +43,13 @@ public interface Traversable<V>
 
     Traversable.Immutable<V> immutableCopy();
 
+    @javax.annotation.concurrent.NotThreadSafe
     interface Mutable<V>
             extends Traversable<V>, Mutability.Mutable {
 
     }
 
+    @javax.annotation.concurrent.Immutable
     interface Immutable<V>
             extends Traversable<V>, Mutability.Immutable {
 
@@ -62,6 +66,7 @@ public interface Traversable<V>
 
     }
 
+    @javax.annotation.concurrent.Immutable
     interface Empty<V>
             extends Traversable.Immutable<V>, Collection.Empty<V> {
 
@@ -87,6 +92,7 @@ public interface Traversable<V>
 
     }
 
+    @javax.annotation.concurrent.Immutable
     interface Singleton<V>
             extends Traversable.Immutable<V>, Collection.Singleton<V> {
 

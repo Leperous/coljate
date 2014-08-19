@@ -1,5 +1,10 @@
 package net.ollie.sc4j;
 
+import java.util.Objects;
+import java.util.function.Function;
+import java.util.function.Predicate;
+import java.util.function.Supplier;
+
 import net.ollie.sc4j.access.Finite;
 import net.ollie.sc4j.imposed.Cached;
 import net.ollie.sc4j.imposed.Mutability;
@@ -8,9 +13,6 @@ import net.ollie.sc4j.utils.Functions;
 import javax.annotation.CheckForNull;
 import javax.annotation.CheckReturnValue;
 import javax.annotation.Nonnull;
-import java.util.Objects;
-import java.util.function.Function;
-import java.util.function.Predicate;
 
 /**
  * A cache create uniquely-keyed values.
@@ -109,6 +111,7 @@ public interface Map<K, V>
      * @param <K>
      * @param <V>
      */
+    @javax.annotation.concurrent.NotThreadSafe
     interface Mutable<K, V>
             extends Map<K, V>, Cached.Mutable<K, V> {
 
@@ -121,6 +124,7 @@ public interface Map<K, V>
         @Nonnull
         Map<K, V> putAll(Map<K, V> map);
 
+        @javax.annotation.concurrent.NotThreadSafe
         interface Entry<K, V>
                 extends Map.Entry<K, V>, Mutability.Mutable {
 
@@ -139,6 +143,7 @@ public interface Map<K, V>
      * @param <K>
      * @param <V>
      */
+    @javax.annotation.concurrent.Immutable
     interface Immutable<K, V>
             extends Map<K, V>, Cached.Immutable<K, V> {
 
@@ -167,6 +172,11 @@ public interface Map<K, V>
         @Override
         default <V2> Map.Immutable<K, V2> mapValues(Function<? super V, ? extends V2> function) {
             return this.mapEntries(Function.identity(), function);
+        }
+
+        @Override
+        default <V2> Map.Immutable<K, V2> map(final Function<? super V, ? extends V2> function) {
+            return this.mapValues(function);
         }
 
         @Override
@@ -209,6 +219,21 @@ public interface Map<K, V>
             }
 
         }
+
+    }
+
+    @javax.annotation.concurrent.ThreadSafe
+    interface Concurrent<K, V>
+            extends Map.Mutable<K, V> {
+
+        @Override
+        V putIfAbsent(K key, V value);
+
+        @Override
+        V putIfAbsent(K key, Supplier<? extends V> supplier);
+
+        @Override
+        boolean replace(K key, V expectedValue, V newValue);
 
     }
 

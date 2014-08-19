@@ -156,13 +156,18 @@ public interface Finite<V>
         return Iterables.safelyToString(this, this);
     }
 
+    @javax.annotation.concurrent.NotThreadSafe
     interface Mutable<V>
             extends Finite<V>, Traversable.Mutable<V> {
 
     }
 
+    @javax.annotation.concurrent.Immutable
     interface Immutable<V>
             extends Finite<V>, Traversable.Immutable<V> {
+
+        @Override
+        <R> Finite.Immutable<R> map(Function<? super V, ? extends R> function);
 
         @Override
         Finite.Immutable<V> tail();
@@ -230,6 +235,7 @@ public interface Finite<V>
 
     }
 
+    @javax.annotation.concurrent.Immutable
     interface Singleton<V>
             extends Finite.Immutable<V>, Traversable.Singleton<V> {
 

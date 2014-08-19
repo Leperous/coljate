@@ -67,6 +67,7 @@ public interface List<V>
      *
      * @param <V>
      */
+    @javax.annotation.concurrent.NotThreadSafe
     interface Mutable<V>
             extends List<V>, Sequence.Mutable<V>, Finite.Mutable<V> {
 
@@ -98,7 +99,7 @@ public interface List<V>
 
         default int removeAll(final Object value) {
             int removed = 0;
-            for (final Iterator<V> iterator = this.iterator(); iterator.hasNext(); ) {
+            for (final Iterator<V> iterator = this.iterator(); iterator.hasNext();) {
                 final V next = iterator.next();
                 if (Objects.equals(next, value)) {
                     iterator.remove();
@@ -110,11 +111,18 @@ public interface List<V>
 
     }
 
+    @javax.annotation.concurrent.ThreadSafe
+    interface Concurrent<V>
+            extends List.Mutable<V> {
+
+    }
+
     /**
      * An immutable list.
      *
      * @param <V>
      */
+    @javax.annotation.concurrent.Immutable
     interface Immutable<V>
             extends List<V>, Sequence.Immutable<V>, Finite.Immutable<V> {
 
@@ -152,6 +160,7 @@ public interface List<V>
 
     }
 
+    @javax.annotation.concurrent.Immutable
     interface Empty<V>
             extends List.Immutable<V>, Sequence.Empty<V>, Finite.Empty<V> {
 
@@ -168,12 +177,12 @@ public interface List<V>
             return this.withPrefix(value);
         }
 
-        @CheckReturnValue
+        @Override
         default List.Empty<V> withoutFirst(final Object value) {
             return this;
         }
 
-        @CheckReturnValue
+        @Override
         default List.Empty<V> withoutAll(final Object value) {
             return this;
         }
@@ -222,6 +231,7 @@ public interface List<V>
 
     }
 
+    @javax.annotation.concurrent.Immutable
     interface Singleton<V>
             extends List.Immutable<V>, Sequence.Singleton<V>, Finite.Singleton<V> {
 

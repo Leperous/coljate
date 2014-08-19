@@ -8,8 +8,8 @@ import net.ollie.sc4j.utils.numeric.NonNegativeInteger;
 
 import javax.annotation.CheckReturnValue;
 import javax.annotation.Nonnull;
+
 import java.util.Comparator;
-import java.util.Optional;
 import java.util.function.Function;
 import java.util.function.Predicate;
 
@@ -98,6 +98,7 @@ public interface Array<V>
     /**
      * @param <V>
      */
+    @javax.annotation.concurrent.NotThreadSafe
     interface Mutable<V>
             extends Array<V>, List.Mutable<V>, Indexed.Mutable<NonNegativeInteger, V> {
 
@@ -113,7 +114,16 @@ public interface Array<V>
 
         @Override
         default V first() {
-            return this.iterator().next();
+            return this.isEmpty()
+                    ? null
+                    : this.get(this.start());
+        }
+
+        @Override
+        default V last() {
+            return this.isEmpty()
+                    ? null
+                    : this.get(this.count().decrement().get());
         }
 
         @Override
@@ -146,9 +156,22 @@ public interface Array<V>
 
     }
 
+    @javax.annotation.concurrent.ThreadSafe
+    interface Concurrent<V>
+            extends Array.Mutable<V>, List.Concurrent<V> {
+
+        @Override
+        V first();
+
+        @Override
+        V last();
+
+    }
+
     /**
      * @param <V>
      */
+    @javax.annotation.concurrent.Immutable
     interface Immutable<V>
             extends Array<V>, List.Immutable<V>, Indexed.Immutable<NonNegativeInteger, V> {
 
@@ -216,41 +239,7 @@ public interface Array<V>
 
     }
 
-    interface NonThreadSafeArray<V>
-            extends Array.Mutable<V> {
-
-        @Override
-        default V first() {
-            return this.isEmpty()
-                    ? null
-                    : this.get(this.start());
-        }
-
-        @Override
-        default V last() {
-            return this.isEmpty()
-                    ? null
-                    : this.get(this.count().decrement().get());
-        }
-
-        default V lastOrElse(final Predicate<? super V> predicate, final V defaultValue) {
-            if (this.isEmpty()) {
-                return defaultValue;
-            }
-            Optional<NonNegativeInteger> optional = this.count().decrement();
-            while (optional.isPresent()) {
-                final NonNegativeInteger index = optional.get();
-                final V element = this.get(index);
-                if (predicate.test(element)) {
-                    return element;
-                }
-                optional = index.decrement();
-            }
-            return defaultValue;
-        }
-
-    }
-
+    @javax.annotation.concurrent.Immutable
     interface Empty<V>
             extends Array.Immutable<V>, List.Empty<V>, Indexed.Empty<NonNegativeInteger, V> {
 
@@ -338,6 +327,7 @@ public interface Array<V>
 
     }
 
+    @javax.annotation.concurrent.Immutable
     interface Singleton<V>
             extends Array.Immutable<V>, List.Singleton<V> {
 

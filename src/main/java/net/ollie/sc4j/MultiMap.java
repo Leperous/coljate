@@ -2,6 +2,7 @@ package net.ollie.sc4j;
 
 import net.ollie.sc4j.access.Finite;
 import net.ollie.sc4j.access.Keyed;
+import net.ollie.sc4j.imposed.Distinctness.Duplicated;
 import net.ollie.sc4j.utils.numeric.NonNegativeInteger;
 
 import javax.annotation.CheckReturnValue;
@@ -12,7 +13,16 @@ import javax.annotation.Nonnull;
  * @author Ollie
  */
 public interface MultiMap<K, V>
-        extends Keyed.Multiple<K, V>, Finite<V> {
+        extends Keyed.Multiple<K, V>, Finite<V>, Duplicated<V> {
+
+    @Override
+    @Nonnull
+    Finite<V> get(Object key);
+
+    @Override
+    default NonNegativeInteger count(final Object object) {
+        return this.get(object).count();
+    }
 
     @Override
     Set<K> keys();
@@ -31,6 +41,9 @@ public interface MultiMap<K, V>
     interface Mutable<K, V>
             extends MultiMap<K, V>, Finite.Mutable<V> {
 
+        @Override
+        Finite.Mutable<V> get(Object object);
+
         boolean put(K key, V value);
 
         default boolean putAll(@Nonnull final Map<K, V> map) {
@@ -42,7 +55,7 @@ public interface MultiMap<K, V>
         }
 
         @Nonnull
-        Collection<V> remove(K key);
+        Finite.Mutable<V> remove(K key);
 
         default boolean removeAll(@Nonnull final Iterable<K> iterable) {
             boolean removed = false;
@@ -57,6 +70,9 @@ public interface MultiMap<K, V>
 
     interface Immutable<K, V>
             extends MultiMap<K, V>, Finite.Immutable<V> {
+
+        @Override
+        Finite.Immutable<V> get(Object object);
 
         @Nonnull
         @CheckReturnValue
@@ -100,32 +116,6 @@ public interface MultiMap<K, V>
         default MultiMap.Immutable<K, V> immutableCopy() {
             return this;
         }
-
-    }
-
-    interface MultiIterableMap<K, V, C extends Finite<V>>
-            extends MultiMap<K, V> {
-
-        @Override
-        C get(Object object);
-
-        default NonNegativeInteger count(final Object key) {
-            return this.get(key).count();
-        }
-
-    }
-
-    interface MultiArrayMap<K, V>
-            extends MultiIterableMap<K, V, Array<V>> {
-
-        @Override
-        @Nonnull
-        Array<V> get(Object object);
-
-    }
-
-    interface MultiSetMap<K, V>
-            extends MultiIterableMap<K, V, Set<V>> {
 
     }
 

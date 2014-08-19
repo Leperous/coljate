@@ -99,18 +99,15 @@ public interface Cached<K, V>
      * @param <K>
      * @param <V>
      */
+    @javax.annotation.concurrent.NotThreadSafe
     interface Mutable<K, V>
             extends Cached<K, V>, Finite.Mutable<V> {
-
-        default boolean add(final K key, final V value) {
-            return this.put(key, value) == null;
-        }
 
         @CheckForNull
         V put(K key, V value);
 
         @CheckForNull
-        default V putIfAbsent(K key, V value) {
+        default V putIfAbsent(final K key, final V value) {
             V current = this.get(key);
             if (current == null) {
                 current = this.put(key, value);
@@ -138,7 +135,7 @@ public interface Cached<K, V>
         @CheckForNull
         V remove(Object key);
 
-        default boolean replace(K key, V expectedValue, V newValue) {
+        default boolean replace(final K key, final V expectedValue, final V newValue) {
             final V currentValue = this.get(expectedValue);
             if (Objects.equals(expectedValue, currentValue)) {
                 this.put(key, newValue);
@@ -150,6 +147,7 @@ public interface Cached<K, V>
 
     }
 
+    @javax.annotation.concurrent.Immutable
     interface Immutable<K, V>
             extends Cached<K, V>, Finite.Immutable<V> {
 
@@ -172,6 +170,14 @@ public interface Cached<K, V>
         @Override
         default UnmodifiableIterator<V> iterator() {
             return this.values().iterator();
+        }
+
+        @Override
+        <V2> Cached.Immutable<K, V2> mapValues(Function<? super V, ? extends V2> function);
+
+        @Override
+        default <V2> Cached.Immutable<K, V2> map(final Function<? super V, ? extends V2> function) {
+            return this.mapValues(function);
         }
 
     }

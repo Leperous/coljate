@@ -1,5 +1,7 @@
 package net.ollie.sc4j.imposed;
 
+import javax.annotation.concurrent.NotThreadSafe;
+
 /**
  *
  * @author Ollie
@@ -10,6 +12,7 @@ public interface Mutability<V extends Mutability<V>> {
 
     Immutable immutableCopy();
 
+    @NotThreadSafe
     interface Mutable
             extends Mutability<Mutable> {
 
