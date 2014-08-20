@@ -215,16 +215,16 @@ public interface Array<V>
         Array.Immutable<V> tail();
 
         @Override
-        Array.Immutable<V> withPrefix(V value);
+        Array.Immutable<V> andPrefix(V value);
 
         @Override
-        Array.Immutable<V> withSuffix(V value);
+        Array.Immutable<V> andSuffix(V value);
 
         @Override
-        Array.Immutable<V> withoutFirst(Object value);
+        Array.Immutable<V> notFirst(Object value);
 
         @Override
-        Array.Immutable<V> withoutAll(Object value);
+        Array.Immutable<V> notAll(Object value);
 
         @Override
         <V2> Array.Immutable<V2> map(Function<? super V, ? extends V2> function);
@@ -257,15 +257,15 @@ public interface Array<V>
         }
 
         @Override
-        Array.Singleton<V> withPrefix(V value);
+        Array.Singleton<V> andPrefix(V value);
 
         @Override
-        default Array.Empty<V> withoutFirst(final Object value) {
+        default Array.Empty<V> notFirst(final Object value) {
             return this;
         }
 
         @Override
-        default Array.Empty<V> withoutAll(final Object value) {
+        default Array.Empty<V> notAll(final Object value) {
             return this;
         }
 
@@ -275,8 +275,8 @@ public interface Array<V>
         }
 
         @Override
-        default Array.Singleton<V> withSuffix(final V value) {
-            return this.withPrefix(value);
+        default Array.Singleton<V> andSuffix(final V value) {
+            return this.andPrefix(value);
         }
 
         @Override
@@ -346,13 +346,13 @@ public interface Array<V>
         }
 
         @Override
-        default Array.Immutable<V> withSuffix(final V value) {
-            return this.withPrefix(value).reverse();
+        default Array.Immutable<V> andSuffix(final V value) {
+            return this.andPrefix(value).reverse();
         }
 
         @Override
-        default Array.Immutable<V> withoutAll(Object value) {
-            return this.withoutFirst(value);
+        default Array.Immutable<V> notAll(Object value) {
+            return this.notFirst(value);
         }
 
         @Override

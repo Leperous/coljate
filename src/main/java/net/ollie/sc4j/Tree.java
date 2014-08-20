@@ -59,7 +59,7 @@ public interface Tree<N, V>
 
         @Override
         default Set.Immutable<N> neighbours(final N node) {
-            return this.children(node).maybeWith(this.parent(node));
+            return this.children(node).andMaybe(this.parent(node));
         }
 
         @Override

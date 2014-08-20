@@ -1,5 +1,10 @@
 package net.ollie.sc4j;
 
+import java.util.Iterator;
+import java.util.Objects;
+import java.util.function.Function;
+import java.util.function.Predicate;
+
 import net.ollie.sc4j.access.Finite;
 import net.ollie.sc4j.utils.Iterables;
 import net.ollie.sc4j.utils.UnmodifiableIterator;
@@ -8,10 +13,6 @@ import javax.annotation.CheckForNull;
 import javax.annotation.CheckReturnValue;
 import javax.annotation.Nonnull;
 import javax.annotation.OverridingMethodsMustInvokeSuper;
-import java.util.Iterator;
-import java.util.Objects;
-import java.util.function.Function;
-import java.util.function.Predicate;
 
 /**
  * An iterable sequence.
@@ -77,14 +78,26 @@ public interface List<V>
 
         void suffix(V value);
 
-        @Override
-        List.Mutable<V> reverse();
-
-        default void suffixAll(final Iterable<? extends V> values) {
+        default void suffixAll(@Nonnull final Iterable<? extends V> values) {
             for (final V value : values) {
                 this.suffix(value);
             }
         }
+
+        @Nonnull
+        default List.Mutable<V> prefixed(final V value) {
+            this.prefix(value);
+            return this;
+        }
+
+        @Nonnull
+        default List.Mutable<V> suffixed(final V value) {
+            this.suffix(value);
+            return this;
+        }
+
+        @Override
+        List.Mutable<V> reverse();
 
         default boolean removeFirst(final Object value) {
             final Iterator<V> iterator = this.iterator();
@@ -130,16 +143,16 @@ public interface List<V>
         List.Immutable<V> tail();
 
         @CheckReturnValue
-        List.Immutable<V> withPrefix(V value);
+        List.Immutable<V> andPrefix(V value);
 
         @CheckReturnValue
-        List.Immutable<V> withSuffix(V value);
+        List.Immutable<V> andSuffix(V value);
 
         @CheckReturnValue
-        List.Immutable<V> withoutFirst(Object value);
+        List.Immutable<V> notFirst(Object value);
 
         @CheckReturnValue
-        List.Immutable<V> withoutAll(Object value);
+        List.Immutable<V> notAll(Object value);
 
         @Override
         <V2> List.Immutable<V2> map(Function<? super V, ? extends V2> function);
@@ -170,20 +183,20 @@ public interface List<V>
         }
 
         @Override
-        List.Singleton<V> withPrefix(V value);
+        List.Singleton<V> andPrefix(V value);
 
         @Override
-        default List.Singleton<V> withSuffix(final V value) {
-            return this.withPrefix(value);
+        default List.Singleton<V> andSuffix(final V value) {
+            return this.andPrefix(value);
         }
 
         @Override
-        default List.Empty<V> withoutFirst(final Object value) {
+        default List.Empty<V> notFirst(final Object value) {
             return this;
         }
 
         @Override
-        default List.Empty<V> withoutAll(final Object value) {
+        default List.Empty<V> notAll(final Object value) {
             return this;
         }
 
@@ -254,8 +267,8 @@ public interface List<V>
         List.Empty<V> tail();
 
         @Override
-        default List.Immutable<V> withoutAll(final Object value) {
-            return this.withoutFirst(value);
+        default List.Immutable<V> notAll(final Object value) {
+            return this.notFirst(value);
         }
 
         @Override

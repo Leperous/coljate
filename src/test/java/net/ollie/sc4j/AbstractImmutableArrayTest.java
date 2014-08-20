@@ -20,11 +20,11 @@ public abstract class AbstractImmutableArrayTest
         final Array.Immutable<Object> empty = this.create();
         final Object object = new Object();
 
-        final Array.Immutable<Object> singleton = empty.withPrefix(object);
+        final Array.Immutable<Object> singleton = empty.andPrefix(object);
         assertContainsNothing(empty);
         assertContainsExactly(singleton, object);
 
-        final Array.Immutable<Object> emptyAgain = singleton.withoutFirst(object);
+        final Array.Immutable<Object> emptyAgain = singleton.notFirst(object);
         assertContainsNothing(emptyAgain);
         assertContainsExactly(singleton, object);
 
@@ -37,11 +37,11 @@ public abstract class AbstractImmutableArrayTest
         final Object o1 = new Object();
         final Object o2 = new Object();
 
-        final Array.Immutable<Object> duo = empty.withSuffix(o1).withSuffix(o2);
+        final Array.Immutable<Object> duo = empty.andSuffix(o1).andSuffix(o2);
         assertContainsNothing(empty);
         assertContainsExactly(duo, o1, o2);
 
-        final Array.Immutable<Object> singleton = duo.withoutFirst(o1);
+        final Array.Immutable<Object> singleton = duo.notFirst(o1);
         assertContainsExactly(singleton, o2);
         assertThat(singleton.indexOf(o1), nullValue());
         assertContainsExactly(duo, o1, o2);

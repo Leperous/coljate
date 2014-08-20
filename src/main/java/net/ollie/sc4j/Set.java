@@ -57,6 +57,18 @@ public interface Set<V>
 
         boolean remove(@Nullable Object value);
 
+        @Nonnull
+        default Set.Mutable<V> and(final V value) {
+            this.add(value);
+            return this;
+        }
+
+        @Nonnull
+        default Set.Mutable<V> not(final V value) {
+            this.remove(value);
+            return this;
+        }
+
         default boolean removeWhere(final Predicate<? super V> predicate) {
             boolean removed = false;
             for (final V value : this) {
@@ -109,25 +121,25 @@ public interface Set<V>
 
         @CheckReturnValue
         @Nonnull
-        Set.Immutable<V> with(@Nonnull V value);
+        Set.Immutable<V> and(@Nonnull V value);
 
         @CheckReturnValue
         @Nonnull
-        default Set.Immutable<V> withAll(final Iterable<? extends V> values) {
+        default Set.Immutable<V> andAll(@Nonnull final Iterable<? extends V> values) {
             Set.Immutable<V> set = this;
             for (final V value : values) {
-                set = set.with(value);
+                set = set.and(value);
             }
             return set;
         }
 
         @Nonnull
-        default Set.Immutable<V> maybeWith(@CheckForNull final V value) {
-            return value == null ? this : this.with(value);
+        default Set.Immutable<V> andMaybe(@CheckForNull final V value) {
+            return value == null ? this : this.and(value);
         }
 
         @CheckReturnValue
-        Set.Immutable<V> without(Object element);
+        Set.Immutable<V> not(Object element);
 
         @Override
         <R> Set.Immutable<R> flatMap(Function<? super V, ? extends Finite<R>> function);
@@ -153,10 +165,10 @@ public interface Set<V>
             extends Set.Immutable<V>, Finite.Empty<V> {
 
         @Override
-        Set.Singleton<V> with(V value);
+        Set.Singleton<V> and(V value);
 
         @Override
-        default Set.Empty<V> without(final Object value) {
+        default Set.Empty<V> not(final Object value) {
             return this;
         }
 
