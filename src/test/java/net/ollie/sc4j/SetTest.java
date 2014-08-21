@@ -24,11 +24,8 @@ public class SetTest {
         final Set.Mutable.Inliner<Object> inliner = new Set.Mutable.Inliner<>(mockSet);
 
         final Object object = new Object();
-        inliner.add(object);
+        inliner.add(object).remove(object);
         verify(mockSet, times(1)).add(eq(object));
-        verifyNoMoreInteractions(mockSet);
-
-        inliner.remove(object);
         verify(mockSet, times(1)).remove(eq(object));
         verifyNoMoreInteractions(mockSet);
 

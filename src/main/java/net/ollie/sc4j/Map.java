@@ -124,6 +124,11 @@ public interface Map<K, V>
         @Nonnull
         Map<K, V> putAll(Map<K, V> map);
 
+        @Nonnull
+        default Inliner<K, V> inline() {
+            return new Inliner<>(this);
+        }
+
         @javax.annotation.concurrent.NotThreadSafe
         interface Entry<K, V>
                 extends Map.Entry<K, V>, Mutability.Mutable {
