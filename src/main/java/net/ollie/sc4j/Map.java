@@ -3,7 +3,6 @@ package net.ollie.sc4j;
 import java.util.Objects;
 import java.util.function.Function;
 import java.util.function.Predicate;
-import java.util.function.Supplier;
 
 import net.ollie.sc4j.access.Finite;
 import net.ollie.sc4j.imposed.Cached;
@@ -264,10 +263,16 @@ public interface Map<K, V>
         V putIfAbsent(K key, V value);
 
         @Override
-        V putIfAbsent(K key, Supplier<? extends V> supplier);
+        boolean replace(K key, V expectedValue, V newValue);
 
         @Override
-        boolean replace(K key, V expectedValue, V newValue);
+        Map.Concurrent<K, V> mutableCopy();
+
+        @Override
+        Set.Concurrent<K> keys();
+
+        @Override
+        Set.Concurrent<? extends Map.Mutable.Entry<K, V>> entries();
 
     }
 

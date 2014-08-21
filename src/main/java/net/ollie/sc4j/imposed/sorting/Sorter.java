@@ -15,16 +15,6 @@ import java.util.Comparator;
 public interface Sorter<T>
         extends java.util.Comparator<T>, Serializable {
 
-    static <T> Sorter<T> create(final java.util.Comparator<T> comparator) {
-        return comparator instanceof Sorter
-                ? (Sorter<T>) comparator
-                : new SorterBridge<>(comparator);
-    }
-
-    static <T extends Comparable<? super T>> Sorter<T> natural() {
-        return SorterBridge.NATURAL;
-    }
-
     @Nonnull
     Sorting sort(T t1, T t2);
 
@@ -33,10 +23,22 @@ public interface Sorter<T>
         return this.sort(o1, o2).comparison();
     }
 
+    static <T> Sorter<T> create(final java.util.Comparator<T> comparator) {
+        return comparator instanceof Sorter
+                ? (Sorter<T>) comparator
+                : new SorterBridge<>(comparator);
+    }
+
+    @SuppressWarnings("unchecked")
+    static <T extends Comparable<? super T>> Sorter<T> natural() {
+        return SorterBridge.NATURAL;
+    }
+
     class SorterBridge<T> implements Sorter<T> {
 
-        private static final long serialVersionUID = 1L;
+        @SuppressWarnings({"rawtypes", "unchecked"})
         private static final SorterBridge NATURAL = new SorterBridge(Comparator.naturalOrder());
+        private static final long serialVersionUID = 1L;
         private final java.util.Comparator<T> comparator;
 
         protected SorterBridge(final Comparator<T> comparator) {

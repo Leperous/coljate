@@ -119,7 +119,7 @@ public interface Cached<K, V>
         default V putIfAbsent(final K key, final Supplier<? extends V> supplier) {
             V value = this.get(key);
             if (value == null) {
-                value = this.put(key, supplier.get());
+                value = this.putIfAbsent(key, supplier.get());
             }
             return value;
         }

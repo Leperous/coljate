@@ -1,5 +1,7 @@
 package net.ollie.sc4j.imposed.sorting;
 
+import javax.annotation.Nonnull;
+
 /**
  *
  * @author Ollie
@@ -9,6 +11,7 @@ package net.ollie.sc4j.imposed.sorting;
 public interface Sortable<T>
         extends Comparable<T> {
 
+    @Nonnull
     Sorting sortWith(T that);
 
     @Override
