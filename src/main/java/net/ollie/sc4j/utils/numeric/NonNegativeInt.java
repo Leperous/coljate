@@ -8,6 +8,7 @@ import javax.annotation.CheckForNull;
 import javax.annotation.Nonnull;
 
 import java.math.BigInteger;
+import javax.annotation.concurrent.ThreadSafe;
 
 /**
  * A non-negative integer, including zero.
@@ -15,6 +16,7 @@ import java.math.BigInteger;
  * @author Ollie
  * @see <a href="http://en.wikipedia.org/wiki/Natural_number">Natural number</a>
  */
+@ThreadSafe
 public final class NonNegativeInt
         extends NonNegativeInteger {
 
@@ -89,7 +91,9 @@ public final class NonNegativeInt
 
     @Override
     public NonNegativeInteger increment() {
-        return new NonNegativeInt(value + 1);
+        return value < Integer.MAX_VALUE
+                ? NonNegativeInteger.of((long) value + 1)
+                : new NonNegativeInt(value + 1);
     }
 
     public int peekDecrement() {

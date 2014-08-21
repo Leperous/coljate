@@ -154,6 +154,53 @@ public interface Array<V>
             return this.remove(index.intValue());
         }
 
+        @Override
+        default Inliner<V> inline() {
+            return new Inliner<>(this);
+        }
+
+        class Inliner<V> extends List.Mutable.Inliner<V> {
+
+            private final Array.Mutable<V> array;
+
+            protected Inliner(final Array.Mutable<V> array) {
+                super(array);
+                this.array = array;
+            }
+
+            @Override
+            public Inliner<V> prefix(final V value) {
+                array.prefix(value);
+                return this;
+            }
+
+            @Override
+            public Inliner<V> suffix(final V value) {
+                array.suffix(value);
+                return this;
+            }
+
+            public Inliner<V> insert(final int index, final V value) {
+                array.insert(index, value);
+                return this;
+            }
+
+            public Inliner<V> set(final int index, final V value) {
+                array.set(index, value);
+                return this;
+            }
+
+            public Inliner<V> remove(final int index) {
+                array.remove(index);
+                return this;
+            }
+
+            public Array.Mutable<V> array() {
+                return array;
+            }
+
+        }
+
     }
 
     @javax.annotation.concurrent.ThreadSafe

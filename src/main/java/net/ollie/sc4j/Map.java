@@ -137,6 +137,35 @@ public interface Map<K, V>
 
         }
 
+        class Inliner<K, V> {
+
+            private final Map.Mutable<K, V> map;
+
+            protected Inliner(final Map.Mutable<K, V> map) {
+                this.map = map;
+            }
+
+            public Inliner<K, V> put(final K key, final V value) {
+                map.put(key, value);
+                return this;
+            }
+
+            public Inliner<K, V> putAll(final Map<K, V> values) {
+                map.putAll(values);
+                return this;
+            }
+
+            public Inliner<K, V> remove(final Object value) {
+                map.remove(value);
+                return this;
+            }
+
+            public Map.Mutable<K, V> map() {
+                return map;
+            }
+
+        }
+
     }
 
     /**

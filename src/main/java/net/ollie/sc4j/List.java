@@ -8,6 +8,7 @@ import java.util.function.Predicate;
 import net.ollie.sc4j.access.Finite;
 import net.ollie.sc4j.utils.Iterables;
 import net.ollie.sc4j.utils.UnmodifiableIterator;
+import net.ollie.sc4j.utils.numeric.NonNegativeInteger;
 
 import javax.annotation.CheckForNull;
 import javax.annotation.CheckReturnValue;
@@ -84,18 +85,6 @@ public interface List<V>
             }
         }
 
-        @Nonnull
-        default List.Mutable<V> prefixed(final V value) {
-            this.prefix(value);
-            return this;
-        }
-
-        @Nonnull
-        default List.Mutable<V> suffixed(final V value) {
-            this.suffix(value);
-            return this;
-        }
-
         @Override
         List.Mutable<V> reverse();
 
@@ -110,7 +99,8 @@ public interface List<V>
             return false;
         }
 
-        default int removeAll(final Object value) {
+        @Nonnull
+        default NonNegativeInteger removeEvery(final Object value) {
             int removed = 0;
             for (final Iterator<V> iterator = this.iterator(); iterator.hasNext();) {
                 final V next = iterator.next();
@@ -119,7 +109,77 @@ public interface List<V>
                     removed++;
                 }
             }
-            return removed;
+            return NonNegativeInteger.of(removed);
+        }
+
+        @Nonnull
+        default NonNegativeInteger removeAll(final Iterable<? extends V> values) {
+            NonNegativeInteger i = NonNegativeInteger.ZERO;
+            for (final V value : values) {
+                i = i.plus(this.removeEvery(value));
+            }
+            return i;
+        }
+
+        @Nonnull
+        default List.Mutable.Inliner<V> inline() {
+            return new Inliner<>(this);
+        }
+
+        class Inliner<V> {
+
+            private final List.Mutable<V> list;
+
+            protected Inliner(final List.Mutable<V> underlying) {
+                this.list = underlying;
+            }
+
+            @Nonnull
+            public Inliner<V> prefix(final V value) {
+                list.prefix(value);
+                return this;
+            }
+
+            @Nonnull
+            public Inliner<V> prefixAll(final Iterable<? extends V> values) {
+                list.prefixAll(values);
+                return this;
+            }
+
+            @Nonnull
+            public Inliner<V> suffix(final V value) {
+                list.suffix(value);
+                return this;
+            }
+
+            @Nonnull
+            public Inliner<V> suffixAll(final Iterable<? extends V> values) {
+                list.suffixAll(values);
+                return this;
+            }
+
+            @Nonnull
+            public Inliner<V> removeFirst(final Object object) {
+                list.removeFirst(object);
+                return this;
+            }
+
+            @Nonnull
+            public Inliner<V> removeEvery(final Object object) {
+                list.removeEvery(object);
+                return this;
+            }
+
+            @Nonnull
+            public Inliner<V> removeAll(final Iterable<? extends V> values) {
+                list.removeAll(values);
+                return this;
+            }
+
+            public List.Mutable<V> list() {
+                return list;
+            }
+
         }
 
     }

@@ -32,7 +32,9 @@ public abstract class NonNegativeInteger
 
     @Nonnull
     public static NonNegativeInteger of(final long value) throws NonNegativeException {
-        return NonNegativeBigInteger.of(value);
+        return value >= Integer.MAX_VALUE
+                ? NonNegativeBigInteger.of(value)
+                : of((int) value);
     }
 
     @Nonnull

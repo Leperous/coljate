@@ -57,11 +57,6 @@ public class NonNegativeBigInteger extends NonNegativeInteger {
     }
 
     @Override
-    public boolean isZero() {
-        return value.signum() == 0;
-    }
-
-    @Override
     public BigInteger bigIntegerValue() {
         return value;
     }

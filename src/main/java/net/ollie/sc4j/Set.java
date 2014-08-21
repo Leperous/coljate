@@ -1,13 +1,19 @@
 package net.ollie.sc4j;
 
+import java.util.function.Consumer;
+import java.util.function.Function;
+import java.util.function.Predicate;
+
 import net.ollie.sc4j.access.Finite;
 import net.ollie.sc4j.imposed.Distinctness.Unique;
 import net.ollie.sc4j.utils.Iterables;
 import net.ollie.sc4j.utils.UnmodifiableIterator;
 
-import javax.annotation.*;
-import java.util.function.Function;
-import java.util.function.Predicate;
+import javax.annotation.CheckForNull;
+import javax.annotation.CheckReturnValue;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import javax.annotation.OverridingMethodsMustInvokeSuper;
 
 /**
  * A finite collection create unique elements.
@@ -57,18 +63,6 @@ public interface Set<V>
 
         boolean remove(@Nullable Object value);
 
-        @Nonnull
-        default Set.Mutable<V> and(final V value) {
-            this.add(value);
-            return this;
-        }
-
-        @Nonnull
-        default Set.Mutable<V> not(final V value) {
-            this.remove(value);
-            return this;
-        }
-
         default boolean removeWhere(final Predicate<? super V> predicate) {
             boolean removed = false;
             for (final V value : this) {
@@ -105,6 +99,44 @@ public interface Set<V>
                 }
             }
             return removed;
+        }
+
+        default Set.Mutable.Inliner<V> inline() {
+            return new Inliner<>(this);
+        }
+
+        class Inliner<V> {
+
+            private final Set.Mutable<V> set;
+
+            protected Inliner(final Set.Mutable<V> set) {
+                this.set = set;
+            }
+
+            public Inliner<V> add(final V value) {
+                set.add(value);
+                return this;
+            }
+
+            public Inliner<V> addAll(final Iterable<? extends V> iterable) {
+                set.addAll(iterable);
+                return this;
+            }
+
+            public Inliner<V> remove(final Object value) {
+                set.remove(value);
+                return this;
+            }
+
+            public Inliner<V> op(final Consumer<? super Set.Mutable<V>> consumer) {
+                consumer.accept(set);
+                return this;
+            }
+
+            public Set.Mutable<V> set() {
+                return set;
+            }
+
         }
 
     }
