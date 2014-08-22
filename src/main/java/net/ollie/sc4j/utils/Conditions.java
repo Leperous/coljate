@@ -16,21 +16,22 @@ public final class Conditions {
     public static <T> T checkNotNull(@CheckForNull final T object) {
         if (object == null) {
             throw new IllegalArgumentException();
-        } else {
-            return object;
         }
+        return object;
     }
 
-    public static void checkIsNonNegative(final int i) {
+    public static int checkIsNonNegative(final int i) {
         if (i < 0) {
             throw new IllegalArgumentException("Value [" + i + "] was not positive!");
         }
+        return i;
     }
 
-    public static void checkIsTrue(final boolean predicate) {
+    public static boolean checkIsTrue(final boolean predicate) {
         if (!predicate) {
             throw new IllegalArgumentException();
         }
+        return predicate;
     }
 
     public static <T> T[] checkIsEmpty(final T[] array) {
