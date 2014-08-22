@@ -1,6 +1,7 @@
 package net.ollie.sc4j.utils.numeric;
 
 import java.util.Optional;
+import java.util.OptionalInt;
 
 import net.ollie.sc4j.imposed.sorting.Sortable;
 
@@ -23,7 +24,7 @@ public abstract class NonNegativeInteger
         implements Sortable<Number> {
 
     private static final long serialVersionUID = 1L;
-    public static final NonNegativeInteger ZERO = new NonNegativeInt(0), ONE = new NonNegativeInt(1);
+    public static final NonNegativeInteger ZERO = new Zero(), ONE = new NonNegativeInt(1), INFINITY = new Infinity();
 
     @Nonnull
     public static NonNegativeInteger of(final int value) throws NonNegativeException {
@@ -55,6 +56,11 @@ public abstract class NonNegativeInteger
 
     @CheckForNull
     public static NonNegativeInteger maybe(final int value) {
+        return NonNegativeInt.maybe(value);
+    }
+
+    @CheckForNull
+    public static NonNegativeInteger maybe(final OptionalInt value) {
         return NonNegativeInt.maybe(value);
     }
 
@@ -138,6 +144,11 @@ public abstract class NonNegativeInteger
     @Override
     public int hashCode() {
         return this.intValue();
+    }
+
+    @Override
+    public String toString() {
+        return this.bigIntegerValue().toString();
     }
 
 }

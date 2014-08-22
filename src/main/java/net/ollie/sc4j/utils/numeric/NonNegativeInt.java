@@ -17,7 +17,7 @@ import javax.annotation.concurrent.ThreadSafe;
  * @see <a href="http://en.wikipedia.org/wiki/Natural_number">Natural number</a>
  */
 @ThreadSafe
-public final class NonNegativeInt
+final class NonNegativeInt
         extends NonNegativeInteger {
 
     private static final long serialVersionUID = 1L;

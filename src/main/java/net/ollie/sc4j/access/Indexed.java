@@ -2,7 +2,6 @@ package net.ollie.sc4j.access;
 
 import net.ollie.sc4j.SortedSet;
 import net.ollie.sc4j.utils.Iterables;
-import net.ollie.sc4j.utils.numeric.NonNegativeInt;
 import net.ollie.sc4j.utils.numeric.NonNegativeInteger;
 
 import javax.annotation.CheckForNull;
@@ -40,7 +39,7 @@ public interface Indexed<N extends Number, V>
     @CheckForNull
     default NonNegativeInteger indexOf(final Object value) {
         final OptionalInt optional = Iterables.indexOf(this, value);
-        return NonNegativeInt.maybe(optional);
+        return NonNegativeInteger.maybe(optional);
     }
 
     @Override
@@ -145,6 +144,7 @@ public interface Indexed<N extends Number, V>
         }
 
         @Override
+        @SuppressWarnings("unchecked")
         default <V2> Indexed.Empty<N, V2> map(Function<? super V, ? extends V2> function) {
             return (Indexed.Empty<N, V2>) this;
         }

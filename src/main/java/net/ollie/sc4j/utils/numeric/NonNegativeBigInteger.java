@@ -10,7 +10,7 @@ import javax.annotation.Nonnull;
  *
  * @author Ollie
  */
-public class NonNegativeBigInteger extends NonNegativeInteger {
+final class NonNegativeBigInteger extends NonNegativeInteger {
 
     private static final long serialVersionUID = 1L;
     private static final NonNegativeBigInteger BI_ZERO = new NonNegativeBigInteger(BigInteger.ZERO);

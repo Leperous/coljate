@@ -23,6 +23,8 @@ import javax.annotation.Nonnull;
  *
  * This interface introduces the {@link #reduce} method.
  *
+ * It it comparable to a stock {@link java.util.Collection}.
+ *
  * @author Ollie
  * @see java.util.Collection
  */
