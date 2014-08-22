@@ -42,6 +42,11 @@ final class Infinity extends NonNegativeInteger {
     }
 
     @Override
+    public float floatValue() {
+        return Float.POSITIVE_INFINITY;
+    }
+
+    @Override
     public NonNegativeInteger plus(final NonNegativeInteger that) {
         return this;
     }
