@@ -13,7 +13,7 @@ import java.util.function.Function;
 import java.util.function.Predicate;
 
 /**
- * Keyed by a number.
+ * An element {@code V} can be accessed given some integer index.
  *
  * @author Ollie
  */

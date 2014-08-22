@@ -1,20 +1,24 @@
 package net.ollie.sc4j.access;
 
+import java.util.function.Function;
+import java.util.function.Predicate;
+
 import net.ollie.sc4j.Collection;
+import net.ollie.sc4j.imposed.Mutability;
 
 import javax.annotation.CheckForNull;
 import javax.annotation.CheckReturnValue;
 import javax.annotation.Nonnull;
 
-import java.util.function.Predicate;
-
-import net.ollie.sc4j.imposed.Mutability;
-
 /**
+ * An element {@code V} can be accessed through inspecting the head or tail elements.
+ *
+ * This interface introduces the {@link #map} method.
+ *
  * @author Ollie
  */
 public interface Traversable<V>
-        extends Collection<V> {
+        extends Collection<V>, Findable<V> {
 
     @CheckForNull
     V head();
@@ -24,10 +28,14 @@ public interface Traversable<V>
 
     @CheckReturnValue
     @Nonnull
+    <V2> Traversable<V2> map(@Nonnull Function<? super V, ? extends V2> function);
+
+    @CheckReturnValue
+    @Nonnull
     Traversable<V> filter(@Nonnull Predicate<? super V> predicate);
 
     @Override
-    default V findOrElse(Predicate<? super V> predicate, V defaultValue) {
+    default V findOrElse(final Predicate<? super V> predicate, final V defaultValue) {
         Traversable<V> tail = this;
         V head;
         while ((head = tail.head()) != null) {
@@ -83,11 +91,6 @@ public interface Traversable<V>
         @Override
         default Traversable.Empty<V> tail() {
             return this;
-        }
-
-        @Override
-        default V findOrElse(final Predicate<? super V> predicate, V defaultValue) {
-            return Collection.Empty.super.findOrElse(predicate, defaultValue);
         }
 
     }

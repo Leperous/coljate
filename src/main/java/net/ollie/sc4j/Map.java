@@ -6,6 +6,7 @@ import java.util.function.Predicate;
 
 import net.ollie.sc4j.access.Finite;
 import net.ollie.sc4j.imposed.Cached;
+import net.ollie.sc4j.imposed.Mapping.Surjective;
 import net.ollie.sc4j.imposed.Mutability;
 import net.ollie.sc4j.utils.Functions;
 
@@ -16,12 +17,15 @@ import javax.annotation.Nonnull;
 /**
  * A cache create uniquely-keyed values.
  *
+ * The mapping is potentially {@link Surjective} (in that it may contain copies of the same value) but not
+ * {@link Injective} (in that null keys are not allowed).
+ *
  * @author Ollie
  * @see java.util.Map
  * @see Cache
  */
 public interface Map<K, V>
-        extends Cached<K, V> {
+        extends Cached<K, V>, Surjective<K, V> {
 
     @Override
     Set<K> keys();

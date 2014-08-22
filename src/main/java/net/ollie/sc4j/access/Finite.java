@@ -1,15 +1,7 @@
 package net.ollie.sc4j.access;
 
-import net.ollie.sc4j.utils.Arrays;
-import net.ollie.sc4j.utils.Iterables;
-import net.ollie.sc4j.utils.Iterators;
-import net.ollie.sc4j.utils.UnmodifiableIterator;
-import net.ollie.sc4j.utils.numeric.NonNegativeInteger;
-
-import javax.annotation.CheckReturnValue;
-import javax.annotation.Nonnull;
-import java.math.BigInteger;
 import java.util.Iterator;
+import java.util.NoSuchElementException;
 import java.util.Objects;
 import java.util.function.BiConsumer;
 import java.util.function.BiFunction;
@@ -17,8 +9,20 @@ import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.stream.Collector;
 
+import net.ollie.sc4j.utils.Arrays;
+import net.ollie.sc4j.utils.Iterables;
+import net.ollie.sc4j.utils.Iterators;
+import net.ollie.sc4j.utils.UnmodifiableIterator;
+import net.ollie.sc4j.utils.numeric.NonNegativeInteger;
+
+import java.math.BigInteger;
+import javax.annotation.CheckReturnValue;
+import javax.annotation.Nonnull;
+
 /**
- * Iterable, finite collection. Introduces "reduce" method.
+ * An element {@code V} may be found by iterating.
+ *
+ * This interface introduces the {@link #reduce} method.
  *
  * @author Ollie
  * @see java.util.Collection
@@ -73,6 +77,25 @@ public interface Finite<V>
         return this.sum(v -> BigInteger.valueOf(function.apply(v))).intValueExact();
     }
 
+    default V find(@Nonnull final Predicate<? super V> predicate) throws NoSuchElementException {
+        final V found = this.findOrElse(predicate, null);
+        if (found == null) {
+            throw new NoSuchElementException();
+        } else {
+            return found;
+        }
+    }
+
+    @Override
+    default V findOrElse(final Predicate<? super V> predicate, final V defaultValue) {
+        for (final V element : this) {
+            if (predicate.test(element)) {
+                return element;
+            }
+        }
+        return defaultValue;
+    }
+
     @Nonnull
     Object[] toRawArray();
 
@@ -99,16 +122,6 @@ public interface Finite<V>
 
     @Override
     Finite<V> tail();
-
-    @Override
-    default V findOrElse(final Predicate<? super V> predicate, final V defaultValue) {
-        for (final V element : this) {
-            if (predicate.test(element)) {
-                return element;
-            }
-        }
-        return defaultValue;
-    }
 
     default boolean forAny(final Predicate<? super V> predicate) {
         for (final V element : this) {
@@ -226,11 +239,6 @@ public interface Finite<V>
         @Override
         default Finite.Empty<V> filter(final Predicate<? super V> predicate) {
             return this;
-        }
-
-        @Override
-        default V findOrElse(final Predicate<? super V> predicate, V defaultValue) {
-            return Traversable.Empty.super.findOrElse(predicate, defaultValue);
         }
 
     }

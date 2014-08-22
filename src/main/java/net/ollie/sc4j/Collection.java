@@ -1,16 +1,13 @@
 package net.ollie.sc4j;
 
-import java.util.NoSuchElementException;
 import java.util.Objects;
-import java.util.function.Function;
 import java.util.function.Predicate;
 
+import net.ollie.sc4j.access.Findable;
 import net.ollie.sc4j.access.Finite;
 import net.ollie.sc4j.imposed.Mutability;
 import net.ollie.sc4j.utils.Iterables;
 
-import javax.annotation.CheckForNull;
-import javax.annotation.CheckReturnValue;
 import javax.annotation.Nonnull;
 
 /**
@@ -37,22 +34,6 @@ public interface Collection<V> {
         return Iterables.containsAll(this, iterable);
     }
 
-    @CheckReturnValue
-    @Nonnull
-    <V2> Collection<V2> map(@Nonnull Function<? super V, ? extends V2> function);
-
-    default V find(@Nonnull final Predicate<? super V> predicate) throws NoSuchElementException {
-        final V found = this.findOrElse(predicate, null);
-        if (found == null) {
-            throw new NoSuchElementException();
-        } else {
-            return found;
-        }
-    }
-
-    @CheckForNull
-    V findOrElse(Predicate<? super V> predicate, V defaultValue);
-
     @javax.annotation.concurrent.Immutable
     interface Empty<V>
             extends Collection<V>, Mutability.Immutable {
@@ -67,21 +48,10 @@ public interface Collection<V> {
             return false;
         }
 
-        @Override
-        @SuppressWarnings("unchecked")
-        default <V2> Collection.Empty<V2> map(Function<? super V, ? extends V2> function) {
-            return (Collection.Empty<V2>) this;
-        }
-
-        @Override
-        default V findOrElse(final Predicate<? super V> predicate, final V defaultValue) {
-            return defaultValue;
-        }
-
     }
 
     interface Singleton<V>
-            extends Collection<V> {
+            extends Collection<V>, Findable<V> {
 
         @Nonnull
         V value();

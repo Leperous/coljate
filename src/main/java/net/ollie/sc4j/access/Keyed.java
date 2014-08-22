@@ -8,13 +8,12 @@ import net.ollie.sc4j.Map;
 import net.ollie.sc4j.imposed.Distinctness.Unique;
 import net.ollie.sc4j.utils.Functions;
 
-import static javafx.scene.input.KeyCode.K;
 import javax.annotation.CheckForNull;
 import javax.annotation.CheckReturnValue;
 import javax.annotation.Nonnull;
 
 /**
- * Lookup an element {@code V} based on some key {@link K}.
+ * An element {@code V} can be accessed given one or more keys.
  *
  * @author Ollie
  */
@@ -50,11 +49,11 @@ public interface Keyed<V> {
 
     interface Single<K, V> extends Keyed<V> {
 
-        @Override
-        Unique<K> keys();
-
         @CheckForNull
         V get(@Nonnull Object key);
+
+        @Override
+        Unique<K> keys();
 
         @CheckReturnValue
         @Nonnull

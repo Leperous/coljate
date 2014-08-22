@@ -3,7 +3,7 @@ package net.ollie.sc4j;
 import java.util.function.Function;
 import java.util.function.Predicate;
 
-import net.ollie.sc4j.imposed.Ordered;
+import net.ollie.sc4j.imposed.sorting.Sorted;
 import net.ollie.sc4j.utils.Functions;
 
 /**
@@ -11,7 +11,7 @@ import net.ollie.sc4j.utils.Functions;
  * @author Ollie
  */
 public interface TreeMap<K, V>
-        extends Tree<K, V>, Map<K, V>, Ordered<K> {
+        extends Tree<K, V>, Map<K, V>, Sorted<K> {
 
     @Override
     Set<K> children(K key);

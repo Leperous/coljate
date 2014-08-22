@@ -10,8 +10,7 @@ import javax.annotation.CheckReturnValue;
 import javax.annotation.Nonnull;
 
 /**
- * A mutable map that may also calculate (and possibly, but not necessarily, store) values on-demand. Keys may or may
- * not be stored as well.
+ * A mutable map that may also calculate (and possibly, but not necessarily, store) values on-demand.
  *
  * @author Ollie
  * @param <K> key type
@@ -26,7 +25,7 @@ public interface Cache<K, V>
 
     @CheckReturnValue
     @Nonnull
-    <V2> Cache<K, V2> recalculate(Function<? super V, ? extends V2> function);
+    <V2> Cache<K, V2> recompute(Function<? super V, ? extends V2> function);
 
     @Override
     Map.Immutable<K, V> immutableCopy();

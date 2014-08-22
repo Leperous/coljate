@@ -4,6 +4,7 @@ import net.ollie.sc4j.Collection;
 import net.ollie.sc4j.utils.numeric.NonNegativeInteger;
 
 /**
+ * Values are duplicated or are distinct.
  *
  * @author Ollie
  */
