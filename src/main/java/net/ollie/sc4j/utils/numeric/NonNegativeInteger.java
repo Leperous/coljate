@@ -123,7 +123,9 @@ public abstract class NonNegativeInteger
     }
 
     public Sorting compareTo(final NonNegativeInteger that) {
-        return this.compareTo(that.bigIntegerValue());
+        return that instanceof Infinity
+                ? Sorting.BEFORE
+                : this.compareTo(that.bigIntegerValue());
     }
 
     public Sorting compareTo(final BigInteger that) {

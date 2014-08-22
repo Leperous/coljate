@@ -61,8 +61,8 @@ final class Infinity extends NonNegativeInteger {
     }
 
     @Override
-    public int compareTo(final Number that) {
-        return that instanceof Infinity ? 0 : 1;
+    public Sorting compareTo(final NonNegativeInteger that) {
+        return that instanceof Infinity ? Sorting.SAME : Sorting.AFTER;
     }
 
     @Override

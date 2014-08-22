@@ -32,9 +32,7 @@ final class Zero extends NonNegativeInteger {
 
     @Override
     public Sorting compareTo(final NonNegativeInteger that) {
-        return that instanceof Infinity
-                ? Sorting.BEFORE
-                : super.compareTo(that);
+        return that.isZero() ? Sorting.SAME : Sorting.BEFORE;
     }
 
     @Override
