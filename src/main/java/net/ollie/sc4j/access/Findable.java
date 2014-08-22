@@ -6,7 +6,7 @@ import java.util.function.Predicate;
 import javax.annotation.Nonnull;
 
 /**
- * An element {@code V} can be found given a {@link Predicate}.
+ * An element {@code V} may be found using a {@link Predicate}.
  *
  * @author Ollie
  * @param <V> value type

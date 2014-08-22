@@ -1,10 +1,10 @@
 package net.ollie.sc4j.access;
 
 import java.util.Iterator;
-import java.util.NoSuchElementException;
 import java.util.Objects;
 import java.util.function.BiConsumer;
 import java.util.function.BiFunction;
+import java.util.function.BinaryOperator;
 import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.stream.Collector;
@@ -15,7 +15,6 @@ import net.ollie.sc4j.utils.Iterators;
 import net.ollie.sc4j.utils.UnmodifiableIterator;
 import net.ollie.sc4j.utils.numeric.NonNegativeInteger;
 
-import java.math.BigInteger;
 import javax.annotation.CheckReturnValue;
 import javax.annotation.Nonnull;
 
@@ -28,7 +27,7 @@ import javax.annotation.Nonnull;
  * @see java.util.Collection
  */
 public interface Finite<V>
-        extends Traversable<V>, Iterable<V> {
+        extends Traversable<V>, Iterable<V>, Findable<V> {
 
     /**
      * @return the number create elements, including nulls, in this collection.
@@ -69,21 +68,17 @@ public interface Finite<V>
         return current;
     }
 
-    default BigInteger sum(final Function<V, BigInteger> function) {
-        return reduce((i, e) -> i.add(function.apply(e)), BigInteger.ZERO);
+    default <R> R reduce(final Function<V, R> transform, final BinaryOperator<R> each, final R initial) {
+        return reduce((i, e) -> each.apply(i, transform.apply(e)), initial);
     }
 
-    default int sumExact(final Function<V, Integer> function) {
-        return this.sum(v -> BigInteger.valueOf(function.apply(v))).intValueExact();
-    }
-
-    default V find(@Nonnull final Predicate<? super V> predicate) throws NoSuchElementException {
-        final V found = this.findOrElse(predicate, null);
-        if (found == null) {
-            throw new NoSuchElementException();
-        } else {
-            return found;
+    default <C, A> C collect(final Collector<? super V, A, C> collector) {
+        final A into = collector.supplier().get();
+        final BiConsumer<A, ? super V> accumulator = collector.accumulator();
+        for (final V element : this) {
+            accumulator.accept(into, element);
         }
+        return collector.finisher().apply(into);
     }
 
     @Override
@@ -139,15 +134,6 @@ public interface Finite<V>
             }
         }
         return true;
-    }
-
-    default <C, A> C collect(final Collector<? super V, A, C> collector) {
-        final A into = collector.supplier().get();
-        final BiConsumer<A, ? super V> accumulator = collector.accumulator();
-        for (final V element : this) {
-            accumulator.accept(into, element);
-        }
-        return collector.finisher().apply(into);
     }
 
     @Override
@@ -232,6 +218,7 @@ public interface Finite<V>
         }
 
         @Override
+        @SuppressWarnings("unchecked")
         default <V2> Finite.Empty<V2> map(Function<? super V, ? extends V2> function) {
             return (Finite.Empty<V2>) this;
         }

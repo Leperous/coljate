@@ -18,7 +18,7 @@ import javax.annotation.Nonnull;
  * @author Ollie
  */
 public interface Traversable<V>
-        extends Collection<V>, Findable<V> {
+        extends Collection<V> {
 
     @CheckForNull
     V head();
@@ -33,19 +33,6 @@ public interface Traversable<V>
     @CheckReturnValue
     @Nonnull
     Traversable<V> filter(@Nonnull Predicate<? super V> predicate);
-
-    @Override
-    default V findOrElse(final Predicate<? super V> predicate, final V defaultValue) {
-        Traversable<V> tail = this;
-        V head;
-        while ((head = tail.head()) != null) {
-            if (predicate.test(head)) {
-                return head;
-            }
-            tail = tail.tail();
-        }
-        return defaultValue;
-    }
 
     Traversable.Mutable<V> mutableCopy();
 
