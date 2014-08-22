@@ -128,7 +128,7 @@ public interface Map<K, V>
         Map<K, V> putAll(Map<K, V> map);
 
         @Nonnull
-        default Inliner<K, V> inline() {
+        default Inliner<K, V, ? extends Map.Mutable<K, V>> inline() {
             return new Inliner<>(this);
         }
 
@@ -145,30 +145,30 @@ public interface Map<K, V>
 
         }
 
-        class Inliner<K, V> {
+        class Inliner<K, V, M extends Map.Mutable<K, V>> {
 
-            private final Map.Mutable<K, V> map;
+            private final M map;
 
-            protected Inliner(final Map.Mutable<K, V> map) {
+            protected Inliner(final M map) {
                 this.map = map;
             }
 
-            public Inliner<K, V> put(final K key, final V value) {
+            public Inliner<K, V, M> put(final K key, final V value) {
                 map.put(key, value);
                 return this;
             }
 
-            public Inliner<K, V> putAll(final Map<K, V> values) {
+            public Inliner<K, V, M> putAll(final Map<K, V> values) {
                 map.putAll(values);
                 return this;
             }
 
-            public Inliner<K, V> remove(final Object value) {
+            public Inliner<K, V, M> remove(final Object value) {
                 map.remove(value);
                 return this;
             }
 
-            public Map.Mutable<K, V> map() {
+            public M map() {
                 return map;
             }
 

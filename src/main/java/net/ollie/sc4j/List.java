@@ -122,61 +122,61 @@ public interface List<V>
         }
 
         @Nonnull
-        default List.Mutable.Inliner<V> inline() {
+        default Inliner<V, ? extends List.Mutable<V>> inline() {
             return new Inliner<>(this);
         }
 
-        class Inliner<V> {
+        class Inliner<V, L extends List.Mutable<V>> {
 
-            private final List.Mutable<V> list;
+            private final L list;
 
-            protected Inliner(final List.Mutable<V> underlying) {
+            protected Inliner(final L underlying) {
                 this.list = underlying;
             }
 
             @Nonnull
-            public Inliner<V> prefix(final V value) {
+            public Inliner<V, L> prefix(final V value) {
                 list.prefix(value);
                 return this;
             }
 
             @Nonnull
-            public Inliner<V> prefixAll(final Iterable<? extends V> values) {
+            public Inliner<V, L> prefixAll(final Iterable<? extends V> values) {
                 list.prefixAll(values);
                 return this;
             }
 
             @Nonnull
-            public Inliner<V> suffix(final V value) {
+            public Inliner<V, L> suffix(final V value) {
                 list.suffix(value);
                 return this;
             }
 
             @Nonnull
-            public Inliner<V> suffixAll(final Iterable<? extends V> values) {
+            public Inliner<V, L> suffixAll(final Iterable<? extends V> values) {
                 list.suffixAll(values);
                 return this;
             }
 
             @Nonnull
-            public Inliner<V> removeFirst(final Object object) {
+            public Inliner<V, L> removeFirst(final Object object) {
                 list.removeFirst(object);
                 return this;
             }
 
             @Nonnull
-            public Inliner<V> removeEvery(final Object object) {
+            public Inliner<V, L> removeEvery(final Object object) {
                 list.removeEvery(object);
                 return this;
             }
 
             @Nonnull
-            public Inliner<V> removeAll(final Iterable<? extends V> values) {
+            public Inliner<V, L> removeAll(final Iterable<? extends V> values) {
                 list.removeAll(values);
                 return this;
             }
 
-            public List.Mutable<V> list() {
+            public L list() {
                 return list;
             }
 

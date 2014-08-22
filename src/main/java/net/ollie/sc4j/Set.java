@@ -101,39 +101,39 @@ public interface Set<V>
             return removed;
         }
 
-        default Set.Mutable.Inliner<V> inline() {
+        default Inliner<V, ? extends Set.Mutable<V>> inline() {
             return new Inliner<>(this);
         }
 
-        class Inliner<V> {
+        class Inliner<V, S extends Set.Mutable<V>> {
 
-            private final Set.Mutable<V> set;
+            private final S set;
 
-            protected Inliner(final Set.Mutable<V> set) {
+            protected Inliner(final S set) {
                 this.set = set;
             }
 
-            public Inliner<V> add(final V value) {
+            public Inliner<V, S> add(final V value) {
                 set.add(value);
                 return this;
             }
 
-            public Inliner<V> addAll(final Iterable<? extends V> iterable) {
+            public Inliner<V, S> addAll(final Iterable<? extends V> iterable) {
                 set.addAll(iterable);
                 return this;
             }
 
-            public Inliner<V> remove(final Object value) {
+            public Inliner<V, S> remove(final Object value) {
                 set.remove(value);
                 return this;
             }
 
-            public Inliner<V> op(final Consumer<? super Set.Mutable<V>> consumer) {
+            public Inliner<V, S> op(final Consumer<? super S> consumer) {
                 consumer.accept(set);
                 return this;
             }
 
-            public Set.Mutable<V> set() {
+            public S set() {
                 return set;
             }
 

@@ -1,5 +1,9 @@
 package net.ollie.sc4j;
 
+import java.util.Comparator;
+import java.util.function.Function;
+import java.util.function.Predicate;
+
 import net.ollie.sc4j.access.Finite;
 import net.ollie.sc4j.access.Indexed;
 import net.ollie.sc4j.imposed.Ordered;
@@ -8,10 +12,6 @@ import net.ollie.sc4j.utils.numeric.NonNegativeInteger;
 
 import javax.annotation.CheckReturnValue;
 import javax.annotation.Nonnull;
-
-import java.util.Comparator;
-import java.util.function.Function;
-import java.util.function.Predicate;
 
 /**
  * An ordered, indexed collection create objects.
@@ -155,47 +155,35 @@ public interface Array<V>
         }
 
         @Override
-        default Inliner<V> inline() {
+        default Inliner<V, ? extends Array.Mutable<V>> inline() {
             return new Inliner<>(this);
         }
 
-        class Inliner<V> extends List.Mutable.Inliner<V> {
+        class Inliner<V, A extends Array.Mutable<V>> extends List.Mutable.Inliner<V, A> {
 
-            private final Array.Mutable<V> array;
+            private final A array;
 
-            protected Inliner(final Array.Mutable<V> array) {
+            protected Inliner(final A array) {
                 super(array);
                 this.array = array;
             }
 
-            @Override
-            public Inliner<V> prefix(final V value) {
-                array.prefix(value);
-                return this;
-            }
-
-            @Override
-            public Inliner<V> suffix(final V value) {
-                array.suffix(value);
-                return this;
-            }
-
-            public Inliner<V> insert(final int index, final V value) {
+            public Inliner<V, A> insert(final int index, final V value) {
                 array.insert(index, value);
                 return this;
             }
 
-            public Inliner<V> set(final int index, final V value) {
+            public Inliner<V, A> set(final int index, final V value) {
                 array.set(index, value);
                 return this;
             }
 
-            public Inliner<V> remove(final int index) {
+            public Inliner<V, A> remove(final int index) {
                 array.remove(index);
                 return this;
             }
 
-            public Array.Mutable<V> array() {
+            public A array() {
                 return array;
             }
 
