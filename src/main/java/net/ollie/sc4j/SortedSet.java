@@ -6,8 +6,8 @@ import net.ollie.sc4j.utils.Iterables;
 
 import javax.annotation.CheckReturnValue;
 import javax.annotation.Nonnull;
+
 import java.util.Comparator;
-import java.util.function.Predicate;
 
 /**
  * @author Ollie
@@ -27,9 +27,6 @@ public interface SortedSet<V>
     default boolean lastInclusive() {
         return true;
     }
-
-    @Override
-    SortedSet<V> filter(Predicate<? super V> predicate);
 
     @Override
     SortedSet.Mutable<V> mutableCopy();
@@ -66,9 +63,6 @@ public interface SortedSet<V>
         SortedSet.Immutable<V> sort(Sorter<? super V> comparator);
 
         @Override
-        SortedSet.Immutable<V> filter(Predicate<? super V> predicate);
-
-        @Override
         default SortedSet.Immutable<V> immutableCopy() {
             return this;
         }
@@ -87,17 +81,13 @@ public interface SortedSet<V>
             return null;
         }
 
+        @Override
         default SortedSet.Empty<V> tail() {
             return this;
         }
 
         @Override
         default SortedSet.Empty<V> sort(final Sorter<? super V> comparator) {
-            return this;
-        }
-
-        @Override
-        default SortedSet.Empty<V> filter(final Predicate<? super V> predicate) {
             return this;
         }
 

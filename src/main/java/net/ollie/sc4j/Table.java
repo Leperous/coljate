@@ -2,11 +2,8 @@ package net.ollie.sc4j;
 
 import net.ollie.sc4j.access.Keyed;
 import net.ollie.sc4j.imposed.Cached;
-import net.ollie.sc4j.utils.Functions;
 
 import javax.annotation.Nonnull;
-import java.util.function.Function;
-import java.util.function.Predicate;
 
 /**
  * A cache create values that are {@link #get accessed} by providing a row and column.
@@ -33,17 +30,6 @@ public interface Table<R, C, V>
 
     @Nonnull
     Map<R, V> column(C column);
-
-    @Override
-    <V2> Table<R, C, V2> mapValues(Function<? super V, ? extends V2> function);
-
-    @Override
-    default Table<R, C, V> filter(Predicate<? super V> predicate) {
-        return this.filterValues(predicate);
-    }
-
-    @Override
-    Table<R, C, V> filterValues(Predicate<? super V> predicate);
 
     @Override
     Table.Mutable<R, C, V> mutableCopy();
@@ -89,19 +75,6 @@ public interface Table<R, C, V>
 
         @Override
         Map.Immutable<R, V> column(C column);
-
-        @Override
-        <V2> Table.Immutable<R, C, V2> mapValues(Function<? super V, ? extends V2> function);
-
-        @Override
-        default Table.Immutable<R, C, V> filter(Predicate<? super V> predicate) {
-            return this.filterValues(predicate);
-        }
-
-        @Override
-        default Table.Immutable<R, C, V> filterValues(final Predicate<? super V> predicate) {
-            return this.mapValues(Functions.satisfying(predicate));
-        }
 
         @Override
         default Table.Immutable<R, C, V> immutableCopy() {

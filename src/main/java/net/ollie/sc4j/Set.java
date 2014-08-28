@@ -1,7 +1,6 @@
 package net.ollie.sc4j;
 
 import java.util.function.Consumer;
-import java.util.function.Function;
 import java.util.function.Predicate;
 
 import net.ollie.sc4j.access.Finite;
@@ -25,17 +24,11 @@ import javax.annotation.OverridingMethodsMustInvokeSuper;
 public interface Set<V>
         extends Finite<V>, Unique<V> {
 
-    @Override
-    Set<V> filter(Predicate<? super V> predicate);
-
-    @Override
-    <V2> Set<V2> map(Function<? super V, ? extends V2> function);
+//    @Override
+//    Stream<V, ? extends Set<V>> stream();
 
     @Override
     Set<V> tail();
-
-    @Override
-    <R> Set<R> flatMap(Function<? super V, ? extends Finite<R>> function);
 
     @Override
     Set.Mutable<V> mutableCopy();
@@ -174,16 +167,7 @@ public interface Set<V>
         Set.Immutable<V> not(Object element);
 
         @Override
-        <R> Set.Immutable<R> flatMap(Function<? super V, ? extends Finite<R>> function);
-
-        @Override
         Set.Immutable<V> tail();
-
-        @Override
-        Set.Immutable<V> filter(Predicate<? super V> predicate);
-
-        @Override
-        <V2> Set.Immutable<V2> map(Function<? super V, ? extends V2> function);
 
         @Override
         default Set.Immutable<V> immutableCopy() {
@@ -210,24 +194,7 @@ public interface Set<V>
         }
 
         @Override
-        @SuppressWarnings("unchecked")
-        default <V2> Set.Empty<V2> flatMap(Function<? super V, ? extends Finite<V2>> function) {
-            return (Set.Empty<V2>) this;
-        }
-
-        @Override
-        @SuppressWarnings("unchecked")
-        default <V2> Set.Empty<V2> map(final Function<? super V, ? extends V2> function) {
-            return (Set.Empty<V2>) this;
-        }
-
-        @Override
         default Set.Empty<V> tail() {
-            return this;
-        }
-
-        @Override
-        default Set.Empty<V> filter(final Predicate<? super V> predicate) {
             return this;
         }
 

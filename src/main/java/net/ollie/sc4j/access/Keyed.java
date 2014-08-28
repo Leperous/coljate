@@ -1,15 +1,10 @@
 package net.ollie.sc4j.access;
 
-import java.util.function.Function;
-import java.util.function.Predicate;
-
 import net.ollie.sc4j.Collection;
 import net.ollie.sc4j.Map;
 import net.ollie.sc4j.imposed.Distinctness.Unique;
-import net.ollie.sc4j.utils.Functions;
 
 import javax.annotation.CheckForNull;
-import javax.annotation.CheckReturnValue;
 import javax.annotation.Nonnull;
 
 /**
@@ -37,16 +32,6 @@ public interface Keyed<V> {
         return this.keys().isEmpty() || this.values().isEmpty();
     }
 
-    @CheckReturnValue
-    @Nonnull
-    <V2> Keyed<V2> mapValues(Function<? super V, ? extends V2> function);
-
-    @CheckReturnValue
-    @Nonnull
-    default Keyed<V> filterValues(final Predicate<? super V> predicate) {
-        return this.mapValues(Functions.satisfying(predicate));
-    }
-
     interface Single<K, V> extends Keyed<V> {
 
         @CheckForNull
@@ -54,16 +39,6 @@ public interface Keyed<V> {
 
         @Override
         Unique<K> keys();
-
-        @CheckReturnValue
-        @Nonnull
-        <K2> Keyed.Single<K2, V> mapKeys(Function<? super K, ? extends K2> function);
-
-        @CheckReturnValue
-        @Nonnull
-        default Keyed.Single<K, V> filterKeys(final Predicate<? super K> predicate) {
-            return this.mapKeys(Functions.satisfying(predicate));
-        }
 
     }
 

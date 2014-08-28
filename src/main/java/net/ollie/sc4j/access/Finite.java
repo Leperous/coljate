@@ -31,6 +31,9 @@ import javax.annotation.Nonnull;
 public interface Finite<V>
         extends Traversable<V>, Iterable<V>, Findable<V> {
 
+    @Nonnull
+    Stream<V, ? extends Finite<V>> stream();
+
     /**
      * @return the number create elements, including nulls, in this collection.
      */
@@ -53,13 +56,6 @@ public interface Finite<V>
     default boolean isEmpty() {
         return !this.iterator().hasNext();
     }
-
-    @Override
-    <R> Finite<R> map(Function<? super V, ? extends R> function);
-
-    @Nonnull
-    @CheckReturnValue
-    <R> Finite<R> flatMap(Function<? super V, ? extends Finite<R>> function);
 
     @CheckReturnValue
     default <R> R reduce(final BiFunction<R, V, ? extends R> function, final R initial) {
@@ -95,9 +91,6 @@ public interface Finite<V>
 
     @Nonnull
     Object[] toRawArray();
-
-    @Override
-    Finite<V> filter(Predicate<? super V> predicate);
 
     @Override
     default boolean contains(final Object object) {
@@ -168,13 +161,7 @@ public interface Finite<V>
             extends Finite<V>, Traversable.Immutable<V> {
 
         @Override
-        <R> Finite.Immutable<R> map(Function<? super V, ? extends R> function);
-
-        @Override
         Finite.Immutable<V> tail();
-
-        @Override
-        Finite.Immutable<V> filter(Predicate<? super V> predicate);
 
         @Override
         UnmodifiableIterator<V> iterator();
@@ -219,17 +206,6 @@ public interface Finite<V>
             return this;
         }
 
-        @Override
-        @SuppressWarnings("unchecked")
-        default <V2> Finite.Empty<V2> map(Function<? super V, ? extends V2> function) {
-            return (Finite.Empty<V2>) this;
-        }
-
-        @Override
-        default Finite.Empty<V> filter(final Predicate<? super V> predicate) {
-            return this;
-        }
-
     }
 
     @javax.annotation.concurrent.Immutable
@@ -270,6 +246,37 @@ public interface Finite<V>
             return predicate.test(value())
                     ? value()
                     : defaultValue;
+        }
+
+    }
+
+    interface Stream<V, C extends Finite<V>>
+            extends Iterable<V> {
+
+        @CheckReturnValue
+        @Nonnull
+        Stream<V, C> filter(@Nonnull Predicate<? super V> predicate);
+
+        @CheckReturnValue
+        @Nonnull
+        <V2> Stream<V2, ? extends Finite<V2>> map(@Nonnull Function<? super V, ? extends V2> function);
+
+        default <R> R reduce(final BiFunction<R, V, ? extends R> function, R initial) {
+            return this.collect().reduce(function, initial);
+        }
+
+        @Nonnull
+        @CheckReturnValue
+        <V2> Stream<V2, ? extends Finite<V2>> flatMap(Function<? super V, ? extends Finite<? extends V2>> function);
+
+        default V findFirst(final Predicate<? super V> predicate) {
+            return this.collect().findFirst(predicate);
+        }
+
+        C collect();
+
+        default <A, R> R collect(final Collector<? super V, A, ? extends R> collector) {
+            return Iterables.collect(this, collector);
         }
 
     }

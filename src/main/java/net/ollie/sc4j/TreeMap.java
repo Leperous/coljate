@@ -1,10 +1,7 @@
 package net.ollie.sc4j;
 
-import java.util.function.Function;
-import java.util.function.Predicate;
 
 import net.ollie.sc4j.imposed.sorting.Sorted;
-import net.ollie.sc4j.utils.Functions;
 
 /**
  *
@@ -15,14 +12,6 @@ public interface TreeMap<K, V>
 
     @Override
     Set<K> children(K key);
-
-    @Override
-    <V2> TreeMap<K, V2> mapValues(Function<? super V, ? extends V2> function);
-
-    @Override
-    default TreeMap<K, V> filterValues(final Predicate<? super V> predicate) {
-        return this.mapValues(Functions.satisfying(predicate));
-    }
 
     @Override
     Set<? extends TreeMap<K, V>> subtrees(K key);
@@ -58,19 +47,6 @@ public interface TreeMap<K, V>
 
         @Override
         Set.Immutable<? extends TreeMap.Immutable<K, V>> subtrees(K key);
-
-        @Override
-        <V2> TreeMap.Immutable<K, V2> mapValues(Function<? super V, ? extends V2> function);
-
-        @Override
-        default TreeMap.Immutable<K, V> filter(final Predicate<? super V> predicate) {
-            return this.filterValues(predicate);
-        }
-
-        @Override
-        default TreeMap.Immutable<K, V> filterValues(final Predicate<? super V> predicate) {
-            return this.mapValues(Functions.satisfying(predicate));
-        }
 
         @Override
         TreeMap.Immutable<K, V> tail();

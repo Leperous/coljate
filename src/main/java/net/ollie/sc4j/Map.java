@@ -2,13 +2,11 @@ package net.ollie.sc4j;
 
 import java.util.Objects;
 import java.util.function.Function;
-import java.util.function.Predicate;
 
 import net.ollie.sc4j.access.Finite;
 import net.ollie.sc4j.imposed.Cached;
 import net.ollie.sc4j.imposed.Mapping.Surjective;
 import net.ollie.sc4j.imposed.Mutability;
-import net.ollie.sc4j.utils.Functions;
 
 import javax.annotation.CheckForNull;
 import javax.annotation.CheckReturnValue;
@@ -32,39 +30,9 @@ public interface Map<K, V>
 
     Set<? extends Entry<K, V>> entries();
 
-    @Override
-    default Map<K, V> filterKeys(Predicate<? super K> predicate) {
-        return this.mapKeys(Functions.satisfying(predicate));
-    }
-
-    @Override
-    default Map<K, V> filter(final Predicate<? super V> predicate) {
-        return this.filterValues(predicate);
-    }
-
-    @Override
-    default Map<K, V> filterValues(final Predicate<? super V> predicate) {
-        return this.mapValues(Functions.satisfying(predicate));
-    }
-
     @Nonnull
     @CheckReturnValue
     <K2, V2> Map<K2, V2> mapEntries(Function<? super K, ? extends K2> keyFunction, Function<? super V, ? extends V2> valueFunction);
-
-    @Override
-    default <V2> Map<K, V2> map(final Function<? super V, ? extends V2> function) {
-        return this.mapValues(function);
-    }
-
-    @Override
-    default <K2> Map<K2, V> mapKeys(Function<? super K, ? extends K2> function) {
-        return this.mapEntries(function, Function.identity());
-    }
-
-    @Override
-    default <V2> Map<K, V2> mapValues(Function<? super V, ? extends V2> function) {
-        return this.mapEntries(Function.identity(), function);
-    }
 
     @Override
     Map.Mutable<K, V> mutableCopy();
@@ -202,27 +170,7 @@ public interface Map<K, V>
         Map.Immutable<K, V> without(Object key);
 
         @Override
-        default <K2> Map.Immutable<K2, V> mapKeys(Function<? super K, ? extends K2> function) {
-            return this.mapEntries(function, Function.identity());
-        }
-
-        @Override
-        default <V2> Map.Immutable<K, V2> mapValues(Function<? super V, ? extends V2> function) {
-            return this.mapEntries(Function.identity(), function);
-        }
-
-        @Override
-        default <V2> Map.Immutable<K, V2> map(final Function<? super V, ? extends V2> function) {
-            return this.mapValues(function);
-        }
-
-        @Override
         <K2, V2> Map.Immutable<K2, V2> mapEntries(Function<? super K, ? extends K2> keyFunction, Function<? super V, ? extends V2> valueFunction);
-
-        @Override
-        default Map.Immutable<K, V> filter(final Predicate<? super V> predicate) {
-            return this.mapValues(Functions.satisfying(predicate));
-        }
 
         @CheckReturnValue
         @Nonnull
@@ -230,16 +178,6 @@ public interface Map<K, V>
             return Objects.equals(expectedValue, this.get(key))
                     ? this.without(key).with(key, newValue)
                     : this;
-        }
-
-        @Override
-        default Map.Immutable<K, V> filterKeys(Predicate<? super K> predicate) {
-            return this.mapKeys(Functions.satisfying(predicate));
-        }
-
-        @Override
-        default Map.Immutable<K, V> filterValues(Predicate<? super V> predicate) {
-            return this.mapValues(Functions.satisfying(predicate));
         }
 
         @Override

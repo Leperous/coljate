@@ -4,9 +4,8 @@ import net.ollie.sc4j.access.Finite;
 
 import javax.annotation.CheckForNull;
 import javax.annotation.Nonnull;
+
 import java.util.NoSuchElementException;
-import java.util.function.Function;
-import java.util.function.Predicate;
 
 /**
  * A mutable first-in-first-out sequence.
@@ -27,12 +26,6 @@ public interface Queue<V>
 
     @Nonnull
     V element() throws NoSuchElementException;
-
-    @Override
-    Queue<V> filter(Predicate<? super V> predicate);
-
-    @Override
-    <V2> Queue<V2> map(Function<? super V, ? extends V2> function);
 
     @Override
     Queue<V> tail();

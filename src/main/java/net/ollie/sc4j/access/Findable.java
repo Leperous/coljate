@@ -13,7 +13,7 @@ import javax.annotation.Nonnull;
  */
 public interface Findable<V> {
 
-    default V find(@Nonnull final Predicate<? super V> predicate) throws NoSuchElementException {
+    default V findFirst(@Nonnull final Predicate<? super V> predicate) throws NoSuchElementException {
         final V found = this.findOrElse(predicate, null);
         if (found == null) {
             throw new NoSuchElementException();

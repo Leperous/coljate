@@ -2,8 +2,6 @@ package net.ollie.sc4j.imposed;
 
 import java.util.Iterator;
 import java.util.Objects;
-import java.util.function.Function;
-import java.util.function.Predicate;
 import java.util.function.Supplier;
 
 import net.ollie.sc4j.access.Finite;
@@ -49,33 +47,6 @@ public interface Cached<K, V>
     @Override
     default Object[] toRawArray() {
         return this.values().toRawArray();
-    }
-
-    @Override
-    Cached<K, V> filterKeys(Predicate<? super K> predicate);
-
-    @Override
-    Cached<K, V> filterValues(Predicate<? super V> predicate);
-
-    @Override
-    default Cached<K, V> filter(final Predicate<? super V> predicate) {
-        return this.filterValues(predicate);
-    }
-
-    @Override
-    default <R> Finite<R> flatMap(Function<? super V, ? extends Finite<R>> function) {
-        return this.values().flatMap(function);
-    }
-
-    @Override
-    <K2> Cached<K2, V> mapKeys(Function<? super K, ? extends K2> function);
-
-    @Override
-    <V2> Cached<K, V2> mapValues(Function<? super V, ? extends V2> function);
-
-    @Override
-    default <V2> Cached<K, V2> map(final Function<? super V, ? extends V2> function) {
-        return this.mapValues(function);
     }
 
     @Override
@@ -157,9 +128,6 @@ public interface Cached<K, V>
         }
 
         @Override
-        Cached.Immutable<K, V> filter(final Predicate<? super V> predicate);
-
-        @Override
         default Cached.Immutable<K, V> immutableCopy() {
             return this;
         }
@@ -170,14 +138,6 @@ public interface Cached<K, V>
         @Override
         default UnmodifiableIterator<V> iterator() {
             return this.values().iterator();
-        }
-
-        @Override
-        <V2> Cached.Immutable<K, V2> mapValues(Function<? super V, ? extends V2> function);
-
-        @Override
-        default <V2> Cached.Immutable<K, V2> map(final Function<? super V, ? extends V2> function) {
-            return this.mapValues(function);
         }
 
     }

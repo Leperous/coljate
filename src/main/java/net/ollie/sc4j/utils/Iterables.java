@@ -4,9 +4,12 @@ import net.ollie.sc4j.Collection;
 import net.ollie.sc4j.access.Finite;
 
 import javax.annotation.CheckReturnValue;
+
 import java.util.*;
+import java.util.function.BiConsumer;
 import java.util.function.Function;
 import java.util.function.Predicate;
+import java.util.stream.Collector;
 
 /**
  * @author Ollie
@@ -75,6 +78,15 @@ public final class Iterables {
         }
     }
 
+    public static <V, A, R> R collect(final Iterable<? extends V> iterable, final Collector<? super V, A, ? extends R> collector) {
+        final A into = collector.supplier().get();
+        final BiConsumer<A, ? super V> accumulator = collector.accumulator();
+        for (final V element : iterable) {
+            accumulator.accept(into, element);
+        }
+        return collector.finisher().apply(into);
+    }
+
     public static <V1, V2> Iterable<V2> apply(final Iterable<V1> iterable, final Function<? super V1, ? extends V2> function) {
         return () -> new Iterator<V2>() {
 
@@ -89,6 +101,7 @@ public final class Iterables {
             public V2 next() {
                 return function.apply(base.next());
             }
+
         };
     }
 
@@ -99,7 +112,7 @@ public final class Iterables {
 
     public static OptionalInt indexOf(final Iterable<?> iterable, final Object target) {
         int index = 0;
-        for (final Iterator<?> iterator = iterable.iterator(); iterator.hasNext(); ) {
+        for (final Iterator<?> iterator = iterable.iterator(); iterator.hasNext();) {
             if (Objects.equals(iterator.next(), target)) {
                 return OptionalInt.of(index);
             } else {

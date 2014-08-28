@@ -1,13 +1,9 @@
 package net.ollie.sc4j;
 
-import java.util.function.Predicate;
-
 import net.ollie.sc4j.access.Finite;
 import net.ollie.sc4j.access.Keyed;
 import net.ollie.sc4j.imposed.Distinctness.Duplicated;
 import net.ollie.sc4j.utils.numeric.NonNegativeInteger;
-
-import javax.annotation.Nonnull;
 
 /**
  *
@@ -30,12 +26,6 @@ public interface MultiSet<V>
 
     @Override
     Finite<NonNegativeInteger> values();
-
-    @Override
-    MultiSet<V> filter(Predicate<? super V> predicate);
-
-    @Nonnull
-    Map<V, NonNegativeInteger> map();
 
     @Override
     default boolean isEmpty() {
@@ -89,12 +79,6 @@ public interface MultiSet<V>
         default MultiSet.Immutable<V> immutableCopy() {
             return this;
         }
-
-        @Override
-        MultiSet.Immutable<V> filter(Predicate<? super V> predicate);
-
-        @Override
-        Map.Immutable<V, NonNegativeInteger> map();
 
     }
 

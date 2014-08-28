@@ -1,19 +1,17 @@
 package net.ollie.sc4j.access;
 
-import java.util.function.Function;
 import java.util.function.Predicate;
 
 import net.ollie.sc4j.Collection;
 import net.ollie.sc4j.imposed.Mutability;
 
 import javax.annotation.CheckForNull;
-import javax.annotation.CheckReturnValue;
 import javax.annotation.Nonnull;
 
 /**
  * An element {@code V} can be accessed through inspecting the head or tail elements.
  *
- * This interface introduces the {@link #map} method.
+ * This interface introduces the {@link #stream} method.
  *
  * @author Ollie
  */
@@ -25,14 +23,6 @@ public interface Traversable<V>
 
     @Nonnull
     Traversable<V> tail();
-
-    @CheckReturnValue
-    @Nonnull
-    <V2> Traversable<V2> map(@Nonnull Function<? super V, ? extends V2> function);
-
-    @CheckReturnValue
-    @Nonnull
-    Traversable<V> filter(@Nonnull Predicate<? super V> predicate);
 
     Traversable.Mutable<V> mutableCopy();
 
@@ -52,9 +42,6 @@ public interface Traversable<V>
         Traversable.Immutable<V> tail();
 
         @Override
-        Traversable.Immutable<V> filter(@Nonnull Predicate<? super V> predicate);
-
-        @Override
         default Traversable.Immutable<V> immutableCopy() {
             return this;
         }
@@ -68,11 +55,6 @@ public interface Traversable<V>
         @Override
         default V head() {
             return null;
-        }
-
-        @Override
-        default Traversable.Empty<V> filter(final Predicate<? super V> predicate) {
-            return this;
         }
 
         @Override

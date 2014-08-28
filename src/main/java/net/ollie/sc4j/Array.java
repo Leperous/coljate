@@ -1,15 +1,12 @@
 package net.ollie.sc4j;
 
 import java.util.Comparator;
-import java.util.function.Function;
-import java.util.function.Predicate;
 
-import net.ollie.sc4j.access.Finite;
 import net.ollie.sc4j.access.Indexed;
 import net.ollie.sc4j.imposed.Ordered;
-import net.ollie.sc4j.utils.Functions;
 import net.ollie.sc4j.utils.numeric.NonNegativeInteger;
 
+import javax.annotation.CheckForNull;
 import javax.annotation.CheckReturnValue;
 import javax.annotation.Nonnull;
 
@@ -21,6 +18,10 @@ import javax.annotation.Nonnull;
 public interface Array<V>
         extends List<V>, Indexed<NonNegativeInteger, V>, Ordered<V> {
 
+//    @Override
+//    Stream<V, ? extends Array<V>> stream();
+
+    @CheckForNull
     V get(int index) throws IndexOutOfBoundsException;
 
     @Override
@@ -57,30 +58,6 @@ public interface Array<V>
     Array<V> tail();
 
     @Override
-    default Array<V> filter(final Predicate<? super V> predicate) {
-        return this.map(Functions.satisfying(predicate));
-    }
-
-    @Override
-    Array<V> filterKeys(Predicate<? super NonNegativeInteger> predicate);
-
-    @Override
-    default Array<V> filterValues(final Predicate<? super V> predicate) {
-        return this.filter(predicate);
-    }
-
-    @Override
-    <V2> Array<V2> map(Function<? super V, ? extends V2> function);
-
-    @Override
-    default <V2> Array<V2> mapValues(Function<? super V, ? extends V2> function) {
-        return this.map(function);
-    }
-
-    @Override
-    <R> Array<R> flatMap(Function<? super V, ? extends Finite<R>> function);
-
-    @Override
     Array.Mutable<V> mutableCopy();
 
     @Override
@@ -108,9 +85,6 @@ public interface Array<V>
 
         @Override
         Array.Mutable<V> reverse();
-
-        @Override
-        <V2> Array.Mutable<V2> map(Function<? super V, ? extends V2> function);
 
         @Override
         default V first() {
@@ -244,9 +218,6 @@ public interface Array<V>
         }
 
         @Override
-        <R> Array.Immutable<R> flatMap(Function<? super V, ? extends Finite<R>> function);
-
-        @Override
         Array.Immutable<V> tail();
 
         @Override
@@ -260,12 +231,6 @@ public interface Array<V>
 
         @Override
         Array.Immutable<V> notAll(Object value);
-
-        @Override
-        <V2> Array.Immutable<V2> map(Function<? super V, ? extends V2> function);
-
-        @Override
-        Array.Immutable<V> filter(Predicate<? super V> predicate);
 
         @Override
         default Array.Immutable<V> values() {
@@ -321,28 +286,6 @@ public interface Array<V>
             } else {
                 throw new IndexOutOfBoundsException();
             }
-        }
-
-        @Override
-        @SuppressWarnings("unchecked")
-        default <V2> Array.Empty<V2> map(Function<? super V, ? extends V2> function) {
-            return (Array.Empty<V2>) this;
-        }
-
-        @Override
-        @SuppressWarnings("unchecked")
-        default <V2> Array.Empty<V2> flatMap(Function<? super V, ? extends Finite<V2>> function) {
-            return (Array.Empty<V2>) this;
-        }
-
-        @Override
-        default Array.Empty<V> filter(final Predicate<? super V> predicate) {
-            return this;
-        }
-
-        @Override
-        default Array.Empty<V> filterKeys(final Predicate<? super NonNegativeInteger> predicate) {
-            return this;
         }
 
         @Override
@@ -407,9 +350,6 @@ public interface Array<V>
         default Array.Singleton<V> reverse() {
             return this;
         }
-
-        @Override
-        <V2> Array.Singleton<V2> map(Function<? super V, ? extends V2> function);
 
         @Override
         default NonNegativeInteger capacity() {

@@ -3,7 +3,6 @@ package net.ollie.sc4j;
 import net.ollie.sc4j.access.Traversable;
 import net.ollie.sc4j.imposed.Ordered;
 
-import java.util.function.Function;
 import java.util.function.Predicate;
 
 /**
@@ -16,12 +15,6 @@ public interface Sequence<V>
 
     @Override
     Sequence<V> tail();
-
-    @Override
-    <V2> Sequence<V2> map(Function<? super V, ? extends V2> function);
-
-    @Override
-    Sequence<V> filter(Predicate<? super V> predicate);
 
     @Override
     Sequence.Mutable<V> mutableCopy();
@@ -41,9 +34,6 @@ public interface Sequence<V>
         Sequence.Immutable<V> tail();
 
         @Override
-        Sequence.Immutable<V> filter(Predicate<? super V> predicate);
-
-        @Override
         default Sequence.Immutable<V> immutableCopy() {
             return this;
         }
@@ -56,16 +46,6 @@ public interface Sequence<V>
         @Override
         default V head() {
             return Traversable.Empty.super.head();
-        }
-
-        @Override
-        default <V2> Sequence.Empty<V2> map(Function<? super V, ? extends V2> function) {
-            return (Sequence.Empty<V2>) this;
-        }
-
-        @Override
-        default Sequence.Empty<V> filter(final Predicate<? super V> predicate) {
-            return this;
         }
 
         @Override

@@ -7,9 +7,8 @@ import net.ollie.sc4j.utils.numeric.NonNegativeInteger;
 import javax.annotation.CheckForNull;
 import javax.annotation.CheckReturnValue;
 import javax.annotation.Nonnull;
+
 import java.util.OptionalInt;
-import java.util.function.Function;
-import java.util.function.Predicate;
 
 /**
  * An element {@code V} may be found given some integer index.
@@ -45,25 +44,6 @@ public interface Indexed<N extends Number, V>
     @Override
     default boolean contains(final Object object) {
         return this.indexOf(object) != null;
-    }
-
-    @Override
-    <V2> Indexed<N, V2> map(Function<? super V, ? extends V2> function);
-
-    @Override
-    default <V2> Indexed<N, V2> mapValues(final Function<? super V, ? extends V2> function) {
-        return this.map(function);
-    }
-
-    @Override
-    Indexed<N, V> filter(Predicate<? super V> predicate);
-
-    @Override
-    Indexed<N, V> filterKeys(Predicate<? super N> predicate);
-
-    @Override
-    default Indexed<N, V> filterValues(final Predicate<? super V> predicate) {
-        return this.filter(predicate);
     }
 
     @Override
@@ -103,12 +83,6 @@ public interface Indexed<N extends Number, V>
         Indexed.Immutable<N, V> tail();
 
         @Override
-        Indexed.Immutable<N, V> filter(Predicate<? super V> predicate);
-
-        @Override
-        <V2> Indexed.Immutable<N, V2> map(Function<? super V, ? extends V2> function);
-
-        @Override
         default Indexed.Immutable<N, V> values() {
             return this;
         }
@@ -136,17 +110,6 @@ public interface Indexed<N extends Number, V>
         @Override
         default Indexed.Empty<N, V> tail() {
             return this;
-        }
-
-        @Override
-        default Indexed.Empty<N, V> filter(Predicate<? super V> predicate) {
-            return this;
-        }
-
-        @Override
-        @SuppressWarnings("unchecked")
-        default <V2> Indexed.Empty<N, V2> map(Function<? super V, ? extends V2> function) {
-            return (Indexed.Empty<N, V2>) this;
         }
 
     }

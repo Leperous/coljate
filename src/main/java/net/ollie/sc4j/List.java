@@ -2,8 +2,6 @@ package net.ollie.sc4j;
 
 import java.util.Iterator;
 import java.util.Objects;
-import java.util.function.Function;
-import java.util.function.Predicate;
 
 import net.ollie.sc4j.access.Finite;
 import net.ollie.sc4j.utils.Iterables;
@@ -35,17 +33,8 @@ public interface List<V>
     @CheckForNull
     V last();
 
-    @Override
-    <V2> List<V2> map(Function<? super V, ? extends V2> function);
-
-    @Override
-    List<V> filter(Predicate<? super V> predicate);
-
     @Nonnull
     List<V> reverse();
-
-    @Override
-    <R> List<R> flatMap(Function<? super V, ? extends Finite<R>> function);
 
     @Override
     List.Mutable<V> mutableCopy();
@@ -215,15 +204,6 @@ public interface List<V>
         List.Immutable<V> notAll(Object value);
 
         @Override
-        <V2> List.Immutable<V2> map(Function<? super V, ? extends V2> function);
-
-        @Override
-        List.Immutable<V> filter(Predicate<? super V> predicate);
-
-        @Override
-        <R> List.Immutable<R> flatMap(Function<? super V, ? extends Finite<R>> function);
-
-        @Override
         List.Immutable<V> reverse();
 
         @Override
@@ -266,12 +246,6 @@ public interface List<V>
         }
 
         @Override
-        @SuppressWarnings("unchecked")
-        default <V2> List.Empty<V2> map(Function<? super V, ? extends V2> function) {
-            return (List.Empty<V2>) this;
-        }
-
-        @Override
         default List.Empty<V> tail() {
             return this;
         }
@@ -284,17 +258,6 @@ public interface List<V>
         @Override
         default List.Empty<V> reverse() {
             return this;
-        }
-
-        @Override
-        default List.Empty<V> filter(final Predicate<? super V> predicate) {
-            return this;
-        }
-
-        @Override
-        @SuppressWarnings("unchecked")
-        default <R> List.Empty<R> flatMap(final Function<? super V, ? extends Finite<R>> function) {
-            return (List.Empty<R>) this;
         }
 
         @Override
@@ -330,9 +293,6 @@ public interface List<V>
         default List.Immutable<V> notAll(final Object value) {
             return this.notFirst(value);
         }
-
-        @Override
-        <V2> List.Singleton<V2> map(Function<? super V, ? extends V2> function);
 
         @Override
         default List.Singleton<V> reverse() {
