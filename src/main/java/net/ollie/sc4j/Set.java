@@ -3,10 +3,10 @@ package net.ollie.sc4j;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
 
-import net.ollie.sc4j.access.Finite;
+import net.ollie.sc4j.access.Streamable;
 import net.ollie.sc4j.imposed.Distinctness.Unique;
-import net.ollie.sc4j.utils.Iterables;
-import net.ollie.sc4j.utils.UnmodifiableIterator;
+import net.ollie.sc4j.utils.iterators.Iterables;
+import net.ollie.sc4j.utils.iterators.UnmodifiableIterator;
 
 import javax.annotation.CheckForNull;
 import javax.annotation.CheckReturnValue;
@@ -22,7 +22,7 @@ import javax.annotation.OverridingMethodsMustInvokeSuper;
  * @author Ollie
  */
 public interface Set<V>
-        extends Finite<V>, Unique<V> {
+        extends Streamable<V>, Unique<V> {
 
 //    @Override
 //    Stream<V, ? extends Set<V>> stream();
@@ -50,7 +50,7 @@ public interface Set<V>
 
     @javax.annotation.concurrent.NotThreadSafe
     interface Mutable<V>
-            extends Set<V>, Finite.Mutable<V> {
+            extends Set<V>, Streamable.Mutable<V> {
 
         boolean add(V value);
 
@@ -142,7 +142,7 @@ public interface Set<V>
 
     @javax.annotation.concurrent.Immutable
     interface Immutable<V>
-            extends Set<V>, Finite.Immutable<V> {
+            extends Set<V>, Streamable.Immutable<V> {
 
         @CheckReturnValue
         @Nonnull
@@ -178,7 +178,7 @@ public interface Set<V>
 
     @javax.annotation.concurrent.Immutable
     interface Empty<V>
-            extends Set.Immutable<V>, Finite.Empty<V> {
+            extends Set.Immutable<V>, Streamable.Empty<V> {
 
         @Override
         Set.Singleton<V> and(V value);
@@ -190,7 +190,7 @@ public interface Set<V>
 
         @Override
         public default UnmodifiableIterator<V> iterator() {
-            return Finite.Empty.super.iterator();
+            return Streamable.Empty.super.iterator();
         }
 
         @Override
@@ -202,7 +202,7 @@ public interface Set<V>
 
     @javax.annotation.concurrent.Immutable
     interface Singleton<V>
-            extends Set.Immutable<V>, Finite.Singleton<V> {
+            extends Set.Immutable<V>, Streamable.Singleton<V> {
 
         @Override
         Set.Empty<V> tail();

@@ -1,7 +1,6 @@
 package net.ollie.sc4j.utils;
 
 import java.util.NoSuchElementException;
-import java.util.function.Supplier;
 
 /**
  *
@@ -12,10 +11,8 @@ public final class Suppliers {
     private Suppliers() {
     }
 
-    public static <V> Supplier<V> noSuchElement() {
-        return () -> {
-            throw new NoSuchElementException();
-        };
+    public static <V> V noSuchElement() {
+        throw new NoSuchElementException();
     }
 
 }

@@ -11,7 +11,7 @@ import java.util.function.Predicate;
  * @author Ollie
  */
 public interface Sequence<V>
-        extends Ordered<V>, Traversable<V> {
+        extends Traversable<V>, Ordered<V> {
 
     @Override
     Sequence<V> tail();

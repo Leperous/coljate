@@ -1,6 +1,6 @@
 package net.ollie.sc4j;
 
-import net.ollie.sc4j.access.Finite;
+import net.ollie.sc4j.access.Streamable;
 import net.ollie.sc4j.access.Keyed;
 import net.ollie.sc4j.imposed.Distinctness.Unique;
 
@@ -12,7 +12,7 @@ import javax.annotation.Nonnull;
  * @author Ollie
  */
 public interface Graph<N, V>
-        extends Keyed.Single<N, V>, Finite<V> {
+        extends Keyed.Single<N, V>, Streamable<V> {
 
     @Nonnull
     Unique<N> neighbours(N node);
@@ -23,7 +23,7 @@ public interface Graph<N, V>
 
     @Override
     default boolean isEmpty() {
-        return Finite.super.isEmpty();
+        return Streamable.super.isEmpty();
     }
 
     @Override
@@ -33,14 +33,14 @@ public interface Graph<N, V>
     Graph.Immutable<N, V> immutableCopy();
 
     interface Mutable<N, V>
-            extends Graph<N, V>, Finite.Mutable<V> {
+            extends Graph<N, V>, Streamable.Mutable<V> {
 
         void delete(N node);
 
     }
 
     interface Immutable<N, V>
-            extends Graph<N, V>, Finite.Immutable<V> {
+            extends Graph<N, V>, Streamable.Immutable<V> {
 
         @Override
         Graph.Immutable<N, V> tail();

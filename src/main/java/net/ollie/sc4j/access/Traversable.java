@@ -1,5 +1,6 @@
 package net.ollie.sc4j.access;
 
+import java.util.Optional;
 import java.util.function.Predicate;
 
 import net.ollie.sc4j.Collection;
@@ -10,8 +11,6 @@ import javax.annotation.Nonnull;
 
 /**
  * An element {@code V} can be accessed through inspecting the head or tail elements.
- *
- * This interface introduces the {@link #stream} method.
  *
  * @author Ollie
  */
@@ -77,8 +76,8 @@ public interface Traversable<V>
         Traversable.Empty<V> tail();
 
         @Override
-        default V findOrElse(Predicate<? super V> predicate, V defaultValue) {
-            return Collection.Singleton.super.findOrElse(predicate, defaultValue);
+        default Optional<V> findAny(Predicate<? super V> predicate) {
+            return Collection.Singleton.super.findAny(predicate);
         }
 
     }

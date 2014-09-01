@@ -3,9 +3,9 @@ package net.ollie.sc4j;
 import java.util.Iterator;
 import java.util.Objects;
 
-import net.ollie.sc4j.access.Finite;
-import net.ollie.sc4j.utils.Iterables;
-import net.ollie.sc4j.utils.UnmodifiableIterator;
+import net.ollie.sc4j.access.Streamable;
+import net.ollie.sc4j.utils.iterators.Iterables;
+import net.ollie.sc4j.utils.iterators.UnmodifiableIterator;
 import net.ollie.sc4j.utils.numeric.NonNegativeInteger;
 
 import javax.annotation.CheckForNull;
@@ -20,11 +20,11 @@ import javax.annotation.OverridingMethodsMustInvokeSuper;
  * @see Array for index-accessible form.
  */
 public interface List<V>
-        extends Sequence<V>, Finite<V> {
+        extends Sequence<V>, Streamable<V> {
 
     @Override
     default V head() {
-        return Finite.super.head();
+        return Streamable.super.head();
     }
 
     @Override
@@ -60,7 +60,7 @@ public interface List<V>
      */
     @javax.annotation.concurrent.NotThreadSafe
     interface Mutable<V>
-            extends List<V>, Sequence.Mutable<V>, Finite.Mutable<V> {
+            extends List<V>, Sequence.Mutable<V>, Streamable.Mutable<V> {
 
         void prefix(V value);
 
@@ -186,7 +186,7 @@ public interface List<V>
      */
     @javax.annotation.concurrent.Immutable
     interface Immutable<V>
-            extends List<V>, Sequence.Immutable<V>, Finite.Immutable<V> {
+            extends List<V>, Sequence.Immutable<V>, Streamable.Immutable<V> {
 
         @Override
         List.Immutable<V> tail();
@@ -215,7 +215,7 @@ public interface List<V>
 
     @javax.annotation.concurrent.Immutable
     interface Empty<V>
-            extends List.Immutable<V>, Sequence.Empty<V>, Finite.Empty<V> {
+            extends List.Immutable<V>, Sequence.Empty<V>, Streamable.Empty<V> {
 
         @Override
         default V head() {
@@ -242,7 +242,7 @@ public interface List<V>
 
         @Override
         default UnmodifiableIterator<V> iterator() {
-            return Finite.Empty.super.iterator();
+            return Streamable.Empty.super.iterator();
         }
 
         @Override
@@ -269,7 +269,7 @@ public interface List<V>
 
     @javax.annotation.concurrent.Immutable
     interface Singleton<V>
-            extends List.Immutable<V>, Sequence.Singleton<V>, Finite.Singleton<V> {
+            extends List.Immutable<V>, Sequence.Singleton<V>, Streamable.Singleton<V> {
 
         @Override
         default V first() {

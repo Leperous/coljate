@@ -3,7 +3,7 @@ package net.ollie.sc4j;
 import java.util.Objects;
 import java.util.function.Function;
 
-import net.ollie.sc4j.access.Finite;
+import net.ollie.sc4j.access.Streamable;
 import net.ollie.sc4j.imposed.Cached;
 import net.ollie.sc4j.imposed.Mapping.Surjective;
 import net.ollie.sc4j.imposed.Mutability;
@@ -156,7 +156,7 @@ public interface Map<K, V>
         Set.Immutable<K> keys();
 
         @Override
-        Finite.Immutable<V> values();
+        Streamable.Immutable<V> values();
 
         @Override
         Set.Immutable<? extends Map.Immutable.Entry<K, V>> entries();

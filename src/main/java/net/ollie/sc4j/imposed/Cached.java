@@ -4,9 +4,9 @@ import java.util.Iterator;
 import java.util.Objects;
 import java.util.function.Supplier;
 
-import net.ollie.sc4j.access.Finite;
+import net.ollie.sc4j.access.Streamable;
 import net.ollie.sc4j.access.Keyed;
-import net.ollie.sc4j.utils.UnmodifiableIterator;
+import net.ollie.sc4j.utils.iterators.UnmodifiableIterator;
 
 import javax.annotation.CheckForNull;
 
@@ -18,7 +18,7 @@ import javax.annotation.CheckForNull;
  * @param <V> value type
  */
 public interface Cached<K, V>
-        extends Keyed.Single<K, V>, Finite<V> {
+        extends Keyed.Single<K, V>, Streamable<V> {
 
     default V getOrDefault(final Object key, final V defaultValue) {
         return this.getOrElse(key, () -> defaultValue);
@@ -32,10 +32,10 @@ public interface Cached<K, V>
     }
 
     @Override
-    Finite<V> values();
+    Streamable<V> values();
 
     @Override
-    default Finite<V> tail() {
+    default Streamable<V> tail() {
         return this.values().tail();
     }
 
@@ -72,7 +72,7 @@ public interface Cached<K, V>
      */
     @javax.annotation.concurrent.NotThreadSafe
     interface Mutable<K, V>
-            extends Cached<K, V>, Finite.Mutable<V> {
+            extends Cached<K, V>, Streamable.Mutable<V> {
 
         @CheckForNull
         V put(K key, V value);
@@ -120,10 +120,10 @@ public interface Cached<K, V>
 
     @javax.annotation.concurrent.Immutable
     interface Immutable<K, V>
-            extends Cached<K, V>, Finite.Immutable<V> {
+            extends Cached<K, V>, Streamable.Immutable<V> {
 
         @Override
-        default Finite.Immutable<V> tail() {
+        default Streamable.Immutable<V> tail() {
             return Cached.super.tail().immutableCopy();
         }
 
@@ -133,7 +133,7 @@ public interface Cached<K, V>
         }
 
         @Override
-        Finite.Immutable<V> values();
+        Streamable.Immutable<V> values();
 
         @Override
         default UnmodifiableIterator<V> iterator() {

@@ -1,6 +1,6 @@
 package net.ollie.sc4j;
 
-import net.ollie.sc4j.access.Finite;
+import net.ollie.sc4j.access.Streamable;
 
 import javax.annotation.CheckForNull;
 import javax.annotation.Nonnull;
@@ -14,7 +14,7 @@ import java.util.NoSuchElementException;
  * @see java.util.Queue
  */
 public interface Queue<V>
-        extends Sequence<V>, Finite<V> {
+        extends Sequence<V>, Streamable<V> {
 
     @CheckForNull
     V peek();
@@ -37,7 +37,7 @@ public interface Queue<V>
     List.Immutable<V> immutableCopy();
 
     interface Mutable<V>
-            extends Queue<V>, Sequence.Mutable<V>, Finite.Mutable<V> {
+            extends Queue<V>, Sequence.Mutable<V>, Streamable.Mutable<V> {
 
         boolean offer(V value);
 

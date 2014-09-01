@@ -1,12 +1,14 @@
 package net.ollie.sc4j;
 
 import java.util.Objects;
+import java.util.Optional;
 import java.util.function.Predicate;
 
 import net.ollie.sc4j.access.Findable;
-import net.ollie.sc4j.access.Finite;
+import net.ollie.sc4j.access.Streamable;
 import net.ollie.sc4j.imposed.Mutability;
-import net.ollie.sc4j.utils.Iterables;
+import net.ollie.sc4j.utils.Suppliers;
+import net.ollie.sc4j.utils.iterators.Iterables;
 
 import javax.annotation.Nonnull;
 
@@ -18,7 +20,7 @@ import javax.annotation.Nonnull;
  *
  * @param <V> value type
  * @author Ollie
- * @see Finite
+ * @see Streamable
  */
 public interface Collection<V> {
 
@@ -67,11 +69,9 @@ public interface Collection<V> {
         }
 
         @Override
-        default V findOrElse(final Predicate<? super V> predicate, final V defaultValue) {
+        default Optional<V> findAny(final Predicate<? super V> predicate) {
             final V value = this.value();
-            return predicate.test(value)
-                    ? value
-                    : defaultValue;
+            return predicate.test(value) ? Optional.of(value) : Suppliers.noSuchElement();
         }
 
     }

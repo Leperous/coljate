@@ -2,7 +2,7 @@ package net.ollie.sc4j.access;
 
 import java.util.Iterator;
 import java.util.Objects;
-import java.util.function.BiConsumer;
+import java.util.Optional;
 import java.util.function.BiFunction;
 import java.util.function.BinaryOperator;
 import java.util.function.Function;
@@ -10,9 +10,10 @@ import java.util.function.Predicate;
 import java.util.stream.Collector;
 
 import net.ollie.sc4j.utils.Arrays;
-import net.ollie.sc4j.utils.Iterables;
-import net.ollie.sc4j.utils.Iterators;
-import net.ollie.sc4j.utils.UnmodifiableIterator;
+import net.ollie.sc4j.utils.iterators.Iterables;
+import net.ollie.sc4j.utils.iterators.Iterators;
+import net.ollie.sc4j.utils.iterators.Streams;
+import net.ollie.sc4j.utils.iterators.UnmodifiableIterator;
 import net.ollie.sc4j.utils.numeric.NonNegativeInteger;
 
 import javax.annotation.CheckReturnValue;
@@ -21,18 +22,24 @@ import javax.annotation.Nonnull;
 /**
  * An element {@code V} may be found by iterating.
  *
- * This interface introduces the {@link #reduce} method.
+ * This interface introduces the {@link #stream} method.
  *
  * It it comparable to a stock {@link java.util.Collection}.
  *
  * @author Ollie
  * @see java.util.Collection
  */
-public interface Finite<V>
+public interface Streamable<V>
         extends Traversable<V>, Iterable<V>, Findable<V> {
 
+    @Override
+    default Iterator<V> iterator() {
+        return this.stream();
+    }
+
     @Nonnull
-    Stream<V, ? extends Finite<V>> stream();
+    @CheckReturnValue
+    Stream<V, ? extends Streamable<V>> stream();
 
     /**
      * @return the number create elements, including nulls, in this collection.
@@ -59,11 +66,7 @@ public interface Finite<V>
 
     @CheckReturnValue
     default <R> R reduce(final BiFunction<R, V, ? extends R> function, final R initial) {
-        R current = initial;
-        for (final V element : this) {
-            current = function.apply(current, element);
-        }
-        return current;
+        return Iterables.reduce(this, function, initial);
     }
 
     default <R> R reduce(final Function<V, R> transform, final BinaryOperator<R> each, final R initial) {
@@ -71,22 +74,12 @@ public interface Finite<V>
     }
 
     default <C, A> C collect(final Collector<? super V, A, C> collector) {
-        final A into = collector.supplier().get();
-        final BiConsumer<A, ? super V> accumulator = collector.accumulator();
-        for (final V element : this) {
-            accumulator.accept(into, element);
-        }
-        return collector.finisher().apply(into);
+        return this.stream().collect(collector);
     }
 
     @Override
-    default V findOrElse(final Predicate<? super V> predicate, final V defaultValue) {
-        for (final V element : this) {
-            if (predicate.test(element)) {
-                return element;
-            }
-        }
-        return defaultValue;
+    default Optional<V> findAny(final Predicate<? super V> predicate) {
+        return Iterators.findFirst(this.iterator(), predicate);
     }
 
     @Nonnull
@@ -111,7 +104,7 @@ public interface Finite<V>
     }
 
     @Override
-    Finite<V> tail();
+    Streamable<V> tail();
 
     default boolean forAny(final Predicate<? super V> predicate) {
         for (final V element : this) {
@@ -132,12 +125,12 @@ public interface Finite<V>
     }
 
     @Override
-    Finite.Mutable<V> mutableCopy();
+    Streamable.Mutable<V> mutableCopy();
 
     @Override
-    Finite.Immutable<V> immutableCopy();
+    Streamable.Immutable<V> immutableCopy();
 
-    default boolean equals(final Finite<?> that) {
+    default boolean equals(final Streamable<?> that) {
         return that != null
                 && Iterables.equals(this, that);
     }
@@ -152,29 +145,34 @@ public interface Finite<V>
 
     @javax.annotation.concurrent.NotThreadSafe
     interface Mutable<V>
-            extends Finite<V>, Traversable.Mutable<V> {
+            extends Streamable<V>, Traversable.Mutable<V> {
 
     }
 
     @javax.annotation.concurrent.Immutable
     interface Immutable<V>
-            extends Finite<V>, Traversable.Immutable<V> {
+            extends Streamable<V>, Traversable.Immutable<V> {
 
         @Override
-        Finite.Immutable<V> tail();
+        Streamable.Immutable<V> tail();
 
         @Override
-        UnmodifiableIterator<V> iterator();
+        default UnmodifiableIterator<V> iterator() {
+            return this.stream();
+        }
 
         @Override
-        default Finite.Immutable<V> immutableCopy() {
+        Stream.Unmodifiable<V, ? extends Streamable.Immutable<V>> stream();
+
+        @Override
+        default Streamable.Immutable<V> immutableCopy() {
             return this;
         }
 
     }
 
     interface Empty<V>
-            extends Traversable.Empty<V>, Finite.Immutable<V> {
+            extends Traversable.Empty<V>, Streamable.Immutable<V> {
 
         @Override
         default boolean isEmpty() {
@@ -187,8 +185,8 @@ public interface Finite<V>
         }
 
         @Override
-        default UnmodifiableIterator<V> iterator() {
-            return Iterators.empty();
+        default Stream.Unmodifiable<V, Streamable.Empty<V>> stream() {
+            return Streams.empty(this);
         }
 
         @Override
@@ -202,7 +200,7 @@ public interface Finite<V>
         }
 
         @Override
-        default Finite.Empty<V> tail() {
+        default Streamable.Empty<V> tail() {
             return this;
         }
 
@@ -210,14 +208,14 @@ public interface Finite<V>
 
     @javax.annotation.concurrent.Immutable
     interface Singleton<V>
-            extends Finite.Immutable<V>, Traversable.Singleton<V> {
+            extends Streamable.Immutable<V>, Traversable.Singleton<V> {
 
         @Override
-        Finite.Empty<V> tail();
+        Streamable.Empty<V> tail();
 
         @Override
         default UnmodifiableIterator<V> iterator() {
-            return Iterators.singleton(this.value());
+            return Iterators.of(this.head());
         }
 
         @Override
@@ -242,16 +240,13 @@ public interface Finite<V>
         }
 
         @Override
-        default V findOrElse(final Predicate<? super V> predicate, final V defaultValue) {
-            return predicate.test(value())
-                    ? value()
-                    : defaultValue;
+        default Optional<V> findAny(final Predicate<? super V> predicate) {
+            return Traversable.Singleton.super.findAny(predicate);
         }
 
     }
 
-    interface Stream<V, C extends Finite<V>>
-            extends Iterable<V> {
+    interface Stream<V, C extends Streamable<V>> extends Iterator<V> {
 
         @CheckReturnValue
         @Nonnull
@@ -259,24 +254,29 @@ public interface Finite<V>
 
         @CheckReturnValue
         @Nonnull
-        <V2> Stream<V2, ? extends Finite<V2>> map(@Nonnull Function<? super V, ? extends V2> function);
-
-        default <R> R reduce(final BiFunction<R, V, ? extends R> function, R initial) {
-            return this.collect().reduce(function, initial);
-        }
+        <V2> Stream<V2, ? extends Streamable<V2>> map(@Nonnull Function<? super V, ? extends V2> function);
 
         @Nonnull
         @CheckReturnValue
-        <V2> Stream<V2, ? extends Finite<V2>> flatMap(Function<? super V, ? extends Finite<? extends V2>> function);
+        <V2> Stream<V2, ? extends Streamable<V2>> flatMap(Function<? super V, ? extends Streamable<? extends V2>> function);
 
-        default V findFirst(final Predicate<? super V> predicate) {
-            return this.collect().findFirst(predicate);
+        default <R> R reduce(final BiFunction<R, V, ? extends R> function, final R initial) {
+            return Iterators.reduce(this, function, initial);
+        }
+
+        default Optional<V> findFirst(final Predicate<? super V> predicate) {
+            return Iterators.findFirst(this, predicate);
+        }
+
+        default <A, R> R collect(final Collector<? super V, A, ? extends R> collector) {
+            return Iterators.collect(this, collector);
         }
 
         C collect();
 
-        default <A, R> R collect(final Collector<? super V, A, ? extends R> collector) {
-            return Iterables.collect(this, collector);
+        interface Unmodifiable<V, C extends Streamable<V>>
+                extends Stream<V, C>, UnmodifiableIterator<V> {
+
         }
 
     }

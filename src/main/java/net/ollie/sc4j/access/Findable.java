@@ -1,6 +1,7 @@
 package net.ollie.sc4j.access;
 
 import java.util.NoSuchElementException;
+import java.util.Optional;
 import java.util.function.Predicate;
 
 import javax.annotation.Nonnull;
@@ -13,15 +14,7 @@ import javax.annotation.Nonnull;
  */
 public interface Findable<V> {
 
-    default V findFirst(@Nonnull final Predicate<? super V> predicate) throws NoSuchElementException {
-        final V found = this.findOrElse(predicate, null);
-        if (found == null) {
-            throw new NoSuchElementException();
-        } else {
-            return found;
-        }
-    }
-
-    V findOrElse(Predicate<? super V> predicate, V defaultValue);
+    @Nonnull
+    Optional<V> findAny(Predicate<? super V> predicate) throws NoSuchElementException;
 
 }

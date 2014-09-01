@@ -1,4 +1,4 @@
-package net.ollie.sc4j.utils;
+package net.ollie.sc4j.utils.iterators;
 
 import java.util.Iterator;
 import java.util.NoSuchElementException;
@@ -10,7 +10,7 @@ import java.util.NoSuchElementException;
 public interface UnmodifiableIterator<V> extends Iterator<V> {
 
     static <V> UnmodifiableIterator<V> of() {
-        return Empty.INSTANCE;
+        return EmptyIterator.INSTANCE;
     }
 
     static <V> UnmodifiableIterator<V> of(final V element) {
@@ -49,25 +49,6 @@ public interface UnmodifiableIterator<V> extends Iterator<V> {
             }
 
         };
-    }
-
-    final class Empty<V> implements UnmodifiableIterator<V> {
-
-        static final Empty INSTANCE = new Empty();
-
-        private Empty() {
-        }
-
-        @Override
-        public boolean hasNext() {
-            return false;
-        }
-
-        @Override
-        public V next() {
-            throw new NoSuchElementException();
-        }
-
     }
 
 }

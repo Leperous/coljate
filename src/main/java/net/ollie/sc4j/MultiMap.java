@@ -1,6 +1,6 @@
 package net.ollie.sc4j;
 
-import net.ollie.sc4j.access.Finite;
+import net.ollie.sc4j.access.Streamable;
 import net.ollie.sc4j.access.Keyed;
 import net.ollie.sc4j.imposed.Distinctness.Duplicated;
 import net.ollie.sc4j.utils.numeric.NonNegativeInteger;
@@ -13,11 +13,11 @@ import javax.annotation.Nonnull;
  * @author Ollie
  */
 public interface MultiMap<K, V>
-        extends Keyed.Multiple<K, V>, Finite<V>, Duplicated<V> {
+        extends Keyed.Multiple<K, V>, Streamable<V>, Duplicated<V> {
 
     @Override
     @Nonnull
-    Finite<V> get(Object key);
+    Streamable<V> get(Object key);
 
     @Override
     default NonNegativeInteger count(final Object object) {
@@ -39,10 +39,10 @@ public interface MultiMap<K, V>
     MultiMap.Immutable<K, V> immutableCopy();
 
     interface Mutable<K, V>
-            extends MultiMap<K, V>, Finite.Mutable<V> {
+            extends MultiMap<K, V>, Streamable.Mutable<V> {
 
         @Override
-        Finite.Mutable<V> get(Object object);
+        Streamable.Mutable<V> get(Object object);
 
         boolean put(K key, V value);
 
@@ -55,7 +55,7 @@ public interface MultiMap<K, V>
         }
 
         @Nonnull
-        Finite.Mutable<V> remove(K key);
+        Streamable.Mutable<V> remove(K key);
 
         default boolean removeAll(@Nonnull final Iterable<K> iterable) {
             boolean removed = false;
@@ -69,10 +69,10 @@ public interface MultiMap<K, V>
     }
 
     interface Immutable<K, V>
-            extends MultiMap<K, V>, Finite.Immutable<V> {
+            extends MultiMap<K, V>, Streamable.Immutable<V> {
 
         @Override
-        Finite.Immutable<V> get(Object object);
+        Streamable.Immutable<V> get(Object object);
 
         @Nonnull
         @CheckReturnValue
@@ -110,7 +110,7 @@ public interface MultiMap<K, V>
         Set.Immutable<K> keys();
 
         @Override
-        Finite.Immutable<V> values();
+        Streamable.Immutable<V> values();
 
         @Override
         default MultiMap.Immutable<K, V> immutableCopy() {

@@ -1,6 +1,6 @@
 package net.ollie.sc4j;
 
-import net.ollie.sc4j.access.Finite;
+import net.ollie.sc4j.access.Streamable;
 import net.ollie.sc4j.access.Keyed;
 import net.ollie.sc4j.imposed.Distinctness.Duplicated;
 import net.ollie.sc4j.utils.numeric.NonNegativeInteger;
@@ -11,7 +11,7 @@ import net.ollie.sc4j.utils.numeric.NonNegativeInteger;
  * @see Set
  */
 public interface MultiSet<V>
-        extends Finite<V>, Keyed.Single<V, NonNegativeInteger>, Duplicated<V> {
+        extends Streamable<V>, Keyed.Single<V, NonNegativeInteger>, Duplicated<V> {
 
     @Override
     default NonNegativeInteger get(final Object object) {
@@ -25,7 +25,7 @@ public interface MultiSet<V>
     Set<V> keys();
 
     @Override
-    Finite<NonNegativeInteger> values();
+    Streamable<NonNegativeInteger> values();
 
     @Override
     default boolean isEmpty() {
@@ -50,7 +50,7 @@ public interface MultiSet<V>
     }
 
     interface Mutable<V>
-            extends MultiSet<V>, Finite.Mutable<V> {
+            extends MultiSet<V>, Streamable.Mutable<V> {
 
         /**
          * Increment the given value by 1. If the value is not present, it is added and 1 is returned.
@@ -73,7 +73,7 @@ public interface MultiSet<V>
     }
 
     interface Immutable<V>
-            extends MultiSet<V>, Finite.Immutable<V> {
+            extends MultiSet<V>, Streamable.Immutable<V> {
 
         @Override
         default MultiSet.Immutable<V> immutableCopy() {

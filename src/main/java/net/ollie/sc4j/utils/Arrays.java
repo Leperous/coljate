@@ -1,5 +1,8 @@
 package net.ollie.sc4j.utils;
 
+import net.ollie.sc4j.utils.iterators.Iterators;
+import net.ollie.sc4j.utils.iterators.Iterables;
+
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 import java.util.function.Predicate;
@@ -22,7 +25,7 @@ public final class Arrays {
 
     public static <V> Iterator<V> iterator(final V[] array) {
         return array.length == 0
-                ? Iterators.empty()
+                ? Iterators.of()
                 : new ArrayIterator<>(array);
     }
 

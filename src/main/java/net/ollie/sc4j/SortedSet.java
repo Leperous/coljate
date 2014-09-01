@@ -2,7 +2,7 @@ package net.ollie.sc4j;
 
 import net.ollie.sc4j.imposed.sorting.Sorted;
 import net.ollie.sc4j.imposed.sorting.Sorter;
-import net.ollie.sc4j.utils.Iterables;
+import net.ollie.sc4j.utils.iterators.Iterables;
 
 import javax.annotation.CheckReturnValue;
 import javax.annotation.Nonnull;

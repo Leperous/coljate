@@ -1,7 +1,7 @@
 package net.ollie.sc4j.access;
 
 import net.ollie.sc4j.SortedSet;
-import net.ollie.sc4j.utils.Iterables;
+import net.ollie.sc4j.utils.iterators.Iterables;
 import net.ollie.sc4j.utils.numeric.NonNegativeInteger;
 
 import javax.annotation.CheckForNull;
@@ -16,7 +16,7 @@ import java.util.OptionalInt;
  * @author Ollie
  */
 public interface Indexed<N extends Number, V>
-        extends Finite<V>, Keyed.Single<N, V> {
+        extends Streamable<V>, Keyed.Single<N, V> {
 
     V get(@Nonnull N index) throws IndexOutOfBoundsException;
 
@@ -48,7 +48,7 @@ public interface Indexed<N extends Number, V>
 
     @Override
     default boolean isEmpty() {
-        return Finite.super.isEmpty();
+        return Streamable.super.isEmpty();
     }
 
     @Override
@@ -61,7 +61,7 @@ public interface Indexed<N extends Number, V>
      * @param <V>
      */
     interface Mutable<N extends Number, V>
-            extends Indexed<N, V>, Finite.Mutable<V> {
+            extends Indexed<N, V>, Streamable.Mutable<V> {
 
         V set(N index, V value) throws IndexOutOfBoundsException;
 
@@ -77,7 +77,7 @@ public interface Indexed<N extends Number, V>
      * @param <V>
      */
     interface Immutable<N extends Number, V>
-            extends Indexed<N, V>, Finite.Immutable<V> {
+            extends Indexed<N, V>, Streamable.Immutable<V> {
 
         @Override
         Indexed.Immutable<N, V> tail();
@@ -95,16 +95,16 @@ public interface Indexed<N extends Number, V>
     }
 
     interface Empty<N extends Number, V>
-            extends Indexed.Immutable<N, V>, Finite.Empty<V> {
+            extends Indexed.Immutable<N, V>, Streamable.Empty<V> {
 
         @Override
         default boolean isEmpty() {
-            return Finite.Empty.super.isEmpty();
+            return Streamable.Empty.super.isEmpty();
         }
 
         @Override
         default boolean contains(final Object object) {
-            return Finite.Empty.super.contains(object);
+            return Streamable.Empty.super.contains(object);
         }
 
         @Override

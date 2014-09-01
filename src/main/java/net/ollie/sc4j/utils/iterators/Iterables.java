@@ -1,15 +1,19 @@
-package net.ollie.sc4j.utils;
+package net.ollie.sc4j.utils.iterators;
 
-import net.ollie.sc4j.Collection;
-import net.ollie.sc4j.access.Finite;
-
-import javax.annotation.CheckReturnValue;
-
-import java.util.*;
-import java.util.function.BiConsumer;
+import java.util.AbstractCollection;
+import java.util.Iterator;
+import java.util.NoSuchElementException;
+import java.util.Objects;
+import java.util.OptionalInt;
+import java.util.function.BiFunction;
 import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.stream.Collector;
+
+import net.ollie.sc4j.Collection;
+import net.ollie.sc4j.access.Streamable;
+
+import javax.annotation.CheckReturnValue;
 
 /**
  * @author Ollie
@@ -41,8 +45,8 @@ public final class Iterables {
     }
 
     public static OptionalInt maybeCount(final Iterable<?> iterable) {
-        if (iterable instanceof Finite) {
-            return OptionalInt.of((((Finite) iterable).count()).intValue());
+        if (iterable instanceof Streamable) {
+            return OptionalInt.of((((Streamable) iterable).count()).intValue());
         } else if (iterable instanceof java.util.Collection) {
             return OptionalInt.of(((java.util.Collection) iterable).size());
         } else if (!iterable.iterator().hasNext()) {
@@ -79,12 +83,7 @@ public final class Iterables {
     }
 
     public static <V, A, R> R collect(final Iterable<? extends V> iterable, final Collector<? super V, A, ? extends R> collector) {
-        final A into = collector.supplier().get();
-        final BiConsumer<A, ? super V> accumulator = collector.accumulator();
-        for (final V element : iterable) {
-            accumulator.accept(into, element);
-        }
-        return collector.finisher().apply(into);
+        return Iterators.collect(iterable.iterator(), collector);
     }
 
     public static <V1, V2> Iterable<V2> apply(final Iterable<V1> iterable, final Function<? super V1, ? extends V2> function) {
@@ -108,6 +107,10 @@ public final class Iterables {
     @CheckReturnValue
     public static <V> Iterable<V> filter(final Iterable<V> iterable, final Predicate<? super V> predicate) {
         return new FilteredIterable<>(predicate, iterable);
+    }
+
+    public static <V, R> R reduce(final Iterable<? extends V> iterable, final BiFunction<R, V, ? extends R> function, final R initial) {
+        return Iterators.reduce(iterable.iterator(), function, initial);
     }
 
     public static OptionalInt indexOf(final Iterable<?> iterable, final Object target) {
