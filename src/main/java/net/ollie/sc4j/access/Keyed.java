@@ -42,6 +42,22 @@ public interface Keyed<V> {
 
     }
 
+    interface Typed<V> extends Single<Key<?>, V> {
+
+        default <K extends Key<T>, T extends V> T get(final K key) {
+            return key.convert(this.get((Object) key));
+        }
+
+    }
+
+    interface Key<T> {
+
+        default T convert(final Object object) {
+            return (T) object;
+        }
+
+    }
+
     interface Dual<K1, K2, V> extends Keyed.Single<Map.Entry<K1, K2>, V> {
 
         V get(Object key1, Object key2);
