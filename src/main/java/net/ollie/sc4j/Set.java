@@ -6,7 +6,6 @@ import java.util.function.Predicate;
 import net.ollie.sc4j.access.Streamable;
 import net.ollie.sc4j.imposed.Distinctness.Unique;
 import net.ollie.sc4j.utils.iterators.Iterables;
-import net.ollie.sc4j.utils.iterators.UnmodifiableIterator;
 
 import javax.annotation.CheckForNull;
 import javax.annotation.CheckReturnValue;
@@ -23,9 +22,6 @@ import javax.annotation.OverridingMethodsMustInvokeSuper;
  */
 public interface Set<V>
         extends Streamable<V>, Unique<V> {
-
-//    @Override
-//    Stream<V, ? extends Set<V>> stream();
 
     @Override
     Set<V> tail();
@@ -144,6 +140,9 @@ public interface Set<V>
     interface Immutable<V>
             extends Set<V>, Streamable.Immutable<V> {
 
+        @Override
+        Set.Stream<V> stream();
+
         @CheckReturnValue
         @Nonnull
         Set.Immutable<V> and(@Nonnull V value);
@@ -181,6 +180,11 @@ public interface Set<V>
             extends Set.Immutable<V>, Streamable.Empty<V> {
 
         @Override
+        default Set.Stream<V> stream() {
+            return Streamable.Empty.super.stream();
+        }
+
+        @Override
         Set.Singleton<V> and(V value);
 
         @Override
@@ -189,12 +193,12 @@ public interface Set<V>
         }
 
         @Override
-        public default UnmodifiableIterator<V> iterator() {
-            return Streamable.Empty.super.iterator();
+        default Set.Empty<V> tail() {
+            return this;
         }
 
         @Override
-        default Set.Empty<V> tail() {
+        default Set.Empty<V> immutableCopy() {
             return this;
         }
 

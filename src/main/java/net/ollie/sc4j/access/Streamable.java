@@ -4,6 +4,7 @@ import java.util.Iterator;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.function.BiFunction;
+import java.util.function.BiPredicate;
 import java.util.function.BinaryOperator;
 import java.util.function.Function;
 import java.util.function.Predicate;
@@ -22,9 +23,10 @@ import javax.annotation.Nonnull;
 /**
  * An element {@code V} may be found by iterating.
  *
- * This interface introduces the {@link #stream} method.
+ * This interface introduces the {@link #stream} method, which returns a (non-modifiable) iterable that can be
+ * manipulated in various ways.
  *
- * It it comparable to a stock {@link java.util.Collection}.
+ * This class is comparable to a stock {@link java.util.Collection}.
  *
  * @author Ollie
  * @see java.util.Collection
@@ -32,14 +34,14 @@ import javax.annotation.Nonnull;
 public interface Streamable<V>
         extends Traversable<V>, Iterable<V>, Findable<V> {
 
-    @Override
-    default Iterator<V> iterator() {
-        return this.stream();
-    }
-
     @Nonnull
     @CheckReturnValue
-    Stream<V, ? extends Streamable<V>> stream();
+    Stream<V> stream();
+
+    @Override
+    default Iterator<V> iterator() {
+        return this.stream().iterator();
+    }
 
     /**
      * @return the number create elements, including nulls, in this collection.
@@ -66,14 +68,14 @@ public interface Streamable<V>
 
     @CheckReturnValue
     default <R> R reduce(final BiFunction<R, V, ? extends R> function, final R initial) {
-        return Iterables.reduce(this, function, initial);
+        return this.stream().reduce(function, initial);
     }
 
     default <R> R reduce(final Function<V, R> transform, final BinaryOperator<R> each, final R initial) {
-        return reduce((i, e) -> each.apply(i, transform.apply(e)), initial);
+        return this.reduce((i, e) -> each.apply(i, transform.apply(e)), initial);
     }
 
-    default <C, A> C collect(final Collector<? super V, A, C> collector) {
+    default <C, A> C collect(final Collector<? super V, A, ? extends C> collector) {
         return this.stream().collect(collector);
     }
 
@@ -154,15 +156,15 @@ public interface Streamable<V>
             extends Streamable<V>, Traversable.Immutable<V> {
 
         @Override
-        Streamable.Immutable<V> tail();
+        Stream<V> stream();
 
         @Override
         default UnmodifiableIterator<V> iterator() {
-            return this.stream();
+            return this.stream().iterator();
         }
 
         @Override
-        Stream.Unmodifiable<V, ? extends Streamable.Immutable<V>> stream();
+        Streamable.Immutable<V> tail();
 
         @Override
         default Streamable.Immutable<V> immutableCopy() {
@@ -185,8 +187,8 @@ public interface Streamable<V>
         }
 
         @Override
-        default Stream.Unmodifiable<V, Streamable.Empty<V>> stream() {
-            return Streams.empty(this);
+        default Stream<V> stream() {
+            return Streams.empty();
         }
 
         @Override
@@ -246,38 +248,53 @@ public interface Streamable<V>
 
     }
 
-    interface Stream<V, C extends Streamable<V>> extends Iterator<V> {
+    /**
+     * Streams are unmodifiably iterable, but are not themselves iterators.
+     *
+     * They allow relatively cheap "bulk" operations, such as {@link #map} and {@link #filter}, without needing to copy
+     * every element in the underlying collection each time.
+     *
+     * @param <V>
+     * @see Iterator
+     */
+    interface Stream<V> extends Iterable<V> {
 
         @CheckReturnValue
         @Nonnull
-        Stream<V, C> filter(@Nonnull Predicate<? super V> predicate);
+        Stream<V> filter(@Nonnull Predicate<? super V> predicate);
 
         @CheckReturnValue
         @Nonnull
-        <V2> Stream<V2, ? extends Streamable<V2>> map(@Nonnull Function<? super V, ? extends V2> function);
+        <V2> Stream<V2> map(@Nonnull Function<? super V, ? extends V2> function);
 
         @Nonnull
         @CheckReturnValue
-        <V2> Stream<V2, ? extends Streamable<V2>> flatMap(Function<? super V, ? extends Streamable<? extends V2>> function);
+        <V2> Stream<V2> flatMap(Function<? super V, ? extends Streamable<? extends V2>> function);
+
+        @Nonnull
+        @CheckReturnValue
+        Stream<V> unique(BiPredicate<? super V, ? super V> predicate);
+
+        @Nonnull
+        @CheckReturnValue
+        default Stream<V> unique() {
+            return this.unique(Object::equals);
+        }
 
         default <R> R reduce(final BiFunction<R, V, ? extends R> function, final R initial) {
-            return Iterators.reduce(this, function, initial);
+            return Iterables.reduce(this, function, initial);
         }
 
         default Optional<V> findFirst(final Predicate<? super V> predicate) {
-            return Iterators.findFirst(this, predicate);
+            return Iterables.findFirst(this, predicate);
         }
 
         default <A, R> R collect(final Collector<? super V, A, ? extends R> collector) {
-            return Iterators.collect(this, collector);
+            return Iterables.collect(this, collector);
         }
 
-        C collect();
-
-        interface Unmodifiable<V, C extends Streamable<V>>
-                extends Stream<V, C>, UnmodifiableIterator<V> {
-
-        }
+        @Override
+        UnmodifiableIterator<V> iterator();
 
     }
 

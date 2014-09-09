@@ -72,9 +72,7 @@ public final class Iterators {
 
     @SuppressWarnings("unchecked")
     public static <V> UnmodifiableIterator<V> unmodifiable(@Nonnull final Iterator<? extends V> iterator) {
-        return iterator instanceof UnmodifiableIterator
-                ? (UnmodifiableIterator<V>) iterator
-                : UnmodifiableIterator.<V>of(iterator);
+        return UnmodifiableIterator.of(iterator);
     }
 
     private static final class ArrayIterator<V>

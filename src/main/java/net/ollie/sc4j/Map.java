@@ -1,7 +1,6 @@
 package net.ollie.sc4j;
 
 import java.util.Objects;
-import java.util.function.Function;
 
 import net.ollie.sc4j.access.Streamable;
 import net.ollie.sc4j.imposed.Cached;
@@ -29,10 +28,6 @@ public interface Map<K, V>
     Set<K> keys();
 
     Set<? extends Entry<K, V>> entries();
-
-    @Nonnull
-    @CheckReturnValue
-    <K2, V2> Map<K2, V2> mapEntries(Function<? super K, ? extends K2> keyFunction, Function<? super V, ? extends V2> valueFunction);
 
     @Override
     Map.Mutable<K, V> mutableCopy();
@@ -168,9 +163,6 @@ public interface Map<K, V>
         @CheckReturnValue
         @Nonnull
         Map.Immutable<K, V> without(Object key);
-
-        @Override
-        <K2, V2> Map.Immutable<K2, V2> mapEntries(Function<? super K, ? extends K2> keyFunction, Function<? super V, ? extends V2> valueFunction);
 
         @CheckReturnValue
         @Nonnull

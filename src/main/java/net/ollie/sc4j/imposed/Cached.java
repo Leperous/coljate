@@ -32,6 +32,11 @@ public interface Cached<K, V>
     }
 
     @Override
+    default Stream<V> stream() {
+        return this.values().stream();
+    }
+
+    @Override
     Streamable<V> values();
 
     @Override
@@ -121,6 +126,11 @@ public interface Cached<K, V>
     @javax.annotation.concurrent.Immutable
     interface Immutable<K, V>
             extends Cached<K, V>, Streamable.Immutable<V> {
+
+        @Override
+        default Stream<V> stream() {
+            return this.values().stream();
+        }
 
         @Override
         default Streamable.Immutable<V> tail() {

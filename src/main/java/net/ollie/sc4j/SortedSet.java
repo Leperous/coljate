@@ -56,11 +56,17 @@ public interface SortedSet<V>
             extends SortedSet<V>, Set.Immutable<V> {
 
         @Override
-        SortedSet.Immutable<V> tail();
+        Immutable<V> and(V value);
+
+        @Override
+        Immutable<V> tail();
+
+        @Override
+        Immutable<V> not(Object object);
 
         @Nonnull
         @CheckReturnValue
-        SortedSet.Immutable<V> sort(Sorter<? super V> comparator);
+        Immutable<V> sort(Sorter<? super V> comparator);
 
         @Override
         default SortedSet.Immutable<V> immutableCopy() {
@@ -72,6 +78,7 @@ public interface SortedSet<V>
     interface Empty<V>
             extends SortedSet.Immutable<V>, Set.Empty<V> {
 
+        @Override
         default V first() {
             return null;
         }
@@ -82,12 +89,25 @@ public interface SortedSet<V>
         }
 
         @Override
+        SortedSet.Singleton<V> and(V element);
+
+        @Override
+        default SortedSet.Empty<V> not(final Object element) {
+            return this;
+        }
+
+        @Override
         default SortedSet.Empty<V> tail() {
             return this;
         }
 
         @Override
         default SortedSet.Empty<V> sort(final Sorter<? super V> comparator) {
+            return this;
+        }
+
+        @Override
+        default SortedSet.Empty<V> immutableCopy() {
             return this;
         }
 

@@ -35,7 +35,11 @@ public interface UnmodifiableIterator<V> extends Iterator<V> {
         };
     }
 
+    @SuppressWarnings("unchecked")
     static <V> UnmodifiableIterator<V> of(final Iterator<? extends V> iterator) {
+        if (iterator instanceof UnmodifiableIterator) {
+            return (UnmodifiableIterator<V>) iterator;
+        }
         return new UnmodifiableIterator<V>() {
 
             @Override

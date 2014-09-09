@@ -23,9 +23,9 @@ public interface Traversable<V>
     @Nonnull
     Traversable<V> tail();
 
-    Traversable.Mutable<V> mutableCopy();
+    Traversable.Mutable<V> mutableCopy(); //TODO make this <V2 super V> when Java supports such a language feature.
 
-    Traversable.Immutable<V> immutableCopy();
+    Traversable.Immutable<V> immutableCopy(); //TODO make this <V2 super V> when Java supports such a language feature.
 
     @javax.annotation.concurrent.NotThreadSafe
     interface Mutable<V>

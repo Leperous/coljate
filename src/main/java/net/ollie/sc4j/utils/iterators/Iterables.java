@@ -4,6 +4,7 @@ import java.util.AbstractCollection;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.OptionalInt;
 import java.util.function.BiFunction;
 import java.util.function.Function;
@@ -183,6 +184,10 @@ public final class Iterables {
         }
         sb.append(']');
         return sb.toString();
+    }
+
+    public static <V> Optional<V> findFirst(final Iterable<? extends V> iterable, final Predicate<? super V> predicate) {
+        return Iterators.findFirst(iterable.iterator(), predicate);
     }
 
     private static final class IterableCollection<V> extends AbstractCollection<V> {

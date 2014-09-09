@@ -6,7 +6,7 @@ import javax.annotation.concurrent.NotThreadSafe;
  *
  * @author Ollie
  */
-public interface Mutability<V extends Mutability<V>> {
+public interface Mutability<M extends Mutability<M>> {
 
     Mutable mutableCopy();
 
