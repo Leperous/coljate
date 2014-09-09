@@ -36,7 +36,7 @@ public interface Streamable<V>
 
     @Nonnull
     @CheckReturnValue
-    Stream<V> stream();
+    Stream<V, ? extends Streamable<V>> stream();
 
     @Override
     default Iterator<V> iterator() {
@@ -156,9 +156,6 @@ public interface Streamable<V>
             extends Streamable<V>, Traversable.Immutable<V> {
 
         @Override
-        Stream<V> stream();
-
-        @Override
         default UnmodifiableIterator<V> iterator() {
             return this.stream().iterator();
         }
@@ -187,8 +184,8 @@ public interface Streamable<V>
         }
 
         @Override
-        default Stream<V> stream() {
-            return Streams.empty();
+        default Stream<V, ? extends Streamable.Empty<V>> stream() {
+            return Streams.empty(this);
         }
 
         @Override
@@ -257,27 +254,19 @@ public interface Streamable<V>
      * @param <V>
      * @see Iterator
      */
-    interface Stream<V> extends Iterable<V> {
+    interface Stream<V, S extends Streamable<V>> extends Iterable<V> {
 
         @CheckReturnValue
         @Nonnull
-        Stream<V> filter(@Nonnull Predicate<? super V> predicate);
-
-        @CheckReturnValue
-        @Nonnull
-        <V2> Stream<V2> map(@Nonnull Function<? super V, ? extends V2> function);
+        Stream<V, S> filter(@Nonnull Predicate<? super V> predicate);
 
         @Nonnull
         @CheckReturnValue
-        <V2> Stream<V2> flatMap(Function<? super V, ? extends Streamable<? extends V2>> function);
+        Stream<V, S> unique(BiPredicate<? super V, ? super V> predicate);
 
         @Nonnull
         @CheckReturnValue
-        Stream<V> unique(BiPredicate<? super V, ? super V> predicate);
-
-        @Nonnull
-        @CheckReturnValue
-        default Stream<V> unique() {
+        default Stream<V, S> unique() {
             return this.unique(Object::equals);
         }
 
@@ -293,8 +282,19 @@ public interface Streamable<V>
             return Iterables.collect(this, collector);
         }
 
+        @CheckReturnValue
+        @Nonnull
+        <V2> Stream<V2, ? extends Streamable<V2>> map(@Nonnull Function<? super V, ? extends V2> function);
+
+        @Nonnull
+        @CheckReturnValue
+        <V2> Stream<V2, ? extends Streamable<V2>> flatMap(Function<? super V, ? extends Streamable<? extends V2>> function);
+
         @Override
         UnmodifiableIterator<V> iterator();
+
+        @Nonnull
+        S collect();
 
     }
 

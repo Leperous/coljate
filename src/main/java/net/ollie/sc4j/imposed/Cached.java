@@ -32,7 +32,7 @@ public interface Cached<K, V>
     }
 
     @Override
-    default Stream<V> stream() {
+    default Stream<V, ? extends Streamable<V>> stream() {
         return this.values().stream();
     }
 
@@ -128,7 +128,7 @@ public interface Cached<K, V>
             extends Cached<K, V>, Streamable.Immutable<V> {
 
         @Override
-        default Stream<V> stream() {
+        default Stream<V, ? extends Streamable<V>> stream() {
             return this.values().stream();
         }
 

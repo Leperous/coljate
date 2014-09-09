@@ -4,6 +4,7 @@ import java.util.Comparator;
 
 import net.ollie.sc4j.access.Indexed;
 import net.ollie.sc4j.imposed.Ordered;
+import net.ollie.sc4j.utils.iterators.Streams;
 import net.ollie.sc4j.utils.numeric.NonNegativeInteger;
 
 import javax.annotation.CheckForNull;
@@ -18,8 +19,8 @@ import javax.annotation.Nonnull;
 public interface Array<V>
         extends List<V>, Indexed<NonNegativeInteger, V>, Ordered<V> {
 
-//    @Override
-//    Stream<V, ? extends Array<V>> stream();
+    @Override
+    Stream<V, ? extends Array<V>> stream();
 
     @CheckForNull
     V get(int index) throws IndexOutOfBoundsException;
@@ -242,6 +243,11 @@ public interface Array<V>
     @javax.annotation.concurrent.Immutable
     interface Empty<V>
             extends Array.Immutable<V>, List.Empty<V>, Indexed.Empty<NonNegativeInteger, V> {
+
+        @Override
+        default Stream<V, ? extends Array.Empty<V>> stream() {
+            return Streams.empty(this);
+        }
 
         @Override
         default V get(final int index) {
