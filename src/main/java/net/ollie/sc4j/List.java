@@ -5,6 +5,7 @@ import java.util.Objects;
 
 import net.ollie.sc4j.access.Streamable;
 import net.ollie.sc4j.utils.iterators.Iterables;
+import net.ollie.sc4j.utils.iterators.Streams;
 import net.ollie.sc4j.utils.iterators.UnmodifiableIterator;
 import net.ollie.sc4j.utils.numeric.NonNegativeInteger;
 
@@ -29,6 +30,9 @@ public interface List<V>
 
     @Override
     List<V> tail();
+
+    @Override
+    Stream<V, ? extends List<V>> stream();
 
     @CheckForNull
     V last();
@@ -258,6 +262,11 @@ public interface List<V>
         @Override
         default List.Empty<V> reverse() {
             return this;
+        }
+
+        @Override
+        public default Stream<V, ? extends List.Empty<V>> stream() {
+            return Streams.empty(this);
         }
 
         @Override
