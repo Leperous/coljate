@@ -16,9 +16,6 @@ public interface SortedSet<V>
         extends Set<V>, Interval<V>, Sorted<V> {
 
     @Override
-    V last();
-
-    @Override
     default boolean firstInclusive() {
         return true;
     }

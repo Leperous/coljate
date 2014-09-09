@@ -25,10 +25,10 @@ public interface Set<V>
         extends Streamable<V>, Unique<V> {
 
     @Override
-    Stream<V, ? extends Set<V>> stream();
+    Set<V> tail();
 
     @Override
-    Set<V> tail();
+    Stream<V, ? extends Set<V>> stream();
 
     @Override
     Set.Mutable<V> mutableCopy();
