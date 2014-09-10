@@ -1,4 +1,4 @@
 coljate-wrapped
 ===============
 
-Coljate implementation. See https://github.com/Leperous/coljate
+Coljate implementation, backed by the native `java.util.Collection` classes.
