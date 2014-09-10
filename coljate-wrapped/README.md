@@ -1,4 +1,6 @@
-coljate-native
-==============
+coljate-wrapped
+===============
 
-Coljate implementation. See https://github.com/Leperous/coljate
+Coljate implementation, backed by the native `java.util.Collection` classes.
+
+Not the most efficient if you are worried about object creation, but comes with a good degree of _correctness_.
