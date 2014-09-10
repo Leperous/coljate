@@ -13,5 +13,3 @@ Inspired by the SLF4J re-working of loggers, this project aims to redefine Java'
   * Maximizing extensibility and minimizing repetition by taking advantage of mixin.
   * Remaining open for extension.
   * Annotating methods with [FindBugs](https://code.google.com/p/findbugs/) annotations to assist static nullity checks.
-
-See [coljate-native](https://github.com/Leperous/coljate-native) for implementations backed by native Java Collections.
