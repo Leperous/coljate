@@ -54,6 +54,7 @@ public class ImmutableArray<V> implements Array.Immutable<V>, CopiedIntoMutableL
     }
 
     private final Object[] array;
+    private transient NonNegativeInteger count;
 
     protected ImmutableArray(final Object[] array) {
         this.array = array;
@@ -61,6 +62,11 @@ public class ImmutableArray<V> implements Array.Immutable<V>, CopiedIntoMutableL
 
     protected Array.Immutable<V> copyOf(final Object[] array) {
         return array.length == 0 ? create() : new ImmutableArray<>(array);
+    }
+
+    @Override
+    public NonNegativeInteger count() {
+        return count == null ? (count = Array.Immutable.super.count()) : count;
     }
 
     @Override
