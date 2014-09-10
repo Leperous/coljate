@@ -11,6 +11,13 @@
     <modules>
         <module>coljate-defined</module>
         <module>coljate-wrapped</module>
+        <module>coljate-native</module>
     </modules>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+    </properties>
 
 </project>
