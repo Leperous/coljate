@@ -1,6 +1,5 @@
 package net.ollie.coljate;
 
-import net.ollie.coljate.Array;
 import net.ollie.coljate.Array.Immutable;
 import net.ollie.coljate.utils.numeric.NonNegativeInteger;
 
@@ -50,14 +49,28 @@ public abstract class AbstractImmutableArrayTest
 
     }
 
+    @Test
+    public void shouldRemoveAll() {
+
+        final Object o1 = new Object(), o2 = new Object(), o3 = new Object();
+        final Array.Immutable<Object> array = this.create(o1, o2, o3, o2);
+
+        final Array.Immutable<Object> without = array.notAll(o2);
+        assertThat(without.count(), is(NonNegativeInteger.of(2)));
+        assertThat(without, is(this.create(o1, o3)));
+
+    }
+
     @Override
     protected void assertContainsNothing(Immutable<Object> collection) {
         super.assertContainsNothing(collection);
         assertThat(collection.count().intValue(), is(0));
+        assertThat(collection.notFirst(new Object()), is(collection));
+        assertThat(collection.notAll(new Object()), is(collection));
     }
 
     protected void assertContainsExactly(final Array.Immutable<Object> array, final Object... objects) {
-        assertEquals(objects.length, array.count().intValue());
+        assertEquals("Length of " + array, objects.length, array.count().intValue());
         assertEquals(objects.length == 0, array.isEmpty());
         int i = 0;
         for (final Object object : objects) {

@@ -4,7 +4,6 @@ import java.util.Iterator;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.function.BiFunction;
-import java.util.function.BiPredicate;
 import java.util.function.BinaryOperator;
 import java.util.function.Function;
 import java.util.function.Predicate;
@@ -259,16 +258,6 @@ public interface Streamable<V>
         @CheckReturnValue
         @Nonnull
         Stream<V, S> filter(@Nonnull Predicate<? super V> predicate);
-
-        @Nonnull
-        @CheckReturnValue
-        Stream<V, S> unique(BiPredicate<? super V, ? super V> predicate);
-
-        @Nonnull
-        @CheckReturnValue
-        default Stream<V, S> unique() {
-            return this.unique(Object::equals);
-        }
 
         default <R> R reduce(final BiFunction<R, V, ? extends R> function, final R initial) {
             return Iterables.reduce(this, function, initial);

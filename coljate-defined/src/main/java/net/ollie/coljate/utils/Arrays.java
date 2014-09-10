@@ -72,6 +72,12 @@ public final class Arrays {
         }
     }
 
+    public static Object[] copy(final Object[] array) {
+        final Object[] copy = new Object[array.length];
+        System.arraycopy(array, 0, copy, 0, array.length);
+        return copy;
+    }
+
     static final class ArrayIterator<V>
             implements Iterator<V> {
 

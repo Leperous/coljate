@@ -1,6 +1,5 @@
 package net.ollie.coljate.utils.iterators;
 
-import java.util.function.BiPredicate;
 import java.util.function.Function;
 import java.util.function.Predicate;
 
@@ -43,11 +42,6 @@ public final class Streams {
         @Override
         public <V2> Stream<V2, ? extends Streamable.Empty<V2>> flatMap(Function<? super V, ? extends Streamable<? extends V2>> function) {
             return (Stream<V2, Streamable.Empty<V2>>) this;
-        }
-
-        @Override
-        public Stream<V, S> unique(final BiPredicate<? super V, ? super V> predicate) {
-            return this;
         }
 
         @Override

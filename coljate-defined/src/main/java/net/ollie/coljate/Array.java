@@ -1,9 +1,11 @@
 package net.ollie.coljate;
 
 import java.util.Comparator;
+import java.util.Objects;
 
 import net.ollie.coljate.access.Indexed;
 import net.ollie.coljate.imposed.Ordered;
+import net.ollie.coljate.utils.Suppliers;
 import net.ollie.coljate.utils.iterators.Streams;
 import net.ollie.coljate.utils.numeric.NonNegativeInteger;
 
@@ -35,6 +37,11 @@ public interface Array<V>
     @Override
     default V get(final NonNegativeInteger index) {
         return this.get(index.intValue());
+    }
+
+    @Override
+    default V first() {
+        return this.head();
     }
 
     default NonNegativeInteger start() {
@@ -266,6 +273,11 @@ public interface Array<V>
         Array.Singleton<V> andPrefix(V value);
 
         @Override
+        default Array.Singleton<V> andSuffix(final V value) {
+            return this.andPrefix(value);
+        }
+
+        @Override
         default Array.Empty<V> notFirst(final Object value) {
             return this;
         }
@@ -281,17 +293,17 @@ public interface Array<V>
         }
 
         @Override
-        default Array.Singleton<V> andSuffix(final V value) {
-            return this.andPrefix(value);
-        }
-
-        @Override
         default Array.Empty<V> segment(final int from, final int to) {
             if (from == 0 && to == 0) {
                 return this;
             } else {
                 throw new IndexOutOfBoundsException();
             }
+        }
+
+        @Override
+        default V first() {
+            return null;
         }
 
         @Override
@@ -350,7 +362,25 @@ public interface Array<V>
         }
 
         @Override
+        default V first() {
+            return this.value();
+        }
+
+        @Override
         Array.Empty<V> tail();
+
+        @Override
+        default Array.Immutable<V> notFirst(final Object value) {
+            return Objects.equals(value, this.value()) ? this.tail() : this;
+        }
+
+        @Override
+        default Immutable<V> segment(final int from, final int to) {
+            final int s = this.start().intValue();
+            return from == s && to == s + 1
+                    ? this
+                    : Suppliers.noSuchElement();
+        }
 
         @Override
         default Array.Singleton<V> reverse() {

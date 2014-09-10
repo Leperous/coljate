@@ -48,11 +48,6 @@ public abstract class DefaultStream<V, S extends Streamable<V>>
         throw new UnsupportedOperationException("flatMap not supported yet!");
     }
 
-    @Override
-    public Streamable.Stream<V, S> unique(final BiPredicate<? super V, ? super V> predicate) {
-        return new UniqueStream<>(this, predicate);
-    }
-
     protected abstract Collector<V, ?, ? extends S> getCollector();
 
     @Override
