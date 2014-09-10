@@ -1,1 +1,4 @@
-Definitions.
+coljate-defined
+===============
+
+Collection interfaces.
