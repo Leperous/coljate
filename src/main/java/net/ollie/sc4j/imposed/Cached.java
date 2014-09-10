@@ -4,8 +4,8 @@ import java.util.Iterator;
 import java.util.Objects;
 import java.util.function.Supplier;
 
-import net.ollie.sc4j.access.Streamable;
 import net.ollie.sc4j.access.Keyed;
+import net.ollie.sc4j.access.Streamable;
 import net.ollie.sc4j.utils.iterators.UnmodifiableIterator;
 
 import javax.annotation.CheckForNull;
@@ -19,17 +19,6 @@ import javax.annotation.CheckForNull;
  */
 public interface Cached<K, V>
         extends Keyed.Single<K, V>, Streamable<V> {
-
-    default V getOrDefault(final Object key, final V defaultValue) {
-        return this.getOrElse(key, () -> defaultValue);
-    }
-
-    default V getOrElse(final Object key, final Supplier<? extends V> supplier) {
-        final V value = this.get(key);
-        return value == null
-                ? supplier.get()
-                : value;
-    }
 
     @Override
     default Stream<V, ? extends Streamable<V>> stream() {

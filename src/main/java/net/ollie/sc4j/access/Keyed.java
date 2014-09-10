@@ -1,5 +1,7 @@
 package net.ollie.sc4j.access;
 
+import java.util.Optional;
+
 import net.ollie.sc4j.Collection;
 import net.ollie.sc4j.Map;
 import net.ollie.sc4j.imposed.Distinctness.Unique;
@@ -36,6 +38,17 @@ public interface Keyed<V> {
 
         @CheckForNull
         V get(@Nonnull Object key);
+
+        @Nonnull
+        default Optional<V> tryGet(final Object key) {
+            return Optional.ofNullable(this.get(key));
+        }
+
+        @Nonnull
+        default V getOrDefault(final Object key, @Nonnull final V defaultValue) {
+            final V value = this.get(key);
+            return value == null ? defaultValue : value;
+        }
 
         @Override
         Unique<K> keys();

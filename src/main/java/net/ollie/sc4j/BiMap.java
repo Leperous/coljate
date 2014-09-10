@@ -6,14 +6,14 @@ import net.ollie.sc4j.imposed.Mapping.Bijective;
  *
  * @author Ollie
  */
-public interface BiMap<K, V>
-        extends Map<K, V>, Bijective<K, V> {
+public interface BiMap<L, R>
+        extends Map<L, R>, Bijective<L, R> {
 
     @Override
-    Set<V> values();
+    Set<R> values();
 
     @Override
-    BiMap<V, K> inverse();
+    BiMap<R, L> inverse();
 
     @Override
     default boolean contains(final Object object) {
@@ -21,33 +21,47 @@ public interface BiMap<K, V>
     }
 
     @Override
-    BiMap.Mutable<K, V> mutableCopy();
+    BiMap.Mutable<L, R> mutableCopy();
 
     @Override
-    BiMap.Immutable<K, V> immutableCopy();
+    BiMap.Immutable<L, R> immutableCopy();
 
-    interface Mutable<K, V>
-            extends BiMap<K, V>, Map.Mutable<K, V> {
+    /**
+     * A mutable bi-map.
+     *
+     * @param <L>
+     * @param <R>
+     */
+    interface Mutable<L, R>
+            extends BiMap<L, R>, Map.Mutable<L, R> {
 
         @Override
-        V put(K key, V value) throws DuplicateValueException;
+        View<R, L> inverse();
+
+        @Override
+        R put(L left, R right) throws DuplicateValueException;
+
+        interface View<L, R>
+                extends BiMap.Mutable<L, R> {
+
+        }
 
     }
 
-    interface Immutable<K, V>
-            extends BiMap<K, V>, Map.Immutable<K, V> {
+    interface Immutable<L, R>
+            extends BiMap<L, R>, Map.Immutable<L, R> {
 
         @Override
-        Set.Immutable<V> values();
+        Set.Immutable<R> values();
 
         @Override
-        BiMap.Immutable<V, K> inverse();
+        BiMap.Immutable<R, L> inverse();
 
         @Override
-        BiMap.Immutable<K, V> with(K key, V value) throws DuplicateValueException;
+        BiMap.Immutable<L, R> with(L left, R right) throws DuplicateValueException;
 
         @Override
-        default BiMap.Immutable<K, V> immutableCopy() {
+        default BiMap.Immutable<L, R> immutableCopy() {
             return this;
         }
 
