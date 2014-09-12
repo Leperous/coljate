@@ -25,6 +25,10 @@ public abstract class DefaultStream<V, S extends Streamable<V>>
         return create(Iterators.of(value), collectorSupplier);
     }
 
+    public static <V> DefaultStream<V, Streamable<V>> create(final Iterable<V> iterable) {
+        return create(iterable.iterator(), StreamableWrapper::collector);
+    }
+
     public static <V, S extends Streamable<V>> DefaultStream<V, S> create(final Iterable<V> iterable, final Supplier<Collector<V, ?, ? extends S>> collectorSupplier) {
         return create(iterable.iterator(), collectorSupplier);
     }

@@ -25,9 +25,13 @@ public abstract class AbstractCollectionTest<C extends Collection<Object>> {
     }
 
     @Test
-    public void shouldImplementEqualsAndHashcode() {
+    public void emptyShouldImplementEqualsAndHash() {
         assertEquals(this.create(), this.create());
         assertEquals(this.create().hashCode(), this.create().hashCode());
+    }
+
+    @Test
+    public void singletonShouldImplementEqualsAndHash() {
         final Object o1 = new Object();
         assertEquals(this.create(o1), this.create(o1));
         assertEquals(this.create(o1).hashCode(), this.create(o1).hashCode());

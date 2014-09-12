@@ -190,6 +190,16 @@ public final class Iterables {
         return Iterators.findFirst(iterable.iterator(), predicate);
     }
 
+    public static Object[] toArray(final Iterable<?> iterable) {
+        final int size = count(iterable);
+        final Object[] array = new Object[size];
+        int index = 0;
+        for (final Object element : iterable) {
+            array[index++] = element;
+        }
+        return array;
+    }
+
     private static final class IterableCollection<V> extends AbstractCollection<V> {
 
         private final Iterable<V> iterable;

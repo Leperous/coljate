@@ -112,7 +112,7 @@ public class MutableWrappedMultiHashSet<V>
 
     @Override
     public Stream<V, ? extends Set<V>> stream() {
-        return DefaultStream.<V, Set<V>>create(this, MutableWrappedHashSet::collector);
+        return DefaultStream.create(this, MutableWrappedHashSet::collector);
     }
 
     @Override

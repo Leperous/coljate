@@ -1,5 +1,6 @@
 package net.ollie.coljate;
 
+import java.util.Objects;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
 
@@ -39,7 +40,7 @@ public interface Set<V>
     @OverridingMethodsMustInvokeSuper
     default boolean equals(final Set<?> that) {
         return that != null
-                && this.count() == that.count()
+                && Objects.equals(this.count(), that.count())
                 && this.containsAll(that);
     }
 
@@ -53,18 +54,6 @@ public interface Set<V>
             extends Set<V>, Streamable.Mutable<V> {
 
         boolean add(V value);
-
-        boolean remove(@Nullable Object value);
-
-        default boolean removeWhere(final Predicate<? super V> predicate) {
-            boolean removed = false;
-            for (final V value : this) {
-                if (predicate.test(value)) {
-                    removed |= this.remove(value);
-                }
-            }
-            return removed;
-        }
 
         default boolean addAll(final Iterable<? extends V> iterable) {
             return this.addAll(iterable, o -> true);
@@ -80,6 +69,24 @@ public interface Set<V>
             return added;
         }
 
+        @Nonnull
+        default Set.Mutable<V> and(final V value) {
+            this.add(value);
+            return this;
+        }
+
+        boolean remove(@Nullable Object value);
+
+        default boolean removeWhere(final Predicate<? super V> predicate) {
+            boolean removed = false;
+            for (final V value : this) {
+                if (predicate.test(value)) {
+                    removed |= this.remove(value);
+                }
+            }
+            return removed;
+        }
+
         default boolean removeAll(final Iterable<?> iterable) {
             return this.removeAll(iterable, o -> true);
         }
@@ -92,6 +99,12 @@ public interface Set<V>
                 }
             }
             return removed;
+        }
+
+        @Nonnull
+        default Set.Mutable<V> not(final Object object) {
+            this.remove(object);
+            return this;
         }
 
         default Inliner<V, ? extends Set.Mutable<V>> inline() {

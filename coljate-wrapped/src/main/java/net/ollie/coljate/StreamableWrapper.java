@@ -17,7 +17,6 @@ import net.ollie.coljate.utils.ArrayLists;
 
 import javax.annotation.Nonnull;
 
-
 /**
  *
  * @author Ollie
@@ -73,7 +72,7 @@ public class StreamableWrapper<V> implements Streamable<V> {
     @Override
     @SuppressWarnings("Convert2Lambda")
     public Stream<V, Streamable<V>> stream() {
-        return DefaultStream.create(this, () -> StreamableWrapper.collector());
+        return DefaultStream.create(this);
     }
 
     @Override

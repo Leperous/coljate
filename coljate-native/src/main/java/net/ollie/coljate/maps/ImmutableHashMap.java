@@ -1,0 +1,418 @@
+package net.ollie.coljate.maps;
+
+import java.util.Arrays;
+import java.util.NoSuchElementException;
+import java.util.Objects;
+
+import net.ollie.coljate.Map;
+import net.ollie.coljate.Set;
+import net.ollie.coljate.access.Streamable;
+import net.ollie.coljate.sets.ImmutableWrappedHashSet;
+import net.ollie.coljate.sets.MutableWrappedHashSet;
+import net.ollie.coljate.streams.DefaultStream;
+import net.ollie.coljate.utils.iterators.Iterables;
+import net.ollie.coljate.utils.iterators.UnmodifiableIterator;
+import net.ollie.coljate.utils.numeric.NonNegativeInteger;
+
+import java.io.Serializable;
+import javax.annotation.CheckForNull;
+
+/**
+ *
+ * @author Ollie
+ * @see java.util.HashMap
+ */
+public class ImmutableHashMap<K, V>
+        implements Map.Immutable<K, V>, Serializable {
+
+    private static final long serialVersionUID = 1L;
+    private static final float LOAD_FACTOR = 0.75f;
+
+    public static <K, V> Map.Immutable<K, V> create() {
+        return new ImmutableHashMap<>();
+    }
+
+    private final ImmutableMapNode<K, V>[] bucket;
+
+    @SuppressWarnings({"rawtypes", "unchecked"})
+    ImmutableHashMap() {
+        this.bucket = new ImmutableMapNode[0];
+    }
+
+    @SuppressWarnings({"rawtypes", "unchecked"})
+    ImmutableHashMap(final K key, final V value) {
+        this.bucket = new ImmutableMapNode[]{new ImmutableMapNode<>(key, value, null)};
+    }
+
+    private ImmutableHashMap(final ImmutableMapNode<K, V>[] bucket) {
+        this.bucket = bucket;
+    }
+
+    @Override
+    public V get(final Object key) {
+        if (key == null) {
+            return null;
+        }
+        for (final ImmutableMapNode<K, V> node : bucket) {
+            ImmutableMapNode<K, V> head = node;
+            while (head != null) {
+                if (Objects.equals(head.key(), key)) {
+                    return node.value();
+                }
+                head = head.next();
+            }
+        }
+        return null;
+    }
+
+    private transient Set.Immutable<K> keys;
+    private transient Streamable.Immutable<V> values;
+    private transient Set.Immutable<Map.Immutable.Entry<K, V>> entries;
+
+    @Override
+    public Set.Immutable<K> keys() {
+        return keys == null ? (keys = new KeySet()) : keys;
+    }
+
+    @Override
+    public Streamable.Immutable<V> values() {
+        return values == null ? (values = new Values()) : values;
+    }
+
+    @Override
+    public Set.Immutable<? extends Map.Immutable.Entry<K, V>> entries() {
+        return entries == null ? (entries = new EntrySet()) : entries;
+    }
+
+    private static int bucketSize(final int numElements) {
+        return Math.round(numElements * LOAD_FACTOR);
+    }
+
+    private ImmutableMapNode<K, V>[] cloneArray(final int newSize) {
+        @SuppressWarnings({"rawtypes", "unchecked"})
+        final ImmutableMapNode<K, V>[] cloned = new ImmutableMapNode[newSize];
+        System.arraycopy(bucket, 0, cloned, 0, bucket.length);
+        return cloned;
+    }
+
+    @Override
+    public Map.Immutable<K, V> with(final K key, final V value) {
+        final ImmutableMapNode<K, V>[] bucket = this.cloneArray(bucketSize(this.bucket.length + 1)); //FIXME don't always increment!
+        final int i = bucketFor(key, bucket);
+        ImmutableMapNode<K, V> node = bucket[i];
+        node = node == null ? new ImmutableMapNode<>(key, value, null) : node.swap(key, value);
+        bucket[i] = node;
+        return new ImmutableHashMap<>(bucket);
+    }
+
+    @Override
+    public Immutable<K, V> without(final Object key) {
+        throw new UnsupportedOperationException("without not supported yet!");
+    }
+
+    private static int bucketFor(final Object key, Object[] bucket) {
+        return key.hashCode() % bucket.length;
+    }
+
+    @Override
+    public Map.Mutable<K, V> mutableCopy() {
+        throw new UnsupportedOperationException("mutableCopy not supported yet!");
+    }
+
+    @Override
+    public NonNegativeInteger count() {
+        return Arrays.stream(bucket).reduce(NonNegativeInteger.ZERO, (current, next) -> current.plus(next.count()), NonNegativeInteger::plus);
+    }
+
+    @Override
+    public boolean isEmpty() {
+        for (final ImmutableMapNode<K, V> node : bucket) {
+            if (node != null) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        return this.hash();
+    }
+
+    @Override
+    public boolean equals(final Object that) {
+        return that instanceof Map && this.equals((Map) that);
+    }
+
+    @Override
+    public String toString() {
+        return this.entries().toString();
+    }
+
+    private static final class ImmutableMapNode<K, V>
+            implements Map.Immutable.Entry<K, V> {
+
+        private final K key;
+        private final V value;
+        private final ImmutableMapNode<K, V> next;
+
+        ImmutableMapNode(final K key, final V value, final ImmutableMapNode<K, V> next) {
+            this.key = key;
+            this.value = value;
+            this.next = next;
+        }
+
+        @Override
+        public K key() {
+            return key;
+        }
+
+        @Override
+        public V value() {
+            return value;
+        }
+
+        @CheckForNull
+        ImmutableMapNode<K, V> next() {
+            return next;
+        }
+
+        NonNegativeInteger count() {
+            return next == null ? NonNegativeInteger.ONE : NonNegativeInteger.ONE.plus(next.count());
+        }
+
+        boolean containsKey(final Object object) {
+            return Objects.equals(key, object) || (next != null && next.containsKey(object));
+        }
+
+        boolean containsValue(final Object object) {
+            return Objects.equals(value, object) || (next != null && next.containsValue(object));
+        }
+
+        ImmutableMapNode<K, V> swap(final K key, final V value) {
+            if (Objects.equals(this.key(), key)) {
+                return new ImmutableMapNode<>(key, value, next);
+            }
+            final ImmutableMapNode<K, V> next = this.next == null ? new ImmutableMapNode<>(key, value, null) : this.next.swap(key, value);
+            return new ImmutableMapNode<>(this.key(), this.value(), next);
+        }
+
+        @Override
+        public Map.Mutable.Entry<K, V> mutableCopy() {
+            throw new UnsupportedOperationException("mutableCopy not supported yet!"); //TODO mutable copy of entry
+        }
+
+        @Override
+        public boolean equals(final Object object) {
+            return object instanceof Map.Entry && this.equals((Map.Entry) object);
+        }
+
+        @Override
+        public int hashCode() {
+            return this.hash();
+        }
+
+        @Override
+        public String toString() {
+            return key + ":" + value;
+        }
+
+    }
+
+    private final class KeySet
+            implements Set.Immutable<K> {
+
+        @Override
+        public Stream<K, ? extends Set<K>> stream() {
+            return DefaultStream.create(this, ImmutableWrappedHashSet::collector);
+        }
+
+        @Override
+        public Set.Mutable<K> mutableCopy() {
+            return MutableWrappedHashSet.copy(this);
+        }
+
+        @Override
+        public boolean contains(final Object object) {
+            final int index = bucketFor(object, bucket);
+            ImmutableMapNode<K, V> node = bucket[index];
+            return node != null && node.containsKey(object);
+        }
+
+        @Override
+        public UnmodifiableIterator<K> iterator() {
+            return new UnmodifiableIterator<K>() {
+
+                final UnmodifiableIterator<? extends Entry<K, V>> iterator = ImmutableHashMap.this.entries().iterator();
+
+                @Override
+                public boolean hasNext() {
+                    return iterator.hasNext();
+                }
+
+                @Override
+                public K next() {
+                    return iterator.next().key();
+                }
+
+            };
+        }
+
+        @Override
+        public Set.Immutable<K> and(final K value) {
+            return this.mutableCopy().and(value).immutableCopy();
+        }
+
+        @Override
+        public Set.Immutable<K> not(final Object element) {
+            return this.mutableCopy().not(element).immutableCopy();
+        }
+
+        @Override
+        public Set.Immutable<K> tail() {
+            return this.mutableCopy().tail().immutableCopy();
+        }
+
+        @Override
+        public boolean isEmpty() {
+            return ImmutableHashMap.this.isEmpty();
+        }
+
+    }
+
+    private final class Values
+            implements Streamable.Immutable<V> {
+
+        @Override
+        public Streamable.Immutable<V> tail() {
+            throw new UnsupportedOperationException("tail not supported yet!");
+        }
+
+        @Override
+        public Streamable.Mutable<V> mutableCopy() {
+            throw new UnsupportedOperationException("mutableCopy not supported yet!");
+        }
+
+        @Override
+        public boolean isEmpty() {
+            return ImmutableHashMap.this.isEmpty();
+        }
+
+        @Override
+        public Stream<V, ? extends Streamable<V>> stream() {
+            return DefaultStream.create(this);
+        }
+
+        @Override
+        public UnmodifiableIterator<V> iterator() {
+            return new UnmodifiableIterator<V>() {
+
+                final UnmodifiableIterator<? extends Map.Immutable.Entry<K, V>> iterator = ImmutableHashMap.this.entries().iterator();
+
+                @Override
+                public boolean hasNext() {
+                    return iterator.hasNext();
+                }
+
+                @Override
+                public V next() {
+                    return iterator.next().value();
+                }
+
+            };
+        }
+
+    }
+
+    private final class EntrySet
+            implements Set.Immutable<Map.Immutable.Entry<K, V>> {
+
+        @Override
+        public Set.Immutable<Entry<K, V>> and(final Map.Immutable.Entry<K, V> value) {
+            throw new UnsupportedOperationException("and not supported yet!");
+        }
+
+        @Override
+        public Set.Immutable<Entry<K, V>> not(final Object element) {
+            throw new UnsupportedOperationException("not not supported yet!");
+        }
+
+        @Override
+        public Set.Immutable<Entry<K, V>> tail() {
+            throw new UnsupportedOperationException("tail not supported yet!");
+        }
+
+        @Override
+        public Set.Mutable<Entry<K, V>> mutableCopy() {
+            throw new UnsupportedOperationException("mutableCopy not supported yet!");
+        }
+
+        @Override
+        public Object[] toRawArray() {
+            throw new UnsupportedOperationException("toRawArray not supported yet!");
+        }
+
+        @Override
+        public boolean isEmpty() {
+            return ImmutableHashMap.this.isEmpty();
+        }
+
+        @Override
+        public UnmodifiableIterator<Entry<K, V>> iterator() {
+            return new UnmodifiableIterator<Entry<K, V>>() {
+
+                int index = 0;
+                ImmutableMapNode<K, V> nextNode;
+
+                @Override
+                public boolean hasNext() {
+                    while (nextNode == null) {
+                        if (index >= bucket.length) {
+                            return false;
+                        }
+                        nextNode = bucket[index++];
+                    }
+                    return true;
+                }
+
+                @Override
+                public Entry<K, V> next() {
+                    if (nextNode == null) {
+                        throw new NoSuchElementException();
+                    }
+                    final ImmutableMapNode<K, V> current = nextNode;
+                    nextNode = nextNode.next();
+                    return current;
+                }
+
+            };
+        }
+
+        @Override
+        public Stream<Entry<K, V>, ? extends Set<Entry<K, V>>> stream() {
+            throw new UnsupportedOperationException("stream not supported yet!");
+        }
+
+        @Override
+        public NonNegativeInteger count() {
+            return ImmutableHashMap.this.count();
+        }
+
+        @Override
+        public String toString() {
+            return Iterables.safelyToString(this, this);
+        }
+
+        @Override
+        public boolean equals(final Object that) {
+            return that instanceof Set && this.equals((Set) that);
+        }
+
+        @Override
+        public int hashCode() {
+            return this.hash();
+        }
+
+    }
+
+}

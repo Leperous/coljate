@@ -113,7 +113,7 @@ public class ImmutableWrappedTreeSet<V>
 
     @Override
     public Set.Stream<V, ? extends Set<V>> stream() {
-        return DefaultStream.<V, Set<V>>create(this, ImmutableWrappedHashSet::collector);
+        return DefaultStream.create(this, ImmutableWrappedHashSet::collector);
     }
 
     protected static class ImmutableEmptyTreeSet<V>

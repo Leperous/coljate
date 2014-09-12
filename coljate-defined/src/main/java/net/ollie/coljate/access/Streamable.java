@@ -84,7 +84,9 @@ public interface Streamable<V>
     }
 
     @Nonnull
-    Object[] toRawArray();
+    default Object[] toRawArray() {
+        return Iterables.toArray(this);
+    }
 
     @Override
     default boolean contains(final Object object) {

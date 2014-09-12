@@ -74,7 +74,7 @@ public class MutableWrappedHashSet<V>
 
     @Override
     public Stream<V, ? extends Set<V>> stream() {
-        return DefaultStream.<V, Set.Mutable<V>>create(this, MutableWrappedHashSet::collector);
+        return DefaultStream.create(this, MutableWrappedHashSet::collector);
     }
 
 }

@@ -7,7 +7,6 @@ import net.ollie.coljate.Collection;
 import net.ollie.coljate.Map;
 import net.ollie.coljate.MultiMap;
 import net.ollie.coljate.Set;
-import net.ollie.coljate.StreamableWrapper;
 import net.ollie.coljate.access.Streamable;
 import net.ollie.coljate.streams.DefaultStream;
 
@@ -100,7 +99,7 @@ public class MutableWrappedMultiArrayMap<K, V>
 
     @Override
     public Stream<V, Streamable<V>> stream() {
-        return DefaultStream.create(this, StreamableWrapper::collector);
+        return DefaultStream.create(this);
     }
 
     @Override
