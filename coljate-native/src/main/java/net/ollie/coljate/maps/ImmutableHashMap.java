@@ -7,6 +7,7 @@ import java.util.Objects;
 import net.ollie.coljate.Map;
 import net.ollie.coljate.Set;
 import net.ollie.coljate.access.Streamable;
+import net.ollie.coljate.lists.MutableWrappedLinkedList;
 import net.ollie.coljate.sets.ImmutableWrappedHashSet;
 import net.ollie.coljate.sets.MutableWrappedHashSet;
 import net.ollie.coljate.streams.DefaultStream;
@@ -284,13 +285,13 @@ public class ImmutableHashMap<K, V>
             implements Streamable.Immutable<V> {
 
         @Override
-        public Streamable.Immutable<V> tail() {
-            throw new UnsupportedOperationException("tail not supported yet!");
+        public Streamable.Mutable<V> mutableCopy() {
+            return MutableWrappedLinkedList.copy(this);
         }
 
         @Override
-        public Streamable.Mutable<V> mutableCopy() {
-            throw new UnsupportedOperationException("mutableCopy not supported yet!");
+        public Streamable.Immutable<V> tail() {
+            return this.mutableCopy().tail().immutableCopy();
         }
 
         @Override
@@ -328,28 +329,23 @@ public class ImmutableHashMap<K, V>
             implements Set.Immutable<Map.Immutable.Entry<K, V>> {
 
         @Override
+        public Set.Mutable<Entry<K, V>> mutableCopy() {
+            return MutableWrappedHashSet.copy(this);
+        }
+
+        @Override
         public Set.Immutable<Entry<K, V>> and(final Map.Immutable.Entry<K, V> value) {
-            throw new UnsupportedOperationException("and not supported yet!");
+            return this.mutableCopy().and(value).immutableCopy();
         }
 
         @Override
         public Set.Immutable<Entry<K, V>> not(final Object element) {
-            throw new UnsupportedOperationException("not not supported yet!");
+            return this.mutableCopy().not(element).immutableCopy();
         }
 
         @Override
         public Set.Immutable<Entry<K, V>> tail() {
-            throw new UnsupportedOperationException("tail not supported yet!");
-        }
-
-        @Override
-        public Set.Mutable<Entry<K, V>> mutableCopy() {
-            throw new UnsupportedOperationException("mutableCopy not supported yet!");
-        }
-
-        @Override
-        public Object[] toRawArray() {
-            throw new UnsupportedOperationException("toRawArray not supported yet!");
+            return this.mutableCopy().tail().immutableCopy();
         }
 
         @Override
@@ -390,7 +386,7 @@ public class ImmutableHashMap<K, V>
 
         @Override
         public Stream<Entry<K, V>, ? extends Set<Entry<K, V>>> stream() {
-            throw new UnsupportedOperationException("stream not supported yet!");
+            return DefaultStream.create(this, ImmutableWrappedHashSet::collector);
         }
 
         @Override
