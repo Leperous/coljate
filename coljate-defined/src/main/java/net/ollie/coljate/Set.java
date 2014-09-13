@@ -1,7 +1,6 @@
 package net.ollie.coljate;
 
 import java.util.Objects;
-import java.util.function.Consumer;
 import java.util.function.Predicate;
 
 import net.ollie.coljate.access.Streamable;
@@ -69,12 +68,6 @@ public interface Set<V>
             return added;
         }
 
-        @Nonnull
-        default Set.Mutable<V> and(final V value) {
-            this.add(value);
-            return this;
-        }
-
         boolean remove(@Nullable Object value);
 
         default boolean removeWhere(final Predicate<? super V> predicate) {
@@ -102,47 +95,15 @@ public interface Set<V>
         }
 
         @Nonnull
-        default Set.Mutable<V> not(final Object object) {
-            this.remove(object);
+        default Set.Mutable<V> and(final V value) {
+            this.add(value);
             return this;
         }
 
-        default Inliner<V, ? extends Set.Mutable<V>> inline() {
-            return new Inliner<>(this);
-        }
-
-        class Inliner<V, S extends Set.Mutable<V>> {
-
-            private final S set;
-
-            protected Inliner(final S set) {
-                this.set = set;
-            }
-
-            public Inliner<V, S> add(final V value) {
-                set.add(value);
-                return this;
-            }
-
-            public Inliner<V, S> addAll(final Iterable<? extends V> iterable) {
-                set.addAll(iterable);
-                return this;
-            }
-
-            public Inliner<V, S> remove(final Object value) {
-                set.remove(value);
-                return this;
-            }
-
-            public Inliner<V, S> op(final Consumer<? super S> consumer) {
-                consumer.accept(set);
-                return this;
-            }
-
-            public S set() {
-                return set;
-            }
-
+        @Nonnull
+        default Set.Mutable<V> not(final Object object) {
+            this.remove(object);
+            return this;
         }
 
     }
