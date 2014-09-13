@@ -17,5 +17,5 @@ Inspired by the SLF4J re-working of loggers, this project aims to redefine Java'
 These collections are, intentionally, *not* compatible with the Java collections API; however wrappers exist for converting from:
 
   * java.util.Collection classes
-  * Guava classes
+  * [Guava](https://code.google.com/p/guava-libraries/) classes
 
