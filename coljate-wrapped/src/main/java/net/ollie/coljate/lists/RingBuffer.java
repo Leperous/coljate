@@ -23,7 +23,7 @@ public class RingBuffer<V>
 
     @SuppressWarnings({"unchecked", "rawtypes"})
     @Nonnull
-    private static final RingBuffer empty = new RingBuffer(AbstactMutableWrappedArray.create());
+    private static final RingBuffer empty = new RingBuffer(MutableWrappedArray.create());
 
     @SuppressWarnings("unchecked")
     @Nonnull
@@ -38,7 +38,7 @@ public class RingBuffer<V>
 
     @Nonnull
     public static <V> RingBuffer<V> copy(final Iterable<? extends V> iterable) {
-        return view(AbstactMutableWrappedArray.copy(iterable));
+        return view(MutableWrappedArray.copy(iterable));
     }
 
     private final Array.Mutable<V> delegate;
@@ -83,7 +83,7 @@ public class RingBuffer<V>
             case 1:
                 return empty();
             default:
-                final Array.Mutable<V> array = AbstactMutableWrappedArray.create(this.size() - 1);
+                final Array.Mutable<V> array = MutableWrappedArray.create(this.size() - 1);
                 for (int i = 1; i < this.size(); i++) {
                     final V value = delegate.get(this.mod(readIndex + i));
                     array.set(i - 1, value);

@@ -1,7 +1,5 @@
 package net.ollie.coljate;
 
-import net.ollie.coljate.Set;
-
 import org.junit.Test;
 
 /**
@@ -9,7 +7,7 @@ import org.junit.Test;
  * @author Ollie
  */
 public abstract class AbstractImmutableSetTest
-        extends AbstractIteratableTest<Set.Immutable<Object>> {
+        extends AbstractStreamableTest<Set.Immutable<Object>> {
 
     @Test
     public void shouldAddAndRemove() {

@@ -34,7 +34,7 @@ public class ImmutableWrappedArray<V>
 
     @Nonnull
     public static <V> Array.Immutable<V> create(final int size) {
-        return copy(AbstactMutableWrappedArray.create(size));
+        return copy(MutableWrappedArray.create(size));
     }
 
     /**
@@ -55,7 +55,7 @@ public class ImmutableWrappedArray<V>
             case 0:
                 return ImmutableWrappedArray.create();
             default:
-                return new ImmutableWrappedArray<>(AbstactMutableWrappedArray.create(array));
+                return new ImmutableWrappedArray<>(MutableWrappedArray.create(array));
         }
     }
 
@@ -68,7 +68,7 @@ public class ImmutableWrappedArray<V>
     public static <V> Array.Immutable<V> copy(final Iterable<? extends V> iterable) {
         return iterable instanceof Array.Immutable
                 ? (Array.Immutable<V>) iterable
-                : new ImmutableWrappedArray<>(AbstactMutableWrappedArray.copy(iterable));
+                : new ImmutableWrappedArray<>(MutableWrappedArray.copy(iterable));
     }
 
     private final Array<V> underlying;
@@ -189,7 +189,7 @@ public class ImmutableWrappedArray<V>
 
         @Override
         public Array.Mutable<V> mutableCopy() {
-            return AbstactMutableWrappedArray.create();
+            return MutableWrappedArray.create();
         }
 
         @Override
@@ -254,7 +254,7 @@ public class ImmutableWrappedArray<V>
 
         @Override
         public Array.Mutable<V> mutableCopy() {
-            return AbstactMutableWrappedArray.create(this.value());
+            return MutableWrappedArray.create(this.value());
         }
 
         public Stream<V, ? extends Array.Immutable<V>> stream() {
@@ -271,7 +271,7 @@ public class ImmutableWrappedArray<V>
 
         @Override
         public Supplier<Array.Mutable<V>> supplier() {
-            return AbstactMutableWrappedArray::create;
+            return MutableWrappedArray::create;
         }
 
         @Override

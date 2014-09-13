@@ -24,7 +24,7 @@ public class MutableWrappedLinkedList<V>
 
     @SafeVarargs
     public static <V> List.Mutable<V> create(final V... elements) {
-        return AbstactMutableWrappedArray.create(elements);
+        return MutableWrappedArray.create(elements);
     }
 
     public static <V> MutableWrappedLinkedList<V> view(final java.util.LinkedList<V> deque) {

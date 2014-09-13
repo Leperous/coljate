@@ -7,6 +7,8 @@ import java.util.Iterator;
 import java.util.NoSuchElementException;
 import java.util.function.Predicate;
 
+import javax.annotation.Nonnull;
+
 /**
  *
  * @author Ollie
@@ -60,8 +62,18 @@ public final class Arrays {
         return concatenated;
     }
 
+    @SafeVarargs
+    @Nonnull
     public static <V> java.util.List<V> asList(final V... elements) {
         return java.util.Arrays.asList(elements);
+    }
+
+    public static <V> java.util.List<V> toList(final V[] array) {
+        final java.util.List<V> list = new java.util.ArrayList<>(array.length);
+        for (final V element : array) {
+            list.add(element);
+        }
+        return list;
     }
 
     public static <V> java.util.List<V> asList(final Iterable<V> iterable) {

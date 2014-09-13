@@ -47,7 +47,7 @@ public class ImmutableWrappedList<V>
     public static <V> List.Immutable<V> copy(final Iterable<? extends V> iterable) {
         return iterable instanceof List.Immutable
                 ? (List.Immutable<V>) iterable
-                : view(AbstactMutableWrappedArray.copy(iterable));
+                : view(MutableWrappedArray.copy(iterable));
     }
 
     @Nonnull

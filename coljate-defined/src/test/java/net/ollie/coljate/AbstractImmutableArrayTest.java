@@ -1,6 +1,5 @@
 package net.ollie.coljate;
 
-import net.ollie.coljate.Array.Immutable;
 import net.ollie.coljate.utils.numeric.NonNegativeInteger;
 
 import org.junit.Test;
@@ -13,7 +12,7 @@ import static org.junit.Assert.*;
  * @author Ollie
  */
 public abstract class AbstractImmutableArrayTest
-        extends AbstractIteratableTest<Array.Immutable<Object>> {
+        extends AbstractStreamableTest<Array.Immutable<Object>> {
 
     @Test
     public void shouldPrefixAndRemove() {
@@ -62,7 +61,7 @@ public abstract class AbstractImmutableArrayTest
     }
 
     @Override
-    protected void assertContainsNothing(Immutable<Object> collection) {
+    protected void assertContainsNothing(final Array.Immutable<Object> collection) {
         super.assertContainsNothing(collection);
         assertThat(collection.count().intValue(), is(0));
         assertThat(collection.notFirst(new Object()), is(collection));

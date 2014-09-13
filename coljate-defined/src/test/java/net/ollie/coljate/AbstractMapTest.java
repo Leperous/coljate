@@ -16,7 +16,7 @@ import org.junit.Test;
  * @author Ollie
  */
 public abstract class AbstractMapTest<C extends Map<Object, Object>>
-        extends AbstractIteratableTest<C> {
+        extends AbstractStreamableTest<C> {
 
     protected abstract C create(Iterable<Map.Entry<Object, Object>> entries);
 

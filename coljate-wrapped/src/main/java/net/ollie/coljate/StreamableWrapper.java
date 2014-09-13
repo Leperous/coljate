@@ -10,7 +10,7 @@ import java.util.function.Supplier;
 import java.util.stream.Collector;
 
 import net.ollie.coljate.access.Streamable;
-import net.ollie.coljate.lists.AbstactMutableWrappedArray;
+import net.ollie.coljate.lists.MutableWrappedArray;
 import net.ollie.coljate.lists.ImmutableWrappedArray;
 import net.ollie.coljate.streams.DefaultStream;
 import net.ollie.coljate.utils.ArrayLists;
@@ -82,7 +82,7 @@ public class StreamableWrapper<V> implements Streamable<V> {
 
     @Override
     public Array.Mutable<V> mutableCopy() {
-        return AbstactMutableWrappedArray.copy(this);
+        return MutableWrappedArray.copy(this);
     }
 
     @Override

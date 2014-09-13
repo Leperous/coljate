@@ -13,7 +13,7 @@ import org.junit.Test;
  * @author Ollie
  */
 public abstract class AbstractMutableListTest<C extends List.Mutable<Object>>
-        extends AbstractIteratableTest<C> {
+        extends AbstractStreamableTest<C> {
 
     @Test
     public void shouldPrefix() {

@@ -1,6 +1,6 @@
 package net.ollie.coljate.lists;
 
-import net.ollie.coljate.lists.AbstactMutableWrappedArray;
+import net.ollie.coljate.lists.MutableWrappedArray;
 import net.ollie.coljate.Array;
 
 import static org.hamcrest.CoreMatchers.is;
@@ -17,7 +17,7 @@ public class MutableArrayTest {
 
     @Test
     public void testEmpty() {
-        final Array.Mutable<Object> empty = AbstactMutableWrappedArray.create(0);
+        final Array.Mutable<Object> empty = MutableWrappedArray.create(0);
         assertTrue(empty.isEmpty());
         try {
             empty.set(0, new Object());
@@ -28,7 +28,7 @@ public class MutableArrayTest {
 
     @Test
     public void testEmptyInitialSize() {
-        final Array.Mutable<Object> empty = AbstactMutableWrappedArray.create(4);
+        final Array.Mutable<Object> empty = MutableWrappedArray.create(4);
         assertThat(empty.count(), is(0));
         empty.set(0, new Object());
         empty.set(1, new Object());

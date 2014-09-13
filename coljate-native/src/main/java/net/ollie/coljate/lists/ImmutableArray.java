@@ -10,7 +10,7 @@ import java.util.stream.Collector;
 
 import net.ollie.coljate.Array;
 import net.ollie.coljate.SortedSet;
-import net.ollie.coljate.lists.AbstactMutableWrappedArray.CopiedIntoMutableListBackedArray;
+import net.ollie.coljate.lists.MutableWrappedArray.CopiedIntoMutableListBackedArray;
 import net.ollie.coljate.streams.DefaultStream;
 import net.ollie.coljate.utils.ArrayLists;
 import net.ollie.coljate.utils.Arrays;

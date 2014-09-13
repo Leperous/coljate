@@ -26,48 +26,48 @@ import javax.annotation.concurrent.NotThreadSafe;
  * @author Ollie
  */
 @NotThreadSafe
-public abstract class AbstactMutableWrappedArray<V>
+public abstract class MutableWrappedArray<V>
         extends AbstractWrappedArray<V>
         implements Array.Mutable<V> {
 
     public static final int DEFAULT_INITIAL_CAPACITY = 10;
 
-    public static <V> AbstactMutableWrappedArray<V> create() {
+    public static <V> MutableWrappedArray<V> create() {
         return create(DEFAULT_INITIAL_CAPACITY);
     }
 
-    public static <V> AbstactMutableWrappedArray<V> create(final NonNegativeInteger initialCapacity) {
+    public static <V> MutableWrappedArray<V> create(final NonNegativeInteger initialCapacity) {
         return create(initialCapacity.intValue());
     }
 
-    public static <V> AbstactMutableWrappedArray<V> create(final int initialCapacity) {
+    public static <V> MutableWrappedArray<V> create(final int initialCapacity) {
         return view(new java.util.ArrayList<>(DEFAULT_INITIAL_CAPACITY), initialCapacity);
     }
 
     @SafeVarargs
-    public static <V> AbstactMutableWrappedArray<V> create(final V... array) {
+    public static <V> MutableWrappedArray<V> create(final V... array) {
         return view(new java.util.ArrayList<>(java.util.Arrays.asList(array)), array.length);
     }
 
-    public static <V> AbstactMutableWrappedArray<V> view(final V[] array) {
+    public static <V> MutableWrappedArray<V> view(final V[] array) {
         return new ArrayBackedArray<>(array);
     }
 
-    public static <V> AbstactMutableWrappedArray<V> copy(final Iterable<? extends V> iterable) {
+    public static <V> MutableWrappedArray<V> copy(final Iterable<? extends V> iterable) {
         return view(ArrayLists.copy(iterable));
     }
 
-    public static <V> AbstactMutableWrappedArray<V> view(final java.util.ArrayList<V> list) {
+    public static <V> MutableWrappedArray<V> view(final java.util.ArrayList<V> list) {
         return new MutableListBackedArray<>(list, list.size());
     }
 
     @Nonnull
-    public static <V> AbstactMutableWrappedArray<V> view(final java.util.ArrayList<V> list, final int capacity) {
+    public static <V> MutableWrappedArray<V> view(final java.util.ArrayList<V> list, final int capacity) {
         return new MutableListBackedArray<>(list, capacity);
     }
 
     @Nonnull
-    public static <V> AbstactMutableWrappedArray<V> maybeView(final Iterable<V> iterable) {
+    public static <V> MutableWrappedArray<V> maybeView(final Iterable<V> iterable) {
         return view(ArrayLists.castOrCopy(iterable));
     }
 
@@ -77,7 +77,7 @@ public abstract class AbstactMutableWrappedArray<V>
     }
 
     static class MutableListBackedArray<V>
-            extends AbstactMutableWrappedArray<V>
+            extends MutableWrappedArray<V>
             implements Array.Mutable<V> {
 
         private final java.util.ArrayList<V> underlying;
@@ -245,7 +245,7 @@ public abstract class AbstactMutableWrappedArray<V>
     }
 
     static class ArrayBackedArray<V>
-            extends AbstactMutableWrappedArray<V>
+            extends MutableWrappedArray<V>
             implements Array.Mutable<V> {
 
         private V[] array;
@@ -425,7 +425,7 @@ public abstract class AbstactMutableWrappedArray<V>
 
         @Override
         public Supplier<Array.Mutable<V>> supplier() {
-            return AbstactMutableWrappedArray::create;
+            return MutableWrappedArray::create;
         }
 
         @Override

@@ -177,10 +177,12 @@ public interface Set<V>
         }
 
         @CheckReturnValue
-        Set.Immutable<V> not(Object element);
+        Set.Immutable<V> not(Object value);
 
         @Override
-        Set.Immutable<V> tail();
+        default Set.Immutable<V> tail() {
+            return this.not(this.head());
+        }
 
         @Override
         default Set.Immutable<V> immutableCopy() {
@@ -236,6 +238,25 @@ public interface Set<V>
 
         @CheckForNull
         V right();
+
+    }
+
+    abstract class Abstract<V> implements Set<V> {
+
+        @Override
+        public boolean equals(final Object object) {
+            return object instanceof Set && this.equals((Set<?>) object);
+        }
+
+        @Override
+        public int hashCode() {
+            return this.hash();
+        }
+
+        @Override
+        public String toString() {
+            return Iterables.safelyToString(this, this);
+        }
 
     }
 

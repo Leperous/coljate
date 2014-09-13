@@ -2,10 +2,12 @@ package net.ollie.coljate;
 
 import java.util.Comparator;
 import java.util.Objects;
+import java.util.RandomAccess;
 
 import net.ollie.coljate.access.Indexed;
 import net.ollie.coljate.imposed.Ordered;
 import net.ollie.coljate.utils.Suppliers;
+import net.ollie.coljate.utils.iterators.Iterables;
 import net.ollie.coljate.utils.iterators.Streams;
 import net.ollie.coljate.utils.numeric.NonNegativeInteger;
 
@@ -14,12 +16,12 @@ import javax.annotation.CheckReturnValue;
 import javax.annotation.Nonnull;
 
 /**
- * An ordered, indexed collection create objects.
+ * An ordered, indexed collection.
  *
  * @author Ollie
  */
 public interface Array<V>
-        extends List<V>, Indexed<NonNegativeInteger, V>, Ordered<V> {
+        extends List<V>, Indexed<NonNegativeInteger, V>, Ordered<V>, RandomAccess {
 
     @Override
     Stream<V, ? extends Array<V>> stream();
@@ -226,6 +228,16 @@ public interface Array<V>
         }
 
         @Override
+        default V first() {
+            return this.isEmpty() ? null : this.get(0);
+        }
+
+        @Override
+        default V last() {
+            return this.isEmpty() ? null : this.get(this.capacity().decrement().get());
+        }
+
+        @Override
         Array.Immutable<V> tail();
 
         @Override
@@ -250,6 +262,11 @@ public interface Array<V>
     @javax.annotation.concurrent.Immutable
     interface Empty<V>
             extends Array.Immutable<V>, List.Empty<V>, Indexed.Empty<NonNegativeInteger, V> {
+
+        @Override
+        default V head() {
+            return List.Empty.super.head();
+        }
 
         @Override
         default Stream<V, ? extends Array.Empty<V>> stream() {
@@ -303,6 +320,11 @@ public interface Array<V>
 
         @Override
         default V first() {
+            return null;
+        }
+
+        @Override
+        default V last() {
             return null;
         }
 
@@ -363,7 +385,17 @@ public interface Array<V>
 
         @Override
         default V first() {
-            return this.value();
+            return List.Singleton.super.first();
+        }
+
+        @Override
+        default V head() {
+            return List.Singleton.super.head();
+        }
+
+        @Override
+        default V last() {
+            return null;
         }
 
         @Override
@@ -390,6 +422,25 @@ public interface Array<V>
         @Override
         default NonNegativeInteger capacity() {
             return NonNegativeInteger.ONE;
+        }
+
+    }
+
+    abstract class Abstract<V> implements Array<V> {
+
+        @Override
+        public String toString() {
+            return Iterables.safelyToString(this, this);
+        }
+
+        @Override
+        public boolean equals(final Object object) {
+            return object instanceof Array && this.equals((Array) object);
+        }
+
+        @Override
+        public int hashCode() {
+            return this.hash();
         }
 
     }

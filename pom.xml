@@ -12,6 +12,7 @@
         <module>coljate-defined</module>
         <module>coljate-wrapped</module>
         <module>coljate-native</module>
+        <module>coljate-guava</module>
     </modules>
 
     <properties>

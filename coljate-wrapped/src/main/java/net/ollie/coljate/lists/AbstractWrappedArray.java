@@ -13,7 +13,7 @@ public abstract class AbstractWrappedArray<V>
 
     @Override
     public Array.Mutable<V> mutableCopy() {
-        return AbstactMutableWrappedArray.copy(this);
+        return MutableWrappedArray.copy(this);
     }
 
     @Override

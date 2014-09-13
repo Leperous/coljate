@@ -1,6 +1,6 @@
 package net.ollie.coljate.lists;
 
-import net.ollie.coljate.lists.AbstactMutableWrappedArray;
+import net.ollie.coljate.lists.MutableWrappedArray;
 
 import java.util.Arrays;
 
@@ -16,7 +16,7 @@ public class AbstactMutableWrappedArrayTest
 
     @Override
     protected Array.Mutable<Object> create(final Object... objects) {
-        return AbstactMutableWrappedArray.copy(Arrays.asList(objects));
+        return MutableWrappedArray.copy(Arrays.asList(objects));
     }
 
 }

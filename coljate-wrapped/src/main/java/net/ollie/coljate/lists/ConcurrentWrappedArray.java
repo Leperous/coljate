@@ -206,7 +206,7 @@ public class ConcurrentWrappedArray<V>
             current = this.array();
             final int length = current.length();
             sorted = new AtomicReferenceArray<>(length);
-            final Array.Mutable<V> array = AbstactMutableWrappedArray.create(length);
+            final Array.Mutable<V> array = MutableWrappedArray.create(length);
             for (int i = 0; i < length; i++) {
                 array.suffix(current.get(i));
             }
