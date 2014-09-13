@@ -20,15 +20,15 @@
         </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>coljate</artifactId>
+            <artifactId>coljate-core</artifactId>
             <version>${project.version}</version>
-            <scope>test</scope>
-            <classifier>tests</classifier>
         </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>coljate-wrapped</artifactId>
+            <artifactId>coljate-api</artifactId>
             <version>${project.version}</version>
+            <scope>test</scope>
+            <classifier>tests</classifier>
         </dependency>
         <dependency>
             <groupId>junit</groupId>

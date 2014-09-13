@@ -9,8 +9,8 @@
     <packaging>pom</packaging>
 
     <modules>
-        <module>coljate-defined</module>
-        <module>coljate-wrapped</module>
+        <module>coljate-api</module>
+        <module>coljate-core</module>
         <module>coljate-native</module>
         <module>coljate-guava</module>
     </modules>

@@ -4,3 +4,5 @@
 /coljate-native/target/
 /coljate-guava/target/
 /coljate-wrapped/target/
+/coljate-core/target/
+/coljate-api/target/
