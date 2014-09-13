@@ -16,9 +16,9 @@ public abstract class AbstractMutableMapTest<C extends Map.Mutable<Object, Objec
         final C map = this.create();
         final Object key = new Object(), value = new Object();
         map.put(key, value);
-        assertContainsKeyValue(map, key, value);
+        assertContainsKeyAndValue(map, key, value);
         map.remove(key);
-        assertNotContainsKeyValue(map, key, value);
+        assertNotContainsKeyOrValue(map, key, value);
         assertContainsNothing(map);
     }
 

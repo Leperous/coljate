@@ -5,6 +5,7 @@ import java.util.stream.Collectors;
 
 import static net.ollie.coljate.matchers.MapMatchers.containsKey;
 
+import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.not;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertThat;
@@ -41,13 +42,14 @@ public abstract class AbstractMapTest<C extends Map<Object, Object>>
 
     }
 
-    protected <K, V> void assertContainsKeyValue(final Map<K, V> map, final K key, final V value) {
+    protected <K, V> void assertContainsKeyAndValue(final Map<K, V> map, final K key, final V value) {
         assertTrue(map.contains(value));
         assertTrue(map.containsKey(key));
         assertTrue(map.containsValue(value));
+        assertThat(map.get(key), is(value));
     }
 
-    protected <K, V> void assertNotContainsKeyValue(final Map<K, V> map, final K key, final V value) {
+    protected <K, V> void assertNotContainsKeyOrValue(final Map<K, V> map, final K key, final V value) {
         assertFalse(map.contains(value));
         assertFalse(map.containsKey(key));
         assertFalse(map.containsValue(value));

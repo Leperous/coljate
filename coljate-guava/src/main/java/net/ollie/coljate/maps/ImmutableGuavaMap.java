@@ -1,5 +1,7 @@
 package net.ollie.coljate.maps;
 
+import java.util.Objects;
+
 import net.ollie.coljate.ImmutableGuavaCollection;
 import net.ollie.coljate.Map;
 import net.ollie.coljate.Set;
@@ -56,12 +58,18 @@ public class ImmutableGuavaMap<K, V> extends Map.Abstract<K, V> implements Map.I
 
     @Override
     public Immutable<K, V> with(final K key, final V value) {
-        throw new UnsupportedOperationException("with not supported yet!");
+        final ImmutableMap.Builder<K, V> builder = ImmutableMap.builder();
+        builder.putAll(delegate);
+        builder.put(key, value);
+        return build(builder);
     }
 
     @Override
     public Immutable<K, V> without(final Object key) {
-        throw new UnsupportedOperationException("without not supported yet!");
+        return view(delegate.entrySet()
+                .stream()
+                .filter(entry -> !Objects.equals(entry.getKey(), key))
+                .collect(ImmutableMapCollector.collector()));
     }
 
     @Override
