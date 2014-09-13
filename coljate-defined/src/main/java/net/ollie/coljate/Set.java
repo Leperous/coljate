@@ -202,7 +202,7 @@ public interface Set<V>
 
     }
 
-    abstract class Abstract<V> implements Set<V> {
+    abstract class Abstract<V> extends Streamable.Abstract<V> implements Set<V> {
 
         @Override
         public boolean equals(final Object object) {
@@ -212,11 +212,6 @@ public interface Set<V>
         @Override
         public int hashCode() {
             return this.hash();
-        }
-
-        @Override
-        public String toString() {
-            return Iterables.safelyToString(this, this);
         }
 
     }

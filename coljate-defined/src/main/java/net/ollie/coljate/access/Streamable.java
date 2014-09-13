@@ -289,4 +289,23 @@ public interface Streamable<V>
 
     }
 
+    abstract class Abstract<V> implements Streamable<V> {
+
+        @Override
+        public String toString() {
+            return Iterables.safelyToString(this, this);
+        }
+
+        @Override
+        public boolean equals(final Object object) {
+            return object instanceof Streamable && this.equals((Streamable) object);
+        }
+
+        @Override
+        public int hashCode() {
+            return this.hash();
+        }
+
+    }
+
 }

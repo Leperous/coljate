@@ -3,7 +3,7 @@ package net.ollie.coljate;
 import net.ollie.coljate.access.Streamable;
 import net.ollie.coljate.lists.MutableWrappedArray;
 import net.ollie.coljate.streams.DefaultStream;
-import net.ollie.coljate.utils.iterators.UnmodifiableIterator;
+import net.ollie.coljate.utils.Arrays;
 
 import com.google.common.collect.ImmutableCollection;
 import com.google.common.collect.ImmutableList;
@@ -13,12 +13,21 @@ import java.io.Serializable;
  *
  * @author Ollie
  */
-public class ImmutableGuavaCollection<V> implements Streamable.Immutable<V>, Serializable {
+public class ImmutableGuavaCollection<V> extends Streamable.Abstract<V> implements Streamable.Immutable<V>, Serializable {
 
     private static final long serialVersionUID = 1L;
 
+    @SafeVarargs
+    public static <V> ImmutableGuavaCollection<V> create(final V... elements) {
+        return build(ImmutableList.<V>builder().addAll(Arrays.iterator(elements)));
+    }
+
     public static <V> ImmutableGuavaCollection<V> copy(final Iterable<? extends V> iterable) {
         return view(ImmutableList.copyOf(iterable));
+    }
+
+    public static <V> ImmutableGuavaCollection<V> build(final ImmutableCollection.Builder<? extends V> builder) {
+        return view(builder.build());
     }
 
     public static <V> ImmutableGuavaCollection<V> view(final ImmutableCollection<? extends V> collection) {
@@ -52,13 +61,8 @@ public class ImmutableGuavaCollection<V> implements Streamable.Immutable<V>, Ser
     }
 
     @Override
-    public UnmodifiableIterator<V> iterator() {
-        return UnmodifiableGuavaIterator.of(underlying.iterator());
-    }
-
-    @Override
     public Stream<V, ? extends Streamable<V>> stream() {
-        return DefaultStream.create(this, StreamableWrapper::collector);
+        return DefaultStream.create(underlying.iterator(), StreamableWrapper::collector);
     }
 
 }
