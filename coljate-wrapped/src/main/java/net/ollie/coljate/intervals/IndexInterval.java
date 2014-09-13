@@ -48,11 +48,6 @@ public class IndexInterval
     }
 
     @Override
-    public Object[] toRawArray() {
-        throw new UnsupportedOperationException("toRawArray not supported yet!");
-    }
-
-    @Override
     public NonNegativeInteger head() {
         throw new UnsupportedOperationException("head not supported yet!");
     }
