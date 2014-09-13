@@ -87,7 +87,7 @@ public final class Iterables {
         return Iterators.collect(iterable.iterator(), collector);
     }
 
-    public static <V1, V2> Iterable<V2> apply(final Iterable<V1> iterable, final Function<? super V1, ? extends V2> function) {
+    public static <V1, V2> Iterable<V2> map(final Iterable<V1> iterable, final Function<? super V1, ? extends V2> function) {
         return () -> new Iterator<V2>() {
 
             final Iterator<V1> base = iterable.iterator();

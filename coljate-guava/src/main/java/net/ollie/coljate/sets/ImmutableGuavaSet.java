@@ -1,4 +1,4 @@
-package net.ollie.coljate;
+package net.ollie.coljate.sets;
 
 import java.util.Objects;
 import java.util.function.Function;
@@ -14,6 +14,9 @@ import net.ollie.coljate.utils.iterators.UnmodifiableIterator;
 import com.google.common.collect.ImmutableSet;
 import java.io.Serializable;
 import javax.annotation.Nonnull;
+
+import net.ollie.coljate.Set;
+import net.ollie.coljate.UnmodifiableGuavaIterator;
 
 /**
  *
@@ -90,7 +93,7 @@ public class ImmutableGuavaSet<V> extends Set.Abstract<V> implements Set.Immutab
 
     @Override
     public UnmodifiableIterator<V> iterator() {
-        return new UnmodifiableGuavaIterator<>(underlying.iterator());
+        return UnmodifiableGuavaIterator.of(underlying.iterator());
     }
 
     @Override

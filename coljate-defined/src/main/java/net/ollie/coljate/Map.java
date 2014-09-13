@@ -210,4 +210,23 @@ public interface Map<K, V>
 
     }
 
+    abstract class Abstract<K, V> implements Map<K, V> {
+
+        @Override
+        public String toString() {
+            return this.entries().toString();
+        }
+
+        @Override
+        public boolean equals(final Object object) {
+            return object instanceof Map && this.equals((Map) object);
+        }
+
+        @Override
+        public int hashCode() {
+            return this.hash();
+        }
+
+    }
+
 }

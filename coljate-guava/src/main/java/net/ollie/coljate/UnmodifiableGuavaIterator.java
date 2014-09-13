@@ -8,9 +8,15 @@ import net.ollie.coljate.utils.iterators.UnmodifiableIterator;
  */
 public class UnmodifiableGuavaIterator<V> implements UnmodifiableIterator<V> {
 
+    public static <V> UnmodifiableIterator<V> of(final com.google.common.collect.UnmodifiableIterator<? extends V> delegate) {
+        return delegate.hasNext()
+                ? new UnmodifiableGuavaIterator<>(delegate)
+                : UnmodifiableIterator.of();
+    }
+
     private final com.google.common.collect.UnmodifiableIterator<? extends V> delegate;
 
-    public UnmodifiableGuavaIterator(final com.google.common.collect.UnmodifiableIterator<? extends V> delegate) {
+    protected UnmodifiableGuavaIterator(final com.google.common.collect.UnmodifiableIterator<? extends V> delegate) {
         this.delegate = delegate;
     }
 

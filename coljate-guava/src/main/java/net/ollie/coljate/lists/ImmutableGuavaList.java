@@ -1,4 +1,4 @@
-package net.ollie.coljate;
+package net.ollie.coljate.lists;
 
 import java.util.Collections;
 import java.util.Comparator;
@@ -18,6 +18,10 @@ import net.ollie.coljate.utils.numeric.NonNegativeInteger;
 import com.google.common.collect.ImmutableList;
 import java.io.Serializable;
 import javax.annotation.Nonnull;
+
+import net.ollie.coljate.Array;
+import net.ollie.coljate.SortedSet;
+import net.ollie.coljate.UnmodifiableGuavaIterator;
 
 /**
  *
@@ -144,7 +148,7 @@ public class ImmutableGuavaList<V> extends Array.Abstract<V> implements Array.Im
 
     @Override
     public UnmodifiableIterator<V> iterator() {
-        return new UnmodifiableGuavaIterator<>(underlying.iterator());
+        return UnmodifiableGuavaIterator.of(underlying.iterator());
     }
 
     @Override
