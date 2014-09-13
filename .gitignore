@@ -1,6 +1,6 @@
 /target/
 /.idea/
-/coljate.iml
 /coljate-defined/target/
 /coljate-native/target/
 /coljate-guava/target/
+/coljate-wrapped/target/
