@@ -2,9 +2,9 @@ package net.ollie.coljate.maps;
 
 import java.util.Iterator;
 
-import net.ollie.coljate.StreamableWrapper;
 import net.ollie.coljate.Map;
 import net.ollie.coljate.Set;
+import net.ollie.coljate.DefaultStreamable;
 import net.ollie.coljate.access.Streamable;
 import net.ollie.coljate.sets.ImmutableWrappedHashSet;
 import net.ollie.coljate.sets.MutableWrappedHashSet;
@@ -12,7 +12,6 @@ import net.ollie.coljate.streams.DefaultStream;
 import net.ollie.coljate.utils.ArrayLists;
 import net.ollie.coljate.utils.Conditions;
 import net.ollie.coljate.utils.iterators.Iterators;
-import net.ollie.coljate.utils.Strings;
 import net.ollie.coljate.utils.numeric.NonNegativeInteger;
 
 import javax.annotation.Nonnull;
@@ -88,7 +87,7 @@ public class MutableWrappedHashMap<K, V>
     @Override
     public Streamable<V> values() {
         if (values == null) {
-            values = StreamableWrapper.view(delegate.values());
+            values = DefaultStreamable.view(delegate.values());
         }
         return values;
     }
@@ -139,6 +138,7 @@ public class MutableWrappedHashMap<K, V>
     }
 
     private final class EntrySet
+            extends Set.Abstract<Map.Mutable.Entry<K, V>>
             implements Set.Mutable<Map.Mutable.Entry<K, V>> {
 
         private final java.util.Set<java.util.Map.Entry<K, V>> entries;
@@ -211,22 +211,6 @@ public class MutableWrappedHashMap<K, V>
         @Override
         public void clear() {
             entries.clear();
-        }
-
-        @Override
-        public boolean equals(final Object object) {
-            return object instanceof Set
-                    && this.equals((Set) object);
-        }
-
-        @Override
-        public int hashCode() {
-            return this.hash();
-        }
-
-        @Override
-        public String toString(final String separator) {
-            return Strings.toString(this, entries, separator);
         }
 
     }

@@ -62,7 +62,7 @@ public class ImmutableGuavaCollection<V> extends Streamable.Abstract<V> implemen
 
     @Override
     public Stream<V, ? extends Streamable<V>> stream() {
-        return DefaultStream.create(underlying.iterator(), StreamableWrapper::collector);
+        return DefaultStream.create(underlying.iterator(), DefaultStreamable::collector);
     }
 
 }

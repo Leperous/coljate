@@ -7,7 +7,6 @@ import java.util.RandomAccess;
 import net.ollie.coljate.access.Indexed;
 import net.ollie.coljate.imposed.Ordered;
 import net.ollie.coljate.utils.Suppliers;
-import net.ollie.coljate.utils.iterators.Iterables;
 import net.ollie.coljate.utils.iterators.Streams;
 import net.ollie.coljate.utils.numeric.NonNegativeInteger;
 
@@ -426,12 +425,7 @@ public interface Array<V>
 
     }
 
-    abstract class Abstract<V> implements Array<V> {
-
-        @Override
-        public String toString() {
-            return Iterables.safelyToString(this, this);
-        }
+    abstract class Abstract<V> extends List.Abstract<V> implements Array<V> {
 
         @Override
         public boolean equals(final Object object) {

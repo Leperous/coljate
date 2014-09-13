@@ -10,8 +10,7 @@ import net.ollie.coljate.access.Streamable;
  * @author Ollie
  * @see AbstractNativelyDelegatedFinite
  */
-public abstract class AbstractWrappedStreamable<V>
-        extends AbstractStreamable<V> {
+public abstract class AbstractWrappedStreamable<V> extends Streamable.Abstract<V> {
 
     protected abstract Streamable<V> underlying();
 
@@ -43,16 +42,6 @@ public abstract class AbstractWrappedStreamable<V>
     @Override
     public Iterator<V> iterator() {
         return this.underlying().iterator();
-    }
-
-    @Override
-    public String toString() {
-        return this.underlying().toString();
-    }
-
-    @Override
-    public String toString(final String separator) {
-        return this.underlying().toString(separator);
     }
 
 }

@@ -18,7 +18,7 @@ import javax.annotation.concurrent.ThreadSafe;
  */
 @ThreadSafe
 public class ConcurrentWrappedArray<V>
-        extends AbstractWrappedArray<V>
+        extends Array.Abstract<V>
         implements Array.Concurrent<V> {
 
     public static <V> Array.Mutable<V> create() {
@@ -244,6 +244,16 @@ public class ConcurrentWrappedArray<V>
     @Override
     public String toString() {
         return this.getClass().getSimpleName() + this.array();
+    }
+
+    @Override
+    public Array.Mutable<V> mutableCopy() {
+        return ConcurrentWrappedArray.copy(reference.get());
+    }
+
+    @Override
+    public Array.Immutable<V> immutableCopy() {
+        return ImmutableWrappedArray.copy(this);
     }
 
 }

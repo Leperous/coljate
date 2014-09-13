@@ -27,7 +27,7 @@ import javax.annotation.concurrent.NotThreadSafe;
  */
 @NotThreadSafe
 public abstract class MutableWrappedArray<V>
-        extends AbstractWrappedArray<V>
+        extends Array.Abstract<V>
         implements Array.Mutable<V> {
 
     public static final int DEFAULT_INITIAL_CAPACITY = 10;
@@ -74,6 +74,16 @@ public abstract class MutableWrappedArray<V>
     @Nonnull
     public static <V> Collector<V, ?, ? extends Array<V>> collector() {
         return new ArrayCollector<>();
+    }
+
+    @Override
+    public Array.Immutable<V> immutableCopy() {
+        return ImmutableWrappedArray.copy(this);
+    }
+
+    @Override
+    public Array.Mutable<V> mutableCopy() {
+        return MutableWrappedArray.copy(this);
     }
 
     static class MutableListBackedArray<V>

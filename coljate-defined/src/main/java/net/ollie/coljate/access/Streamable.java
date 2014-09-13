@@ -143,7 +143,7 @@ public interface Streamable<V>
     }
 
     default String toString(final String separator) {
-        return Iterables.safelyToString(this, this);
+        return Iterables.safelyToString(this, this, separator);
     }
 
     @javax.annotation.concurrent.NotThreadSafe
@@ -292,11 +292,6 @@ public interface Streamable<V>
     abstract class Abstract<V> implements Streamable<V> {
 
         @Override
-        public String toString() {
-            return Iterables.safelyToString(this, this);
-        }
-
-        @Override
         public boolean equals(final Object object) {
             return object instanceof Streamable && this.equals((Streamable) object);
         }
@@ -304,6 +299,11 @@ public interface Streamable<V>
         @Override
         public int hashCode() {
             return this.hash();
+        }
+
+        @Override
+        public String toString() {
+            return this.toString(",");
         }
 
     }

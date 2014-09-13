@@ -1,6 +1,6 @@
 package net.ollie.coljate.maps;
 
-import net.ollie.coljate.StreamableWrapper;
+import net.ollie.coljate.DefaultStreamable;
 import net.ollie.coljate.Map;
 import net.ollie.coljate.Set;
 import net.ollie.coljate.TreeMap;
@@ -120,7 +120,7 @@ public class MutableWrappedTreeMap<K, V>
 
     @Override
     public Streamable<V> values() {
-        return StreamableWrapper.view(delegate.values());
+        return DefaultStreamable.view(delegate.values());
     }
 
     @Override

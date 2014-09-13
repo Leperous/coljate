@@ -1,7 +1,7 @@
 package net.ollie.coljate;
 
 import net.ollie.coljate.access.Traversable;
-import net.ollie.coljate.utils.Strings;
+import net.ollie.coljate.utils.iterators.Iterables;
 
 /**
  * Delegates operations to some underlying {@link java.util.Collection}.
@@ -30,7 +30,7 @@ public abstract class AbstractNativelyDelegatedTraversable<V>
     }
 
     public String toString(final String separator) {
-        return Strings.toString(this, this.delegate(), separator);
+        return Iterables.safelyToString(this.delegate(), this, separator);
     }
 
 }

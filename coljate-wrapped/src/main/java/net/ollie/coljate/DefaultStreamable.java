@@ -21,16 +21,19 @@ import javax.annotation.Nonnull;
  *
  * @author Ollie
  */
-public class StreamableWrapper<V> implements Streamable<V> {
+public class DefaultStreamable<V> implements Streamable<V> {
 
+    @Nonnull
     public static <V> Streamable<V> view(final java.util.Collection<V> collection) {
-        return new StreamableWrapper<>(collection);
+        return new DefaultStreamable<>(collection);
     }
 
+    @Nonnull
     public static <V> Streamable<V> create() {
         return view(java.util.Collections.emptySet());
     }
 
+    @Nonnull
     public static <V> Streamable<V> copy(@Nonnull final Iterable<? extends V> iterable) {
         return view(ArrayLists.copy(iterable));
     }
@@ -42,7 +45,7 @@ public class StreamableWrapper<V> implements Streamable<V> {
 
     private final java.util.Collection<V> collection;
 
-    protected StreamableWrapper(final java.util.Collection<V> collection) {
+    protected DefaultStreamable(final java.util.Collection<V> collection) {
         this.collection = collection;
     }
 
@@ -91,7 +94,7 @@ public class StreamableWrapper<V> implements Streamable<V> {
     }
 
     protected static class StreamableWrapperCollector<V>
-            implements Collector<V, StreamableWrapper<V>, Streamable<V>> {
+            implements Collector<V, DefaultStreamable<V>, Streamable<V>> {
 
         static final StreamableWrapperCollector INSTANCE = new StreamableWrapperCollector();
 
@@ -99,17 +102,17 @@ public class StreamableWrapper<V> implements Streamable<V> {
         }
 
         @Override
-        public Supplier<StreamableWrapper<V>> supplier() {
-            return () -> new StreamableWrapper<>(new ArrayList<>());
+        public Supplier<DefaultStreamable<V>> supplier() {
+            return () -> new DefaultStreamable<>(new ArrayList<>());
         }
 
         @Override
-        public BiConsumer<StreamableWrapper<V>, V> accumulator() {
+        public BiConsumer<DefaultStreamable<V>, V> accumulator() {
             return (streamable, value) -> streamable.collection.add(value);
         }
 
         @Override
-        public BinaryOperator<StreamableWrapper<V>> combiner() {
+        public BinaryOperator<DefaultStreamable<V>> combiner() {
             return (l, r) -> {
                 l.collection.addAll(r.collection);
                 return l;
@@ -117,7 +120,7 @@ public class StreamableWrapper<V> implements Streamable<V> {
         }
 
         @Override
-        public Function<StreamableWrapper<V>, Streamable<V>> finisher() {
+        public Function<DefaultStreamable<V>, Streamable<V>> finisher() {
             return f -> f;
         }
 

@@ -164,22 +164,25 @@ public final class Iterables {
     }
 
     public static String safelyToString(final Iterable<?> iterable, final Object caller) {
-        final StringBuilder sb = new StringBuilder();
+        return safelyToString(iterable, caller, ",");
+    }
+
+    public static String safelyToString(final Iterable<?> iterable, final Object caller, final String separator) {
         final Iterator<?> iterator = iterable.iterator();
-        if (iterator.hasNext()) {
-            sb.append('[');
-        } else {
+        if (!iterator.hasNext()) {
             return "[]";
         }
+        final StringBuilder sb = new StringBuilder();
+        sb.append('[');
         while (iterator.hasNext()) {
             final Object next = iterator.next();
-            if (Objects.equals(next, caller)) {
+            if (caller == next) {
                 sb.append("(this)");
             } else {
                 sb.append(next);
             }
             if (iterator.hasNext()) {
-                sb.append(',');
+                sb.append(separator);
             }
         }
         sb.append(']');

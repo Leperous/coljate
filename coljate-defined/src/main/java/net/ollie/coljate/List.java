@@ -310,4 +310,18 @@ public interface List<V>
 
     }
 
+    abstract class Abstract<V> extends Streamable.Abstract<V> implements List<V> {
+
+        @Override
+        public boolean equals(final Object object) {
+            return object instanceof List && this.equals((List) object);
+        }
+
+        @Override
+        public int hashCode() {
+            return this.hash();
+        }
+
+    }
+
 }

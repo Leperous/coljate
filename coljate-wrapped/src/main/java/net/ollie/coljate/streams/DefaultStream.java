@@ -8,7 +8,7 @@ import java.util.function.Predicate;
 import java.util.function.Supplier;
 import java.util.stream.Collector;
 
-import net.ollie.coljate.StreamableWrapper;
+import net.ollie.coljate.DefaultStreamable;
 import net.ollie.coljate.access.Streamable;
 import net.ollie.coljate.utils.iterators.Iterables;
 import net.ollie.coljate.utils.iterators.Iterators;
@@ -26,7 +26,7 @@ public abstract class DefaultStream<V, S extends Streamable<V>>
     }
 
     public static <V> DefaultStream<V, Streamable<V>> create(final Iterable<V> iterable) {
-        return create(iterable.iterator(), StreamableWrapper::collector);
+        return create(iterable.iterator(), DefaultStreamable::collector);
     }
 
     public static <V, S extends Streamable<V>> DefaultStream<V, S> create(final Iterable<V> iterable, final Supplier<Collector<V, ?, ? extends S>> collectorSupplier) {
@@ -144,7 +144,7 @@ public abstract class DefaultStream<V, S extends Streamable<V>>
 
         @Override
         protected Collector<V2, ?, ? extends Streamable<V2>> getCollector() {
-            return StreamableWrapper.collector();
+            return DefaultStreamable.collector();
         }
 
         @Override
