@@ -14,5 +14,8 @@ Inspired by the SLF4J re-working of loggers, this project aims to redefine Java'
   * Remaining open for extension.
   * Annotating methods with [FindBugs](https://code.google.com/p/findbugs/) annotations to assist static nullity checks.
 
-These collections are, intentionally, *not* compatible with the Java collections API.
+These collections are, intentionally, *not* compatible with the Java collections API; however wrappers exist for converting to and from:
+
+  * java.util.Collection classes
+  * Guava classes
 
