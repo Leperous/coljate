@@ -1,7 +1,5 @@
 package net.ollie.coljate.sets;
 
-import java.util.function.BiConsumer;
-import java.util.function.BinaryOperator;
 import java.util.function.Function;
 import java.util.function.Supplier;
 import java.util.stream.Collector;
@@ -13,7 +11,7 @@ import net.ollie.coljate.Set;
  * @author Ollie
  */
 public class MutableSetCollector<V, S extends Set.Mutable<V>>
-        implements Collector<V, S, S> {
+        extends AbstractSetCollector<V, S, S> {
 
     public static <V, S extends Set.Mutable<V>> Collector<V, ?, S> create(final Supplier<S> supplier) {
         return new MutableSetCollector<>(supplier);
@@ -28,19 +26,6 @@ public class MutableSetCollector<V, S extends Set.Mutable<V>>
     @Override
     public Supplier<S> supplier() {
         return supplier;
-    }
-
-    @Override
-    public BiConsumer<S, V> accumulator() {
-        return (set, value) -> set.add(value);
-    }
-
-    @Override
-    public BinaryOperator<S> combiner() {
-        return (left, right) -> {
-            left.addAll(right);
-            return left;
-        };
     }
 
     @Override

@@ -5,8 +5,6 @@ import java.util.function.Function;
 import java.util.function.Supplier;
 import java.util.stream.Collector;
 
-import net.ollie.coljate.sets.AbstractSetCollector;
-import net.ollie.coljate.sets.MutableWrappedHashSet;
 import net.ollie.coljate.streams.DefaultStream;
 import net.ollie.coljate.utils.iterators.Iterables;
 import net.ollie.coljate.utils.iterators.UnmodifiableIterator;
@@ -112,7 +110,7 @@ public class ImmutableGuavaSet<V> extends Set.Abstract<V> implements Set.Immutab
     }
 
     private static final class ImmutableGuavaSetCollector<V>
-            extends AbstractSetCollector<V, ImmutableGuavaSet<V>> {
+            extends AbstractSetCollector<V, Set.Mutable<V>, ImmutableGuavaSet<V>> {
 
         @Override
         public Supplier<Set.Mutable<V>> supplier() {

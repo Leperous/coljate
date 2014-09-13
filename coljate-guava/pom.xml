@@ -22,11 +22,6 @@
             <groupId>${project.groupId}</groupId>
             <artifactId>coljate</artifactId>
             <version>${project.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>coljate</artifactId>
-            <version>${project.version}</version>
             <scope>test</scope>
             <classifier>tests</classifier>
         </dependency>
@@ -40,11 +35,6 @@
             <artifactId>junit</artifactId>
             <version>4.10</version>
             <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>coljate-native</artifactId>
-            <version>${project.version}</version>
         </dependency>
     </dependencies>
 </project>

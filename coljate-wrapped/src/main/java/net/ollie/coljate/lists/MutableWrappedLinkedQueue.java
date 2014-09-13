@@ -4,7 +4,7 @@ import java.util.Iterator;
 import java.util.NoSuchElementException;
 import java.util.stream.Collector;
 
-import net.ollie.coljate.AbstractNativelyDelegatedTraversable;
+import net.ollie.coljate.AbstractNativeTraversable;
 import net.ollie.coljate.List;
 import net.ollie.coljate.Queue;
 import net.ollie.coljate.Sequence;
@@ -18,7 +18,7 @@ import net.ollie.coljate.utils.numeric.NonNegativeInteger;
  * @author Ollie
  */
 public class MutableWrappedLinkedQueue<V>
-        extends AbstractNativelyDelegatedTraversable<V>
+        extends AbstractNativeTraversable<V>
         implements Queue.Mutable<V>, Streamable.Mutable<V> {
 
     public static <V> MutableWrappedLinkedQueue<V> empty() {

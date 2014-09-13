@@ -8,7 +8,7 @@ import net.ollie.coljate.utils.iterators.Iterables;
  *
  * @author Ollie
  */
-public abstract class AbstractNativelyDelegatedTraversable<V>
+public abstract class AbstractNativeTraversable<V>
         implements Traversable<V> {
 
     protected abstract java.util.Collection<V> delegate();

@@ -6,13 +6,13 @@ import net.ollie.coljate.access.Streamable;
 import net.ollie.coljate.utils.numeric.NonNegativeInteger;
 
 /**
- *
+ * Delegates to some native {@link java.util.Collection collection}.
  *
  * @author Ollie
  * @see AbstractDelegatedFinite
  */
-public abstract class AbstractNativelyDelegatedStreamable<V>
-        extends AbstractNativelyDelegatedTraversable<V>
+public abstract class AbstractNativeStreamable<V>
+        extends AbstractNativeTraversable<V>
         implements Streamable<V> {
 
     @Override

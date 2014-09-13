@@ -1,6 +1,6 @@
 package net.ollie.coljate.lists;
 
-import net.ollie.coljate.AbstractNativelyDelegatedStreamable;
+import net.ollie.coljate.AbstractNativeStreamable;
 import net.ollie.coljate.List;
 import net.ollie.coljate.streams.DefaultStream;
 import net.ollie.coljate.utils.Arrays;
@@ -15,7 +15,7 @@ import javax.annotation.concurrent.NotThreadSafe;
  */
 @NotThreadSafe
 public class MutableWrappedLinkedList<V>
-        extends AbstractNativelyDelegatedStreamable<V>
+        extends AbstractNativeStreamable<V>
         implements List.Mutable<V> {
 
     public static <V> List.Mutable<V> create() {

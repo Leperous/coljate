@@ -7,8 +7,6 @@ import java.util.function.Function;
 import java.util.function.Supplier;
 import java.util.stream.Collector;
 
-import net.ollie.coljate.lists.AbstractArrayCollector;
-import net.ollie.coljate.lists.MutableWrappedArray;
 import net.ollie.coljate.streams.DefaultStream;
 import net.ollie.coljate.utils.Arrays;
 import net.ollie.coljate.utils.iterators.Iterables;

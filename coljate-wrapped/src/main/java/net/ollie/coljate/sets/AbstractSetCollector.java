@@ -10,15 +10,15 @@ import net.ollie.coljate.Set;
  *
  * @author Ollie
  */
-public abstract class AbstractSetCollector<V, I extends Set<V>> implements Collector<V, Set.Mutable<V>, I> {
+public abstract class AbstractSetCollector<V, S extends Set.Mutable<V>, I extends Set<V>> implements Collector<V, S, I> {
 
     @Override
-    public BiConsumer<Set.Mutable<V>, V> accumulator() {
+    public BiConsumer<S, V> accumulator() {
         return Set.Mutable::add;
     }
 
     @Override
-    public BinaryOperator<Set.Mutable<V>> combiner() {
+    public BinaryOperator<S> combiner() {
         return (left, right) -> {
             left.addAll(right);
             return left;

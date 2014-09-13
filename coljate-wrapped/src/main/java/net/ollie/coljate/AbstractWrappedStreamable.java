@@ -5,7 +5,7 @@ import java.util.Iterator;
 import net.ollie.coljate.access.Streamable;
 
 /**
- * Delegates operations to some underlying {@link Streamable iterable}.
+ * Delegates operations to some underlying {@link Streamable streamable} object.
  *
  * @author Ollie
  * @see AbstractNativelyDelegatedFinite

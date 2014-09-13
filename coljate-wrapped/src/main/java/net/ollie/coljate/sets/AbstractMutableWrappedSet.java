@@ -1,7 +1,7 @@
 package net.ollie.coljate.sets;
 
 
-import net.ollie.coljate.AbstractNativelyDelegatedStreamable;
+import net.ollie.coljate.AbstractNativeStreamable;
 import net.ollie.coljate.Set;
 
 /**
@@ -9,7 +9,7 @@ import net.ollie.coljate.Set;
  * @author Ollie
  */
 public abstract class AbstractMutableWrappedSet<V>
-        extends AbstractNativelyDelegatedStreamable<V>
+        extends AbstractNativeStreamable<V>
         implements Set.Mutable<V> {
 
     @Override
