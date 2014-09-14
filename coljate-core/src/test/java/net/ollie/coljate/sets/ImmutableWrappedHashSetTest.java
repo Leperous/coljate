@@ -1,7 +1,5 @@
 package net.ollie.coljate.sets;
 
-import net.ollie.coljate.sets.ImmutableWrappedHashSet;
-
 import java.util.Arrays;
 
 import net.ollie.coljate.AbstractImmutableSetTest;

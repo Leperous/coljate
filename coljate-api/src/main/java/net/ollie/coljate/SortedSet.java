@@ -119,4 +119,8 @@ public interface SortedSet<V>
 
     }
 
+    abstract class Abstract<V> extends Set.Abstract<V> implements SortedSet<V> {
+
+    }
+
 }

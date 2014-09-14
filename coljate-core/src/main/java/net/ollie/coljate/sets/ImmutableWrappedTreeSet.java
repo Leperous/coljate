@@ -6,6 +6,7 @@ import net.ollie.coljate.Set;
 import net.ollie.coljate.SortedSet;
 import net.ollie.coljate.imposed.sorting.Sorter;
 import net.ollie.coljate.streams.DefaultStream;
+import static net.ollie.coljate.utils.Conditions.checkNotNull;
 
 import javax.annotation.Nonnull;
 
@@ -28,8 +29,13 @@ public class ImmutableWrappedTreeSet<V>
     }
 
     @Nonnull
-    public static <V> SortedSet.Singleton<V> create(final Sorter<? super V> sorter, final V value) {
-        throw new UnsupportedOperationException(); //TODO
+    public static <V extends Comparable<? super V>> SortedSet.Singleton<V> create(final V value) {
+        return create(value, Sorter.natural());
+    }
+
+    @Nonnull
+    public static <V> SortedSet.Singleton<V> create(final V value, final Sorter<? super V> sorter) {
+        return new ImmutableSingletonTreeSet<>(value, sorter);
     }
 
     @Nonnull
@@ -49,8 +55,8 @@ public class ImmutableWrappedTreeSet<V>
 
     private final SortedSet.Mutable<V> underlying;
 
-    protected ImmutableWrappedTreeSet(final SortedSet.Mutable<V> underlying) {
-        this.underlying = underlying;
+    protected ImmutableWrappedTreeSet(@Nonnull final SortedSet.Mutable<V> underlying) {
+        this.underlying = checkNotNull(underlying);
     }
 
     @Override
@@ -139,7 +145,7 @@ public class ImmutableWrappedTreeSet<V>
 
         @Override
         public SortedSet.Singleton<V> and(final V value) {
-            return create(this.sorter(), value);
+            return create(value, this.sorter());
         }
 
         @Override
@@ -165,6 +171,29 @@ public class ImmutableWrappedTreeSet<V>
         @Override
         public Stream<V, ? extends Set.Empty<V>> stream() {
             return SortedSet.Empty.super.stream();
+        }
+
+    }
+
+    protected static class ImmutableSingletonTreeSet<V>
+            extends ImmutableWrappedTreeSet<V>
+            implements SortedSet.Singleton<V> {
+
+        private final V value;
+
+        ImmutableSingletonTreeSet(final V value, final Sorter<? super V> sorter) {
+            super(MutableWrappedTreeSet.create(sorter, value));
+            this.value = checkNotNull(value);
+        }
+
+        @Override
+        public SortedSet.Empty<V> tail() {
+            return create(this.sorter());
+        }
+
+        @Override
+        public V value() {
+            return value;
         }
 
     }

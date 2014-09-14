@@ -2,12 +2,13 @@ package net.ollie.coljate.maps;
 
 import java.util.Iterator;
 
+import net.ollie.coljate.DefaultStreamable;
 import net.ollie.coljate.Map;
 import net.ollie.coljate.Set;
-import net.ollie.coljate.DefaultStreamable;
 import net.ollie.coljate.access.Streamable;
 import net.ollie.coljate.sets.ImmutableWrappedHashSet;
 import net.ollie.coljate.sets.MutableWrappedHashSet;
+import net.ollie.coljate.sets.WrappedHashSetBuilder;
 import net.ollie.coljate.streams.DefaultStream;
 import net.ollie.coljate.utils.ArrayLists;
 import net.ollie.coljate.utils.Conditions;
@@ -138,7 +139,7 @@ public class MutableWrappedHashMap<K, V>
     }
 
     private final class EntrySet
-            extends Set.Abstract<Map.Mutable.Entry<K, V>>
+            extends WrappedHashSetBuilder<Map.Mutable.Entry<K, V>>
             implements Set.Mutable<Map.Mutable.Entry<K, V>> {
 
         private final java.util.Set<java.util.Map.Entry<K, V>> entries;
@@ -176,16 +177,6 @@ public class MutableWrappedHashMap<K, V>
         @Override
         public Set<Entry<K, V>> tail() {
             throw new UnsupportedOperationException("tail not supported yet!");
-        }
-
-        @Override
-        public Set.Mutable<Map.Mutable.Entry<K, V>> mutableCopy() {
-            return MutableWrappedHashSet.copy(this);
-        }
-
-        @Override
-        public Set.Immutable<Map.Mutable.Entry<K, V>> immutableCopy() {
-            return ImmutableWrappedHashSet.copy(this);
         }
 
         @Override

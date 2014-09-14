@@ -4,7 +4,7 @@ import net.ollie.coljate.SortedSet;
 import net.ollie.coljate.imposed.sorting.Sortable;
 import net.ollie.coljate.imposed.sorting.Sorter;
 import net.ollie.coljate.sets.ImmutableWrappedTreeSet;
-import net.ollie.coljate.sets.MutableWrappedTreeSet;
+import net.ollie.coljate.sets.WrappedTreeSetBuilder;
 import net.ollie.coljate.utils.iterators.Streams;
 import net.ollie.coljate.utils.numeric.NonNegativeInteger;
 
@@ -14,8 +14,11 @@ import java.io.Serializable;
  *
  * @author Ollie
  */
-public class IndexInterval implements SortedSet.Immutable<NonNegativeInteger> {
+public class IndexInterval
+        extends WrappedTreeSetBuilder<NonNegativeInteger>
+        implements SortedSet.Immutable<NonNegativeInteger>, Serializable {
 
+    private static final long serialVersionUID = 1L;
     private static final IndexBound INFINITY = new UpperBound(NonNegativeInteger.INFINITY, true);
     private static final EmptyIndexInterval EMPTY = new EmptyIndexInterval();
 
@@ -101,11 +104,6 @@ public class IndexInterval implements SortedSet.Immutable<NonNegativeInteger> {
     @Override
     public Stream<NonNegativeInteger, ? extends IndexInterval> stream() {
         throw new UnsupportedOperationException("stream not supported yet!");
-    }
-
-    @Override
-    public SortedSet.Mutable<NonNegativeInteger> mutableCopy() {
-        return MutableWrappedTreeSet.copy(this);
     }
 
     private static class IndexBound implements Bound<NonNegativeInteger>, Sortable<IndexBound>, Serializable {
@@ -204,6 +202,7 @@ public class IndexInterval implements SortedSet.Immutable<NonNegativeInteger> {
 
     public static final class EmptyIndexInterval extends IndexInterval implements SortedSet.Empty<NonNegativeInteger> {
 
+        private static final long serialVersionUID = 1L;
         static final IndexBound OPEN_ZERO = new IndexBound(NonNegativeInteger.ZERO, false);
 
         EmptyIndexInterval() {
@@ -212,7 +211,7 @@ public class IndexInterval implements SortedSet.Immutable<NonNegativeInteger> {
 
         @Override
         public SortedSet.Singleton<NonNegativeInteger> and(final NonNegativeInteger element) {
-            throw new UnsupportedOperationException("and() not supported yet!");
+            return ImmutableWrappedTreeSet.create(element);
         }
 
         @Override
@@ -221,8 +220,8 @@ public class IndexInterval implements SortedSet.Immutable<NonNegativeInteger> {
         }
 
         @Override
-        public EmptyIndexInterval immutableCopy() {
-            return this;
+        public SortedSet.Empty<NonNegativeInteger> immutableCopy() {
+            return this.emptyCopy();
         }
 
         @Override
@@ -236,7 +235,7 @@ public class IndexInterval implements SortedSet.Immutable<NonNegativeInteger> {
         }
 
         @Override
-        public SortedSet.Empty<NonNegativeInteger> sort(Sorter<? super NonNegativeInteger> comparator) {
+        public SortedSet.Empty<NonNegativeInteger> sort(final Sorter<? super NonNegativeInteger> comparator) {
             return ImmutableWrappedTreeSet.create(comparator);
         }
 

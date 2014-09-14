@@ -1,6 +1,5 @@
 package net.ollie.coljate.utils;
 
-import javax.annotation.CheckForNull;
 import javax.annotation.Nonnull;
 
 /**
@@ -13,7 +12,7 @@ public final class Conditions {
     }
 
     @Nonnull
-    public static <T> T checkNotNull(@CheckForNull final T object) {
+    public static <T> T checkNotNull(final T object) {
         if (object == null) {
             throw new IllegalArgumentException();
         }
