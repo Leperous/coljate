@@ -10,6 +10,7 @@ import java.util.stream.Collector;
 
 import net.ollie.coljate.Array;
 import net.ollie.coljate.SortedSet;
+import net.ollie.coljate.intervals.IndexInterval;
 import net.ollie.coljate.lists.MutableWrappedArray.CopiedIntoMutableListBackedArray;
 import net.ollie.coljate.streams.DefaultStream;
 import net.ollie.coljate.utils.ArrayLists;
@@ -229,7 +230,7 @@ public class ImmutableArray<V> implements Array.Immutable<V>, CopiedIntoMutableL
 
         @Override
         public SortedSet.Empty<NonNegativeInteger> keys() {
-            throw new UnsupportedOperationException("keys not supported yet!"); //TODO
+            return IndexInterval.empty();
         }
 
         @Override

@@ -55,7 +55,9 @@ public interface SortedSet<V>
         Immutable<V> and(V value);
 
         @Override
-        Immutable<V> tail();
+        default Immutable<V> tail() {
+            return this.not(this.head());
+        }
 
         @Override
         Immutable<V> not(Object object);
