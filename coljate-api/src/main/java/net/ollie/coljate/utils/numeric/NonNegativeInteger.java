@@ -69,6 +69,11 @@ public abstract class NonNegativeInteger
         return NonNegativeBigInteger.maybe(value);
     }
 
+    @CheckForNull
+    public static NonNegativeInteger maybe(final Number number) {
+        return number == null ? null : NonNegativeInt.maybe(number.intValue());
+    }
+
     @Nonnull
     @CheckReturnValue
     public abstract NonNegativeInteger increment();

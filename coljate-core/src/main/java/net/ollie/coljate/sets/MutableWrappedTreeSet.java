@@ -119,6 +119,16 @@ public class MutableWrappedTreeSet<V>
     }
 
     @Override
+    public Bound<V> lower() {
+        return Bound.of(delegate.first());
+    }
+
+    @Override
+    public Bound<V> upper() {
+        return Bound.of(delegate.last());
+    }
+
+    @Override
     public SortedSet.Mutable<V> mutableCopy() {
         return copy(this.delegate());
     }

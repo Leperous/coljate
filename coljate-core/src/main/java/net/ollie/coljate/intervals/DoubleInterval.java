@@ -2,6 +2,8 @@ package net.ollie.coljate.intervals;
 
 import net.ollie.coljate.Interval;
 
+import javax.annotation.Nonnull;
+
 /**
  *
  * @author Ollie
@@ -9,35 +11,32 @@ import net.ollie.coljate.Interval;
 public class DoubleInterval
         implements Interval<Double> {
 
-    private static final boolean CLOSED = true;
-
     public static Interval<Double> degenerate(final double d) {
-        return new Degenerate(d);
+        final DoubleBound bound = new DoubleBound(d, true);
+        return new Degenerate(bound);
     }
 
     public static Interval<Double> closed(final double min, final double max) {
-        return new DoubleInterval(min, CLOSED, max, CLOSED);
+        return new DoubleInterval(new LowerDoubleBound(min, true), new UpperDoubleBound(max, true));
+    }
+
+    public static Interval<Double> greatherThan(final double min) {
+        return new DoubleInterval(new LowerDoubleBound(min, false), new UpperDoubleBound(Double.POSITIVE_INFINITY, true));
     }
 
     public static Interval<Double> open(final double min, final double max) {
-        return new DoubleInterval(min, !CLOSED, max, !CLOSED);
+        return new DoubleInterval(new LowerDoubleBound(min, false), new UpperDoubleBound(max, false));
     }
 
-    private final double min, max;
-    private final boolean minInclusive, maxInclusive;
+    @Nonnull
+    private final DoubleBound lower;
+    private final DoubleBound upper;
 
-    protected DoubleInterval(
-            final double min,
-            final boolean minInclusive,
-            final double max,
-            final boolean maxInclusive) {
-        if (min > max) {
-            throw new IllegalArgumentException("Passed " + min + " > " + max);
-        }
-        this.min = min;
-        this.minInclusive = minInclusive;
-        this.max = max;
-        this.maxInclusive = maxInclusive;
+    DoubleInterval(
+            final DoubleBound lower,
+            final DoubleBound upper) {
+        this.lower = lower;
+        this.upper = upper;
     }
 
     @Override
@@ -46,9 +45,20 @@ public class DoubleInterval
         return d == null ? false : this.contains(d.doubleValue());
     }
 
+    @Override
+    @Nonnull
+    public Bound<Double> lower() {
+        return lower;
+    }
+
+    @Override
+    @Nonnull
+    public Bound<Double> upper() {
+        return upper;
+    }
+
     public boolean contains(final double d) {
-        return (minInclusive ? d >= min : d > min)
-                && (maxInclusive ? d <= max : d < max);
+        return lower.precedes(d) && upper.exceeds(d);
     }
 
     protected Double tryCast(final Object object) {
@@ -59,46 +69,75 @@ public class DoubleInterval
 
     @Override
     public boolean isEmpty() {
-        return min == max && !this.contains(min);
-    }
-
-    @Override
-    public Double first() {
-        return min;
-    }
-
-    @Override
-    public Double last() {
-        return max;
-    }
-
-    @Override
-    public boolean firstInclusive() {
-        return minInclusive;
-    }
-
-    @Override
-    public boolean lastInclusive() {
-        return maxInclusive;
+        return lower.value >= upper.value && !this.contains(lower.value);
     }
 
     @Override
     public String toString() {
-        return (minInclusive ? "[" : "(")
-                + min
-                + ':'
-                + max
-                + (maxInclusive ? ']' : ')');
+        return lower + ":" + upper;
+    }
+
+    private static class DoubleBound
+            implements Bound<Double> {
+
+        final double value;
+        final boolean inclusive;
+
+        DoubleBound(final double value, final boolean inclusive) {
+            this.value = value;
+            this.inclusive = inclusive;
+        }
+
+        @Override
+        public Double value() {
+            return value;
+        }
+
+        boolean isInclusive() {
+            return inclusive;
+        }
+
+        boolean precedes(final double value) {
+            return this.value < value || (inclusive && this.value == value);
+        }
+
+        boolean exceeds(final double value) {
+            return this.value > value || (inclusive && this.value == value);
+        }
+
+    }
+
+    static final class LowerDoubleBound extends DoubleBound {
+
+        LowerDoubleBound(final double value, final boolean inclusive) {
+            super(value, inclusive);
+        }
+
+        @Override
+        public String toString() {
+            return (this.isInclusive() ? "[" : "(") + this.value();
+        }
+
+    }
+
+    static final class UpperDoubleBound extends DoubleBound {
+
+        UpperDoubleBound(double value, boolean inclusive) {
+            super(value, inclusive);
+        }
+
+        @Override
+        public String toString() {
+            return this.value() + (this.isInclusive() ? "]" : ")");
+        }
+
     }
 
     private static final class Degenerate
             extends DoubleInterval {
 
-        private final double value;
-
-        Degenerate(final double value) {
-            super(value, true, value, true);
-            this.value = value;
+        Degenerate(final DoubleBound value) {
+            super(value, value);
         }
 
         @Override
@@ -108,7 +147,7 @@ public class DoubleInterval
 
         @Override
         public String toString() {
-            return "[" + value + "]";
+            return "[" + this.lower().value() + ']';
         }
 
     }

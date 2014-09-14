@@ -69,6 +69,16 @@ public class ImmutableWrappedTreeSet<V>
     }
 
     @Override
+    public Bound<V> lower() {
+        throw new UnsupportedOperationException("lower not supported yet!");
+    }
+
+    @Override
+    public Bound<V> upper() {
+        throw new UnsupportedOperationException("upper not supported yet!");
+    }
+
+    @Override
     public SortedSet.Immutable<V> and(final V value) {
         final SortedSet.Mutable<V> copy = this.mutableCopy();
         return copy.add(value)

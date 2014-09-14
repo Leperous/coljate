@@ -4,6 +4,7 @@ import net.ollie.coljate.imposed.Distinctness.Unique;
 import net.ollie.coljate.imposed.Ordered;
 
 import javax.annotation.CheckForNull;
+import javax.annotation.Nonnull;
 
 /**
  *
@@ -12,11 +13,48 @@ import javax.annotation.CheckForNull;
 public interface Interval<V>
         extends Collection<V>, Ordered<V>, Unique<V> {
 
-    boolean firstInclusive();
+    @Nonnull
+    Bound<V> lower();
 
-    boolean lastInclusive();
+    @Nonnull
+    Bound<V> upper();
 
-    @CheckForNull
-    V last();
+    @Override
+    public default V first() {
+        return this.lower().value();
+    }
+
+    interface Bound<V> {
+
+        @CheckForNull
+        V value();
+
+        static <V> Default<V> of() {
+            return Default.EMPTY;
+        }
+
+        @Nonnull
+        static <V> Default<V> of(@CheckForNull final V value) {
+            return value == null ? Default.EMPTY : new Default<>(value);
+        }
+
+        class Default<V> implements Bound<V> {
+
+            static final Default EMPTY = new Default(null);
+
+            private final V value;
+
+            protected Default(final V value) {
+                this.value = value;
+            }
+
+            @Override
+            public V value() {
+                return value;
+            }
+
+        }
+
+    }
 
 }

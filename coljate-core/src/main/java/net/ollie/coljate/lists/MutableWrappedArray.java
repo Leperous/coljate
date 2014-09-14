@@ -234,7 +234,7 @@ public abstract class MutableWrappedArray<V>
 
         @Override
         public IndexInterval keys() {
-            return IndexInterval.zeroToClosed(this.count());
+            return IndexInterval.lessThanOrEqualTo(this.count());
         }
 
         @Override

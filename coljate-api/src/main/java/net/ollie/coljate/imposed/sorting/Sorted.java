@@ -2,9 +2,9 @@ package net.ollie.coljate.imposed.sorting;
 
 import java.util.Comparator;
 
-import javax.annotation.Nonnull;
-
 import net.ollie.coljate.imposed.Ordered;
+
+import javax.annotation.Nonnull;
 
 /**
  * Values are explicitly sorted according to some {@link Comparator}.

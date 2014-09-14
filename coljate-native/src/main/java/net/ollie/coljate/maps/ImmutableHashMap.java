@@ -17,6 +17,7 @@ import net.ollie.coljate.utils.numeric.NonNegativeInteger;
 
 import java.io.Serializable;
 import javax.annotation.CheckForNull;
+import javax.annotation.Nonnull;
 
 /**
  *
@@ -108,7 +109,15 @@ public class ImmutableHashMap<K, V>
 
     @Override
     public Immutable<K, V> without(final Object key) {
-        throw new UnsupportedOperationException("without not supported yet!");
+        final ImmutableMapNode<K, V>[] bucket = this.cloneArray(bucketSize(this.bucket.length + 1)); //FIXME don't always increment!
+        final int i = bucketFor(key, bucket);
+        ImmutableMapNode<K, V> node = bucket[i];
+        if (node == null) {
+            return this;
+        }
+        node = node.delete(key);
+        bucket[i] = node;
+        return new ImmutableHashMap<>(bucket);
     }
 
     private static int bucketFor(final Object key, Object[] bucket) {
@@ -190,12 +199,20 @@ public class ImmutableHashMap<K, V>
             return Objects.equals(value, object) || (next != null && next.containsValue(object));
         }
 
+        @Nonnull
         ImmutableMapNode<K, V> swap(final K key, final V value) {
             if (Objects.equals(this.key(), key)) {
                 return new ImmutableMapNode<>(key, value, next);
             }
             final ImmutableMapNode<K, V> next = this.next == null ? new ImmutableMapNode<>(key, value, null) : this.next.swap(key, value);
             return new ImmutableMapNode<>(this.key(), this.value(), next);
+        }
+
+        @CheckForNull
+        ImmutableMapNode<K, V> delete(final Object key) {
+            return Objects.equals(this.key, key)
+                    ? next
+                    : new ImmutableMapNode<>(this.key, value, next == null ? null : next.delete(key));
         }
 
         @Override
@@ -235,6 +252,9 @@ public class ImmutableHashMap<K, V>
 
         @Override
         public boolean contains(final Object object) {
+            if (this.isEmpty()) {
+                return false;
+            }
             final int index = bucketFor(object, bucket);
             ImmutableMapNode<K, V> node = bucket[index];
             return node != null && node.containsKey(object);

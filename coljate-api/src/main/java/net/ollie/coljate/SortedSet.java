@@ -16,13 +16,12 @@ public interface SortedSet<V>
         extends Set<V>, Interval<V>, Sorted<V> {
 
     @Override
-    default boolean firstInclusive() {
-        return true;
+    default V first() {
+        return this.lower().value();
     }
 
-    @Override
-    default boolean lastInclusive() {
-        return true;
+    default V last() {
+        return this.upper().value();
     }
 
     @Override
@@ -76,13 +75,13 @@ public interface SortedSet<V>
             extends SortedSet.Immutable<V>, Set.Empty<V> {
 
         @Override
-        default V first() {
-            return null;
+        public default Bound<V> lower() {
+            return Bound.of();
         }
 
         @Override
-        default V last() {
-            return null;
+        public default Bound<V> upper() {
+            return Bound.of();
         }
 
         @Override
