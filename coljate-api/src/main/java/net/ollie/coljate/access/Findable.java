@@ -1,6 +1,5 @@
 package net.ollie.coljate.access;
 
-import java.util.NoSuchElementException;
 import java.util.Optional;
 import java.util.function.Predicate;
 
@@ -15,6 +14,6 @@ import javax.annotation.Nonnull;
 public interface Findable<V> {
 
     @Nonnull
-    Optional<V> findAny(Predicate<? super V> predicate) throws NoSuchElementException;
+    Optional<V> findAny(Predicate<? super V> predicate);
 
 }
