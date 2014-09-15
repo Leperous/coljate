@@ -1,5 +1,7 @@
-package net.ollie.coljate;
+package net.ollie.coljate.lists;
 
+import net.ollie.coljate.lists.Sequence;
+import net.ollie.coljate.lists.List;
 import net.ollie.coljate.access.Streamable;
 
 import javax.annotation.CheckForNull;

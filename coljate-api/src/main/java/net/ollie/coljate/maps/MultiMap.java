@@ -1,4 +1,4 @@
-package net.ollie.coljate;
+package net.ollie.coljate.maps;
 
 import net.ollie.coljate.sets.Set;
 import net.ollie.coljate.access.Streamable;
@@ -8,6 +8,8 @@ import net.ollie.coljate.utils.numeric.NonNegativeInteger;
 
 import javax.annotation.CheckReturnValue;
 import javax.annotation.Nonnull;
+
+import net.ollie.coljate.Collection;
 
 /**
  *

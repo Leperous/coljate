@@ -2,9 +2,7 @@ package net.ollie.coljate.maps;
 
 
 import net.ollie.coljate.AbstractWrappedStreamable;
-import net.ollie.coljate.Array;
-import net.ollie.coljate.Map;
-import net.ollie.coljate.MultiMap;
+import net.ollie.coljate.lists.Array;
 import net.ollie.coljate.sets.Set;
 import net.ollie.coljate.utils.iterators.UnmodifiableIterator;
 import net.ollie.coljate.utils.numeric.NonNegativeInteger;

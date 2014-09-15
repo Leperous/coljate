@@ -1,17 +1,12 @@
 package net.ollie.coljate.lists;
 
-import net.ollie.coljate.lists.ImmutableWrappedArray;
-
 import java.util.Arrays;
-
-import net.ollie.coljate.AbstractImmutableArrayTest;
-import net.ollie.coljate.Array;
 
 /**
  *
  * @author Ollie
  */
-public class ImmutableWrappedArrayListTest
+public class ImmutableWrappedArrayTest
         extends AbstractImmutableArrayTest {
 
     @Override

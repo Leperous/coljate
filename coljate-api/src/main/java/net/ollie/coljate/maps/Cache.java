@@ -1,4 +1,6 @@
-package net.ollie.coljate;
+package net.ollie.coljate.maps;
+
+import net.ollie.coljate.maps.Map;
 
 import java.util.function.Function;
 

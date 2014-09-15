@@ -1,7 +1,6 @@
 package net.ollie.coljate.lists;
 
 import net.ollie.coljate.lists.RingBuffer;
-import net.ollie.coljate.AbstractQueueTest;
 
 import java.util.Arrays;
 

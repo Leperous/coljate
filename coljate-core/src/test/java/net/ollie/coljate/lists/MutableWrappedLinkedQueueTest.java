@@ -4,8 +4,6 @@ import net.ollie.coljate.lists.MutableWrappedLinkedQueue;
 
 import java.util.Arrays;
 
-import net.ollie.coljate.AbstractQueueTest;
-import net.ollie.coljate.Queue;
 
 /**
  *

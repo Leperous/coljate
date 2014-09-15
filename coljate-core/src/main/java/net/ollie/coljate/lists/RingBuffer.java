@@ -2,10 +2,6 @@ package net.ollie.coljate.lists;
 
 import java.util.NoSuchElementException;
 
-import net.ollie.coljate.Array;
-import net.ollie.coljate.List;
-import net.ollie.coljate.Queue;
-import net.ollie.coljate.Sequence;
 import net.ollie.coljate.access.Streamable;
 import net.ollie.coljate.utils.iterators.Iterables;
 import net.ollie.coljate.utils.iterators.UnmodifiableIterator;

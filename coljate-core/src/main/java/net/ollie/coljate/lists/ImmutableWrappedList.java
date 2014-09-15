@@ -4,8 +4,6 @@ import java.util.Objects;
 import java.util.stream.Collector;
 
 import net.ollie.coljate.AbstractWrappedStreamable;
-import net.ollie.coljate.Array;
-import net.ollie.coljate.List;
 import net.ollie.coljate.streams.DefaultStream;
 import net.ollie.coljate.utils.Arrays;
 import net.ollie.coljate.utils.iterators.Iterators;

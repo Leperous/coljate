@@ -1,6 +1,5 @@
 package net.ollie.coljate.maps;
 
-import net.ollie.coljate.Map;
 import net.ollie.coljate.utils.Conditions;
 
 import javax.annotation.concurrent.NotThreadSafe;

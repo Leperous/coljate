@@ -1,9 +1,7 @@
 package net.ollie.coljate.maps;
 
 import net.ollie.coljate.DefaultStreamable;
-import net.ollie.coljate.Map;
 import net.ollie.coljate.sets.Set;
-import net.ollie.coljate.TreeMap;
 import net.ollie.coljate.access.Streamable;
 import net.ollie.coljate.imposed.sorting.Sorter;
 import net.ollie.coljate.sets.ImmutableWrappedHashSet;

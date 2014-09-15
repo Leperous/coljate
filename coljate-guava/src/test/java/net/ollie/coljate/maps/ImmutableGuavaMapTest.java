@@ -1,7 +1,5 @@
 package net.ollie.coljate.maps;
 
-import net.ollie.coljate.AbstractImmutableMapTest;
-import net.ollie.coljate.Map;
 
 import com.google.common.collect.ImmutableMap;
 

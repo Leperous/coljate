@@ -1,6 +1,6 @@
 package net.ollie.coljate.matchers;
 
-import net.ollie.coljate.Map;
+import net.ollie.coljate.maps.Map;
 
 import org.hamcrest.BaseMatcher;
 import org.hamcrest.Description;

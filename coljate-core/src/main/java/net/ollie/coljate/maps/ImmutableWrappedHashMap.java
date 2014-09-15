@@ -7,7 +7,6 @@ import java.util.function.Supplier;
 import java.util.stream.Collector;
 
 import net.ollie.coljate.AbstractWrappedStreamable;
-import net.ollie.coljate.Map;
 import net.ollie.coljate.sets.Set;
 import net.ollie.coljate.access.Streamable;
 import net.ollie.coljate.utils.iterators.Iterators;

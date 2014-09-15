@@ -1,5 +1,7 @@
 package net.ollie.coljate;
 
+import net.ollie.coljate.lists.Array;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Set;

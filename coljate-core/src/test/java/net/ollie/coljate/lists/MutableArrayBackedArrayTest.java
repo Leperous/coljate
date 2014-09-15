@@ -1,9 +1,7 @@
 package net.ollie.coljate.lists;
 
 import net.ollie.coljate.lists.MutableWrappedArray;
-import net.ollie.coljate.AbstractMutableArrayTest;
-import net.ollie.coljate.Array;
-import net.ollie.coljate.Array.Mutable;
+import net.ollie.coljate.lists.Array.Mutable;
 
 /**
  *

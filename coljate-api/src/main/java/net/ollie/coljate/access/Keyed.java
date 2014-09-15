@@ -3,7 +3,7 @@ package net.ollie.coljate.access;
 import java.util.Optional;
 
 import net.ollie.coljate.Collection;
-import net.ollie.coljate.Map;
+import net.ollie.coljate.maps.Map;
 import net.ollie.coljate.imposed.Distinctness.Unique;
 
 import javax.annotation.CheckForNull;

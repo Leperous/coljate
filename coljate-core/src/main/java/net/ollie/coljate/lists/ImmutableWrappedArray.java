@@ -8,7 +8,6 @@ import java.util.function.Function;
 import java.util.function.Supplier;
 import java.util.stream.Collector;
 
-import net.ollie.coljate.Array;
 import net.ollie.coljate.sets.SortedSet;
 import net.ollie.coljate.sets.ImmutableWrappedTreeSet;
 import net.ollie.coljate.streams.DefaultStream;

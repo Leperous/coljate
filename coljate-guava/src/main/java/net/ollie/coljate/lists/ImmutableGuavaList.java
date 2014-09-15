@@ -17,7 +17,6 @@ import com.google.common.collect.ImmutableList;
 import java.io.Serializable;
 import javax.annotation.Nonnull;
 
-import net.ollie.coljate.Array;
 import net.ollie.coljate.UnmodifiableGuavaIterator;
 import net.ollie.coljate.intervals.IndexInterval;
 

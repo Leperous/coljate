@@ -1,7 +1,7 @@
-package net.ollie.coljate;
+package net.ollie.coljate.lists;
 
-import net.ollie.coljate.Sequence;
-import net.ollie.coljate.Queue;
+import net.ollie.coljate.AbstractCollectionTest;
+import net.ollie.coljate.lists.Sequence;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertFalse;

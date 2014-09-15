@@ -1,8 +1,11 @@
-package net.ollie.coljate;
+package net.ollie.coljate.maps;
+
+import net.ollie.coljate.maps.Map;
 
 import java.util.Arrays;
 import java.util.stream.Collectors;
 
+import net.ollie.coljate.AbstractStreamableTest;
 import static net.ollie.coljate.matchers.MapMatchers.containsKey;
 
 import static org.hamcrest.CoreMatchers.is;

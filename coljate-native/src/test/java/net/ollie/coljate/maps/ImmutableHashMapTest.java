@@ -1,8 +1,5 @@
 package net.ollie.coljate.maps;
 
-import net.ollie.coljate.AbstractImmutableMapTest;
-import net.ollie.coljate.Map;
-
 /**
  *
  * @author Ollie

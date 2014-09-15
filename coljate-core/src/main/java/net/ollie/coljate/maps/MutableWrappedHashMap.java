@@ -3,7 +3,6 @@ package net.ollie.coljate.maps;
 import java.util.Iterator;
 
 import net.ollie.coljate.DefaultStreamable;
-import net.ollie.coljate.Map;
 import net.ollie.coljate.sets.Set;
 import net.ollie.coljate.access.Streamable;
 import net.ollie.coljate.sets.ImmutableWrappedHashSet;

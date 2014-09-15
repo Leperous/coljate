@@ -4,8 +4,6 @@ import net.ollie.coljate.lists.MutableWrappedArray;
 
 import java.util.Arrays;
 
-import net.ollie.coljate.AbstractMutableArrayTest;
-import net.ollie.coljate.Array;
 
 /**
  *

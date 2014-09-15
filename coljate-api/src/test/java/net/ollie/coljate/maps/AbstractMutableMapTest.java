@@ -1,6 +1,6 @@
-package net.ollie.coljate;
+package net.ollie.coljate.maps;
 
-import net.ollie.coljate.Map;
+import net.ollie.coljate.maps.Map;
 
 import org.junit.Test;
 

@@ -1,8 +1,10 @@
-package net.ollie.coljate;
+package net.ollie.coljate.lists;
 
-import net.ollie.coljate.List;
+import net.ollie.coljate.lists.List;
 
 import java.util.Arrays;
+
+import net.ollie.coljate.AbstractStreamableTest;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;

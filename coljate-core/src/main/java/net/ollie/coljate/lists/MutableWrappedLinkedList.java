@@ -1,7 +1,6 @@
 package net.ollie.coljate.lists;
 
 import net.ollie.coljate.AbstractNativeStreamable;
-import net.ollie.coljate.List;
 import net.ollie.coljate.streams.DefaultStream;
 import net.ollie.coljate.utils.Arrays;
 import net.ollie.coljate.utils.iterators.Iterables;

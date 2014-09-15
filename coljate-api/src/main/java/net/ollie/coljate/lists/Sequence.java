@@ -1,4 +1,4 @@
-package net.ollie.coljate;
+package net.ollie.coljate.lists;
 
 import net.ollie.coljate.access.Traversable;
 import net.ollie.coljate.imposed.Ordered;

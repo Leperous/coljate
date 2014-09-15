@@ -1,4 +1,4 @@
-package net.ollie.coljate;
+package net.ollie.coljate.lists;
 
 import net.ollie.coljate.sets.SortedSet;
 

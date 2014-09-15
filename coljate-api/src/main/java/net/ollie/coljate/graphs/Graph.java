@@ -1,4 +1,4 @@
-package net.ollie.coljate;
+package net.ollie.coljate.graphs;
 
 import net.ollie.coljate.access.Streamable;
 import net.ollie.coljate.access.Keyed;

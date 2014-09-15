@@ -2,7 +2,6 @@ package net.ollie.coljate.maps;
 
 import java.util.Objects;
 
-import net.ollie.coljate.Map;
 
 /**
  *

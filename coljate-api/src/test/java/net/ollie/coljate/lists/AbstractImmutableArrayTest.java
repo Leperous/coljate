@@ -1,5 +1,7 @@
-package net.ollie.coljate;
+package net.ollie.coljate.lists;
 
+import net.ollie.coljate.AbstractStreamableTest;
+import net.ollie.coljate.lists.Array;
 import net.ollie.coljate.utils.numeric.NonNegativeInteger;
 
 import org.junit.Test;

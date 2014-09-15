@@ -1,7 +1,5 @@
 package net.ollie.coljate.lists;
 
-import net.ollie.coljate.AbstractImmutableArrayTest;
-import net.ollie.coljate.Array;
 import net.ollie.coljate.lists.ImmutableGuavaList;
 
 /**

@@ -1,8 +1,6 @@
 package net.ollie.coljate.lists;
 
 import net.ollie.coljate.lists.ConcurrentWrappedArray;
-import net.ollie.coljate.AbstractMutableArrayTest;
-import net.ollie.coljate.Array;
 
 /**
  *

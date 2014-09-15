@@ -5,9 +5,6 @@ import java.util.NoSuchElementException;
 import java.util.stream.Collector;
 
 import net.ollie.coljate.AbstractNativeTraversable;
-import net.ollie.coljate.List;
-import net.ollie.coljate.Queue;
-import net.ollie.coljate.Sequence;
 import net.ollie.coljate.access.Streamable;
 import net.ollie.coljate.streams.DefaultStream;
 import net.ollie.coljate.utils.numeric.NonNegativeInteger;
