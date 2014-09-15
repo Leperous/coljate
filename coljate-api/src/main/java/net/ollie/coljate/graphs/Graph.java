@@ -3,6 +3,7 @@ package net.ollie.coljate.graphs;
 import net.ollie.coljate.access.Streamable;
 import net.ollie.coljate.access.Keyed;
 import net.ollie.coljate.imposed.Distinctness.Unique;
+import net.ollie.coljate.imposed.Mapping.Surjective;
 
 import javax.annotation.Nonnull;
 
@@ -12,7 +13,7 @@ import javax.annotation.Nonnull;
  * @author Ollie
  */
 public interface Graph<N, V>
-        extends Keyed.Single<N, V>, Streamable<V> {
+        extends Keyed.Single<N, V>, Streamable<V>, Surjective<N, V> {
 
     @Nonnull
     Unique<N> neighbours(N node);
