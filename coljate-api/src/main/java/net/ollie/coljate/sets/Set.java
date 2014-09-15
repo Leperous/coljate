@@ -30,6 +30,18 @@ public interface Set<V>
     @Override
     Stream<V, ? extends Set<V>> stream();
 
+    @Nonnull
+    default Set<V> intersection(final Set<? extends V> that) {
+        final Set.Mutable<V> intersection = this.mutableCopy();
+        intersection.removeWhere(that::contains);
+        return intersection;
+    }
+
+    @Nonnull
+    default Set<V> union(Set<? extends V> that) {
+        return this.mutableCopy().andAll(that);
+    }
+
     @Override
     Set.Mutable<V> mutableCopy();
 
@@ -100,9 +112,20 @@ public interface Set<V>
             return this;
         }
 
+        default Set.Mutable<V> andAll(Iterable<? extends V> values) {
+            this.addAll(values);
+            return this;
+        }
+
         @Nonnull
         default Set.Mutable<V> not(final Object object) {
             this.remove(object);
+            return this;
+        }
+
+        @Nonnull
+        default Set.Mutable<V> notAny(final Iterable<?> objects) {
+            this.removeAll(objects);
             return this;
         }
 

@@ -84,14 +84,14 @@ public class MutableWrappedEnumSet<E extends Enum<E>>
     }
 
     @Override
-    public EnumSet<E> intersection(final FiniteSet<E, EnumUniverse<E>> that) {
+    public EnumSet<E> intersection(final Set<? extends E> that) {
         final java.util.EnumSet<E> clone = delegate.clone();
         that.forEach(e -> clone.remove(e));
         return view(clone);
     }
 
     @Override
-    public EnumSet<E> union(final FiniteSet<E, EnumUniverse<E>> that) {
+    public EnumSet<E> union(final Set<? extends E> that) {
         final java.util.EnumSet<E> clone = delegate.clone();
         that.forEach(e -> clone.add(e));
         return view(clone);

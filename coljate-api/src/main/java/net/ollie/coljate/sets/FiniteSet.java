@@ -3,8 +3,6 @@ package net.ollie.coljate.sets;
 import net.ollie.coljate.imposed.Finite;
 import net.ollie.coljate.imposed.Finite.Universe;
 
-import javax.annotation.Nonnull;
-
 /**
  *
  * @author Ollie
@@ -15,10 +13,10 @@ public interface FiniteSet<V, U extends Universe<V>>
     @Override
     FiniteSet<V, U> complement();
 
-    @Nonnull
-    FiniteSet<V, U> union(FiniteSet<V, U> set);
+    @Override
+    FiniteSet<V, U> union(Set<? extends V> iterable);
 
-    @Nonnull
-    FiniteSet<V, U> intersection(FiniteSet<V, U> set);
+    @Override
+    FiniteSet<V, U> intersection(Set<? extends V> iterable);
 
 }

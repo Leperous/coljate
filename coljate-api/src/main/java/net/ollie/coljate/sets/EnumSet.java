@@ -19,10 +19,10 @@ public interface EnumSet<E extends Enum<E>> extends FiniteSet<E, EnumUniverse<E>
     EnumSet<E> complement();
 
     @Override
-    EnumSet<E> intersection(FiniteSet<E, EnumUniverse<E>> set);
+    EnumSet<E> intersection(Set<? extends E> iterable);
 
     @Override
-    EnumSet<E> union(FiniteSet<E, EnumUniverse<E>> set);
+    EnumSet<E> union(Set<? extends E> iterable);
 
     @Override
     default EnumUniverse<E> universe() {
