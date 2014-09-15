@@ -7,7 +7,6 @@ import java.util.function.Predicate;
 import net.ollie.coljate.access.Findable;
 import net.ollie.coljate.access.Streamable;
 import net.ollie.coljate.imposed.Mutability;
-import net.ollie.coljate.utils.Suppliers;
 import net.ollie.coljate.utils.iterators.Iterables;
 
 import javax.annotation.Nonnull;
@@ -38,7 +37,7 @@ public interface Collection<V> {
 
     @javax.annotation.concurrent.Immutable
     interface Empty<V>
-            extends Collection<V>, Mutability.Immutable {
+            extends Collection<V>, Findable<V>, Mutability.Immutable {
 
         @Override
         default boolean isEmpty() {
@@ -48,6 +47,11 @@ public interface Collection<V> {
         @Override
         default boolean contains(final Object object) {
             return false;
+        }
+
+        @Override
+        public default Optional<V> findAny(final Predicate<? super V> predicate) {
+            return Optional.empty();
         }
 
     }
@@ -71,7 +75,7 @@ public interface Collection<V> {
         @Override
         default Optional<V> findAny(final Predicate<? super V> predicate) {
             final V value = this.value();
-            return predicate.test(value) ? Optional.of(value) : Suppliers.noSuchElement();
+            return predicate.test(value) ? Optional.of(value) : Optional.empty();
         }
 
     }

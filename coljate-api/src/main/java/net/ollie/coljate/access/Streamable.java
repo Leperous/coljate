@@ -204,6 +204,11 @@ public interface Streamable<V>
             return this;
         }
 
+        @Override
+        default Optional<V> findAny(final Predicate<? super V> predicate) {
+            return Traversable.Empty.super.findAny(predicate);
+        }
+
     }
 
     @javax.annotation.concurrent.Immutable
