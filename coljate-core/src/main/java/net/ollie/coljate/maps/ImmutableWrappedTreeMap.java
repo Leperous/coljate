@@ -2,7 +2,7 @@ package net.ollie.coljate.maps;
 
 import net.ollie.coljate.AbstractWrappedStreamable;
 import net.ollie.coljate.Map;
-import net.ollie.coljate.Set;
+import net.ollie.coljate.sets.Set;
 import net.ollie.coljate.TreeMap;
 import net.ollie.coljate.access.Streamable;
 import net.ollie.coljate.imposed.sorting.Sorter;

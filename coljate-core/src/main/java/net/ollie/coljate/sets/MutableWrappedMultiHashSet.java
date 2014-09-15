@@ -4,8 +4,6 @@ import java.util.Iterator;
 import java.util.NoSuchElementException;
 import java.util.Optional;
 
-import net.ollie.coljate.MultiSet;
-import net.ollie.coljate.Set;
 import net.ollie.coljate.access.Streamable;
 import net.ollie.coljate.lists.ImmutableWrappedList;
 import net.ollie.coljate.streams.DefaultStream;

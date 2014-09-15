@@ -8,7 +8,7 @@ import java.lang.reflect.Field;
  *
  * @author Ollie
  */
-public final class EnumSets {
+public final class Enums {
 
     private static final Field elementTypeField;
 
@@ -21,7 +21,7 @@ public final class EnumSets {
         }
     }
 
-    private EnumSets() {
+    private Enums() {
     }
 
     public static <E extends Enum<E>> Class<E> getElementType(final EnumSet<E> set) {

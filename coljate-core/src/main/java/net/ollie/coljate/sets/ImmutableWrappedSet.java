@@ -1,7 +1,6 @@
 package net.ollie.coljate.sets;
 
 import net.ollie.coljate.AbstractWrappedStreamable;
-import net.ollie.coljate.Set;
 import net.ollie.coljate.utils.iterators.Iterators;
 import net.ollie.coljate.utils.iterators.UnmodifiableIterator;
 

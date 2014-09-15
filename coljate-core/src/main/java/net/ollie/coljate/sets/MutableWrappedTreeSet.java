@@ -3,8 +3,6 @@ package net.ollie.coljate.sets;
 import java.util.Comparator;
 import java.util.stream.Collector;
 
-import net.ollie.coljate.Set;
-import net.ollie.coljate.SortedSet;
 import net.ollie.coljate.imposed.sorting.Sorter;
 import net.ollie.coljate.streams.DefaultStream;
 import net.ollie.coljate.utils.iterators.Iterables;

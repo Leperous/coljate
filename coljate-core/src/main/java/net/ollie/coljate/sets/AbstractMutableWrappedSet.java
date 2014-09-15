@@ -1,7 +1,6 @@
 package net.ollie.coljate.sets;
 
 import net.ollie.coljate.AbstractNativeStreamable;
-import net.ollie.coljate.Set;
 import net.ollie.coljate.streams.DefaultStream;
 
 /**

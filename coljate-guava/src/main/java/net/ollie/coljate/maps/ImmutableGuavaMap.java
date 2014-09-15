@@ -4,7 +4,7 @@ import java.util.Objects;
 
 import net.ollie.coljate.ImmutableGuavaCollection;
 import net.ollie.coljate.Map;
-import net.ollie.coljate.Set;
+import net.ollie.coljate.sets.Set;
 import net.ollie.coljate.access.Streamable;
 import net.ollie.coljate.sets.ImmutableGuavaSet;
 import net.ollie.coljate.sets.MutableWrappedHashSet;

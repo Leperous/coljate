@@ -3,7 +3,6 @@ package net.ollie.coljate.sets;
 import java.util.Objects;
 import java.util.stream.Collector;
 
-import net.ollie.coljate.Set;
 import net.ollie.coljate.streams.DefaultStream;
 import net.ollie.coljate.utils.iterators.Iterators;
 import net.ollie.coljate.utils.iterators.UnmodifiableIterator;

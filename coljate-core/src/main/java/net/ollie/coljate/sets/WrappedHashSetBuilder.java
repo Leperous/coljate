@@ -1,7 +1,5 @@
 package net.ollie.coljate.sets;
 
-import net.ollie.coljate.Set;
-
 /**
  *
  * @author Ollie

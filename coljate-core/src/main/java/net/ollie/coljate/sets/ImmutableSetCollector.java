@@ -3,7 +3,6 @@ package net.ollie.coljate.sets;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
-import net.ollie.coljate.Set;
 
 /**
  *

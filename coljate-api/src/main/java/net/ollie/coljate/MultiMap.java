@@ -1,5 +1,6 @@
 package net.ollie.coljate;
 
+import net.ollie.coljate.sets.Set;
 import net.ollie.coljate.access.Streamable;
 import net.ollie.coljate.access.Keyed;
 import net.ollie.coljate.imposed.Distinctness.Duplicated;

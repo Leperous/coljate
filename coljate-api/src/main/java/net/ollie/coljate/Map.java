@@ -1,5 +1,7 @@
 package net.ollie.coljate;
 
+import net.ollie.coljate.sets.Set;
+
 import java.util.Objects;
 
 import net.ollie.coljate.access.Streamable;

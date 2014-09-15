@@ -10,7 +10,7 @@ import java.util.function.Supplier;
 import java.util.stream.Collector;
 
 import net.ollie.coljate.Array;
-import net.ollie.coljate.SortedSet;
+import net.ollie.coljate.sets.SortedSet;
 import net.ollie.coljate.intervals.IndexInterval;
 import net.ollie.coljate.streams.DefaultStream;
 import net.ollie.coljate.utils.ArrayLists;

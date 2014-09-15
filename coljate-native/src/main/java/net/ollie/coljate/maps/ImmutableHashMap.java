@@ -5,7 +5,7 @@ import java.util.NoSuchElementException;
 import java.util.Objects;
 
 import net.ollie.coljate.Map;
-import net.ollie.coljate.Set;
+import net.ollie.coljate.sets.Set;
 import net.ollie.coljate.access.Streamable;
 import net.ollie.coljate.lists.MutableWrappedLinkedList;
 import net.ollie.coljate.sets.ImmutableWrappedHashSet;

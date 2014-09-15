@@ -1,6 +1,6 @@
 package net.ollie.coljate.intervals;
 
-import net.ollie.coljate.SortedSet;
+import net.ollie.coljate.sets.SortedSet;
 import net.ollie.coljate.imposed.sorting.Sortable;
 import net.ollie.coljate.imposed.sorting.Sorter;
 import net.ollie.coljate.sets.ImmutableWrappedTreeSet;

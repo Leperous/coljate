@@ -6,7 +6,7 @@ import java.util.concurrent.atomic.AtomicReference;
 import java.util.concurrent.atomic.AtomicReferenceArray;
 
 import net.ollie.coljate.Array;
-import net.ollie.coljate.SortedSet;
+import net.ollie.coljate.sets.SortedSet;
 import net.ollie.coljate.streams.DefaultStream;
 import net.ollie.coljate.utils.iterators.Iterators;
 import net.ollie.coljate.utils.numeric.NonNegativeInteger;

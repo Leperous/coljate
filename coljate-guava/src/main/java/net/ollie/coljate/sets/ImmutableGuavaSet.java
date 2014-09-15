@@ -13,7 +13,6 @@ import com.google.common.collect.ImmutableSet;
 import java.io.Serializable;
 import javax.annotation.Nonnull;
 
-import net.ollie.coljate.Set;
 import net.ollie.coljate.UnmodifiableGuavaIterator;
 
 /**

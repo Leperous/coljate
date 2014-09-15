@@ -1,5 +1,6 @@
 package net.ollie.coljate;
 
+import net.ollie.coljate.sets.SortedSet;
 import net.ollie.coljate.imposed.sorting.Sorted;
 
 /**

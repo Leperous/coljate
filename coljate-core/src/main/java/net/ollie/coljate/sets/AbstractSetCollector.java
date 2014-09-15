@@ -4,7 +4,6 @@ import java.util.function.BiConsumer;
 import java.util.function.BinaryOperator;
 import java.util.stream.Collector;
 
-import net.ollie.coljate.Set;
 
 /**
  *

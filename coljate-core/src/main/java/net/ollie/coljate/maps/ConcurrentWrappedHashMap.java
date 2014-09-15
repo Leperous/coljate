@@ -1,7 +1,7 @@
 package net.ollie.coljate.maps;
 
 import net.ollie.coljate.Map;
-import net.ollie.coljate.Set;
+import net.ollie.coljate.sets.Set;
 import net.ollie.coljate.access.Streamable;
 
 /**

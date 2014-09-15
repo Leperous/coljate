@@ -1,4 +1,4 @@
-package net.ollie.coljate;
+package net.ollie.coljate.sets;
 
 import net.ollie.coljate.imposed.sorting.Sorted;
 import net.ollie.coljate.imposed.sorting.Sorter;
@@ -8,6 +8,8 @@ import javax.annotation.CheckReturnValue;
 import javax.annotation.Nonnull;
 
 import java.util.Comparator;
+
+import net.ollie.coljate.Interval;
 
 /**
  * @author Ollie

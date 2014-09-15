@@ -1,5 +1,7 @@
 package net.ollie.coljate;
 
+import net.ollie.coljate.sets.SortedSet;
+
 import java.util.Comparator;
 import java.util.Objects;
 import java.util.RandomAccess;

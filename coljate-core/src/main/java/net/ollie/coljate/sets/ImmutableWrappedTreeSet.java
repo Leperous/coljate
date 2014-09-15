@@ -2,8 +2,6 @@ package net.ollie.coljate.sets;
 
 import java.util.Comparator;
 
-import net.ollie.coljate.Set;
-import net.ollie.coljate.SortedSet;
 import net.ollie.coljate.imposed.sorting.Sorter;
 import net.ollie.coljate.streams.DefaultStream;
 import static net.ollie.coljate.utils.Conditions.checkNotNull;

@@ -1,4 +1,6 @@
-package net.ollie.coljate;
+package net.ollie.coljate.sets;
+
+import net.ollie.coljate.AbstractStreamableTest;
 
 import org.junit.Test;
 

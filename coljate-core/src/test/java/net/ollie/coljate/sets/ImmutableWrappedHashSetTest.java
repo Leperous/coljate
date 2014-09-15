@@ -2,8 +2,6 @@ package net.ollie.coljate.sets;
 
 import java.util.Arrays;
 
-import net.ollie.coljate.AbstractImmutableSetTest;
-import net.ollie.coljate.Set;
 
 /**
  *

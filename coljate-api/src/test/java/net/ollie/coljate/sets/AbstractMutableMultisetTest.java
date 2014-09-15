@@ -1,9 +1,9 @@
-package net.ollie.coljate;
-
-import net.ollie.coljate.MultiSet;
+package net.ollie.coljate.sets;
 
 import java.util.Arrays;
 import java.util.Iterator;
+
+import net.ollie.coljate.AbstractStreamableTest;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.Matchers.isOneOf;

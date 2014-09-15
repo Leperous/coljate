@@ -1,6 +1,6 @@
 package net.ollie.coljate.access;
 
-import net.ollie.coljate.SortedSet;
+import net.ollie.coljate.sets.SortedSet;
 import net.ollie.coljate.utils.iterators.Iterables;
 import net.ollie.coljate.utils.numeric.NonNegativeInteger;
 
