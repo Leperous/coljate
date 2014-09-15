@@ -203,6 +203,10 @@ public final class Iterables {
         return array;
     }
 
+    public static <V> Iterable<V> concatenate(final Iterable<? extends V> first, final Iterable<? extends V> second) {
+        return new ConcatenatedIterable<>(first, second);
+    }
+
     private static final class IterableCollection<V> extends AbstractCollection<V> {
 
         private final Iterable<V> iterable;
@@ -218,11 +222,7 @@ public final class Iterables {
 
         @Override
         public int size() {
-            int size = 0;
-            for (final V element : this) {
-                size += 1;
-            }
-            return size;
+            return this.stream().mapToInt(e -> 1).reduce(0, Integer::sum);
         }
 
     }
@@ -265,6 +265,46 @@ public final class Iterables {
                     }
                     hasNext = false;
                     return next;
+                }
+
+            };
+        }
+
+    }
+
+    private static class ConcatenatedIterable<V>
+            implements Iterable<V> {
+
+        private final Iterable<? extends V> first, second;
+
+        ConcatenatedIterable(Iterable<? extends V> first, Iterable<? extends V> second) {
+            this.first = first;
+            this.second = second;
+        }
+
+        @Override
+        public Iterator<V> iterator() {
+            return new Iterator<V>() {
+
+                private boolean isFirst;
+                private Iterator<? extends V> iterator = first.iterator();
+
+                @Override
+                public boolean hasNext() {
+                    if (iterator.hasNext()) {
+                        return true;
+                    } else if (isFirst) {
+                        iterator = second.iterator();
+                        isFirst = false;
+                        return this.hasNext();
+                    } else {
+                        return false;
+                    }
+                }
+
+                @Override
+                public V next() {
+                    return iterator.next();
                 }
 
             };
