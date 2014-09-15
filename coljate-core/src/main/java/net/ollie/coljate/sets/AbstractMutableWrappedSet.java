@@ -1,8 +1,8 @@
 package net.ollie.coljate.sets;
 
-
 import net.ollie.coljate.AbstractNativeStreamable;
 import net.ollie.coljate.Set;
+import net.ollie.coljate.streams.DefaultStream;
 
 /**
  *
@@ -51,6 +51,11 @@ public abstract class AbstractMutableWrappedSet<V>
     @Override
     public void clear() {
         this.delegate().clear();
+    }
+
+    @Override
+    public Stream<V, ? extends Set<V>> stream() {
+        return DefaultStream.create(this, MutableWrappedHashSet::collector);
     }
 
     @Override
