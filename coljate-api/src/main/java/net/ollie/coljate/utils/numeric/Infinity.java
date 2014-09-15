@@ -28,7 +28,7 @@ final class Infinity extends NonNegativeInteger {
 
     @Override
     public BigInteger bigIntegerValue() {
-        throw new ArithmeticException("Infinite!");
+        return undefined("Infinite!");
     }
 
     @Override
@@ -61,6 +61,13 @@ final class Infinity extends NonNegativeInteger {
     }
 
     @Override
+    public Optional<NonNegativeInteger> minus(final NonNegativeInteger that) {
+        return that instanceof Infinity
+                ? undefined("Infinity minus infinity is undefined!")
+                : Optional.of(this);
+    }
+
+    @Override
     public Sorting compareTo(final NonNegativeInteger that) {
         return that instanceof Infinity ? Sorting.SAME : Sorting.AFTER;
     }
@@ -78,6 +85,10 @@ final class Infinity extends NonNegativeInteger {
     @Override
     public String toString() {
         return "Infinity";
+    }
+
+    static <T> T undefined(final String reason) {
+        throw new ArithmeticException(reason);
     }
 
 }

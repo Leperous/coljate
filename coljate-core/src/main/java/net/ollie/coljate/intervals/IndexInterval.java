@@ -9,6 +9,7 @@ import net.ollie.coljate.utils.iterators.Streams;
 import net.ollie.coljate.utils.numeric.NonNegativeInteger;
 
 import java.io.Serializable;
+import javax.annotation.Nonnull;
 
 /**
  *
@@ -26,14 +27,22 @@ public class IndexInterval
         return EMPTY;
     }
 
+    @Nonnull
     public static IndexInterval lessThanOrEqualTo(final NonNegativeInteger max) {
         return closed(NonNegativeInteger.ZERO, max);
     }
 
+    @Nonnull
+    public static IndexInterval lessThan(final NonNegativeInteger max) {
+        return new IndexInterval(new LowerBound(NonNegativeInteger.ZERO, true), new UpperBound(max, false));
+    }
+
+    @Nonnull
     public static IndexInterval greaterThan(final NonNegativeInteger min) {
         return new IndexInterval(new LowerBound(min, false), INFINITY);
     }
 
+    @Nonnull
     public static IndexInterval closed(final NonNegativeInteger min, final NonNegativeInteger max) {
         return new IndexInterval(new LowerBound(min, true), new UpperBound(max, true));
     }
@@ -70,6 +79,11 @@ public class IndexInterval
             default:
                 return false;
         }
+    }
+
+    @Override
+    public NonNegativeInteger count() {
+        return upper.value().minus(lower.value()).orElse(NonNegativeInteger.ZERO);
     }
 
     @Override

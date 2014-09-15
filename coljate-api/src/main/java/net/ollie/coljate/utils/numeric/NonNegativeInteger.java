@@ -114,6 +114,10 @@ public abstract class NonNegativeInteger
         return this.bigIntegerValue().signum() == 0;
     }
 
+    public Optional<NonNegativeInteger> minus(final NonNegativeInteger that) {
+        return Optional.ofNullable(maybe(this.bigIntegerValue().subtract(that.bigIntegerValue())));
+    }
+
     @Override
     public Sorting sortWith(final Number that) {
         if (that instanceof NonNegativeInteger) {

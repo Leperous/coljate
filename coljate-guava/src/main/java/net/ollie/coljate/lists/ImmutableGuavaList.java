@@ -18,8 +18,8 @@ import java.io.Serializable;
 import javax.annotation.Nonnull;
 
 import net.ollie.coljate.Array;
-import net.ollie.coljate.SortedSet;
 import net.ollie.coljate.UnmodifiableGuavaIterator;
+import net.ollie.coljate.intervals.IndexInterval;
 
 /**
  *
@@ -28,6 +28,11 @@ import net.ollie.coljate.UnmodifiableGuavaIterator;
 public class ImmutableGuavaList<V> extends Array.Abstract<V> implements Array.Immutable<V>, Serializable {
 
     private static final long serialVersionUID = 1L;
+
+    @Nonnull
+    public static <V> ImmutableGuavaList<V> create() {
+        return view(ImmutableList.of());
+    }
 
     @Nonnull
     public static <V> ImmutableGuavaList<V> copy(final V[] array) {
@@ -128,13 +133,8 @@ public class ImmutableGuavaList<V> extends Array.Abstract<V> implements Array.Im
     }
 
     @Override
-    public V last() {
-        throw new UnsupportedOperationException("last not supported yet!");
-    }
-
-    @Override
-    public SortedSet.Immutable<NonNegativeInteger> keys() {
-        throw new UnsupportedOperationException("keys not supported yet!");
+    public IndexInterval keys() {
+        return IndexInterval.lessThan(this.count());
     }
 
     @Override
