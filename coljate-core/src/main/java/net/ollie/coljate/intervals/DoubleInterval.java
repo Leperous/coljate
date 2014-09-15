@@ -2,6 +2,7 @@ package net.ollie.coljate.intervals;
 
 import net.ollie.coljate.Interval;
 
+import java.io.Serializable;
 import javax.annotation.Nonnull;
 
 /**
@@ -9,7 +10,9 @@ import javax.annotation.Nonnull;
  * @author Ollie
  */
 public class DoubleInterval
-        implements Interval<Double> {
+        implements Interval<Double>, Serializable {
+
+    private static final long serialVersionUID = 1L;
 
     public static Interval<Double> degenerate(final double d) {
         final DoubleBound bound = new DoubleBound(d, true);
@@ -78,8 +81,9 @@ public class DoubleInterval
     }
 
     private static class DoubleBound
-            implements Bound<Double> {
+            implements Bound<Double>, Serializable {
 
+        private static final long serialVersionUID = 1L;
         final double value;
         final boolean inclusive;
 
@@ -109,6 +113,8 @@ public class DoubleInterval
 
     static final class LowerDoubleBound extends DoubleBound {
 
+        private static final long serialVersionUID = 1L;
+
         LowerDoubleBound(final double value, final boolean inclusive) {
             super(value, inclusive);
         }
@@ -121,6 +127,8 @@ public class DoubleInterval
     }
 
     static final class UpperDoubleBound extends DoubleBound {
+
+        private static final long serialVersionUID = 1L;
 
         UpperDoubleBound(double value, boolean inclusive) {
             super(value, inclusive);
@@ -135,6 +143,8 @@ public class DoubleInterval
 
     private static final class Degenerate
             extends DoubleInterval {
+
+        private static final long serialVersionUID = 1L;
 
         Degenerate(final DoubleBound value) {
             super(value, value);
