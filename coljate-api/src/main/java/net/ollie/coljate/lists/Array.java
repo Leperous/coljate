@@ -8,7 +8,7 @@ import java.util.RandomAccess;
 
 import net.ollie.coljate.access.Indexed;
 import net.ollie.coljate.imposed.Ordered;
-import net.ollie.coljate.utils.Suppliers;
+import net.ollie.coljate.utils.Exceptions;
 import net.ollie.coljate.utils.iterators.Streams;
 import net.ollie.coljate.utils.numeric.NonNegativeInteger;
 
@@ -412,7 +412,7 @@ public interface Array<V>
             final int s = this.start().intValue();
             return from == s && to == s + 1
                     ? this
-                    : Suppliers.noSuchElement();
+                    : Exceptions.noSuchElement();
         }
 
         @Override

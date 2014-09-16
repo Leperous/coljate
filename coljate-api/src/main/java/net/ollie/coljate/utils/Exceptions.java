@@ -6,9 +6,13 @@ import java.util.NoSuchElementException;
  *
  * @author Ollie
  */
-public final class Suppliers {
+public final class Exceptions {
 
-    private Suppliers() {
+    private Exceptions() {
+    }
+
+    public static <V> V illegalArgument(final String reason) {
+        throw new IllegalArgumentException(reason);
     }
 
     public static <V> V noSuchElement() {
