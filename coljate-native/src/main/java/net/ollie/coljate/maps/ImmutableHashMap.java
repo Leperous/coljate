@@ -29,8 +29,15 @@ public class ImmutableHashMap<K, V>
     private static final long serialVersionUID = 1L;
     private static final float LOAD_FACTOR = 0.75f;
 
-    public static <K, V> Map.Immutable<K, V> create() {
+    public static <K, V> ImmutableHashMap<K, V> create() {
         return new ImmutableHashMap<>();
+    }
+
+    public static <K, V> ImmutableHashMap<K, V> copy(final Map<? extends K, ? extends V> map) {
+        if (map instanceof ImmutableHashMap) {
+            return (ImmutableHashMap<K, V>) map;
+        }
+        throw new UnsupportedOperationException(); //TODO
     }
 
     private final ImmutableMapNode<K, V>[] bucket;
@@ -97,7 +104,7 @@ public class ImmutableHashMap<K, V>
     }
 
     @Override
-    public Map.Immutable<K, V> with(final K key, final V value) {
+    public ImmutableHashMap<K, V> with(final K key, final V value) {
         final ImmutableMapNode<K, V>[] bucket = this.cloneArray(bucketSize(this.bucket.length + 1)); //FIXME don't always increment!
         final int i = bucketFor(key, bucket);
         ImmutableMapNode<K, V> node = bucket[i];
@@ -107,7 +114,7 @@ public class ImmutableHashMap<K, V>
     }
 
     @Override
-    public Immutable<K, V> without(final Object key) {
+    public ImmutableHashMap<K, V> without(final Object key) {
         final ImmutableMapNode<K, V>[] bucket = this.cloneArray(bucketSize(this.bucket.length + 1)); //FIXME don't always increment!
         final int i = bucketFor(key, bucket);
         ImmutableMapNode<K, V> node = bucket[i];
@@ -237,6 +244,7 @@ public class ImmutableHashMap<K, V>
     }
 
     private final class KeySet
+            extends Set.Abstract<K>
             implements Set.Immutable<K> {
 
         @Override
