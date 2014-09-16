@@ -1,6 +1,7 @@
 package net.ollie.coljate.utils;
 
 import java.util.NoSuchElementException;
+import java.util.function.Supplier;
 
 /**
  *
@@ -15,8 +16,8 @@ public final class Exceptions {
         return illegalArgument(null);
     }
 
-    public static <V> V illegalArgument(final String reason) {
-        throw new IllegalArgumentException(reason);
+    public static <V> V illegalArgument(final Supplier<String> reason) {
+        throw new IllegalArgumentException(reason.get());
     }
 
     public static <V> V noSuchElement() {

@@ -19,7 +19,7 @@ public final class Conditions {
     }
 
     public static int checkIsNonNegative(final int i) {
-        return i < 0 ? illegalArgument("Negative value " + i) : i;
+        return i < 0 ? illegalArgument(() -> "Negative value " + i) : i;
     }
 
     public static boolean checkIsTrue(final boolean predicate) {
