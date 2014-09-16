@@ -34,13 +34,6 @@ final class NonNegativeInt
         }
     }
 
-    @Nonnull
-    public static NonNegativeInteger of(final Number number) throws NonNegativeException {
-        return number instanceof NonNegativeInteger
-                ? (NonNegativeInteger) number
-                : of(Math.round(number.floatValue()));
-    }
-
     @CheckForNull
     public static NonNegativeInteger maybe(final int value) {
         return value >= 0
@@ -91,9 +84,7 @@ final class NonNegativeInt
 
     @Override
     public NonNegativeInteger increment() {
-        return value < Integer.MAX_VALUE
-                ? NonNegativeInteger.of((long) value + 1)
-                : new NonNegativeInt(value + 1);
+        return NonNegativeInteger.of((long) value + 1);
     }
 
     public int peekDecrement() {
