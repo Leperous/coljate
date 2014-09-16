@@ -11,6 +11,10 @@ public final class Exceptions {
     private Exceptions() {
     }
 
+    public static <V> V illegalArgument() {
+        return illegalArgument(null);
+    }
+
     public static <V> V illegalArgument(final String reason) {
         throw new IllegalArgumentException(reason);
     }

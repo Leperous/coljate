@@ -1,5 +1,7 @@
 package net.ollie.coljate.utils;
 
+import static net.ollie.coljate.utils.Exceptions.illegalArgument;
+
 import javax.annotation.Nonnull;
 
 /**
@@ -13,24 +15,15 @@ public final class Conditions {
 
     @Nonnull
     public static <T> T checkNotNull(final T object) {
-        if (object == null) {
-            throw new IllegalArgumentException();
-        }
-        return object;
+        return object == null ? illegalArgument() : object;
     }
 
     public static int checkIsNonNegative(final int i) {
-        if (i < 0) {
-            throw new IllegalArgumentException("Value [" + i + "] was not positive!");
-        }
-        return i;
+        return i < 0 ? illegalArgument("Negative value " + i) : i;
     }
 
     public static boolean checkIsTrue(final boolean predicate) {
-        if (!predicate) {
-            throw new IllegalArgumentException();
-        }
-        return predicate;
+        return predicate ? predicate : illegalArgument();
     }
 
     public static <T> T[] checkIsEmpty(final T[] array) {
