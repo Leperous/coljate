@@ -459,13 +459,4 @@ public abstract class MutableWrappedArray<V>
 
     }
 
-    public interface CopiedIntoMutableListBackedArray<V> extends Array<V> {
-
-        @Override
-        default Array.Mutable<V> mutableCopy() {
-            return MutableListBackedArray.copy(this);
-        }
-
-    }
-
 }

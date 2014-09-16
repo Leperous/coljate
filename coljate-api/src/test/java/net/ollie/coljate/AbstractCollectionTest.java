@@ -49,7 +49,8 @@ public abstract class AbstractCollectionTest<C extends Collection<Object>> {
             assertContainsNothing(collection);
         }
         for (final Object object : objects) {
-            assertTrue("Collection [" + collection + "] should contain [" + object + "]", collection.contains(object));
+            assertTrue("Collection [" + collection + "] of class [" + collection.getClass().getSimpleName() + "] should contain [" + object + "]",
+                    collection.contains(object));
         }
         assertTrue(collection.containsAny(Arrays.asList(objects)));
         assertTrue(collection.containsAll(Arrays.asList(objects)));

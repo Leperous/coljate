@@ -8,9 +8,8 @@ import java.util.function.Function;
 import java.util.function.Supplier;
 import java.util.stream.Collector;
 
-import net.ollie.coljate.sets.SortedSet;
 import net.ollie.coljate.intervals.IndexInterval;
-import net.ollie.coljate.lists.MutableWrappedArray.CopiedIntoMutableListBackedArray;
+import net.ollie.coljate.sets.SortedSet;
 import net.ollie.coljate.streams.DefaultStream;
 import net.ollie.coljate.utils.ArrayLists;
 import net.ollie.coljate.utils.Arrays;
@@ -24,7 +23,9 @@ import java.io.Serializable;
  *
  * @author Ollie
  */
-public class ImmutableArray<V> implements Array.Immutable<V>, CopiedIntoMutableListBackedArray<V>, Serializable {
+public class ImmutableArray<V>
+        extends WrappedArrayBuilder<V>
+        implements Array.Immutable<V>, Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -200,11 +201,6 @@ public class ImmutableArray<V> implements Array.Immutable<V>, CopiedIntoMutableL
     }
 
     @Override
-    public Array.Mutable<V> mutableCopy() {
-        return CopiedIntoMutableListBackedArray.super.mutableCopy();
-    }
-
-    @Override
     public boolean equals(final Object that) {
         return that instanceof Array && this.equals((Array<?>) that);
     }
@@ -220,7 +216,8 @@ public class ImmutableArray<V> implements Array.Immutable<V>, CopiedIntoMutableL
     }
 
     private static final class ImmutableEmptyArray<V>
-            implements CopiedIntoMutableListBackedArray<V>, Array.Empty<V>, Serializable {
+            extends WrappedArrayBuilder<V>
+            implements Array.Empty<V>, Serializable {
 
         private static final long serialVersionUID = 1L;
 
@@ -237,11 +234,6 @@ public class ImmutableArray<V> implements Array.Immutable<V>, CopiedIntoMutableL
             return create(value);
         }
 
-        @Override
-        public Array.Mutable<V> mutableCopy() {
-            return CopiedIntoMutableListBackedArray.super.mutableCopy();
-        }
-
         private Object readResolve() {
             return INSTANCE;
         }
@@ -254,7 +246,8 @@ public class ImmutableArray<V> implements Array.Immutable<V>, CopiedIntoMutableL
     }
 
     private static final class ImmutableSingletonArray<V>
-            implements CopiedIntoMutableListBackedArray<V>, Array.Singleton<V> {
+            extends WrappedArrayBuilder<V>
+            implements Array.Singleton<V> {
 
         private final V value;
 
@@ -299,11 +292,6 @@ public class ImmutableArray<V> implements Array.Immutable<V>, CopiedIntoMutableL
         }
 
         @Override
-        public Array.Mutable<V> mutableCopy() {
-            return CopiedIntoMutableListBackedArray.super.mutableCopy();
-        }
-
-        @Override
         public String toString() {
             return "[" + value + ']';
         }
@@ -337,7 +325,7 @@ public class ImmutableArray<V> implements Array.Immutable<V>, CopiedIntoMutableL
         }
 
         @Override
-        public Function<java.util.ArrayList<V>, Immutable<V>> finisher() {
+        public Function<java.util.ArrayList<V>, Array.Immutable<V>> finisher() {
             return ImmutableArray::copy;
         }
 

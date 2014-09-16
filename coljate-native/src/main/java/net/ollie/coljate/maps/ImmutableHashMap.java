@@ -4,11 +4,11 @@ import java.util.Arrays;
 import java.util.NoSuchElementException;
 import java.util.Objects;
 
-import net.ollie.coljate.sets.Set;
 import net.ollie.coljate.access.Streamable;
 import net.ollie.coljate.lists.MutableWrappedLinkedList;
 import net.ollie.coljate.sets.ImmutableWrappedHashSet;
 import net.ollie.coljate.sets.MutableWrappedHashSet;
+import net.ollie.coljate.sets.Set;
 import net.ollie.coljate.streams.DefaultStream;
 import net.ollie.coljate.utils.iterators.Iterables;
 import net.ollie.coljate.utils.iterators.UnmodifiableIterator;
@@ -99,7 +99,15 @@ public class ImmutableHashMap<K, V>
     private ImmutableMapNode<K, V>[] cloneArray(final int newSize) {
         @SuppressWarnings({"rawtypes", "unchecked"})
         final ImmutableMapNode<K, V>[] cloned = new ImmutableMapNode[newSize];
-        System.arraycopy(bucket, 0, cloned, 0, bucket.length);
+        //System.arraycopy(bucket, 0, cloned, 0, bucket.length);
+        for (final ImmutableMapNode<K, V> node : bucket) {
+            ImmutableMapNode<K, V> innerNode = node;
+            while (innerNode != null) {
+                final int index = bucketFor(innerNode.key(), cloned);
+                cloned[index] = new ImmutableMapNode<>(innerNode.key, innerNode.value, cloned[index]);
+                innerNode = innerNode.next();
+            }
+        }
         return cloned;
     }
 

@@ -44,7 +44,7 @@ public class ImmutableHashSet<V>
 
     @Override
     public boolean contains(final Object object) {
-        return map.keys().contains(object);
+        return map.containsKey(object);
     }
 
     @Override

@@ -53,9 +53,9 @@ public abstract class AbstractMapTest<C extends Map<Object, Object>>
     }
 
     protected <K, V> void assertNotContainsKeyOrValue(final Map<K, V> map, final K key, final V value) {
-        assertFalse(map.contains(value));
-        assertFalse(map.containsKey(key));
+        assertFalse("Map [" + map + "] should not contain key [" + map + "]", map.containsKey(key));
         assertFalse(map.containsValue(value));
+        assertFalse(map.contains(value));
     }
 
     protected static <K, V> Map.Entry<K, V> entry(final K key, final V value) {
