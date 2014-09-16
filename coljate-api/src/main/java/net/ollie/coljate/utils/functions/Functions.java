@@ -1,4 +1,4 @@
-package net.ollie.coljate.utils;
+package net.ollie.coljate.utils.functions;
 
 import java.util.function.Function;
 import java.util.function.Predicate;
