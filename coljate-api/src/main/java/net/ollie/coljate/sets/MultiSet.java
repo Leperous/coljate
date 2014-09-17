@@ -1,8 +1,7 @@
 package net.ollie.coljate.sets;
 
-import net.ollie.coljate.sets.Set;
-import net.ollie.coljate.access.Streamable;
 import net.ollie.coljate.access.Keyed;
+import net.ollie.coljate.access.Streamable;
 import net.ollie.coljate.imposed.Distinctness.Duplicated;
 import net.ollie.coljate.utils.numeric.NonNegativeInteger;
 
@@ -15,7 +14,7 @@ public interface MultiSet<V>
         extends Streamable<V>, Keyed.Single<V, NonNegativeInteger>, Duplicated<V> {
 
     @Override
-    default NonNegativeInteger get(final Object object) {
+    default NonNegativeInteger maybeGet(final Object object) {
         return this.count(object);
     }
 

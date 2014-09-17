@@ -3,10 +3,10 @@ package net.ollie.coljate.maps;
 import java.util.Objects;
 
 import net.ollie.coljate.ImmutableGuavaCollection;
-import net.ollie.coljate.sets.Set;
 import net.ollie.coljate.access.Streamable;
 import net.ollie.coljate.sets.ImmutableGuavaSet;
 import net.ollie.coljate.sets.MutableWrappedHashSet;
+import net.ollie.coljate.sets.Set;
 import net.ollie.coljate.streams.DefaultStream;
 import net.ollie.coljate.utils.iterators.UnmodifiableIterator;
 
@@ -77,7 +77,8 @@ public class ImmutableGuavaMap<K, V> extends Map.Abstract<K, V> implements Map.I
     }
 
     @Override
-    public V get(final Object key) {
+    @SuppressWarnings("element-type-mismatch")
+    public V maybeGet(final Object key) {
         return delegate.get(key);
     }
 

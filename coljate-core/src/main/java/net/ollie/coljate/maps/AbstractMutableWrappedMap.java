@@ -1,6 +1,5 @@
 package net.ollie.coljate.maps;
 
-
 import javax.annotation.Nonnull;
 
 /**
@@ -15,7 +14,7 @@ public abstract class AbstractMutableWrappedMap<K, V>
 
     @Override
     @SuppressWarnings({"element-type-mismatch", "SuspiciousMethodCalls"})
-    public V get(final Object key) {
+    public V maybeGet(final Object key) {
         return this.delegate().get(key);
     }
 

@@ -101,7 +101,7 @@ public interface Cached<K, V>
         V remove(Object key);
 
         default boolean replace(final K key, final V expectedValue, final V newValue) {
-            final V currentValue = this.get(expectedValue);
+            final V currentValue = this.get(key);
             if (Objects.equals(expectedValue, currentValue)) {
                 this.put(key, newValue);
                 return true;

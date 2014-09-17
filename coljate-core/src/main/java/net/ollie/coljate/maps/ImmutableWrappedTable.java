@@ -1,9 +1,8 @@
 package net.ollie.coljate.maps;
 
-
+import net.ollie.coljate.access.Streamable;
 import net.ollie.coljate.lists.Array;
 import net.ollie.coljate.sets.Set;
-import net.ollie.coljate.access.Streamable;
 
 /**
  *
@@ -23,13 +22,8 @@ public class ImmutableWrappedTable<R, C, V>
     }
 
     @Override
-    public V get(final Object key1, final Object key2) {
-        return delegate.get(key1, key2);
-    }
-
-    @Override
-    public V get(final Object key) {
-        return delegate.get(key);
+    public V maybeGet(final Object k1, final Object k2) {
+        return delegate.maybeGet(k1, k2);
     }
 
     @Override

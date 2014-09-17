@@ -36,11 +36,11 @@ public class MutableWrappedTable<R, C, V>
     }
 
     @Override
-    public V get(final Object row, final Object column) {
-        final Map<C, V> map = values.get(row);
+    public V maybeGet(final Object row, final Object column) {
+        final Map<C, V> map = values.maybeGet(row);
         return map == null
                 ? null
-                : map.get(column);
+                : map.maybeGet(column);
     }
 
     @Override
@@ -64,7 +64,7 @@ public class MutableWrappedTable<R, C, V>
 
     @Override
     public V remove(final Object row, final Object column) {
-        final Map.Mutable<C, V> actualRow = values.get(row);
+        final Map.Mutable<C, V> actualRow = values.maybeGet(row);
         return actualRow == null
                 ? null
                 : actualRow.remove(column);

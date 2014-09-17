@@ -12,7 +12,6 @@ import net.ollie.coljate.access.Streamable;
 import net.ollie.coljate.utils.iterators.Iterators;
 import net.ollie.coljate.utils.iterators.UnmodifiableIterator;
 
-
 /**
  *
  * @author Ollie
@@ -59,8 +58,8 @@ public class ImmutableWrappedHashMap<K, V>
     }
 
     @Override
-    public V get(final Object key) {
-        return delegate.get(key);
+    public V maybeGet(final Object key) {
+        return delegate.maybeGet(key);
     }
 
     @Override

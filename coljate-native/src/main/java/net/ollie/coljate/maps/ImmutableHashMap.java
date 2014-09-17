@@ -57,7 +57,7 @@ public class ImmutableHashMap<K, V>
     }
 
     @Override
-    public V get(final Object key) {
+    public V maybeGet(final Object key) {
         if (key == null) {
             return null;
         }

@@ -3,8 +3,8 @@ package net.ollie.coljate.access;
 import java.util.Optional;
 
 import net.ollie.coljate.Collection;
-import net.ollie.coljate.maps.Map;
 import net.ollie.coljate.imposed.Distinctness.Unique;
+import net.ollie.coljate.maps.Map;
 
 import javax.annotation.CheckForNull;
 import javax.annotation.Nonnull;
@@ -37,15 +37,20 @@ public interface Keyed<V> {
     interface Single<K, V> extends Keyed<V> {
 
         @CheckForNull
-        V get(@Nonnull Object key);
+        default V get(@Nonnull final K key) {
+            return this.maybeGet(key);
+        }
+
+        @CheckForNull
+        V maybeGet(Object key);
 
         @Nonnull
-        default Optional<V> tryGet(final Object key) {
+        default Optional<V> tryGet(final K key) {
             return Optional.ofNullable(this.get(key));
         }
 
         @Nonnull
-        default V getOrDefault(final Object key, @Nonnull final V defaultValue) {
+        default V getOrDefault(final K key, @Nonnull final V defaultValue) {
             final V value = this.get(key);
             return value == null ? defaultValue : value;
         }
@@ -57,36 +62,43 @@ public interface Keyed<V> {
 
     interface Typed<V> extends Single<Key<?>, V> {
 
-        default <K extends Key<T>, T extends V> T get(final K key) {
-            return key.convert(this.get((Object) key));
-        }
+        <K extends Key<T>, T extends V> T get(K key);
 
     }
 
     interface Key<T> {
 
-        default T convert(final Object object) {
-            return (T) object;
-        }
-
     }
 
     interface Dual<K1, K2, V> extends Keyed.Single<Map.Entry<K1, K2>, V> {
 
-        V get(Object key1, Object key2);
+        @CheckForNull
+        default V get(final K1 key1, final K2 key2) {
+            return this.maybeGet(key1, key2);
+        }
 
-        default V get(final Map.Entry<? extends K1, ? extends K2> entry) {
+        @CheckForNull
+        V maybeGet(Object key1, Object key2);
+
+        @Override
+        @CheckForNull
+        default V get(final Map.Entry<K1, K2> entry) {
+            return this.get(entry.key(), entry.value());
+        }
+
+        @CheckForNull
+        default V getAny(final Map.Entry<? extends K1, ? extends K2> entry) {
             return this.get(entry.key(), entry.value());
         }
 
         @Override
-        default V get(final Object object) {
+        default V maybeGet(final Object object) {
             if (object instanceof Map.Entry) {
                 final Map.Entry<?, ?> that = (Map.Entry) object;
-                return this.get(that.key(), that.value());
+                return this.maybeGet(that.key(), that.value());
             } else if (object instanceof java.util.Map) {
                 final java.util.Map.Entry<?, ?> that = (java.util.Map.Entry) object;
-                return this.get(that.getKey(), that.getValue());
+                return this.maybeGet(that.getKey(), that.getValue());
             } else {
                 return null;
             }

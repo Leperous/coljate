@@ -62,7 +62,7 @@ public class ImmutableWrappedMultiHashSet<V>
     }
 
     @Override
-    public NonNegativeInteger get(Object key) {
+    public NonNegativeInteger maybeGet(Object key) {
         throw new UnsupportedOperationException("get not supported yet!");
     }
 

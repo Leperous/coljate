@@ -92,7 +92,7 @@ public class MutableWrappedTreeMap<K, V>
 
     @Override
     @SuppressWarnings("element-type-mismatch")
-    public V get(final Object key) {
+    public V maybeGet(final Object key) {
         return delegate.get(key);
     }
 

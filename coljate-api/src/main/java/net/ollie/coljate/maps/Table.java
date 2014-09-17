@@ -1,9 +1,8 @@
 package net.ollie.coljate.maps;
 
-import net.ollie.coljate.maps.Map;
-import net.ollie.coljate.lists.Array;
 import net.ollie.coljate.access.Keyed;
 import net.ollie.coljate.imposed.Cached;
+import net.ollie.coljate.lists.Array;
 
 import javax.annotation.Nonnull;
 
@@ -17,9 +16,6 @@ import javax.annotation.Nonnull;
  */
 public interface Table<R, C, V>
         extends Keyed.Dual<R, C, V>, Cached<Map.Entry<R, C>, V> {
-
-    @Override
-    V get(Object row, Object column);
 
     @Nonnull
     Array<R> rows();

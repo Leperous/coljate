@@ -71,8 +71,8 @@ public class ImmutableWrappedTreeMap<K, V>
     }
 
     @Override
-    public V get(final Object key) {
-        return this.underlying().get(key);
+    public V maybeGet(final Object key) {
+        return this.underlying().maybeGet(key);
     }
 
     @Override
