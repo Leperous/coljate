@@ -109,9 +109,10 @@ public class MutableWrappedLinkedList<V>
     }
 
     @Override
-    public List.Mutable<V> reverse() {
-        java.util.Collections.reverse(delegate);
-        return this;
+    public List.Mutable<V> reverseCopy() {
+        final java.util.LinkedList<V> copy = new java.util.LinkedList<>(delegate);
+        java.util.Collections.reverse(copy);
+        return view(copy);
     }
 
     @Override

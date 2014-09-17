@@ -1,7 +1,5 @@
 package net.ollie.coljate.lists;
 
-import net.ollie.coljate.lists.ConcurrentWrappedArray;
-
 /**
  *
  * @author Ollie

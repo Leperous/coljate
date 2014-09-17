@@ -2,9 +2,11 @@ package net.ollie.coljate.lists;
 
 import java.util.Comparator;
 import java.util.Iterator;
+import java.util.ListIterator;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.concurrent.atomic.AtomicReferenceArray;
 
+import net.ollie.coljate.intervals.IndexInterval;
 import net.ollie.coljate.sets.SortedSet;
 import net.ollie.coljate.streams.DefaultStream;
 import net.ollie.coljate.utils.iterators.Iterators;
@@ -142,7 +144,7 @@ public class ConcurrentWrappedArray<V>
 
     @Override
     public SortedSet<NonNegativeInteger> keys() {
-        throw new UnsupportedOperationException("keys not supported yet!");
+        return IndexInterval.lessThan(this.capacity());
     }
 
     @Override
@@ -236,8 +238,15 @@ public class ConcurrentWrappedArray<V>
     }
 
     @Override
-    public Array.Mutable<V> reverse() {
-        throw new UnsupportedOperationException("reverse not supported yet!");
+    public Array.Mutable<V> reverseCopy() {
+        final AtomicReferenceArray<V> array = reference.get();
+        final Array.Mutable<V> reversed = create(array.length());
+        final ListIterator<V> iterator = Iterators.ofArray(array, array.length());
+        int index = 0;
+        while (iterator.hasPrevious()) {
+            reversed.set(index++, iterator.previous());
+        }
+        return reversed;
     }
 
     @Override

@@ -151,8 +151,8 @@ public class ImmutableWrappedArray<V>
     }
 
     @Override
-    public Array.Immutable<V> reverse() {
-        return this.underlying().mutableCopy().reverse().immutableCopy();
+    public Array.Immutable<V> reverseCopy() {
+        return this.underlying().mutableCopy().reverseCopy().immutableCopy();
     }
 
     @Override

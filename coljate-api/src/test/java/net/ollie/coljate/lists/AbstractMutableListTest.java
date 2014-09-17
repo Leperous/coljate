@@ -1,7 +1,5 @@
 package net.ollie.coljate.lists;
 
-import net.ollie.coljate.lists.List;
-
 import java.util.Arrays;
 
 import net.ollie.coljate.AbstractStreamableTest;
@@ -49,11 +47,21 @@ public abstract class AbstractMutableListTest<C extends List.Mutable<Object>>
         assertContains(list, o1, o2, o3);
     }
 
+    @Test
+    public void shouldReverse() {
+        final Object o1 = new Object(), o2 = new Object(), o3 = new Object();
+        final C list = this.create(o1, o2, o3);
+        assertContains(list, o1, o2, o3);
+        final C reversed = (C) list.reverseCopy();
+        assertContains(list, o1, o2, o3);
+        assertContains(reversed, o3, o2, o1);
+    }
+
     @Override
     protected void assertContains(final C collection, final Object... objects) {
         super.assertContains(collection, objects);
         if (objects.length > 0) {
-            assertThat(collection.head(), is(objects[0]));
+            assertThat("Collect head: " + collection, collection.head(), is(objects[0]));
         }
         if (objects.length > 1) {
             final Object[] tail = new Object[objects.length - 1];

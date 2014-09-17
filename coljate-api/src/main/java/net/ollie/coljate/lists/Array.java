@@ -63,7 +63,7 @@ public interface Array<V>
     Array<V> segment(final int from, final int to) throws IndexOutOfBoundsException;
 
     @Override
-    Array<V> reverse();
+    Array<V> reverseCopy();
 
     @Override
     Array<V> tail();
@@ -95,7 +95,7 @@ public interface Array<V>
         void setCapacity(NonNegativeInteger capacity);
 
         @Override
-        Array.Mutable<V> reverse();
+        Array.Mutable<V> reverseCopy();
 
         @Override
         default V first() {
@@ -209,7 +209,7 @@ public interface Array<V>
         Array.Immutable<V> segment(int from, int to);
 
         @Override
-        Array.Immutable<V> reverse();
+        Array.Immutable<V> reverseCopy();
 
         @Nonnull
         @CheckReturnValue
@@ -306,7 +306,7 @@ public interface Array<V>
         }
 
         @Override
-        default Array.Empty<V> reverse() {
+        default Array.Empty<V> reverseCopy() {
             return this;
         }
 
@@ -366,7 +366,7 @@ public interface Array<V>
 
         @Override
         default Array.Immutable<V> andSuffix(final V value) {
-            return this.andPrefix(value).reverse();
+            return this.andPrefix(value).reverseCopy();
         }
 
         @Override
@@ -416,7 +416,7 @@ public interface Array<V>
         }
 
         @Override
-        default Array.Singleton<V> reverse() {
+        default Array.Singleton<V> reverseCopy() {
             return this;
         }
 

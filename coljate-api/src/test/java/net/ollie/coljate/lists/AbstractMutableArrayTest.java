@@ -1,6 +1,5 @@
 package net.ollie.coljate.lists;
 
-import net.ollie.coljate.lists.Array;
 import net.ollie.coljate.utils.numeric.NonNegativeInteger;
 
 import static org.hamcrest.CoreMatchers.is;

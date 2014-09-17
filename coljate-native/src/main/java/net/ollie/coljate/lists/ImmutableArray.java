@@ -132,7 +132,7 @@ public class ImmutableArray<V>
     }
 
     @Override
-    public Array.Immutable<V> reverse() {
+    public Array.Immutable<V> reverseCopy() {
         final Object[] reversed = this.toRawArray();
         for (int i = 0; i < reversed.length / 2; i++) {
             final Object temp = reversed[i];

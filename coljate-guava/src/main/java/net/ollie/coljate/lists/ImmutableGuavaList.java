@@ -86,7 +86,7 @@ public class ImmutableGuavaList<V> extends Array.Abstract<V> implements Array.Im
     }
 
     @Override
-    public Array.Immutable<V> reverse() {
+    public Array.Immutable<V> reverseCopy() {
         return view(underlying.reverse());
     }
 

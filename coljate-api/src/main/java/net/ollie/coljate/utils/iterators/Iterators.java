@@ -1,6 +1,7 @@
 package net.ollie.coljate.utils.iterators;
 
 import java.util.Iterator;
+import java.util.ListIterator;
 import java.util.Optional;
 import java.util.concurrent.atomic.AtomicReferenceArray;
 import java.util.function.BiConsumer;
@@ -39,8 +40,12 @@ public final class Iterators {
         return new TransformedIterator<>(iterable.iterator(), function);
     }
 
-    public static <V> Iterator<V> ofArray(final AtomicReferenceArray<? extends V> array) {
-        return new AtomicReferenceArrayIterator<>(array);
+    public static <V> ListIterator<V> ofArray(final AtomicReferenceArray<? extends V> array) {
+        return ofArray(array, 0);
+    }
+
+    public static <V> ListIterator<V> ofArray(final AtomicReferenceArray<? extends V> array, final int index) {
+        return new AtomicReferenceArrayIterator<>(array, index);
     }
 
     public static <V, A, R> R collect(final Iterator<? extends V> iterator, final Collector<? super V, A, ? extends R> collector) {
@@ -126,13 +131,14 @@ public final class Iterators {
     }
 
     private static final class AtomicReferenceArrayIterator<V>
-            implements Iterator<V> {
+            implements ListIterator<V> {
 
         private final AtomicReferenceArray<? extends V> array;
         private int index;
 
-        AtomicReferenceArrayIterator(final AtomicReferenceArray<? extends V> array) {
+        AtomicReferenceArrayIterator(final AtomicReferenceArray<? extends V> array, final int index) {
             this.array = array;
+            this.index = index;
         }
 
         @Override
@@ -143,6 +149,41 @@ public final class Iterators {
         @Override
         public V next() {
             return array.get(index++);
+        }
+
+        @Override
+        public boolean hasPrevious() {
+            return index > 0;
+        }
+
+        @Override
+        public V previous() {
+            return array.get(--index);
+        }
+
+        @Override
+        public int nextIndex() {
+            return index + 1;
+        }
+
+        @Override
+        public int previousIndex() {
+            return index - 1;
+        }
+
+        @Override
+        public void remove() {
+            throw new UnsupportedOperationException("remove not supported yet!");
+        }
+
+        @Override
+        public void set(V e) {
+            throw new UnsupportedOperationException("set not supported yet!");
+        }
+
+        @Override
+        public void add(V e) {
+            throw new UnsupportedOperationException("add not supported yet!");
         }
 
     }

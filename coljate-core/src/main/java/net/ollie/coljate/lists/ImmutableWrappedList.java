@@ -136,8 +136,8 @@ public class ImmutableWrappedList<V>
     }
 
     @Override
-    public List.Immutable<V> reverse() {
-        return this.underlying().reverse().immutableCopy();
+    public List.Immutable<V> reverseCopy() {
+        return this.underlying().reverseCopy().immutableCopy();
     }
 
     @Override

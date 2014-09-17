@@ -29,6 +29,11 @@ public interface List<V>
     }
 
     @Override
+    default V first() {
+        return this.head();
+    }
+
+    @Override
     List<V> tail();
 
     @Override
@@ -38,7 +43,8 @@ public interface List<V>
     V last();
 
     @Nonnull
-    List<V> reverse();
+    @CheckReturnValue
+    List<V> reverseCopy();
 
     @Override
     List.Mutable<V> mutableCopy();
@@ -79,7 +85,7 @@ public interface List<V>
         }
 
         @Override
-        List.Mutable<V> reverse();
+        List.Mutable<V> reverseCopy();
 
         default boolean removeFirst(final Object value) {
             final Iterator<V> iterator = this.iterator();
@@ -208,7 +214,7 @@ public interface List<V>
         List.Immutable<V> notAll(Object value);
 
         @Override
-        List.Immutable<V> reverse();
+        List.Immutable<V> reverseCopy();
 
         @Override
         default List.Immutable<V> immutableCopy() {
@@ -255,12 +261,17 @@ public interface List<V>
         }
 
         @Override
+        default V first() {
+            return Sequence.Empty.super.first();
+        }
+
+        @Override
         default V last() {
             return null;
         }
 
         @Override
-        default List.Empty<V> reverse() {
+        default List.Empty<V> reverseCopy() {
             return this;
         }
 
@@ -304,7 +315,7 @@ public interface List<V>
         }
 
         @Override
-        default List.Singleton<V> reverse() {
+        default List.Singleton<V> reverseCopy() {
             return this;
         }
 

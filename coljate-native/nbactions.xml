@@ -7,4 +7,13 @@
                 <goal>jacoco:report</goal>
             </goals>
         </action>
+        <action>
+            <actionName>CUSTOM-Test dependencies</actionName>
+            <displayName>Test dependencies</displayName>
+            <goals>
+                <goal>dependency:tree</goal>
+                <goal>-Dscope=test</goal>
+                
+            </goals>
+        </action>
     </actions>

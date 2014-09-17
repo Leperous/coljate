@@ -1,7 +1,5 @@
 package net.ollie.coljate.lists;
 
-import net.ollie.coljate.lists.MutableWrappedArray;
-
 import java.util.Arrays;
 
 
@@ -9,7 +7,7 @@ import java.util.Arrays;
  *
  * @author Ollie
  */
-public class AbstactMutableWrappedArrayTest
+public class MutableWrappedArrayTest
         extends AbstractMutableArrayTest<Array.Mutable<Object>> {
 
     @Override

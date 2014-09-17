@@ -190,9 +190,10 @@ public abstract class MutableWrappedArray<V>
         }
 
         @Override
-        public Array.Mutable<V> reverse() {
-            Collections.reverse(underlying);
-            return this;
+        public Array.Mutable<V> reverseCopy() {
+            final java.util.ArrayList<V> copy = new java.util.ArrayList<>(underlying);
+            Collections.reverse(copy);
+            return view(copy);
         }
 
         @Override
@@ -345,13 +346,14 @@ public abstract class MutableWrappedArray<V>
         }
 
         @Override
-        public Array.Mutable<V> reverse() {
-            for (int i = 0; i < array.length / 2; i++) {
-                final V temp = array[i];
-                array[i] = array[array.length - 1 - i];
-                array[array.length - 1 - i] = temp;
+        public Array.Mutable<V> reverseCopy() {
+            final V[] cloned = java.util.Arrays.copyOf(array, array.length);
+            for (int i = 0; i < cloned.length / 2; i++) {
+                final V temp = cloned[i];
+                cloned[i] = cloned[cloned.length - 1 - i];
+                cloned[cloned.length - 1 - i] = temp;
             }
-            return this;
+            return view(cloned);
         }
 
         @Override

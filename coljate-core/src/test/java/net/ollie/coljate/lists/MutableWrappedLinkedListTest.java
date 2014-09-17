@@ -1,6 +1,5 @@
 package net.ollie.coljate.lists;
 
-import net.ollie.coljate.lists.MutableWrappedLinkedList;
 import net.ollie.coljate.utils.Arrays;
 
 /**
