@@ -17,6 +17,13 @@ import javax.annotation.Nonnull;
 public interface Table<R, C, V>
         extends Keyed.Dual<R, C, V>, Cached<Map.Entry<R, C>, V> {
 
+    @Override
+    default V get(R row, C column) {
+        return this.maybeGet(row, column);
+    }
+
+    V maybeGet(Object row, Object column);
+
     @Nonnull
     Array<R> rows();
 

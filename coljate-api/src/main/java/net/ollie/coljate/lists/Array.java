@@ -31,13 +31,6 @@ public interface Array<V>
     V get(int index) throws IndexOutOfBoundsException;
 
     @Override
-    default V maybeGet(final Object key) throws IndexOutOfBoundsException {
-        return key instanceof Number
-                ? this.get(NonNegativeInteger.of((Number) key))
-                : null;
-    }
-
-    @Override
     default V get(final NonNegativeInteger index) {
         return this.get(index.intValue());
     }

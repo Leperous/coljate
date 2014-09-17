@@ -14,7 +14,7 @@ public interface MultiSet<V>
         extends Streamable<V>, Keyed.Single<V, NonNegativeInteger>, Duplicated<V> {
 
     @Override
-    default NonNegativeInteger maybeGet(final Object object) {
+    default NonNegativeInteger get(final V object) {
         return this.count(object);
     }
 

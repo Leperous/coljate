@@ -57,16 +57,6 @@ public class ImmutableWrappedMultiHashSet<V>
     }
 
     @Override
-    public MultiSet.Immutable<V> immutableCopy() {
-        throw new UnsupportedOperationException("immutableCopy not supported yet!");
-    }
-
-    @Override
-    public NonNegativeInteger maybeGet(Object key) {
-        throw new UnsupportedOperationException("get not supported yet!");
-    }
-
-    @Override
     public NonNegativeInteger count(Object object) {
         throw new UnsupportedOperationException("count not supported yet!");
     }

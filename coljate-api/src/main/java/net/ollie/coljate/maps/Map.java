@@ -27,6 +27,14 @@ public interface Map<K, V>
         extends Cached<K, V>, Surjective<K, V> {
 
     @Override
+    default V get(K key) {
+        return this.maybeGet(key);
+    }
+
+    @CheckForNull
+    V maybeGet(Object key);
+
+    @Override
     Set<K> keys();
 
     Set<? extends Entry<K, V>> entries();
