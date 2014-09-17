@@ -31,6 +31,20 @@ public class MutableWrappedMultiHashSet<V>
         return view(new java.util.HashMap<>(initialCapacity));
     }
 
+    @SuppressWarnings("unchecked")
+    public static <V> MutableWrappedMultiHashSet<V> copy(final V... array) {
+        return copy(Arrays.asList(array));
+    }
+
+    public static <V> MutableWrappedMultiHashSet<V> copy(final Iterable<? extends V> iterable) {
+        final java.util.Map<V, NonNegativeInteger> map = new java.util.HashMap<>();
+        for (final V element : iterable) {
+            final NonNegativeInteger current = map.get(element);
+            map.put(element, current == null ? NonNegativeInteger.of(1) : current.increment());
+        }
+        return view(map);
+    }
+
     /**
      *
      * @param <V> value type
@@ -38,22 +52,8 @@ public class MutableWrappedMultiHashSet<V>
      * @return a mutable multiset backed by the given map.
      * @throws IllegalArgumentException if any negative values are present.
      */
-    public static <V> MultiSet.Mutable<V> view(@Nonnull final java.util.Map<V, NonNegativeInteger> map) {
+    public static <V> MutableWrappedMultiHashSet<V> view(@Nonnull final java.util.Map<V, NonNegativeInteger> map) {
         return new MutableWrappedMultiHashSet<>(map);
-    }
-
-    @SuppressWarnings("unchecked")
-    public static <V> MultiSet.Mutable<V> copy(final V... array) {
-        return copy(Arrays.asList(array));
-    }
-
-    public static <V> MultiSet.Mutable<V> copy(final Iterable<? extends V> iterable) {
-        final java.util.Map<V, NonNegativeInteger> map = new java.util.HashMap<>();
-        for (final V element : iterable) {
-            final NonNegativeInteger current = map.get(element);
-            map.put(element, current == null ? NonNegativeInteger.of(1) : current.increment());
-        }
-        return view(map);
     }
 
     private final java.util.Map<V, NonNegativeInteger> delegate;
@@ -155,7 +155,7 @@ public class MutableWrappedMultiHashSet<V>
 
     @Override
     public MultiSet.Immutable<V> immutableCopy() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return ImmutableWrappedMultiHashSet.copy(this);
     }
 
     @Override
