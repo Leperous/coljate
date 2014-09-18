@@ -1,5 +1,8 @@
 package net.ollie.coljate.utils;
 
+import java.util.function.Predicate;
+import java.util.function.Supplier;
+
 import static net.ollie.coljate.utils.Exceptions.illegalArgument;
 
 import javax.annotation.Nonnull;
@@ -24,6 +27,22 @@ public final class Conditions {
 
     public static boolean checkIsTrue(final boolean predicate) {
         return predicate ? predicate : illegalArgument();
+    }
+
+    public static <T> T checkIsTrue(final T object, final Predicate<? super T> predicate, final Supplier<String> reason) {
+        return predicate.test(object) ? object : illegalArgument(reason);
+    }
+
+    public static <T> T checkIsTrue(final T object, final Predicate<? super T> predicate, final String reason) {
+        return predicate.test(object) ? object : illegalArgument(reason);
+    }
+
+    public static <T> T checkIsFalse(final T object, final Predicate<? super T> predicate, final Supplier<String> reason) {
+        return checkIsTrue(object, predicate.negate(), reason);
+    }
+
+    public static <T> T checkIsFalse(final T object, final Predicate<? super T> predicate, final String reason) {
+        return checkIsTrue(object, predicate.negate(), reason);
     }
 
     public static <T> T[] checkIsEmpty(final T[] array) {

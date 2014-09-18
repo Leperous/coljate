@@ -3,6 +3,7 @@ package net.ollie.coljate.utils.functions;
 import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Predicate;
+import java.util.function.Supplier;
 
 /**
  *
@@ -20,6 +21,10 @@ public final class Functions {
     public static <T> Consumer<T> doNothing() {
         return object -> {
         };
+    }
+
+    public static <T> Supplier<T> nothing() {
+        return () -> null;
     }
 
 }
