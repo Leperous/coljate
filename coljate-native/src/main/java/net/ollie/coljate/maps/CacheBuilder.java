@@ -15,8 +15,12 @@ import javax.annotation.Nonnull;
  */
 public interface CacheBuilder<K, V> extends Cache<K, V> {
 
-    static <K, V> CacheBuilder<K, V> create(final Function<? super K, ? extends V> valueFunction) {
-        return MapCache.create(valueFunction);
+    static <K, V> CacheBuilder<K, V> createNonThreadSafe(final Function<? super K, ? extends V> valueFunction) {
+        return MapCache.createNonThreadSafe(valueFunction);
+    }
+
+    static <K, V> CacheBuilder<K, V> createThreadSafe(final Function<? super K, ? extends V> valueFunction) {
+        return MapCache.createThreadSafe(valueFunction);
     }
 
     @CheckReturnValue

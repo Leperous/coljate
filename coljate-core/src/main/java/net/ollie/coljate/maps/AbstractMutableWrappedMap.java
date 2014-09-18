@@ -35,6 +35,11 @@ public abstract class AbstractMutableWrappedMap<K, V>
     }
 
     @Override
+    public boolean remove(final Object key, final Object value) {
+        return this.delegate().remove(key, value);
+    }
+
+    @Override
     public boolean replace(K key, V oldValue, V newValue) {
         return this.delegate().replace(key, oldValue, newValue);
     }

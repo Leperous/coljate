@@ -1,13 +1,12 @@
 package net.ollie.coljate.maps;
 
-import net.ollie.coljate.sets.Set;
-
 import java.util.Objects;
 
 import net.ollie.coljate.access.Streamable;
 import net.ollie.coljate.imposed.Cached;
 import net.ollie.coljate.imposed.Mapping.Surjective;
 import net.ollie.coljate.imposed.Mutability;
+import net.ollie.coljate.sets.Set;
 
 import javax.annotation.CheckForNull;
 import javax.annotation.CheckReturnValue;
@@ -91,6 +90,17 @@ public interface Map<K, V>
     interface Mutable<K, V>
             extends Map<K, V>, Cached.Mutable<K, V> {
 
+        @CheckForNull
+        default boolean remove(final Object key, final Object value) {
+            final Object current = this.maybeGet(key);
+            if (Objects.equals(current, value) && this.containsKey(key)) {
+                this.remove(key);
+                return true;
+            } else {
+                return false;
+            }
+        }
+
         @Override
         Set.Mutable<K> keys();
 
@@ -99,11 +109,6 @@ public interface Map<K, V>
 
         @Nonnull
         Map<K, V> putAll(Map<K, V> map);
-
-        @Nonnull
-        default Inliner<K, V, ? extends Map.Mutable<K, V>> inline() {
-            return new Inliner<>(this);
-        }
 
         @javax.annotation.concurrent.NotThreadSafe
         interface Entry<K, V>
@@ -114,35 +119,6 @@ public interface Map<K, V>
             @Override
             default void clear() {
                 this.setValue(null);
-            }
-
-        }
-
-        class Inliner<K, V, M extends Map.Mutable<K, V>> {
-
-            private final M map;
-
-            protected Inliner(final M map) {
-                this.map = map;
-            }
-
-            public Inliner<K, V, M> put(final K key, final V value) {
-                map.put(key, value);
-                return this;
-            }
-
-            public Inliner<K, V, M> putAll(final Map<K, V> values) {
-                map.putAll(values);
-                return this;
-            }
-
-            public Inliner<K, V, M> remove(final Object value) {
-                map.remove(value);
-                return this;
-            }
-
-            public M map() {
-                return map;
             }
 
         }
@@ -200,7 +176,7 @@ public interface Map<K, V>
     }
 
     @javax.annotation.concurrent.ThreadSafe
-    interface Concurrent<K, V>
+    interface ThreadSafe<K, V>
             extends Map.Mutable<K, V> {
 
         @Override
@@ -210,7 +186,10 @@ public interface Map<K, V>
         boolean replace(K key, V expectedValue, V newValue);
 
         @Override
-        Map.Concurrent<K, V> mutableCopy();
+        boolean remove(Object key, Object value);
+
+        @Override
+        Map.ThreadSafe<K, V> mutableCopy();
 
         @Override
         Set.Concurrent<K> keys();

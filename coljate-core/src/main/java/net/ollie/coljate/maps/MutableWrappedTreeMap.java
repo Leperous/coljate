@@ -1,15 +1,15 @@
 package net.ollie.coljate.maps;
 
+import java.util.Comparator;
+
 import net.ollie.coljate.DefaultStreamable;
-import net.ollie.coljate.sets.Set;
 import net.ollie.coljate.access.Streamable;
 import net.ollie.coljate.imposed.sorting.Sorter;
 import net.ollie.coljate.sets.ImmutableWrappedHashSet;
 import net.ollie.coljate.sets.MutableWrappedHashSet;
+import net.ollie.coljate.sets.Set;
 
 import java.lang.reflect.Field;
-
-import java.util.Comparator;
 
 /**
  * @author Ollie
@@ -114,6 +114,11 @@ public class MutableWrappedTreeMap<K, V>
     @SuppressWarnings("element-type-mismatch")
     public V remove(final Object key) {
         return delegate.remove(key);
+    }
+
+    @Override
+    public boolean remove(final Object key, final Object value) {
+        return delegate.remove(key, value);
     }
 
     @Override

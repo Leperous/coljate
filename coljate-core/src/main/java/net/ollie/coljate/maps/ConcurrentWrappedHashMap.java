@@ -1,15 +1,18 @@
 package net.ollie.coljate.maps;
 
-import net.ollie.coljate.sets.Set;
 import net.ollie.coljate.access.Streamable;
+import net.ollie.coljate.sets.Set;
+
+import javax.annotation.concurrent.ThreadSafe;
 
 /**
  *
  * @author Ollie
  */
+@ThreadSafe
 public class ConcurrentWrappedHashMap<K, V>
         extends AbstractMutableWrappedMap<K, V>
-        implements Map.Concurrent<K, V> {
+        implements Map.ThreadSafe<K, V> {
 
     public static <K, V> ConcurrentWrappedHashMap<K, V> create() {
         return view(new java.util.concurrent.ConcurrentHashMap<>());
@@ -35,7 +38,7 @@ public class ConcurrentWrappedHashMap<K, V>
     }
 
     @Override
-    public Map.Concurrent<K, V> mutableCopy() {
+    public Map.ThreadSafe<K, V> mutableCopy() {
         return copy(delegate);
     }
 

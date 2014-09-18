@@ -6,14 +6,21 @@ import net.ollie.coljate.access.Streamable;
 import net.ollie.coljate.sets.Set;
 import static net.ollie.coljate.utils.Objects.coalesce;
 
+import javax.annotation.concurrent.NotThreadSafe;
+import javax.annotation.concurrent.ThreadSafe;
+
 /**
  *
  * @author Ollie
  */
-public class MapCache<K, V> implements CacheBuilder<K, V> {
+public abstract class MapCache<K, V> implements CacheBuilder<K, V> {
 
-    public static <K, V> MapCache<K, V> create(final Function<? super K, ? extends V> function) {
-        return new MapCache<>(MutableWrappedHashMap.create(), function);
+    public static <K, V> NonThreadSafeMapCache<K, V> createNonThreadSafe(final Function<? super K, ? extends V> function) {
+        return new NonThreadSafeMapCache<>(MutableWrappedHashMap.create(), function);
+    }
+
+    public static <K, V> ThreadSafeMapCache<K, V> createThreadSafe(final Function<? super K, ? extends V> function) {
+        return new ThreadSafeMapCache<>(ConcurrentWrappedHashMap.create(), function);
     }
 
     private final Map.Mutable<K, V> map;
@@ -100,6 +107,24 @@ public class MapCache<K, V> implements CacheBuilder<K, V> {
     @Override
     public String toString() {
         return "MapCache";
+    }
+
+    @ThreadSafe
+    public static class ThreadSafeMapCache<K, V> extends MapCache<K, V> {
+
+        ThreadSafeMapCache(final Map.ThreadSafe<K, V> map, Function<? super K, ? extends V> valueFunction) {
+            super(map, valueFunction);
+        }
+
+    }
+
+    @NotThreadSafe
+    public static class NonThreadSafeMapCache<K, V> extends MapCache<K, V> {
+
+        NonThreadSafeMapCache(final Map.Mutable<K, V> map, final Function<? super K, ? extends V> valueFunction) {
+            super(map, valueFunction);
+        }
+
     }
 
 }
