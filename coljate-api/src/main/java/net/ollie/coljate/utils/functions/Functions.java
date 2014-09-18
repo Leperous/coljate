@@ -27,8 +27,4 @@ public final class Functions {
         return () -> null;
     }
 
-    public static <T> T doThrow(final RuntimeException exception) {
-        throw exception;
-    }
-
 }

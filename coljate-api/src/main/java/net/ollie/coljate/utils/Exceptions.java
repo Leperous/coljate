@@ -14,6 +14,14 @@ public final class Exceptions {
     private Exceptions() {
     }
 
+    public static <T> T doThrow(final RuntimeException exception) {
+        throw exception;
+    }
+
+    public static <T, X extends Exception> T doThrow(final X exception) throws X {
+        throw exception;
+    }
+
     public static <V> V illegalArgument() {
         return illegalArgument(nothing());
     }

@@ -2,6 +2,7 @@ package net.ollie.coljate.utils.numeric;
 
 import java.util.Optional;
 import java.util.OptionalInt;
+import java.util.function.Predicate;
 
 import net.ollie.coljate.imposed.sorting.Sortable;
 
@@ -57,22 +58,35 @@ public abstract class NonNegativeInteger
 
     @CheckForNull
     public static NonNegativeInteger maybe(final int value) {
-        return NonNegativeInt.maybe(value);
+        return value >= 0 ? of(value) : null;
+    }
+
+    @CheckForNull
+    public static NonNegativeInteger maybe(final long value) {
+        return value >= 0 ? of(value) : null;
     }
 
     @CheckForNull
     public static NonNegativeInteger maybe(final OptionalInt value) {
-        return NonNegativeInt.maybe(value);
+        return value.isPresent() ? maybe(value.getAsInt()) : null;
     }
 
     @CheckForNull
     public static NonNegativeInteger maybe(final BigInteger value) {
-        return NonNegativeBigInteger.maybe(value);
+        return value.signum() >= 0 ? NonNegativeBigInteger.of(value) : null;
     }
 
     @CheckForNull
     public static NonNegativeInteger maybe(final Number number) {
-        return number == null ? null : NonNegativeInt.maybe(number.intValue());
+        if (number instanceof BigInteger) {
+            return maybe((BigInteger) number);
+        }
+        return number == null ? null : maybe(number.longValue());
+    }
+
+    @Nonnull
+    public static Predicate<NonNegativeInteger> predicate(final Predicate<? super Integer> integerPredicate) {
+        return (NonNegativeInteger i) -> integerPredicate.test(i.intValue());
     }
 
     @Nonnull
