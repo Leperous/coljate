@@ -38,11 +38,8 @@ public class SizeLimitedCache<K, V> extends DelegatedCache<K, V> {
     }
 
     @Override
-    protected void onRead(final K key) {
-    }
-
-    @Override
-    protected void onRemove(final Object key) {
+    public String toString() {
+        return super.toString() + " max size=" + maxSize;
     }
 
 }

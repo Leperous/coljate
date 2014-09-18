@@ -15,7 +15,7 @@ import javax.annotation.Nonnull;
  */
 public interface CacheBuilder<K, V> extends Cache<K, V> {
 
-    static <K, V> MapCache<K, V> create(final Function<? super K, ? extends V> valueFunction) {
+    static <K, V> CacheBuilder<K, V> create(final Function<? super K, ? extends V> valueFunction) {
         return MapCache.create(valueFunction);
     }
 

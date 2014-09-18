@@ -59,11 +59,14 @@ public abstract class DelegatedCache<K, V>
         return delegate.values();
     }
 
-    protected abstract void onWrite(K key, V value);
+    protected void onWrite(K key, V value) {
+    }
 
-    protected abstract void onRead(K key);
+    protected void onRead(K key) {
+    }
 
-    protected abstract void onRemove(Object key);
+    protected void onRemove(Object key) {
+    }
 
     @Override
     public NonNegativeInteger count() {

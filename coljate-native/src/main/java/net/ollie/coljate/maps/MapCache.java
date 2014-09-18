@@ -97,4 +97,9 @@ public class MapCache<K, V> implements CacheBuilder<K, V> {
         return map.immutableCopy();
     }
 
+    @Override
+    public String toString() {
+        return "MapCache";
+    }
+
 }
