@@ -4,6 +4,7 @@ import java.util.function.Function;
 
 import net.ollie.coljate.imposed.Cached;
 import net.ollie.coljate.imposed.Computed;
+import net.ollie.coljate.sets.Set;
 
 import javax.annotation.CheckForNull;
 import javax.annotation.CheckReturnValue;
@@ -26,6 +27,9 @@ public interface Cache<K, V>
     @CheckReturnValue
     @Nonnull
     <V2> Cache<K, V2> recompute(Function<? super V, ? extends V2> function);
+
+    @Override
+    Set<K> keys();
 
     @Override
     Map.Immutable<K, V> immutableCopy();

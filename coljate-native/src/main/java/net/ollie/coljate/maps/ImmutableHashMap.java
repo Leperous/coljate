@@ -314,6 +314,11 @@ public class ImmutableHashMap<K, V>
             return ImmutableHashMap.this.isEmpty();
         }
 
+        @Override
+        public NonNegativeInteger count() {
+            return ImmutableHashMap.this.count();
+        }
+
     }
 
     private final class Values
