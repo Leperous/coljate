@@ -3,7 +3,7 @@ package net.ollie.coljate.maps;
 import java.util.Timer;
 import java.util.function.Function;
 
-import net.ollie.coljate.utils.numeric.NonNegativeInteger;
+import net.ollie.coljate.utils.numeric.PositiveInteger;
 
 import java.time.Duration;
 import javax.annotation.CheckReturnValue;
@@ -33,14 +33,20 @@ public interface CacheBuilder<K, V> extends Cache<K, V> {
 
     @CheckReturnValue
     @Nonnull
-    default TimedCache<K, V> withExpireAfterReadOrWrite(final Duration expiration, final Timer timer) {
+    default TimedCache<K, V> withExpireAfterReadOrWrite(@Nonnull final Duration expiration, @Nonnull final Timer timer) {
         return TimedCache.readWriteExpires(this, expiration, expiration, timer);
     }
 
     @CheckReturnValue
     @Nonnull
-    default SizeLimitedCache<K, V> withMaxSize(final NonNegativeInteger maxSize) {
+    default SizeLimitedCache<K, V> withMaxSize(@Nonnull final PositiveInteger maxSize) {
         return SizeLimitedCache.create(this, maxSize);
+    }
+
+    @CheckReturnValue
+    @Nonnull
+    default SizeLimitedCache<K, V> withMaxSize(final int maxSize) {
+        return this.withMaxSize(PositiveInteger.of(maxSize));
     }
 
 }

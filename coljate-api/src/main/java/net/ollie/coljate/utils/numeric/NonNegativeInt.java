@@ -4,35 +4,17 @@ import java.util.Optional;
 import java.util.OptionalInt;
 import java.util.function.Predicate;
 
-import javax.annotation.CheckForNull;
-import javax.annotation.Nonnull;
-
 import java.math.BigInteger;
+import javax.annotation.CheckForNull;
 import javax.annotation.concurrent.ThreadSafe;
 
 /**
- * A non-negative integer, including zero.
  *
- * @author Ollie
- * @see <a href="http://en.wikipedia.org/wiki/Natural_number">Natural number</a>
  */
 @ThreadSafe
-final class NonNegativeInt
-        extends NonNegativeInteger {
+final class NonNegativeInt extends PositiveInteger {
 
     private static final long serialVersionUID = 1L;
-
-    @Nonnull
-    public static NonNegativeInteger of(final int value) throws NonNegativeException {
-        switch (value) {
-            case 0:
-                return ZERO;
-            case 1:
-                return ONE;
-            default:
-                return new NonNegativeInt(value);
-        }
-    }
 
     @CheckForNull
     public static NonNegativeInteger maybe(final int value) {
@@ -63,7 +45,7 @@ final class NonNegativeInt
     private transient BigInteger bigInt;
 
     NonNegativeInt(final int value) throws NonNegativeException {
-        if (value < 0) {
+        if (value <= 0) {
             throw new NonNegativeException(value);
         }
         this.value = value;
@@ -97,11 +79,6 @@ final class NonNegativeInt
         return decremented >= 0
                 ? Optional.of(NonNegativeInteger.of(decremented))
                 : Optional.empty();
-    }
-
-    @Override
-    public boolean isZero() {
-        return value == 0;
     }
 
     @Override

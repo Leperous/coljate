@@ -24,11 +24,12 @@ public abstract class NonNegativeInteger
         implements Sortable<Number> {
 
     private static final long serialVersionUID = 1L;
-    public static final NonNegativeInteger ZERO = new Zero(), ONE = new NonNegativeInt(1), INFINITY = new Infinity();
+    public static final NonNegativeInteger ZERO = new Zero();
+    public static final PositiveInteger ONE = new NonNegativeInt(1), INFINITY = new Infinity();
 
     @Nonnull
     public static NonNegativeInteger of(final int value) throws NonNegativeException {
-        return NonNegativeInt.of(value);
+        return value == 0 ? ZERO : new NonNegativeInt(value);
     }
 
     @Nonnull
@@ -111,8 +112,10 @@ public abstract class NonNegativeInteger
     }
 
     public boolean isZero() {
-        return this.bigIntegerValue().signum() == 0;
+        return !this.maybePositive().isPresent();
     }
+
+    public abstract Optional<PositiveInteger> maybePositive();
 
     public Optional<NonNegativeInteger> minus(final NonNegativeInteger that) {
         return Optional.ofNullable(maybe(this.bigIntegerValue().subtract(that.bigIntegerValue())));

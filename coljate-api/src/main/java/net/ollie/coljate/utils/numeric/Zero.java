@@ -45,4 +45,9 @@ final class Zero extends NonNegativeInteger {
         return true;
     }
 
+    @Override
+    public Optional<PositiveInteger> maybePositive() {
+        return Optional.empty();
+    }
+
 }

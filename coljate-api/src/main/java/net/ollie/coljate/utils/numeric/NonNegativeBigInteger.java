@@ -10,34 +10,38 @@ import javax.annotation.Nonnull;
  *
  * @author Ollie
  */
-final class NonNegativeBigInteger extends NonNegativeInteger {
+final class NonNegativeBigInteger extends PositiveInteger {
 
     private static final long serialVersionUID = 1L;
-    private static final NonNegativeBigInteger BI_ZERO = new NonNegativeBigInteger(BigInteger.ZERO);
 
     @Nonnull
-    public static NonNegativeBigInteger of(final long value) throws NonNegativeException {
-        return new NonNegativeBigInteger(BigInteger.valueOf(value));
+    public static NonNegativeInteger of(final long value) throws NonNegativeException {
+        return of(BigInteger.valueOf(value));
     }
 
     @Nonnull
-    public static NonNegativeBigInteger of(final BigInteger value) throws NonNegativeException {
+    public static NonNegativeInteger of(final BigInteger value) throws NonNegativeException {
         return value.signum() == 0
-                ? BI_ZERO
+                ? NonNegativeInteger.ZERO
                 : new NonNegativeBigInteger(value);
     }
 
     @CheckForNull
-    public static NonNegativeBigInteger maybe(final BigInteger value) {
-        return value.signum() < 0
-                ? null
-                : new NonNegativeBigInteger(value);
+    public static NonNegativeInteger maybe(final BigInteger value) {
+        final int s = value.signum();
+        if (s == 0) {
+            return ZERO;
+        } else if (s < 0) {
+            return null;
+        } else {
+            return new NonNegativeBigInteger(value);
+        }
     }
 
     private final BigInteger value;
 
-    protected NonNegativeBigInteger(final BigInteger value) throws NonNegativeException {
-        if (value.signum() < 0) {
+    NonNegativeBigInteger(final BigInteger value) throws NonNegativeException {
+        if (value.signum() <= 0) {
             throw new NonNegativeException(value);
         }
         this.value = value;

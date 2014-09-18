@@ -2,8 +2,7 @@ package net.ollie.coljate.maps;
 
 import java.util.Iterator;
 
-import static net.ollie.coljate.utils.Conditions.checkIsFalse;
-import net.ollie.coljate.utils.numeric.NonNegativeInteger;
+import net.ollie.coljate.utils.numeric.PositiveInteger;
 
 /**
  * Removes a random entry if the map is too large.
@@ -21,15 +20,15 @@ public class SizeLimitedCache<K, V> extends DelegatedCache<K, V> {
      * @return
      * @throws IllegalArgumentException if given zero size
      */
-    public static <K, V> SizeLimitedCache<K, V> create(final Cache<K, V> delegate, final NonNegativeInteger maxSize) {
+    public static <K, V> SizeLimitedCache<K, V> create(final Cache<K, V> delegate, final PositiveInteger maxSize) {
         return new SizeLimitedCache<>(delegate, maxSize);
     }
 
-    private final NonNegativeInteger maxSize;
+    private final PositiveInteger maxSize;
 
-    protected SizeLimitedCache(final Cache<K, V> delegate, final NonNegativeInteger maxSize) {
+    protected SizeLimitedCache(final Cache<K, V> delegate, final PositiveInteger maxSize) {
         super(delegate);
-        this.maxSize = checkIsFalse(maxSize, NonNegativeInteger::isZero, "Passed zero size!");
+        this.maxSize = maxSize;
     }
 
     @Override

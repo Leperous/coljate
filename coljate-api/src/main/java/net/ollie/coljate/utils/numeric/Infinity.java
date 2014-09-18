@@ -9,7 +9,7 @@ import java.math.BigInteger;
  * @author Ollie
  */
 @SuppressWarnings("EqualsAndHashcode")
-final class Infinity extends NonNegativeInteger {
+final class Infinity extends PositiveInteger {
 
     private static final long serialVersionUID = 1L;
 
@@ -29,11 +29,6 @@ final class Infinity extends NonNegativeInteger {
     @Override
     public BigInteger bigIntegerValue() {
         return undefined("Infinite!");
-    }
-
-    @Override
-    public boolean isZero() {
-        return false;
     }
 
     @Override
