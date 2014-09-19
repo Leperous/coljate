@@ -59,7 +59,7 @@ public class ImmutableWrappedHashSet<V>
     @SuppressWarnings("unchecked")
     @Nonnull
     public static <V> Collector<V, ?, ImmutableWrappedHashSet<V>> collector() {
-        return new ImmutableSetCollector<>(MutableWrappedHashSet::create, ImmutableWrappedHashSet::copy);
+        return new ImmutableSetCollector<>(MutableWrappedHashSet::create, ImmutableWrappedHashSet::new); //Don't expect the underlying set to leak
     }
 
     private final Set<V> underlying;

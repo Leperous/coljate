@@ -6,6 +6,7 @@ import net.ollie.coljate.access.Streamable;
 import net.ollie.coljate.lists.Array;
 import net.ollie.coljate.sets.Set;
 import net.ollie.coljate.streams.DefaultStream;
+import net.ollie.coljate.utils.numeric.NonNegativeInteger;
 
 /**
  *
@@ -34,7 +35,7 @@ public class MutableWrappedMultiArrayMap<K, V>
     }
 
     @Override
-    public Array.Mutable<V> get(Object object) {
+    public Array.Mutable<V> get(K key) {
         throw new UnsupportedOperationException("get not supported yet!");
     }
 
@@ -51,6 +52,11 @@ public class MutableWrappedMultiArrayMap<K, V>
     @Override
     public Set<K> keys() {
         throw new UnsupportedOperationException("keys not supported yet!");
+    }
+
+    @Override
+    public NonNegativeInteger count(Object object) {
+        throw new UnsupportedOperationException("count not supported yet!");
     }
 
     @Override

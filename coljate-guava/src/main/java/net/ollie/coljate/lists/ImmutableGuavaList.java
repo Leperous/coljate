@@ -7,6 +7,8 @@ import java.util.function.Function;
 import java.util.function.Supplier;
 import java.util.stream.Collector;
 
+import net.ollie.coljate.UnmodifiableGuavaIterator;
+import net.ollie.coljate.intervals.IndexInterval;
 import net.ollie.coljate.streams.DefaultStream;
 import net.ollie.coljate.utils.Arrays;
 import net.ollie.coljate.utils.iterators.Iterables;
@@ -17,14 +19,13 @@ import com.google.common.collect.ImmutableList;
 import java.io.Serializable;
 import javax.annotation.Nonnull;
 
-import net.ollie.coljate.UnmodifiableGuavaIterator;
-import net.ollie.coljate.intervals.IndexInterval;
-
 /**
  *
  * @author Ollie
  */
-public class ImmutableGuavaList<V> extends Array.Abstract<V> implements Array.Immutable<V>, Serializable {
+public class ImmutableGuavaList<V>
+        extends Array.Abstract<V>
+        implements Array.Immutable<V>, Serializable {
 
     private static final long serialVersionUID = 1L;
 

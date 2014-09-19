@@ -13,7 +13,9 @@ import java.io.Serializable;
  *
  * @author Ollie
  */
-public class ImmutableGuavaCollection<V> extends Streamable.Abstract<V> implements Streamable.Immutable<V>, Serializable {
+public class ImmutableGuavaCollection<V>
+        extends Streamable.Abstract<V>
+        implements Streamable.Immutable<V>, Serializable {
 
     private static final long serialVersionUID = 1L;
 

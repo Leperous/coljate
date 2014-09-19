@@ -42,7 +42,7 @@ public class ImmutableWrappedMultiArrayMap<K, V>
     }
 
     @Override
-    public Array.Immutable<V> get(final Object object) {
+    public Array.Immutable<V> get(final K object) {
         return underlying.get(object).immutableCopy();
     }
 

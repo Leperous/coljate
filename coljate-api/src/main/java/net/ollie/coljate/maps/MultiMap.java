@@ -23,15 +23,13 @@ public interface MultiMap<K, V>
 
     @Override
     @Nonnull
-    Streamable<V> get(Object key);
+    Streamable<V> get(K key);
 
     @Override
     Map<V, K> inverseCopy();
 
     @Override
-    default NonNegativeInteger count(final Object object) {
-        return this.get(object).count();
-    }
+    NonNegativeInteger count(Object object);
 
     @Override
     Set<K> keys();
@@ -59,7 +57,7 @@ public interface MultiMap<K, V>
             extends MultiMap<K, V>, Streamable.Mutable<V> {
 
         @Override
-        Streamable.Mutable<V> get(Object object);
+        Streamable.Mutable<V> get(K key);
 
         boolean put(K key, V value);
 
@@ -89,7 +87,7 @@ public interface MultiMap<K, V>
             extends MultiMap<K, V>, Streamable.Immutable<V> {
 
         @Override
-        Streamable.Immutable<V> get(Object object);
+        Streamable.Immutable<V> get(K key);
 
         @Nonnull
         @CheckReturnValue
@@ -128,6 +126,11 @@ public interface MultiMap<K, V>
 
         @Override
         Streamable.Immutable<V> values();
+
+        @Override
+        default Stream<V, ? extends Streamable<V>> stream() {
+            return this.values().stream();
+        }
 
         @Override
         default Streamable.Immutable<V> tail() {

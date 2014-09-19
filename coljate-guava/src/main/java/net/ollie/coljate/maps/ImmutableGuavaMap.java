@@ -18,7 +18,9 @@ import javax.annotation.Nonnull;
  *
  * @author Ollie
  */
-public class ImmutableGuavaMap<K, V> extends Map.Abstract<K, V> implements Map.Immutable<K, V>, Serializable {
+public class ImmutableGuavaMap<K, V>
+        extends Map.Abstract<K, V>
+        implements Map.Immutable<K, V>, Serializable {
 
     private static final long serialVersionUID = 1L;
 

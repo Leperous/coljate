@@ -89,7 +89,7 @@ public interface Keyed<V> {
         Unique<K> keys();
 
         @CheckForNull
-        Collection<V> get(@Nonnull Object key);
+        Collection<V> get(@Nonnull K key);
 
     }
 

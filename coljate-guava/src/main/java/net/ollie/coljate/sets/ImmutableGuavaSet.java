@@ -20,7 +20,9 @@ import net.ollie.coljate.UnmodifiableGuavaIterator;
  * @author Ollie
  */
 @SuppressWarnings("element-type-mismatch")
-public class ImmutableGuavaSet<V> extends Set.Abstract<V> implements Set.Immutable<V>, Serializable {
+public class ImmutableGuavaSet<V>
+        extends Set.Abstract<V>
+        implements Set.Immutable<V>, Serializable {
 
     private static final long serialVersionUID = 1L;
 
