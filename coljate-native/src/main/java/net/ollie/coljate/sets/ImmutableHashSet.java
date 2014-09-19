@@ -1,7 +1,12 @@
 package net.ollie.coljate.sets;
 
+import java.util.function.Function;
+import java.util.function.Supplier;
+import java.util.stream.Collector;
+
 import net.ollie.coljate.maps.ImmutableHashMap;
 import net.ollie.coljate.maps.Map;
+import net.ollie.coljate.maps.MutableWrappedHashMap;
 import net.ollie.coljate.utils.iterators.UnmodifiableIterator;
 
 import java.io.Serializable;
@@ -23,7 +28,7 @@ public class ImmutableHashSet<V>
     }
 
     @SafeVarargs
-    public static <V> Set.Immutable<V> create(final V... values) {
+    public static <V> ImmutableHashSet<V> create(final V... values) {
         //TODO make this more efficient
         ImmutableHashMap<V, Object> map = ImmutableHashMap.create();
         for (final V value : values) {
@@ -32,8 +37,20 @@ public class ImmutableHashSet<V>
         return view(map);
     }
 
-    public static <V> Set.Immutable<V> view(final Map.Immutable<V, ?> map) {
+    public static <V> ImmutableHashSet<V> copy(final Iterable<? extends V> iterable) {
+        final Map.Mutable<V, Object> map = MutableWrappedHashMap.create();
+        for (final V element : iterable) {
+            map.put(element, VALUE);
+        }
+        return view(ImmutableHashMap.copy(map));
+    }
+
+    public static <V> ImmutableHashSet<V> view(final Map.Immutable<V, ?> map) {
         return new ImmutableHashSet<>(ImmutableHashMap.copy(map));
+    }
+
+    public static <V> Collector<V, ?, ImmutableHashSet<V>> collector() {
+        return new ImmutableHashSetCollector<>();
     }
 
     private final ImmutableHashMap<V, Object> map;
@@ -75,6 +92,21 @@ public class ImmutableHashSet<V>
     @Override
     public Set.Immutable<V> not(Object value) {
         return this.contains(value) ? new ImmutableHashSet<>(map.without(value)) : this;
+    }
+
+    private static final class ImmutableHashSetCollector<V>
+            extends AbstractSetCollector<V, Set.Mutable<V>, ImmutableHashSet<V>> {
+
+        @Override
+        public Supplier<Set.Mutable<V>> supplier() {
+            return MutableWrappedHashSet::create;
+        }
+
+        @Override
+        public Function<Set.Mutable<V>, ImmutableHashSet<V>> finisher() {
+            return set -> copy(set);
+        }
+
     }
 
 }
