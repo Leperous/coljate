@@ -70,7 +70,7 @@ public abstract class AbstractMapTest<C extends Map<Object, Object>>
             }
 
             @Override
-            public Map.Entry<V, K> inverse() {
+            public Map.Entry<V, K> inverseCopy() {
                 return entry(value, key);
             }
 

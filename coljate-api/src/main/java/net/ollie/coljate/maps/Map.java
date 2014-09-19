@@ -32,7 +32,7 @@ public interface Map<K, V>
     }
 
     @Override
-    MultiMap<V, K> inverse();
+    MultiMap<V, K> inverseCopy();
 
     @CheckForNull
     V maybeGet(Object key);
@@ -67,7 +67,7 @@ public interface Map<K, V>
         V value();
 
         @Override
-        Entry<V, K> inverse();
+        Entry<V, K> inverseCopy();
 
         @Nonnull
         @CheckReturnValue
@@ -164,7 +164,7 @@ public interface Map<K, V>
         }
 
         @Override
-        MultiMap.Immutable<V, K> inverse();
+        MultiMap.Immutable<V, K> inverseCopy();
 
         @Override
         default Map.Immutable<K, V> immutableCopy() {

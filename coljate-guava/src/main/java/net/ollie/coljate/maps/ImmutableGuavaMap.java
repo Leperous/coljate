@@ -72,7 +72,7 @@ public class ImmutableGuavaMap<K, V> extends Map.Abstract<K, V> implements Map.I
     }
 
     @Override
-    public MultiMap.Immutable<V, K> inverse() {
+    public MultiMap.Immutable<V, K> inverseCopy() {
         throw new UnsupportedOperationException("inverse not supported yet!");
     }
 

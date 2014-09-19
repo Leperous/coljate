@@ -26,7 +26,7 @@ public interface MultiMap<K, V>
     Streamable<V> get(Object key);
 
     @Override
-    Map<V, K> inverse();
+    Map<V, K> inverseCopy();
 
     @Override
     default NonNegativeInteger count(final Object object) {

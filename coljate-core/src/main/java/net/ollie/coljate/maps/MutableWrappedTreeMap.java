@@ -152,7 +152,7 @@ public class MutableWrappedTreeMap<K, V>
     }
 
     @Override
-    public MultiMap<V, K> inverse() {
+    public MultiMap<V, K> inverseCopy() {
         throw new UnsupportedOperationException("inverse not supported yet!");
     }
 

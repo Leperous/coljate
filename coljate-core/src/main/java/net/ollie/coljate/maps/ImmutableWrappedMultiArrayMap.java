@@ -92,8 +92,8 @@ public class ImmutableWrappedMultiArrayMap<K, V>
     }
 
     @Override
-    public Map<V, K> inverse() {
-        return underlying.inverse();
+    public Map<V, K> inverseCopy() {
+        return underlying.inverseCopy();
     }
 
     @Override

@@ -159,7 +159,7 @@ public class ImmutableHashMap<K, V>
     }
 
     @Override
-    public MultiMap.Immutable<V, K> inverse() {
+    public MultiMap.Immutable<V, K> inverseCopy() {
         throw new UnsupportedOperationException("inverse not supported yet!");
     }
 
@@ -240,7 +240,7 @@ public class ImmutableHashMap<K, V>
         }
 
         @Override
-        public Map.Entry<V, K> inverse() {
+        public Map.Entry<V, K> inverseCopy() {
             return MapEntry.immutable(value, key);
         }
 

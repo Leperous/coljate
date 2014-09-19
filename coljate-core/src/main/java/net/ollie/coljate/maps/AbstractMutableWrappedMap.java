@@ -45,8 +45,8 @@ public abstract class AbstractMutableWrappedMap<K, V>
     }
 
     @Override
-    public MultiMap<V, K> inverse() {
-        return MutableWrappedMultiArrayMap.copy(entries().stream().map(e -> e.inverse()));
+    public MultiMap<V, K> inverseCopy() {
+        return MutableWrappedMultiArrayMap.copy(entries().stream().map(e -> e.inverseCopy()));
     }
 
     @Override

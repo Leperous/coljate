@@ -12,7 +12,7 @@ import javax.annotation.Nonnull;
 public interface Invertible<K, V> {
 
     @Nonnull
-    Invertible<V, K> inverse();
+    Invertible<V, K> inverseCopy();
 
     /**
      * All values {@code V} are mapped-to by at least one key {@code K}. For example, a {@link Map}.
@@ -45,7 +45,7 @@ public interface Invertible<K, V> {
     interface Bijective<K, V> extends Surjective<K, V>, Injective<K, V> {
 
         @Override
-        Bijective<V, K> inverse();
+        Bijective<V, K> inverseCopy();
 
         @CheckForNull
         K invert(V right);

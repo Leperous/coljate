@@ -20,7 +20,7 @@ public interface BijectiveMap<L, R>
     L inverse(R value);
 
     @Override
-    BijectiveMap<R, L> inverse();
+    BijectiveMap<R, L> inverseCopy();
 
     @Override
     default boolean contains(final Object object) {
@@ -43,7 +43,7 @@ public interface BijectiveMap<L, R>
             extends BijectiveMap<L, R>, Cached.Mutable<L, R> {
 
         @Override
-        View<R, L> inverse();
+        View<R, L> inverseCopy();
 
         @Override
         R put(L left, R right) throws DuplicateValueException;
@@ -62,7 +62,7 @@ public interface BijectiveMap<L, R>
         Set.Immutable<R> values();
 
         @Override
-        BijectiveMap.Immutable<R, L> inverse();
+        BijectiveMap.Immutable<R, L> inverseCopy();
 
         @Override
         BijectiveMap.Immutable<L, R> with(L left, R right) throws DuplicateValueException;

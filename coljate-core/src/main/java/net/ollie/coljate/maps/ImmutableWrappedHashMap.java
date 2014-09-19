@@ -97,8 +97,8 @@ public class ImmutableWrappedHashMap<K, V>
     }
 
     @Override
-    public MultiMap.Immutable<V, K> inverse() {
-        return delegate.inverse().immutableCopy();
+    public MultiMap.Immutable<V, K> inverseCopy() {
+        return delegate.inverseCopy().immutableCopy();
     }
 
     @Override

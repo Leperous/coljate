@@ -35,7 +35,7 @@ public abstract class MapEntry<K, V>
     }
 
     @Override
-    public Map.Entry<V, K> inverse() {
+    public Map.Entry<V, K> inverseCopy() {
         return new ImmutableEntry<>(this.value(), this.key());
     }
 
@@ -87,7 +87,7 @@ public abstract class MapEntry<K, V>
         }
 
         @Override
-        public Map.Entry<V, K> inverse() {
+        public Map.Entry<V, K> inverseCopy() {
             return new MutableEntry<>(this.value(), this.key());
         }
 
@@ -116,7 +116,7 @@ public abstract class MapEntry<K, V>
         }
 
         @Override
-        public Map.Entry<V, K> inverse() {
+        public Map.Entry<V, K> inverseCopy() {
             return new ThreadSafeEntry<>(this.value(), this.key());
         }
 

@@ -109,7 +109,7 @@ public class MutableWrappedMultiArrayMap<K, V>
     }
 
     @Override
-    public Map<V, K> inverse() {
+    public Map<V, K> inverseCopy() {
         throw new UnsupportedOperationException("inverse not supported yet!");
     }
 
