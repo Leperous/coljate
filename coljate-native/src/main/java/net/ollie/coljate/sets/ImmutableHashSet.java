@@ -15,7 +15,12 @@ public class ImmutableHashSet<V>
         implements Set.Immutable<V>, Serializable {
 
     private static final long serialVersionUID = 1L;
+    private static final ImmutableHashSet EMPTY = new ImmutableHashSet(ImmutableHashMap.create());
     private static final Object VALUE = new Object();
+
+    public static <V> Set.Immutable<V> create() {
+        return EMPTY;
+    }
 
     @SafeVarargs
     public static <V> Set.Immutable<V> create(final V... values) {
