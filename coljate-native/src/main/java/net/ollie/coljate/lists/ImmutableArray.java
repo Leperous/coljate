@@ -38,6 +38,11 @@ public class ImmutableArray<V>
         return new ImmutableSingletonArray<>(value);
     }
 
+    @SafeVarargs
+    public static <V> Array.Immutable<V> create(final V... values) {
+        return copy(Arrays.asList(values));
+    }
+
     public static <V> Array.Immutable<V> copy(final V[] array) {
         final Object[] copy = Arrays.copy(array);
         return copy.length == 0 ? create() : new ImmutableArray<>(copy);
