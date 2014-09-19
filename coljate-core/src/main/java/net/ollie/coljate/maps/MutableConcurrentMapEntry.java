@@ -8,7 +8,7 @@ import javax.annotation.concurrent.NotThreadSafe;
  * @author Ollie
  */
 @NotThreadSafe
-public class MutableConcurrentMapEntry<K, V> extends AbstractMapEntry<K, V> implements Map.Mutable.Entry<K, V> {
+public class MutableConcurrentMapEntry<K, V> extends MapEntry<K, V> implements Map.Mutable.Entry<K, V> {
 
     public static <K, V> Map.Mutable.Entry<K, V> copy(final Map.Entry<? extends K, ? extends V> entry) {
         return new MutableConcurrentMapEntry<>(entry.key(), entry.value());

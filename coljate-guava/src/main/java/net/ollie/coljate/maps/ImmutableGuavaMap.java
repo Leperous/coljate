@@ -72,6 +72,11 @@ public class ImmutableGuavaMap<K, V> extends Map.Abstract<K, V> implements Map.I
     }
 
     @Override
+    public MultiMap.Immutable<V, K> inverse() {
+        throw new UnsupportedOperationException("inverse not supported yet!");
+    }
+
+    @Override
     public Mutable<K, V> mutableCopy() {
         throw new UnsupportedOperationException("mutableCopy not supported yet!");
     }
@@ -113,7 +118,7 @@ public class ImmutableGuavaMap<K, V> extends Map.Abstract<K, V> implements Map.I
 
         @Override
         public UnmodifiableIterator<Map.Immutable.Entry<K, V>> iterator() {
-            return UnmodifiableIterator.map(delegate.entrySet(), ImmutableMapEntry::copy);
+            return UnmodifiableIterator.map(delegate.entrySet(), MapEntry::copy);
         }
 
     }

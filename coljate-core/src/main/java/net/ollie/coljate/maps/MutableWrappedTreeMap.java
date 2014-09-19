@@ -152,8 +152,8 @@ public class MutableWrappedTreeMap<K, V>
     }
 
     @Override
-    public String toString(String separator) {
-        throw new UnsupportedOperationException("toString not supported yet!");
+    public MultiMap<V, K> inverse() {
+        throw new UnsupportedOperationException("inverse not supported yet!");
     }
 
 }

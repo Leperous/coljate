@@ -67,8 +67,13 @@ public class ImmutableWrappedTable<R, C, V>
     }
 
     @Override
-    public String toString(final String separator) {
-        throw new UnsupportedOperationException("toString not supported yet!");
+    public Table.Immutable<R, C, V> with(Map.Entry<R, C> key, V value) {
+        throw new UnsupportedOperationException("with not supported yet!");
+    }
+
+    @Override
+    public Table.Immutable<R, C, V> without(Object key) {
+        throw new UnsupportedOperationException("without not supported yet!");
     }
 
 }

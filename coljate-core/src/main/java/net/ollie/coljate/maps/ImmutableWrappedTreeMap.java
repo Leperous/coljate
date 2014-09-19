@@ -1,11 +1,11 @@
 package net.ollie.coljate.maps;
 
 import net.ollie.coljate.AbstractWrappedStreamable;
-import net.ollie.coljate.sets.Set;
 import net.ollie.coljate.access.Streamable;
 import net.ollie.coljate.imposed.sorting.Sorter;
 import net.ollie.coljate.sets.ImmutableWrappedHashSet;
 import net.ollie.coljate.sets.ImmutableWrappedTreeSet;
+import net.ollie.coljate.sets.Set;
 import net.ollie.coljate.utils.iterators.UnmodifiableIterator;
 
 /**
@@ -127,6 +127,11 @@ public class ImmutableWrappedTreeMap<K, V>
     @Override
     public TreeMap.Immutable<K, V> tail() {
         throw new UnsupportedOperationException("tail not supported yet!");
+    }
+
+    @Override
+    public MultiMap.Immutable<V, K> inverse() {
+        throw new UnsupportedOperationException("inverse not supported yet!");
     }
 
 }

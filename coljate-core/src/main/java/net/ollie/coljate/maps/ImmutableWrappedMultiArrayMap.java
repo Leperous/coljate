@@ -1,6 +1,5 @@
 package net.ollie.coljate.maps;
 
-
 import net.ollie.coljate.AbstractWrappedStreamable;
 import net.ollie.coljate.lists.Array;
 import net.ollie.coljate.sets.Set;
@@ -90,6 +89,11 @@ public class ImmutableWrappedMultiArrayMap<K, V>
     @Override
     public UnmodifiableIterator<V> iterator() {
         throw new UnsupportedOperationException("iterator not supported yet!");
+    }
+
+    @Override
+    public Map<V, K> inverse() {
+        return underlying.inverse();
     }
 
     @Override

@@ -9,6 +9,8 @@ import net.ollie.coljate.access.Streamable;
 import net.ollie.coljate.utils.iterators.UnmodifiableIterator;
 
 import javax.annotation.CheckForNull;
+import javax.annotation.CheckReturnValue;
+import javax.annotation.Nonnull;
 
 /**
  * Values are stored.
@@ -115,6 +117,14 @@ public interface Cached<K, V>
     @javax.annotation.concurrent.Immutable
     interface Immutable<K, V>
             extends Cached<K, V>, Streamable.Immutable<V> {
+
+        @CheckReturnValue
+        @Nonnull
+        Cached.Immutable<K, V> with(K key, V value);
+
+        @CheckReturnValue
+        @Nonnull
+        Cached.Immutable<K, V> without(Object key);
 
         @Override
         default Stream<V, ? extends Streamable<V>> stream() {

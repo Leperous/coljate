@@ -45,6 +45,11 @@ public abstract class AbstractMutableWrappedMap<K, V>
     }
 
     @Override
+    public MultiMap<V, K> inverse() {
+        return MutableWrappedMultiArrayMap.copy(entries().stream().map(e -> e.inverse()));
+    }
+
+    @Override
     public void clear() {
         this.delegate().clear();
     }
@@ -59,7 +64,7 @@ public abstract class AbstractMutableWrappedMap<K, V>
     }
 
     protected static class MutableEntry<K, V>
-            extends Entries<K, V>
+            extends MapEntry<K, V>
             implements Map.Mutable.Entry<K, V> {
 
         private final java.util.Map.Entry<K, V> delegate;

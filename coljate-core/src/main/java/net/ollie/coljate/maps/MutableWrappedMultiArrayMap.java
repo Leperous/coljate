@@ -2,10 +2,9 @@ package net.ollie.coljate.maps;
 
 import java.util.Iterator;
 
-import net.ollie.coljate.lists.Array;
-import net.ollie.coljate.Collection;
-import net.ollie.coljate.sets.Set;
 import net.ollie.coljate.access.Streamable;
+import net.ollie.coljate.lists.Array;
+import net.ollie.coljate.sets.Set;
 import net.ollie.coljate.streams.DefaultStream;
 
 /**
@@ -16,6 +15,10 @@ public class MutableWrappedMultiArrayMap<K, V>
         implements MultiMap.Mutable<K, V> {
 
     public static <K, V> MutableWrappedMultiArrayMap<K, V> create() {
+        throw new UnsupportedOperationException();
+    }
+
+    public static <K, V> MutableWrappedMultiArrayMap<K, V> copy(final Iterable<? extends Map.Entry<K, V>> entries) {
         throw new UnsupportedOperationException();
     }
 
@@ -61,7 +64,7 @@ public class MutableWrappedMultiArrayMap<K, V>
     }
 
     @Override
-    public Collection<V> values() {
+    public Streamable<V> values() {
         throw new UnsupportedOperationException("values not supported yet!");
     }
 
@@ -103,6 +106,11 @@ public class MutableWrappedMultiArrayMap<K, V>
     @Override
     public Set<V> unique() {
         throw new UnsupportedOperationException("unique not supported yet!");
+    }
+
+    @Override
+    public Map<V, K> inverse() {
+        throw new UnsupportedOperationException("inverse not supported yet!");
     }
 
     @Override

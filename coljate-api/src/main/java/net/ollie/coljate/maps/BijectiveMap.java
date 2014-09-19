@@ -1,21 +1,26 @@
 package net.ollie.coljate.maps;
 
-import net.ollie.coljate.maps.Map;
+import net.ollie.coljate.imposed.Cached;
+import net.ollie.coljate.imposed.Invertible.Bijective;
 import net.ollie.coljate.sets.Set;
-import net.ollie.coljate.imposed.Mapping.Bijective;
 
 /**
+ * An invertible one-to-one mapping.
  *
  * @author Ollie
+ * @see InvertibleMap
+ * @see MultiMap
  */
-public interface BiMap<L, R>
-        extends Map<L, R>, Bijective<L, R> {
+public interface BijectiveMap<L, R>
+        extends Cached<L, R>, Bijective<L, R> {
 
     @Override
     Set<R> values();
 
+    L inverse(R value);
+
     @Override
-    BiMap<R, L> inverse();
+    BijectiveMap<R, L> inverse();
 
     @Override
     default boolean contains(final Object object) {
@@ -23,10 +28,10 @@ public interface BiMap<L, R>
     }
 
     @Override
-    BiMap.Mutable<L, R> mutableCopy();
+    BijectiveMap.Mutable<L, R> mutableCopy();
 
     @Override
-    BiMap.Immutable<L, R> immutableCopy();
+    BijectiveMap.Immutable<L, R> immutableCopy();
 
     /**
      * A mutable bi-map.
@@ -35,7 +40,7 @@ public interface BiMap<L, R>
      * @param <R>
      */
     interface Mutable<L, R>
-            extends BiMap<L, R>, Map.Mutable<L, R> {
+            extends BijectiveMap<L, R>, Cached.Mutable<L, R> {
 
         @Override
         View<R, L> inverse();
@@ -44,26 +49,26 @@ public interface BiMap<L, R>
         R put(L left, R right) throws DuplicateValueException;
 
         interface View<L, R>
-                extends BiMap.Mutable<L, R> {
+                extends BijectiveMap.Mutable<L, R> {
 
         }
 
     }
 
     interface Immutable<L, R>
-            extends BiMap<L, R>, Map.Immutable<L, R> {
+            extends BijectiveMap<L, R>, Cached.Immutable<L, R> {
 
         @Override
         Set.Immutable<R> values();
 
         @Override
-        BiMap.Immutable<R, L> inverse();
+        BijectiveMap.Immutable<R, L> inverse();
 
         @Override
-        BiMap.Immutable<L, R> with(L left, R right) throws DuplicateValueException;
+        BijectiveMap.Immutable<L, R> with(L left, R right) throws DuplicateValueException;
 
         @Override
-        default BiMap.Immutable<L, R> immutableCopy() {
+        default BijectiveMap.Immutable<L, R> immutableCopy() {
             return this;
         }
 

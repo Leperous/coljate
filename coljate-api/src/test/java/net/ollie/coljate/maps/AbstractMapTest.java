@@ -1,7 +1,5 @@
 package net.ollie.coljate.maps;
 
-import net.ollie.coljate.maps.Map;
-
 import java.util.Arrays;
 import java.util.stream.Collectors;
 
@@ -69,6 +67,11 @@ public abstract class AbstractMapTest<C extends Map<Object, Object>>
             @Override
             public V value() {
                 return value;
+            }
+
+            @Override
+            public Map.Entry<V, K> inverse() {
+                return entry(value, key);
             }
 
             @Override

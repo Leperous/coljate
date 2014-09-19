@@ -71,7 +71,7 @@ public class MutableWrappedTable<R, C, V>
     }
 
     protected <A, B> Map.Entry<A, B> createEntry(final A key, final B value) {
-        return new Entries.MutableEntry<>(key, value);
+        return new MapEntry.MutableEntry<>(key, value);
     }
 
     @Override

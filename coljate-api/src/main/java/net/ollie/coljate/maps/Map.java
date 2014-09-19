@@ -4,7 +4,8 @@ import java.util.Objects;
 
 import net.ollie.coljate.access.Streamable;
 import net.ollie.coljate.imposed.Cached;
-import net.ollie.coljate.imposed.Mapping.Surjective;
+import net.ollie.coljate.imposed.Invertible;
+import net.ollie.coljate.imposed.Invertible.Surjective;
 import net.ollie.coljate.imposed.Mutability;
 import net.ollie.coljate.sets.Set;
 
@@ -13,7 +14,7 @@ import javax.annotation.CheckReturnValue;
 import javax.annotation.Nonnull;
 
 /**
- * A cache create uniquely-keyed values.
+ * A many-to-one mapping from unique keys.
  *
  * The mapping is potentially {@link Surjective} (in that it may contain copies of the same value) but not
  * {@link Injective} (in that null keys are not allowed).
@@ -29,6 +30,9 @@ public interface Map<K, V>
     default V get(K key) {
         return this.maybeGet(key);
     }
+
+    @Override
+    MultiMap<V, K> inverse();
 
     @CheckForNull
     V maybeGet(Object key);
@@ -54,13 +58,16 @@ public interface Map<K, V>
         return this.entries().hashCode();
     }
 
-    interface Entry<K, V> {
+    interface Entry<K, V> extends Invertible<K, V> {
 
         @Nonnull
         K key();
 
         @CheckForNull
         V value();
+
+        @Override
+        Entry<V, K> inverse();
 
         @Nonnull
         @CheckReturnValue
@@ -142,12 +149,10 @@ public interface Map<K, V>
         @Override
         Set.Immutable<? extends Map.Immutable.Entry<K, V>> entries();
 
-        @CheckReturnValue
-        @Nonnull
+        @Override
         Map.Immutable<K, V> with(K key, V value);
 
-        @CheckReturnValue
-        @Nonnull
+        @Override
         Map.Immutable<K, V> without(Object key);
 
         @CheckReturnValue
@@ -157,6 +162,9 @@ public interface Map<K, V>
                     ? this.without(key).with(key, newValue)
                     : this;
         }
+
+        @Override
+        MultiMap.Immutable<V, K> inverse();
 
         @Override
         default Map.Immutable<K, V> immutableCopy() {

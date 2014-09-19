@@ -1,26 +1,32 @@
 package net.ollie.coljate.maps;
 
-import net.ollie.coljate.sets.Set;
-import net.ollie.coljate.access.Streamable;
+import net.ollie.coljate.Collection;
 import net.ollie.coljate.access.Keyed;
+import net.ollie.coljate.access.Streamable;
 import net.ollie.coljate.imposed.Distinctness.Duplicated;
+import net.ollie.coljate.imposed.Invertible.Surjective;
+import net.ollie.coljate.sets.Set;
 import net.ollie.coljate.utils.numeric.NonNegativeInteger;
 
 import javax.annotation.CheckReturnValue;
 import javax.annotation.Nonnull;
 
-import net.ollie.coljate.Collection;
-
 /**
+ * An invertible one-to-many mapping.
  *
  * @author Ollie
+ * @see InvertedMap
+ * @see BijectiveMap
  */
 public interface MultiMap<K, V>
-        extends Keyed.Multiple<K, V>, Streamable<V>, Duplicated<V> {
+        extends Keyed.Multiple<K, V>, Streamable<V>, Duplicated<V>, Surjective<K, V> {
 
     @Override
     @Nonnull
     Streamable<V> get(Object key);
+
+    @Override
+    Map<V, K> inverse();
 
     @Override
     default NonNegativeInteger count(final Object object) {
@@ -29,6 +35,14 @@ public interface MultiMap<K, V>
 
     @Override
     Set<K> keys();
+
+    @Override
+    Streamable<V> values();
+
+    @Override
+    default Streamable<V> tail() {
+        return this.values().tail();
+    }
 
     @Override
     default boolean isEmpty() {
@@ -114,6 +128,11 @@ public interface MultiMap<K, V>
 
         @Override
         Streamable.Immutable<V> values();
+
+        @Override
+        default Streamable.Immutable<V> tail() {
+            return this.values().tail();
+        }
 
         @Override
         default MultiMap.Immutable<K, V> immutableCopy() {

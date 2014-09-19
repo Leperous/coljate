@@ -3,7 +3,7 @@ package net.ollie.coljate.graphs;
 import net.ollie.coljate.access.Keyed;
 import net.ollie.coljate.access.Streamable;
 import net.ollie.coljate.imposed.Distinctness.Unique;
-import net.ollie.coljate.imposed.Mapping.Surjective;
+import net.ollie.coljate.imposed.Invertible.Surjective;
 
 import javax.annotation.Nonnull;
 
