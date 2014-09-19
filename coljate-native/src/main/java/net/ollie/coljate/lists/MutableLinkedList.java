@@ -9,6 +9,7 @@ import java.util.stream.Collector;
 import net.ollie.coljate.streams.DefaultStream;
 import net.ollie.coljate.utils.Arrays;
 
+import java.io.Serializable;
 import javax.annotation.CheckForNull;
 
 /**
@@ -18,7 +19,9 @@ import javax.annotation.CheckForNull;
  */
 public class MutableLinkedList<V>
         extends List.Abstract<V>
-        implements List.Mutable<V> {
+        implements List.Mutable<V>, Serializable {
+
+    private static final long serialVersionUID = 1L;
 
     public static <V> MutableLinkedList<V> create() {
         return new MutableLinkedList<>();
@@ -43,6 +46,7 @@ public class MutableLinkedList<V>
         return create(iterable.iterator());
     }
 
+    @SuppressWarnings("unchecked")
     public static <V> Collector<V, ?, MutableLinkedList<V>> collector() {
         return MutableLinkedListCollector.INSTANCE;
     }
@@ -131,7 +135,9 @@ public class MutableLinkedList<V>
         return ImmutableWrappedList.copy(this);
     }
 
-    private static final class Node<V> {
+    private static final class Node<V> implements Serializable {
+
+        private static final long serialVersionUID = 1L;
 
         private final V value;
         private Node<V> next;

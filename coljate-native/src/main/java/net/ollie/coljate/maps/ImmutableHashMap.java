@@ -42,6 +42,10 @@ public class ImmutableHashMap<K, V>
 
     private final ImmutableMapNode<K, V>[] bucket;
 
+    private transient Set.Immutable<K> keys;
+    private transient Streamable.Immutable<V> values;
+    private transient Set.Immutable<Map.Immutable.Entry<K, V>> entries;
+
     @SuppressWarnings({"rawtypes", "unchecked"})
     ImmutableHashMap() {
         this.bucket = new ImmutableMapNode[0];
@@ -72,10 +76,6 @@ public class ImmutableHashMap<K, V>
         }
         return null;
     }
-
-    private transient Set.Immutable<K> keys;
-    private transient Streamable.Immutable<V> values;
-    private transient Set.Immutable<Map.Immutable.Entry<K, V>> entries;
 
     @Override
     public Set.Immutable<K> keys() {
@@ -179,7 +179,9 @@ public class ImmutableHashMap<K, V>
     }
 
     private static final class ImmutableMapNode<K, V>
-            implements Map.Immutable.Entry<K, V> {
+            implements Map.Immutable.Entry<K, V>, Serializable {
+
+        private static final long serialVersionUID = 1L;
 
         private final K key;
         private final V value;
