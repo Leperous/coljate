@@ -6,9 +6,11 @@ import java.util.function.Predicate;
 
 import net.ollie.coljate.imposed.sorting.Sortable;
 
+import java.math.BigDecimal;
 import java.math.BigInteger;
 import javax.annotation.CheckForNull;
 import javax.annotation.CheckReturnValue;
+import javax.annotation.Nonnegative;
 import javax.annotation.Nonnull;
 
 /**
@@ -29,28 +31,30 @@ public abstract class NonNegativeInteger
     public static final PositiveInteger ONE = new NonNegativeInt(1), INFINITY = new Infinity();
 
     @Nonnull
-    public static NonNegativeInteger of(final int value) throws NonNegativeException {
+    public static NonNegativeInteger of(@Nonnegative final int value) throws NonNegativeException {
         return value == 0 ? ZERO : new NonNegativeInt(value);
     }
 
     @Nonnull
-    public static NonNegativeInteger of(final long value) throws NonNegativeException {
+    public static NonNegativeInteger of(@Nonnegative final long value) throws NonNegativeException {
         return value >= Integer.MAX_VALUE
                 ? NonNegativeBigInteger.of(value)
                 : of((int) value);
     }
 
     @Nonnull
-    public static NonNegativeInteger of(final BigInteger value) throws NonNegativeException {
+    public static NonNegativeInteger of(@Nonnegative final BigInteger value) throws NonNegativeException {
         return NonNegativeBigInteger.of(value);
     }
 
     @Nonnull
-    public static NonNegativeInteger of(final Number number) throws NonNegativeException {
+    public static NonNegativeInteger of(@Nonnegative final Number number) throws NonNegativeException {
         if (number instanceof NonNegativeInteger) {
             return (NonNegativeInteger) number;
         } else if (number instanceof BigInteger) {
             return of((BigInteger) number);
+        } else if (number instanceof BigDecimal) {
+            return of(((BigDecimal) number).intValue());
         } else {
             return of(number.intValue());
         }
