@@ -27,9 +27,6 @@ public interface Set<V>
     @Override
     Set<V> tail();
 
-    @Override
-    Stream<V, ? extends Set<V>> stream();
-
     @Nonnull
     default Set<V> intersection(final Set<? extends V> that) {
         final Set.Mutable<V> intersection = this.mutableCopy();
@@ -40,6 +37,13 @@ public interface Set<V>
     @Nonnull
     default Set<V> union(Set<? extends V> that) {
         return this.mutableCopy().andAll(that);
+    }
+
+    @Override
+    Stream<V, ? extends Set<V>> stream();
+
+    default Set<V> filter(final Predicate<? super V> predicate) {
+        return this.stream().filter(predicate).collect();
     }
 
     @Override
