@@ -42,7 +42,7 @@ public class ImmutableHashSet<V>
         for (final V element : iterable) {
             map.put(element, VALUE);
         }
-        return view(ImmutableHashMap.copy(map));
+        return new ImmutableHashSet<>(map.immutableCopy());
     }
 
     public static <V> ImmutableHashSet<V> view(final Map.Immutable<V, ?> map) {
@@ -53,9 +53,9 @@ public class ImmutableHashSet<V>
         return new ImmutableHashSetCollector<>();
     }
 
-    private final ImmutableHashMap<V, Object> map;
+    private final Map.Immutable<V, Object> map;
 
-    protected ImmutableHashSet(final ImmutableHashMap<V, Object> map) {
+    protected ImmutableHashSet(final Map.Immutable<V, Object> map) {
         this.map = map;
     }
 
