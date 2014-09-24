@@ -66,12 +66,12 @@ public interface Streamable<V>
     }
 
     @CheckReturnValue
-    default <R> R reduce(final BiFunction<R, V, ? extends R> function, final R initial) {
-        return this.stream().reduce(function, initial);
+    default <R> R reduce(final R initial, final BiFunction<R, V, ? extends R> function) {
+        return this.stream().reduce(initial, function);
     }
 
-    default <R> R reduce(final Function<V, R> transform, final BinaryOperator<R> each, final R initial) {
-        return this.reduce((i, e) -> each.apply(i, transform.apply(e)), initial);
+    default <R> R reduce(final R initial, final Function<V, R> transform, final BinaryOperator<R> each) {
+        return this.reduce(initial, (i, e) -> each.apply(i, transform.apply(e)));
     }
 
     default <C, A> C collect(final Collector<? super V, A, ? extends C> collector) {
@@ -266,7 +266,7 @@ public interface Streamable<V>
         @Nonnull
         Stream<V, S> filter(@Nonnull Predicate<? super V> predicate);
 
-        default <R> R reduce(final BiFunction<R, V, ? extends R> function, final R initial) {
+        default <R> R reduce(final R initial, final BiFunction<R, V, ? extends R> function) {
             return Iterables.reduce(this, function, initial);
         }
 
@@ -276,6 +276,10 @@ public interface Streamable<V>
 
         default <A, R> R collect(final Collector<? super V, A, ? extends R> collector) {
             return Iterables.collect(this, collector);
+        }
+
+        default <R> R collect(final Function<? super Iterable<V>, R> function) {
+            return function.apply(this);
         }
 
         @CheckReturnValue
