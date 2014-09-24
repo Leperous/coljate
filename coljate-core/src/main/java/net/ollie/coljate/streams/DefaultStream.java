@@ -49,7 +49,7 @@ public abstract class DefaultStream<V, S extends Streamable<V>>
 
     @Override
     public <V2> Streamable.Stream<V2, ? extends Streamable<V2>> flatMap(final Function<? super V, ? extends Streamable<? extends V2>> function) {
-        throw new UnsupportedOperationException("flatMap not supported yet!");
+        return new FlatMappedStream<>(this, function);
     }
 
     protected abstract Collector<V, ?, ? extends S> getCollector();
@@ -161,6 +161,47 @@ public abstract class DefaultStream<V, S extends Streamable<V>>
                 @Override
                 public V2 next() {
                     return function.apply(source.next());
+                }
+
+            };
+        }
+
+    }
+
+    private static final class FlatMappedStream<V, V2>
+            extends DefaultStream<V2, Streamable<V2>> {
+
+        private final DefaultStream<V, ?> stream;
+        private final Function<? super V, ? extends Streamable<? extends V2>> function;
+
+        FlatMappedStream(final DefaultStream<V, ?> stream, final Function<? super V, ? extends Streamable<? extends V2>> function) {
+            this.stream = stream;
+            this.function = function;
+        }
+
+        @Override
+        protected Collector<V2, ?, ? extends Streamable<V2>> getCollector() {
+            return DefaultStreamable.collector();
+        }
+
+        @Override
+        public UnmodifiableIterator<V2> iterator() {
+            return new UnmodifiableIterator<V2>() {
+
+                private final Iterator<V> rootIterator = stream.iterator();
+                private Iterator<? extends V2> innerIterator = Iterators.of();
+
+                @Override
+                public boolean hasNext() {
+                    while (!innerIterator.hasNext() && rootIterator.hasNext()) {
+                        innerIterator = function.apply(rootIterator.next()).iterator();
+                    }
+                    return innerIterator.hasNext();
+                }
+
+                @Override
+                public V2 next() {
+                    return innerIterator.next();
                 }
 
             };
