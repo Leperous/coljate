@@ -222,7 +222,7 @@ public final class Iterables {
 
         @Override
         public int size() {
-            return this.stream().mapToInt(e -> 1).reduce(0, Integer::sum);
+            return this.stream().mapToInt(e -> e == null ? 0 : 1).reduce(0, Integer::sum);
         }
 
     }
