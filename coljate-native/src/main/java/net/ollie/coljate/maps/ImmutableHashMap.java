@@ -135,7 +135,7 @@ public class ImmutableHashMap<K, V>
     }
 
     private static int bucketFor(final Object key, Object[] bucket) {
-        return key.hashCode() % bucket.length;
+        return Math.abs(key.hashCode()) % bucket.length;
     }
 
     @Override
