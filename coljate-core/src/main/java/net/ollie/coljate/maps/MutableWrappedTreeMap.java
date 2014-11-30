@@ -1,5 +1,6 @@
 package net.ollie.coljate.maps;
 
+import java.lang.reflect.Field;
 import java.util.Comparator;
 
 import net.ollie.coljate.DefaultStreamable;
@@ -8,8 +9,6 @@ import net.ollie.coljate.imposed.sorting.Sorter;
 import net.ollie.coljate.sets.ImmutableWrappedHashSet;
 import net.ollie.coljate.sets.MutableWrappedHashSet;
 import net.ollie.coljate.sets.Set;
-
-import java.lang.reflect.Field;
 
 /**
  * @author Ollie

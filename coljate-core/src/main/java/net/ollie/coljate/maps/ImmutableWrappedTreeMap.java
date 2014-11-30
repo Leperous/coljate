@@ -1,5 +1,8 @@
 package net.ollie.coljate.maps;
 
+import java.util.Comparator;
+import java.util.function.BiFunction;
+
 import net.ollie.coljate.AbstractWrappedStreamable;
 import net.ollie.coljate.access.Streamable;
 import net.ollie.coljate.imposed.sorting.Sorter;
@@ -11,6 +14,8 @@ import net.ollie.coljate.utils.iterators.UnmodifiableIterator;
 /**
  *
  * @author Ollie
+ * @param <K>
+ * @param <V>
  */
 public class ImmutableWrappedTreeMap<K, V>
         extends AbstractWrappedStreamable<V>
@@ -22,6 +27,14 @@ public class ImmutableWrappedTreeMap<K, V>
 
     public static <K, V> TreeMap.Immutable<K, V> copy(final TreeMap<K, V> map) {
         return new ImmutableWrappedTreeMap<>(map.mutableCopy());
+    }
+
+    public static <K extends Comparable<? super K>, V> TreeMap.Immutable<K, V> create() {
+        return new ImmutableWrappedTreeMap<>(MutableWrappedTreeMap.<K, V>create());
+    }
+
+    public static <K, V> TreeMap.Immutable<K, V> create(final Comparator<? super K> keyComparator) {
+        return new ImmutableWrappedTreeMap<>(MutableWrappedTreeMap.create(keyComparator));
     }
 
     private final TreeMap.Mutable<K, V> underlying;
@@ -83,6 +96,13 @@ public class ImmutableWrappedTreeMap<K, V>
     @Override
     public UnmodifiableIterator<V> iterator() {
         return UnmodifiableIterator.of(this.underlying().iterator());
+    }
+
+    @Override
+    public <V2> Map.Immutable<K, V2> transformEntries(final BiFunction<? super K, ? super V, ? extends V2> function) {
+        final Map.Mutable<K, V2> mutable = ImmutableWrappedTreeMap.<K, V2>create(this.sorter()).mutableCopy();
+        this.entries().forEach(entry -> mutable.put(entry.key(), function.apply(entry.key(), entry.value())));
+        return mutable.immutableCopy();
     }
 
     @Override

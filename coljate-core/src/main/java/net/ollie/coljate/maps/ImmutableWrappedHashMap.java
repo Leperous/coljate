@@ -1,14 +1,15 @@
 package net.ollie.coljate.maps;
 
 import java.util.function.BiConsumer;
+import java.util.function.BiFunction;
 import java.util.function.BinaryOperator;
 import java.util.function.Function;
 import java.util.function.Supplier;
 import java.util.stream.Collector;
 
 import net.ollie.coljate.AbstractWrappedStreamable;
-import net.ollie.coljate.sets.Set;
 import net.ollie.coljate.access.Streamable;
+import net.ollie.coljate.sets.Set;
 import net.ollie.coljate.utils.iterators.Iterators;
 import net.ollie.coljate.utils.iterators.UnmodifiableIterator;
 
@@ -89,6 +90,13 @@ public class ImmutableWrappedHashMap<K, V>
     @Override
     public Set.Immutable<? extends Map.Immutable.Entry<K, V>> entries() {
         throw new UnsupportedOperationException(); //TODO
+    }
+
+    @Override
+    public <V2> Map.Immutable<K, V2> transformEntries(final BiFunction<? super K, ? super V, ? extends V2> function) {
+        final Map.Mutable<K, V2> mutable = ImmutableWrappedHashMap.<K, V2>create().mutableCopy();
+        this.entries().forEach(entry -> mutable.put(entry.key(), function.apply(entry.key(), entry.value())));
+        return mutable.immutableCopy();
     }
 
     @Override
