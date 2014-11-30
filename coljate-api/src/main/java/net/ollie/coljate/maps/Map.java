@@ -1,6 +1,12 @@
 package net.ollie.coljate.maps;
 
 import java.util.Objects;
+import java.util.function.BiFunction;
+import java.util.function.Function;
+
+import javax.annotation.CheckForNull;
+import javax.annotation.CheckReturnValue;
+import javax.annotation.Nonnull;
 
 import net.ollie.coljate.access.Streamable;
 import net.ollie.coljate.imposed.Cached;
@@ -9,15 +15,12 @@ import net.ollie.coljate.imposed.Invertible.Surjective;
 import net.ollie.coljate.imposed.Mutability;
 import net.ollie.coljate.sets.Set;
 
-import javax.annotation.CheckForNull;
-import javax.annotation.CheckReturnValue;
-import javax.annotation.Nonnull;
-
 /**
  * A many-to-one mapping from unique keys.
  *
- * The mapping is potentially {@link Surjective} (in that it may contain copies of the same value) but not
- * {@link Injective} (in that null keys are not allowed).
+ * The mapping is potentially {@link Surjective} (in that it may contain copies
+ * of the same value) but not {@link Injective} (in that null keys are not
+ * allowed).
  *
  * @author Ollie
  * @param <K> key type
@@ -163,6 +166,12 @@ public interface Map<K, V>
             return Objects.equals(expectedValue, this.get(key))
                     ? this.without(key).with(key, newValue)
                     : this;
+        }
+
+        <V2> Map.Immutable<K, V2> transformEntries(BiFunction<? super K, ? super V, ? extends V2> function);
+
+        default <V2> Map.Immutable<K, V2> transformValues(Function<? super V, ? extends V2> function) {
+            return this.transformEntries((key, value) -> function.apply(value));
         }
 
         @Override

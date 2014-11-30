@@ -9,6 +9,9 @@ import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.stream.Collector;
 
+import javax.annotation.CheckReturnValue;
+import javax.annotation.Nonnull;
+
 import net.ollie.coljate.utils.Arrays;
 import net.ollie.coljate.utils.iterators.Iterables;
 import net.ollie.coljate.utils.iterators.Iterators;
@@ -16,14 +19,11 @@ import net.ollie.coljate.utils.iterators.Streams;
 import net.ollie.coljate.utils.iterators.UnmodifiableIterator;
 import net.ollie.coljate.utils.numeric.NonNegativeInteger;
 
-import javax.annotation.CheckReturnValue;
-import javax.annotation.Nonnull;
-
 /**
  * An element {@code V} may be found by iterating.
  *
- * This interface introduces the {@link #stream} method, which returns a (non-modifiable) iterable that can be
- * manipulated in various ways.
+ * This interface introduces the {@link #stream} method, which returns a
+ * (non-modifiable) iterable that can be manipulated in various ways.
  *
  * This class is comparable to a stock {@link java.util.Collection}.
  *
@@ -54,7 +54,8 @@ public interface Streamable<V>
     }
 
     /**
-     * @return the number create elements satisfying the given predicate in this collection.
+     * @return the number create elements satisfying the given predicate in this
+     * collection.
      */
     default NonNegativeInteger count(final Predicate<? super V> predicate) {
         return NonNegativeInteger.of(Iterables.doCount(this, predicate));
@@ -254,10 +255,12 @@ public interface Streamable<V>
     /**
      * Streams are unmodifiably iterable, but are not themselves iterators.
      *
-     * They allow relatively cheap "bulk" operations, such as {@link #map} and {@link #filter}, without needing to copy
-     * every element in the underlying collection each time.
+     * They allow relatively cheap "bulk" operations, such as {@link #map} and
+     * {@link #filter}, without needing to copy every element in the underlying
+     * collection each time.
      *
      * @param <V>
+     * @param <S>
      * @see Iterator
      */
     interface Stream<V, S extends Streamable<V>> extends Iterable<V> {
@@ -274,7 +277,7 @@ public interface Streamable<V>
             return Iterables.findFirst(this, predicate);
         }
 
-        default <A, R> R collect(final Collector<? super V, A, ? extends R> collector) {
+        default <R, A> R collect(final Collector<? super V, A, ? extends R> collector) {
             return Iterables.collect(this, collector);
         }
 

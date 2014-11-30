@@ -2,12 +2,14 @@ package net.ollie.coljate.maps;
 
 
 import net.ollie.coljate.graphs.Tree;
-import net.ollie.coljate.sets.Set;
 import net.ollie.coljate.imposed.sorting.Sorted;
+import net.ollie.coljate.sets.Set;
 
 /**
  *
  * @author Ollie
+ * @param <K>
+ * @param <V>
  */
 public interface TreeMap<K, V>
         extends Tree<K, V>, Map<K, V>, Sorted<K> {
