@@ -20,6 +20,8 @@ import javax.annotation.Nonnull;
  * {@link Injective} (in that null keys are not allowed).
  *
  * @author Ollie
+ * @param <K> key type
+ * @param <V> value type
  * @see java.util.Map
  * @see Cache
  */

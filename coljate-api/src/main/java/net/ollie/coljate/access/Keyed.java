@@ -1,6 +1,7 @@
 package net.ollie.coljate.access;
 
 import java.util.Optional;
+import java.util.function.Supplier;
 
 import net.ollie.coljate.Collection;
 import net.ollie.coljate.imposed.Distinctness.Unique;
@@ -48,6 +49,12 @@ public interface Keyed<V> {
         default V getOrDefault(final K key, @Nonnull final V defaultValue) {
             final V value = this.get(key);
             return value == null ? defaultValue : value;
+        }
+        
+        @CheckForNull
+        default V getOrElse(final K key, final Supplier<V> defaultValue) {
+            final V value = this.get(key);
+            return value == null && !this.containsKey(key) ? defaultValue.get() : value;
         }
 
         @Override
