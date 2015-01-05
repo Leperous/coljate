@@ -1,6 +1,12 @@
 package net.ollie.coljate.maps;
 
+import java.io.Serializable;
 import java.util.Objects;
+import java.util.function.BiFunction;
+
+import javax.annotation.Nonnull;
+
+import com.google.common.collect.ImmutableMap;
 
 import net.ollie.coljate.ImmutableGuavaCollection;
 import net.ollie.coljate.access.Streamable;
@@ -9,10 +15,6 @@ import net.ollie.coljate.sets.MutableWrappedHashSet;
 import net.ollie.coljate.sets.Set;
 import net.ollie.coljate.streams.DefaultStream;
 import net.ollie.coljate.utils.iterators.UnmodifiableIterator;
-
-import com.google.common.collect.ImmutableMap;
-import java.io.Serializable;
-import javax.annotation.Nonnull;
 
 /**
  *
@@ -92,6 +94,16 @@ public class ImmutableGuavaMap<K, V>
     @Override
     public boolean isEmpty() {
         return delegate.isEmpty();
+    }
+
+    @Override
+    public Immutable<K, V> immutableCopy() {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public <V2> Immutable<K, V2> transformEntries(BiFunction<? super K, ? super V, ? extends V2> function) {
+        throw new UnsupportedOperationException();
     }
 
     private final class EntrySet
