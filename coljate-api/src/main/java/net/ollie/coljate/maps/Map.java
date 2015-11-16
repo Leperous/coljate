@@ -36,4 +36,12 @@ public interface Map<K, V> extends PartialFunction<K, V> {
         return this.get(input);
     }
 
+    default int size() {
+        return this.keys().size();
+    }
+
+    default boolean isEmpty() {
+        return this.keys().isEmpty();
+    }
+
 }
