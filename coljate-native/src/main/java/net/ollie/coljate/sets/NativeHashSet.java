@@ -1,5 +1,6 @@
 package net.ollie.coljate.sets;
 
+import java.util.Collection;
 import java.util.Iterator;
 import static java.util.Objects.requireNonNull;
 
@@ -9,7 +10,11 @@ import static java.util.Objects.requireNonNull;
  */
 public abstract class NativeHashSet<T> implements Set<T> {
 
-    public static <T> java.util.HashSet<T> read(final Iterator<? extends T> iterator) {
+    public static <T> java.util.HashSet<T> copyIntoHashSet(final Collection<? extends T> collection) {
+        return new java.util.HashSet<>(collection);
+    }
+
+    public static <T> java.util.HashSet<T> copyIntoHashSet(final Iterator<? extends T> iterator) {
         final java.util.HashSet<T> hashSet = new java.util.HashSet<>();
         iterator.forEachRemaining(hashSet::add);
         return hashSet;
@@ -22,7 +27,7 @@ public abstract class NativeHashSet<T> implements Set<T> {
     }
 
     protected java.util.HashSet<T> copyDelegate() {
-        return delegate;
+        return copyIntoHashSet(delegate);
     }
 
     @Override

@@ -11,15 +11,15 @@ import net.ollie.coljate.sets.ImmutableSet;
  *
  * @author Ollie
  */
-public class NativeImmutableHashMap<K, V> extends NativeMap<K, V> implements ImmutableMap<K, V> {
+public class ImmutableHashMap<K, V> extends NativeMap<K, V> implements ImmutableMap<K, V> {
 
     public static <K, V> ImmutableMap<K, V> copyOf(final java.util.Map<K, V> map) {
-        return new NativeImmutableHashMap<>(copyIntoHashMap(map));
+        return new ImmutableHashMap<>(copyIntoHashMap(map));
     }
 
     private final java.util.HashMap<K, V> delegate;
 
-    NativeImmutableHashMap(final java.util.HashMap<K, V> delegate) {
+    ImmutableHashMap(final java.util.HashMap<K, V> delegate) {
         super(delegate);
         this.delegate = delegate;
     }

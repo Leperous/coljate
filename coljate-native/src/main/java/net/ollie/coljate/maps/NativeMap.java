@@ -26,7 +26,7 @@ public abstract class NativeMap<K, V> implements Map<K, V> {
 
     @Override
     public ImmutableMap<K, V> immutableCopy() {
-        return NativeImmutableHashMap.copyOf(delegate);
+        return ImmutableHashMap.copyOf(delegate);
     }
 
     @Override
@@ -37,6 +37,16 @@ public abstract class NativeMap<K, V> implements Map<K, V> {
     @Override
     public boolean inDomain(final K key) {
         return delegate.containsKey(key);
+    }
+
+    @Override
+    public int size() {
+        return delegate.size();
+    }
+
+    @Override
+    public boolean isEmpty() {
+        return delegate.isEmpty();
     }
 
 }
