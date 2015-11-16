@@ -2,8 +2,6 @@ package net.ollie.coljate.sets;
 
 import java.util.Iterator;
 
-import net.ollie.coljate.ImmutableCollection;
-
 /**
  *
  * @author Ollie
@@ -19,15 +17,18 @@ public class ImmutableHashSet<T> extends NativeHashSet<T> implements ImmutableSe
     }
 
     @Override
-    public Iterator<T> iterator() {
-        throw new UnsupportedOperationException();
-    }
-
-    @Override
-    public ImmutableCollection<T> with(final T element) {
+    public ImmutableSet<T> with(final T element) {
+        if (this.contains(element)) {
+            return this;
+        }
         final java.util.HashSet<T> copy = this.copyDelegate();
         copy.add(element);
         return new ImmutableHashSet<>(copy);
+    }
+
+    @Override
+    public Iterator<T> iterator() {
+        throw new UnsupportedOperationException(); //TODO
     }
 
     @Override

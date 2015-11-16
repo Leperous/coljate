@@ -1,24 +1,26 @@
 package net.ollie.coljate;
 
+import org.checkerframework.checker.nullness.qual.NonNull;
+
 import net.ollie.coljate.theory.Finite;
 
-import javax.annotation.Nonnull;
+import org.checkerframework.checker.nullness.qual.Nullable;
 
 /**
  *
  * @author Ollie
  */
-public interface Collection<T> extends Finite<T> {
+public interface Collection<@Nullable T> extends Finite<T> {
 
     boolean contains(Object object);
 
     @Override
     Collection<T> tail();
 
-    @Nonnull
+    @NonNull
     MutableCollection<T> mutableCopy();
 
-    @Nonnull
+    @NonNull
     ImmutableCollection<T> immutableCopy();
 
 }

@@ -2,23 +2,24 @@ package net.ollie.coljate.theory;
 
 import java.util.stream.Stream;
 
-import javax.annotation.Nonnull;
+import org.checkerframework.checker.nullness.qual.NonNull;
+import org.checkerframework.checker.nullness.qual.Nullable;
 
 /**
  *
  * @author Ollie
  */
-public interface Streamable<T> {
+public interface Streamable<@Nullable T> {
 
     @Deprecated
     default Stream<T> stream() {
         return this.serialStream();
     }
 
-    @Nonnull
+    @NonNull
     Stream<T> serialStream();
 
-    @Nonnull
+    @NonNull
     Stream<T> parallelStream();
 
 }

@@ -1,17 +1,16 @@
 package net.ollie.coljate;
 
-import javax.annotation.CheckReturnValue;
-import javax.annotation.Nonnull;
+import org.checkerframework.checker.nullness.qual.NonNull;
+import org.checkerframework.checker.nullness.qual.Nullable;
 
 /**
  *
  * @author Ollie
  */
-public interface ImmutableCollection<T> extends Collection<T> {
+public interface ImmutableCollection<@Nullable T> extends Collection<T> {
 
-    @CheckReturnValue
-    @Nonnull
-    ImmutableCollection<T> with(T element);
+    @NonNull
+    ImmutableCollection<T> with(@Nullable T element);
 
     @Override
     ImmutableCollection<T> tail();

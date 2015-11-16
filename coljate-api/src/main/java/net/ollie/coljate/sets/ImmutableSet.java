@@ -12,6 +12,9 @@ public interface ImmutableSet<T> extends Set<T>, ImmutableCollection<T> {
     ImmutableSet<T> tail();
 
     @Override
+    ImmutableSet<T> with(T element);
+
+    @Override
     @Deprecated
     default ImmutableSet<T> immutableCopy() {
         return this;

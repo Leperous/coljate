@@ -2,8 +2,8 @@ package net.ollie.coljate.lists;
 
 import java.util.OptionalInt;
 
-import javax.annotation.CheckForNull;
-import javax.annotation.Nonnull;
+import org.checkerframework.checker.nullness.qual.NonNull;
+import org.checkerframework.checker.nullness.qual.Nullable;
 
 import net.ollie.coljate.Collection;
 import net.ollie.coljate.theory.PartialFunction;
@@ -12,12 +12,12 @@ import net.ollie.coljate.theory.PartialFunction;
  *
  * @author Ollie
  */
-public interface List<T> extends Collection<T>, PartialFunction<Integer, T> {
+public interface List<@Nullable T> extends Collection<T>, PartialFunction<Integer, T> {
 
-    @CheckForNull
+    @Nullable
     T get(int index);
 
-    @Nonnull
+    @NonNull
     OptionalInt indexOf(Object element);
 
     @Override
@@ -34,7 +34,6 @@ public interface List<T> extends Collection<T>, PartialFunction<Integer, T> {
         return this.get(index);
     }
 
-    @CheckForNull
     @Override
     default T head() {
         return this.get(0);

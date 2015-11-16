@@ -1,10 +1,12 @@
 package net.ollie.coljate.theory;
 
+import org.checkerframework.checker.nullness.qual.Nullable;
+
 /**
  *
  * @author Ollie
  */
-public interface Finite<T> extends Traversable<T> {
+public interface Finite<@Nullable T> extends Traversable<T> {
 
     int size();
     
