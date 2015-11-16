@@ -3,16 +3,14 @@
     <modelVersion>4.0.0</modelVersion>
 
     <name>coljate-parent</name>
-    <groupId>net.ollie</groupId>
+    <groupId>net.ollie.coljate</groupId>
     <artifactId>coljate-parent</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <modules>
         <module>coljate-api</module>
-        <module>coljate-core</module>
         <module>coljate-native</module>
-        <module>coljate-guava</module>
     </modules>
 
     <properties>
@@ -22,6 +20,11 @@
     </properties>
 
     <dependencies>
+        <dependency>
+            <groupId>com.google.code.findbugs</groupId>
+            <artifactId>jsr305</artifactId>
+            <version>3.0.0</version>
+        </dependency>
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
