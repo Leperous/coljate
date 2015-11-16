@@ -1,4 +1,4 @@
-package net.ollie.coljate;
+package net.ollie.coljate.theory;
 
 import java.util.stream.Stream;
 

@@ -1,5 +1,7 @@
 package net.ollie.coljate;
 
+import net.ollie.coljate.theory.Finite;
+
 import javax.annotation.Nonnull;
 
 /**
