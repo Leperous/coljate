@@ -12,7 +12,7 @@ public interface Collection<T> extends Finite<T> {
 
     boolean contains(Object object);
 
-    @Nonnull
+    @Override
     Collection<T> tail();
 
     @Nonnull

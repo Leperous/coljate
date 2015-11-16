@@ -6,7 +6,7 @@ import java.util.Iterator;
  *
  * @author Ollie
  */
-public class ImmutableArrayList<T> extends NativeArrayList<T> implements ImmutableList<T> {
+public class ImmutableArrayList<T> extends NativeList<T> implements ImmutableList<T> {
 
     public static <T> ImmutableList<T> copyOf(final java.util.Collection<? extends T> collection) {
         return new ImmutableArrayList<>(copyToList(collection));

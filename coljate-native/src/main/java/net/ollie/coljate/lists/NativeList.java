@@ -1,13 +1,14 @@
 package net.ollie.coljate.lists;
 
 import java.util.Iterator;
+import static java.util.Objects.requireNonNull;
 import java.util.OptionalInt;
 
 /**
  *
  * @author Ollie
  */
-public abstract class NativeList<T> implements List<T> {
+public class NativeList<T> implements List<T> {
 
     public static <T> java.util.ArrayList<T> copyToList(final java.util.Collection<? extends T> collection) {
         return new java.util.ArrayList<>(collection);
@@ -16,7 +17,7 @@ public abstract class NativeList<T> implements List<T> {
     private final java.util.List<? extends T> delegate;
 
     NativeList(final java.util.List<? extends T> delegate) {
-        this.delegate = delegate;
+        this.delegate = requireNonNull(delegate);
     }
 
     protected java.util.ArrayList<T> copyDelegate() {
@@ -63,6 +64,11 @@ public abstract class NativeList<T> implements List<T> {
     @Override
     public Iterator<T> iterator() {
         throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public List<T> tail() {
+        return new NativeList<>(delegate.subList(1, delegate.size() - 1));
     }
 
 }
