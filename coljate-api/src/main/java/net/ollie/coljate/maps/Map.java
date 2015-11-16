@@ -2,10 +2,8 @@ package net.ollie.coljate.maps;
 
 import java.util.Objects;
 
-import javax.annotation.CheckForNull;
-import javax.annotation.Nonnull;
-
 import org.checkerframework.checker.nullness.qual.NonNull;
+import org.checkerframework.checker.nullness.qual.Nullable;
 
 import net.ollie.coljate.Collection;
 import net.ollie.coljate.sets.Set;
@@ -17,13 +15,13 @@ import net.ollie.coljate.theory.PartialFunction;
  */
 public interface Map<K, V> extends Collection<MapEntry<K, V>>, PartialFunction<K, V> {
 
-    @CheckForNull
-    V get(Object key);
+    @Nullable
+    V get(@Nullable Object key);
 
-    @Nonnull
+    @NonNull
     Set<K> keys();
 
-    @Nonnull
+    @NonNull
     Collection<V> values();
 
     @Override

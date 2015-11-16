@@ -3,22 +3,21 @@ package net.ollie.coljate.theory;
 import java.util.Optional;
 import java.util.function.Function;
 
-import javax.annotation.CheckForNull;
-import javax.annotation.Nonnull;
+import org.checkerframework.checker.nullness.qual.NonNull;
+import org.checkerframework.checker.nullness.qual.Nullable;
 
 /**
  *
  * @author Ollie
  * @see <a href="https://en.wikipedia.org/wiki/Partial_function">Partial function</a>
  */
-public interface PartialFunction<F, T> {
+public interface PartialFunction<@Nullable F, @Nullable T> {
 
-    boolean inDomain(@Nonnull F input);
+    boolean inDomain(F input);
 
-    @CheckForNull
     T apply(F input);
 
-    @Nonnull
+    @NonNull
     default Function<F, Optional<T>> total() {
         return element -> this.inDomain(element)
                 ? Optional.ofNullable(this.apply(element))

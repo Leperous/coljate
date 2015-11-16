@@ -1,16 +1,15 @@
 package net.ollie.coljate.maps;
 
-import javax.annotation.CheckForNull;
+import org.checkerframework.checker.nullness.qual.Nullable;
 
 /**
  *
  * @author Ollie
  */
-public interface MapEntry<K, V> {
+public interface MapEntry<K, @Nullable V> {
 
     K key();
 
-    @CheckForNull
     V value();
 
 }

@@ -1,6 +1,6 @@
 package net.ollie.coljate.lists;
 
-import javax.annotation.CheckForNull;
+import org.checkerframework.checker.nullness.qual.Nullable;
 
 import net.ollie.coljate.MutableCollection;
 
@@ -10,7 +10,7 @@ import net.ollie.coljate.MutableCollection;
  */
 public interface MutableList<T> extends List<T>, MutableCollection<T> {
 
-    @CheckForNull
+    @Nullable
     T set(int index, T element);
 
     @Override
