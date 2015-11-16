@@ -1,5 +1,7 @@
 package net.ollie.coljate.maps;
 
+import java.util.Iterator;
+
 import net.ollie.coljate.ImmutableCollection;
 import net.ollie.coljate.lists.ImmutableArrayList;
 import net.ollie.coljate.sets.ImmutableHashSet;
@@ -28,13 +30,23 @@ public class NativeImmutableHashMap<K, V> extends NativeMap<K, V> implements Imm
     }
 
     @Override
-    public ImmutableSet<? extends ImmutableMapEntry<K, V>> entries() {
+    public ImmutableCollection<V> values() {
+        return ImmutableArrayList.copyOf(delegate.values());
+    }
+
+    @Override
+    public ImmutableMap<K, V> with(final K key, final V value) {
         throw new UnsupportedOperationException(); //TODO
     }
 
     @Override
-    public ImmutableCollection<V> values() {
-        return ImmutableArrayList.copyOf(delegate.values());
+    public Iterator<MapEntry<K, V>> iterator() {
+        throw new UnsupportedOperationException(); //TODO
+    }
+
+    @Override
+    public ImmutableMap<K, V> tail() {
+        throw new UnsupportedOperationException(); //TODO
     }
 
 }

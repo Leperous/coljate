@@ -2,9 +2,6 @@ package net.ollie.coljate.maps;
 
 import static java.util.Objects.requireNonNull;
 
-import net.ollie.coljate.Collection;
-import net.ollie.coljate.sets.Set;
-
 /**
  *
  * @author Ollie
