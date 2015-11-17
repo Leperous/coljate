@@ -13,9 +13,6 @@ import net.ollie.coljate.theory.Finite;
 public interface Collection<@Nullable T> extends Finite<T>, Container {
 
     @Override
-    boolean contains(Object object);
-
-    @Override
     Collection<T> tail();
 
     @NonNull

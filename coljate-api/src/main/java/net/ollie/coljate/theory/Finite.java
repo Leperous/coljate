@@ -9,5 +9,8 @@ import org.checkerframework.checker.nullness.qual.Nullable;
 public interface Finite<@Nullable T> extends Traversable<T> {
 
     int size();
-    
+
+    @Override
+    Finite<T> tail();
+
 }
