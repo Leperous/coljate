@@ -1,6 +1,5 @@
 package net.ollie.coljate.lists;
 
-import java.util.Iterator;
 import static java.util.Objects.requireNonNull;
 import java.util.OptionalInt;
 
@@ -14,7 +13,7 @@ public class WrappedList<T> extends WrappedCollection<T> implements List<T> {
 
     private final java.util.List<T> delegate;
 
-    protected WrappedList(final java.util.List<T> delegate) {
+    public WrappedList(final java.util.List<T> delegate) {
         super(delegate);
         this.delegate = requireNonNull(delegate);
     }

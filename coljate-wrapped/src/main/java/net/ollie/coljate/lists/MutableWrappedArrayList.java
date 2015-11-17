@@ -1,8 +1,11 @@
 package net.ollie.coljate.lists;
 
+import net.ollie.coljate.lists.mixin.WrappedArrayList;
+
 import java.util.List;
 
 import net.ollie.coljate.Collection;
+import static net.ollie.coljate.lists.mixin.WrappedArrayList.copyToArrayList;
 import net.ollie.coljate.lists.mixin.GenericMutableWrappedList;
 
 /**
@@ -10,7 +13,7 @@ import net.ollie.coljate.lists.mixin.GenericMutableWrappedList;
  * @author Ollie
  * @see List
  */
-public class MutableWrappedArrayList<T> extends WrappedArrayList<T> implements GenericMutableWrappedList<T> {
+public class MutableWrappedArrayList<T> extends WrappedList<T> implements GenericMutableWrappedList<T>, WrappedArrayList<T> {
 
     public static <T> MutableList<T> copyOf(final java.util.Collection<? extends T> collection) {
         return new MutableWrappedArrayList<>(copyToArrayList(collection));
@@ -24,13 +27,21 @@ public class MutableWrappedArrayList<T> extends WrappedArrayList<T> implements G
         return new MutableWrappedArrayList<>(list);
     }
 
+    private final java.util.ArrayList<T> delegate;
+
     protected MutableWrappedArrayList(final java.util.ArrayList<T> delegate) {
         super(delegate);
+        this.delegate = delegate;
     }
 
     @Override
-    public java.util.List<T> delegate() {
+    public java.util.ArrayList<T> delegate() {
         return delegate;
+    }
+
+    @Override
+    public java.util.ArrayList<T> copyDelegate() {
+        return new java.util.ArrayList<>(delegate);
     }
 
     @Override

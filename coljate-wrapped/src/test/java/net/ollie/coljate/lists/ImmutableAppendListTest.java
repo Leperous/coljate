@@ -11,7 +11,7 @@ public class ImmutableAppendListTest extends ImmutableListTest {
 
     @Override
     protected ImmutableList<Object> empty() {
-        return ImmutableEmptyList.instance();
+        return ImmutableEmptyList.empty();
     }
 
     @Override

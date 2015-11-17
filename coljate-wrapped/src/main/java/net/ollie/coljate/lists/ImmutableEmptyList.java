@@ -13,7 +13,7 @@ public class ImmutableEmptyList<T> implements GenericImmutableWrappedList<T> {
     private static final ImmutableEmptyList INSTANCE = new ImmutableEmptyList();
 
     @SuppressWarnings("unchecked")
-    public static <T> ImmutableList<T> instance() {
+    public static <T> ImmutableList<T> empty() {
         return INSTANCE;
     }
 

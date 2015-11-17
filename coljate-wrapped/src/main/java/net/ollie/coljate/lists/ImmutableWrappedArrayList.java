@@ -1,17 +1,20 @@
 package net.ollie.coljate.lists;
 
+import net.ollie.coljate.lists.mixin.WrappedArrayList;
 import net.ollie.coljate.Collection;
 import net.ollie.coljate.UnmodifiableIterator;
+import static net.ollie.coljate.lists.mixin.WrappedArrayList.copyToArrayList;
 import net.ollie.coljate.utils.DelegatedUnmodifiableIterator;
+import static net.ollie.coljate.lists.mixin.WrappedArrayList.copyToArrayList;
 
 /**
  *
  * @author Ollie
  */
-public class ImmutableWrappedArrayList<T> extends WrappedArrayList<T> implements ImmutableList<T> {
+public class ImmutableWrappedArrayList<T> extends WrappedList<T> implements ImmutableList<T>, WrappedArrayList<T> {
 
     public static <T> ImmutableList<T> of() {
-        return ImmutableEmptyList.instance();
+        return ImmutableEmptyList.empty();
     }
 
     public static <T> ImmutableList<T> of(final T element) {
@@ -56,8 +59,16 @@ public class ImmutableWrappedArrayList<T> extends WrappedArrayList<T> implements
         }
     }
 
+    private final java.util.ArrayList<T> delegate;
+
     ImmutableWrappedArrayList(final java.util.ArrayList<T> delegate) {
         super(delegate);
+        this.delegate = delegate;
+    }
+
+    @Override
+    public java.util.ArrayList<T> copyDelegate() {
+        return new java.util.ArrayList<>(delegate);
     }
 
     @Override
