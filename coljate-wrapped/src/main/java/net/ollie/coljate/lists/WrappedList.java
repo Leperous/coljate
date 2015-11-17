@@ -56,7 +56,7 @@ public class WrappedList<T> implements List<T> {
     protected java.util.List<T> nativeTail() {
         return delegate.subList(1, delegate.size());
     }
-    
+
     @Override
     public MutableList<T> mutableCopy() {
         return MutableWrappedArrayList.copyOf(this);

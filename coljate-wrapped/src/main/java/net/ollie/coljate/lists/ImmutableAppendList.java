@@ -1,5 +1,6 @@
 package net.ollie.coljate.lists;
 
+
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 import static java.util.Objects.requireNonNull;
@@ -8,12 +9,13 @@ import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
 
 import net.ollie.coljate.UnmodifiableIterator;
+import net.ollie.coljate.lists.mixin.GenericWrappedImmutableList;
 
 /**
  *
  * @author Ollie
  */
-public class ImmutableAppendList<@Nullable T> implements WrappedImmutableList<T> {
+public class ImmutableAppendList<@Nullable T> implements GenericWrappedImmutableList<T> {
 
     public static <T> ImmutableList<T> of(@NonNull final ImmutableList<? extends T> list, @Nullable final T right) {
         return list.isEmpty()

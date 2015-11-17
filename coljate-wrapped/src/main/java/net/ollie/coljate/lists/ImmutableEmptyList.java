@@ -1,12 +1,13 @@
 package net.ollie.coljate.lists;
 
 import net.ollie.coljate.UnmodifiableIterator;
+import net.ollie.coljate.lists.mixin.GenericWrappedImmutableList;
 
 /**
  *
  * @author Ollie
  */
-public class ImmutableEmptyList<T> implements WrappedImmutableList<T> {
+public class ImmutableEmptyList<T> implements GenericWrappedImmutableList<T> {
 
     @SuppressWarnings("rawtypes")
     private static final ImmutableEmptyList INSTANCE = new ImmutableEmptyList();

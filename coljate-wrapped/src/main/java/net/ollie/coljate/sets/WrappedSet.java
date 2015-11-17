@@ -7,7 +7,7 @@ import static java.util.Objects.requireNonNull;
  *
  * @author Ollie
  */
-public abstract class WrappedSet<T> implements Set<T> {
+public class WrappedSet<T> implements Set<T> {
 
     public static <T> java.util.HashSet<T> copyIntoHashSet(final java.util.Collection<? extends T> collection) {
         return new java.util.HashSet<>(collection);

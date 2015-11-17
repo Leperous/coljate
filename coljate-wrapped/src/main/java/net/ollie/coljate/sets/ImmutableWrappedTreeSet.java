@@ -1,7 +1,6 @@
 package net.ollie.coljate.sets;
 
 import java.util.Comparator;
-import java.util.SortedSet;
 
 import net.ollie.coljate.UnmodifiableIterator;
 
@@ -11,13 +10,26 @@ import net.ollie.coljate.UnmodifiableIterator;
  */
 public class ImmutableWrappedTreeSet<T> extends WrappedTreeSet<T> implements ImmutableSortedSet<T> {
 
-    ImmutableWrappedTreeSet(SortedSet<T> delegate, Comparator<? super T> comparator) {
-        super(delegate, comparator);
+    public static <T extends Comparable<? super T>> ImmutableSortedSet<T> copyOf(final java.util.Collection<? extends T> collection) {
+        return copyOf(collection, Comparator.naturalOrder());
+    }
+
+    public static <T> ImmutableSortedSet<T> copyOf(final java.util.Collection<? extends T> collection, final Comparator<? super T> comparator) {
+        return new ImmutableWrappedTreeSet<>(copyIntoTreeSet(collection, comparator));
+    }
+
+    ImmutableWrappedTreeSet(final java.util.TreeSet<T> delegate) {
+        super(delegate, delegate.comparator());
     }
 
     @Override
     public ImmutableWrappedTreeSet<T> tail() {
         throw new UnsupportedOperationException(); //TODO
+    }
+
+    @Override
+    public ImmutableSortedSet<T> subSet(final T min, final T max) {
+        return new ImmutableWrappedTreeSet<>(viewAsTreeSet(delegate.subSet(min, max), delegate::comparator));
     }
 
     @Override

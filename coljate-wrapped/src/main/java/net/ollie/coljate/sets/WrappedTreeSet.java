@@ -1,35 +1,34 @@
 package net.ollie.coljate.sets;
 
 import java.util.Comparator;
+import static java.util.Objects.requireNonNull;
+import java.util.TreeSet;
+import java.util.function.Supplier;
 
 /**
  *
  * @author Ollie
  */
-public abstract class WrappedTreeSet<T> extends WrappedSet<T> implements SortedSet<T> {
+public class WrappedTreeSet<T> extends WrappedSortedSet<T> {
 
-    private final java.util.SortedSet<T> delegate;
-    private final Comparator<? super T> comparator;
+    public static <T> java.util.TreeSet<T> viewAsTreeSet(final java.util.Collection<T> collection, final Supplier<Comparator<? super T>> comparator) {
+        return collection instanceof java.util.TreeSet
+                ? (java.util.TreeSet<T>) collection
+                : copyIntoTreeSet(collection, comparator.get());
+    }
 
-    protected WrappedTreeSet(final java.util.SortedSet<T> delegate, final Comparator<? super T> comparator) {
-        super(delegate);
+    public static <T> java.util.TreeSet<T> copyIntoTreeSet(final java.util.Collection<? extends T> collection, final Comparator<? super T> comparator) {
+        requireNonNull(comparator);
+        final TreeSet<T> set = new java.util.TreeSet<>(comparator);
+        set.addAll(collection);
+        return set;
+    }
+
+    final java.util.TreeSet<T> delegate;
+
+    protected WrappedTreeSet(final java.util.TreeSet<T> delegate, final Comparator<? super T> comparator) {
+        super(delegate, comparator);
         this.delegate = delegate;
-        this.comparator = comparator;
-    }
-
-    @Override
-    public Comparator<? super T> comparator() {
-        return comparator;
-    }
-
-    @Override
-    public MutableSortedSet<T> mutableCopy() {
-        throw new UnsupportedOperationException(); //TODO
-    }
-
-    @Override
-    public ImmutableSortedSet<T> immutableCopy() {
-        throw new UnsupportedOperationException(); //TODO
     }
 
 }

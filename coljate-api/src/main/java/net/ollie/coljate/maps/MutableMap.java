@@ -45,4 +45,9 @@ public interface MutableMap<K, V> extends Map<K, V>, MutableCollection<MapEntry<
         return false;
     }
 
+    @Override
+    public default boolean clear() {
+        return this.keys().clear();
+    }
+
 }
