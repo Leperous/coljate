@@ -1,6 +1,5 @@
 package net.ollie.coljate.sets;
 
-import java.util.Iterator;
 import static java.util.Objects.requireNonNull;
 
 import net.ollie.coljate.WrappedCollection;
@@ -14,21 +13,15 @@ public class WrappedSet<T>
         extends WrappedCollection<T>
         implements WrapsSet<T> {
 
-    public static <T> java.util.HashSet<T> copyIntoHashSet(final java.util.Collection<? extends T> collection) {
-        return new java.util.HashSet<>(collection);
-    }
-
-    public static <T> java.util.HashSet<T> copyIntoHashSet(final Iterator<? extends T> iterator) {
-        final java.util.HashSet<T> hashSet = new java.util.HashSet<>();
-        iterator.forEachRemaining(hashSet::add);
-        return hashSet;
-    }
-
-    final java.util.Set<T> delegate;
+    private final java.util.Set<T> delegate;
 
     public WrappedSet(final java.util.Set<T> delegate) {
         super(delegate);
         this.delegate = requireNonNull(delegate);
+    }
+
+    protected java.util.Set<T> delegate() {
+        return delegate;
     }
 
     @Override

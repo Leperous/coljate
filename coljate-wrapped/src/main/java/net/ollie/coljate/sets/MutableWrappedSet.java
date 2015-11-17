@@ -1,7 +1,5 @@
 package net.ollie.coljate.sets;
 
-import java.util.Set;
-
 import net.ollie.coljate.sets.mixin.WrapsMutableSet;
 
 /**
@@ -15,8 +13,8 @@ public class MutableWrappedSet<T> extends WrappedSet<T> implements WrapsMutableS
     }
 
     @Override
-    public Set<T> delegate() {
-        return delegate;
+    public java.util.Set<T> delegate() {
+        return super.delegate();
     }
 
 }

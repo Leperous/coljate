@@ -1,5 +1,8 @@
 package net.ollie.coljate.sets.mixin;
 
+import java.util.Iterator;
+import java.util.Set;
+
 import net.ollie.coljate.sets.MutableSet;
 import net.ollie.coljate.sets.MutableWrappedHashSet;
 
@@ -16,6 +19,20 @@ public interface WrapsHashSet<T> extends WrapsSet<T> {
     @Override
     default MutableSet<T> mutableCopy() {
         return MutableWrappedHashSet.viewOf(this.copyDelegate());
+    }
+
+    static <T> java.util.HashSet<T> copyIntoHashSet(final java.util.Collection<? extends T> collection) {
+        return new java.util.HashSet<>(collection);
+    }
+
+    static <T> java.util.HashSet<T> copyIntoHashSet(final Iterable<? extends T> iterable) {
+        return copyIntoHashSet(iterable.iterator());
+    }
+
+    static <T> java.util.HashSet<T> copyIntoHashSet(final Iterator<? extends T> iterator) {
+        final java.util.HashSet<T> hashSet = new java.util.HashSet<>();
+        iterator.forEachRemaining(hashSet::add);
+        return hashSet;
     }
 
 }

@@ -10,7 +10,9 @@ import net.ollie.coljate.utils.Objects;
  *
  * @author Ollie
  */
-public class MutableWrappedTreeSet<T> extends WrappedSortedSet<T> implements MutableSortedSet<T>, WrapsMutableSet<T> {
+public class MutableWrappedTreeSet<T>
+        extends WrappedSortedSet<T>
+        implements MutableSortedSet<T>, WrapsMutableSet<T> {
 
     public static <T extends Comparable<? super T>> MutableSortedSet<T> viewOf(final java.util.TreeSet<T> set) {
         return new MutableWrappedTreeSet<>(set, Objects.firstNonNull(set.comparator(), Comparator::naturalOrder));

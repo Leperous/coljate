@@ -1,6 +1,7 @@
 package net.ollie.coljate.sets;
 
 import net.ollie.coljate.Collection;
+import static net.ollie.coljate.sets.mixin.WrapsHashSet.copyIntoHashSet;
 
 /**
  *
@@ -9,11 +10,11 @@ import net.ollie.coljate.Collection;
 public class MutableWrappedHashSet<T> extends MutableWrappedSet<T> {
 
     public static <T> MutableSet<T> copyOf(final java.util.Collection<? extends T> collection) {
-        return viewOf(new java.util.HashSet<>(collection));
+        return viewOf(copyIntoHashSet(collection));
     }
 
     public static <T> MutableSet<T> copyOf(final Collection<? extends T> collection) {
-        throw new UnsupportedOperationException(); //TODO
+        return viewOf(copyIntoHashSet(collection));
     }
 
     public static <T> MutableSet<T> viewOf(final java.util.HashSet<T> set) {
