@@ -1,5 +1,7 @@
 package net.ollie.coljate.theory;
 
+import java.util.Iterator;
+import java.util.Objects;
 import java.util.stream.Stream;
 import java.util.stream.StreamSupport;
 
@@ -10,7 +12,7 @@ import org.checkerframework.checker.nullness.qual.Nullable;
  *
  * @author Ollie
  */
-public interface Traversable<@Nullable T> extends Streamable<T>, Iterable<T> {
+public interface Traversable<@Nullable T> extends Streamable<T>, Iterable<T>, Container {
 
     @Nullable
     default T head() {
@@ -19,6 +21,16 @@ public interface Traversable<@Nullable T> extends Streamable<T>, Iterable<T> {
 
     @NonNull
     Traversable<T> tail();
+
+    @Override
+    default boolean contains(final Object object) {
+        for (final Iterator<?> iterator = this.iterator(); iterator.hasNext();) {
+            if (Objects.equals(iterator.next(), object)) {
+                return true;
+            }
+        }
+        return false;
+    }
 
     default boolean isEmpty() {
         return this.iterator().hasNext();
