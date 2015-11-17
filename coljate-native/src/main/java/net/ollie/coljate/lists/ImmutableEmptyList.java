@@ -6,7 +6,9 @@ import net.ollie.coljate.UnmodifiableIterator;
  *
  * @author Ollie
  */
-public class ImmutableEmptyList<T> implements ImmutableList<T> {
+public class ImmutableEmptyList<T>
+        extends AbstractList<T>
+        implements ImmutableList<T> {
 
     @SuppressWarnings("rawtypes")
     private static final ImmutableEmptyList INSTANCE = new ImmutableEmptyList();

@@ -2,6 +2,7 @@ package net.ollie.coljate.lists;
 
 import java.util.Arrays;
 import java.util.Iterator;
+import java.util.Objects;
 
 import static net.ollie.coljate.utils.Assertions.checkNonNegative;
 
@@ -10,7 +11,9 @@ import static net.ollie.coljate.utils.Assertions.checkNonNegative;
  * @author Ollie
  * @see java.util.ArrayList
  */
-public class MutableArrayList<T> implements MutableArray<T> {
+public class MutableArrayList<T>
+        extends AbstractList<T>
+        implements MutableArray<T> {
 
     private static final Object[] EMPTY = new Object[0];
 
@@ -87,7 +90,12 @@ public class MutableArrayList<T> implements MutableArray<T> {
 
     @Override
     public boolean removeOnce(final Object element) {
-        throw new UnsupportedOperationException(); //TODO
+        for (int i = 0; i < size; i++) {
+            if (Objects.equals(array[i], element)) {
+                throw new UnsupportedOperationException(); //TODO resize array
+            }
+        }
+        return false;
     }
 
     @Override

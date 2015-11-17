@@ -9,7 +9,9 @@ import net.ollie.coljate.UnmodifiableIterator;
  *
  * @author Ollie
  */
-public class ImmutablePrefixList<T> implements ImmutableList<T> {
+public class ImmutablePrefixList<T>
+        extends AbstractList<T>
+        implements ImmutableList<T> {
 
     public static <T> ImmutableList<T> of(final T element, final ImmutableList<T> right) {
         throw new UnsupportedOperationException(); //TODO

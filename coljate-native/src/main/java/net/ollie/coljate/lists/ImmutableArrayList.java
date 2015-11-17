@@ -10,7 +10,9 @@ import net.ollie.coljate.utils.UnmodifiableArrayIterator;
  * @author Ollie
  * @see java.util.ArrayList
  */
-public class ImmutableArrayList<T> implements ImmutableList<T>, Array<T> {
+public class ImmutableArrayList<T>
+        extends AbstractList<T>
+        implements ImmutableList<T>, Array<T> {
 
     public static <T> ImmutableList<T> of() {
         return ImmutableEmptyList.empty();

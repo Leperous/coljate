@@ -1,6 +1,7 @@
 package net.ollie.coljate.lists;
 
 import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
 import org.junit.Test;
@@ -20,13 +21,16 @@ public abstract class MutableListTest extends ListTest {
     }
 
     @Test
-    public void testEmpty_Add() {
+    public void testEmpty_AddRemove() {
         final MutableList<Object> list = this.empty();
         assertTrue(list.isEmpty());
         final Object element = new Object();
         list.add(element);
         assertThat(list.count(), is(1));
         assertTrue(list.contains(element));
+        list.removeOnce(element);
+        assertTrue(list.isEmpty());
+        assertFalse(list.contains(element));
     }
 
 }

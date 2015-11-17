@@ -14,7 +14,9 @@ import net.ollie.coljate.lists.mixin.WrapsImmutableList;
  *
  * @author Ollie
  */
-public class ImmutableAppendList<@Nullable T> implements WrapsImmutableList<T> {
+public class ImmutableAppendList<@Nullable T>
+        extends AbstractList<T>
+        implements WrapsImmutableList<T> {
 
     public static <T> ImmutableList<T> of(@NonNull final ImmutableList<? extends T> list, @Nullable final T right) {
         return list.isEmpty()

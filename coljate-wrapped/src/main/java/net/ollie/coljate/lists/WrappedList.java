@@ -10,7 +10,9 @@ import net.ollie.coljate.lists.mixin.WrapsList;
  *
  * @author Ollie
  */
-public class WrappedList<T> extends WrappedCollection<T> implements WrapsList<T> {
+public class WrappedList<T>
+        extends WrappedCollection<T>
+        implements WrapsList<T> {
 
     private final java.util.List<T> delegate;
 
@@ -52,6 +54,17 @@ public class WrappedList<T> extends WrappedCollection<T> implements WrapsList<T>
     @Override
     public ImmutableList<T> immutableCopy() {
         return ImmutableWrappedArrayList.copyOf(this);
+    }
+
+    @Override
+    public boolean equals(final Object object) {
+        return object instanceof List
+                && List.equals(this, (List) object);
+    }
+
+    @Override
+    public int hashCode() {
+        return List.hashCode(this);
     }
 
 }

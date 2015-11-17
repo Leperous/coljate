@@ -7,7 +7,9 @@ import net.ollie.coljate.lists.mixin.WrapsImmutableList;
  *
  * @author Ollie
  */
-public class ImmutableWrappedEmptyList<T> implements WrapsImmutableList<T> {
+public class ImmutableWrappedEmptyList<T>
+        extends AbstractList<T>
+        implements WrapsImmutableList<T> {
 
     @SuppressWarnings("rawtypes")
     private static final ImmutableWrappedEmptyList INSTANCE = new ImmutableWrappedEmptyList();
@@ -18,6 +20,11 @@ public class ImmutableWrappedEmptyList<T> implements WrapsImmutableList<T> {
     }
 
     protected ImmutableWrappedEmptyList() {
+    }
+
+    @Override
+    public T head() {
+        return null;
     }
 
     @Override
