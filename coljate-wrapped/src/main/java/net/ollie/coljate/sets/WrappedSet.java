@@ -4,12 +4,13 @@ import java.util.Iterator;
 import static java.util.Objects.requireNonNull;
 
 import net.ollie.coljate.WrappedCollection;
+import net.ollie.coljate.sets.mixin.WrapsSet;
 
 /**
  *
  * @author Ollie
  */
-public class WrappedSet<T> extends WrappedCollection<T> implements Set<T> {
+public class WrappedSet<T> extends WrappedCollection<T> implements WrapsSet<T> {
 
     public static <T> java.util.HashSet<T> copyIntoHashSet(final java.util.Collection<? extends T> collection) {
         return new java.util.HashSet<>(collection);
@@ -26,6 +27,11 @@ public class WrappedSet<T> extends WrappedCollection<T> implements Set<T> {
     public WrappedSet(final java.util.Set<T> delegate) {
         super(delegate);
         this.delegate = requireNonNull(delegate);
+    }
+
+    @Override
+    public java.util.Set<T> copyDelegate() {
+        return new java.util.HashSet<>(delegate);
     }
 
     @Override

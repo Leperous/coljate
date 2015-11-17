@@ -1,17 +1,18 @@
 package net.ollie.coljate.lists;
 
-import net.ollie.coljate.lists.mixin.WrappedArrayList;
 import net.ollie.coljate.Collection;
 import net.ollie.coljate.UnmodifiableIterator;
-import static net.ollie.coljate.lists.mixin.WrappedArrayList.copyToArrayList;
+import net.ollie.coljate.lists.mixin.WrapsArrayList;
+import static net.ollie.coljate.lists.mixin.WrapsArrayList.copyToArrayList;
 import net.ollie.coljate.utils.DelegatedUnmodifiableIterator;
-import static net.ollie.coljate.lists.mixin.WrappedArrayList.copyToArrayList;
 
 /**
  *
  * @author Ollie
  */
-public class ImmutableWrappedArrayList<T> extends WrappedList<T> implements ImmutableList<T>, WrappedArrayList<T> {
+public class ImmutableWrappedArrayList<T>
+        extends WrappedList<T>
+        implements ImmutableList<T>, WrapsArrayList<T> {
 
     public static <T> ImmutableList<T> of() {
         return ImmutableEmptyList.empty();

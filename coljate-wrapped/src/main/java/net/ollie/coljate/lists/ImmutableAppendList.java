@@ -8,13 +8,15 @@ import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
 
 import net.ollie.coljate.UnmodifiableIterator;
-import net.ollie.coljate.lists.mixin.GenericImmutableWrappedList;
+import net.ollie.coljate.lists.mixin.WrapsImmutableList;
+
+import static java.util.Objects.requireNonNull;
 
 /**
  *
  * @author Ollie
  */
-public class ImmutableAppendList<@Nullable T> implements GenericImmutableWrappedList<T> {
+public class ImmutableAppendList<@Nullable T> implements WrapsImmutableList<T> {
 
     public static <T> ImmutableList<T> of(@NonNull final ImmutableList<? extends T> list, @Nullable final T right) {
         return list.isEmpty()

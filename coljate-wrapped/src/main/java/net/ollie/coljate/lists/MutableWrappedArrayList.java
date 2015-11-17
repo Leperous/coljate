@@ -1,19 +1,20 @@
 package net.ollie.coljate.lists;
 
-import net.ollie.coljate.lists.mixin.WrappedArrayList;
-
 import java.util.List;
 
 import net.ollie.coljate.Collection;
-import static net.ollie.coljate.lists.mixin.WrappedArrayList.copyToArrayList;
-import net.ollie.coljate.lists.mixin.GenericMutableWrappedList;
+import net.ollie.coljate.lists.mixin.WrapsArrayList;
+import static net.ollie.coljate.lists.mixin.WrapsArrayList.copyToArrayList;
+import net.ollie.coljate.lists.mixin.WrapsMutableList;
 
 /**
  *
  * @author Ollie
  * @see List
  */
-public class MutableWrappedArrayList<T> extends WrappedList<T> implements GenericMutableWrappedList<T>, WrappedArrayList<T> {
+public class MutableWrappedArrayList<T>
+        extends WrappedList<T>
+        implements WrapsMutableList<T>, WrapsArrayList<T> {
 
     public static <T> MutableList<T> copyOf(final java.util.Collection<? extends T> collection) {
         return new MutableWrappedArrayList<>(copyToArrayList(collection));

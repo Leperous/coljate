@@ -5,15 +5,14 @@ import java.util.LinkedList;
 import javax.annotation.Nonnull;
 
 import net.ollie.coljate.Collection;
-import net.ollie.coljate.lists.List;
 
 /**
  *
  * @author Ollie
  */
-public interface WrappedLinkedList<T> extends List<T> {
+public interface WrapsLinkedList<T> extends WrapsList<T> {
 
-    @Nonnull
+    @Override
     java.util.LinkedList<T> copyDelegate();
 
     static <T> java.util.LinkedList<T> copyIntoLinkedList(@Nonnull final java.util.Collection<? extends T> collection) {

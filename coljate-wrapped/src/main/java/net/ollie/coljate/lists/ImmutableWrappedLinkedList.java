@@ -1,17 +1,20 @@
 package net.ollie.coljate.lists;
 
-import net.ollie.coljate.lists.mixin.WrappedLinkedList;
 import net.ollie.coljate.Collection;
 import net.ollie.coljate.UnmodifiableIterator;
-import static net.ollie.coljate.lists.mixin.WrappedLinkedList.copyIntoLinkedList;
-import net.ollie.coljate.lists.mixin.GenericImmutableWrappedList;
+import net.ollie.coljate.lists.mixin.WrapsLinkedList;
+import static net.ollie.coljate.lists.mixin.WrapsLinkedList.copyIntoLinkedList;
 import net.ollie.coljate.utils.DelegatedUnmodifiableIterator;
+import net.ollie.coljate.lists.mixin.WrapsImmutableList;
+import static net.ollie.coljate.lists.mixin.WrapsLinkedList.copyIntoLinkedList;
 
 /**
  *
  * @author Ollie
  */
-public class ImmutableWrappedLinkedList<T> extends WrappedList<T> implements GenericImmutableWrappedList<T>, WrappedLinkedList<T> {
+public class ImmutableWrappedLinkedList<T>
+        extends WrappedList<T>
+        implements WrapsImmutableList<T>, WrapsLinkedList<T> {
 
     public static <T> ImmutableList<T> copyOf(final java.util.Collection<? extends T> collection) {
         return new ImmutableWrappedLinkedList<>(copyIntoLinkedList(collection));

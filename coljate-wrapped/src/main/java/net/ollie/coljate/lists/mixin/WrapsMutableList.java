@@ -2,17 +2,24 @@ package net.ollie.coljate.lists.mixin;
 
 import java.util.Collections;
 
-import net.ollie.coljate.GenericMutableWrappedCollection;
+import net.ollie.coljate.lists.List;
 import net.ollie.coljate.lists.MutableList;
+import net.ollie.coljate.WrapsMutableCollection;
 
 /**
  *
  * @author Ollie
+ * @see List
  */
-public interface GenericMutableWrappedList<T> extends GenericMutableWrappedCollection<T>, MutableList<T> {
+public interface WrapsMutableList<T> extends WrapsMutableCollection<T>, MutableList<T>, WrapsList<T> {
 
     @Override
     java.util.List<T> delegate();
+
+    @Override
+    default java.util.List<T> copyDelegate() {
+        return new java.util.ArrayList<>(this.delegate());
+    }
 
     @Override
     default T set(int index, T element) {

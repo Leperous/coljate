@@ -3,14 +3,14 @@ package net.ollie.coljate.lists.mixin;
 import java.util.RandomAccess;
 
 import net.ollie.coljate.Collection;
-import net.ollie.coljate.lists.List;
 
 /**
  *
  * @author Ollie
  */
-public interface WrappedArrayList<T> extends List<T>, RandomAccess {
+public interface WrapsArrayList<T> extends WrapsList<T>, RandomAccess {
 
+    @Override
     java.util.ArrayList<T> copyDelegate();
 
     @SafeVarargs

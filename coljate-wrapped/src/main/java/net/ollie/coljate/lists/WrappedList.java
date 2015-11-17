@@ -4,18 +4,24 @@ import static java.util.Objects.requireNonNull;
 import java.util.OptionalInt;
 
 import net.ollie.coljate.WrappedCollection;
+import net.ollie.coljate.lists.mixin.WrapsList;
 
 /**
  *
  * @author Ollie
  */
-public class WrappedList<T> extends WrappedCollection<T> implements List<T> {
+public class WrappedList<T> extends WrappedCollection<T> implements WrapsList<T> {
 
     private final java.util.List<T> delegate;
 
     public WrappedList(final java.util.List<T> delegate) {
         super(delegate);
         this.delegate = requireNonNull(delegate);
+    }
+
+    @Override
+    public java.util.List<T> copyDelegate() {
+        return new java.util.ArrayList<>(delegate);
     }
 
     @Override

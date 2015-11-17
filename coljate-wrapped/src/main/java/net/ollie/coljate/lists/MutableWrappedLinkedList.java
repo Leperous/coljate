@@ -1,17 +1,16 @@
 package net.ollie.coljate.lists;
 
-import net.ollie.coljate.lists.mixin.WrappedLinkedList;
-
-import java.util.LinkedList;
-
-import static net.ollie.coljate.lists.mixin.WrappedLinkedList.copyIntoLinkedList;
-import net.ollie.coljate.lists.mixin.GenericMutableWrappedList;
+import net.ollie.coljate.lists.mixin.WrapsLinkedList;
+import static net.ollie.coljate.lists.mixin.WrapsLinkedList.copyIntoLinkedList;
+import net.ollie.coljate.lists.mixin.WrapsMutableList;
 
 /**
  *
  * @author Ollie
  */
-public class MutableWrappedLinkedList<T> extends WrappedList<T> implements GenericMutableWrappedList<T>, WrappedLinkedList<T> {
+public class MutableWrappedLinkedList<T>
+        extends WrappedList<T>
+        implements WrapsMutableList<T>, WrapsLinkedList<T> {
 
     private final java.util.LinkedList<T> delegate;
 

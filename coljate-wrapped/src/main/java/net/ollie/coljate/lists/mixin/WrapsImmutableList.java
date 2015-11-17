@@ -1,17 +1,17 @@
 package net.ollie.coljate.lists.mixin;
 
+import org.checkerframework.checker.nullness.qual.Nullable;
+
 import net.ollie.coljate.lists.ImmutableAppendList;
 import net.ollie.coljate.lists.ImmutableList;
 import net.ollie.coljate.lists.MutableList;
 import net.ollie.coljate.lists.MutableWrappedArrayList;
 
-import org.checkerframework.checker.nullness.qual.Nullable;
-
 /**
  *
  * @author Ollie
  */
-public interface GenericImmutableWrappedList<@Nullable T> extends ImmutableList<T> {
+public interface WrapsImmutableList<@Nullable T> extends ImmutableList<T>, WrapsList<T> {
 
     @Override
     default ImmutableList<T> with(final T element) {

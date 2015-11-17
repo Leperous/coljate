@@ -10,7 +10,7 @@ import org.checkerframework.checker.nullness.qual.Nullable;
  *
  * @author Ollie
  */
-public interface GenericMutableWrappedCollection<@Nullable T> extends MutableCollection<T> {
+public interface WrapsMutableCollection<@Nullable T> extends MutableCollection<T> {
 
     @Nonnull
     java.util.Collection<T> delegate();

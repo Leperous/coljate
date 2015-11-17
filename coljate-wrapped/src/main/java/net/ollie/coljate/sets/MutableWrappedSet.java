@@ -3,13 +3,13 @@ package net.ollie.coljate.sets;
 
 import java.util.Set;
 
-import net.ollie.coljate.sets.mixin.GenericMutableWrappedSet;
+import net.ollie.coljate.sets.mixin.WrapsMutableSet;
 
 /**
  *
  * @author Ollie
  */
-public class MutableWrappedSet<T> extends WrappedSet<T> implements GenericMutableWrappedSet<T> {
+public class MutableWrappedSet<T> extends WrappedSet<T> implements WrapsMutableSet<T> {
 
     public MutableWrappedSet(final java.util.Set<T> delegate) {
         super(delegate);

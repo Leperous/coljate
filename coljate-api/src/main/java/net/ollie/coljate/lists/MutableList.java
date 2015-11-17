@@ -13,8 +13,6 @@ public interface MutableList<T> extends List<T>, MutableCollection<T> {
     @Nullable
     T set(int index, T element);
 
-    boolean removeAll(Object element);
-
     @Override
     MutableList<T> tail();
 
