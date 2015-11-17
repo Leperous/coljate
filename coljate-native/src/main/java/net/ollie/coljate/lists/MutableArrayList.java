@@ -14,6 +14,10 @@ public class MutableArrayList<T> implements MutableArray<T> {
 
     private static final Object[] EMPTY = new Object[0];
 
+    public static <T> MutableArray<T> of() {
+        return new MutableArrayList<>(0);
+    }
+
     private Object[] array;
     private int size;
 

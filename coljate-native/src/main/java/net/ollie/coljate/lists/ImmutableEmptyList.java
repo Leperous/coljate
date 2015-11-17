@@ -44,12 +44,12 @@ public class ImmutableEmptyList<T> implements ImmutableList<T> {
 
     @Override
     public MutableList<T> mutableCopy() {
-        throw new UnsupportedOperationException(); //TODO
+        return MutableArrayList.of();
     }
 
     @Override
     public ImmutableList<T> tail() {
-        throw new UnsupportedOperationException(); //TODO
+        return this;
     }
 
     @Override
