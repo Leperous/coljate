@@ -6,6 +6,8 @@ import java.util.OptionalInt;
 
 import net.ollie.coljate.lists.mixin.NativeListMixin;
 
+import static java.util.Objects.requireNonNull;
+
 /**
  *
  * @author Ollie

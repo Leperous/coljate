@@ -10,6 +10,15 @@ import net.ollie.coljate.Collection;
  */
 public class NativeArrayList<T> extends NativeList<T> implements RandomAccess {
 
+    @SafeVarargs
+    public static <T> java.util.ArrayList<T> copyToArrayList(final T... array) {
+        final java.util.ArrayList<T> list = new java.util.ArrayList<>(array.length);
+        for (final T element : array) {
+            list.add(element);
+        }
+        return list;
+    }
+
     public static <T> java.util.ArrayList<T> copyToArrayList(final java.util.Collection<? extends T> collection) {
         return new java.util.ArrayList<>(collection);
     }

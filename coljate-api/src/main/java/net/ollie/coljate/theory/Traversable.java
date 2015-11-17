@@ -33,7 +33,7 @@ public interface Traversable<@Nullable T> extends Streamable<T>, Iterable<T>, Co
     }
 
     default boolean isEmpty() {
-        return this.iterator().hasNext();
+        return !this.iterator().hasNext();
     }
 
     @Override

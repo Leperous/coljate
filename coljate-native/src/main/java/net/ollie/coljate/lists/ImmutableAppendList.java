@@ -1,5 +1,7 @@
 package net.ollie.coljate.lists;
 
+import java.util.Iterator;
+import java.util.NoSuchElementException;
 import static java.util.Objects.requireNonNull;
 
 import org.checkerframework.checker.nullness.qual.NonNull;
@@ -47,7 +49,29 @@ public class ImmutableAppendList<@Nullable T> implements ImmutableNativeListMixi
 
     @Override
     public UnmodifiableIterator<T> iterator() {
-        throw new UnsupportedOperationException(); //TODO
+        return new UnmodifiableIterator<T>() {
+
+            final Iterator<? extends T> iterator = left.iterator();
+            boolean finished = false;
+
+            @Override
+            public boolean hasNext() {
+                return iterator.hasNext() || finished;
+            }
+
+            @Override
+            public T next() {
+                if (finished) {
+                    throw new NoSuchElementException();
+                }
+                if (iterator.hasNext()) {
+                    return iterator.next();
+                }
+                finished = true;
+                return right;
+            }
+
+        };
     }
 
 }
