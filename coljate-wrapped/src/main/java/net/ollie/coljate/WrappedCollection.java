@@ -10,7 +10,9 @@ import net.ollie.coljate.lists.MutableWrappedArrayList;
  *
  * @author Ollie
  */
-public class WrappedCollection<T> extends AbstractCollection<T> implements Collection<T> {
+public class WrappedCollection<T>
+        extends AbstractCollection<T>
+        implements Collection<T> {
 
     private final java.util.Collection<T> delegate;
 
