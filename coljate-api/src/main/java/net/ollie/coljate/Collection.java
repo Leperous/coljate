@@ -10,7 +10,7 @@ import net.ollie.coljate.theory.Finite;
  *
  * @author Ollie
  */
-public interface Collection<@Nullable T> extends Container, Finite<T> {
+public interface Collection<@Nullable T> extends Finite<T>, Container {
 
     @Override
     boolean contains(Object object);
