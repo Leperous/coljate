@@ -2,6 +2,9 @@ package net.ollie.coljate.lists;
 
 import static java.util.Objects.requireNonNull;
 
+import org.checkerframework.checker.nullness.qual.NonNull;
+import org.checkerframework.checker.nullness.qual.Nullable;
+
 import net.ollie.coljate.UnmodifiableIterator;
 import net.ollie.coljate.lists.mixin.ImmutableNativeListMixin;
 
@@ -9,9 +12,9 @@ import net.ollie.coljate.lists.mixin.ImmutableNativeListMixin;
  *
  * @author Ollie
  */
-public class ImmutableAppendList<T> implements ImmutableNativeListMixin<T> {
+public class ImmutableAppendList<@Nullable T> implements ImmutableNativeListMixin<T> {
 
-    public static <T> ImmutableList<T> of(final ImmutableList<? extends T> list, final T right) {
+    public static <T> ImmutableList<T> of(@NonNull final ImmutableList<? extends T> list, @Nullable final T right) {
         return list.isEmpty()
                 ? ImmutableArrayList.of(right)
                 : new ImmutableAppendList<>(list, right);

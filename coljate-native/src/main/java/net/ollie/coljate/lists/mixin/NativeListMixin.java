@@ -1,5 +1,7 @@
 package net.ollie.coljate.lists.mixin;
 
+import org.checkerframework.checker.nullness.qual.Nullable;
+
 import net.ollie.coljate.lists.ImmutableArrayList;
 import net.ollie.coljate.lists.ImmutableList;
 import net.ollie.coljate.lists.List;
@@ -10,7 +12,7 @@ import net.ollie.coljate.lists.MutableList;
  *
  * @author Ollie
  */
-public interface NativeListMixin<T> extends List<T> {
+public interface NativeListMixin<@Nullable T> extends List<T> {
 
     @Override
     default MutableList<T> mutableCopy() {
