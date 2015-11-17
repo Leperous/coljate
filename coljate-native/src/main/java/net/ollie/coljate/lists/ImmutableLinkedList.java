@@ -2,13 +2,14 @@ package net.ollie.coljate.lists;
 
 import net.ollie.coljate.Collection;
 import net.ollie.coljate.UnmodifiableIterator;
+import net.ollie.coljate.lists.mixin.ImmutableNativeListMixin;
 import net.ollie.coljate.utils.DelegatedUnmodifiableIterator;
 
 /**
  *
  * @author Ollie
  */
-public class ImmutableLinkedList<T> extends NativeLinkedList<T> implements ImmutableList<T> {
+public class ImmutableLinkedList<T> extends NativeLinkedList<T> implements ImmutableNativeListMixin<T> {
 
     public static <T> ImmutableList<T> copyOf(final java.util.Collection<? extends T> collection) {
         return new ImmutableLinkedList<>(copyIntoLinkedList(collection));
@@ -23,13 +24,6 @@ public class ImmutableLinkedList<T> extends NativeLinkedList<T> implements Immut
     }
 
     @Override
-    public ImmutableList<T> with(final T element) {
-        final java.util.LinkedList<T> copy = this.copyDelegate();
-        copy.add(element);
-        return new ImmutableLinkedList<>(copy);
-    }
-
-    @Override
     public ImmutableList<T> tail() {
         return copyOf(super.nativeTail());
     }
@@ -37,6 +31,12 @@ public class ImmutableLinkedList<T> extends NativeLinkedList<T> implements Immut
     @Override
     public UnmodifiableIterator<T> iterator() {
         return new DelegatedUnmodifiableIterator<>(super.iterator());
+    }
+
+    @Override
+    @Deprecated
+    public ImmutableLinkedList<T> immutableCopy() {
+        return this;
     }
 
 }

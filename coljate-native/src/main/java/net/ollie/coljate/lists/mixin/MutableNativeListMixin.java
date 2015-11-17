@@ -1,12 +1,14 @@
-package net.ollie.coljate.lists;
+package net.ollie.coljate.lists.mixin;
 
 import javax.annotation.Nonnull;
+
+import net.ollie.coljate.lists.MutableList;
 
 /**
  *
  * @author Ollie
  */
-interface MutableNativeList<T> extends MutableList<T> {
+public interface MutableNativeListMixin<T> extends MutableList<T>, NativeListMixin<T> {
 
     @Nonnull
     java.util.List<T> delegate();

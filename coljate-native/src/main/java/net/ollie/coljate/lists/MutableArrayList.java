@@ -1,16 +1,24 @@
 package net.ollie.coljate.lists;
 
+import net.ollie.coljate.lists.mixin.MutableNativeListMixin;
+
 import java.util.List;
+
+import net.ollie.coljate.Collection;
 
 /**
  *
  * @author Ollie
  * @see List
  */
-public class MutableArrayList<T> extends NativeArrayList<T> implements MutableNativeList<T> {
+public class MutableArrayList<T> extends NativeArrayList<T> implements MutableNativeListMixin<T> {
 
     public static <T> MutableList<T> copyOf(final java.util.Collection<? extends T> collection) {
-        return new MutableArrayList<>(new java.util.ArrayList<>(collection));
+        return new MutableArrayList<>(copyToArrayList(collection));
+    }
+
+    public static <T> MutableList<T> copyOf(final Collection<? extends T> collection) {
+        return new MutableArrayList<>(copyToArrayList(collection));
     }
 
     public static <T> MutableList<T> viewOf(final java.util.ArrayList<T> list) {

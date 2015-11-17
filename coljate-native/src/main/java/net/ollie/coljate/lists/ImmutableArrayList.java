@@ -10,6 +10,12 @@ import net.ollie.coljate.utils.DelegatedUnmodifiableIterator;
  */
 public class ImmutableArrayList<T> extends NativeArrayList<T> implements ImmutableList<T> {
 
+    public static <T> ImmutableList<T> of(final T element) {
+        final java.util.ArrayList<T> list = new java.util.ArrayList<>(1);
+        list.add(element);
+        return new ImmutableArrayList<>(list);
+    }
+
     public static <T> ImmutableList<T> copyOf(final java.util.Collection<? extends T> collection) {
         return new ImmutableArrayList<>(copyToArrayList(collection));
     }
@@ -40,6 +46,12 @@ public class ImmutableArrayList<T> extends NativeArrayList<T> implements Immutab
     @Override
     public ImmutableList<T> tail() {
         return copyOf(super.tail());
+    }
+
+    @Override
+    @Deprecated
+    public ImmutableArrayList<T> immutableCopy() {
+        return this;
     }
 
 }

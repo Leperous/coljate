@@ -1,5 +1,6 @@
 package net.ollie.coljate.lists;
 
+import java.util.Objects;
 import java.util.OptionalInt;
 
 import org.checkerframework.checker.nullness.qual.NonNull;
@@ -18,7 +19,21 @@ public interface List<@Nullable T> extends Collection<T>, PartialFunction<Intege
     T get(int index);
 
     @NonNull
-    OptionalInt indexOf(Object element);
+    default OptionalInt indexOf(final Object target) {
+        int index = 0;
+        for (final T element : this) {
+            if (Objects.equals(element, target)) {
+                return OptionalInt.of(index);
+            }
+            index++;
+        }
+        return OptionalInt.empty();
+    }
+
+    @Override
+    default boolean contains(final Object target) {
+        return this.indexOf(target).isPresent();
+    }
 
     @Override
     List<T> tail();

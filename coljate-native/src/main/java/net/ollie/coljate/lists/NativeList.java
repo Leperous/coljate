@@ -3,13 +3,14 @@ package net.ollie.coljate.lists;
 import java.util.Iterator;
 import static java.util.Objects.requireNonNull;
 import java.util.OptionalInt;
-import static java.util.Objects.requireNonNull;
+
+import net.ollie.coljate.lists.mixin.NativeListMixin;
 
 /**
  *
  * @author Ollie
  */
-public class NativeList<T> implements List<T> {
+public class NativeList<T> implements List<T>, NativeListMixin<T> {
 
     private final java.util.List<T> delegate;
 
@@ -50,22 +51,17 @@ public class NativeList<T> implements List<T> {
     }
 
     @Override
-    public MutableList<T> mutableCopy() {
-        return MutableArrayList.copyOf(delegate);
-    }
-
-    @Override
-    public ImmutableList<T> immutableCopy() {
-        return ImmutableArrayList.copyOf(delegate);
-    }
-
-    @Override
     public List<T> tail() {
         return new NativeList<>(this.nativeTail());
     }
 
     protected java.util.List<T> nativeTail() {
         return delegate.subList(1, delegate.size());
+    }
+
+    @Override
+    public ImmutableList<T> immutableCopy() {
+        return ImmutableArrayList.copyOf(this);
     }
 
 }
