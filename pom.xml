@@ -10,7 +10,7 @@
 
     <modules>
         <module>coljate-api</module>
-        <module>coljate-native</module>
+        <module>coljate-wrapped</module>
     </modules>
 
     <properties>
