@@ -3,13 +3,13 @@ package net.ollie.coljate.lists;
 import net.ollie.coljate.Collection;
 import net.ollie.coljate.UnmodifiableIterator;
 import net.ollie.coljate.utils.DelegatedUnmodifiableIterator;
-import net.ollie.coljate.lists.mixin.GenericWrappedImmutableList;
+import net.ollie.coljate.lists.mixin.GenericImmutableWrappedList;
 
 /**
  *
  * @author Ollie
  */
-public class ImmutableWrappedLinkedList<T> extends WrappedLinkedList<T> implements GenericWrappedImmutableList<T> {
+public class ImmutableWrappedLinkedList<T> extends WrappedLinkedList<T> implements GenericImmutableWrappedList<T> {
 
     public static <T> ImmutableList<T> copyOf(final java.util.Collection<? extends T> collection) {
         return new ImmutableWrappedLinkedList<>(copyIntoLinkedList(collection));

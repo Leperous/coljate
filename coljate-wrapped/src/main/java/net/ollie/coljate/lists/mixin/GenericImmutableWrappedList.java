@@ -11,7 +11,7 @@ import org.checkerframework.checker.nullness.qual.Nullable;
  *
  * @author Ollie
  */
-public interface GenericWrappedImmutableList<@Nullable T> extends ImmutableList<T> {
+public interface GenericImmutableWrappedList<@Nullable T> extends ImmutableList<T> {
 
     @Override
     default ImmutableList<T> with(final T element) {
