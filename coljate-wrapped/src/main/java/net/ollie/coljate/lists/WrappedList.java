@@ -4,22 +4,19 @@ import java.util.Iterator;
 import static java.util.Objects.requireNonNull;
 import java.util.OptionalInt;
 
+import net.ollie.coljate.WrappedCollection;
+
 /**
  *
  * @author Ollie
  */
-public class WrappedList<T> implements List<T> {
+public class WrappedList<T> extends WrappedCollection<T> implements List<T> {
 
     private final java.util.List<T> delegate;
 
     protected WrappedList(final java.util.List<T> delegate) {
+        super(delegate);
         this.delegate = requireNonNull(delegate);
-    }
-
-    @Override
-    @SuppressWarnings("element-type-mismatch")
-    public boolean contains(final Object object) {
-        return delegate.contains(object);
     }
 
     @Override
@@ -28,24 +25,9 @@ public class WrappedList<T> implements List<T> {
     }
 
     @Override
-    public int size() {
-        return delegate.size();
-    }
-
-    @Override
-    public boolean isEmpty() {
-        return delegate.isEmpty();
-    }
-
-    @Override
     public OptionalInt indexOf(final Object element) {
         final int index = delegate.indexOf(element);
         return index >= 0 ? OptionalInt.of(index) : OptionalInt.empty();
-    }
-
-    @Override
-    public Iterator<T> iterator() {
-        return delegate.iterator();
     }
 
     @Override

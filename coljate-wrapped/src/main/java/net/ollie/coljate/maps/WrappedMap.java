@@ -1,12 +1,18 @@
 package net.ollie.coljate.maps;
 
+import java.util.Iterator;
 import static java.util.Objects.requireNonNull;
+
+import net.ollie.coljate.Collection;
+import net.ollie.coljate.WrappedCollection;
+import net.ollie.coljate.sets.Set;
+import net.ollie.coljate.sets.WrappedSet;
 
 /**
  *
  * @author Ollie
  */
-public abstract class WrappedMap<K, V> implements Map<K, V> {
+public class WrappedMap<K, V> implements Map<K, V> {
 
     final java.util.Map<K, V> delegate;
 
@@ -33,6 +39,36 @@ public abstract class WrappedMap<K, V> implements Map<K, V> {
     @Override
     public boolean isEmpty() {
         return delegate.isEmpty();
+    }
+
+    @Override
+    public Iterator<MapEntry<K, V>> iterator() {
+        throw new UnsupportedOperationException(); //TODO
+    }
+
+    @Override
+    public Set<K> keys() {
+        return new WrappedSet<>(delegate.keySet());
+    }
+
+    @Override
+    public Collection<V> values() {
+        return new WrappedCollection<>(delegate.values());
+    }
+
+    @Override
+    public Map<K, V> tail() {
+        throw new UnsupportedOperationException(); //TODO
+    }
+
+    @Override
+    public MutableMap<K, V> mutableCopy() {
+        return MutableWrappedHashMap.copyOf(delegate);
+    }
+
+    @Override
+    public ImmutableMap<K, V> immutableCopy() {
+        return ImmutableWrappedHashMap.copyOf(delegate);
     }
 
 }
