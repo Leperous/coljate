@@ -3,7 +3,9 @@ package net.ollie.coljate.maps;
 import java.util.Iterator;
 
 import net.ollie.coljate.Collection;
+import net.ollie.coljate.sets.MutableNativeSet;
 import net.ollie.coljate.sets.MutableSet;
+import net.ollie.coljate.utils.Lazy;
 
 /**
  *
@@ -16,10 +18,12 @@ public class MutableHashMap<K, V> extends NativeMap<K, V> implements MutableMap<
     }
 
     private final java.util.HashMap<K, V> delegate;
+    private final Lazy<MutableSet<K>> keys;
 
     protected MutableHashMap(final java.util.HashMap<K, V> delegate) {
         super(delegate);
         this.delegate = delegate;
+        this.keys = Lazy.nonNull(() -> new MutableNativeSet<>(delegate.keySet()));
     }
 
     @Override
@@ -35,7 +39,7 @@ public class MutableHashMap<K, V> extends NativeMap<K, V> implements MutableMap<
 
     @Override
     public MutableSet<K> keys() {
-        throw new UnsupportedOperationException(); //TODO
+        return keys.get();
     }
 
     @Override

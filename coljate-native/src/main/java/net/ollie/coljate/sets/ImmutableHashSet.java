@@ -1,5 +1,6 @@
 package net.ollie.coljate.sets;
 
+import net.ollie.coljate.Collection;
 import net.ollie.coljate.UnmodifiableIterator;
 import net.ollie.coljate.utils.DelegatedUnmodifiableIterator;
 
@@ -11,6 +12,10 @@ public class ImmutableHashSet<T> extends NativeHashSet<T> implements ImmutableSe
 
     public static <T> ImmutableSet<T> copyOf(final java.util.Collection<? extends T> collection) {
         return new ImmutableHashSet<>(new java.util.HashSet<>(collection));
+    }
+
+    public static <T> ImmutableSet<T> copyOf(final Collection<? extends T> collection) {
+        throw new UnsupportedOperationException(); //TODO
     }
 
     ImmutableHashSet(final java.util.HashSet<T> delegate) {

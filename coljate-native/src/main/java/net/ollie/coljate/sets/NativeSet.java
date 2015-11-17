@@ -2,7 +2,6 @@ package net.ollie.coljate.sets;
 
 import java.util.Iterator;
 import static java.util.Objects.requireNonNull;
-import static java.util.Objects.requireNonNull;
 
 /**
  *
@@ -20,7 +19,7 @@ public abstract class NativeSet<T> implements Set<T> {
         return hashSet;
     }
 
-    private final java.util.Set<T> delegate;
+    final java.util.Set<T> delegate;
 
     protected NativeSet(final java.util.Set<T> delegate) {
         this.delegate = requireNonNull(delegate);

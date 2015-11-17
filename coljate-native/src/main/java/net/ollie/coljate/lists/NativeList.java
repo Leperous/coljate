@@ -6,8 +6,6 @@ import java.util.OptionalInt;
 
 import net.ollie.coljate.lists.mixin.NativeListMixin;
 
-import static java.util.Objects.requireNonNull;
-
 /**
  *
  * @author Ollie
@@ -59,11 +57,6 @@ public class NativeList<T> implements List<T>, NativeListMixin<T> {
 
     protected java.util.List<T> nativeTail() {
         return delegate.subList(1, delegate.size());
-    }
-
-    @Override
-    public ImmutableList<T> immutableCopy() {
-        return ImmutableArrayList.copyOf(this);
     }
 
 }
