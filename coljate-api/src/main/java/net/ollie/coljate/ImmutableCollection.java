@@ -16,6 +16,9 @@ public interface ImmutableCollection<@Nullable T> extends Collection<T> {
     ImmutableCollection<T> tail();
 
     @Override
+    UnmodifiableIterator<T> iterator();
+
+    @Override
     @Deprecated
     default ImmutableCollection<T> immutableCopy() {
         return this;

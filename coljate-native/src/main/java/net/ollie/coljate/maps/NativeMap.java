@@ -25,13 +25,13 @@ public abstract class NativeMap<K, V> implements Map<K, V> {
     }
 
     @Override
-    public ImmutableMap<K, V> immutableCopy() {
-        return ImmutableHashMap.copyOf(delegate);
+    public MutableMap<K, V> mutableCopy() {
+        return MutableHashMap.copyOf(delegate);
     }
 
     @Override
-    public MutableMap<K, V> mutableCopy() {
-        throw new UnsupportedOperationException(); //TODO
+    public ImmutableMap<K, V> immutableCopy() {
+        return ImmutableHashMap.copyOf(delegate);
     }
 
     @Override

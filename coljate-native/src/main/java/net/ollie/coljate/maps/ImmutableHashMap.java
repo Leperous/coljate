@@ -1,8 +1,7 @@
 package net.ollie.coljate.maps;
 
-import java.util.Iterator;
-
 import net.ollie.coljate.ImmutableCollection;
+import net.ollie.coljate.UnmodifiableIterator;
 import net.ollie.coljate.lists.ImmutableArrayList;
 import net.ollie.coljate.sets.ImmutableHashSet;
 import net.ollie.coljate.sets.ImmutableSet;
@@ -40,7 +39,7 @@ public class ImmutableHashMap<K, V> extends NativeMap<K, V> implements Immutable
     }
 
     @Override
-    public Iterator<MapEntry<K, V>> iterator() {
+    public UnmodifiableIterator<MapEntry<K, V>> iterator() {
         throw new UnsupportedOperationException(); //TODO
     }
 

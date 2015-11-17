@@ -1,6 +1,5 @@
 package net.ollie.coljate.sets;
 
-import java.util.Collection;
 import java.util.Iterator;
 import static java.util.Objects.requireNonNull;
 
@@ -8,9 +7,9 @@ import static java.util.Objects.requireNonNull;
  *
  * @author Ollie
  */
-public abstract class NativeHashSet<T> implements Set<T> {
+public class NativeHashSet<T> implements Set<T> {
 
-    public static <T> java.util.HashSet<T> copyIntoHashSet(final Collection<? extends T> collection) {
+    public static <T> java.util.HashSet<T> copyIntoHashSet(final java.util.Collection<? extends T> collection) {
         return new java.util.HashSet<>(collection);
     }
 
@@ -48,7 +47,22 @@ public abstract class NativeHashSet<T> implements Set<T> {
 
     @Override
     public MutableSet<T> mutableCopy() {
-        return MutableHashSet.viewOf(this.copyDelegate());
+        return MutableHashSet.copyOf(delegate);
+    }
+
+    @Override
+    public ImmutableSet<T> immutableCopy() {
+        return ImmutableHashSet.copyOf(delegate);
+    }
+
+    @Override
+    public Iterator<T> iterator() {
+        return delegate.iterator();
+    }
+
+    @Override
+    public Set<T> tail() {
+        throw new UnsupportedOperationException(); //TODO
     }
 
 }

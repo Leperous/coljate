@@ -1,6 +1,7 @@
 package net.ollie.coljate.sets;
 
-import java.util.Iterator;
+import net.ollie.coljate.UnmodifiableIterator;
+import net.ollie.coljate.utils.DelegatedUnmodifiableIterator;
 
 /**
  *
@@ -27,8 +28,8 @@ public class ImmutableHashSet<T> extends NativeHashSet<T> implements ImmutableSe
     }
 
     @Override
-    public Iterator<T> iterator() {
-        throw new UnsupportedOperationException(); //TODO
+    public UnmodifiableIterator<T> iterator() {
+        return new DelegatedUnmodifiableIterator<>(super.iterator());
     }
 
     @Override

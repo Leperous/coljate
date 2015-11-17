@@ -44,9 +44,4 @@ public class MutableHashSet<T> extends NativeHashSet<T> implements MutableSet<T>
         return delegate.remove(element);
     }
 
-    @Override
-    public Set<T> tail() {
-        throw new UnsupportedOperationException();
-    }
-
 }
