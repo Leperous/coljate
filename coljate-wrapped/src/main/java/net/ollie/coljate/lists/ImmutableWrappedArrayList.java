@@ -5,9 +5,6 @@ import net.ollie.coljate.UnmodifiableIterator;
 import net.ollie.coljate.lists.mixin.WrapsArrayList;
 import static net.ollie.coljate.lists.mixin.WrapsArrayList.copyToArrayList;
 import net.ollie.coljate.utils.DelegatedUnmodifiableIterator;
-import static net.ollie.coljate.lists.mixin.WrapsArrayList.copyToArrayList;
-import static net.ollie.coljate.lists.mixin.WrapsArrayList.copyToArrayList;
-import static net.ollie.coljate.lists.mixin.WrapsArrayList.copyToArrayList;
 
 /**
  *

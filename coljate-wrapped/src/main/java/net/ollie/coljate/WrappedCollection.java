@@ -6,22 +6,6 @@ import static java.util.Objects.requireNonNull;
 import net.ollie.coljate.lists.ImmutableWrappedArrayList;
 import net.ollie.coljate.lists.MutableWrappedArrayList;
 
-import static java.util.Objects.requireNonNull;
-import static java.util.Objects.requireNonNull;
-import static java.util.Objects.requireNonNull;
-import static java.util.Objects.requireNonNull;
-import static java.util.Objects.requireNonNull;
-import static java.util.Objects.requireNonNull;
-import static java.util.Objects.requireNonNull;
-import static java.util.Objects.requireNonNull;
-import static java.util.Objects.requireNonNull;
-import static java.util.Objects.requireNonNull;
-import static java.util.Objects.requireNonNull;
-import static java.util.Objects.requireNonNull;
-import static java.util.Objects.requireNonNull;
-import static java.util.Objects.requireNonNull;
-import static java.util.Objects.requireNonNull;
-
 /**
  *
  * @author Ollie
@@ -68,6 +52,11 @@ public class WrappedCollection<T> implements Collection<T> {
     @SuppressWarnings("element-type-mismatch")
     public boolean contains(final Object object) {
         return delegate.contains(object);
+    }
+
+    @Override
+    public String toString() {
+        return delegate.toString();
     }
 
 }

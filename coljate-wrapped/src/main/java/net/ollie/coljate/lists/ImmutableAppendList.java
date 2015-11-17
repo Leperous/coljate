@@ -10,8 +10,6 @@ import org.checkerframework.checker.nullness.qual.Nullable;
 import net.ollie.coljate.UnmodifiableIterator;
 import net.ollie.coljate.lists.mixin.WrapsImmutableList;
 
-import static java.util.Objects.requireNonNull;
-
 /**
  *
  * @author Ollie

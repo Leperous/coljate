@@ -18,12 +18,27 @@ public class MutableArrayList<T> implements MutableArray<T> {
         return new MutableArrayList<>(0);
     }
 
+    @SafeVarargs
+    public static <T> MutableArray<T> viewOf(final T... elements) {
+        switch (elements.length) {
+            case 0:
+                return of();
+            default:
+                return new MutableArrayList<>(elements);
+        }
+    }
+
     private Object[] array;
     private int size;
 
     public MutableArrayList(final int capacity) {
         checkNonNegative(capacity);
         this.array = capacity == 0 ? EMPTY : new Object[capacity];
+    }
+
+    public MutableArrayList(final T[] array) {
+        this.array = array;
+        this.size = array.length;
     }
 
     @SuppressWarnings("unchecked")
@@ -71,11 +86,6 @@ public class MutableArrayList<T> implements MutableArray<T> {
     }
 
     @Override
-    public Iterator<T> iterator() {
-        throw new UnsupportedOperationException(); //TODO
-    }
-
-    @Override
     public boolean removeOnce(final Object element) {
         throw new UnsupportedOperationException(); //TODO
     }
@@ -103,6 +113,31 @@ public class MutableArrayList<T> implements MutableArray<T> {
     @Override
     public ImmutableList<T> immutableCopy() {
         return ImmutableArrayList.of(this.typedArray());
+    }
+
+    @Override
+    public Iterator<T> iterator() {
+        return new Iterator<T>() {
+
+            int index = 0;
+
+            @Override
+            public boolean hasNext() {
+                return index < size;
+            }
+
+            @Override
+            public T next() {
+                return MutableArrayList.this.get(index++);
+            }
+
+            @Override
+            public void remove() {
+                array[index] = null;
+                size--;
+            }
+
+        };
     }
 
 }

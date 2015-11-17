@@ -6,7 +6,6 @@ import net.ollie.coljate.lists.mixin.WrapsImmutableList;
 import net.ollie.coljate.lists.mixin.WrapsLinkedList;
 import static net.ollie.coljate.lists.mixin.WrapsLinkedList.copyIntoLinkedList;
 import net.ollie.coljate.utils.DelegatedUnmodifiableIterator;
-import static net.ollie.coljate.lists.mixin.WrapsLinkedList.copyIntoLinkedList;
 
 /**
  *
