@@ -1,13 +1,13 @@
 package net.ollie.coljate.lists;
 
-import java.util.RandomAccess;
+import java.util.List;
 
 /**
  *
  * @author Ollie
  * @see List
  */
-public class MutableArrayList<T> extends MutableNativeList<T> implements RandomAccess {
+public class MutableArrayList<T> extends NativeArrayList<T> implements MutableNativeList<T> {
 
     public static <T> MutableList<T> copyOf(final java.util.Collection<? extends T> collection) {
         return new MutableArrayList<>(new java.util.ArrayList<>(collection));
@@ -19,6 +19,16 @@ public class MutableArrayList<T> extends MutableNativeList<T> implements RandomA
 
     protected MutableArrayList(final java.util.ArrayList<T> delegate) {
         super(delegate);
+    }
+
+    @Override
+    public java.util.List<T> delegate() {
+        return delegate;
+    }
+
+    @Override
+    public MutableList<T> tail() {
+        throw new UnsupportedOperationException(); //TODO
     }
 
 }
