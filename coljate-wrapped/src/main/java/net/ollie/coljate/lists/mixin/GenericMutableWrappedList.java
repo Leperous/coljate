@@ -1,5 +1,6 @@
 package net.ollie.coljate.lists.mixin;
 
+import java.util.Collections;
 
 import net.ollie.coljate.GenericMutableWrappedCollection;
 import net.ollie.coljate.lists.MutableList;
@@ -18,5 +19,9 @@ public interface GenericMutableWrappedList<T> extends GenericMutableWrappedColle
         return this.delegate().set(index, element);
     }
 
+    @Override
+    default boolean removeAll(final Object element) {
+        return this.delegate().removeAll(Collections.singletonList(element));
+    }
 
 }

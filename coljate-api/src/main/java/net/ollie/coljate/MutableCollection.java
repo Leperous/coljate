@@ -18,12 +18,26 @@ public interface MutableCollection<@Nullable T> extends Collection<T> {
         return added;
     }
 
-    boolean remove(Object element);
+    /**
+     * Remove a single object from this collection.
+     *
+     * @param element
+     * @return
+     */
+    boolean removeOnce(Object element);
+
+    /**
+     * Remove all instances from this collection.
+     *
+     * @param element
+     * @return
+     */
+    boolean removeAll(Object element);
 
     default boolean removeAll(final Iterable<? extends T> iterable) {
         boolean removed = false;
         for (final T element : iterable) {
-            removed |= this.remove(element);
+            removed |= this.removeAll(element);
         }
         return removed;
     }

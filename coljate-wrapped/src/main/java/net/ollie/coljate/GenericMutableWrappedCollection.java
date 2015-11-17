@@ -1,5 +1,7 @@
 package net.ollie.coljate;
 
+import java.util.Collections;
+
 import javax.annotation.Nonnull;
 
 import org.checkerframework.checker.nullness.qual.Nullable;
@@ -27,8 +29,14 @@ public interface GenericMutableWrappedCollection<@Nullable T> extends MutableCol
 
     @Override
     @SuppressWarnings("element-type-mismatch")
-    default boolean remove(final Object element) {
+    default boolean removeOnce(final Object element) {
         return this.delegate().remove(element);
+    }
+
+    @Override
+    @SuppressWarnings("element-type-mismatch")
+    default boolean removeAll(final Object element) {
+        return this.delegate().removeAll(Collections.singleton(element));
     }
 
     @Override

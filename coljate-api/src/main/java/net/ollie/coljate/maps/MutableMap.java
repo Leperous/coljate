@@ -31,9 +31,15 @@ public interface MutableMap<K, V> extends Map<K, V>, MutableCollection<MapEntry<
 
     @Override
     @Deprecated
-    default boolean remove(final Object element) {
+    default boolean removeOnce(final Object element) {
         return element instanceof MapEntry
                 && this.remove((MapEntry) element);
+    }
+
+    @Override
+    @Deprecated
+    default boolean removeAll(final Object element) {
+        return this.removeOnce(element);
     }
 
     default boolean remove(final MapEntry<?, ?> entry) {
