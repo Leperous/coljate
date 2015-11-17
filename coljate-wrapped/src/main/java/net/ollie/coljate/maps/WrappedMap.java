@@ -8,6 +8,8 @@ import net.ollie.coljate.WrappedCollection;
 import net.ollie.coljate.sets.Set;
 import net.ollie.coljate.sets.WrappedSet;
 
+import static java.util.Objects.requireNonNull;
+
 /**
  *
  * @author Ollie
@@ -32,7 +34,7 @@ public class WrappedMap<K, V> implements Map<K, V> {
     }
 
     @Override
-    public int size() {
+    public int count() {
         return delegate.size();
     }
 

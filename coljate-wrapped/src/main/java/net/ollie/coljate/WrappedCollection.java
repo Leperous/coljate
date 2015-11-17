@@ -6,6 +6,22 @@ import static java.util.Objects.requireNonNull;
 import net.ollie.coljate.lists.ImmutableWrappedArrayList;
 import net.ollie.coljate.lists.MutableWrappedArrayList;
 
+import static java.util.Objects.requireNonNull;
+import static java.util.Objects.requireNonNull;
+import static java.util.Objects.requireNonNull;
+import static java.util.Objects.requireNonNull;
+import static java.util.Objects.requireNonNull;
+import static java.util.Objects.requireNonNull;
+import static java.util.Objects.requireNonNull;
+import static java.util.Objects.requireNonNull;
+import static java.util.Objects.requireNonNull;
+import static java.util.Objects.requireNonNull;
+import static java.util.Objects.requireNonNull;
+import static java.util.Objects.requireNonNull;
+import static java.util.Objects.requireNonNull;
+import static java.util.Objects.requireNonNull;
+import static java.util.Objects.requireNonNull;
+
 /**
  *
  * @author Ollie
@@ -34,7 +50,7 @@ public class WrappedCollection<T> implements Collection<T> {
     }
 
     @Override
-    public int size() {
+    public int count() {
         return delegate.size();
     }
 

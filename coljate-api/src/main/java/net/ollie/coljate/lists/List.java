@@ -60,7 +60,7 @@ public interface List<@Nullable T> extends Collection<T>, PartialFunction<Intege
     }
 
     default boolean inDomain(final int index) {
-        return index >= 0 && index < this.size();
+        return index >= 0 && index < this.count();
     }
 
 }

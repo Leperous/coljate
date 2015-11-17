@@ -8,7 +8,11 @@ import org.checkerframework.checker.nullness.qual.Nullable;
  */
 public interface Finite<@Nullable T> extends Traversable<T> {
 
-    int size();
+    /**
+     *
+     * @return the number of elements in this collection.
+     */
+    int count();
 
     @Override
     Finite<T> tail();

@@ -39,8 +39,8 @@ public interface Map<K, V> extends Collection<MapEntry<K, V>>, PartialFunction<K
     }
 
     @Override
-    default int size() {
-        return this.keys().size();
+    default int count() {
+        return this.keys().count();
     }
 
     @Override

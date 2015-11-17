@@ -17,7 +17,14 @@ public interface ImmutableList<@Nullable T> extends List<T>, ImmutableCollection
     }
 
     @Override
-    ImmutableList<T> with(T element);
+    @Deprecated
+    default ImmutableCollection<T> with(final T element) {
+        return this.suffix(element);
+    }
+
+    ImmutableList<T> prefix(T element);
+
+    ImmutableList<T> suffix(T element);
 
     @Override
     ImmutableList<T> tail();

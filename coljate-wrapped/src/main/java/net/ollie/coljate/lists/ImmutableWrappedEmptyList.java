@@ -7,17 +7,17 @@ import net.ollie.coljate.lists.mixin.WrapsImmutableList;
  *
  * @author Ollie
  */
-public class ImmutableEmptyList<T> implements WrapsImmutableList<T> {
+public class ImmutableWrappedEmptyList<T> implements WrapsImmutableList<T> {
 
     @SuppressWarnings("rawtypes")
-    private static final ImmutableEmptyList INSTANCE = new ImmutableEmptyList();
+    private static final ImmutableWrappedEmptyList INSTANCE = new ImmutableWrappedEmptyList();
 
     @SuppressWarnings("unchecked")
     public static <T> ImmutableList<T> empty() {
         return INSTANCE;
     }
 
-    protected ImmutableEmptyList() {
+    protected ImmutableWrappedEmptyList() {
     }
 
     @Override
@@ -36,7 +36,7 @@ public class ImmutableEmptyList<T> implements WrapsImmutableList<T> {
     }
 
     @Override
-    public int size() {
+    public int count() {
         return 0;
     }
 

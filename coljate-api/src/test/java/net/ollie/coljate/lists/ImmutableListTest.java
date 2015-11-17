@@ -23,7 +23,7 @@ public abstract class ImmutableListTest {
     public void shouldCreateEmpty() {
         final ImmutableList<Object> empty = this.empty();
         assertTrue("Should be empty", empty.isEmpty());
-        assertThat("Should have 0 size", empty.size(), is(0));
+        assertThat("Should have 0 size", empty.count(), is(0));
         assertThat("Should have empty tail", empty.tail(), is(empty));
     }
 
@@ -32,7 +32,7 @@ public abstract class ImmutableListTest {
         final Object head = new Object();
         final ImmutableList<Object> singleton = this.create(head);
         assertFalse("Should not be empty", singleton.isEmpty());
-        assertThat("Should have 1 size", singleton.size(), is(1));
+        assertThat("Should have 1 size", singleton.count(), is(1));
         assertThat("Should have head", singleton.head(), is(head));
         assertThat("Should have empty tail", singleton.tail(), is(this.empty()));
     }
@@ -42,7 +42,7 @@ public abstract class ImmutableListTest {
         final Object first = new Object(), second = new Object();
         final ImmutableList<Object> singleton = this.create(first, second);
         assertFalse("Should not be empty", singleton.isEmpty());
-        assertThat("Should have 1 size", singleton.size(), is(2));
+        assertThat("Should have 1 size", singleton.count(), is(2));
         assertThat("Should have head", singleton.head(), is(first));
     }
 

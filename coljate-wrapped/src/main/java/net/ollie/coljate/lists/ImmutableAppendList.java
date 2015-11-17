@@ -35,20 +35,20 @@ public class ImmutableAppendList<@Nullable T> implements WrapsImmutableList<T> {
     @Override
     public ImmutableList<T> tail() {
         return left.isEmpty()
-                ? ImmutableEmptyList.empty()
+                ? ImmutableWrappedEmptyList.empty()
                 : of(left.tail(), right);
     }
 
     @Override
     public T get(final int index) {
-        return index == left.size()
+        return index == left.count()
                 ? right
                 : left.get(index);
     }
 
     @Override
-    public int size() {
-        return left.size() + 1;
+    public int count() {
+        return left.count() + 1;
     }
 
     @Override

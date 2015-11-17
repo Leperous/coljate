@@ -29,7 +29,7 @@ public interface WrapsArrayList<T> extends WrapsList<T>, RandomAccess {
     }
 
     static <T> java.util.ArrayList<T> copyToArrayList(final Collection<? extends T> collection) {
-        final java.util.ArrayList<T> list = new java.util.ArrayList<>(collection.size());
+        final java.util.ArrayList<T> list = new java.util.ArrayList<>(collection.count());
         collection.forEach(list::add);
         return list;
     }

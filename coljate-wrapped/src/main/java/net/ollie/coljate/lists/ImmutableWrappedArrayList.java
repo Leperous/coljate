@@ -5,6 +5,9 @@ import net.ollie.coljate.UnmodifiableIterator;
 import net.ollie.coljate.lists.mixin.WrapsArrayList;
 import static net.ollie.coljate.lists.mixin.WrapsArrayList.copyToArrayList;
 import net.ollie.coljate.utils.DelegatedUnmodifiableIterator;
+import static net.ollie.coljate.lists.mixin.WrapsArrayList.copyToArrayList;
+import static net.ollie.coljate.lists.mixin.WrapsArrayList.copyToArrayList;
+import static net.ollie.coljate.lists.mixin.WrapsArrayList.copyToArrayList;
 
 /**
  *
@@ -15,7 +18,7 @@ public class ImmutableWrappedArrayList<T>
         implements ImmutableList<T>, WrapsArrayList<T> {
 
     public static <T> ImmutableList<T> of() {
-        return ImmutableEmptyList.empty();
+        return ImmutableWrappedEmptyList.empty();
     }
 
     public static <T> ImmutableList<T> of(final T element) {
@@ -50,7 +53,7 @@ public class ImmutableWrappedArrayList<T>
         if (collection instanceof ImmutableList) {
             return (ImmutableList<T>) collection;
         }
-        switch (collection.size()) {
+        switch (collection.count()) {
             case 0:
                 return of();
             case 1:
@@ -73,7 +76,14 @@ public class ImmutableWrappedArrayList<T>
     }
 
     @Override
-    public ImmutableList<T> with(final T element) {
+    public ImmutableList<T> prefix(final T element) {
+        final java.util.ArrayList<T> copy = this.copyDelegate();
+        copy.add(0, element);
+        return new ImmutableWrappedArrayList<>(copy);
+    }
+
+    @Override
+    public ImmutableList<T> suffix(final T element) {
         final java.util.ArrayList<T> copy = this.copyDelegate();
         copy.add(element);
         return new ImmutableWrappedArrayList<>(copy);
