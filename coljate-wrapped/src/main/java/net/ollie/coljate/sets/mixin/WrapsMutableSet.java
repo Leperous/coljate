@@ -7,6 +7,7 @@ import net.ollie.coljate.sets.MutableSet;
 import net.ollie.coljate.sets.Set;
 
 /**
+ * Some {@link MutableSet} that wraps a {@link java.util.Set}.
  *
  * @author Ollie
  * @see Set

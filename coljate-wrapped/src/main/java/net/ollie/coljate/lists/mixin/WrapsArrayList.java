@@ -3,8 +3,10 @@ package net.ollie.coljate.lists.mixin;
 import java.util.RandomAccess;
 
 import net.ollie.coljate.Collection;
+import net.ollie.coljate.lists.List;
 
 /**
+ * Some {@link List} that wraps a {@link java.util.ArrayList}.
  *
  * @author Ollie
  */

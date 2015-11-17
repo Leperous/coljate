@@ -3,10 +3,8 @@ package net.ollie.coljate.sets;
 import java.util.Comparator;
 import static java.util.Objects.requireNonNull;
 
-import net.ollie.coljate.utils.Objects;
 import net.ollie.coljate.sets.mixin.WrapsMutableSet;
-
-import static java.util.Objects.requireNonNull;
+import net.ollie.coljate.utils.Objects;
 
 /**
  *

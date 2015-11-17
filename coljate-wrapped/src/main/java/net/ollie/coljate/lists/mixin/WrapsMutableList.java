@@ -2,14 +2,13 @@ package net.ollie.coljate.lists.mixin;
 
 import java.util.Collections;
 
-import net.ollie.coljate.lists.List;
-import net.ollie.coljate.lists.MutableList;
 import net.ollie.coljate.WrapsMutableCollection;
+import net.ollie.coljate.lists.MutableList;
 
 /**
+ * Some {@link MutableList} that wraps a {@link java.util.List}.
  *
  * @author Ollie
- * @see List
  */
 public interface WrapsMutableList<T> extends WrapsMutableCollection<T>, MutableList<T>, WrapsList<T> {
 

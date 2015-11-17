@@ -5,6 +5,7 @@ import javax.annotation.Nonnull;
 import net.ollie.coljate.lists.List;
 
 /**
+ * Some {@link List} that wraps a {@link java.util.List}.
  *
  * @author Ollie
  */

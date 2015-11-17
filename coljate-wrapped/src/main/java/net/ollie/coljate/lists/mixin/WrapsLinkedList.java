@@ -1,12 +1,12 @@
 package net.ollie.coljate.lists.mixin;
 
-import java.util.LinkedList;
-
 import javax.annotation.Nonnull;
 
 import net.ollie.coljate.Collection;
+import net.ollie.coljate.lists.List;
 
 /**
+ * Some {@link List} that wraps a {@link java.util.LinkedList}.
  *
  * @author Ollie
  */
@@ -20,7 +20,7 @@ public interface WrapsLinkedList<T> extends WrapsList<T> {
     }
 
     static <T> java.util.LinkedList<T> copyIntoLinkedList(@Nonnull final Collection<? extends T> collection) {
-        final LinkedList<T> list = new java.util.LinkedList<>();
+        final java.util.LinkedList<T> list = new java.util.LinkedList<>();
         collection.forEach(list::add);
         return list;
     }

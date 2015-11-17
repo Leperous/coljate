@@ -8,6 +8,7 @@ import net.ollie.coljate.lists.MutableList;
 import net.ollie.coljate.lists.MutableWrappedArrayList;
 
 /**
+ * Some {@link ImmutableList} that wraps a {@link java.util.List}.
  *
  * @author Ollie
  */

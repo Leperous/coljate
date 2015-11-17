@@ -1,6 +1,5 @@
 package net.ollie.coljate.sets;
 
-
 import java.util.Set;
 
 import net.ollie.coljate.sets.mixin.WrapsMutableSet;

@@ -2,11 +2,10 @@ package net.ollie.coljate.lists;
 
 import net.ollie.coljate.Collection;
 import net.ollie.coljate.UnmodifiableIterator;
+import net.ollie.coljate.lists.mixin.WrapsImmutableList;
 import net.ollie.coljate.lists.mixin.WrapsLinkedList;
 import static net.ollie.coljate.lists.mixin.WrapsLinkedList.copyIntoLinkedList;
 import net.ollie.coljate.utils.DelegatedUnmodifiableIterator;
-import net.ollie.coljate.lists.mixin.WrapsImmutableList;
-import static net.ollie.coljate.lists.mixin.WrapsLinkedList.copyIntoLinkedList;
 
 /**
  *
