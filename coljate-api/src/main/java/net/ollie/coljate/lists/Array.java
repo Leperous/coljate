@@ -1,6 +1,7 @@
 package net.ollie.coljate.lists;
 
 /**
+ * Fixed size list.
  *
  * @author Ollie
  */

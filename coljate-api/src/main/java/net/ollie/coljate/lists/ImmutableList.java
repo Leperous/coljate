@@ -7,8 +7,10 @@ import net.ollie.coljate.ImmutableCollection;
 /**
  *
  * @author Ollie
+ * @param <T>
  */
-public interface ImmutableList<@Nullable T> extends List<T>, ImmutableCollection<T> {
+public interface ImmutableList<@Nullable T>
+        extends List<T>, ImmutableCollection<T> {
 
     @Override
     @Deprecated

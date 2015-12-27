@@ -14,7 +14,8 @@ import net.ollie.coljate.theory.PartialFunction;
  *
  * @author Ollie
  */
-public interface List<@Nullable T> extends Collection<T>, PartialFunction<Integer, T> {
+public interface List<@Nullable T>
+        extends Collection<T>, PartialFunction<Integer, T> {
 
     @Nullable
     T get(int index);

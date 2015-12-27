@@ -1,7 +1,5 @@
 package net.ollie.coljate.theory;
 
-import java.util.StringJoiner;
-
 import org.checkerframework.checker.nullness.qual.Nullable;
 
 /**
@@ -12,7 +10,7 @@ public interface Finite<@Nullable T> extends Traversable<T> {
 
     /**
      *
-     * @return the number of elements in this collection.
+     * @return the number of non-null elements in this collection.
      */
     int count();
 

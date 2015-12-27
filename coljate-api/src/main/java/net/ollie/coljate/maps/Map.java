@@ -13,7 +13,8 @@ import net.ollie.coljate.theory.PartialFunction;
  *
  * @author Ollie
  */
-public interface Map<K, V> extends Collection<MapEntry<K, V>>, PartialFunction<K, V> {
+public interface Map<K, V>
+        extends Collection<MapEntry<K, V>>, PartialFunction<K, V> {
 
     @Nullable
     V get(@Nullable Object key);
@@ -44,6 +45,7 @@ public interface Map<K, V> extends Collection<MapEntry<K, V>>, PartialFunction<K
     }
 
     @Override
+    @Deprecated
     default boolean contains(final Object object) {
         return object instanceof MapEntry
                 && this.contains((MapEntry) object);
