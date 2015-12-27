@@ -1,5 +1,8 @@
 package net.ollie.coljate.theory;
 
+import java.util.Iterator;
+import java.util.Objects;
+import java.util.StringJoiner;
 import org.checkerframework.checker.nullness.qual.Nullable;
 
 /**
@@ -16,5 +19,42 @@ public interface Finite<@Nullable T> extends Traversable<T> {
 
     @Override
     Finite<T> tail();
+
+    static boolean sequenceEquals(final Finite<?> left, final Finite<?> right) {
+        if (left.count() != right.count()) {
+            return false;
+        }
+        for (final Iterator<?> l = left.iterator(), r = right.iterator(); l.hasNext() && r.hasNext();) {
+            if (!Objects.equals(l.next(), r.next())) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    static int productHash(final Finite<?> list) {
+        int hashCode = 1;
+        for (final Object element : list) {
+            hashCode = 31 * hashCode + (element == null ? 0 : element.hashCode());
+        }
+        return hashCode;
+    }
+
+    static boolean elementsEqual(final Finite<?> c1, final Finite<?> c2) {
+        if (c1.count() != c2.count()) {
+            return false;
+        }
+        throw new UnsupportedOperationException(); //TODO
+    }
+
+    static int sumHash(final Finite<?> finite) {
+        return finite.serialStream().mapToInt(Object::hashCode).sum();
+    }
+
+    static String toString(final Finite<?> finite) {
+        final StringJoiner joiner = new StringJoiner("[", ",", "]");
+        finite.iterator().forEachRemaining(element -> joiner.add(element == finite ? "(collection)" : String.valueOf(element)));
+        return joiner.toString();
+    }
 
 }

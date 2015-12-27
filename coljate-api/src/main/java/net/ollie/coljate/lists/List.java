@@ -1,14 +1,11 @@
 package net.ollie.coljate.lists;
 
-import java.util.Iterator;
 import java.util.Objects;
 import java.util.OptionalInt;
-
-import org.checkerframework.checker.nullness.qual.NonNull;
-import org.checkerframework.checker.nullness.qual.Nullable;
-
 import net.ollie.coljate.Collection;
 import net.ollie.coljate.theory.PartialFunction;
+import org.checkerframework.checker.nullness.qual.NonNull;
+import org.checkerframework.checker.nullness.qual.Nullable;
 
 /**
  *
@@ -63,26 +60,6 @@ public interface List<@Nullable T>
 
     default boolean inDomain(final int index) {
         return index >= 0 && index < this.count();
-    }
-
-    static boolean equals(final List<?> left, final List<?> right) {
-        if (left.count() != right.count()) {
-            return false;
-        }
-        for (final Iterator<?> l = left.iterator(), r = right.iterator(); l.hasNext() && r.hasNext();) {
-            if (!Objects.equals(l.next(), r.next())) {
-                return false;
-            }
-        }
-        return true;
-    }
-
-    static int hashCode(final List<?> list) {
-        int hashCode = 1;
-        for (final Object element : list) {
-            hashCode = 31 * hashCode + (element == null ? 0 : element.hashCode());
-        }
-        return hashCode;
     }
 
 }

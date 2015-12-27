@@ -1,12 +1,12 @@
 package net.ollie.coljate.sets;
 
-import org.checkerframework.checker.nullness.qual.Nullable;
-
 import net.ollie.coljate.Collection;
+import org.checkerframework.checker.nullness.qual.Nullable;
 
 /**
  *
  * @author Ollie
+ * @param <T>
  */
 public interface Set<@Nullable T> extends Collection<T> {
 

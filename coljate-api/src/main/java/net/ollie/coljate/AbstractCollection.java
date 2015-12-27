@@ -1,5 +1,7 @@
 package net.ollie.coljate;
 
+import net.ollie.coljate.theory.Finite;
+
 /**
  *
  * @author Ollie
@@ -9,7 +11,7 @@ public abstract class AbstractCollection<T> implements Collection<T> {
 
     @Override
     public String toString() {
-        return Collection.toString(this);
+        return Finite.toString(this);
     }
 
 }
