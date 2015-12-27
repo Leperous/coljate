@@ -8,7 +8,8 @@ import org.checkerframework.checker.nullness.qual.Nullable;
  * @author Ollie
  * @param <T>
  */
-public interface Set<@Nullable T> extends Collection<T> {
+public interface Set<@Nullable T>
+        extends Collection<T> {
 
     @Override
     Set<T> tail();

@@ -3,6 +3,7 @@ package net.ollie.coljate.theory;
 import java.util.Iterator;
 import java.util.Objects;
 import java.util.StringJoiner;
+import net.ollie.coljate.feature.ConstantContains;
 import org.checkerframework.checker.nullness.qual.Nullable;
 
 /**
@@ -44,7 +45,20 @@ public interface Finite<@Nullable T> extends Traversable<T> {
         if (c1.count() != c2.count()) {
             return false;
         }
-        throw new UnsupportedOperationException(); //TODO
+        final Finite<?> outer, inner;
+        if (c2 instanceof ConstantContains) {
+            outer = c1;
+            inner = c2;
+        } else {
+            outer = c2;
+            inner = c1;
+        }
+        for (final Object e1 : outer) {
+            if (!inner.contains(e1)) {
+                return false;
+            }
+        }
+        return true;
     }
 
     static int sumHash(final Finite<?> finite) {
