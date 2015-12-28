@@ -35,12 +35,12 @@ public class ImmutableEmptyArray<T>
     }
 
     @Override
-    public ImmutableList<T> prefix(final T element) {
-        return this.suffix(element);
+    public ImmutableList<T> prefixed(final T element) {
+        return this.suffixed(element);
     }
 
     @Override
-    public ImmutableList<T> suffix(final T element) {
+    public ImmutableList<T> suffixed(final T element) {
         return ImmutableArrayList.of(element);
     }
 

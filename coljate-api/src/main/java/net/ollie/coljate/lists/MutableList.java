@@ -9,8 +9,10 @@ import org.checkerframework.checker.nullness.qual.Nullable;
 /**
  *
  * @author Ollie
+ * @param <T>
+ * @see ImmutableList
  */
-public interface MutableList<T>
+public interface MutableList<@Nullable T>
         extends List<T>, MutableCollection<T> {
 
     @Override

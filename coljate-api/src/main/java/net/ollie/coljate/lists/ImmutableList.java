@@ -8,6 +8,7 @@ import net.ollie.coljate.ImmutableCollection;
  *
  * @author Ollie
  * @param <T>
+ * @see MutableList
  */
 public interface ImmutableList<@Nullable T>
         extends List<T>, ImmutableCollection<T> {
@@ -21,12 +22,12 @@ public interface ImmutableList<@Nullable T>
     @Override
     @Deprecated
     default ImmutableCollection<T> with(final T element) {
-        return this.suffix(element);
+        return this.suffixed(element);
     }
 
-    ImmutableList<T> prefix(T element);
+    ImmutableList<T> prefixed(T element);
 
-    ImmutableList<T> suffix(T element);
+    ImmutableList<T> suffixed(T element);
 
     @Override
     ImmutableList<T> tail();

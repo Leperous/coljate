@@ -60,7 +60,7 @@ public class ImmutableArrayList<T>
     }
 
     @Override
-    public ImmutableList<T> prefix(final T element) {
+    public ImmutableList<T> prefixed(final T element) {
         final Object[] newArray = new Object[array.length + 1];
         newArray[0] = element;
         System.arraycopy(array, 0, newArray, 1, array.length);
@@ -68,7 +68,7 @@ public class ImmutableArrayList<T>
     }
 
     @Override
-    public ImmutableList<T> suffix(final T element) {
+    public ImmutableList<T> suffixed(final T element) {
         final Object[] newArray = new Object[array.length + 1];
         System.arraycopy(array, 0, newArray, 0, array.length);
         newArray[array.length] = element;
