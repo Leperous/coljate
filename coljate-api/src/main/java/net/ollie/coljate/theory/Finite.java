@@ -3,6 +3,7 @@ package net.ollie.coljate.theory;
 import java.util.Iterator;
 import java.util.Objects;
 import java.util.StringJoiner;
+import java.util.function.Function;
 import net.ollie.coljate.feature.ConstantContains;
 import org.checkerframework.checker.nullness.qual.Nullable;
 
@@ -66,8 +67,12 @@ public interface Finite<@Nullable T> extends Traversable<T> {
     }
 
     static String toString(final Finite<?> finite) {
+        return toString(finite, element -> element == finite ? "(collection)" : String.valueOf(element));
+    }
+
+    static <T> String toString(final Finite<T> finite, final Function<? super T, ? extends CharSequence> eachToString) {
         final StringJoiner joiner = new StringJoiner("[", ",", "]");
-        finite.iterator().forEachRemaining(element -> joiner.add(element == finite ? "(collection)" : String.valueOf(element)));
+        finite.forEach(element -> joiner.add(eachToString.apply(element)));
         return joiner.toString();
     }
 

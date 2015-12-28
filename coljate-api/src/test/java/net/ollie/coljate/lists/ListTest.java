@@ -22,7 +22,7 @@ public abstract class ListTest {
     }
 
     @Test
-    public void testEmpty_Create() {
+    public void testEmpty_Count() {
         final List<Object> empty = this.empty();
         assertTrue("Should be empty", empty.isEmpty());
         assertThat("Should have 0 size", empty.count(), is(0));

@@ -6,6 +6,11 @@ package net.ollie.coljate.lists;
  */
 public interface MutableArray<T> extends Array<T>, MutableList<T> {
 
+    /**
+     * Will pad with nulls, or truncate.
+     *
+     * @param capacity
+     */
     void setCapacity(int capacity);
 
     default void ensureCapacity(final int capacity) {

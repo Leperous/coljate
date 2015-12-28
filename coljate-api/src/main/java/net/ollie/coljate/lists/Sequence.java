@@ -11,8 +11,11 @@ import net.ollie.coljate.theory.Streamable;
 /**
  *
  * @author Ollie
+ * @param <N>
+ * @param <T>
  */
-public interface Sequence<@NonNull N, @Nullable T> extends Function<N, T>, Streamable<T>, Container {
+public interface Sequence<@NonNull N, @Nullable T>
+        extends Function<N, T>, Streamable<T>, Container {
 
     T at(N index);
 

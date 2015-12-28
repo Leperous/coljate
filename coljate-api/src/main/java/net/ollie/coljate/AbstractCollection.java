@@ -14,4 +14,10 @@ public abstract class AbstractCollection<T> implements Collection<T> {
         return Finite.toString(this);
     }
 
+    @Override
+    public abstract boolean equals(Object obj);
+
+    @Override
+    public abstract int hashCode();
+
 }

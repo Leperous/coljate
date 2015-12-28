@@ -2,20 +2,28 @@ package net.ollie.coljate.lists;
 
 import java.util.Objects;
 import java.util.OptionalInt;
+
 import net.ollie.coljate.Collection;
-import net.ollie.coljate.theory.PartialFunction;
+import net.ollie.coljate.theory.Associative;
+
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
 
 /**
  *
  * @author Ollie
+ * @param <T>
  */
 public interface List<@Nullable T>
-        extends Collection<T>, PartialFunction<Integer, T> {
+        extends Collection<T>, Associative<Integer, T> {
 
     @Nullable
     T get(int index);
+
+    @Override
+    default T get(final Integer index) {
+        return this.get(index.intValue());
+    }
 
     @NonNull
     default OptionalInt indexOf(final Object target) {
@@ -42,11 +50,6 @@ public interface List<@Nullable T>
 
     @Override
     MutableList<T> mutableCopy();
-
-    @Override
-    default T apply(final Integer index) {
-        return this.get(index);
-    }
 
     @Override
     default T head() {

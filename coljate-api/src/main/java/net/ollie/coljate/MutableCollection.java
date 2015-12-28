@@ -1,10 +1,14 @@
 package net.ollie.coljate;
 
+import java.util.Iterator;
+import java.util.Objects;
+
 import org.checkerframework.checker.nullness.qual.Nullable;
 
 /**
  *
  * @author Ollie
+ * @param <T>
  */
 public interface MutableCollection<@Nullable T> extends Collection<T> {
 
@@ -24,7 +28,15 @@ public interface MutableCollection<@Nullable T> extends Collection<T> {
      * @param element
      * @return
      */
-    boolean removeOnce(Object element);
+    default boolean removeOnce(final Object element) {
+        for (final Iterator<T> iterator = this.iterator(); iterator.hasNext();) {
+            if (Objects.equals(element, iterator.next())) {
+                iterator.remove();
+                return true;
+            }
+        }
+        return false;
+    }
 
     /**
      * Remove all instances from this collection.
@@ -32,7 +44,13 @@ public interface MutableCollection<@Nullable T> extends Collection<T> {
      * @param element
      * @return
      */
-    boolean removeAll(Object element);
+    default boolean removeAll(Object element) {
+        boolean removed = false;
+        while (this.removeOnce(element)) {
+            removed = true;
+        }
+        return removed;
+    }
 
     default boolean removeAll(final Iterable<? extends T> iterable) {
         boolean removed = false;
@@ -42,6 +60,6 @@ public interface MutableCollection<@Nullable T> extends Collection<T> {
         return removed;
     }
 
-    boolean clear();
+    void clear();
 
 }
