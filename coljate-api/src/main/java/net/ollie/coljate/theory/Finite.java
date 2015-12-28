@@ -4,12 +4,15 @@ import java.util.Iterator;
 import java.util.Objects;
 import java.util.StringJoiner;
 import java.util.function.Function;
+
 import net.ollie.coljate.feature.ConstantContains;
+
 import org.checkerframework.checker.nullness.qual.Nullable;
 
 /**
  *
  * @author Ollie
+ * @param <T>
  */
 public interface Finite<@Nullable T> extends Traversable<T> {
 
@@ -21,6 +24,15 @@ public interface Finite<@Nullable T> extends Traversable<T> {
 
     @Override
     Finite<T> tail();
+
+    default Object[] toArray() {
+        final Object[] array = new Object[this.count()];
+        int index = 0;
+        for (final Object object : this) {
+            array[index++] = object;
+        }
+        return array;
+    }
 
     static boolean sequenceEquals(final Finite<?> left, final Finite<?> right) {
         if (left.count() != right.count()) {

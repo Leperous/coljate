@@ -10,7 +10,8 @@ import org.checkerframework.checker.nullness.qual.Nullable;
  *
  * @author Ollie
  */
-public interface MutableList<T> extends List<T>, MutableCollection<T> {
+public interface MutableList<T>
+        extends List<T>, MutableCollection<T> {
 
     @Override
     @Deprecated

@@ -8,9 +8,15 @@ import org.checkerframework.checker.nullness.qual.Nullable;
 /**
  *
  * @author Ollie
+ * @param <T>
  */
 public interface Streamable<@Nullable T> {
 
+    /**
+     *
+     * @return a serial stream.
+     * @deprecated use explicit stream type.
+     */
     @Deprecated
     default Stream<T> stream() {
         return this.serialStream();

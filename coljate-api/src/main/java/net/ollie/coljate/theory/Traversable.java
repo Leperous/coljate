@@ -11,8 +11,10 @@ import org.checkerframework.checker.nullness.qual.Nullable;
 /**
  *
  * @author Ollie
+ * @param <T>
  */
-public interface Traversable<@Nullable T> extends Streamable<T>, Iterable<T>, Container {
+public interface Traversable<@Nullable T>
+        extends Streamable<T>, Iterable<T>, Container {
 
     @Nullable
     default T head() {

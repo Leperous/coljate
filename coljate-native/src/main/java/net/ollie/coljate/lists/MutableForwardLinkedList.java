@@ -4,6 +4,8 @@ import java.util.Iterator;
 import java.util.NoSuchElementException;
 import static java.util.Objects.requireNonNull;
 
+import javax.annotation.Nonnull;
+
 import net.ollie.coljate.utils.Iterators;
 
 /**
@@ -16,7 +18,7 @@ public class MutableForwardLinkedList<T>
 
     @SuppressWarnings("unchecked")
     public static <T> MutableForwardLinkedList<T> empty() {
-        return new MutableForwardLinkedList<>(RootNode.get());
+        return new MutableForwardLinkedList<>(RootNode.get(), 0);
     }
 
     @SafeVarargs
@@ -28,15 +30,18 @@ public class MutableForwardLinkedList<T>
         return list;
     }
 
+    @Nonnull
     private Node<T> head;
+    private int count;
 
-    private MutableForwardLinkedList(final Node<T> head) {
+    private MutableForwardLinkedList(final Node<T> head, final int count) {
         this.head = requireNonNull(head);
+        this.count = count;
     }
 
     @Override
     public int count() {
-        return head.count();
+        return count;
     }
 
     @Override
@@ -52,11 +57,13 @@ public class MutableForwardLinkedList<T>
     @Override
     public void prefix(final T element) {
         head = head.prefix(element);
+        count++;
     }
 
     @Override
     public void suffix(final T element) {
         head = head.suffix(element);
+        count++;
     }
 
     @Override
@@ -67,11 +74,17 @@ public class MutableForwardLinkedList<T>
     @Override
     public void clear() {
         head = RootNode.get();
+        count = 0;
+    }
+
+    @Override
+    public boolean isEmpty() {
+        return head.isRoot();
     }
 
     @Override
     public MutableList<T> tail() {
-        return new MutableForwardLinkedList<>(head.next());
+        return new MutableForwardLinkedList<>(head.nextOrSelf(), Math.max(0, count - 1));
     }
 
     @Override
@@ -80,7 +93,7 @@ public class MutableForwardLinkedList<T>
     }
 
     @Override
-    public MutableList<T> mutableCopy() {
+    public MutableForwardLinkedList<T> mutableCopy() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
@@ -92,7 +105,8 @@ public class MutableForwardLinkedList<T>
 
         int count();
 
-        default Node<T> next() {
+        @Nonnull
+        default Node<T> nextOrSelf() {
             return this.descend(1);
         }
 
@@ -127,7 +141,7 @@ public class MutableForwardLinkedList<T>
                     }
                     this.previousPrevious = this.previous;
                     this.previous = this.current;
-                    this.current = current.next();
+                    this.current = current.nextOrSelf();
                     return previous.value();
                 }
 
@@ -137,8 +151,10 @@ public class MutableForwardLinkedList<T>
                         throw new IllegalStateException();
                     } else if (previousPrevious == null) {
                         list.head = current;
+                        list.count -= 1;
                     } else {
                         previousPrevious.deleteNext();
+                        list.count -= 1;
                     }
                 }
 
@@ -157,7 +173,7 @@ public class MutableForwardLinkedList<T>
         }
 
         @Override
-        public Node<T> next() {
+        public Node<T> nextOrSelf() {
             return this;
         }
 
@@ -252,7 +268,7 @@ public class MutableForwardLinkedList<T>
 
         @Override
         public void deleteNext() {
-            next = next.next();
+            next = next.nextOrSelf();
         }
 
     }

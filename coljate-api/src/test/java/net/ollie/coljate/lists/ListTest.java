@@ -36,12 +36,18 @@ public abstract class ListTest {
     }
 
     @Test
+    public void testEmpty_Array() {
+        final List<Object> empty = this.empty();
+        final Object[] array = empty.toArray();
+        assertThat(array.length, is(0));
+    }
+
+    @Test
     public void testSingleton_Create() {
         final Object head = new Object();
         final List<Object> singleton = this.create(head);
         assertFalse("Should not be empty", singleton.isEmpty());
         assertThat("Should have 1 size", singleton.count(), is(1));
-
     }
 
     @Test
@@ -50,6 +56,15 @@ public abstract class ListTest {
         final List<Object> singleton = this.create(head);
         assertThat("Should have head", singleton.head(), is(head));
         assertThat("Should have empty tail", singleton.tail(), is(this.empty()));
+    }
+    
+    @Test
+    public void testSinglton_Array() {
+        final Object head = new Object();
+        final List<Object> singleton = this.create(head);
+        final Object[] array = singleton.toArray();
+        assertThat(array.length, is(1));
+        assertThat(array[0], is(head));
     }
 
     @Test

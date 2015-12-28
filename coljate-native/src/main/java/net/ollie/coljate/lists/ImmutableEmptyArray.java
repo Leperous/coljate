@@ -6,15 +6,15 @@ import net.ollie.coljate.UnmodifiableIterator;
  *
  * @author Ollie
  */
-public class ImmutableEmptyList<T>
+public class ImmutableEmptyArray<T>
         extends AbstractList<T>
-        implements ImmutableList<T> {
+        implements ImmutableArray<T> {
 
     @SuppressWarnings("rawtypes")
-    private static final ImmutableEmptyList INSTANCE = new ImmutableEmptyList();
+    private static final ImmutableEmptyArray INSTANCE = new ImmutableEmptyArray();
 
     @SuppressWarnings("unchecked")
-    public static <T> ImmutableList<T> empty() {
+    public static <T> ImmutableArray<T> get() {
         return INSTANCE;
     }
 
@@ -45,18 +45,24 @@ public class ImmutableEmptyList<T>
     }
 
     @Override
-    public MutableList<T> mutableCopy() {
-        return MutableArrayList.of();
+    public MutableArray<T> mutableCopy() {
+        //return MutableArrayList.of();
+        throw new UnsupportedOperationException(); //TODO
     }
 
     @Override
-    public ImmutableList<T> tail() {
+    public ImmutableArray<T> tail() {
         return this;
     }
 
     @Override
     public UnmodifiableIterator<T> iterator() {
         return UnmodifiableIterator.empty();
+    }
+
+    @Override
+    public int capacity() {
+        return 0;
     }
 
 }

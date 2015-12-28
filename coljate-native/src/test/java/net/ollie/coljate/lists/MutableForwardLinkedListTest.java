@@ -4,7 +4,7 @@ package net.ollie.coljate.lists;
  *
  * @author ollie
  */
-public class MutableLinkedListTest extends MutableListTest {
+public class MutableForwardLinkedListTest extends MutableListTest {
 
     @Override
     protected MutableList<Object> create(final Object... objects) {

@@ -68,7 +68,7 @@ public abstract class MutableListTest extends ListTest {
     }
 
     @Test
-    public void testMultiple_RemoveFirst() {
+    public void testDual_RemoveFirst() {
 
         final Object o1 = new Object(), o2 = new Object();
         final MutableList<Object> list = this.create(o1, o2);
@@ -83,7 +83,7 @@ public abstract class MutableListTest extends ListTest {
     }
 
     @Test
-    public void testMultiple_RemoveLast() {
+    public void testDual_RemoveLast() {
 
         final Object o1 = new Object(), o2 = new Object();
         final MutableList<Object> list = this.create(o1, o2);
