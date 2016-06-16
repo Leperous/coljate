@@ -1,5 +1,9 @@
 package net.ollie.coljate.lists;
 
+import net.ollie.coljate.list.ImmutableArray;
+import net.ollie.coljate.list.AbstractList;
+import net.ollie.coljate.list.MutableArray;
+
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.Objects;
@@ -12,7 +16,18 @@ public class MutableNativeArray<T>
         extends AbstractList<T>
         implements MutableArray<T> {
 
+    @SafeVarargs
+    public static <T> MutableArray<T> copyOf(final T... elements) {
+        return new MutableNativeArray<>(0, Arrays.copyOf(elements, elements.length));
+    }
+
+    private final int offset;
     private Object[] array;
+
+    MutableNativeArray(final int offset, final Object[] array) {
+        this.offset = offset;
+        this.array = array;
+    }
 
     @Override
     public int count() {
@@ -21,18 +36,38 @@ public class MutableNativeArray<T>
 
     @Override
     public Iterator<T> iterator() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return new Iterator<T>() {
+
+            int index = offset;
+
+            @Override
+            public boolean hasNext() {
+                return index < array.length;
+            }
+
+            @Override
+            @SuppressWarnings("unchecked")
+            public T next() {
+                return MutableNativeArray.this.get(index++);
+            }
+
+            @Override
+            public void remove() {
+                array[index - offset - 1] = null;
+            }
+
+        };
     }
 
     @Override
     @SuppressWarnings("unchecked")
-    public T get(int index) {
-        return (T) array[index];
+    public T get(final int index) {
+        return (T) array[offset + index];
     }
 
     @Override
     public MutableArray<T> tail() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return new MutableNativeArray<>(offset + 1, array);
     }
 
     @Override

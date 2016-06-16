@@ -1,5 +1,7 @@
 package net.ollie.coljate.lists;
 
+import net.ollie.coljate.list.List;
+
 import org.checkerframework.checker.nullness.qual.NonNull;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertFalse;

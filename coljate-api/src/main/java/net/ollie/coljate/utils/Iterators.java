@@ -10,6 +10,7 @@ import java.util.NoSuchElementException;
 public class Iterators {
 
     private static final Iterator NONE = new Iterator() {
+
         @Override
         public boolean hasNext() {
             return false;
@@ -19,6 +20,7 @@ public class Iterators {
         public Object next() {
             throw new NoSuchElementException();
         }
+
     };
 
     @SuppressWarnings("unchecked")

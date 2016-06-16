@@ -8,4 +8,6 @@ public interface Container {
 
     boolean contains(Object object);
 
+    boolean isEmpty();
+
 }

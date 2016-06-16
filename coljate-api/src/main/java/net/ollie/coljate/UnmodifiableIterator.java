@@ -16,12 +16,12 @@ public abstract class UnmodifiableIterator<T> implements Iterator<T> {
     }
 
     @SuppressWarnings("unchecked")
-    public static <T> UnmodifiableIterator<T> empty() {
-        return EMPTY;
+    public static <T> UnmodifiableIterator<T> none() {
+        return NONE;
     }
 
     @SuppressWarnings("rawtypes")
-    private static final UnmodifiableIterator EMPTY = new UnmodifiableIterator() {
+    private static final UnmodifiableIterator NONE = new UnmodifiableIterator() {
 
         @Override
         public boolean hasNext() {

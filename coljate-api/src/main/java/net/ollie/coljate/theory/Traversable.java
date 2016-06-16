@@ -34,6 +34,7 @@ public interface Traversable<@Nullable T>
         return false;
     }
 
+    @Override
     default boolean isEmpty() {
         return !this.iterator().hasNext();
     }

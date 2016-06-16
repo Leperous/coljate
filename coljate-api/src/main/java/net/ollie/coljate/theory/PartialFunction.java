@@ -9,7 +9,8 @@ import org.checkerframework.checker.nullness.qual.Nullable;
 /**
  *
  * @author Ollie
- * @see <a href="https://en.wikipedia.org/wiki/Partial_function">Partial function</a>
+ * @see <a href="https://en.wikipedia.org/wiki/Partial_function">Partial
+ * function</a>
  */
 public interface PartialFunction<@Nullable F, @Nullable T> {
 
@@ -18,7 +19,7 @@ public interface PartialFunction<@Nullable F, @Nullable T> {
     T apply(F input);
 
     @NonNull
-    default Function<F, Optional<T>> total() {
+    default Function<F, Optional<T>> toTotalFunction() {
         return element -> this.inDomain(element)
                 ? Optional.ofNullable(this.apply(element))
                 : Optional.empty();

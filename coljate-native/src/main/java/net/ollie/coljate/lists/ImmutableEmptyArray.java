@@ -1,6 +1,11 @@
 package net.ollie.coljate.lists;
 
+import net.ollie.coljate.list.ImmutableArray;
+import net.ollie.coljate.list.AbstractList;
+import net.ollie.coljate.list.MutableArray;
+import net.ollie.coljate.list.ImmutableList;
 import net.ollie.coljate.UnmodifiableIterator;
+import net.ollie.coljate.theory.feature.Empty;
 
 /**
  *
@@ -8,7 +13,7 @@ import net.ollie.coljate.UnmodifiableIterator;
  */
 public class ImmutableEmptyArray<T>
         extends AbstractList<T>
-        implements ImmutableArray<T> {
+        implements ImmutableArray<T>, Empty<T> {
 
     @SuppressWarnings("rawtypes")
     private static final ImmutableEmptyArray INSTANCE = new ImmutableEmptyArray();
@@ -51,13 +56,18 @@ public class ImmutableEmptyArray<T>
     }
 
     @Override
-    public ImmutableArray<T> tail() {
+    public ImmutableEmptyArray<T> tail() {
         return this;
     }
 
     @Override
+    public boolean contains(Object object) {
+        return Empty.super.contains(object);
+    }
+
+    @Override
     public UnmodifiableIterator<T> iterator() {
-        return UnmodifiableIterator.empty();
+        return UnmodifiableIterator.none();
     }
 
     @Override

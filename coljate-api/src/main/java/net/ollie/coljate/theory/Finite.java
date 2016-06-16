@@ -5,8 +5,9 @@ import java.util.Objects;
 import java.util.StringJoiner;
 import java.util.function.Function;
 
-import net.ollie.coljate.feature.ConstantContains;
+import net.ollie.coljate.theory.feature.ConstantContains;
 
+import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
 
 /**
@@ -25,6 +26,7 @@ public interface Finite<@Nullable T> extends Traversable<T> {
     @Override
     Finite<T> tail();
 
+    @NonNull
     default Object[] toArray() {
         final Object[] array = new Object[this.count()];
         int index = 0;
@@ -58,16 +60,16 @@ public interface Finite<@Nullable T> extends Traversable<T> {
         if (c1.count() != c2.count()) {
             return false;
         }
-        final Finite<?> outer, inner;
-        if (c2 instanceof ConstantContains) {
-            outer = c1;
-            inner = c2;
+        final Finite<?> slow, fast;
+        if (c1 instanceof ConstantContains) {
+            fast = c1;
+            slow = c2;
         } else {
-            outer = c2;
-            inner = c1;
+            fast = c2;
+            slow = c1;
         }
-        for (final Object e1 : outer) {
-            if (!inner.contains(e1)) {
+        for (final Object e1 : slow) {
+            if (!fast.contains(e1)) {
                 return false;
             }
         }

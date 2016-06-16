@@ -1,5 +1,7 @@
 package net.ollie.coljate.lists;
 
+import net.ollie.coljate.list.MutableList;
+
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertThat;
