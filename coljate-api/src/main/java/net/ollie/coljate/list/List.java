@@ -5,6 +5,7 @@ import java.util.OptionalInt;
 
 import net.ollie.coljate.Collection;
 import net.ollie.coljate.theory.Associative;
+import net.ollie.coljate.theory.Finite;
 
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
@@ -56,12 +57,20 @@ public interface List<@Nullable T>
     }
 
     @Override
-    public default boolean inDomain(final Integer input) {
+    default boolean inDomain(final Integer input) {
         return input != null && this.inDomain(input.intValue());
     }
 
     default boolean inDomain(final int index) {
         return index >= 0 && index < this.count();
+    }
+
+    static int hashCode(final List<?> list) {
+        return Finite.productHash(list);
+    }
+
+    static boolean elementsEqual(final List<?> l1, final List<?> l2) {
+        return Finite.elementsEqual(l1, l2);
     }
 
 }

@@ -18,6 +18,10 @@ public class WrappedSortedSet<T> extends WrappedSet<T> implements SortedSet<T> {
         this.comparator = requireNonNull(comparator);
     }
 
+    protected WrappedSortedSet<T> create(final java.util.SortedSet<T> delegate) {
+        return new WrappedSortedSet<>(delegate, comparator);
+    }
+
     @Override
     public Comparator<? super T> comparator() {
         return comparator;
@@ -25,7 +29,12 @@ public class WrappedSortedSet<T> extends WrappedSet<T> implements SortedSet<T> {
 
     @Override
     public SortedSet<T> subSet(final T min, final T max) {
-        return new WrappedSortedSet<>(delegate.subSet(min, max), comparator);
+        return this.create(delegate.subSet(min, max));
+    }
+
+    @Override
+    public SortedSet<T> tail() {
+        return this.create(delegate.tailSet(this.head()));
     }
 
     @Override

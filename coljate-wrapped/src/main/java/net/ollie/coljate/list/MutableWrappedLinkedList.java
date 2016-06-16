@@ -1,8 +1,8 @@
-package net.ollie.coljate.lists;
+package net.ollie.coljate.list;
 
-import net.ollie.coljate.lists.mixin.WrapsLinkedList;
-import static net.ollie.coljate.lists.mixin.WrapsLinkedList.copyIntoLinkedList;
-import net.ollie.coljate.lists.mixin.WrapsMutableList;
+import net.ollie.coljate.list.mixin.WrapsLinkedList;
+import static net.ollie.coljate.list.mixin.WrapsLinkedList.copyIntoLinkedList;
+import net.ollie.coljate.list.mixin.WrapsMutableList;
 
 /**
  *

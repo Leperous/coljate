@@ -59,7 +59,7 @@ public class WrappedList<T>
     @Override
     public boolean equals(final Object object) {
         return object instanceof List
-                && List.equals(this, (List) object);
+                && List.elementsEqual(this, (List) object);
     }
 
     @Override

@@ -5,10 +5,8 @@ import static java.util.Objects.requireNonNull;
 
 import net.ollie.coljate.Collection;
 import net.ollie.coljate.WrappedCollection;
-import net.ollie.coljate.sets.Set;
+import net.ollie.coljate.set.Set;
 import net.ollie.coljate.set.WrappedSet;
-
-import static java.util.Objects.requireNonNull;
 
 /**
  *

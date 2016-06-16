@@ -1,7 +1,6 @@
 package net.ollie.coljate.list;
 
 import net.ollie.coljate.AbstractCollection;
-import net.ollie.coljate.theory.Finite;
 
 /**
  *
@@ -19,12 +18,12 @@ public abstract class AbstractList<T>
     }
 
     public boolean equals(final List<?> that) {
-        return Finite.sequenceEquals(this, that);
+        return List.elementsEqual(this, that);
     }
 
     @Override
     public int hashCode() {
-        return Finite.productHash(this);
+        return List.hashCode(this);
     }
 
 }

@@ -2,6 +2,10 @@ package net.ollie.coljate.lists;
 
 import java.util.Arrays;
 
+import net.ollie.coljate.list.ImmutableAppendList;
+import net.ollie.coljate.list.ImmutableList;
+import net.ollie.coljate.list.ImmutableWrappedArrayList;
+
 /**
  *
  * @author Ollie

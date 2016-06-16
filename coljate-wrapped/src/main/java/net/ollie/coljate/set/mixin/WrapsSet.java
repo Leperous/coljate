@@ -1,6 +1,6 @@
 package net.ollie.coljate.set.mixin;
 
-import net.ollie.coljate.sets.Set;
+import net.ollie.coljate.set.Set;
 
 /**
  * Some {@link Set} that wraps a {@link java.util.Set}.

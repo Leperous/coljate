@@ -1,7 +1,6 @@
 package net.ollie.coljate.map;
 
-import net.ollie.coljate.Collection;
-import net.ollie.coljate.sets.MutableSet;
+import net.ollie.coljate.set.MutableSet;
 import net.ollie.coljate.set.MutableWrappedSet;
 import net.ollie.coljate.utils.Lazy;
 
@@ -9,7 +8,9 @@ import net.ollie.coljate.utils.Lazy;
  *
  * @author Ollie
  */
-public class MutableWrappedHashMap<K, V> extends WrappedHashMap<K, V> implements MutableMap<K, V> {
+public class MutableWrappedHashMap<K, V>
+        extends WrappedHashMap<K, V>
+        implements MutableMap<K, V> {
 
     public static <K, V> MutableMap<K, V> copyOf(final java.util.Map<K, V> map) {
         return new MutableWrappedHashMap<>(copyIntoHashMap(map));

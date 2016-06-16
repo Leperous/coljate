@@ -3,8 +3,8 @@ package net.ollie.coljate;
 import java.util.Iterator;
 import static java.util.Objects.requireNonNull;
 
-import net.ollie.coljate.lists.ImmutableWrappedArrayList;
-import net.ollie.coljate.lists.MutableWrappedArrayList;
+import net.ollie.coljate.list.ImmutableWrappedArrayList;
+import net.ollie.coljate.list.MutableWrappedArrayList;
 
 /**
  *
@@ -59,6 +59,17 @@ public class WrappedCollection<T>
     @Override
     public String toString() {
         return delegate.toString();
+    }
+
+    @Override
+    public boolean equals(final Object obj) {
+        return obj instanceof WrappedCollection
+                && this.delegate.equals(((WrappedCollection) obj).delegate);
+    }
+
+    @Override
+    public int hashCode() {
+        return delegate.hashCode();
     }
 
 }

@@ -47,10 +47,8 @@ public interface WrapsMutableCollection<@Nullable T> extends MutableCollection<T
     }
 
     @Override
-    default boolean clear() {
-        final boolean any = !this.delegate().isEmpty();
+    default void clear() {
         this.delegate().clear();
-        return any;
     }
 
 }

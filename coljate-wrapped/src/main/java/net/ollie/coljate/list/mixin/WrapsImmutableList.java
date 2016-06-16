@@ -4,7 +4,7 @@ import net.ollie.coljate.list.ImmutableAppendList;
 import net.ollie.coljate.list.ImmutableList;
 import net.ollie.coljate.list.ImmutablePrefixList;
 import net.ollie.coljate.list.MutableList;
-import net.ollie.coljate.lists.MutableWrappedArrayList;
+import net.ollie.coljate.list.MutableWrappedArrayList;
 
 import org.checkerframework.checker.nullness.qual.Nullable;
 

@@ -1,12 +1,11 @@
-package net.ollie.coljate.lists;
+package net.ollie.coljate.list;
 
 import java.util.List;
 
 import net.ollie.coljate.Collection;
-import net.ollie.coljate.list.MutableList;
 import net.ollie.coljate.list.mixin.WrapsArrayList;
 import static net.ollie.coljate.list.mixin.WrapsArrayList.copyToArrayList;
-import net.ollie.coljate.lists.mixin.WrapsMutableList;
+import net.ollie.coljate.list.mixin.WrapsMutableList;
 
 /**
  *

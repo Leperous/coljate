@@ -22,8 +22,24 @@ public interface WrapsMutableList<T>
     }
 
     @Override
+    @Deprecated
+    default boolean add(T element) {
+        return MutableList.super.add(element);
+    }
+
+    @Override
     default T set(int index, T element) {
         return this.delegate().set(index, element);
+    }
+
+    @Override
+    default void prefix(final T element) {
+        this.delegate().add(0, element);
+    }
+
+    @Override
+    default void suffix(final T element) {
+        this.delegate().add(element);
     }
 
     @Override

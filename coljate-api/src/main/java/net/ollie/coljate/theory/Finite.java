@@ -48,6 +48,10 @@ public interface Finite<@Nullable T> extends Traversable<T> {
         return true;
     }
 
+    /**
+     * @return the product of the hashes of the elements. Suitable for ordered
+     * collections.
+     */
     static int productHash(final Finite<?> list) {
         int hashCode = 1;
         for (final Object element : list) {

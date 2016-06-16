@@ -3,7 +3,7 @@ package net.ollie.coljate.set.mixin;
 import java.util.Iterator;
 import java.util.Set;
 
-import net.ollie.coljate.sets.MutableSet;
+import net.ollie.coljate.set.MutableSet;
 import net.ollie.coljate.set.MutableWrappedHashSet;
 
 /**

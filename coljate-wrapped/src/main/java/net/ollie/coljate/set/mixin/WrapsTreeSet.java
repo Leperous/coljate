@@ -1,7 +1,7 @@
 package net.ollie.coljate.set.mixin;
 
-import net.ollie.coljate.sets.Set;
-import net.ollie.coljate.sets.SortedSet;
+import net.ollie.coljate.set.Set;
+import net.ollie.coljate.set.SortedSet;
 
 /**
  * Some {@link Set} that wraps a {@link java.util.TreeSet}.
