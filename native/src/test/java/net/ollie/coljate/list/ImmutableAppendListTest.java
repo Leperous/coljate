@@ -7,7 +7,7 @@ import java.util.Arrays;
 import net.ollie.coljate.list.ImmutableAppendList;
 import net.ollie.coljate.list.ImmutableList;
 import net.ollie.coljate.list.ImmutableWrappedArrayList;
-import net.ollie.coljate.list.ImmutableWrappedEmptyList;
+import net.ollie.coljate.list.ImmutableWrappedEmptyArray;
 
 /**
  *
@@ -18,7 +18,7 @@ public class ImmutableAppendListTest extends ImmutableListTest {
 
     @Override
     protected ImmutableList<Object> empty() {
-        return ImmutableWrappedEmptyList.empty();
+        return ImmutableWrappedEmptyArray.empty();
     }
 
     @Override

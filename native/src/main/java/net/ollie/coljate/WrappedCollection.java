@@ -3,8 +3,7 @@ package net.ollie.coljate;
 import java.util.Iterator;
 import static java.util.Objects.requireNonNull;
 
-import net.ollie.coljate.list.ImmutableWrappedArrayList;
-import net.ollie.coljate.list.MutableArrayList;
+import net.ollie.coljate.list.mixin.CopiedToCollection;
 
 /**
  *
@@ -12,7 +11,7 @@ import net.ollie.coljate.list.MutableArrayList;
  */
 public class WrappedCollection<T>
         extends AbstractCollection<T>
-        implements Collection<T> {
+        implements Collection<T>, CopiedToCollection<T> {
 
     private final java.util.Collection<T> delegate;
 
@@ -23,16 +22,6 @@ public class WrappedCollection<T>
     @Override
     public Collection<T> tail() {
         throw new UnsupportedOperationException(); //TODO
-    }
-
-    @Override
-    public MutableCollection<T> mutableCopy() {
-        return MutableArrayList.copyOf(delegate);
-    }
-
-    @Override
-    public ImmutableCollection<T> immutableCopy() {
-        return ImmutableWrappedArrayList.copyOf(delegate);
     }
 
     @Override

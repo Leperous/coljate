@@ -15,7 +15,13 @@ public class ImmutableWrappedHashMap<K, V>
         extends WrappedMap<K, V>
         implements ImmutableMap<K, V>, HashMap<K, V> {
 
-    public static <K, V> ImmutableMap<K, V> copyOf(final java.util.Map<K, V> map) {
+    public static <K, V> ImmutableWrappedHashMap<K, V> copyOf(final Map<K, V> map) {
+        return map instanceof ImmutableWrappedHashMap
+                ? (ImmutableWrappedHashMap<K, V>) map
+                : new ImmutableWrappedHashMap<>(HashMap.copyOf(map));
+    }
+
+    public static <K, V> ImmutableWrappedHashMap<K, V> copyOf(final java.util.Map<K, V> map) {
         return new ImmutableWrappedHashMap<>(HashMap.copyOf(map));
     }
 
@@ -59,6 +65,12 @@ public class ImmutableWrappedHashMap<K, V>
     @Override
     public ImmutableMap<K, V> tail() {
         throw new UnsupportedOperationException(); //TODO
+    }
+
+    @Override
+    @Deprecated
+    public ImmutableWrappedHashMap<K, V> immutableCopy() {
+        return this;
     }
 
 }

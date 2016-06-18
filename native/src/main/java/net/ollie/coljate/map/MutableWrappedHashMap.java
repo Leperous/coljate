@@ -18,6 +18,10 @@ public class MutableWrappedHashMap<K, V>
         return viewOf(new java.util.HashMap<>(initialCapacity));
     }
 
+    public static <K, V> MutableWrappedHashMap<K, V> copyOf(final Map<K, V> map) {
+        return viewOf(HashMap.copyOf(map));
+    }
+
     public static <K, V> MutableWrappedHashMap<K, V> copyOf(final java.util.Map<K, V> map) {
         return viewOf(HashMap.copyOf(map));
     }

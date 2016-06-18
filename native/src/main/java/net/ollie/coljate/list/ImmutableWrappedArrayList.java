@@ -12,20 +12,20 @@ import net.ollie.coljate.utils.DelegatedUnmodifiableIterator;
  */
 public class ImmutableWrappedArrayList<T>
         extends WrappedList<T>
-        implements ImmutableList<T>, WrapsArrayList<T> {
+        implements ImmutableArray<T>, WrapsArrayList<T> {
 
-    public static <T> ImmutableList<T> of() {
-        return ImmutableWrappedEmptyList.empty();
+    public static <T> ImmutableArray<T> of() {
+        return ImmutableWrappedEmptyArray.empty();
     }
 
-    public static <T> ImmutableList<T> of(final T element) {
+    public static <T> ImmutableArray<T> of(final T element) {
         final java.util.ArrayList<T> list = new java.util.ArrayList<>(1);
         list.add(element);
         return new ImmutableWrappedArrayList<>(list);
     }
 
     @SafeVarargs
-    public static <T> ImmutableList<T> copyOf(final T... array) {
+    public static <T> ImmutableArray<T> copyOf(final T... array) {
         switch (array.length) {
             case 0:
                 return of();
@@ -36,7 +36,7 @@ public class ImmutableWrappedArrayList<T>
         }
     }
 
-    public static <T> ImmutableList<T> copyOf(final java.util.Collection<? extends T> collection) {
+    public static <T> ImmutableArray<T> copyOf(final java.util.Collection<? extends T> collection) {
         switch (collection.size()) {
             case 0:
                 return of();
@@ -46,9 +46,9 @@ public class ImmutableWrappedArrayList<T>
     }
 
     @SuppressWarnings("unchecked")
-    public static <T> ImmutableList<T> copyOf(final Collection<? extends T> collection) {
-        if (collection instanceof ImmutableList) {
-            return (ImmutableList<T>) collection;
+    public static <T> ImmutableArray<T> copyOf(final Collection<? extends T> collection) {
+        if (collection instanceof ImmutableArray) {
+            return (ImmutableArray<T>) collection;
         }
         switch (collection.count()) {
             case 0:
@@ -92,7 +92,7 @@ public class ImmutableWrappedArrayList<T>
     }
 
     @Override
-    public ImmutableList<T> tail() {
+    public ImmutableArray<T> tail() {
         return ImmutableWrappedArrayList.copyOf(super.tail());
     }
 
@@ -100,6 +100,11 @@ public class ImmutableWrappedArrayList<T>
     @Deprecated
     public ImmutableWrappedArrayList<T> immutableCopy() {
         return this;
+    }
+
+    @Override
+    public MutableArray<T> mutableCopy() {
+        return WrapsArrayList.super.mutableCopy();
     }
 
 }

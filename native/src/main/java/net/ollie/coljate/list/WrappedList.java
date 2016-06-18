@@ -4,6 +4,7 @@ import java.util.Objects;
 import java.util.OptionalInt;
 
 import net.ollie.coljate.WrappedCollection;
+import net.ollie.coljate.list.mixin.CopiedToList;
 import net.ollie.coljate.list.mixin.WrapsList;
 
 /**
@@ -12,7 +13,7 @@ import net.ollie.coljate.list.mixin.WrapsList;
  */
 public class WrappedList<T>
         extends WrappedCollection<T>
-        implements WrapsList<T> {
+        implements WrapsList<T>, CopiedToList<T> {
 
     private final java.util.List<T> delegate;
 
@@ -42,18 +43,18 @@ public class WrappedList<T>
         return new WrappedList<>(this.nativeTail());
     }
 
-    protected java.util.List<T> nativeTail() {
-        return delegate.subList(1, delegate.size());
+    @Override
+    public ImmutableList<T> immutableCopy() {
+        return WrapsList.super.immutableCopy();
     }
 
     @Override
     public MutableList<T> mutableCopy() {
-        return MutableArrayList.copyOf(this);
+        return WrapsList.super.mutableCopy();
     }
 
-    @Override
-    public ImmutableList<T> immutableCopy() {
-        return ImmutableWrappedArrayList.copyOf(this);
+    protected java.util.List<T> nativeTail() {
+        return delegate.subList(1, delegate.size());
     }
 
     @Override

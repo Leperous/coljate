@@ -3,11 +3,15 @@ package net.ollie.coljate.set;
 import java.util.Comparator;
 import static java.util.Objects.requireNonNull;
 
+import net.ollie.coljate.set.mixin.CopiedToTreeSet;
+
 /**
  *
  * @author Ollie
  */
-public class WrappedSortedSet<T> extends WrappedSet<T> implements SortedSet<T> {
+public class WrappedSortedSet<T>
+        extends WrappedSet<T>
+        implements SortedSet<T>, CopiedToTreeSet<T> {
 
     private final java.util.SortedSet<T> delegate;
     private final Comparator<? super T> comparator;
@@ -38,16 +42,6 @@ public class WrappedSortedSet<T> extends WrappedSet<T> implements SortedSet<T> {
     }
 
     @Override
-    public MutableSortedSet<T> mutableCopy() {
-        throw new UnsupportedOperationException(); //TODO
-    }
-
-    @Override
-    public ImmutableSortedSet<T> immutableCopy() {
-        return ImmutableWrappedTreeSet.copyOf(delegate, comparator);
-    }
-
-    @Override
     public T max() {
         return delegate.last();
     }
@@ -55,6 +49,16 @@ public class WrappedSortedSet<T> extends WrappedSet<T> implements SortedSet<T> {
     @Override
     public T min() {
         return delegate.first();
+    }
+
+    @Override
+    public MutableSortedSet<T> mutableCopy() {
+        return CopiedToTreeSet.super.mutableCopy();
+    }
+
+    @Override
+    public ImmutableSortedSet<T> immutableCopy() {
+        return CopiedToTreeSet.super.immutableCopy();
     }
 
 }

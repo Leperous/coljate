@@ -3,6 +3,7 @@ package net.ollie.coljate.set;
 import static java.util.Objects.requireNonNull;
 
 import net.ollie.coljate.WrappedCollection;
+import net.ollie.coljate.set.mixin.CopiedToHashSet;
 import net.ollie.coljate.set.mixin.WrapsSet;
 
 /**
@@ -11,7 +12,7 @@ import net.ollie.coljate.set.mixin.WrapsSet;
  */
 public class WrappedSet<T>
         extends WrappedCollection<T>
-        implements WrapsSet<T> {
+        implements WrapsSet<T>, CopiedToHashSet<T> {
 
     private final java.util.Set<T> delegate;
 
@@ -36,12 +37,12 @@ public class WrappedSet<T>
 
     @Override
     public MutableSet<T> mutableCopy() {
-        return MutableWrappedHashSet.copyOf(delegate);
+        return CopiedToHashSet.super.mutableCopy();
     }
 
     @Override
     public ImmutableSet<T> immutableCopy() {
-        return ImmutableWrappedHashSet.copyOf(delegate);
+        return CopiedToHashSet.super.immutableCopy();
     }
 
 }

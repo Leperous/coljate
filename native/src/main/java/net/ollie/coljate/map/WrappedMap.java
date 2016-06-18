@@ -5,6 +5,7 @@ import static java.util.Objects.requireNonNull;
 
 import net.ollie.coljate.Collection;
 import net.ollie.coljate.WrappedCollection;
+import net.ollie.coljate.map.mixin.CopiedToHashMap;
 import net.ollie.coljate.set.Set;
 import net.ollie.coljate.set.WrappedSet;
 import net.ollie.coljate.utils.Iterators;
@@ -15,7 +16,7 @@ import net.ollie.coljate.utils.Iterators;
  */
 public class WrappedMap<K, V>
         extends AbstractMap<K, V>
-        implements Map<K, V> {
+        implements Map<K, V>, CopiedToHashMap<K, V> {
 
     private final java.util.Map<K, V> delegate;
 
@@ -62,16 +63,6 @@ public class WrappedMap<K, V>
     @Override
     public Map<K, V> tail() {
         throw new UnsupportedOperationException(); //TODO
-    }
-
-    @Override
-    public MutableMap<K, V> mutableCopy() {
-        return MutableWrappedHashMap.copyOf(delegate);
-    }
-
-    @Override
-    public ImmutableMap<K, V> immutableCopy() {
-        return ImmutableWrappedHashMap.copyOf(delegate);
     }
 
 }

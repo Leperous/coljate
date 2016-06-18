@@ -1,25 +1,26 @@
 package net.ollie.coljate.list;
 
 import net.ollie.coljate.UnmodifiableIterator;
+import net.ollie.coljate.list.mixin.CopiedToArray;
 import net.ollie.coljate.list.mixin.WrapsImmutableList;
 
 /**
  *
  * @author Ollie
  */
-public class ImmutableWrappedEmptyList<T>
+public class ImmutableWrappedEmptyArray<T>
         extends AbstractList<T>
-        implements WrapsImmutableList<T> {
+        implements ImmutableArray<T>, WrapsImmutableList<T>, CopiedToArray<T> {
 
     @SuppressWarnings("rawtypes")
-    private static final ImmutableWrappedEmptyList INSTANCE = new ImmutableWrappedEmptyList();
+    private static final ImmutableWrappedEmptyArray INSTANCE = new ImmutableWrappedEmptyArray();
 
     @SuppressWarnings("unchecked")
-    public static <T> ImmutableWrappedEmptyList<T> empty() {
+    public static <T> ImmutableWrappedEmptyArray<T> empty() {
         return INSTANCE;
     }
 
-    protected ImmutableWrappedEmptyList() {
+    protected ImmutableWrappedEmptyArray() {
     }
 
     @Override
@@ -28,18 +29,23 @@ public class ImmutableWrappedEmptyList<T>
     }
 
     @Override
-    public ImmutableWrappedEmptyList<T> tail() {
+    public ImmutableWrappedEmptyArray<T> tail() {
         return this;
     }
 
     @Override
     public T get(final int index) {
-        throw new IndexOutOfBoundsException("Empty list!");
+        throw new IndexOutOfBoundsException("List is empty.");
     }
 
     @Override
     public boolean contains(final Object object) {
         return false;
+    }
+
+    @Override
+    public int capacity() {
+        return 0;
     }
 
     @Override
@@ -55,6 +61,17 @@ public class ImmutableWrappedEmptyList<T>
     @Override
     public UnmodifiableIterator<T> iterator() {
         return UnmodifiableIterator.none();
+    }
+
+    @Override
+    public MutableArray<T> mutableCopy() {
+        return CopiedToArray.super.mutableCopy();
+    }
+
+    @Override
+    @Deprecated
+    public ImmutableWrappedEmptyArray<T> immutableCopy() {
+        return this;
     }
 
 }

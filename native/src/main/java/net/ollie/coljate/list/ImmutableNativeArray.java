@@ -3,6 +3,7 @@ package net.ollie.coljate.list;
 import java.util.Arrays;
 
 import net.ollie.coljate.UnmodifiableIterator;
+import net.ollie.coljate.theory.Finite;
 import net.ollie.coljate.utils.UnmodifiableArrayIterator;
 
 /**
@@ -10,7 +11,7 @@ import net.ollie.coljate.utils.UnmodifiableArrayIterator;
  * @author Ollie
  * @see java.util.ArrayList
  */
-public class ImmutableArrayList<T>
+public class ImmutableNativeArray<T>
         extends AbstractList<T>
         implements ImmutableArray<T> {
 
@@ -19,7 +20,7 @@ public class ImmutableArrayList<T>
     }
 
     public static <T> ImmutableArray<T> of(final T element) {
-        return new ImmutableArrayList<>(new Object[]{element});
+        return new ImmutableNativeArray<>(new Object[]{element});
     }
 
     @SafeVarargs
@@ -28,13 +29,17 @@ public class ImmutableArrayList<T>
             case 0:
                 return of();
             default:
-                return new ImmutableArrayList<>(elements);
+                return new ImmutableNativeArray<>(elements);
         }
+    }
+
+    public static <T> ImmutableArray<T> copyOf(final Finite<T> collection) {
+        return new ImmutableNativeArray<>(collection.toArray());
     }
 
     private final Object[] array;
 
-    ImmutableArrayList(final Object[] array) {
+    ImmutableNativeArray(final Object[] array) {
         this.array = array;
     }
 
@@ -64,7 +69,7 @@ public class ImmutableArrayList<T>
         final Object[] newArray = new Object[array.length + 1];
         newArray[0] = element;
         System.arraycopy(array, 0, newArray, 1, array.length);
-        return new ImmutableArrayList<>(newArray);
+        return new ImmutableNativeArray<>(newArray);
     }
 
     @Override
@@ -72,7 +77,7 @@ public class ImmutableArrayList<T>
         final Object[] newArray = new Object[array.length + 1];
         System.arraycopy(array, 0, newArray, 0, array.length);
         newArray[array.length] = element;
-        return new ImmutableArrayList<>(newArray);
+        return new ImmutableNativeArray<>(newArray);
     }
 
     @Override

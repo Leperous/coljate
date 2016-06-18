@@ -10,6 +10,8 @@ import org.checkerframework.checker.nullness.qual.Nullable;
 import net.ollie.coljate.UnmodifiableIterator;
 import net.ollie.coljate.list.mixin.WrapsImmutableList;
 
+import static java.util.Objects.requireNonNull;
+
 /**
  *
  * @author Ollie
@@ -35,7 +37,7 @@ public class ImmutableAppendList<@Nullable T>
     @Override
     public ImmutableList<T> tail() {
         return left.isEmpty()
-                ? ImmutableWrappedEmptyList.empty()
+                ? ImmutableWrappedEmptyArray.empty()
                 : of(left.tail(), right);
     }
 

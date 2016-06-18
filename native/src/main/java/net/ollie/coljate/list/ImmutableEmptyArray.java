@@ -26,23 +26,13 @@ public class ImmutableEmptyArray<T>
     }
 
     @Override
-    public int count() {
-        return 0;
-    }
-
-    @Override
-    public boolean isEmpty() {
-        return true;
-    }
-
-    @Override
     public ImmutableList<T> prefixed(final T element) {
         return this.suffixed(element);
     }
 
     @Override
     public ImmutableList<T> suffixed(final T element) {
-        return ImmutableArrayList.of(element);
+        return ImmutableNativeArray.of(element);
     }
 
     @Override

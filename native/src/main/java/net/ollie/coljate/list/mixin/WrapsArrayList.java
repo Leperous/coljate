@@ -1,19 +1,36 @@
 package net.ollie.coljate.list.mixin;
 
-import java.util.RandomAccess;
-
 import net.ollie.coljate.Collection;
+import net.ollie.coljate.list.Array;
+import net.ollie.coljate.list.ImmutableArray;
 import net.ollie.coljate.list.List;
+import net.ollie.coljate.list.MutableArray;
 
 /**
  * Some {@link List} that wraps a {@link java.util.ArrayList}.
  *
  * @author Ollie
  */
-public interface WrapsArrayList<T> extends WrapsList<T>, RandomAccess {
+public interface WrapsArrayList<T>
+        extends Array<T>, WrapsList<T>, CopiedToArray<T> {
 
     @Override
     java.util.ArrayList<T> copyDelegate();
+
+    @Override
+    default int capacity() {
+        throw new UnsupportedOperationException(); //TODO reflection?
+    }
+
+    @Override
+    default MutableArray<T> mutableCopy() {
+        return CopiedToArray.super.mutableCopy();
+    }
+
+    @Override
+    default ImmutableArray<T> immutableCopy() {
+        return CopiedToArray.super.immutableCopy();
+    }
 
     @SafeVarargs
     static <T> java.util.ArrayList<T> copyToArrayList(final T... array) {
