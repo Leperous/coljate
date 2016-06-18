@@ -2,6 +2,7 @@ package net.ollie.coljate.utils;
 
 import java.util.Iterator;
 import java.util.NoSuchElementException;
+import java.util.function.Function;
 
 /**
  *
@@ -35,6 +36,27 @@ public class Iterators {
             count++;
         }
         return count;
+    }
+
+    public static <F, T> Iterator<T> transform(final Iterator<F> iterator, final Function<? super F, ? extends T> transform) {
+        return new Iterator<T>() {
+
+            @Override
+            public boolean hasNext() {
+                return iterator.hasNext();
+            }
+
+            @Override
+            public T next() {
+                return transform.apply(iterator.next());
+            }
+
+            @Override
+            public void remove() {
+                iterator.remove();
+            }
+
+        };
     }
 
 }

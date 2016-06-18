@@ -1,11 +1,18 @@
 package net.ollie.coljate.map;
 
+import org.checkerframework.checker.nullness.qual.Nullable;
+
 /**
  *
  * @author Ollie
  */
-public interface MutableMapEntry<K, V> extends MapEntry<K, V> {
+public interface MutableMapEntry<K, @Nullable V> extends MapEntry<K, V> {
 
-    void setValue(V value);
+    /**
+     *
+     * @param value
+     * @return the previous value.
+     */
+    V setValue(V value);
 
 }

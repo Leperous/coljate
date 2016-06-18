@@ -1,8 +1,9 @@
 package net.ollie.coljate.map;
 
-import net.ollie.coljate.set.MutableSet;
-import net.ollie.coljate.set.MutableWrappedSet;
-import net.ollie.coljate.utils.Lazy;
+import java.util.Iterator;
+import java.util.Map;
+
+import net.ollie.coljate.utils.Iterators;
 
 /**
  *
@@ -12,17 +13,29 @@ public class MutableWrappedHashMap<K, V>
         extends WrappedHashMap<K, V>
         implements MutableMap<K, V> {
 
-    public static <K, V> MutableMap<K, V> copyOf(final java.util.Map<K, V> map) {
+    public static final int DEFAULT_CAPACITY = 10;
+
+    public static <K, V> MutableWrappedHashMap<K, V> create() {
+        return create(DEFAULT_CAPACITY);
+    }
+
+    public static <K, V> MutableWrappedHashMap<K, V> create(final int initialCapacity) {
+        return new MutableWrappedHashMap<>(new java.util.HashMap<>(initialCapacity));
+    }
+
+    public static <K, V> MutableWrappedHashMap<K, V> copyOf(final java.util.Map<K, V> map) {
         return new MutableWrappedHashMap<>(copyIntoHashMap(map));
     }
 
+    public static <K, V> MutableWrappedHashMap<K, V> viewOf(final java.util.HashMap<K, V> map) {
+        return new MutableWrappedHashMap<>(map);
+    }
+
     private final java.util.HashMap<K, V> delegate;
-    private final Lazy<MutableSet<K>> keys;
 
     protected MutableWrappedHashMap(final java.util.HashMap<K, V> delegate) {
         super(delegate);
         this.delegate = delegate;
-        this.keys = Lazy.nonNull(() -> new MutableWrappedSet<>(delegate.keySet()));
     }
 
     @Override
@@ -37,13 +50,38 @@ public class MutableWrappedHashMap<K, V>
     }
 
     @Override
-    public MutableSet<K> keys() {
-        return keys.get();
+    public void clear() {
+        delegate.clear();
     }
 
     @Override
-    public MutableSet<? extends MutableMapEntry<K, V>> entries() {
-        throw new UnsupportedOperationException(); //TODO
+    public Iterator<? extends MutableMapEntry<K, V>> entries() {
+        return Iterators.transform(delegate.entrySet().iterator(), EntryWrapper::new);
+    }
+
+    private final class EntryWrapper implements MutableMapEntry<K, V> {
+
+        private final java.util.Map.Entry<K, V> delegate;
+
+        EntryWrapper(final Map.Entry<K, V> delegate) {
+            this.delegate = delegate;
+        }
+
+        @Override
+        public K key() {
+            return delegate.getKey();
+        }
+
+        @Override
+        public V value() {
+            return delegate.getValue();
+        }
+
+        @Override
+        public V setValue(final V value) {
+            return delegate.setValue(value);
+        }
+
     }
 
 }

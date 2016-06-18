@@ -1,5 +1,6 @@
 package net.ollie.coljate.lists;
 
+import net.ollie.coljate.list.ImmutableListTest;
 import net.ollie.coljate.list.ImmutableList;
 import net.ollie.coljate.list.ImmutableWrappedArrayList;
 

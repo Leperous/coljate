@@ -44,6 +44,14 @@ public interface Map<K, @Nullable V>
         return this.keys().count();
     }
 
+    default boolean containsKey(final Object key) {
+        return this.keys().contains(key);
+    }
+
+    default boolean containsValue(final Object value) {
+        return this.values().contains(value);
+    }
+
     @Override
     @Deprecated
     default boolean contains(final Object object) {
@@ -52,7 +60,12 @@ public interface Map<K, @Nullable V>
     }
 
     default boolean contains(@NonNull final MapEntry<?, ?> entry) {
-        return Objects.equals(entry.value(), this.get(entry.key()));
+        return entry != null && Objects.equals(entry.value(), this.get(entry.key()));
+    }
+
+    @Override
+    default boolean inDomain(final K input) {
+        return this.keys().contains(input);
     }
 
 }

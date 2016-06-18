@@ -1,6 +1,4 @@
-package net.ollie.coljate.lists;
-
-import net.ollie.coljate.list.MutableArray;
+package net.ollie.coljate.list;
 
 /**
  *

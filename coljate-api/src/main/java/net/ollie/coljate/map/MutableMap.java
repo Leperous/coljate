@@ -1,23 +1,17 @@
 package net.ollie.coljate.map;
 
+import java.util.Iterator;
 import java.util.Objects;
-
-import org.checkerframework.checker.nullness.qual.NonNull;
+import java.util.function.Function;
 
 import net.ollie.coljate.MutableCollection;
-import net.ollie.coljate.set.MutableSet;
+import net.ollie.coljate.utils.Iterators;
 
 /**
  *
  * @author Ollie
  */
 public interface MutableMap<K, V> extends Map<K, V>, MutableCollection<MapEntry<K, V>> {
-
-    @Override
-    MutableSet<K> keys();
-
-    @NonNull
-    MutableSet<? extends MutableMapEntry<K, V>> entries();
 
     V put(K key, V value);
 
@@ -51,9 +45,14 @@ public interface MutableMap<K, V> extends Map<K, V>, MutableCollection<MapEntry<
         return false;
     }
 
+    Iterator<? extends MutableMapEntry<K, V>> entries();
+
     @Override
-    default void clear() {
-        this.keys().clear();
+    default Iterator<MapEntry<K, V>> iterator() {
+        return Iterators.transform(this.entries(), Function.identity());
     }
+
+    @Override
+    void clear();
 
 }

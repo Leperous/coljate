@@ -1,7 +1,5 @@
 package net.ollie.coljate.list;
 
-import net.ollie.coljate.lists.MutableListTest;
-
 /**
  *
  * @author Ollie

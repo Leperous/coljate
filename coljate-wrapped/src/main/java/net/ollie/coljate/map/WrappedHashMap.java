@@ -1,10 +1,13 @@
 package net.ollie.coljate.map;
 
+import org.checkerframework.checker.nullness.qual.NonNull;
+import org.checkerframework.checker.nullness.qual.Nullable;
+
 /**
  *
  * @author Ollie
  */
-public abstract class WrappedHashMap<K, V>
+public abstract class WrappedHashMap<@NonNull K, @Nullable V>
         extends WrappedMap<K, V>
         implements HashMap<K, V> {
 

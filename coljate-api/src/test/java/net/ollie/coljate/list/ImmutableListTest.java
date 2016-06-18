@@ -1,8 +1,6 @@
-package net.ollie.coljate.lists;
+package net.ollie.coljate.list;
 
 import org.checkerframework.checker.nullness.qual.NonNull;
-
-import net.ollie.coljate.list.ImmutableList;
 
 /**
  *

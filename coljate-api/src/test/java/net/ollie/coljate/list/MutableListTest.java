@@ -1,13 +1,10 @@
-package net.ollie.coljate.lists;
+package net.ollie.coljate.list;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
 import org.junit.Test;
-
-import net.ollie.coljate.list.ImmutableList;
-import net.ollie.coljate.list.MutableList;
 
 /**
  *

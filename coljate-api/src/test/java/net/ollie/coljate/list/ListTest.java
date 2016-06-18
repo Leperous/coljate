@@ -1,6 +1,4 @@
-package net.ollie.coljate.lists;
-
-import net.ollie.coljate.list.List;
+package net.ollie.coljate.list;
 
 import org.checkerframework.checker.nullness.qual.NonNull;
 import static org.hamcrest.CoreMatchers.is;
@@ -59,7 +57,7 @@ public abstract class ListTest {
         assertThat("Should have head", singleton.head(), is(head));
         assertThat("Should have empty tail", singleton.tail(), is(this.empty()));
     }
-    
+
     @Test
     public void testSinglton_Array() {
         final Object head = new Object();

@@ -9,7 +9,7 @@ import org.checkerframework.checker.nullness.qual.Nullable;
  *
  * @author Ollie
  */
-public interface Sorted<@Nullable T> extends Traversable<T> {
+public interface Sorted<@Nullable T> {
 
     @NonNull
     Comparator<? super T> comparator();
