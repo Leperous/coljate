@@ -12,7 +12,7 @@ public class WrappedSortedSet<T> extends WrappedSet<T> implements SortedSet<T> {
     private final java.util.SortedSet<T> delegate;
     private final Comparator<? super T> comparator;
 
-    protected WrappedSortedSet(final java.util.SortedSet<T> delegate, final Comparator<? super T> comparator) {
+    public WrappedSortedSet(final java.util.SortedSet<T> delegate, final Comparator<? super T> comparator) {
         super(delegate);
         this.delegate = requireNonNull(delegate);
         this.comparator = requireNonNull(comparator);

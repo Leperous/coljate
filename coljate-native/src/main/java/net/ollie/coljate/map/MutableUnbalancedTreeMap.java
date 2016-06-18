@@ -17,7 +17,7 @@ import net.ollie.coljate.utils.Iterators;
  */
 public class MutableUnbalancedTreeMap<K, V>
         extends AbstractSortedMap<K, V>
-        implements MutableMap<K, V> {
+        implements MutableSortedMap<K, V> {
 
     public static <K extends Comparable<? super K>, V> MutableUnbalancedTreeMap<K, V> create() {
         return create(Comparator.naturalOrder());
@@ -159,7 +159,7 @@ public class MutableUnbalancedTreeMap<K, V>
         return SearchType.DEPTH_FIRST_RECURSIVE.count(root);
     }
 
-    private static final class Node<K, V> implements MutableMapEntry<K, V> {
+    private static final class Node<K, V> extends AbstractMapEntry<K, V> implements MutableMapEntry<K, V> {
 
         private final K key;
         private V value;
@@ -186,11 +186,6 @@ public class MutableUnbalancedTreeMap<K, V>
             final V previousValue = value;
             value = newValue;
             return previousValue;
-        }
-
-        @Override
-        public String toString() {
-            return key + "=" + value;
         }
 
     }

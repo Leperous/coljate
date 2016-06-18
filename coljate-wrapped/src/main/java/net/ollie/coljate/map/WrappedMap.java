@@ -17,7 +17,7 @@ public class WrappedMap<K, V>
         extends AbstractMap<K, V>
         implements Map<K, V> {
 
-    final java.util.Map<K, V> delegate;
+    private final java.util.Map<K, V> delegate;
 
     protected WrappedMap(final java.util.Map<K, V> delegate) {
         this.delegate = requireNonNull(delegate);
@@ -30,7 +30,7 @@ public class WrappedMap<K, V>
     }
 
     @Override
-    public boolean inDomain(final K key) {
+    public boolean containsKey(final Object key) {
         return delegate.containsKey(key);
     }
 
@@ -74,7 +74,7 @@ public class WrappedMap<K, V>
         return ImmutableWrappedHashMap.copyOf(delegate);
     }
 
-    private static final class EntryWrapper<K, V> implements MapEntry<K, V> {
+    private static final class EntryWrapper<K, V> extends AbstractMapEntry<K, V> {
 
         private final java.util.Map.Entry<K, V> delegate;
 

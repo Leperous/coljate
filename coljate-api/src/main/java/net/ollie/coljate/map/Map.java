@@ -66,8 +66,9 @@ public interface Map<K, @Nullable V>
     }
 
     @Override
+    @Deprecated
     default boolean inDomain(final K input) {
-        return this.keys().contains(input);
+        return this.containsKey(input);
     }
 
     default void forEach(final BiConsumer<? super K, ? super V> consumer) {
