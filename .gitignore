@@ -10,3 +10,6 @@
 /coljate-api/nbproject/
 /coljate-native/nbproject/
 /coljate-wrapped/nbproject/
+/native/nbproject/
+/native/target/
+/api/target/
