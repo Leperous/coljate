@@ -3,6 +3,8 @@ package net.ollie.coljate.map;
 import java.util.Comparator;
 import java.util.Iterator;
 
+import net.ollie.coljate.map.MapEntry;
+import net.ollie.coljate.map.SortedMap;
 import net.ollie.coljate.set.ImmutableSortedSet;
 import net.ollie.coljate.set.MutableSortedSet;
 import net.ollie.coljate.set.SortedSet;

@@ -11,7 +11,6 @@
     <modules>
         <module>coljate-api</module>
         <module>coljate-wrapped</module>
-        <module>coljate-native</module>
     </modules>
 
     <properties>

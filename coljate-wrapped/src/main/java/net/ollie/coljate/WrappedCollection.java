@@ -6,8 +6,6 @@ import static java.util.Objects.requireNonNull;
 import net.ollie.coljate.list.ImmutableWrappedArrayList;
 import net.ollie.coljate.list.MutableArrayList;
 
-import static java.util.Objects.requireNonNull;
-
 /**
  *
  * @author Ollie
