@@ -8,7 +8,6 @@ import javax.annotation.CheckForNull;
 
 import org.checkerframework.checker.nullness.qual.NonNull;
 
-import net.ollie.coljate.Collection;
 import net.ollie.coljate.utils.Iterators;
 
 /**
@@ -21,7 +20,25 @@ public class MutableUnbalancedTreeMap<K, V>
         implements MutableMap<K, V> {
 
     public static <K extends Comparable<? super K>, V> MutableUnbalancedTreeMap<K, V> create() {
-        return new MutableUnbalancedTreeMap<>(Comparator.naturalOrder());
+        return create(Comparator.naturalOrder());
+    }
+
+    public static <K, V> MutableUnbalancedTreeMap<K, V> create(@NonNull final Comparator<? super K> comparator) {
+        return new MutableUnbalancedTreeMap<>(comparator);
+    }
+
+    public static <K, V> MutableUnbalancedTreeMap<K, V> copyOf(@NonNull final Map<K, V> map, final Comparator<? super K> comparator) {
+        final MutableUnbalancedTreeMap<K, V> treeMap = create(comparator);
+        map.forEach(treeMap::put);
+        return treeMap;
+    }
+
+    public static <K extends Comparable<? super K>, V> MutableUnbalancedTreeMap<K, V> copyOf(@NonNull final Map<K, V> map) {
+        return copyOf(map, Comparator.naturalOrder());
+    }
+
+    public static <K, V> MutableUnbalancedTreeMap<K, V> copyOf(@NonNull final SortedMap<K, V> map) {
+        return copyOf(map, map.comparator());
     }
 
     private final Comparator<? super K> comparator;
@@ -111,13 +128,8 @@ public class MutableUnbalancedTreeMap<K, V>
     }
 
     @Override
-    public Collection<V> values() {
-        throw new UnsupportedOperationException(); //TODO
-    }
-
-    @Override
-    public MutableMap<K, V> mutableCopy() {
-        throw new UnsupportedOperationException(); //TODO
+    public MutableUnbalancedTreeMap<K, V> mutableCopy() {
+        return copyOf(this);
     }
 
     @Override
@@ -144,7 +156,7 @@ public class MutableUnbalancedTreeMap<K, V>
 
     @Override
     public int count() {
-        return SearchType.DEFAULT.count(root);
+        return SearchType.DEPTH_FIRST_RECURSIVE.count(root);
     }
 
     private static final class Node<K, V> implements MutableMapEntry<K, V> {
@@ -183,7 +195,7 @@ public class MutableUnbalancedTreeMap<K, V>
 
     }
 
-    private class EntryIterator implements Iterator<MutableMapEntry<K, V>> {
+    private final class EntryIterator implements Iterator<MutableMapEntry<K, V>> {
 
         Node<K, V> parent, next;
 

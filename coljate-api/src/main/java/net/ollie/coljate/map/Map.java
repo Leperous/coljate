@@ -1,6 +1,7 @@
 package net.ollie.coljate.map;
 
 import java.util.Objects;
+import java.util.function.BiConsumer;
 
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
@@ -8,6 +9,7 @@ import org.checkerframework.checker.nullness.qual.Nullable;
 import net.ollie.coljate.Collection;
 import net.ollie.coljate.set.Set;
 import net.ollie.coljate.theory.Associative;
+import net.ollie.coljate.theory.Finite;
 
 /**
  *
@@ -66,6 +68,22 @@ public interface Map<K, @Nullable V>
     @Override
     default boolean inDomain(final K input) {
         return this.keys().contains(input);
+    }
+
+    default void forEach(final BiConsumer<? super K, ? super V> consumer) {
+        this.iterator().forEachRemaining(entry -> consumer.accept(entry.key(), entry.value()));
+    }
+
+    static boolean equal(final Map<?, ?> m1, final Map<?, ?> m2) {
+        return Finite.elementsEqual(m1, m2);
+    }
+
+    static int hash(final Map<?, ?> map) {
+        return Finite.sumHash(map);
+    }
+
+    static String toString(final Map<?, ?> map) {
+        return Finite.toString(map, entry -> entry.key() + "=" + entry.value());
     }
 
 }

@@ -12,4 +12,15 @@
                 <goal>2</goal>
             </goals>
         </action>
+        <action>
+            <actionName>CUSTOM-skip tests</actionName>
+            <displayName>skip tests</displayName>
+            <goals>
+                <goal>clean</goal>
+                <goal>install</goal>
+            </goals>
+            <properties>
+                <skipTests>true</skipTests>
+            </properties>
+        </action>
     </actions>

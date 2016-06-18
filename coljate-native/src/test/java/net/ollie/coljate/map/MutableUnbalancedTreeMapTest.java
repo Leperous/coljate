@@ -12,7 +12,7 @@ import org.junit.Test;
 public class MutableUnbalancedTreeMapTest extends MutableMapTest {
 
     @Override
-    protected MutableUnbalancedTreeMap<Integer, Object> create() {
+    protected <V> MutableUnbalancedTreeMap<Integer, V> create() {
         return MutableUnbalancedTreeMap.create();
     }
 

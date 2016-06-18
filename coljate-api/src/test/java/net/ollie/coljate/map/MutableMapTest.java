@@ -16,7 +16,7 @@ import org.junit.Test;
  */
 public abstract class MutableMapTest {
 
-    protected abstract MutableMap<Integer, Object> create();
+    protected abstract <V> MutableMap<Integer, V> create();
 
     @Test
     public void testEmpty() {
@@ -43,6 +43,18 @@ public abstract class MutableMapTest {
         map.put(1, new Object());
         map.delete(1);
         assertThat(map, isEmptyMap());
+    }
+
+    @Test
+    public void testSingleton_Equality() {
+        final Object value = new Object();
+        final MutableMap<Integer, Object> m1 = this.create();
+        m1.put(1, value);
+        final MutableMap<Integer, Object> m2 = this.create();
+        m2.put(1, value);
+        assertThat(m1, is(m2));
+        assertThat(m2, is(m1));
+        assertThat(m1.hashCode(), is(m2.hashCode()));
     }
 
     protected static Matcher<Map<?, ?>> isEmptyMap() {

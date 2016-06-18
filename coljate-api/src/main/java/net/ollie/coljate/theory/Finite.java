@@ -6,11 +6,11 @@ import java.util.StringJoiner;
 import java.util.function.Function;
 import java.util.function.Predicate;
 
-import net.ollie.coljate.theory.feature.ConstantContains;
-import net.ollie.coljate.utils.Iterators;
-
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
+
+import net.ollie.coljate.theory.feature.ConstantContains;
+import net.ollie.coljate.utils.Iterators;
 
 /**
  *
@@ -62,8 +62,7 @@ public interface Finite<@Nullable T> extends Traversable<T> {
     }
 
     /**
-     * @return the product of the hashes of the elements. Suitable for ordered
-     * collections.
+     * @return the product of the hashes of the elements. Suitable for ordered collections.
      */
     static int productHash(final Finite<?> list) {
         int hashCode = 1;
@@ -93,6 +92,9 @@ public interface Finite<@Nullable T> extends Traversable<T> {
         return true;
     }
 
+    /**
+     * @return the sum of the hashes of the elements. Suitable for unordered collections.
+     */
     static int sumHash(final Finite<?> finite) {
         return finite.serialStream().mapToInt(Object::hashCode).sum();
     }
@@ -102,9 +104,9 @@ public interface Finite<@Nullable T> extends Traversable<T> {
     }
 
     static <T> String toString(final Finite<T> finite, final Function<? super T, ? extends CharSequence> eachToString) {
-        final StringJoiner joiner = new StringJoiner("[", ",", "]");
+        final StringJoiner joiner = new StringJoiner(",", "[", "]");
         finite.forEach(element -> joiner.add(eachToString.apply(element)));
-        return joiner.toString();
+        return finite.getClass().getSimpleName() + ": " + joiner.toString();
     }
 
 }
