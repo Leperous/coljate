@@ -14,21 +14,21 @@ public class WrappedSortedSet<T>
         implements SortedSet<T>, CopiedToTreeSet<T> {
 
     private final java.util.SortedSet<T> delegate;
-    private final Comparator<? super T> comparator;
 
-    public WrappedSortedSet(final java.util.SortedSet<T> delegate, final Comparator<? super T> comparator) {
+    public WrappedSortedSet(final java.util.SortedSet<T> delegate) {
         super(delegate);
         this.delegate = requireNonNull(delegate);
-        this.comparator = requireNonNull(comparator);
     }
 
     protected WrappedSortedSet<T> create(final java.util.SortedSet<T> delegate) {
-        return new WrappedSortedSet<>(delegate, comparator);
+        return new WrappedSortedSet<>(delegate);
     }
 
     @Override
+    @SuppressWarnings("unchecked")
     public Comparator<? super T> comparator() {
-        return comparator;
+        final Comparator<? super T> comparator = delegate.comparator();
+        return comparator == null ? (Comparator) Comparator.naturalOrder() : comparator;
     }
 
     @Override

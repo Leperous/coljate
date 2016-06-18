@@ -44,7 +44,7 @@ public class MutableWrappedSortedMap<K, V>
 
     @Override
     public SortedSet<K> keys() {
-        return new WrappedSortedSet<>(delegate.navigableKeySet(), this.comparator());
+        return new WrappedSortedSet<>(delegate.navigableKeySet());
     }
 
     @Override

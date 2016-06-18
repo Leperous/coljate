@@ -3,6 +3,7 @@ package net.ollie.coljate.set;
 import java.util.Comparator;
 
 import net.ollie.coljate.UnmodifiableIterator;
+import net.ollie.coljate.set.mixin.WrapsTreeSet;
 import net.ollie.coljate.theory.Finite;
 import net.ollie.coljate.theory.Sorted;
 
@@ -19,7 +20,7 @@ public class ImmutableWrappedTreeSet<T>
     }
 
     public static <T> ImmutableSortedSet<T> copyOf(final Finite<T> collection, final Comparator<? super T> comparator) {
-        return new ImmutableWrappedTreeSet<>(copyIntoTreeSet(collection, comparator));
+        return new ImmutableWrappedTreeSet<>(WrapsTreeSet.copyIntoTreeSet(collection, comparator));
     }
 
     public static <T extends Comparable<? super T>> ImmutableSortedSet<T> copyOf(final java.util.Collection<? extends T> collection) {
@@ -27,13 +28,13 @@ public class ImmutableWrappedTreeSet<T>
     }
 
     public static <T> ImmutableSortedSet<T> copyOf(final java.util.Collection<? extends T> collection, final Comparator<? super T> comparator) {
-        return new ImmutableWrappedTreeSet<>(copyIntoTreeSet(collection, comparator));
+        return new ImmutableWrappedTreeSet<>(WrapsTreeSet.copyIntoTreeSet(collection, comparator));
     }
 
     private final java.util.TreeSet<T> delegate;
 
     ImmutableWrappedTreeSet(final java.util.TreeSet<T> delegate) {
-        super(delegate, delegate.comparator());
+        super(delegate);
         this.delegate = delegate;
     }
 
@@ -44,7 +45,7 @@ public class ImmutableWrappedTreeSet<T>
 
     @Override
     public ImmutableSortedSet<T> subSet(final T min, final T max) {
-        return new ImmutableWrappedTreeSet<>(viewAsTreeSet(delegate.subSet(min, max), delegate::comparator));
+        return new ImmutableWrappedTreeSet<>(WrapsTreeSet.viewAsTreeSet(delegate.subSet(min, max), delegate::comparator));
     }
 
     @Override
@@ -55,6 +56,12 @@ public class ImmutableWrappedTreeSet<T>
     @Override
     public UnmodifiableIterator<T> iterator() {
         throw new UnsupportedOperationException(); //TODO
+    }
+
+    @Override
+    @Deprecated
+    public ImmutableWrappedTreeSet<T> immutableCopy() {
+        return this;
     }
 
 }

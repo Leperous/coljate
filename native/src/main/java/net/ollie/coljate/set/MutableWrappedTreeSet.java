@@ -6,7 +6,6 @@ import static java.util.Objects.requireNonNull;
 import net.ollie.coljate.set.mixin.WrapsMutableSet;
 import net.ollie.coljate.theory.Finite;
 import net.ollie.coljate.theory.Sorted;
-import net.ollie.coljate.utils.Objects;
 
 /**
  *
@@ -23,17 +22,17 @@ public class MutableWrappedTreeSet<T>
     public static <T> MutableSortedSet<T> copyOf(final Finite<T> collection, final Comparator<? super T> comparator) {
         final java.util.TreeSet<T> treeSet = new java.util.TreeSet<>(comparator);
         collection.forEach(treeSet::add);
-        return new MutableWrappedTreeSet<>(treeSet, comparator);
+        return new MutableWrappedTreeSet<>(treeSet);
     }
 
-    public static <T extends Comparable<? super T>> MutableSortedSet<T> viewOf(final java.util.TreeSet<T> set) {
-        return new MutableWrappedTreeSet<>(set, Objects.firstNonNull(set.comparator(), Comparator::naturalOrder));
+    public static <T> MutableSortedSet<T> viewOf(final java.util.TreeSet<T> set) {
+        return new MutableWrappedTreeSet<>(set);
     }
 
     private final java.util.TreeSet<T> delegate;
 
-    MutableWrappedTreeSet(final java.util.TreeSet<T> delegate, final Comparator<? super T> comparator) {
-        super(delegate, comparator);
+    MutableWrappedTreeSet(final java.util.TreeSet<T> delegate) {
+        super(delegate);
         this.delegate = requireNonNull(delegate);
     }
 
