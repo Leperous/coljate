@@ -6,6 +6,7 @@ import static java.util.Objects.requireNonNull;
 
 import javax.annotation.Nonnull;
 
+import net.ollie.coljate.list.mixin.CopiedToList;
 import net.ollie.coljate.utils.Iterators;
 
 /**
@@ -14,16 +15,16 @@ import net.ollie.coljate.utils.Iterators;
  */
 public class MutableForwardLinkedList<T>
         extends AbstractList<T>
-        implements MutableList<T> {
+        implements MutableList<T>, CopiedToList<T> {
 
     @SuppressWarnings("unchecked")
-    public static <T> MutableForwardLinkedList<T> empty() {
-        return new MutableForwardLinkedList<>(RootNode.get(), 0);
+    public static <T> MutableForwardLinkedList<T> create() {
+        return new MutableForwardLinkedList<>(RootNode.instance(), 0);
     }
 
     @SafeVarargs
     public static <T> MutableForwardLinkedList<T> copyOf(final T... elements) {
-        final MutableForwardLinkedList<T> list = empty();
+        final MutableForwardLinkedList<T> list = create();
         for (int i = elements.length - 1; i >= 0; i--) {
             list.prefix(elements[i]);
         }
@@ -73,7 +74,7 @@ public class MutableForwardLinkedList<T>
 
     @Override
     public void clear() {
-        head = RootNode.get();
+        head = RootNode.instance();
         count = 0;
     }
 
@@ -89,12 +90,12 @@ public class MutableForwardLinkedList<T>
 
     @Override
     public ImmutableList<T> immutableCopy() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return CopiedToList.super.immutableCopy();
     }
 
     @Override
-    public MutableForwardLinkedList<T> mutableCopy() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public MutableList<T> mutableCopy() {
+        return CopiedToList.super.mutableCopy();
     }
 
     private interface Node<T> {
@@ -168,7 +169,7 @@ public class MutableForwardLinkedList<T>
         static final RootNode INSTANCE = new RootNode();
 
         @SuppressWarnings("unchecked")
-        static <T> RootNode<T> get() {
+        static <T> RootNode<T> instance() {
             return INSTANCE;
         }
 

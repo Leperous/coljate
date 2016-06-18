@@ -1,16 +1,16 @@
 package net.ollie.coljate.set.mixin;
 
-import net.ollie.coljate.Collection;
 import net.ollie.coljate.set.ImmutableSet;
 import net.ollie.coljate.set.ImmutableWrappedHashSet;
 import net.ollie.coljate.set.MutableSet;
 import net.ollie.coljate.set.MutableWrappedHashSet;
+import net.ollie.coljate.set.Set;
 
 /**
  *
  * @author Ollie
  */
-public interface CopiedToHashSet<T> extends Collection<T> {
+public interface CopiedToHashSet<T> extends Set<T> {
 
     @Override
     default MutableSet<T> mutableCopy() {

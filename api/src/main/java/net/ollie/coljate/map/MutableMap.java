@@ -4,6 +4,8 @@ import java.util.Iterator;
 import java.util.Objects;
 import java.util.function.Function;
 
+import org.checkerframework.checker.nullness.qual.NonNull;
+
 import net.ollie.coljate.MutableCollection;
 import net.ollie.coljate.utils.Iterators;
 
@@ -14,6 +16,10 @@ import net.ollie.coljate.utils.Iterators;
 public interface MutableMap<K, V> extends Map<K, V>, MutableCollection<MapEntry<K, V>> {
 
     V put(K key, V value);
+
+    default void putAll(@NonNull final Map<? extends K, ? extends V> map) {
+        map.forEach(this::put);
+    }
 
     V delete(Object key);
 

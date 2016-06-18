@@ -2,6 +2,7 @@ package net.ollie.coljate.theory;
 
 import java.util.Iterator;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.StringJoiner;
 import java.util.function.Function;
 import java.util.function.Predicate;
@@ -47,6 +48,15 @@ public interface Finite<@Nullable T> extends Traversable<T> {
             array[index++] = object;
         }
         return array;
+    }
+
+    default Optional<T> first(final Predicate<? super T> predicate) {
+        for (final T element : this) {
+            if (predicate.test(element)) {
+                return Optional.ofNullable(element);
+            }
+        }
+        return Optional.empty();
     }
 
     static boolean sequenceEquals(final Finite<?> left, final Finite<?> right) {

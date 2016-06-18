@@ -9,8 +9,14 @@ import net.ollie.coljate.theory.feature.ConstantGet;
 /**
  *
  * @author Ollie
+ * @see java.util.HashMap
  */
 public interface HashMap<@NonNull K, @Nullable V> extends Map<K, V>, ConstantGet<K, V>, ConstantContains {
+
+    int DEFAULT_INITIAL_CAPACITY = 10;
+
+    @Override
+    V get(Object key);
 
     static <K, V> java.util.HashMap<K, V> copyOf(final java.util.Map<? extends K, ? extends V> map) {
         return new java.util.HashMap<>(map);

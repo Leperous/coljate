@@ -4,7 +4,6 @@ import java.util.HashSet;
 
 import net.ollie.coljate.Collection;
 import net.ollie.coljate.UnmodifiableIterator;
-import net.ollie.coljate.set.ImmutableSet;
 import net.ollie.coljate.set.mixin.WrapsHashSet;
 import net.ollie.coljate.utils.DelegatedUnmodifiableIterator;
 
