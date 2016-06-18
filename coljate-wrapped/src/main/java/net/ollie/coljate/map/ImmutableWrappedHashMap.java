@@ -5,17 +5,18 @@ import net.ollie.coljate.UnmodifiableIterator;
 import net.ollie.coljate.list.ImmutableWrappedArrayList;
 import net.ollie.coljate.set.ImmutableSet;
 import net.ollie.coljate.set.ImmutableWrappedHashSet;
+import net.ollie.coljate.utils.DelegatedUnmodifiableIterator;
 
 /**
  *
  * @author Ollie
  */
 public class ImmutableWrappedHashMap<K, V>
-        extends WrappedHashMap<K, V>
-        implements ImmutableMap<K, V> {
+        extends WrappedMap<K, V>
+        implements ImmutableMap<K, V>, HashMap<K, V> {
 
     public static <K, V> ImmutableMap<K, V> copyOf(final java.util.Map<K, V> map) {
-        return new ImmutableWrappedHashMap<>(copyIntoHashMap(map));
+        return new ImmutableWrappedHashMap<>(HashMap.copyOf(map));
     }
 
     private final java.util.HashMap<K, V> delegate;
@@ -37,12 +38,22 @@ public class ImmutableWrappedHashMap<K, V>
 
     @Override
     public ImmutableMap<K, V> with(final K key, final V value) {
+        if (this.contains(key, value)) {
+            return this;
+        }
+        final java.util.HashMap<K, V> copy = HashMap.copyOf(delegate);
+        copy.put(key, value);
+        return new ImmutableWrappedHashMap<>(copy);
+    }
+
+    @Override
+    public ImmutableMap<K, V> without(final Object key) {
         throw new UnsupportedOperationException(); //TODO
     }
 
     @Override
     public UnmodifiableIterator<MapEntry<K, V>> iterator() {
-        throw new UnsupportedOperationException(); //TODO
+        return new DelegatedUnmodifiableIterator<>(super.iterator());
     }
 
     @Override

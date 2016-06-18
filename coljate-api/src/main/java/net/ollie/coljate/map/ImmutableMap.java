@@ -28,6 +28,9 @@ public interface ImmutableMap<K, V> extends Map<K, V>, ImmutableCollection<MapEn
         return this.with(entry.key(), entry.value());
     }
 
+    @NonNull
+    ImmutableMap<K, V> without(Object key);
+
     @Override
     @Deprecated
     default ImmutableMap<K, V> immutableCopy() {

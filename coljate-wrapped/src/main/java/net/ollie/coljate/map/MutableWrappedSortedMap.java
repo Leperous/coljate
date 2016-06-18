@@ -1,7 +1,6 @@
 package net.ollie.coljate.map;
 
 import java.util.Comparator;
-import java.util.Iterator;
 
 import net.ollie.coljate.set.SortedSet;
 import net.ollie.coljate.set.WrappedSortedSet;
@@ -11,7 +10,7 @@ import net.ollie.coljate.set.WrappedSortedSet;
  * @author Ollie
  */
 public class MutableWrappedSortedMap<K, V>
-        extends WrappedMap<K, V>
+        extends MutableWrappedMap<K, V>
         implements MutableSortedMap<K, V> {
 
     public static <K extends Comparable<? super K>, V> MutableWrappedSortedMap<K, V> create() {
@@ -58,26 +57,6 @@ public class MutableWrappedSortedMap<K, V>
     public Comparator<? super K> comparator() {
         final Comparator<? super K> comparator = delegate.comparator();
         return comparator == null ? (Comparator) Comparator.naturalOrder() : comparator;
-    }
-
-    @Override
-    public V put(final K key, final V value) {
-        return delegate.put(key, value);
-    }
-
-    @Override
-    public V delete(final Object key) {
-        return delegate.remove(key);
-    }
-
-    @Override
-    public Iterator<? extends MutableMapEntry<K, V>> entries() {
-        throw new UnsupportedOperationException(); //TODO
-    }
-
-    @Override
-    public void clear() {
-        delegate.clear();
     }
 
 }

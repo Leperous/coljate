@@ -62,7 +62,11 @@ public interface Map<K, @Nullable V>
     }
 
     default boolean contains(@NonNull final MapEntry<?, ?> entry) {
-        return entry != null && Objects.equals(entry.value(), this.get(entry.key()));
+        return entry != null && this.contains(entry.key(), entry.value());
+    }
+
+    default boolean contains(final Object key, final Object value) {
+        return Objects.equals(this.get(key), value);
     }
 
     @Override

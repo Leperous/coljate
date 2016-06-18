@@ -46,7 +46,7 @@ public class WrappedMap<K, V>
 
     @Override
     public Iterator<MapEntry<K, V>> iterator() {
-        return Iterators.transform(delegate.entrySet().iterator(), EntryWrapper::new);
+        return Iterators.transform(delegate.entrySet().iterator(), WrappedMapEntry::new);
     }
 
     @Override
@@ -72,26 +72,6 @@ public class WrappedMap<K, V>
     @Override
     public ImmutableMap<K, V> immutableCopy() {
         return ImmutableWrappedHashMap.copyOf(delegate);
-    }
-
-    private static final class EntryWrapper<K, V> extends AbstractMapEntry<K, V> {
-
-        private final java.util.Map.Entry<K, V> delegate;
-
-        EntryWrapper(java.util.Map.Entry<K, V> delegate) {
-            this.delegate = delegate;
-        }
-
-        @Override
-        public K key() {
-            return delegate.getKey();
-        }
-
-        @Override
-        public V value() {
-            return delegate.getValue();
-        }
-
     }
 
 }

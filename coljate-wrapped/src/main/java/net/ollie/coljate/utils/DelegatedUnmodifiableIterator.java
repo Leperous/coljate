@@ -13,7 +13,7 @@ public class DelegatedUnmodifiableIterator<T> extends UnmodifiableIterator<T> {
 
     private final Iterator<? extends T> delegate;
 
-    public DelegatedUnmodifiableIterator(Iterator<? extends T> delegate) {
+    public DelegatedUnmodifiableIterator(final Iterator<? extends T> delegate) {
         this.delegate = requireNonNull(delegate);
     }
 

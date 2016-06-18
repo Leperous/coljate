@@ -12,4 +12,8 @@ import net.ollie.coljate.theory.feature.ConstantGet;
  */
 public interface HashMap<@NonNull K, @Nullable V> extends Map<K, V>, ConstantGet<K, V>, ConstantContains {
 
+    static <K, V> java.util.HashMap<K, V> copyOf(final java.util.Map<K, V> map) {
+        return new java.util.HashMap<>(map);
+    }
+
 }
