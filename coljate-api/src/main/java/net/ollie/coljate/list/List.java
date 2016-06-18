@@ -3,12 +3,12 @@ package net.ollie.coljate.list;
 import java.util.Objects;
 import java.util.OptionalInt;
 
+import org.checkerframework.checker.nullness.qual.NonNull;
+import org.checkerframework.checker.nullness.qual.Nullable;
+
 import net.ollie.coljate.Collection;
 import net.ollie.coljate.theory.Associative;
 import net.ollie.coljate.theory.Finite;
-
-import org.checkerframework.checker.nullness.qual.NonNull;
-import org.checkerframework.checker.nullness.qual.Nullable;
 
 /**
  *
@@ -21,7 +21,7 @@ public interface List<@Nullable T>
     T get(int index);
 
     @Override
-    default T get(final Integer index) {
+    default T get(@NonNull final Integer index) {
         return this.get(index.intValue());
     }
 
@@ -41,7 +41,7 @@ public interface List<@Nullable T>
     default boolean contains(final Object target) {
         return this.indexOf(target).isPresent();
     }
-    
+
     @Override
     List<T> tail();
 

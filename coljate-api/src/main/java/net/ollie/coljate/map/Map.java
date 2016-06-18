@@ -2,21 +2,21 @@ package net.ollie.coljate.map;
 
 import java.util.Objects;
 
+import org.checkerframework.checker.nullness.qual.NonNull;
+import org.checkerframework.checker.nullness.qual.Nullable;
+
 import net.ollie.coljate.Collection;
 import net.ollie.coljate.set.Set;
 import net.ollie.coljate.theory.Associative;
-
-import org.checkerframework.checker.nullness.qual.NonNull;
-import org.checkerframework.checker.nullness.qual.Nullable;
 
 /**
  *
  * @author Ollie
  */
-public interface Map<K, V>
+public interface Map<K, @Nullable V>
         extends Collection<MapEntry<K, V>>, Associative<K, V> {
 
-    @Nullable
+    @Override
     V get(@Nullable Object key);
 
     @NonNull

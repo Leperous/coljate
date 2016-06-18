@@ -10,7 +10,9 @@ import net.ollie.coljate.set.ImmutableWrappedHashSet;
  *
  * @author Ollie
  */
-public class ImmutableWrappedHashMap<K, V> extends WrappedHashMap<K, V> implements ImmutableMap<K, V> {
+public class ImmutableWrappedHashMap<K, V>
+        extends WrappedHashMap<K, V>
+        implements ImmutableMap<K, V> {
 
     public static <K, V> ImmutableMap<K, V> copyOf(final java.util.Map<K, V> map) {
         return new ImmutableWrappedHashMap<>(copyIntoHashMap(map));
