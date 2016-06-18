@@ -6,9 +6,6 @@ import static java.util.Objects.requireNonNull;
 
 import javax.annotation.Nonnull;
 
-import net.ollie.coljate.list.AbstractList;
-import net.ollie.coljate.list.ImmutableList;
-import net.ollie.coljate.list.MutableList;
 import net.ollie.coljate.utils.Iterators;
 
 /**

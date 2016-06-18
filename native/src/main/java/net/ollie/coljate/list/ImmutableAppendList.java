@@ -4,11 +4,11 @@ import java.util.Iterator;
 import java.util.NoSuchElementException;
 import static java.util.Objects.requireNonNull;
 
-import net.ollie.coljate.UnmodifiableIterator;
-import net.ollie.coljate.list.mixin.WrapsImmutableList;
-
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
+
+import net.ollie.coljate.UnmodifiableIterator;
+import net.ollie.coljate.list.mixin.WrapsImmutableList;
 
 /**
  *

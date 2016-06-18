@@ -1,7 +1,6 @@
 package net.ollie.coljate.list;
 
 import net.ollie.coljate.list.mixin.WrapsLinkedList;
-import static net.ollie.coljate.list.mixin.WrapsLinkedList.copyIntoLinkedList;
 
 /**
  *
@@ -25,7 +24,7 @@ public class MutableWrappedLinkedList<T>
 
     @Override
     public java.util.LinkedList<T> copyDelegate() {
-        return copyIntoLinkedList(delegate);
+        return WrapsLinkedList.copyIntoLinkedList(delegate);
     }
 
 }
