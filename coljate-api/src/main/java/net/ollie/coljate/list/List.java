@@ -41,7 +41,7 @@ public interface List<@Nullable T>
     default boolean contains(final Object target) {
         return this.indexOf(target).isPresent();
     }
-
+    
     @Override
     List<T> tail();
 

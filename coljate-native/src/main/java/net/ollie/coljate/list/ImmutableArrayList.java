@@ -1,9 +1,4 @@
-package net.ollie.coljate.lists;
-
-import net.ollie.coljate.list.ImmutableArray;
-import net.ollie.coljate.list.AbstractList;
-import net.ollie.coljate.list.MutableArray;
-import net.ollie.coljate.list.ImmutableList;
+package net.ollie.coljate.list;
 
 import java.util.Arrays;
 

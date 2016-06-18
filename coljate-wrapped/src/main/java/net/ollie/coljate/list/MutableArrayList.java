@@ -5,32 +5,36 @@ import java.util.List;
 import net.ollie.coljate.Collection;
 import net.ollie.coljate.list.mixin.WrapsArrayList;
 import static net.ollie.coljate.list.mixin.WrapsArrayList.copyToArrayList;
-import net.ollie.coljate.list.mixin.WrapsMutableList;
 
 /**
  *
  * @author Ollie
  * @see List
  */
-public class MutableWrappedArrayList<T>
-        extends WrappedList<T>
-        implements WrapsMutableList<T>, WrapsArrayList<T> {
+public class MutableArrayList<T>
+        extends MutableWrappedList<T>
+        implements WrapsArrayList<T> {
+
+    @SafeVarargs
+    public static <T> MutableList<T> copyOf(final T... array) {
+        return new MutableArrayList<>(copyToArrayList(array));
+    }
 
     public static <T> MutableList<T> copyOf(final java.util.Collection<? extends T> collection) {
-        return new MutableWrappedArrayList<>(copyToArrayList(collection));
+        return new MutableArrayList<>(copyToArrayList(collection));
     }
 
     public static <T> MutableList<T> copyOf(final Collection<? extends T> collection) {
-        return new MutableWrappedArrayList<>(copyToArrayList(collection));
+        return new MutableArrayList<>(copyToArrayList(collection));
     }
 
     public static <T> MutableList<T> viewOf(final java.util.ArrayList<T> list) {
-        return new MutableWrappedArrayList<>(list);
+        return new MutableArrayList<>(list);
     }
 
     private final java.util.ArrayList<T> delegate;
 
-    protected MutableWrappedArrayList(final java.util.ArrayList<T> delegate) {
+    protected MutableArrayList(final java.util.ArrayList<T> delegate) {
         super(delegate);
         this.delegate = delegate;
     }
@@ -43,11 +47,6 @@ public class MutableWrappedArrayList<T>
     @Override
     public java.util.ArrayList<T> copyDelegate() {
         return new java.util.ArrayList<>(delegate);
-    }
-
-    @Override
-    public MutableList<T> tail() {
-        throw new UnsupportedOperationException(); //TODO
     }
 
 }

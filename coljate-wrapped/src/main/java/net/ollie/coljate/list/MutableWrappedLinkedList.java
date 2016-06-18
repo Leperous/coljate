@@ -2,15 +2,14 @@ package net.ollie.coljate.list;
 
 import net.ollie.coljate.list.mixin.WrapsLinkedList;
 import static net.ollie.coljate.list.mixin.WrapsLinkedList.copyIntoLinkedList;
-import net.ollie.coljate.list.mixin.WrapsMutableList;
 
 /**
  *
  * @author Ollie
  */
 public class MutableWrappedLinkedList<T>
-        extends WrappedList<T>
-        implements WrapsMutableList<T>, WrapsLinkedList<T> {
+        extends MutableWrappedList<T>
+        implements WrapsLinkedList<T> {
 
     private final java.util.LinkedList<T> delegate;
 
@@ -20,18 +19,13 @@ public class MutableWrappedLinkedList<T>
     }
 
     @Override
-    public java.util.List<T> delegate() {
+    public java.util.LinkedList<T> delegate() {
         return delegate;
     }
 
     @Override
     public java.util.LinkedList<T> copyDelegate() {
         return copyIntoLinkedList(delegate);
-    }
-
-    @Override
-    public MutableList<T> tail() {
-        throw new UnsupportedOperationException(); //TODO
     }
 
 }

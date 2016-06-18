@@ -4,7 +4,9 @@ import java.util.Iterator;
 import static java.util.Objects.requireNonNull;
 
 import net.ollie.coljate.list.ImmutableWrappedArrayList;
-import net.ollie.coljate.list.MutableWrappedArrayList;
+import net.ollie.coljate.list.MutableArrayList;
+
+import static java.util.Objects.requireNonNull;
 
 /**
  *
@@ -27,7 +29,7 @@ public class WrappedCollection<T>
 
     @Override
     public MutableCollection<T> mutableCopy() {
-        return MutableWrappedArrayList.copyOf(delegate);
+        return MutableArrayList.copyOf(delegate);
     }
 
     @Override

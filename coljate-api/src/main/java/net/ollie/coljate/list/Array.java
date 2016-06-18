@@ -1,5 +1,7 @@
 package net.ollie.coljate.list;
 
+import org.checkerframework.checker.nullness.qual.Nullable;
+
 /**
  * Same as a {@link List}, but with a fixed capacity.
  *
@@ -7,7 +9,7 @@ package net.ollie.coljate.list;
  *
  * @author Ollie
  */
-public interface Array<T> extends List<T> {
+public interface Array<@Nullable T> extends List<T> {
 
     int capacity();
 

@@ -4,7 +4,7 @@ import net.ollie.coljate.list.ImmutableAppendList;
 import net.ollie.coljate.list.ImmutableList;
 import net.ollie.coljate.list.ImmutablePrefixList;
 import net.ollie.coljate.list.MutableList;
-import net.ollie.coljate.list.MutableWrappedArrayList;
+import net.ollie.coljate.list.MutableArrayList;
 
 import org.checkerframework.checker.nullness.qual.Nullable;
 
@@ -27,7 +27,7 @@ public interface WrapsImmutableList<@Nullable T> extends ImmutableList<T> {
 
     @Override
     default MutableList<T> mutableCopy() {
-        return MutableWrappedArrayList.copyOf(this);
+        return MutableArrayList.copyOf(this);
     }
 
     @Override

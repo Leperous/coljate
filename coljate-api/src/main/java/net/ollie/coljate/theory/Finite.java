@@ -4,8 +4,10 @@ import java.util.Iterator;
 import java.util.Objects;
 import java.util.StringJoiner;
 import java.util.function.Function;
+import java.util.function.Predicate;
 
 import net.ollie.coljate.theory.feature.ConstantContains;
+import net.ollie.coljate.utils.Iterators;
 
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
@@ -18,10 +20,21 @@ import org.checkerframework.checker.nullness.qual.Nullable;
 public interface Finite<@Nullable T> extends Traversable<T> {
 
     /**
-     *
-     * @return the number of non-null elements in this collection.
+     * @return the number of elements, null or not, in this collection.
      */
-    int count();
+    default int count() {
+        return Iterators.count(this.iterator());
+    }
+
+    default int count(final Predicate<? super T> predicate) {
+        int count = 0;
+        for (final T element : this) {
+            if (predicate.test(element)) {
+                count++;
+            }
+        }
+        return count;
+    }
 
     @Override
     Finite<T> tail();

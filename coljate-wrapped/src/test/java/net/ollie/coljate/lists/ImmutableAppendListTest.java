@@ -5,6 +5,7 @@ import java.util.Arrays;
 import net.ollie.coljate.list.ImmutableAppendList;
 import net.ollie.coljate.list.ImmutableList;
 import net.ollie.coljate.list.ImmutableWrappedArrayList;
+import net.ollie.coljate.list.ImmutableWrappedEmptyList;
 
 /**
  *

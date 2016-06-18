@@ -28,4 +28,13 @@ public class Iterators {
         return NONE;
     }
 
+    public static int count(final Iterator<?> iterator) {
+        int count = 0;
+        while (iterator.hasNext()) {
+            iterator.next();
+            count++;
+        }
+        return count;
+    }
+
 }

@@ -2,9 +2,9 @@ package net.ollie.coljate.list;
 
 import java.util.Objects;
 
-import net.ollie.coljate.MutableCollection;
-
 import org.checkerframework.checker.nullness.qual.Nullable;
+
+import net.ollie.coljate.MutableCollection;
 
 /**
  *
@@ -42,6 +42,10 @@ public interface MutableList<@Nullable T>
                 : false;
     }
 
+    /**
+     *
+     * @return a view onto the tail of this list.
+     */
     @Override
     MutableList<T> tail();
 

@@ -1,12 +1,13 @@
 package net.ollie.coljate.lists;
 
-import net.ollie.coljate.list.MutableList;
-
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
 import org.junit.Test;
+
+import net.ollie.coljate.list.ImmutableList;
+import net.ollie.coljate.list.MutableList;
 
 /**
  *
@@ -89,7 +90,9 @@ public abstract class MutableListTest extends ListTest {
 
         final Object o1 = new Object(), o2 = new Object();
         final MutableList<Object> list = this.create(o1, o2);
+        assertTrue(list.contains(o2));
 
+        //When
         list.removeOnce(o2);
 
         //Then
@@ -97,6 +100,13 @@ public abstract class MutableListTest extends ListTest {
         assertTrue(list.contains(o1));
         assertFalse(list.contains(o2));
 
+    }
+
+    public void testImmutableCopy() {
+        final Object o1 = new Object();
+        final MutableList<Object> list = this.create(o1);
+        final ImmutableList<Object> immutable = list.immutableCopy();
+        assertTrue(immutable.contains(o1));
     }
 
 }

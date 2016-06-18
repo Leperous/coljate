@@ -1,8 +1,4 @@
-package net.ollie.coljate.lists;
-
-import net.ollie.coljate.list.AbstractList;
-import net.ollie.coljate.list.ImmutableList;
-import net.ollie.coljate.list.MutableList;
+package net.ollie.coljate.list;
 
 import java.util.Iterator;
 import java.util.NoSuchElementException;

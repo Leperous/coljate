@@ -39,15 +39,18 @@ public interface MutableCollection<@Nullable T> extends Collection<T> {
     }
 
     /**
-     * Remove all instances from this collection.
+     * Remove all objects that {@link Object#equals equal} the given object from this collection.
      *
      * @param element
-     * @return
+     * @return true if at least one instance was removed.
      */
-    default boolean removeAll(Object element) {
+    default boolean removeAll(final Object element) {
         boolean removed = false;
-        while (this.removeOnce(element)) {
-            removed = true;
+        for (final Iterator<T> iterator = this.iterator(); iterator.hasNext();) {
+            if (Objects.equals(element, iterator.next())) {
+                iterator.remove();
+                removed = true;
+            }
         }
         return removed;
     }

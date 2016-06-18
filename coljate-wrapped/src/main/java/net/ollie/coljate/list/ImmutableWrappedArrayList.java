@@ -4,7 +4,6 @@ import net.ollie.coljate.Collection;
 import net.ollie.coljate.UnmodifiableIterator;
 import net.ollie.coljate.list.mixin.WrapsArrayList;
 import static net.ollie.coljate.list.mixin.WrapsArrayList.copyToArrayList;
-import net.ollie.coljate.lists.ImmutableWrappedEmptyList;
 import net.ollie.coljate.utils.DelegatedUnmodifiableIterator;
 
 /**

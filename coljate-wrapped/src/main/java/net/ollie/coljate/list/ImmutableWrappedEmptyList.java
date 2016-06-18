@@ -1,7 +1,6 @@
-package net.ollie.coljate.lists;
+package net.ollie.coljate.list;
 
 import net.ollie.coljate.UnmodifiableIterator;
-import net.ollie.coljate.list.AbstractList;
 import net.ollie.coljate.list.mixin.WrapsImmutableList;
 
 /**

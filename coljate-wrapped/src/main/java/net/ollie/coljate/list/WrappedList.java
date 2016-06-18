@@ -48,7 +48,7 @@ public class WrappedList<T>
 
     @Override
     public MutableList<T> mutableCopy() {
-        return MutableWrappedArrayList.copyOf(this);
+        return MutableArrayList.copyOf(this);
     }
 
     @Override
