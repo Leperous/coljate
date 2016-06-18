@@ -72,6 +72,13 @@ public interface Finite<@Nullable T> extends Traversable<T> {
         return hashCode;
     }
 
+    /**
+     * @return the sum of the hashes of the elements. Suitable for unordered collections.
+     */
+    static int sumHash(final Finite<?> finite) {
+        return finite.serialStream().mapToInt(Object::hashCode).sum();
+    }
+
     static boolean elementsEqual(final Finite<?> c1, final Finite<?> c2) {
         if (c1.count() != c2.count()) {
             return false;
@@ -90,13 +97,6 @@ public interface Finite<@Nullable T> extends Traversable<T> {
             }
         }
         return true;
-    }
-
-    /**
-     * @return the sum of the hashes of the elements. Suitable for unordered collections.
-     */
-    static int sumHash(final Finite<?> finite) {
-        return finite.serialStream().mapToInt(Object::hashCode).sum();
     }
 
     static String toString(final Finite<?> finite) {
