@@ -15,11 +15,11 @@ public class MutableWrappedHashMap<K, V>
     }
 
     public static <K, V> MutableWrappedHashMap<K, V> create(final int initialCapacity) {
-        return new MutableWrappedHashMap<>(new java.util.HashMap<>(initialCapacity));
+        return viewOf(new java.util.HashMap<>(initialCapacity));
     }
 
     public static <K, V> MutableWrappedHashMap<K, V> copyOf(final java.util.Map<K, V> map) {
-        return new MutableWrappedHashMap<>(HashMap.copyOf(map));
+        return viewOf(HashMap.copyOf(map));
     }
 
     public static <K, V> MutableWrappedHashMap<K, V> viewOf(final java.util.HashMap<K, V> map) {
