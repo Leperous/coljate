@@ -3,15 +3,23 @@ package net.ollie.coljate.set;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
+import javax.annotation.CheckForNull;
+
+import net.ollie.coljate.list.MutableWrappedStack;
+import net.ollie.coljate.list.Stack;
+import net.ollie.coljate.map.MapEntry;
 import net.ollie.coljate.map.MutableMap;
 import net.ollie.coljate.map.MutableWrappedHashMap;
 import net.ollie.coljate.set.mixin.CopiedToHashSet;
+import net.ollie.coljate.utils.Iterators;
 
 /**
  *
  * @author Ollie
  */
-public class MutableTrie implements Trie, MutableSet<String>, CopiedToHashSet<String> {
+public class MutableTrie
+        extends AbstractSet<String>
+        implements Trie, MutableSet<String>, CopiedToHashSet<String> {
 
     private final MutableMap<Character, MutableTrie> children;
     private boolean endOfWord;
@@ -51,7 +59,7 @@ public class MutableTrie implements Trie, MutableSet<String>, CopiedToHashSet<St
                 return false;
             }
         }
-        return trie.isEndOfWord();
+        return trie.endOfWord;
     }
 
     @Override
@@ -61,7 +69,7 @@ public class MutableTrie implements Trie, MutableSet<String>, CopiedToHashSet<St
     }
 
     public boolean removeOnce(final String string) {
-        throw new UnsupportedOperationException();
+        throw new UnsupportedOperationException(); //TODO removeOnce
     }
 
     @Override
@@ -106,35 +114,92 @@ public class MutableTrie implements Trie, MutableSet<String>, CopiedToHashSet<St
 
     @Override
     public Iterator<String> iterator() {
-        return new TrieIterator();
+        return this.isEmpty() ? Iterators.none() : new TrieIterator();
     }
 
-    class TrieIterator implements Iterator<String> {
+    private final class TrieIterator implements Iterator<String> {
 
-        String next;
+        private final Stack<TriePointer> stack = new MutableWrappedStack<>();
+        private String next;
+
+        TrieIterator() {
+            this.buildStack(new TriePointer(MutableTrie.this));
+        }
+
+        private void buildStack(TriePointer pointer) {
+            while (pointer != null) {
+                stack.push(pointer);
+                pointer = pointer.child();
+            }
+        }
 
         @Override
         public boolean hasNext() {
-            throw new UnsupportedOperationException(); //TODO
+            return !stack.isEmpty();
         }
 
         @Override
         public String next() {
-            if (next == null) {
-                throw new NoSuchElementException();
+            final StringBuilder sb = new StringBuilder(stack.count());
+            for (final TriePointer pointer : stack) {
+                sb.append(pointer.c());
             }
-            final String next = this.next;
-            this.next = this.computeNext();
+            this.moveToNext();
+            next = sb.toString();
             return next;
         }
 
-        private String computeNext() {
-            throw new UnsupportedOperationException();
+        private void moveToNext() {
+            //Pop exhausted iterators off the stack
+            while (!stack.isEmpty() && !stack.peek().hasNext()) {
+                stack.pop();
+            }
+            if (stack.isEmpty()) {
+                return;
+            }
+            //Advance the head
+            stack.peek().advance();
+            //Push children onto the stack
+            this.buildStack(stack.pop());
         }
 
         @Override
         public void remove() {
-            MutableTrie.this.removeOnce(this.next());
+            if (next == null) {
+                throw new NoSuchElementException();
+            }
+            MutableTrie.this.removeOnce(next);
+        }
+
+        private final class TriePointer {
+
+            private final Iterator<MapEntry<Character, MutableTrie>> children;
+            private MapEntry<Character, MutableTrie> currentChild;
+
+            TriePointer(final MutableTrie trie) {
+                this.children = trie.children.iterator();
+                this.advance();
+            }
+
+            char c() {
+                return currentChild.key();
+            }
+
+            boolean hasNext() {
+                return children.hasNext();
+            }
+
+            final void advance() {
+                currentChild = children.next();
+            }
+
+            @CheckForNull
+            TriePointer child() {
+                return currentChild.value().isEmpty()
+                        ? null
+                        : new TriePointer(currentChild.value());
+            }
+
         }
 
     }

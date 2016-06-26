@@ -18,7 +18,7 @@ public interface Traversable<@Nullable T>
 
     @Nullable
     default T head() {
-        return this.iterator().next();
+        return this.isEmpty() ? null : this.iterator().next();
     }
 
     @NonNull

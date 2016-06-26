@@ -37,11 +37,11 @@ public class MutableTrieTest extends MutableSetTest<String> {
 
     @Override
     protected String randomValue() {
-        return UUID.randomUUID().toString();
+        return UUID.randomUUID().toString().substring(0, 5);
     }
 
     @Test
-    public void testContainsEmptyString() {
+    public void testEmptyString() {
         final MutableTrie trie = this.create();
         assertFalse(trie.contains(""));
         trie.add("");

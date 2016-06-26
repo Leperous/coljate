@@ -19,4 +19,11 @@ public class Assertions {
         return input;
     }
 
+    public static boolean checkArgument(final boolean b, final Supplier<String> message) {
+        if (b) {
+            throw new IllegalArgumentException(message.get());
+        }
+        return b;
+    }
+
 }

@@ -1,5 +1,7 @@
 package net.ollie.coljate.list;
 
+import org.checkerframework.checker.nullness.qual.NonNull;
+
 /**
  *
  * @author Ollie
@@ -7,7 +9,7 @@ package net.ollie.coljate.list;
  */
 public interface Stack<T> extends MutableList<T> {
 
-    default T push(final T element) {
+    default T push(@NonNull final T element) {
         this.suffix(element);
         return element;
     }

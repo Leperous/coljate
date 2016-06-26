@@ -1,7 +1,6 @@
 package net.ollie.coljate.set;
 
 import net.ollie.coljate.AbstractCollection;
-import net.ollie.coljate.theory.Finite;
 
 /**
  *
@@ -18,12 +17,12 @@ public abstract class AbstractSet<T>
     }
 
     public boolean equals(final Set<?> set) {
-        return Finite.elementsEqual(this, set);
+        return Set.elementsEqual(this, set);
     }
 
     @Override
     public int hashCode() {
-        return Finite.sumHash(this);
+        return Set.hash(this);
     }
 
 }
