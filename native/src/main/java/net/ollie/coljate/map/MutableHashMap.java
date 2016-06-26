@@ -78,7 +78,7 @@ public class MutableHashMap<K, V>
     }
 
     @Override
-    public V delete(final Object key) {
+    public V deleteKey(final Object key) {
         final int index = this.indexOf(key);
         final Bucket<K, V> bucket = buckets[index];
         if (bucket == null) {

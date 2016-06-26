@@ -41,7 +41,7 @@ public abstract class MutableMapTest {
     public void testPutRemove() {
         final MutableMap<Integer, Object> map = this.create();
         map.put(1, new Object());
-        map.delete(1);
+        map.deleteKey(1);
         assertThat(map, isEmptyMap());
     }
 

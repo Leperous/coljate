@@ -2,6 +2,7 @@ package net.ollie.coljate.map;
 
 import java.util.Iterator;
 import java.util.Objects;
+import java.util.function.BiFunction;
 import java.util.function.Function;
 
 import org.checkerframework.checker.nullness.qual.NonNull;
@@ -22,6 +23,13 @@ public interface MutableMap<K, V> extends Map<K, V>, MutableCollection<MapEntry<
         map.forEach(this::put);
     }
 
+    default V compute(final K key, final BiFunction<? super K, ? super V, ? extends V> compute) {
+        final V current = this.get(key);
+        final V computed = compute.apply(key, current);
+        this.put(key, computed);
+        return computed;
+    }
+
     default V computeIfAbsent(final K key, final Function<? super K, ? extends V> compute) {
         final V current = this.get(key);
         if (current == null && !this.containsKey(key)) {
@@ -33,7 +41,7 @@ public interface MutableMap<K, V> extends Map<K, V>, MutableCollection<MapEntry<
         }
     }
 
-    V delete(Object key);
+    V deleteKey(Object key);
 
     @Override
     default boolean add(final MapEntry<K, V> element) {
@@ -45,7 +53,7 @@ public interface MutableMap<K, V> extends Map<K, V>, MutableCollection<MapEntry<
     @Deprecated
     default boolean removeOnce(final Object element) {
         return element instanceof MapEntry
-                && this.remove((MapEntry) element);
+                && this.removeEntry((MapEntry) element);
     }
 
     @Override
@@ -54,10 +62,10 @@ public interface MutableMap<K, V> extends Map<K, V>, MutableCollection<MapEntry<
         return this.removeOnce(element);
     }
 
-    default boolean remove(final MapEntry<?, ?> entry) {
+    default boolean removeEntry(final MapEntry<?, ?> entry) {
         final V current = this.get(entry.key());
         if (Objects.equals(current, entry.value())) {
-            this.delete(entry.key());
+            this.deleteKey(entry.key());
             return true;
         }
         return false;

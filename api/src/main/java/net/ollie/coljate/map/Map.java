@@ -2,6 +2,7 @@ package net.ollie.coljate.map;
 
 import java.util.Objects;
 import java.util.function.BiConsumer;
+import java.util.function.Supplier;
 
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
@@ -20,6 +21,11 @@ public interface Map<K, @Nullable V>
 
     @Override
     V get(@Nullable Object key);
+
+    default V getOrDefault(final Object key, final Supplier<? extends V> getDefault) {
+        V value = this.get(key);
+        return value == null ? getDefault.get() : value;
+    }
 
     @NonNull
     Set<K> keys();

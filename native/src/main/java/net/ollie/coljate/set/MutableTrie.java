@@ -83,7 +83,7 @@ public class MutableTrie
         final MutableTrie child = children.get(c);
         final boolean removed = child != null && child.remove(string, offset + 1);
         if (removed && child.isEmpty()) {
-            children.delete(c);
+            children.deleteKey(c);
         }
         return removed;
     }

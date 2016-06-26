@@ -77,7 +77,7 @@ public class MutableUnbalancedTreeMap<K, V>
     @Override
     @Deprecated
     @SuppressWarnings("unchecked")
-    public V delete(final Object key) {
+    public V deleteKey(final Object key) {
         return this.delete((K) key, SearchType.DEFAULT);
     }
 

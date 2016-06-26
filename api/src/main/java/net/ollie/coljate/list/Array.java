@@ -5,9 +5,7 @@ import org.checkerframework.checker.nullness.qual.Nullable;
 import net.ollie.coljate.theory.feature.ConstantGet;
 
 /**
- * Same as a {@link List}, but with a fixed capacity.
- *
- * Likely backed by an actual object array.
+ * A {@link List} implementation, where lookup takes constant-time, and with a {@link #capacity() maximum size}.
  *
  * @author Ollie
  */

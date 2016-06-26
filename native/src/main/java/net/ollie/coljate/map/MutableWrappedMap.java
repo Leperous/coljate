@@ -28,7 +28,7 @@ public class MutableWrappedMap<@NonNull K, @Nullable V>
     }
 
     @Override
-    public V delete(final Object key) {
+    public V deleteKey(final Object key) {
         return delegate.remove(key);
     }
 
