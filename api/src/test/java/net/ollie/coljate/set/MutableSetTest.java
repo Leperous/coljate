@@ -33,4 +33,15 @@ public abstract class MutableSetTest<T> extends SetTest<T> {
         assertTrue(set.isEmpty());
     }
 
+    @Test
+    public void testSingleton_AddRemove() {
+        final MutableSet<T> set = this.create();
+        final T object = this.randomValue();
+        set.add(object);
+        assertTrue(set.contains(object));
+        set.removeOnce(object);
+        assertFalse(set.contains(object));
+        assertTrue(set.isEmpty());
+    }
+
 }

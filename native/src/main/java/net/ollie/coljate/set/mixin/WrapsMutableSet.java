@@ -1,10 +1,10 @@
 package net.ollie.coljate.set.mixin;
 
+import org.checkerframework.checker.nullness.qual.Nullable;
+
 import net.ollie.coljate.WrapsMutableCollection;
 import net.ollie.coljate.set.MutableSet;
 import net.ollie.coljate.set.Set;
-
-import org.checkerframework.checker.nullness.qual.Nullable;
 
 /**
  * Some {@link MutableSet} that wraps a {@link java.util.Set}.
@@ -21,6 +21,12 @@ public interface WrapsMutableSet<@Nullable T>
     @Override
     default java.util.Set<T> copyDelegate() {
         return new java.util.HashSet<>(this.delegate());
+    }
+
+    @Override
+    @Deprecated
+    default boolean removeAll(final Object element) {
+        return MutableSet.super.removeAll(element);
     }
 
 }

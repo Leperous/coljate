@@ -69,7 +69,23 @@ public class MutableTrie
     }
 
     public boolean removeOnce(final String string) {
-        throw new UnsupportedOperationException(); //TODO removeOnce
+        return this.remove(string, 0);
+    }
+
+    private boolean remove(final String string, final int offset) {
+        if (offset == string.length()) {
+            if (endOfWord) {
+                endOfWord = false;
+                return true;
+            }
+        }
+        final char c = string.charAt(offset);
+        final MutableTrie child = children.get(c);
+        final boolean removed = child != null && child.remove(string, offset + 1);
+        if (removed && child.isEmpty()) {
+            children.delete(c);
+        }
+        return removed;
     }
 
     @Override
