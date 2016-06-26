@@ -13,16 +13,16 @@ import org.junit.Test;
 public abstract class MutableListTest extends ListTest {
 
     @Override
-    protected abstract MutableList<Object> create(Object... objects);
+    protected abstract MutableList<Object> createFrom(Object... objects);
 
     @Override
-    protected MutableList<Object> empty() {
-        return this.create();
+    protected MutableList<Object> create() {
+        return this.createFrom();
     }
 
     @Test
     public void testEmpty_SuffixRemove() {
-        final MutableList<Object> list = this.empty();
+        final MutableList<Object> list = this.create();
         assertTrue(list.isEmpty());
         final Object element = new Object();
         list.suffix(element);
@@ -38,7 +38,7 @@ public abstract class MutableListTest extends ListTest {
 
         //Given
         final Object o1 = new Object(), o2 = new Object();
-        final MutableList<Object> list = this.create(o1);
+        final MutableList<Object> list = this.createFrom(o1);
 
         //When
         list.prefix(o2);
@@ -55,7 +55,7 @@ public abstract class MutableListTest extends ListTest {
 
         //Given
         final Object o1 = new Object(), o2 = new Object();
-        final MutableList<Object> list = this.create(o1);
+        final MutableList<Object> list = this.createFrom(o1);
 
         //When
         list.suffix(o2);
@@ -71,7 +71,7 @@ public abstract class MutableListTest extends ListTest {
     public void testDual_RemoveFirst() {
 
         final Object o1 = new Object(), o2 = new Object();
-        final MutableList<Object> list = this.create(o1, o2);
+        final MutableList<Object> list = this.createFrom(o1, o2);
 
         list.removeOnce(o1);
 
@@ -86,7 +86,7 @@ public abstract class MutableListTest extends ListTest {
     public void testDual_RemoveLast() {
 
         final Object o1 = new Object(), o2 = new Object();
-        final MutableList<Object> list = this.create(o1, o2);
+        final MutableList<Object> list = this.createFrom(o1, o2);
         assertTrue(list.contains(o2));
 
         //When
@@ -101,7 +101,7 @@ public abstract class MutableListTest extends ListTest {
 
     public void testImmutableCopy() {
         final Object o1 = new Object();
-        final MutableList<Object> list = this.create(o1);
+        final MutableList<Object> list = this.createFrom(o1);
         final ImmutableList<Object> immutable = list.immutableCopy();
         assertTrue(immutable.contains(o1));
     }

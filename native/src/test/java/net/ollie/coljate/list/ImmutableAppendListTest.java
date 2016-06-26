@@ -1,13 +1,6 @@
 package net.ollie.coljate.list;
 
-import net.ollie.coljate.list.ImmutableListTest;
-
 import java.util.Arrays;
-
-import net.ollie.coljate.list.ImmutableAppendList;
-import net.ollie.coljate.list.ImmutableList;
-import net.ollie.coljate.list.ImmutableWrappedArrayList;
-import net.ollie.coljate.list.ImmutableWrappedEmptyArray;
 
 /**
  *
@@ -17,17 +10,17 @@ import net.ollie.coljate.list.ImmutableWrappedEmptyArray;
 public class ImmutableAppendListTest extends ImmutableListTest {
 
     @Override
-    protected ImmutableList<Object> empty() {
+    protected ImmutableList<Object> create() {
         return ImmutableWrappedEmptyArray.empty();
     }
 
     @Override
-    protected ImmutableList<Object> create(final Object... objects) {
+    protected ImmutableList<Object> createFrom(final Object... objects) {
         switch (objects.length) {
             case 0:
-                return empty();
+                return create();
             case 1:
-                return ImmutableAppendList.of(empty(), objects[0]);
+                return ImmutableAppendList.of(create(), objects[0]);
             default:
                 final Object[] sublist = Arrays.copyOf(objects, objects.length - 1);
                 return ImmutableAppendList.of(ImmutableWrappedArrayList.copyOf(sublist), objects[objects.length - 1]);

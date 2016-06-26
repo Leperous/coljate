@@ -12,6 +12,7 @@ import net.ollie.coljate.utils.Iterators;
 /**
  *
  * @author Ollie
+ * @see java.util.Map
  */
 public interface MutableMap<K, V> extends Map<K, V>, MutableCollection<MapEntry<K, V>> {
 
@@ -19,6 +20,17 @@ public interface MutableMap<K, V> extends Map<K, V>, MutableCollection<MapEntry<
 
     default void putAll(@NonNull final Map<? extends K, ? extends V> map) {
         map.forEach(this::put);
+    }
+
+    default V computeIfAbsent(final K key, final Function<? super K, ? extends V> compute) {
+        final V current = this.get(key);
+        if (current == null && !this.containsKey(key)) {
+            final V computed = compute.apply(key);
+            this.put(key, computed);
+            return computed;
+        } else {
+            return current;
+        }
     }
 
     V delete(Object key);

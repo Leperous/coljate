@@ -1,9 +1,5 @@
 package net.ollie.coljate.list;
 
-import net.ollie.coljate.list.ImmutableListTest;
-import net.ollie.coljate.list.ImmutableList;
-import net.ollie.coljate.list.ImmutableWrappedArrayList;
-
 /**
  *
  * @author Ollie
@@ -12,7 +8,7 @@ import net.ollie.coljate.list.ImmutableWrappedArrayList;
 public class ImmutableWrappedArrayListTest extends ImmutableListTest {
 
     @Override
-    protected ImmutableList<Object> create(final Object... objects) {
+    protected ImmutableList<Object> createFrom(final Object... objects) {
         return ImmutableWrappedArrayList.copyOf(objects);
     }
 

@@ -8,7 +8,7 @@ package net.ollie.coljate.list;
 public class MutableArrayListTest extends MutableListTest {
 
     @Override
-    protected MutableList<Object> create(final Object... objects) {
+    protected MutableList<Object> createFrom(final Object... objects) {
         return MutableWrappedArrayList.copyOf(objects);
     }
 
