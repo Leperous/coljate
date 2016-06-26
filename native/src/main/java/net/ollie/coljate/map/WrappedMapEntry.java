@@ -4,7 +4,9 @@ package net.ollie.coljate.map;
  *
  * @author Ollie
  */
-public class WrappedMapEntry<K, V> extends AbstractMapEntry<K, V> implements MutableMapEntry<K, V> {
+public class WrappedMapEntry<K, V> 
+        extends AbstractKeyValue<K, V>
+        implements MutableKeyValue<K, V> {
 
     private final java.util.Map.Entry<K, V> delegate;
 

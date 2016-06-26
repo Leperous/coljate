@@ -17,7 +17,7 @@ import net.ollie.coljate.theory.Finite;
  * @author Ollie
  */
 public interface Map<K, @Nullable V>
-        extends Collection<MapEntry<K, V>>, Associative<K, V> {
+        extends Collection<KeyValue<K, V>>, Associative<K, V> {
 
     @Override
     V get(@Nullable Object key);
@@ -63,11 +63,11 @@ public interface Map<K, @Nullable V>
     @Override
     @Deprecated
     default boolean contains(final Object object) {
-        return object instanceof MapEntry
-                && this.contains((MapEntry) object);
+        return object instanceof KeyValue
+                && this.contains((KeyValue) object);
     }
 
-    default boolean contains(@NonNull final MapEntry<?, ?> entry) {
+    default boolean contains(@NonNull final KeyValue<?, ?> entry) {
         return entry != null && this.contains(entry.key(), entry.value());
     }
 

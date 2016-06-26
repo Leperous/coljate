@@ -10,6 +10,8 @@ import net.ollie.coljate.set.Set;
 import net.ollie.coljate.set.WrappedSet;
 import net.ollie.coljate.utils.Iterators;
 
+import static java.util.Objects.requireNonNull;
+
 /**
  *
  * @author Ollie
@@ -46,7 +48,7 @@ public class WrappedMap<K, V>
     }
 
     @Override
-    public Iterator<MapEntry<K, V>> iterator() {
+    public Iterator<KeyValue<K, V>> iterator() {
         return Iterators.transform(delegate.entrySet().iterator(), WrappedMapEntry::new);
     }
 

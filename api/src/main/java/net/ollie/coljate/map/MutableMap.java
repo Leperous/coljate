@@ -15,7 +15,7 @@ import net.ollie.coljate.utils.Iterators;
  * @author Ollie
  * @see java.util.Map
  */
-public interface MutableMap<K, V> extends Map<K, V>, MutableCollection<MapEntry<K, V>> {
+public interface MutableMap<K, V> extends Map<K, V>, MutableCollection<KeyValue<K, V>> {
 
     V put(K key, V value);
 
@@ -48,7 +48,7 @@ public interface MutableMap<K, V> extends Map<K, V>, MutableCollection<MapEntry<
     V deleteKey(Object key);
 
     @Override
-    default boolean add(final MapEntry<K, V> element) {
+    default boolean add(final KeyValue<K, V> element) {
         this.put(element.key(), element.value());
         return true;
     }
@@ -56,8 +56,8 @@ public interface MutableMap<K, V> extends Map<K, V>, MutableCollection<MapEntry<
     @Override
     @Deprecated
     default boolean removeOnce(final Object element) {
-        return element instanceof MapEntry
-                && this.removeEntry((MapEntry) element);
+        return element instanceof KeyValue
+                && this.removeEntry((KeyValue) element);
     }
 
     @Override
@@ -66,7 +66,7 @@ public interface MutableMap<K, V> extends Map<K, V>, MutableCollection<MapEntry<
         return this.removeOnce(element);
     }
 
-    default boolean removeEntry(final MapEntry<?, ?> entry) {
+    default boolean removeEntry(final KeyValue<?, ?> entry) {
         final V current = this.get(entry.key());
         if (Objects.equals(current, entry.value())) {
             this.deleteKey(entry.key());
@@ -75,10 +75,10 @@ public interface MutableMap<K, V> extends Map<K, V>, MutableCollection<MapEntry<
         return false;
     }
 
-    Iterator<? extends MutableMapEntry<K, V>> entries();
+    Iterator<? extends MutableKeyValue<K, V>> entries();
 
     @Override
-    default Iterator<MapEntry<K, V>> iterator() {
+    default Iterator<KeyValue<K, V>> iterator() {
         return Iterators.transform(this.entries(), Function.identity());
     }
 

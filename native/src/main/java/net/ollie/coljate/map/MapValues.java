@@ -21,7 +21,7 @@ public class MapValues<V> implements Collection<V> {
 
     @Override
     public Iterator<V> iterator() {
-        return Iterators.transform(map.iterator(), MapEntry::value);
+        return Iterators.transform(map.iterator(), KeyValue::value);
     }
 
     @Override

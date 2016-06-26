@@ -6,7 +6,7 @@ import org.checkerframework.checker.nullness.qual.Nullable;
  *
  * @author Ollie
  */
-public interface MutableMapEntry<K, @Nullable V> extends MapEntry<K, V> {
+public interface MutableKeyValue<K, @Nullable V> extends KeyValue<K, V> {
 
     /**
      *

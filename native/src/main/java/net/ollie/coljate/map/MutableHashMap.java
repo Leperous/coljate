@@ -92,7 +92,7 @@ public class MutableHashMap<K, V>
     }
 
     @Override
-    public Iterator<? extends MutableMapEntry<K, V>> entries() {
+    public Iterator<? extends MutableKeyValue<K, V>> entries() {
         return new EntryIterator();
     }
 
@@ -128,13 +128,13 @@ public class MutableHashMap<K, V>
 
         boolean isEmpty();
 
-        Optional<? extends MapEntry<K, V>> find(Object key);
+        Optional<? extends KeyValue<K, V>> find(Object key);
 
         V put(K key, V value, Runnable ifNew);
 
         V delete(Object key, Runnable ifDeleted);
 
-        Iterator<? extends MutableMapEntry<K, V>> entries();
+        Iterator<? extends MutableKeyValue<K, V>> entries();
 
     }
 
@@ -152,18 +152,18 @@ public class MutableHashMap<K, V>
         }
 
         @Override
-        public Optional<? extends MutableMapEntry<K, V>> find(final Object key) {
+        public Optional<? extends MutableKeyValue<K, V>> find(final Object key) {
             return list.first(element -> Objects.equals(element.key, key));
         }
 
         @Override
         public V get(final Object key) {
-            return this.find(key).map(MapEntry::value).orElse(null);
+            return this.find(key).map(KeyValue::value).orElse(null);
         }
 
         @Override
         public V put(final K key, final V value, final Runnable ifPut) {
-            final MutableMapEntry<K, V> entry = this.find(key).orElse(null);
+            final MutableKeyValue<K, V> entry = this.find(key).orElse(null);
             if (entry == null) {
                 list.suffix(new Entry<>(key, value));
                 ifPut.run();
@@ -187,13 +187,13 @@ public class MutableHashMap<K, V>
         }
 
         @Override
-        public Iterator<? extends MutableMapEntry<K, V>> entries() {
+        public Iterator<? extends MutableKeyValue<K, V>> entries() {
             return list.iterator();
         }
 
     }
 
-    private static final class Entry<K, V> extends AbstractMapEntry<K, V> implements MutableMapEntry<K, V> {
+    private static final class Entry<K, V> extends AbstractKeyValue<K, V> implements MutableKeyValue<K, V> {
 
         private final K key;
         private V value;
@@ -222,10 +222,10 @@ public class MutableHashMap<K, V>
 
     }
 
-    private final class EntryIterator implements Iterator<MutableMapEntry<K, V>> {
+    private final class EntryIterator implements Iterator<MutableKeyValue<K, V>> {
 
         private int index;
-        private Iterator<? extends MutableMapEntry<K, V>> entries = Iterators.none();
+        private Iterator<? extends MutableKeyValue<K, V>> entries = Iterators.none();
 
         @Override
         public boolean hasNext() {
@@ -237,7 +237,7 @@ public class MutableHashMap<K, V>
         }
 
         @Override
-        public MutableMapEntry<K, V> next() {
+        public MutableKeyValue<K, V> next() {
             return entries.next();
         }
 
@@ -247,7 +247,7 @@ public class MutableHashMap<K, V>
 
         @Override
         public Iterator<K> iterator() {
-            return Iterators.transform(MutableHashMap.this.iterator(), MapEntry::key);
+            return Iterators.transform(MutableHashMap.this.iterator(), KeyValue::key);
         }
 
         @Override

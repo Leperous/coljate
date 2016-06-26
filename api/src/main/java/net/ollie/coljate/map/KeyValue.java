@@ -9,23 +9,23 @@ import org.checkerframework.checker.nullness.qual.Nullable;
  *
  * @author Ollie
  */
-public interface MapEntry<@NonNull K, @Nullable V> {
+public interface KeyValue<@NonNull K, @Nullable V> {
 
     K key();
 
     V value();
 
-    static int hashCode(@NonNull final MapEntry<?, ?> entry) {
+    static int hashCode(@NonNull final KeyValue<?, ?> entry) {
         return Objects.hash(entry.key(), entry.value());
     }
 
-    static boolean equal(final MapEntry<?, ?> left, final MapEntry<?, ?> right) {
+    static boolean equal(final KeyValue<?, ?> left, final KeyValue<?, ?> right) {
         return left == null || right == null
                 ? left == right
                 : Objects.equals(left.key(), right.key()) && Objects.equals(left.value(), right.value());
     }
 
-    static String toString(final MapEntry<?, ?> entry) {
+    static String toString(final KeyValue<?, ?> entry) {
         return entry.key() + "=" + entry.value();
     }
 

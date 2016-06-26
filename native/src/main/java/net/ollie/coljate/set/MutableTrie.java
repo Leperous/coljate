@@ -7,11 +7,11 @@ import javax.annotation.CheckForNull;
 
 import net.ollie.coljate.list.MutableWrappedStack;
 import net.ollie.coljate.list.Stack;
-import net.ollie.coljate.map.MapEntry;
 import net.ollie.coljate.map.MutableMap;
 import net.ollie.coljate.map.MutableWrappedHashMap;
 import net.ollie.coljate.set.mixin.CopiedToHashSet;
 import net.ollie.coljate.utils.Iterators;
+import net.ollie.coljate.map.KeyValue;
 
 /**
  *
@@ -188,8 +188,8 @@ public class MutableTrie
 
         private final class TriePointer {
 
-            private final Iterator<MapEntry<Character, MutableTrie>> children;
-            private MapEntry<Character, MutableTrie> currentChild;
+            private final Iterator<KeyValue<Character, MutableTrie>> children;
+            private KeyValue<Character, MutableTrie> currentChild;
 
             TriePointer(final MutableTrie trie) {
                 this.children = trie.children.iterator();

@@ -143,7 +143,7 @@ public class MutableUnbalancedTreeMap<K, V>
     }
 
     @Override
-    public Iterator<MutableMapEntry<K, V>> entries() {
+    public Iterator<MutableKeyValue<K, V>> entries() {
         return this.isEmpty()
                 ? Iterators.none()
                 : new EntryIterator();
@@ -159,7 +159,7 @@ public class MutableUnbalancedTreeMap<K, V>
         return SearchType.DEPTH_FIRST_RECURSIVE.count(root);
     }
 
-    private static final class Node<K, V> extends AbstractMapEntry<K, V> implements MutableMapEntry<K, V> {
+    private static final class Node<K, V> extends AbstractKeyValue<K, V> implements MutableKeyValue<K, V> {
 
         private final K key;
         private V value;
@@ -190,7 +190,7 @@ public class MutableUnbalancedTreeMap<K, V>
 
     }
 
-    private final class EntryIterator implements Iterator<MutableMapEntry<K, V>> {
+    private final class EntryIterator implements Iterator<MutableKeyValue<K, V>> {
 
         Node<K, V> parent, next;
 
@@ -213,7 +213,7 @@ public class MutableUnbalancedTreeMap<K, V>
         }
 
         @Override
-        public MutableMapEntry<K, V> next() {
+        public MutableKeyValue<K, V> next() {
             final Node<K, V> next = this.next;
             if (parent == null) {
                 this.next = null;

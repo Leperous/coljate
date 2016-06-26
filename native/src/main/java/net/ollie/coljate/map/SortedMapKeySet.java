@@ -42,7 +42,7 @@ public class SortedMapKeySet<K> implements SortedSet<K> {
 
     @Override
     public Iterator<K> iterator() {
-        return Iterators.transform(delegate.iterator(), MapEntry::key);
+        return Iterators.transform(delegate.iterator(), KeyValue::key);
     }
 
     @Override

@@ -38,7 +38,7 @@ public class MutableWrappedMap<@NonNull K, @Nullable V>
     }
 
     @Override
-    public Iterator<? extends MutableMapEntry<K, V>> entries() {
+    public Iterator<? extends MutableKeyValue<K, V>> entries() {
         return Iterators.transform(delegate.entrySet().iterator(), WrappedMapEntry::new);
     }
 

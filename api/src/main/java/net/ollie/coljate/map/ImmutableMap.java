@@ -9,7 +9,7 @@ import net.ollie.coljate.set.ImmutableSet;
  *
  * @author Ollie
  */
-public interface ImmutableMap<K, V> extends Map<K, V>, ImmutableCollection<MapEntry<K, V>> {
+public interface ImmutableMap<K, V> extends Map<K, V>, ImmutableCollection<KeyValue<K, V>> {
 
     @Override
     ImmutableSet<K> keys();
@@ -24,7 +24,7 @@ public interface ImmutableMap<K, V> extends Map<K, V>, ImmutableCollection<MapEn
     ImmutableMap<K, V> with(K key, V value);
 
     @Override
-    default ImmutableMap<K, V> with(final MapEntry<K, V> entry) {
+    default ImmutableMap<K, V> with(final KeyValue<K, V> entry) {
         return this.with(entry.key(), entry.value());
     }
 

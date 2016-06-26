@@ -58,7 +58,7 @@ public class ImmutableWrappedHashMap<K, V>
     }
 
     @Override
-    public UnmodifiableIterator<MapEntry<K, V>> iterator() {
+    public UnmodifiableIterator<KeyValue<K, V>> iterator() {
         return new DelegatedUnmodifiableIterator<>(super.iterator());
     }
 
