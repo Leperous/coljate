@@ -1,12 +1,16 @@
 package net.ollie.coljate.list;
 
+import java.io.Serializable;
+
 /**
  *
  * @author Ollie
  */
 public class MutableWrappedStack<T>
         extends MutableWrappedList<T>
-        implements Stack<T> {
+        implements Stack<T>, Serializable, Cloneable {
+
+    private static final long serialVersionUID = 1L;
 
     private final java.util.Stack<T> delegate;
 
@@ -38,6 +42,17 @@ public class MutableWrappedStack<T>
     @SuppressWarnings("unchecked")
     public java.util.Stack<T> copyDelegate() {
         return (java.util.Stack<T>) delegate.clone();
+    }
+
+    @Override
+    public MutableWrappedStack<T> mutableCopy() {
+        return new MutableWrappedStack<>(this.copyDelegate());
+    }
+
+    @Override
+    @SuppressWarnings("CloneDoesntCallSuperClone")
+    public MutableWrappedStack<T> clone() {
+        return this.mutableCopy();
     }
 
 }

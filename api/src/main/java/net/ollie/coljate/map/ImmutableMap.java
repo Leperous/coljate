@@ -1,15 +1,16 @@
 package net.ollie.coljate.map;
 
-import org.checkerframework.checker.nullness.qual.NonNull;
-
 import net.ollie.coljate.ImmutableCollection;
 import net.ollie.coljate.set.ImmutableSet;
+
+import org.checkerframework.checker.nullness.qual.NonNull;
 
 /**
  *
  * @author Ollie
  */
-public interface ImmutableMap<K, V> extends Map<K, V>, ImmutableCollection<KeyValue<K, V>> {
+public interface ImmutableMap<K, V>
+        extends Map<K, V>, ImmutableCollection<KeyValue<K, V>> {
 
     @Override
     ImmutableSet<K> keys();

@@ -1,5 +1,6 @@
 package net.ollie.coljate.set;
 
+import java.io.Serializable;
 import java.util.Comparator;
 
 import net.ollie.coljate.UnmodifiableIterator;
@@ -13,7 +14,9 @@ import net.ollie.coljate.theory.Sorted;
  */
 public class ImmutableWrappedTreeSet<T>
         extends WrappedTreeSet<T>
-        implements ImmutableSortedSet<T> {
+        implements ImmutableSortedSet<T>, Serializable, Cloneable {
+
+    private static final long serialVersionUID = 1L;
 
     public static <S extends Finite<T> & Sorted<T>, T> ImmutableSortedSet<T> copyOf(final S collection) {
         return copyOf(collection, collection.comparator());
@@ -62,6 +65,11 @@ public class ImmutableWrappedTreeSet<T>
     @Deprecated
     public ImmutableWrappedTreeSet<T> immutableCopy() {
         return this;
+    }
+
+    @Override
+    public ImmutableWrappedTreeSet<T> clone() {
+        return new ImmutableWrappedTreeSet<>(this.copyDelegate());
     }
 
 }

@@ -1,5 +1,6 @@
 package net.ollie.coljate.set;
 
+import java.io.Serializable;
 import java.util.Comparator;
 import static java.util.Objects.requireNonNull;
 
@@ -13,7 +14,9 @@ import net.ollie.coljate.theory.Sorted;
  */
 public class MutableWrappedTreeSet<T>
         extends WrappedSortedSet<T>
-        implements MutableSortedSet<T>, WrapsMutableSet<T> {
+        implements MutableSortedSet<T>, WrapsMutableSet<T>, Serializable, Cloneable {
+
+    private static final long serialVersionUID = 1L;
 
     public static <S extends Finite<T> & Sorted<T>, T> MutableSortedSet<T> copyOf(final S collection) {
         return copyOf(collection, collection.comparator());
@@ -39,6 +42,22 @@ public class MutableWrappedTreeSet<T>
     @Override
     public java.util.TreeSet<T> delegate() {
         return delegate;
+    }
+
+    @Override
+    public java.util.TreeSet<T> copyDelegate() {
+        return new java.util.TreeSet<>(delegate);
+    }
+
+    @Override
+    public MutableWrappedTreeSet<T> mutableCopy() {
+        return new MutableWrappedTreeSet<>(this.copyDelegate());
+    }
+
+    @Override
+    @SuppressWarnings("CloneDoesntCallSuperClone")
+    public MutableWrappedTreeSet<T> clone() {
+        return this.mutableCopy();
     }
 
 }

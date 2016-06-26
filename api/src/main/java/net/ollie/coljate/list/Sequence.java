@@ -2,11 +2,11 @@ package net.ollie.coljate.list;
 
 import java.util.function.Function;
 
-import org.checkerframework.checker.nullness.qual.NonNull;
-import org.checkerframework.checker.nullness.qual.Nullable;
-
 import net.ollie.coljate.theory.Container;
 import net.ollie.coljate.theory.Streamable;
+
+import org.checkerframework.checker.nullness.qual.NonNull;
+import org.checkerframework.checker.nullness.qual.Nullable;
 
 /**
  *

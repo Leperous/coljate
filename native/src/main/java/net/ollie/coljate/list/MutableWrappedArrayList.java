@@ -1,5 +1,6 @@
 package net.ollie.coljate.list;
 
+import java.io.Serializable;
 import java.util.List;
 
 import net.ollie.coljate.Collection;
@@ -13,7 +14,9 @@ import static net.ollie.coljate.list.mixin.WrapsArrayList.copyToArrayList;
  */
 public class MutableWrappedArrayList<T>
         extends MutableWrappedList<T>
-        implements MutableArray<T>, WrapsArrayList<T> {
+        implements MutableArray<T>, WrapsArrayList<T>, Serializable, Cloneable {
+
+    private static final long serialVersionUID = 1L;
 
     @SafeVarargs
     public static <T> MutableList<T> copyOf(final T... array) {
@@ -55,13 +58,18 @@ public class MutableWrappedArrayList<T>
     }
 
     @Override
-    public MutableArray<T> mutableCopy() {
-        return WrapsArrayList.super.mutableCopy();
+    public MutableWrappedArrayList<T> mutableCopy() {
+        return new MutableWrappedArrayList<>(this.copyDelegate());
     }
 
     @Override
     public ImmutableArray<T> immutableCopy() {
         return WrapsArrayList.super.immutableCopy();
+    }
+
+    @Override
+    public MutableWrappedArrayList<T> clone() {
+        return this.mutableCopy();
     }
 
 }

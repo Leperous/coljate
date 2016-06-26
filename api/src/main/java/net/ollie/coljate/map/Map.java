@@ -4,13 +4,13 @@ import java.util.Objects;
 import java.util.function.BiConsumer;
 import java.util.function.Supplier;
 
-import org.checkerframework.checker.nullness.qual.NonNull;
-import org.checkerframework.checker.nullness.qual.Nullable;
-
 import net.ollie.coljate.Collection;
 import net.ollie.coljate.set.Set;
 import net.ollie.coljate.theory.Associative;
 import net.ollie.coljate.theory.Finite;
+
+import org.checkerframework.checker.nullness.qual.NonNull;
+import org.checkerframework.checker.nullness.qual.Nullable;
 
 /**
  *

@@ -8,7 +8,7 @@ import net.ollie.coljate.list.mixin.WrapsMutableList;
  */
 public class MutableWrappedList<T>
         extends WrappedList<T>
-        implements WrapsMutableList<T> {
+        implements WrapsMutableList<T>, Cloneable {
 
     private final java.util.List<T> delegate;
 
@@ -34,6 +34,17 @@ public class MutableWrappedList<T>
         }
         final java.util.List<T> subList = delegate.subList(1, delegate.size());
         return new MutableWrappedList<>(subList);
+    }
+
+    @Override
+    public MutableWrappedList<T> mutableCopy() {
+        return new MutableWrappedList<>(this.copyDelegate());
+    }
+
+    @Override
+    @SuppressWarnings("CloneDoesntCallSuperClone")
+    public MutableWrappedList<T> clone() {
+        return this.mutableCopy();
     }
 
 }
