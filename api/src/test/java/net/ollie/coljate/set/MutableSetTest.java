@@ -24,4 +24,13 @@ public abstract class MutableSetTest<T> extends SetTest<T> {
         assertTrue(set.contains(object));
     }
 
+    @Test
+    public void testAddClear() {
+        final MutableSet<T> set = this.create();
+        final T object = this.randomValue();
+        set.add(object);
+        set.clear();
+        assertTrue(set.isEmpty());
+    }
+
 }

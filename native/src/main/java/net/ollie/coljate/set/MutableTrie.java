@@ -1,20 +1,22 @@
 package net.ollie.coljate.set;
 
 import java.util.Iterator;
+import java.util.NoSuchElementException;
 
 import net.ollie.coljate.map.MutableMap;
 import net.ollie.coljate.map.MutableWrappedHashMap;
+import net.ollie.coljate.set.mixin.CopiedToHashSet;
 
 /**
  *
  * @author Ollie
  */
-public class MutableTrie implements Trie, MutableSet<String> {
+public class MutableTrie implements Trie, MutableSet<String>, CopiedToHashSet<String> {
 
     private final MutableMap<Character, MutableTrie> children;
     private boolean endOfWord;
 
-    MutableTrie() {
+    public MutableTrie() {
         this(MutableWrappedHashMap.create());
     }
 
@@ -53,6 +55,16 @@ public class MutableTrie implements Trie, MutableSet<String> {
     }
 
     @Override
+    @Deprecated
+    public boolean removeOnce(final Object element) {
+        return element instanceof String && this.removeOnce((String) element);
+    }
+
+    public boolean removeOnce(final String string) {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
     public boolean isEndOfWord() {
         return endOfWord;
     }
@@ -64,23 +76,32 @@ public class MutableTrie implements Trie, MutableSet<String> {
     }
 
     @Override
-    public Set<Trie> children() {
-        throw new UnsupportedOperationException(); //TODO
+    public boolean isEmpty() {
+        return children.isEmpty();
     }
 
     @Override
     public MutableTrie mutableCopy() {
-        throw new UnsupportedOperationException(); //TODO
-    }
-
-    @Override
-    public ImmutableSet<String> immutableCopy() {
-        throw new UnsupportedOperationException(); //TODO
+        final MutableTrie trie = new MutableTrie();
+        final Iterator<String> iterator = this.iterator();
+        while (iterator.hasNext()) {
+            trie.add(iterator.next());
+        }
+        return trie;
     }
 
     @Override
     public Set<String> tail() {
-        throw new UnsupportedOperationException(); //TODO
+        final Iterator<String> iterator = this.iterator();
+        if (!iterator.hasNext()) {
+            return this;
+        }
+        iterator.next();
+        final MutableTrie trie = new MutableTrie();
+        while (iterator.hasNext()) {
+            trie.add(iterator.next());
+        }
+        return trie;
     }
 
     @Override
@@ -90,6 +111,8 @@ public class MutableTrie implements Trie, MutableSet<String> {
 
     class TrieIterator implements Iterator<String> {
 
+        String next;
+
         @Override
         public boolean hasNext() {
             throw new UnsupportedOperationException(); //TODO
@@ -97,7 +120,21 @@ public class MutableTrie implements Trie, MutableSet<String> {
 
         @Override
         public String next() {
-            throw new UnsupportedOperationException(); //TODO
+            if (next == null) {
+                throw new NoSuchElementException();
+            }
+            final String next = this.next;
+            this.next = this.computeNext();
+            return next;
+        }
+
+        private String computeNext() {
+            throw new UnsupportedOperationException();
+        }
+
+        @Override
+        public void remove() {
+            MutableTrie.this.removeOnce(this.next());
         }
 
     }

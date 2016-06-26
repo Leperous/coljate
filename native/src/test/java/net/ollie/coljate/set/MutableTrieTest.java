@@ -2,6 +2,10 @@ package net.ollie.coljate.set;
 
 import java.util.UUID;
 
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+import org.junit.Test;
+
 /**
  *
  * @author Ollie
@@ -15,7 +19,7 @@ public class MutableTrieTest extends MutableSetTest<String> {
 
     @Override
     protected MutableTrie create(final String string) {
-        return this.createFrom();
+        return this.createFrom(string);
     }
 
     @Override
@@ -34,6 +38,14 @@ public class MutableTrieTest extends MutableSetTest<String> {
     @Override
     protected String randomValue() {
         return UUID.randomUUID().toString();
+    }
+
+    @Test
+    public void testContainsEmptyString() {
+        final MutableTrie trie = this.create();
+        assertFalse(trie.contains(""));
+        trie.add("");
+        assertTrue(trie.contains(""));
     }
 
 }

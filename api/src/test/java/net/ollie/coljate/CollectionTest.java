@@ -25,9 +25,14 @@ public abstract class CollectionTest<T> {
     protected abstract T randomValue();
 
     @Test
-    public void testEmpty_Count() {
+    public void testEmpty_Empty() {
         final Collection<T> empty = this.create();
         assertTrue("Should be empty", empty.isEmpty());
+    }
+
+    @Test
+    public void testEmpty_Count() {
+        final Collection<T> empty = this.create();
         assertThat("Should have 0 size", empty.count(), is(0));
     }
 
@@ -51,6 +56,7 @@ public abstract class CollectionTest<T> {
         final Collection<T> singleton = this.create(random);
         assertFalse("Should not be empty", singleton.isEmpty());
         assertThat("Should have 1 size", singleton.count(), is(1));
+        assertTrue(singleton.contains(random));
     }
 
     @Test
