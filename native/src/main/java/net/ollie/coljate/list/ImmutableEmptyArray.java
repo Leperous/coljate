@@ -22,7 +22,7 @@ public class ImmutableEmptyArray<T>
     @Override
     @SuppressWarnings("unchecked")
     public T get(final int index) {
-        throw new IndexOutOfBoundsException("Empty list!");
+        throw new IndexOutOfBoundsException("Empty array!");
     }
 
     @Override
@@ -37,8 +37,7 @@ public class ImmutableEmptyArray<T>
 
     @Override
     public MutableArray<T> mutableCopy() {
-        //return MutableArrayList.of();
-        throw new UnsupportedOperationException(); //TODO
+        return new MutableWrappedArrayList<>();
     }
 
     @Override

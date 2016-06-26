@@ -37,6 +37,10 @@ public class MutableWrappedArrayList<T>
 
     private final java.util.ArrayList<T> delegate;
 
+    public MutableWrappedArrayList() {
+        this(new java.util.ArrayList<>());
+    }
+
     protected MutableWrappedArrayList(final java.util.ArrayList<T> delegate) {
         super(delegate);
         this.delegate = delegate;

@@ -59,4 +59,23 @@ public class Iterators {
         };
     }
 
+    public static <T> Iterator<T> of(final T element) {
+        return new Iterator<T>() {
+
+            boolean used = false;
+
+            @Override
+            public boolean hasNext() {
+                return !used;
+            }
+
+            @Override
+            public T next() {
+                used = true;
+                return element;
+            }
+
+        };
+    }
+
 }

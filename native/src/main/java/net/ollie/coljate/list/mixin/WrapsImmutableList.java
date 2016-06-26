@@ -1,6 +1,5 @@
 package net.ollie.coljate.list.mixin;
 
-import net.ollie.coljate.list.ImmutableAppendList;
 import net.ollie.coljate.list.ImmutableList;
 import net.ollie.coljate.list.ImmutablePrefixList;
 import net.ollie.coljate.list.MutableList;
@@ -17,12 +16,12 @@ public interface WrapsImmutableList<@Nullable T> extends ImmutableList<T> {
 
     @Override
     default ImmutableList<T> prefixed(final T element) {
-        return ImmutablePrefixList.of(element, this);
+        return ImmutablePrefixList.prefix(element, this);
     }
 
     @Override
     default ImmutableList<T> suffixed(final T element) {
-        return ImmutableAppendList.of(this, element);
+        return ImmutablePrefixList.suffix(this, element);
     }
 
     @Override

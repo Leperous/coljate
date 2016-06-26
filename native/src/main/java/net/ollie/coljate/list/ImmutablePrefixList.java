@@ -1,9 +1,11 @@
 package net.ollie.coljate.list;
 
-import java.util.stream.Stream;
+import java.util.Iterator;
+import java.util.Objects;
 
-import net.ollie.coljate.ImmutableCollection;
 import net.ollie.coljate.UnmodifiableIterator;
+import net.ollie.coljate.list.mixin.CopiedToList;
+import net.ollie.coljate.utils.Iterators;
 
 /**
  *
@@ -11,80 +13,125 @@ import net.ollie.coljate.UnmodifiableIterator;
  */
 public class ImmutablePrefixList<T>
         extends AbstractList<T>
-        implements ImmutableList<T> {
+        implements ImmutableList<T>, CopiedToList<T> {
 
-    public static <T> ImmutableList<T> of(final T element, final ImmutableList<T> right) {
-        throw new UnsupportedOperationException(); //TODO
+    public static <T> ImmutablePrefixList<T> of(final T element) {
+        return new ImmutablePrefixList<>(ImmutableEmptyArray.get(), element, ImmutableEmptyArray.get());
+    }
+
+    public static <T> ImmutablePrefixList<T> prefix(final T prefix, final ImmutableList<T> suffix) {
+        return new ImmutablePrefixList<>(ImmutableEmptyArray.get(), prefix, suffix);
+    }
+
+    public static <T> ImmutablePrefixList<T> suffix(final ImmutableList<T> prefix, final T suffix) {
+        return new ImmutablePrefixList<>(prefix, suffix, ImmutableEmptyArray.get());
+    }
+
+    private final ImmutableList<T> prefix;
+    private final T element;
+    private final ImmutableList<T> suffix;
+
+    ImmutablePrefixList(
+            final ImmutableList<T> prefix,
+            final T element,
+            final ImmutableList<T> suffix) {
+        this.prefix = prefix;
+        this.element = element;
+        this.suffix = suffix;
     }
 
     @Override
     public ImmutableList<T> prefixed(final T element) {
-        throw new UnsupportedOperationException(); //TODO
+        return prefix(element, this);
     }
 
     @Override
-    public ImmutableList<T> suffixed(T element) {
-        throw new UnsupportedOperationException(); //TODO
+    public ImmutablePrefixList<T> suffixed(final T element) {
+        return suffix(this, element);
+    }
+
+    @Override
+    public T head() {
+        return prefix.isEmpty()
+                ? element
+                : prefix.head();
     }
 
     @Override
     public ImmutableList<T> tail() {
-        throw new UnsupportedOperationException(); //TODO
+        return prefix.isEmpty()
+                ? suffix
+                : new ImmutablePrefixList<>(prefix.tail(), element, suffix);
     }
 
     @Override
-    public T get(int index) {
-        throw new UnsupportedOperationException(); //TODO
+    public T get(final int index) {
+        final int p = prefix.count();
+        if (index < p) {
+            return prefix.get(index);
+        } else if (index == p) {
+            return element;
+        } else {
+            return suffix.get(index - p);
+        }
     }
 
     @Override
-    public ImmutableList<T> immutableCopy() {
-        throw new UnsupportedOperationException(); //TODO
+    @Deprecated
+    public ImmutablePrefixList<T> immutableCopy() {
+        return this;
+    }
+
+    public ImmutableList<T> squash() {
+        return ImmutableWrappedArrayList.copyOf(this);
     }
 
     @Override
     public MutableList<T> mutableCopy() {
-        throw new UnsupportedOperationException(); //TODO
+        return CopiedToList.super.mutableCopy();
     }
 
     @Override
     public int count() {
-        throw new UnsupportedOperationException(); //TODO
+        return prefix.count() + 1 + suffix.count();
     }
 
     @Override
-    public Stream<T> serialStream() {
-        throw new UnsupportedOperationException(); //TODO
-    }
-
-    @Override
-    public Stream<T> parallelStream() {
-        throw new UnsupportedOperationException(); //TODO
-    }
-
-    @Override
-    public boolean contains(Object object) {
-        throw new UnsupportedOperationException(); //TODO
-    }
-
-    @Override
-    public boolean inDomain(Integer input) {
-        throw new UnsupportedOperationException(); //TODO
-    }
-
-    @Override
-    public T apply(Integer input) {
-        throw new UnsupportedOperationException(); //TODO
-    }
-
-    @Override
-    public ImmutableCollection<T> with(T element) {
-        throw new UnsupportedOperationException(); //TODO
+    public boolean contains(final Object object) {
+        return Objects.equals(element, object)
+                || prefix.contains(object)
+                || suffix.contains(object);
     }
 
     @Override
     public UnmodifiableIterator<T> iterator() {
-        throw new UnsupportedOperationException(); //TODO
+        return new ImmutablePrefixListIterator();
+    }
+
+    private final class ImmutablePrefixListIterator
+            extends UnmodifiableIterator<T> {
+
+        private final Iterator<T> l = prefix.iterator();
+        private final Iterator<T> m = Iterators.of(element);
+        private Iterator<T> current = l;
+
+        @Override
+        public boolean hasNext() {
+            if (!current.hasNext()) {
+                if (current == l) {
+                    current = m;
+                } else if (current == m) {
+                    current = suffix.iterator();
+                }
+            }
+            return current.hasNext();
+        }
+
+        @Override
+        public T next() {
+            return current.next();
+        }
+
     }
 
 }
