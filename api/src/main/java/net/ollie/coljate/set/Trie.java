@@ -6,8 +6,6 @@ package net.ollie.coljate.set;
  */
 public interface Trie extends Set<String> {
 
-    boolean isEndOfWord();
-
     @Override
     @Deprecated
     default boolean contains(final Object object) {

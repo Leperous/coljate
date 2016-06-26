@@ -22,7 +22,7 @@ public class MutableTrie
         implements Trie, MutableSet<String>, CopiedToHashSet<String> {
 
     private final MutableMap<Character, MutableTrie> children;
-    private boolean endOfWord;
+    private boolean end;
 
     public MutableTrie() {
         this(MutableWrappedHashMap.create());
@@ -45,8 +45,8 @@ public class MutableTrie
             }
             trie = next;
         }
-        final boolean wasEndOfWord = trie.endOfWord;
-        trie.endOfWord = true;
+        final boolean wasEndOfWord = trie.end;
+        trie.end = true;
         return added || !wasEndOfWord;
     }
 
@@ -59,7 +59,7 @@ public class MutableTrie
                 return false;
             }
         }
-        return trie.endOfWord;
+        return trie.end;
     }
 
     @Override
@@ -74,8 +74,8 @@ public class MutableTrie
 
     private boolean remove(final String string, final int offset) {
         if (offset == string.length()) {
-            if (endOfWord) {
-                endOfWord = false;
+            if (end) {
+                end = false;
                 return true;
             }
         }
@@ -88,9 +88,8 @@ public class MutableTrie
         return removed;
     }
 
-    @Override
-    public boolean isEndOfWord() {
-        return endOfWord;
+    public boolean isEnd() {
+        return end;
     }
 
     @Override
