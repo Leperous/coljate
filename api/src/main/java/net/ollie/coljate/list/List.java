@@ -56,6 +56,10 @@ public interface List<@Nullable T>
         return this.isEmpty() ? null : this.get(0);
     }
 
+    default T last() {
+        return this.isEmpty() ? null : this.get(this.count() - 1);
+    }
+
     @Override
     default boolean inDomain(final Integer input) {
         return input != null && this.inDomain(input.intValue());
