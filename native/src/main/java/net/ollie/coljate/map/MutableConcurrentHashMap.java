@@ -31,6 +31,10 @@ public class MutableConcurrentHashMap<K, V>
         this.delegate = delegate;
     }
 
+    public java.util.concurrent.ConcurrentHashMap<K, V> delegate() {
+        return delegate;
+    }
+
     @Override
     public java.util.concurrent.ConcurrentHashMap<K, V> copyDelegate() {
         return new java.util.concurrent.ConcurrentHashMap<>(delegate);

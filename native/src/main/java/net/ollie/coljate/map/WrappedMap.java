@@ -1,7 +1,7 @@
 package net.ollie.coljate.map;
 
 import java.util.Iterator;
-import static java.util.Objects.requireNonNull;
+import java.util.Objects;
 
 import net.ollie.coljate.Collection;
 import net.ollie.coljate.WrappedCollection;
@@ -21,7 +21,7 @@ public class WrappedMap<K, V>
     private final java.util.Map<K, V> delegate;
 
     protected WrappedMap(final java.util.Map<K, V> delegate) {
-        this.delegate = requireNonNull(delegate);
+        this.delegate = Objects.requireNonNull(delegate);
     }
 
     public java.util.Map<K, V> copyDelegate() {
