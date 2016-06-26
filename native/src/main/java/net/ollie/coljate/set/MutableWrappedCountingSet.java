@@ -5,6 +5,7 @@ import java.util.Iterator;
 import net.ollie.coljate.map.Map;
 import net.ollie.coljate.map.MutableMap;
 import net.ollie.coljate.set.mixin.CopiedToHashSet;
+import net.ollie.coljate.utils.Assertions;
 
 /**
  *
@@ -55,8 +56,17 @@ public class MutableWrappedCountingSet<T>
     }
 
     @Override
-    public boolean removeOnce(final Object key) {
-        throw new UnsupportedOperationException(); //TODO cast
+    @Deprecated
+    public boolean remove(final Object key, final int times) {
+        final int current = this.count(key);
+        this.decrement((T) key, times);
+        return current > 0;
+    }
+
+    public int decrement(final T key, final int count) {
+        //FIXME integer overflow
+        Assertions.checkArgument(count >= 0, () -> "Cannot decrement by negative amount!");
+        return this.count.compute(key, (k, current) -> current == null || current <= count ? null : current - count);
     }
 
     @Override

@@ -29,13 +29,20 @@ public interface MutableCollection<@Nullable T> extends Collection<T> {
      * @return
      */
     default boolean removeOnce(final Object element) {
+        return this.remove(element, 1);
+    }
+
+    default boolean remove(final Object element, final int maxTimes) {
+        int numRemoved = 0;
         for (final Iterator<T> iterator = this.iterator(); iterator.hasNext();) {
             if (Objects.equals(element, iterator.next())) {
                 iterator.remove();
-                return true;
+                if (++numRemoved == maxTimes) {
+                    return true;
+                }
             }
         }
-        return false;
+        return numRemoved > 0;
     }
 
     /**

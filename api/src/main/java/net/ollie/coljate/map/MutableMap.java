@@ -26,7 +26,11 @@ public interface MutableMap<K, V> extends Map<K, V>, MutableCollection<MapEntry<
     default V compute(final K key, final BiFunction<? super K, ? super V, ? extends V> compute) {
         final V current = this.get(key);
         final V computed = compute.apply(key, current);
-        this.put(key, computed);
+        if (computed == null && (current != null || this.containsKey(key))) {
+            this.deleteKey(key);
+        } else if (computed != null) {
+            this.put(key, computed);
+        }
         return computed;
     }
 
