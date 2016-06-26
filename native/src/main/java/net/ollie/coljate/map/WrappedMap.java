@@ -10,8 +10,6 @@ import net.ollie.coljate.set.Set;
 import net.ollie.coljate.set.WrappedSet;
 import net.ollie.coljate.utils.Iterators;
 
-import static java.util.Objects.requireNonNull;
-
 /**
  *
  * @author Ollie
@@ -24,6 +22,10 @@ public class WrappedMap<K, V>
 
     protected WrappedMap(final java.util.Map<K, V> delegate) {
         this.delegate = requireNonNull(delegate);
+    }
+
+    public java.util.Map<K, V> copyDelegate() {
+        return new java.util.HashMap<>(delegate);
     }
 
     @Override

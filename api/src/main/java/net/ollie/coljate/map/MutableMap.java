@@ -5,10 +5,10 @@ import java.util.Objects;
 import java.util.function.BiFunction;
 import java.util.function.Function;
 
-import org.checkerframework.checker.nullness.qual.NonNull;
-
 import net.ollie.coljate.MutableCollection;
 import net.ollie.coljate.utils.Iterators;
+
+import org.checkerframework.checker.nullness.qual.NonNull;
 
 /**
  *
@@ -21,6 +21,17 @@ public interface MutableMap<K, V> extends Map<K, V>, MutableCollection<KeyValue<
 
     default void putAll(@NonNull final Map<? extends K, ? extends V> map) {
         map.forEach(this::put);
+    }
+
+    /**
+     * @see java.util.Map#putIfAbsent
+     */
+    default V putIfAbsent(final K key, final V value) {
+        V current = this.get(key);
+        if (current == null) {
+            current = this.put(key, value);
+        }
+        return current;
     }
 
     default V compute(final K key, final BiFunction<? super K, ? super V, ? extends V> compute) {
