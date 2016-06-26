@@ -11,7 +11,7 @@ import org.junit.Test;
 public abstract class MutableSetTest<T> extends SetTest<T> {
 
     @Override
-    protected abstract MutableSet<T> create();
+    public abstract MutableSet<T> create();
 
     @Test
     public void testAdd_NotTwice() {
@@ -34,12 +34,19 @@ public abstract class MutableSetTest<T> extends SetTest<T> {
     }
 
     @Test
+    public void testEmpty_Remove() {
+        final MutableSet<T> set = this.create();
+        assertFalse(set.removeOnce(this.randomValue()));
+        assertTrue(set.isEmpty());
+    }
+
+    @Test
     public void testSingleton_AddRemove() {
         final MutableSet<T> set = this.create();
         final T object = this.randomValue();
         set.add(object);
         assertTrue(set.contains(object));
-        set.removeOnce(object);
+        assertTrue(set.removeOnce(object));
         assertFalse(set.contains(object));
         assertTrue(set.isEmpty());
     }

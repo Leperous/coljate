@@ -16,7 +16,7 @@ public abstract class MutableListTest extends ListTest {
     protected abstract MutableList<Object> createFrom(Object... objects);
 
     @Override
-    protected MutableList<Object> create() {
+    public MutableList<Object> create() {
         return this.createFrom();
     }
 

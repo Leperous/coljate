@@ -10,7 +10,7 @@ import java.util.Arrays;
 public class ImmutableAppendListTest extends ImmutableListTest {
 
     @Override
-    protected ImmutableList<Object> create() {
+    public ImmutableList<Object> create() {
         return ImmutableWrappedEmptyArray.empty();
     }
 

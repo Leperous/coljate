@@ -9,16 +9,25 @@ import static net.ollie.coljate.set.mixin.WrapsHashSet.copyIntoHashSet;
  */
 public class MutableWrappedHashSet<T> extends MutableWrappedSet<T> {
 
-    public static <T> MutableSet<T> copyOf(final java.util.Collection<? extends T> collection) {
+    @SafeVarargs
+    public static <T> MutableWrappedHashSet<T> copyOf(final T... array) {
+        return viewOf(copyIntoHashSet(array));
+    }
+
+    public static <T> MutableWrappedHashSet<T> copyOf(final java.util.Collection<? extends T> collection) {
         return viewOf(copyIntoHashSet(collection));
     }
 
-    public static <T> MutableSet<T> copyOf(final Collection<? extends T> collection) {
+    public static <T> MutableWrappedHashSet<T> copyOf(final Collection<? extends T> collection) {
         return viewOf(copyIntoHashSet(collection));
     }
 
-    public static <T> MutableSet<T> viewOf(final java.util.HashSet<T> set) {
+    public static <T> MutableWrappedHashSet<T> viewOf(final java.util.HashSet<T> set) {
         return new MutableWrappedHashSet<>(set);
+    }
+
+    public MutableWrappedHashSet() {
+        this(new java.util.HashSet<>());
     }
 
     MutableWrappedHashSet(final java.util.HashSet<T> delegate) {

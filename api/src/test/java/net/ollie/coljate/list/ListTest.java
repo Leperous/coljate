@@ -13,17 +13,17 @@ import net.ollie.coljate.CollectionTest;
 public abstract class ListTest extends CollectionTest<Object> {
 
     @Override
-    protected List<Object> create() {
+    public List<Object> create() {
         return createFrom();
     }
 
     @Override
-    protected List<Object> create(Object singleton) {
+    public List<Object> create(Object singleton) {
         return createFrom(singleton);
     }
 
     @Override
-    protected List<Object> create(Object first, Object second) {
+    public List<Object> create(Object first, Object second) {
         return createFrom(first, second);
     }
 

@@ -13,17 +13,17 @@ import org.junit.Test;
 public class MutableTrieTest extends MutableSetTest<String> {
 
     @Override
-    protected MutableTrie create() {
+    public MutableTrie create() {
         return this.createFrom();
     }
 
     @Override
-    protected MutableTrie create(final String string) {
+    public MutableTrie create(final String string) {
         return this.createFrom(string);
     }
 
     @Override
-    protected MutableTrie create(String first, String second) {
+    public MutableTrie create(String first, String second) {
         return this.createFrom(first, second);
     }
 

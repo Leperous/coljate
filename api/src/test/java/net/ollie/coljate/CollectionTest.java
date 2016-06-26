@@ -2,7 +2,6 @@ package net.ollie.coljate;
 
 import java.util.Iterator;
 
-import org.checkerframework.checker.nullness.qual.NonNull;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNull;
@@ -14,15 +13,7 @@ import org.junit.Test;
  *
  * @author Ollie
  */
-public abstract class CollectionTest<T> {
-
-    protected abstract Collection<T> create();
-
-    @NonNull
-    protected abstract Collection<T> create(T singleton);
-
-    @NonNull
-    protected abstract Collection<T> create(T first, T second);
+public abstract class CollectionTest<T> implements CollectionBuilder<T> {
 
     protected abstract T randomValue();
 

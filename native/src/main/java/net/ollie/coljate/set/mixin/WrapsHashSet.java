@@ -26,6 +26,15 @@ public interface WrapsHashSet<T> extends WrapsSet<T>, CopiedToHashSet<T> {
         return CopiedToHashSet.super.immutableCopy();
     }
 
+    @SafeVarargs
+    static <T> java.util.HashSet<T> copyIntoHashSet(final T... array) {
+        final java.util.HashSet<T> set = new java.util.HashSet<>(array.length);
+        for (final T element : array) {
+            set.add(element);
+        }
+        return set;
+    }
+
     static <T> java.util.HashSet<T> copyIntoHashSet(final java.util.Collection<? extends T> collection) {
         return new java.util.HashSet<>(collection);
     }
@@ -35,9 +44,9 @@ public interface WrapsHashSet<T> extends WrapsSet<T>, CopiedToHashSet<T> {
     }
 
     static <T> java.util.HashSet<T> copyIntoHashSet(final Iterator<? extends T> iterator) {
-        final java.util.HashSet<T> hashSet = new java.util.HashSet<>();
-        iterator.forEachRemaining(hashSet::add);
-        return hashSet;
+        final java.util.HashSet<T> set = new java.util.HashSet<>();
+        iterator.forEachRemaining(set::add);
+        return set;
     }
 
 }
