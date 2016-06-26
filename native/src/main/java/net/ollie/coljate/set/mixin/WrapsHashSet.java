@@ -3,6 +3,7 @@ package net.ollie.coljate.set.mixin;
 import java.util.Iterator;
 import java.util.Set;
 
+import net.ollie.coljate.set.HashSet;
 import net.ollie.coljate.set.ImmutableSet;
 import net.ollie.coljate.set.MutableSet;
 
@@ -11,7 +12,7 @@ import net.ollie.coljate.set.MutableSet;
  *
  * @author Ollie
  */
-public interface WrapsHashSet<T> extends WrapsSet<T>, CopiedToHashSet<T> {
+public interface WrapsHashSet<T> extends WrapsSet<T>, HashSet<T>, CopiedToHashSet<T> {
 
     @Override
     java.util.HashSet<T> copyDelegate();

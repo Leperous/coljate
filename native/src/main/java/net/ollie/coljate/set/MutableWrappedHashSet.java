@@ -7,7 +7,7 @@ import static net.ollie.coljate.set.mixin.WrapsHashSet.copyIntoHashSet;
  *
  * @author Ollie
  */
-public class MutableWrappedHashSet<T> extends MutableWrappedSet<T> {
+public class MutableWrappedHashSet<T> extends MutableWrappedSet<T> implements HashSet<T> {
 
     @SafeVarargs
     public static <T> MutableWrappedHashSet<T> copyOf(final T... array) {
