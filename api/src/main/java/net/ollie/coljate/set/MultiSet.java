@@ -4,7 +4,7 @@ package net.ollie.coljate.set;
  *
  * @author Ollie
  */
-public interface CountingSet<T> extends Set<T> {
+public interface MultiSet<T> extends Set<T> {
 
     int count(Object object);
 

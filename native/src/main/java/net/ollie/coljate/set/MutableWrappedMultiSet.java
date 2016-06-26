@@ -11,21 +11,21 @@ import net.ollie.coljate.utils.Assertions;
  *
  * @author Ollie
  */
-public class MutableWrappedCountingSet<T>
+public class MutableWrappedMultiSet<T>
         extends AbstractSet<T>
-        implements CountingSet<T>, MutableSet<T>, CopiedToHashSet<T> {
+        implements MultiSet<T>, MutableSet<T>, CopiedToHashSet<T> {
 
-    public static <T> MutableWrappedCountingSet<T> viewOf(final MutableMap<T, Integer> count) {
-        return new MutableWrappedCountingSet<>(count);
+    public static <T> MutableWrappedMultiSet<T> viewOf(final MutableMap<T, Integer> count) {
+        return new MutableWrappedMultiSet<>(count);
     }
 
-    public static <T> MutableWrappedCountingSet<T> copyOf(final Map<T, Integer> count) {
+    public static <T> MutableWrappedMultiSet<T> copyOf(final Map<T, Integer> count) {
         return viewOf(count.mutableCopy());
     }
 
     private final MutableMap<T, Integer> count;
 
-    protected MutableWrappedCountingSet(final MutableMap<T, Integer> count) {
+    protected MutableWrappedMultiSet(final MutableMap<T, Integer> count) {
         this.count = count;
     }
 
@@ -40,7 +40,7 @@ public class MutableWrappedCountingSet<T>
     }
 
     @Override
-    public MutableWrappedCountingSet<T> mutableCopy() {
+    public MutableWrappedMultiSet<T> mutableCopy() {
         return copyOf(count);
     }
 
@@ -87,7 +87,7 @@ public class MutableWrappedCountingSet<T>
     }
 
     @Override
-    public CountingSet<T> tail() {
+    public MultiSet<T> tail() {
         throw new UnsupportedOperationException(); //TODO
     }
 
