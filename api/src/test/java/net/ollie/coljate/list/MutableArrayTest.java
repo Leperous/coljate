@@ -7,6 +7,6 @@ package net.ollie.coljate.list;
 public abstract class MutableArrayTest extends MutableListTest {
 
     @Override
-    protected abstract MutableArray<Object> createFrom(Object... objects);
+    public abstract MutableArray<Object> createFrom(Object... objects);
 
 }

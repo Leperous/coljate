@@ -8,7 +8,7 @@ package net.ollie.coljate.list;
 public class ImmutableWrappedArrayListTest extends ImmutableListTest {
 
     @Override
-    protected ImmutableList<Object> createFrom(final Object... objects) {
+    public ImmutableList<Object> createFrom(final Object... objects) {
         return ImmutableWrappedArrayList.copyOf(objects);
     }
 

@@ -5,33 +5,20 @@ import static org.junit.Assert.assertThat;
 import org.junit.Test;
 
 import net.ollie.coljate.CollectionTest;
+import net.ollie.coljate.ObjectCollectionBuilder;
 
 /**
  *
  * @author Ollie
  */
-public abstract class ListTest extends CollectionTest<Object> {
+public abstract class ListTest extends CollectionTest<Object> implements ObjectCollectionBuilder {
 
     @Override
-    public List<Object> create() {
-        return createFrom();
-    }
-
-    @Override
-    public List<Object> create(Object singleton) {
-        return createFrom(singleton);
-    }
+    public abstract List<Object> createFrom(Object... objects);
 
     @Override
     public List<Object> create(Object first, Object second) {
-        return createFrom(first, second);
-    }
-
-    protected abstract List<Object> createFrom(Object... objects);
-
-    @Override
-    protected Object randomValue() {
-        return new Object();
+        return this.createFrom(first, second);
     }
 
     @Test

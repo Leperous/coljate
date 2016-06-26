@@ -11,6 +11,6 @@ public abstract class ImmutableListTest extends ListTest {
 
     @NonNull
     @Override
-    protected abstract ImmutableList<Object> createFrom(Object... objects);
+    public abstract ImmutableList<Object> createFrom(Object... objects);
 
 }

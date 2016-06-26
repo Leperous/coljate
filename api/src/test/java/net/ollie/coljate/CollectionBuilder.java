@@ -6,6 +6,8 @@ package net.ollie.coljate;
  */
 public interface CollectionBuilder<T> {
 
+    T randomValue();
+
     Collection<T> create();
 
     Collection<T> create(T element);

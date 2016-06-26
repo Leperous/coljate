@@ -15,7 +15,7 @@ public class ImmutableAppendListTest extends ImmutableListTest {
     }
 
     @Override
-    protected ImmutableList<Object> createFrom(final Object... objects) {
+    public ImmutableList<Object> createFrom(final Object... objects) {
         switch (objects.length) {
             case 0:
                 return create();

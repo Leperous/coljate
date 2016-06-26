@@ -6,6 +6,11 @@ package net.ollie.coljate;
  */
 public interface ObjectCollectionBuilder extends CollectionBuilder<Object> {
 
+    @Override
+    default Object randomValue() {
+        return new Object();
+    }
+
     Collection<Object> createFrom(Object... objects);
 
     @Override

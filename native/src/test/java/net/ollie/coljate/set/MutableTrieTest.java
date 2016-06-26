@@ -36,7 +36,7 @@ public class MutableTrieTest extends MutableSetTest<String> {
     }
 
     @Override
-    protected String randomValue() {
+    public String randomValue() {
         return UUID.randomUUID().toString().substring(0, 5);
     }
 

@@ -15,8 +15,6 @@ import org.junit.Test;
  */
 public abstract class CollectionTest<T> implements CollectionBuilder<T> {
 
-    protected abstract T randomValue();
-
     @Test
     public void testEmpty_IsEmpty() {
         final Collection<T> empty = this.create();

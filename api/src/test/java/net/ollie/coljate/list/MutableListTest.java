@@ -13,7 +13,7 @@ import org.junit.Test;
 public abstract class MutableListTest extends ListTest {
 
     @Override
-    protected abstract MutableList<Object> createFrom(Object... objects);
+    public abstract MutableList<Object> createFrom(Object... objects);
 
     @Override
     public MutableList<Object> create() {

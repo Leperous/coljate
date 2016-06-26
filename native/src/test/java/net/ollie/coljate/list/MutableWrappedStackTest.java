@@ -8,7 +8,7 @@ package net.ollie.coljate.list;
 public class MutableWrappedStackTest extends MutableListTest {
 
     @Override
-    protected MutableWrappedStack<Object> createFrom(final Object... objects) {
+    public MutableWrappedStack<Object> createFrom(final Object... objects) {
         final MutableWrappedStack<Object> stack = new MutableWrappedStack();
         for (final Object object : objects) {
             stack.add(object);
