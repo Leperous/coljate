@@ -43,6 +43,11 @@ public interface List<@Nullable T>
     }
 
     @Override
+    default boolean containsValue(final T value) {
+        return this.contains(value);
+    }
+
+    @Override
     List<T> tail();
 
     @Override
@@ -61,11 +66,11 @@ public interface List<@Nullable T>
     }
 
     @Override
-    default boolean inDomain(final Integer input) {
-        return input != null && this.inDomain(input.intValue());
+    default boolean containsKey(final Integer input) {
+        return input != null && this.isValidIndex(input);
     }
 
-    default boolean inDomain(final int index) {
+    default boolean isValidIndex(final int index) {
         return index >= 0 && index < this.count();
     }
 

@@ -7,6 +7,8 @@ import java.util.StringJoiner;
 import java.util.function.Function;
 import java.util.function.Predicate;
 
+import javax.annotation.Nonnull;
+
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
 
@@ -44,13 +46,13 @@ public interface Finite<@Nullable T> extends Traversable<T> {
     default Object[] toArray() {
         final Object[] array = new Object[this.count()];
         int index = 0;
-        for (final Object object : this) {
-            array[index++] = object;
+        for (final Object element : this) {
+            array[index++] = element;
         }
         return array;
     }
 
-    default Optional<T> first(final Predicate<? super T> predicate) {
+    default Optional<T> first(@Nonnull final Predicate<? super T> predicate) {
         for (final T element : this) {
             if (predicate.test(element)) {
                 return Optional.ofNullable(element);
@@ -59,6 +61,15 @@ public interface Finite<@Nullable T> extends Traversable<T> {
         return Optional.empty();
     }
 
+    default boolean any(@Nonnull final Predicate<? super T> predicate) {
+        for (final T element : this) {
+            if (predicate.test(element)) {
+                return true;
+            }
+        }
+        return false;
+    }
+    
     static boolean sequenceEquals(final Finite<?> left, final Finite<?> right) {
         if (left.count() != right.count()) {
             return false;
