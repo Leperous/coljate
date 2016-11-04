@@ -6,11 +6,11 @@ import java.util.Iterator;
  *
  * @author ollie
  */
-public abstract class UnmodifiableIterator<T> implements Iterator<T> {
+public interface UnmodifiableIterator<T> extends Iterator<T> {
 
     @Override
     @Deprecated
-    public final void remove() {
+    default void remove() {
         throw new UnsupportedOperationException("Unmodifiable");
     }
 

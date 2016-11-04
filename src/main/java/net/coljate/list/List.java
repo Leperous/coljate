@@ -9,11 +9,13 @@ import net.coljate.Collection;
 public interface List<T> extends Collection<T> {
 
     /**
-     *
      * @return the length of this list. It will be equal to or greater than the
      * {@link #count}.
      */
     int length();
+
+    @Override
+    ListIterator<T> iterator();
 
     @Override
     MutableList<T> mutableCopy();

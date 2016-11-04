@@ -1,31 +1,57 @@
 package net.coljate.list;
 
-import java.util.Iterator;
-
 /**
  *
  * @author ollie
  */
-public class ImmutableArray<T> extends Array<T> implements ImmutableList<T> {
+public class ImmutableArray<T> implements Array<T>, ImmutableList<T> {
+
+    @SuppressWarnings("unchecked")
+    public static <T> ImmutableArray<T> of() {
+        return EmptyArray.INSTANCE;
+    }
+
+    private final Object[] underlying;
+    private final int count;
+
+    ImmutableArray(final Object[] underlying, final int count) {
+        this.underlying = underlying;
+        this.count = count;
+    }
 
     @Override
-    protected Object[] underlying() {
-        throw new UnsupportedOperationException("Not supported yet.");
+    @SuppressWarnings("unchecked")
+    public T get(final int index) {
+        return (T) underlying[index];
     }
 
     @Override
     public int length() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return underlying.length;
     }
 
     @Override
     public int count() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return count;
     }
 
     @Override
-    public Iterator<T> iterator() {
-        throw new UnsupportedOperationException("Not supported yet.");
+    public ImmutableArrayIterator<T> iterator() {
+        return new ImmutableArrayIterator<>(this);
+    }
+
+    @Override
+    @Deprecated
+    public ImmutableArray<T> immutableCopy() {
+        return this;
+    }
+
+    public class ImmutableArrayIterator<T> extends ArrayIterator<T> implements ImmutableListIterator<T> {
+
+        protected ImmutableArrayIterator(final ImmutableArray<T> array) {
+            super(array);
+        }
+
     }
 
 }

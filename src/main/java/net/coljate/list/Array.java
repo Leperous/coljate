@@ -1,16 +1,28 @@
 package net.coljate.list;
 
+import java.util.Iterator;
+import java.util.RandomAccess;
+
 /**
  *
  * @author ollie
  */
-public abstract class Array<T> implements List<T> {
+public interface Array<T> extends List<T>, RandomAccess {
 
-    protected abstract Object[] underlying();
+    T get(int index);
 
     @Override
-    public MutableArray<T> mutableCopy() {
+    ArrayIterator<T> iterator();
+
+    @Override
+    default MutableArray<T> mutableCopy() {
         throw new UnsupportedOperationException("Not supported yet.");
     }
+
+    @Override
+    default ImmutableArray<T> immutableCopy() {
+        throw new UnsupportedOperationException();
+    }
+
 
 }

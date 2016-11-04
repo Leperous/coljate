@@ -10,14 +10,28 @@ public interface Collection<T> extends Container, Iterable<T> {
 
     /**
      *
-     * @return the number of elements in this collection.
+     * @return the number of (null or non-null) elements considered to be
+     * contained within this collection.
      */
     int count();
 
+    /**
+     *
+     * @return a mutable copy of this collection.
+     */
     MutableCollection<T> mutableCopy();
 
+    /**
+     *
+     * @return an immutable copy of this collection.
+     */
     ImmutableCollection<T> immutableCopy();
 
+    /**
+     *
+     * @return a copy of this collection.
+     * @deprecated only useful for bridging.
+     */
     @Deprecated
     default java.util.Collection<T> javaCollectionCopy() {
         final java.util.Collection<T> collection = new java.util.ArrayList<>(this.count());

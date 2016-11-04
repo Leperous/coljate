@@ -1,8 +1,10 @@
 package net.coljate;
 
 /**
+ * An object that can "contain" other objects.
  *
  * @author ollie
+ * @see Collection
  */
 public interface Container {
 

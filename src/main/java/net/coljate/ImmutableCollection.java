@@ -8,6 +8,9 @@ import java.util.Collections;
  */
 public interface ImmutableCollection<T> extends Collection<T> {
 
+    @Override
+    UnmodifiableIterator<T> iterator();
+
     @Deprecated
     @Override
     default ImmutableCollection<T> immutableCopy() {

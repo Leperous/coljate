@@ -1,7 +1,5 @@
 package net.coljate.list;
 
-import java.util.Iterator;
-
 import net.coljate.Collection;
 import net.coljate.utils.Arrays;
 
@@ -9,7 +7,7 @@ import net.coljate.utils.Arrays;
  *
  * @author ollie
  */
-public class MutableArray<T> extends Array<T> implements MutableList<T> {
+public class MutableArray<T> implements Array<T>, MutableList<T> {
 
     public static <T> MutableArray<T> copyOf(final Collection<? extends T> collection) {
         throw new UnsupportedOperationException();
@@ -24,8 +22,8 @@ public class MutableArray<T> extends Array<T> implements MutableList<T> {
     }
 
     @Override
-    protected Object[] underlying() {
-        return array;
+    public T get(final int index) {
+        return (T) array[index];
     }
 
     @Override
@@ -44,22 +42,28 @@ public class MutableArray<T> extends Array<T> implements MutableList<T> {
     }
 
     @Override
-    public Iterator<T> iterator() {
+    public ArrayIterator<T> iterator() {
+        return new ArrayIterator<T>(this) {
+
+            @Override
+            public void remove() {
+                MutableArray.this.remove(this.currentIndex());
+            }
+
+        };
+    }
+
+    public void remove(final int index) {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public boolean removeFirst(final T element) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override
-    public boolean removeFirst(T element) {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
-
-    @Override
-    public boolean removeAll(T element) {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
-
-    @Override
-    public ImmutableList<T> immutableCopy() {
+    public boolean removeAll(final T element) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 

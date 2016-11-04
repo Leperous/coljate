@@ -4,6 +4,6 @@ package net.coljate.set;
  *
  * @author ollie
  */
-public abstract class HashSet<T> implements Set<T> {
+public interface HashSet<T> extends Set<T> {
 
 }
