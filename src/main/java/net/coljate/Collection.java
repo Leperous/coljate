@@ -1,6 +1,8 @@
 package net.coljate;
 
 import java.util.Objects;
+import java.util.stream.Stream;
+import java.util.stream.StreamSupport;
 
 /**
  *
@@ -19,13 +21,13 @@ public interface Collection<T> extends Container, Iterable<T> {
      *
      * @return a mutable copy of this collection.
      */
-    MutableCollection<T> mutableCopy();
+    MutableCollection<? extends T> mutableCopy();
 
     /**
      *
      * @return an immutable copy of this collection.
      */
-    ImmutableCollection<T> immutableCopy();
+    ImmutableCollection<? extends T> immutableCopy();
 
     /**
      *
@@ -37,6 +39,31 @@ public interface Collection<T> extends Container, Iterable<T> {
         final java.util.Collection<T> collection = new java.util.ArrayList<>(this.count());
         this.forEach(collection::add);
         return collection;
+    }
+
+    /**
+     *
+     * @return a new array containing the elements in this collection.
+     */
+    default Object[] arrayCopy() {
+        final Object[] array = new Object[this.count()];
+        int index = 0;
+        for (final T element : this) {
+            array[index++] = element;
+        }
+        return array;
+    }
+
+    default T[] arrayCopy(final T[] array) {
+        final int max = Math.min(this.count(), array.length);
+        int index = 0;
+        for (final T element : this) {
+            if (index >= max) {
+                break;
+            }
+            array[index++] = element;
+        }
+        return array;
     }
 
     @Override
@@ -52,6 +79,14 @@ public interface Collection<T> extends Container, Iterable<T> {
     @Override
     default boolean isEmpty() {
         return this.count() == 0;
+    }
+
+    default Stream<T> serialStream() {
+        return StreamSupport.stream(this.spliterator(), false);
+    }
+
+    default Stream<T> parallelStream() {
+        return StreamSupport.stream(this.spliterator(), true);
     }
 
 }

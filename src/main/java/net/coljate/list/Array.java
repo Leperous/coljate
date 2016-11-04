@@ -1,6 +1,5 @@
 package net.coljate.list;
 
-import java.util.Iterator;
 import java.util.RandomAccess;
 
 /**
@@ -23,6 +22,5 @@ public interface Array<T> extends List<T>, RandomAccess {
     default ImmutableArray<T> immutableCopy() {
         throw new UnsupportedOperationException();
     }
-
 
 }

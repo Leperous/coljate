@@ -1,5 +1,7 @@
 package net.coljate.list;
 
+import net.coljate.utils.Arrays;
+
 /**
  *
  * @author ollie
@@ -7,10 +9,9 @@ package net.coljate.list;
 public class EmptyArray<T> extends ImmutableArray<T> {
 
     static final EmptyArray INSTANCE = new EmptyArray();
-    private static final Object[] EMPTY = new Object[0];
 
     EmptyArray() {
-        super(EMPTY, 0);
+        super(Arrays.EMPTY, 0);
     }
 
 }

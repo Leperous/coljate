@@ -8,6 +8,8 @@ import java.util.Objects;
  */
 public final class Arrays {
 
+    public static final Object[] EMPTY = new Object[0];
+
     private Arrays() {
     }
 
@@ -18,6 +20,15 @@ public final class Arrays {
             }
         }
         return false;
+    }
+
+    public static Object[] copyOf(final Object[] from) {
+        if (from.length == 0) {
+            return EMPTY;
+        }
+        final Object[] to = new Object[from.length];
+        System.arraycopy(from, 0, to, 0, from.length);
+        return to;
     }
 
 }

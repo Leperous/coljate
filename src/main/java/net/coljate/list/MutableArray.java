@@ -9,8 +9,12 @@ import net.coljate.utils.Arrays;
  */
 public class MutableArray<T> implements Array<T>, MutableList<T> {
 
+    public static <T> MutableArray<T> viewOf(final Object[] array) {
+        return new MutableArray<>(array, array.length);
+    }
+
     public static <T> MutableArray<T> copyOf(final Collection<? extends T> collection) {
-        throw new UnsupportedOperationException();
+        return new MutableArray<>(collection.arrayCopy(), collection.count());
     }
 
     private Object[] array;
@@ -39,6 +43,11 @@ public class MutableArray<T> implements Array<T>, MutableList<T> {
     @Override
     public boolean contains(final Object object) {
         return Arrays.contains(array, object);
+    }
+
+    @Override
+    public Object[] arrayCopy() {
+        return Arrays.copyOf(array);
     }
 
     @Override
