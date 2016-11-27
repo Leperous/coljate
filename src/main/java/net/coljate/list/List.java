@@ -34,4 +34,12 @@ public interface List<T> extends Collection<T> {
         return Equality.orderedEquals(this, that);
     }
 
+    static <T> MutableWrappedList<T> viewOf(final java.util.List<T> list) {
+        return new MutableWrappedList<>(list);
+    }
+
+    static <T> MutableWrappedArrayList<T> viewOf(final java.util.ArrayList<T> list) {
+        return new MutableWrappedArrayList<>(list);
+    }
+
 }

@@ -8,8 +8,8 @@ package net.coljate.list;
 public class MutableArrayListTest extends MutableListTest {
 
     @Override
-    protected <T> MutableArrayList<T> create(final T... elements) {
-        return MutableArrayList.copyOf(elements);
+    protected <T> MutableNativeArray<T> create(final T... elements) {
+        return MutableNativeArray.copyOf(elements);
     }
 
 }

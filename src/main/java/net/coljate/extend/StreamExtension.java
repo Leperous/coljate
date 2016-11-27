@@ -9,6 +9,11 @@ import java.util.stream.StreamSupport;
  */
 public interface StreamExtension<T> extends Iterable<T> {
 
+    @Deprecated
+    default Stream<T> stream() {
+        return this.serialStream();
+    }
+
     default Stream<T> serialStream() {
         return StreamSupport.stream(this.spliterator(), false);
     }

@@ -1,6 +1,7 @@
 package net.coljate;
 
 import java.util.Iterator;
+import java.util.Spliterator;
 
 import net.coljate.utils.Equality;
 
@@ -42,6 +43,11 @@ public class WrappedCollection<T> implements Collection<T> {
     @Override
     public ImmutableCollection<T> immutableCopy() {
         return ImmutableWrappedCollection.copyOf(delegate);
+    }
+
+    @Override
+    public Spliterator<T> spliterator() {
+        return delegate.spliterator();
     }
 
     @Override

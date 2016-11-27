@@ -7,17 +7,17 @@ import net.coljate.utils.Arrays;
  * @author ollie
  * @see java.util.ArrayList
  */
-public class MutableArrayList<T> implements MutableArray<T> {
+public class MutableNativeArray<T> implements MutableArray<T> {
 
     @SafeVarargs
-    public static <T> MutableArrayList<T> copyOf(final T... elements) {
-        return new MutableArrayList<>(elements, elements.length);
+    public static <T> MutableNativeArray<T> copyOf(final T... elements) {
+        return new MutableNativeArray<>(elements, elements.length);
     }
 
     private Object[] array;
     private int count;
 
-    protected MutableArrayList(final Object[] array, final int count) {
+    protected MutableNativeArray(final Object[] array, final int count) {
         this.array = array;
         this.count = count;
     }
@@ -64,18 +64,29 @@ public class MutableArrayList<T> implements MutableArray<T> {
     }
 
     @Override
-    public boolean removeFirst(T element) {
+    public boolean removeFirst(final Object element) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override
-    public boolean removeAll(T element) {
+    public boolean removeAll(final Object element) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public boolean removeAll(final Iterable<?> elements) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override
     public ImmutableArray<T> immutableCopy() {
         throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public void clear() {
+        array = new Object[array.length];
+        count = 0;
     }
 
     @Override
