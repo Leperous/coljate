@@ -13,9 +13,17 @@ public class MutableWrappedTreeSet<T>
         extends MutableWrappedSet<T>
         implements SortedSet<T> {
 
+    public static <T> MutableWrappedTreeSet<T> viewOf(final java.util.TreeSet<T> set) {
+        return new MutableWrappedTreeSet<>(set);
+    }
+
+    public static <T> MutableWrappedTreeSet<T> copyOf(final java.util.SortedSet<T> set) {
+        return new MutableWrappedTreeSet<>(new java.util.TreeSet<>(set));
+    }
+
     private final java.util.TreeSet<T> delegate;
 
-    public MutableWrappedTreeSet(final java.util.TreeSet<T> delegate) {
+    protected MutableWrappedTreeSet(final java.util.TreeSet<T> delegate) {
         super(delegate);
         this.delegate = delegate;
     }
@@ -38,6 +46,11 @@ public class MutableWrappedTreeSet<T>
     @Override
     public T last() {
         return delegate.last();
+    }
+
+    @Override
+    public MutableWrappedTreeSet<T> mutableCopy() {
+        return new MutableWrappedTreeSet<>(this.mutableDelegateCopy());
     }
 
 }

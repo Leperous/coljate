@@ -15,6 +15,9 @@ public interface MutableMap<K, V> extends Map<K, V>, MutableCollection<Entry<K, 
 
     V remove(Object key);
 
+    @Override
+    MutableEntry<K, V> entry(Object key);
+
     default V putIfAbsent(final K key, final V value) {
         final V current = this.get(key);
         return current == null
@@ -42,5 +45,36 @@ public interface MutableMap<K, V> extends Map<K, V>, MutableCollection<Entry<K, 
         this.put(key, replacementValue);
         return true;
     }
+
+    @Deprecated
+    @Override
+    default boolean removeAll(final Object object) {
+        return this.removeFirst(object);
+    }
+
+    @Deprecated
+    @Override
+    default boolean removeFirst(final Object object) {
+        return object instanceof Entry
+                && this.remove((Entry) object);
+    }
+
+    default boolean remove(final Entry<?, ?> entry) {
+        final Entry<K, V> current = this.entry(entry.key());
+        if (Objects.equals(current, entry)) {
+            this.remove(entry.key());
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public interface MutableEntry<K, V> extends Entry<K, V> {
+
+        void setValue(V value);
+
+    ;
+
+}
 
 }
