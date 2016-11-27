@@ -1,7 +1,7 @@
 package net.coljate;
 
-import net.coljate.extend.IterableExtension;
-import net.coljate.extend.StreamExtension;
+import net.coljate.feature.IterableExtension;
+import net.coljate.feature.StreamExtension;
 
 /**
  * Some {@link Iterable} {@link Container} with a {@link #count count} of
@@ -67,6 +67,10 @@ public interface Collection<T> extends IterableExtension<T>, StreamExtension<T> 
             into[index++] = element;
         }
         return into;
+    }
+
+    static <T> Collection<T> viewOf(final java.util.Collection<T> collection) {
+        return WrappedCollection.viewOf(collection);
     }
 
 }

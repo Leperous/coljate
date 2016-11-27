@@ -1,6 +1,10 @@
-package net.coljate.list;
+package net.coljate.list.impl;
 
-import net.coljate.utils.Arrays;
+import net.coljate.list.Array;
+import net.coljate.list.ImmutableArray;
+import net.coljate.list.ListIterator;
+import net.coljate.list.MutableArray;
+import net.coljate.util.Arrays;
 
 /**
  *

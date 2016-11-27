@@ -4,6 +4,9 @@ import java.util.Collections;
 
 import net.coljate.ImmutableCollection;
 import net.coljate.UnmodifiableIterator;
+import net.coljate.list.impl.ImmutableJoinList;
+import net.coljate.list.impl.ImmutableSingletonList;
+import net.coljate.list.impl.ImmutableWrappedList;
 
 /**
  *
@@ -60,13 +63,7 @@ public interface ImmutableList<T> extends List<T>, ImmutableCollection<T> {
     static <T> ImmutableList<T> join(
             final ImmutableList<? extends T> left,
             final ImmutableList<? extends T> right) {
-        if (right.isEmpty()) {
-            return (ImmutableList<T>) left;
-        }
-        if (left.isEmpty()) {
-            return (ImmutableList<T>) right;
-        }
-        return new ImmutableJoinList<>(left, right);
+        return ImmutableJoinList.of(left, right);
     }
 
     interface ImmutableListIterator<T> extends ListIterator<T>, UnmodifiableIterator<T> {

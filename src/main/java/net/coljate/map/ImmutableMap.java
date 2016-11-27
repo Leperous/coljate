@@ -7,7 +7,7 @@ import net.coljate.set.ImmutableSet;
  *
  * @author ollie
  */
-public interface ImmutableMap<K, V> extends Map<K, V>, ImmutableCollection<Map.Entry<K, V>> {
+public interface ImmutableMap<K, V> extends Map<K, V>, ImmutableCollection<Entry<K, V>> {
 
     @Override
     ImmutableSet<K> keys();
@@ -16,7 +16,7 @@ public interface ImmutableMap<K, V> extends Map<K, V>, ImmutableCollection<Map.E
     ImmutableCollection<V> values();
 
     @Override
-    default ImmutableMap<K, V> with(final Map.Entry<K, V> entry) {
+    default ImmutableMap<K, V> with(final Entry<K, V> entry) {
         return this.with(entry.key(), entry.value());
     }
 
@@ -28,7 +28,7 @@ public interface ImmutableMap<K, V> extends Map<K, V>, ImmutableCollection<Map.E
         return this;
     }
 
-    class ImmutableEntry<K, V> implements Map.Entry<K, V> {
+    class ImmutableEntry<K, V> implements Entry<K, V> {
 
         private final K key;
         private final V value;

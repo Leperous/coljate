@@ -18,4 +18,9 @@ public interface MutableSet<T> extends Set<T>, MutableCollection<T> {
 
     boolean addAll(Iterable<? extends T> elements);
 
+    @Deprecated
+    default boolean removeFirst(final Object element) {
+        return this.removeAll(element);
+    }
+
 }

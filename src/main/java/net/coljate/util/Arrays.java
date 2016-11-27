@@ -1,4 +1,4 @@
-package net.coljate.utils;
+package net.coljate.util;
 
 import java.util.Objects;
 

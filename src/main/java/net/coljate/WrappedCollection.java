@@ -3,7 +3,7 @@ package net.coljate;
 import java.util.Iterator;
 import java.util.Spliterator;
 
-import net.coljate.utils.Equality;
+import net.coljate.util.Equality;
 
 /**
  *
@@ -22,13 +22,18 @@ public class WrappedCollection<T> implements Collection<T> {
     }
 
     @Override
+    public boolean contains(final Object object) {
+        return delegate.contains(object);
+    }
+
+    @Override
     public int count() {
         return delegate.size();
     }
 
     @Override
     public Iterator<T> iterator() {
-        return delegate.iterator();
+        return UnmodifiableIterator.wrap(delegate.iterator());
     }
 
     protected java.util.Collection<T> mutableDelegateCopy() {

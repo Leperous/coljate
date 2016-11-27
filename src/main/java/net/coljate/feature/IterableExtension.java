@@ -1,4 +1,4 @@
-package net.coljate.extend;
+package net.coljate.feature;
 
 import net.coljate.Container;
 

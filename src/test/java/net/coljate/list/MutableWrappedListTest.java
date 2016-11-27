@@ -1,5 +1,7 @@
 package net.coljate.list;
 
+import net.coljate.list.impl.MutableWrappedList;
+
 /**
  *
  * @author ollie

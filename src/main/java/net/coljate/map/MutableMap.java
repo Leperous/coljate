@@ -1,5 +1,6 @@
 package net.coljate.map;
 
+import java.util.Objects;
 import java.util.function.Function;
 
 import net.coljate.MutableCollection;
@@ -8,7 +9,7 @@ import net.coljate.MutableCollection;
  *
  * @author ollie
  */
-public interface MutableMap<K, V> extends Map<K, V>, MutableCollection<Map.Entry<K, V>> {
+public interface MutableMap<K, V> extends Map<K, V>, MutableCollection<Entry<K, V>> {
 
     V put(K key, V value);
 
@@ -31,6 +32,15 @@ public interface MutableMap<K, V> extends Map<K, V>, MutableCollection<Map.Entry
             }
         }
         return current;
+    }
+
+    default boolean replace(final K key, final V expectedValue, final V replacementValue) {
+        final Entry<K, V> current = this.entry(key);
+        if (current == null || !Objects.equals(current.value(), expectedValue)) {
+            return false;
+        }
+        this.put(key, replacementValue);
+        return true;
     }
 
 }

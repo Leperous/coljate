@@ -1,12 +1,27 @@
-package net.coljate.list;
+package net.coljate.list.impl;
 
 import java.util.Objects;
+
+import net.coljate.list.ImmutableList;
 
 /**
  *
  * @author ollie
  */
 public class ImmutableJoinList<T> implements ImmutableList<T> {
+
+    @SuppressWarnings("unchecked")
+    public static <T> ImmutableList<T> of(
+            final ImmutableList<? extends T> left,
+            final ImmutableList<? extends T> right) {
+        if (right.isEmpty()) {
+            return (ImmutableList<T>) left;
+        }
+        if (left.isEmpty()) {
+            return (ImmutableList<T>) right;
+        }
+        return new ImmutableJoinList<>(left, right);
+    }
 
     private final ImmutableList<? extends T> left, right;
 
@@ -20,6 +35,16 @@ public class ImmutableJoinList<T> implements ImmutableList<T> {
     @Override
     public ImmutableListIterator<T> iterator() {
         return new JoinListIterator();
+    }
+
+    @Override
+    public T first() {
+        return left.first();
+    }
+
+    @Override
+    public T last() {
+        return right.last();
     }
 
     private final class JoinListIterator implements ImmutableListIterator<T> {

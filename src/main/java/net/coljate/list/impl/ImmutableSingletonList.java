@@ -1,4 +1,6 @@
-package net.coljate.list;
+package net.coljate.list.impl;
+
+import net.coljate.list.ImmutableList;
 
 /**
  *
@@ -10,6 +12,16 @@ public class ImmutableSingletonList<T> implements ImmutableList<T> {
 
     public ImmutableSingletonList(final T element) {
         this.element = element;
+    }
+
+    @Override
+    public T first() {
+        return element;
+    }
+
+    @Override
+    public T last() {
+        return element;
     }
 
     @Override

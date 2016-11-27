@@ -1,6 +1,9 @@
-package net.coljate.list;
+package net.coljate.list.impl;
 
 import net.coljate.MutableWrappedCollection;
+import net.coljate.list.ImmutableList;
+import net.coljate.list.ListIterator;
+import net.coljate.list.MutableList;
 
 /**
  *
@@ -43,6 +46,11 @@ public class MutableWrappedList<T>
     @Override
     public void suffix(final T element) {
         delegate.add(element);
+    }
+
+    @Override
+    public T last() {
+        return delegate.get(delegate.size() - 1);
     }
 
     @Override

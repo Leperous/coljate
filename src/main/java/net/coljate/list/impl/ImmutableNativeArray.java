@@ -1,4 +1,8 @@
-package net.coljate.list;
+package net.coljate.list.impl;
+
+import net.coljate.list.ImmutableArray;
+import net.coljate.list.ImmutableList;
+import net.coljate.list.MutableList;
 
 /**
  *

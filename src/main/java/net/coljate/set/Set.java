@@ -1,6 +1,7 @@
 package net.coljate.set;
 
 import net.coljate.Collection;
+import net.coljate.set.impl.WrappedSet;
 
 /**
  *
@@ -19,6 +20,10 @@ public interface Set<T> extends Collection<T> {
         final java.util.Set<T> set = new java.util.HashSet<>(this.count());
         this.forEach(set::add);
         return set;
+    }
+
+    static <T> Set<T> viewOf(final java.util.Set<T> set) {
+        return WrappedSet.viewOf(set);
     }
 
 }

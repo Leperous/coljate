@@ -1,16 +1,22 @@
 package net.coljate.list;
 
-import net.coljate.Collection;
-import net.coljate.utils.Equality;
+import net.coljate.feature.Ordered;
+import net.coljate.list.impl.MutableWrappedList;
+import net.coljate.util.Equality;
 
 /**
  *
  * @author ollie
  */
-public interface List<T> extends Collection<T> {
+public interface List<T> extends Ordered<T> {
 
     @Override
     ListIterator<T> iterator();
+
+    @Override
+    default T first() {
+        return this.iterator().next();
+    }
 
     @Override
     default MutableList<T> mutableCopy() {
@@ -35,11 +41,7 @@ public interface List<T> extends Collection<T> {
     }
 
     static <T> MutableWrappedList<T> viewOf(final java.util.List<T> list) {
-        return new MutableWrappedList<>(list);
-    }
-
-    static <T> MutableWrappedArrayList<T> viewOf(final java.util.ArrayList<T> list) {
-        return new MutableWrappedArrayList<>(list);
+        return MutableWrappedList.viewOf(list);
     }
 
 }

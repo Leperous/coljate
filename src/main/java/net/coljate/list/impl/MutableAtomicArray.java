@@ -1,6 +1,10 @@
-package net.coljate.list;
+package net.coljate.list.impl;
 
 import java.util.concurrent.atomic.AtomicReferenceArray;
+
+import net.coljate.list.ImmutableArray;
+import net.coljate.list.ListIterator;
+import net.coljate.list.MutableArray;
 
 /**
  *

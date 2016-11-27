@@ -1,40 +1,39 @@
 package net.coljate.map;
 
 import java.util.Objects;
-import java.util.Optional;
+import java.util.function.BiConsumer;
 
 import net.coljate.Collection;
+import net.coljate.feature.Associative;
 import net.coljate.set.Set;
+import net.coljate.util.Functions;
 
 /**
  *
  * @author ollie
  */
-public interface Map<K, V> extends Collection<Map.Entry<K, V>> {
+public interface Map<K, V> extends Collection<Entry<K, V>>, Associative<K, V> {
 
-    Lookup<V> lookup(Object key);
+    Entry<K, V> entry(Object key);
 
+    @Override
     default V get(final Object key) {
-        return this.lookup(key).value();
+        return Functions.ifNonNull(this.entry(key), Entry::value);
     }
-
-    default Optional<V> maybeGet(final Object key) {
-        return Optional.ofNullable(this.get(key));
-    }
-
+    
     Set<K> keys();
 
     Collection<V> values();
 
     @Deprecated
     default boolean contains(final Object object) {
-        return object instanceof Map.Entry
-                && this.contains((Map.Entry) object);
+        return object instanceof Entry
+                && this.contains((Entry) object);
     }
 
-    default boolean contains(final Map.Entry<?, ?> entry) {
-        final Lookup<V> checked = this.lookup(entry.key());
-        return checked.contained() && Objects.equals(entry.value(), checked.value());
+    default boolean contains(final Entry<?, ?> entry) {
+        final Entry<K, V> got = this.entry(entry.key());
+        return Objects.equals(got, entry);
     }
 
     default boolean containsKey(final Object key) {
@@ -45,26 +44,15 @@ public interface Map<K, V> extends Collection<Map.Entry<K, V>> {
         return this.values().contains(value);
     }
 
+    default void forEach(final BiConsumer<? super K, ? super V> consumer) {
+        this.forEach(entry -> consumer.accept(entry.key(), entry.value()));
+    }
+
     @Override
     MutableMap<K, V> mutableCopy();
 
     @Override
     ImmutableMap<K, V> immutableCopy();
 
-    interface Entry<K, V> {
-
-        K key();
-
-        V value();
-
-    }
-
-    interface Lookup<V> {
-
-        boolean contained();
-
-        V value();
-
-    }
 
 }

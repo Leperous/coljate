@@ -1,14 +1,15 @@
-package net.coljate.list;
+package net.coljate.list.impl;
 
-import net.coljate.ImmutableWrappedCollection;
-import net.coljate.utils.Lists;
+import net.coljate.list.ImmutableList;
+import net.coljate.list.MutableList;
+import net.coljate.util.NativeCollections;
 
 /**
  *
  * @author ollie
  */
 public class ImmutableWrappedList<T>
-        extends ImmutableWrappedCollection<T>
+        extends WrappedList<T>
         implements ImmutableList<T> {
 
     public static <T> ImmutableWrappedList<T> copyOf(final java.util.Collection<? extends T> collection) {
@@ -30,7 +31,7 @@ public class ImmutableWrappedList<T>
     @Override
     @Deprecated
     public java.util.List<T> javaCollectionCopy() {
-        return Lists.asUnmodifiableList(delegate);
+        return NativeCollections.asUnmodifiableList(delegate);
     }
 
     @Override

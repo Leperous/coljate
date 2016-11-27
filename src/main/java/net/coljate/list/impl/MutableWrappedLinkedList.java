@@ -1,4 +1,4 @@
-package net.coljate.list;
+package net.coljate.list.impl;
 
 import java.io.Serializable;
 

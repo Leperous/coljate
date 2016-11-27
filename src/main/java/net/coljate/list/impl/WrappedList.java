@@ -1,6 +1,10 @@
-package net.coljate.list;
+package net.coljate.list.impl;
 
 import net.coljate.WrappedCollection;
+import net.coljate.list.ImmutableList;
+import net.coljate.list.List;
+import net.coljate.list.ListIterator;
+import net.coljate.list.MutableList;
 
 /**
  *
@@ -12,7 +16,7 @@ public class WrappedList<T> extends WrappedCollection<T> implements List<T> {
         return new WrappedList<>(collection);
     }
 
-    public static <T> List<T> copyOf(final java.util.Collection<T> collection) {
+    public static <T> List<T> copyOf(final java.util.Collection<? extends T> collection) {
         return viewOf(new java.util.ArrayList<>(collection));
     }
 
@@ -26,6 +30,11 @@ public class WrappedList<T> extends WrappedCollection<T> implements List<T> {
     @Override
     public ListIterator<T> iterator() {
         throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public T last() {
+        return delegate.get(delegate.size() - 1);
     }
 
     @Override

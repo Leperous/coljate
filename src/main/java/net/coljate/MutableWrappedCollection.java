@@ -2,7 +2,7 @@ package net.coljate;
 
 import java.util.Collections;
 
-import net.coljate.utils.NativeCollections;
+import net.coljate.util.NativeCollections;
 
 /**
  *
