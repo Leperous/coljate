@@ -32,8 +32,12 @@ public interface ImmutableList<T> extends List<T>, ImmutableCollection<T> {
 
     @Override
     @Deprecated
-    public default java.util.List<T> javaCollectionCopy() {
+    default java.util.List<T> javaCollectionCopy() {
         return Collections.unmodifiableList(List.super.javaCollectionCopy());
+    }
+
+    static <T> ImmutableList<T> copyOf(final java.util.Collection<? extends T> collection) {
+        return ImmutableWrappedList.copyOf(collection);
     }
 
     interface ImmutableListIterator<T> extends ListIterator<T>, UnmodifiableIterator<T> {

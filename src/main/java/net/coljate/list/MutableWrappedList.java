@@ -19,6 +19,10 @@ public class MutableWrappedList<T>
         return new MutableWrappedList<>(list);
     }
 
+    public static <T> MutableWrappedList<T> viewOf(final java.util.List<T> list) {
+        return new MutableWrappedList<>(list);
+    }
+
     private final java.util.List<T> delegate;
 
     protected MutableWrappedList(final java.util.List<T> delegate) {

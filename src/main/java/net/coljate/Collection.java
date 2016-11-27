@@ -1,21 +1,15 @@
 package net.coljate;
 
-import java.util.Objects;
-import java.util.stream.Stream;
-import java.util.stream.StreamSupport;
+import net.coljate.extend.IterableExtension;
+import net.coljate.extend.StreamExtension;
 
 /**
+ * Some {@link Iterable} {@link Container} with a {@link #count count} of
+ * elements.
  *
  * @author ollie
  */
-public interface Collection<T> extends Container, Iterable<T> {
-
-    /**
-     *
-     * @return the number of (null or non-null) elements considered to be
-     * contained within this collection.
-     */
-    int count();
+public interface Collection<T> extends IterableExtension<T>, StreamExtension<T> {
 
     /**
      *
@@ -54,39 +48,25 @@ public interface Collection<T> extends Container, Iterable<T> {
         return array;
     }
 
+    /**
+     *
+     * @param array
+     * @return an array containing all the elements in this collection. This
+     * will either be the original array if it has sufficient capacity, or a new
+     * array.
+     * @see java.util.Collection#toArray(T[])
+     */
     default T[] arrayCopy(final T[] array) {
-        final int max = Math.min(this.count(), array.length);
+        final int c = this.count();
+        @SuppressWarnings("unchecked") //Same as java.util.AbstractCollection
+        final T[] into = c > array.length
+                ? (T[]) java.lang.reflect.Array.newInstance(array.getClass().getComponentType(), c)
+                : array;
         int index = 0;
         for (final T element : this) {
-            if (index >= max) {
-                break;
-            }
-            array[index++] = element;
+            into[index++] = element;
         }
-        return array;
-    }
-
-    @Override
-    default boolean contains(final Object object) {
-        for (final T element : this) {
-            if (Objects.equals(object, element)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    @Override
-    default boolean isEmpty() {
-        return this.count() == 0;
-    }
-
-    default Stream<T> serialStream() {
-        return StreamSupport.stream(this.spliterator(), false);
-    }
-
-    default Stream<T> parallelStream() {
-        return StreamSupport.stream(this.spliterator(), true);
+        return into;
     }
 
 }

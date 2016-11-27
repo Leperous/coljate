@@ -1,7 +1,5 @@
 package net.coljate;
 
-import java.util.Collection;
-
 /**
  *
  * @author ollie
@@ -10,7 +8,11 @@ public class ImmutableWrappedCollection<T>
         extends WrappedCollection<T>
         implements ImmutableCollection<T> {
 
-    protected ImmutableWrappedCollection(final Collection<T> delegate) {
+    public static <T> ImmutableCollection<T> copyOf(final java.util.Collection<? extends T> collection) {
+        return new ImmutableWrappedCollection<>(new java.util.ArrayList<>(collection));
+    }
+
+    protected ImmutableWrappedCollection(final java.util.Collection<T> delegate) {
         super(delegate);
     }
 

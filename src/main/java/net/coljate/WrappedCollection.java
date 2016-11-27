@@ -41,7 +41,7 @@ public class WrappedCollection<T> implements Collection<T> {
 
     @Override
     public ImmutableCollection<T> immutableCopy() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return ImmutableWrappedCollection.copyOf(delegate);
     }
 
     @Override
