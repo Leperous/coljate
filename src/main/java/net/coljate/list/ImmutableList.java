@@ -20,6 +20,16 @@ public interface ImmutableList<T> extends List<T>, ImmutableCollection<T> {
         return this;
     }
 
+    ImmutableList<T> prefixed(T element);
+
+    ImmutableList<T> suffixed(T element);
+
+    @Override
+    @Deprecated
+    default ImmutableCollection<T> with(final T element) {
+        return this.suffixed(element);
+    }
+
     @Override
     @Deprecated
     public default java.util.List<T> javaCollectionCopy() {

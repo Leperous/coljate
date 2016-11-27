@@ -1,6 +1,7 @@
 package net.coljate.list;
 
 import net.coljate.Collection;
+import net.coljate.utils.Equality;
 
 /**
  *
@@ -8,20 +9,18 @@ import net.coljate.Collection;
  */
 public interface List<T> extends Collection<T> {
 
-    /**
-     * @return the length of this list. It will be equal to or greater than the
-     * {@link #count}.
-     */
-    int length();
-
     @Override
     ListIterator<T> iterator();
 
     @Override
-    MutableList<T> mutableCopy();
+    default MutableList<T> mutableCopy() {
+        throw new UnsupportedOperationException(); //TODO default
+    }
 
     @Override
-    ImmutableList<T> immutableCopy();
+    default ImmutableList<T> immutableCopy() {
+        throw new UnsupportedOperationException(); //TODO default
+    }
 
     @Override
     @Deprecated
@@ -29,6 +28,10 @@ public interface List<T> extends Collection<T> {
         final java.util.List<T> list = new java.util.ArrayList<>(this.count());
         this.forEach(list::add);
         return list;
+    }
+
+    default boolean equals(final List<?> that) {
+        return Equality.orderedEquals(this, that);
     }
 
 }

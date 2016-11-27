@@ -8,19 +8,20 @@ import java.util.RandomAccess;
  */
 public interface Array<T> extends List<T>, RandomAccess {
 
+    /**
+     *
+     * @param index
+     * @return
+     */
     T get(int index);
 
-    @Override
-    ArrayIterator<T> iterator();
+    /**
+     * @return the length of this array. It will be equal to or greater than the
+     * {@link #count}.
+     */
+    int length();
 
     @Override
-    default MutableArray<T> mutableCopy() {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
-
-    @Override
-    default ImmutableArray<T> immutableCopy() {
-        throw new UnsupportedOperationException();
-    }
+    ImmutableArray<T> immutableCopy();
 
 }

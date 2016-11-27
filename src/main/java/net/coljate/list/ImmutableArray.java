@@ -6,28 +6,12 @@ package net.coljate.list;
  */
 public class ImmutableArray<T> implements Array<T>, ImmutableList<T> {
 
-    @SuppressWarnings("unchecked")
-    public static <T> ImmutableArray<T> of() {
-        return EmptyArray.INSTANCE;
-    }
-
-    private final Object[] underlying;
+    private final Object[] array;
     private final int count;
 
-    ImmutableArray(final Object[] underlying, final int count) {
-        this.underlying = underlying;
+    ImmutableArray(final Object[] array, final int count) {
+        this.array = array;
         this.count = count;
-    }
-
-    @Override
-    @SuppressWarnings("unchecked")
-    public T get(final int index) {
-        return (T) underlying[index];
-    }
-
-    @Override
-    public int length() {
-        return underlying.length;
     }
 
     @Override
@@ -36,22 +20,42 @@ public class ImmutableArray<T> implements Array<T>, ImmutableList<T> {
     }
 
     @Override
-    public ImmutableArrayIterator<T> iterator() {
-        return new ImmutableArrayIterator<>(this);
+    public int length() {
+        return array.length;
+    }
+
+    @Override
+    public T get(final int index) {
+        if (index >= count) {
+            throw new IndexOutOfBoundsException();
+        }
+        return (T) array[index];
+    }
+
+    @Override
+    public ImmutableListIterator<T> iterator() {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public ImmutableArray<T> prefixed(final T element) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public ImmutableArray<T> suffixed(final T element) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public MutableList<T> mutableCopy() {
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override
     @Deprecated
     public ImmutableArray<T> immutableCopy() {
         return this;
-    }
-
-    public class ImmutableArrayIterator<T> extends ArrayIterator<T> implements ImmutableListIterator<T> {
-
-        protected ImmutableArrayIterator(final ImmutableArray<T> array) {
-            super(array);
-        }
-
     }
 
 }

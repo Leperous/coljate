@@ -31,4 +31,8 @@ public final class Arrays {
         return to;
     }
 
+    public static Object[] copyOf(final Object[] from, final int length) {
+        return java.util.Arrays.copyOf(from, length);
+    }
+
 }
