@@ -20,14 +20,14 @@ public class MutableAtomicArray<T> implements ConcurrentArray<T> {
         this.arrayRef = new AtomicReference<>(array);
     }
 
-    private AtomicReferenceArray<T> read() {
+    private AtomicReferenceArray<T> array() {
         return arrayRef.get();
     }
 
     private AtomicReferenceArray<T> replace(final Function<AtomicReferenceArray<T>, AtomicReferenceArray<T>> replace) {
         AtomicReferenceArray<T> current, next;
         do {
-            current = this.read();
+            current = this.array();
             next = replace.apply(current);
         } while (!arrayRef.compareAndSet(current, next));
         return next;
@@ -35,17 +35,17 @@ public class MutableAtomicArray<T> implements ConcurrentArray<T> {
 
     @Override
     public T get(final int index) {
-        return this.read().get(index);
+        return this.array().get(index);
     }
 
     @Override
     public T set(int i, T value) {
-        return this.read().getAndSet(i, value);
+        return this.array().getAndSet(i, value);
     }
 
     @Override
     public int length() {
-        return this.read().length();
+        return this.array().length();
     }
 
     @Override
