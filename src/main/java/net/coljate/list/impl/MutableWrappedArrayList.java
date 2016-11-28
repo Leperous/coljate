@@ -22,13 +22,18 @@ public class MutableWrappedArrayList<T>
     }
 
     @Override
-    public T get(int index) {
+    public T get(final int index) {
         return delegate.get(index);
     }
 
     @Override
+    public T set(final int i, final T value) {
+        return delegate.set(i, value);
+    }
+
+    @Override
     public int length() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return delegate.size();
     }
 
     @Override

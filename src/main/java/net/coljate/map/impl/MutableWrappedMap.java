@@ -10,6 +10,10 @@ public class MutableWrappedMap<K, V>
         extends WrappedMap<K, V>
         implements MutableMap<K, V> {
 
+    protected static <K, V> java.util.HashMap<K, V> copyIntoHashMap(final java.util.Map<K, V> map) {
+        return new java.util.HashMap<>(map);
+    }
+
     private final java.util.Map<K, V> delegate;
 
     protected MutableWrappedMap(final java.util.Map<K, V> delegate) {

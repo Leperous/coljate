@@ -1,28 +1,51 @@
 package net.coljate.list.impl;
 
+import java.util.concurrent.atomic.AtomicReference;
 import java.util.concurrent.atomic.AtomicReferenceArray;
+import java.util.function.Function;
 
+import net.coljate.list.ConcurrentArray;
 import net.coljate.list.ImmutableArray;
 import net.coljate.list.ListIterator;
-import net.coljate.list.MutableArray;
 
 /**
  *
  * @author ollie
  */
-public class MutableAtomicArray<T> implements MutableArray<T> {
+public class MutableAtomicArray<T> implements ConcurrentArray<T> {
+
+    private final AtomicReference<AtomicReferenceArray<T>> arrayRef;
 
     protected MutableAtomicArray(final AtomicReferenceArray<T> array) {
+        this.arrayRef = new AtomicReference<>(array);
+    }
+
+    private AtomicReferenceArray<T> read() {
+        return arrayRef.get();
+    }
+
+    private AtomicReferenceArray<T> replace(final Function<AtomicReferenceArray<T>, AtomicReferenceArray<T>> replace) {
+        AtomicReferenceArray<T> current, next;
+        do {
+            current = this.read();
+            next = replace.apply(current);
+        } while (!arrayRef.compareAndSet(current, next));
+        return next;
     }
 
     @Override
     public T get(final int index) {
-        throw new UnsupportedOperationException();
+        return this.read().get(index);
+    }
+
+    @Override
+    public T set(int i, T value) {
+        return this.read().getAndSet(i, value);
     }
 
     @Override
     public int length() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return this.read().length();
     }
 
     @Override
@@ -46,18 +69,18 @@ public class MutableAtomicArray<T> implements MutableArray<T> {
     }
 
     @Override
-    public boolean removeFirst(Object element) {
+    public boolean removeFirst(final Object element) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override
-    public boolean removeAll(Object element) {
+    public boolean removeAll(final Object element) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override
     public void clear() {
-        throw new UnsupportedOperationException();
+        this.replace(current -> new AtomicReferenceArray<>(current.length()));
     }
 
 }

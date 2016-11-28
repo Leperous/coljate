@@ -4,6 +4,7 @@ import java.util.Objects;
 import java.util.function.Function;
 
 import net.coljate.MutableCollection;
+import net.coljate.map.impl.MutableWrappedHashMap;
 
 /**
  *
@@ -69,12 +70,14 @@ public interface MutableMap<K, V> extends Map<K, V>, MutableCollection<Entry<K, 
         }
     }
 
+    static <K, V> MutableMap<K, V> copyIntoHashMap(final java.util.Map<K, V> map) {
+        return MutableWrappedHashMap.copyOf(map);
+    }
+
     public interface MutableEntry<K, V> extends Entry<K, V> {
 
         void setValue(V value);
 
-    ;
-
-}
+    }
 
 }

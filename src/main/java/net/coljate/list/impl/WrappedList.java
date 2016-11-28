@@ -27,6 +27,14 @@ public class WrappedList<T> extends WrappedCollection<T> implements List<T> {
         this.delegate = delegate;
     }
 
+    protected java.util.ArrayList<T> mutableArrayListCopy() {
+        return new java.util.ArrayList<>(delegate);
+    }
+
+    protected java.util.LinkedList<T> mutableLinkedListCopy() {
+        return new java.util.LinkedList<>(delegate);
+    }
+
     @Override
     public ListIterator<T> iterator() {
         throw new UnsupportedOperationException("Not supported yet.");

@@ -13,9 +13,13 @@ import net.coljate.util.Arrays;
  */
 public class MutableNativeArray<T> implements MutableArray<T> {
 
+    public static <T> MutableNativeArray<T> copyOf(final T[] elements) {
+        return new MutableNativeArray<>(Arrays.copyOf(elements), elements.length);
+    }
+
     @SafeVarargs
-    public static <T> MutableNativeArray<T> copyOf(final T... elements) {
-        return new MutableNativeArray<>(elements, elements.length);
+    public static <T> MutableNativeArray<T> viewOf(final T... elements) {
+        return new MutableNativeArray<>((Object[]) elements, elements.length);
     }
 
     private Object[] array;
@@ -29,6 +33,13 @@ public class MutableNativeArray<T> implements MutableArray<T> {
     @Override
     public T get(final int index) {
         return (T) array[index];
+    }
+
+    @Override
+    public T set(int i, T value) {
+        final T current = this.get(i);
+        array[i] = value;
+        return current;
     }
 
     @Override

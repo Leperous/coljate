@@ -24,6 +24,10 @@ public class WrappedMap<K, V> implements Map<K, V> {
         this.delegate = delegate;
     }
 
+    protected java.util.Map<K, V> mutableDelegateCopy() {
+        return new java.util.HashMap<>(delegate);
+    }
+
     @Override
     public V get(final Object key) {
         return delegate.get(key);
@@ -54,7 +58,7 @@ public class WrappedMap<K, V> implements Map<K, V> {
 
     @Override
     public MutableMap<K, V> mutableCopy() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return new MutableWrappedMap<>(this.mutableDelegateCopy());
     }
 
     @Override
