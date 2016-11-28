@@ -7,5 +7,8 @@ import net.coljate.ConcurrentCollection;
  * @author ollie
  */
 public interface ConcurrentList<T> extends MutableList<T>, ConcurrentCollection<T> {
+    
+    @Override
+    ConcurrentList<T> mutableCopy();
 
 }

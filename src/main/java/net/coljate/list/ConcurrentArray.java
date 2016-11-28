@@ -6,4 +6,7 @@ package net.coljate.list;
  */
 public interface ConcurrentArray<T> extends MutableArray<T>, ConcurrentList<T> {
 
+    @Override
+    ConcurrentArray<T> mutableCopy();
+
 }

@@ -2,6 +2,7 @@ package net.coljate.map;
 
 import java.util.Objects;
 import java.util.function.BiConsumer;
+import java.util.function.Supplier;
 
 import net.coljate.Collection;
 import net.coljate.feature.Associative;
@@ -20,7 +21,17 @@ public interface Map<K, V> extends Collection<Entry<K, V>>, Associative<K, V> {
     default V get(final Object key) {
         return Functions.ifNonNull(this.entry(key), Entry::value);
     }
-    
+
+    default V getOrDefault(final Object key, final Supplier<? extends V> supplier) {
+        final Entry<K, V> got = this.entry(key);
+        return got == null ? supplier.get() : got.value();
+    }
+
+    default V getOrDefault(final Object key, final V defaultValue) {
+        final Entry<K, V> got = this.entry(key);
+        return got == null ? defaultValue : got.value();
+    }
+
     Set<K> keys();
 
     Collection<V> values();
@@ -53,6 +64,5 @@ public interface Map<K, V> extends Collection<Entry<K, V>>, Associative<K, V> {
 
     @Override
     ImmutableMap<K, V> immutableCopy();
-
 
 }
