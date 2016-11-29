@@ -1,6 +1,6 @@
 package net.coljate.list;
 
-import net.coljate.MutableCollectionTest;
+import net.coljate.collection.MutableCollectionTest;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;

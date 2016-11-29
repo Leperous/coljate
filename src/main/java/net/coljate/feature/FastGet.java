@@ -6,6 +6,7 @@ package net.coljate.feature;
  */
 public interface FastGet<K, V> extends Associative<K, V> {
 
+    @Override
     V get(K key);
 
 }

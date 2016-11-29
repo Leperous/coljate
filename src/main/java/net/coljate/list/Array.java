@@ -32,6 +32,21 @@ public interface Array<T> extends List<T>, FastGet<Integer, T> {
     }
 
     @Override
+    default boolean isEmpty() {
+        return this.count() == 0;
+    }
+
+    @Override
+    default boolean equals(final List<?> list) {
+        return list instanceof Array
+                && this.equals((Array) list);
+    }
+
+    default boolean equals(final Array<?> array) {
+        return List.super.equals(array);
+    }
+
+    @Override
     MutableArray<T> mutableCopy();
 
     @Override

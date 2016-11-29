@@ -1,13 +1,13 @@
-package net.coljate.list;
+package net.coljate.list.impl;
 
-import net.coljate.list.impl.MutableNativeArray;
+import net.coljate.list.MutableArrayTest;
 
 /**
  *
  * @author ollie
  */
 @SuppressWarnings({"unchecked", "rawtypes"})
-public class MutableArrayListTest extends MutableListTest {
+public class MutableNativeArrayTest extends MutableArrayTest {
 
     @Override
     protected <T> MutableNativeArray<T> create(final T... elements) {

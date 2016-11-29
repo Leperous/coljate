@@ -1,5 +1,6 @@
-package net.coljate.list;
+package net.coljate.list.impl;
 
+import net.coljate.list.MutableListTest;
 import net.coljate.list.impl.MutableWrappedList;
 
 /**
