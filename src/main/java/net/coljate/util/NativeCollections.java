@@ -3,7 +3,7 @@ package net.coljate.util;
 import java.util.OptionalInt;
 import java.util.function.IntFunction;
 
-import net.coljate.Collection;
+import net.coljate.collection.Collection;
 
 /**
  *

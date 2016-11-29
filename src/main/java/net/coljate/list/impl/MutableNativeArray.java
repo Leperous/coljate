@@ -94,6 +94,11 @@ public class MutableNativeArray<T> implements MutableArray<T> {
     }
 
     @Override
+    public MutableArray<T> mutableCopy() {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
     public ImmutableArray<T> immutableCopy() {
         throw new UnsupportedOperationException("Not supported yet.");
     }

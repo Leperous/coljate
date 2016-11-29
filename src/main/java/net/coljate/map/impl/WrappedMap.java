@@ -2,7 +2,7 @@ package net.coljate.map.impl;
 
 import java.util.Iterator;
 
-import net.coljate.Collection;
+import net.coljate.collection.Collection;
 import net.coljate.map.Entry;
 import net.coljate.map.ImmutableMap;
 import net.coljate.map.ImmutableMap.ImmutableEntry;

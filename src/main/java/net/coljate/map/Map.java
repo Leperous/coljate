@@ -4,7 +4,7 @@ import java.util.Objects;
 import java.util.function.BiConsumer;
 import java.util.function.Supplier;
 
-import net.coljate.Collection;
+import net.coljate.collection.Collection;
 import net.coljate.feature.Associative;
 import net.coljate.set.Set;
 import net.coljate.util.Functions;

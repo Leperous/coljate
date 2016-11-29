@@ -32,6 +32,9 @@ public interface Array<T> extends List<T>, FastGet<Integer, T> {
     }
 
     @Override
+    MutableArray<T> mutableCopy();
+
+    @Override
     ImmutableArray<T> immutableCopy();
 
 }

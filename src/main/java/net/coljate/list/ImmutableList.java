@@ -2,7 +2,7 @@ package net.coljate.list;
 
 import java.util.Collections;
 
-import net.coljate.ImmutableCollection;
+import net.coljate.collection.ImmutableCollection;
 import net.coljate.UnmodifiableIterator;
 import net.coljate.list.impl.ImmutableJoinList;
 import net.coljate.list.impl.ImmutableSingletonList;

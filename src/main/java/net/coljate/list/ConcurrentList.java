@@ -1,6 +1,6 @@
 package net.coljate.list;
 
-import net.coljate.ConcurrentCollection;
+import net.coljate.collection.ConcurrentCollection;
 
 /**
  *

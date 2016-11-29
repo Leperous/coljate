@@ -1,6 +1,6 @@
 package net.coljate.list.impl;
 
-import net.coljate.WrappedCollection;
+import net.coljate.collection.WrappedCollection;
 import net.coljate.list.ImmutableList;
 import net.coljate.list.List;
 import net.coljate.list.ListIterator;

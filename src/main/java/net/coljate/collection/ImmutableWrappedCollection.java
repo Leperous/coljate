@@ -1,4 +1,6 @@
-package net.coljate;
+package net.coljate.collection;
+
+import net.coljate.UnmodifiableIterator;
 
 /**
  *

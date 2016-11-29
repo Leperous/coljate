@@ -1,6 +1,6 @@
 package net.coljate.set;
 
-import net.coljate.Collection;
+import net.coljate.collection.Collection;
 import net.coljate.set.impl.WrappedSet;
 
 /**

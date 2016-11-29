@@ -1,5 +1,7 @@
 package net.coljate;
 
+import net.coljate.collection.MutableCollection;
+
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertThat;

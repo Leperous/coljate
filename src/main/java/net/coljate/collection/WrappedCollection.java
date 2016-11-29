@@ -1,8 +1,9 @@
-package net.coljate;
+package net.coljate.collection;
 
 import java.util.Iterator;
 import java.util.Spliterator;
 
+import net.coljate.UnmodifiableIterator;
 import net.coljate.util.Equality;
 
 /**

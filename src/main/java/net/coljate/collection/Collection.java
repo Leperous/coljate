@@ -1,4 +1,4 @@
-package net.coljate;
+package net.coljate.collection;
 
 import net.coljate.feature.IterableExtension;
 import net.coljate.feature.StreamExtension;

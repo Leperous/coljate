@@ -3,7 +3,7 @@ package net.coljate.map;
 import java.util.Objects;
 import java.util.function.Function;
 
-import net.coljate.MutableCollection;
+import net.coljate.collection.MutableCollection;
 import net.coljate.map.impl.MutableWrappedHashMap;
 
 /**

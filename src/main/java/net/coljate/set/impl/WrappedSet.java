@@ -1,6 +1,6 @@
 package net.coljate.set.impl;
 
-import net.coljate.WrappedCollection;
+import net.coljate.collection.WrappedCollection;
 import net.coljate.set.ImmutableSet;
 import net.coljate.set.MutableSet;
 import net.coljate.set.Set;

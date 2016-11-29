@@ -37,6 +37,11 @@ public class MutableWrappedArrayList<T>
     }
 
     @Override
+    public MutableArray<T> mutableCopy() {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
     public ImmutableNativeArray<T> immutableCopy() {
         throw new UnsupportedOperationException("Not supported yet.");
     }

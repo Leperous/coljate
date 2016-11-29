@@ -1,6 +1,6 @@
 package net.coljate.list;
 
-import net.coljate.MutableCollection;
+import net.coljate.collection.MutableCollection;
 
 /**
  *

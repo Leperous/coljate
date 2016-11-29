@@ -2,7 +2,7 @@ package net.coljate.set;
 
 import java.util.Collections;
 
-import net.coljate.ImmutableCollection;
+import net.coljate.collection.ImmutableCollection;
 
 /**
  *

@@ -1,4 +1,4 @@
-package net.coljate;
+package net.coljate.collection;
 
 import java.util.Collections;
 
@@ -8,7 +8,9 @@ import net.coljate.util.NativeCollections;
  *
  * @author ollie
  */
-public class MutableWrappedCollection<T> extends WrappedCollection<T> implements MutableCollection<T> {
+public class MutableWrappedCollection<T>
+        extends WrappedCollection<T>
+        implements MutableCollection<T> {
 
     public static <T> MutableCollection<T> copyOf(final java.util.Collection<? extends T> collection) {
         return new MutableWrappedCollection<>(new java.util.ArrayList<>(collection));

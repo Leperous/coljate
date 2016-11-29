@@ -2,7 +2,7 @@ package net.coljate.list.impl;
 
 import net.coljate.list.ImmutableArray;
 import net.coljate.list.ImmutableList;
-import net.coljate.list.MutableList;
+import net.coljate.list.MutableArray;
 
 /**
  *
@@ -52,7 +52,7 @@ public class ImmutableNativeArray<T> implements ImmutableArray<T>, ImmutableList
     }
 
     @Override
-    public MutableList<T> mutableCopy() {
+    public MutableArray<T> mutableCopy() {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 

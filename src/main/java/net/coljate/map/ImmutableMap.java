@@ -1,6 +1,6 @@
 package net.coljate.map;
 
-import net.coljate.ImmutableCollection;
+import net.coljate.collection.ImmutableCollection;
 import net.coljate.set.ImmutableSet;
 
 /**

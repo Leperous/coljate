@@ -1,6 +1,6 @@
 package net.coljate.map;
 
-import net.coljate.ConcurrentCollection;
+import net.coljate.collection.ConcurrentCollection;
 import net.coljate.map.impl.ConcurrentWrappedMap;
 
 /**
