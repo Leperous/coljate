@@ -25,7 +25,7 @@ public class ImmutableWrappedCollection<T>
 
     @Override
     public ImmutableCollection<T> with(final T element) {
-        final java.util.Collection<T> copy = this.mutableDelegateCopy();
+        final java.util.Collection<T> copy = this.mutableJavaCopy();
         return copy.add(element)
                 ? new ImmutableWrappedCollection<>(copy)
                 : this;

@@ -1,5 +1,8 @@
 package net.coljate.collection;
 
+import java.util.function.IntFunction;
+
+import net.coljate.Container;
 import net.coljate.feature.IterableExtension;
 import net.coljate.feature.StreamExtension;
 
@@ -25,12 +28,14 @@ public interface Collection<T> extends IterableExtension<T>, StreamExtension<T> 
 
     /**
      *
-     * @return a copy of this collection.
-     * @deprecated only useful for bridging.
+     * @return a mutable copy of this collection.
      */
-    @Deprecated
-    default java.util.Collection<T> javaCollectionCopy() {
-        final java.util.Collection<T> collection = new java.util.ArrayList<>(this.count());
+    default java.util.Collection<T> mutableJavaCopy() {
+        return this.mutableJavaCopy(java.util.ArrayList::new);
+    }
+
+    default <C extends java.util.Collection<T>> C mutableJavaCopy(final IntFunction<? extends C> createCollection) {
+        final C collection = createCollection.apply(this.count());
         this.forEach(collection::add);
         return collection;
     }

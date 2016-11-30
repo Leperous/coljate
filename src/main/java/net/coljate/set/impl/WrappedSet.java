@@ -23,13 +23,13 @@ public class WrappedSet<T> extends WrappedCollection<T> implements Set<T> {
     }
 
     @Override
-    protected java.util.Set<T> mutableDelegateCopy() {
+    public java.util.Set<T> mutableJavaCopy() {
         return new java.util.HashSet<>(delegate);
     }
 
     @Override
     public MutableSet<T> mutableCopy() {
-        return new MutableWrappedSet<>(this.mutableDelegateCopy());
+        return new MutableWrappedSet<>(this.mutableJavaCopy());
     }
 
     @Override

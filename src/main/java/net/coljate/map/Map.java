@@ -2,6 +2,7 @@ package net.coljate.map;
 
 import java.util.Objects;
 import java.util.function.BiConsumer;
+import java.util.function.IntFunction;
 import java.util.function.Supplier;
 
 import net.coljate.collection.Collection;
@@ -57,6 +58,16 @@ public interface Map<K, V> extends Collection<Entry<K, V>>, Associative<K, V> {
 
     default void forEach(final BiConsumer<? super K, ? super V> consumer) {
         this.forEach(entry -> consumer.accept(entry.key(), entry.value()));
+    }
+
+    default java.util.Map<K, V> javaMapCopy() {
+        return this.javaMapCopy(java.util.HashMap::new);
+    }
+
+    default <M extends java.util.Map<K, V>> M javaMapCopy(final IntFunction<? extends M> mapSupplier) {
+        final M map = mapSupplier.apply(this.count());
+        this.forEach(map::put);
+        return map;
     }
 
     @Override

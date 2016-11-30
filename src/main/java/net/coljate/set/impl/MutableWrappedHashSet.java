@@ -37,13 +37,13 @@ public class MutableWrappedHashSet<T>
     }
 
     @Override
-    protected java.util.HashSet<T> mutableDelegateCopy() {
+    public java.util.HashSet<T> mutableJavaCopy() {
         return new java.util.HashSet<>(delegate);
     }
 
     @Override
     public MutableWrappedHashSet<T> mutableCopy() {
-        return new MutableWrappedHashSet<>(this.mutableDelegateCopy());
+        return new MutableWrappedHashSet<>(this.mutableJavaCopy());
     }
 
 }

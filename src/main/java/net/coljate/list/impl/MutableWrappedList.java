@@ -34,11 +34,6 @@ public class MutableWrappedList<T>
     }
 
     @Override
-    protected java.util.List<T> mutableDelegateCopy() {
-        return new java.util.ArrayList<>(delegate);
-    }
-
-    @Override
     public void prefix(final T element) {
         delegate.add(0, element);
     }
@@ -60,7 +55,7 @@ public class MutableWrappedList<T>
 
     @Override
     public MutableList<T> mutableCopy() {
-        return new MutableWrappedList<>(this.mutableDelegateCopy());
+        return new MutableWrappedList<>(this.mutableJavaCopy());
     }
 
     @Override

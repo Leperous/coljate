@@ -53,8 +53,8 @@ public class MutableWrappedArrayList<T>
     }
 
     @Override
-    protected java.util.ArrayList<T> mutableDelegateCopy() {
-        return new java.util.ArrayList<>(delegate);
+    public java.util.ArrayList<T> mutableJavaCopy() {
+        return this.mutableJavaCopy(java.util.ArrayList::new);
     }
 
     @Override
@@ -98,8 +98,8 @@ public class MutableWrappedArrayList<T>
     @Override
     public MutableArray<T> mutableCopy() {
         return this.lengthManaged
-                ? new MutableWrappedArrayList<>(this.mutableDelegateCopy(), length)
-                : new MutableWrappedArrayList<>(this.mutableDelegateCopy());
+                ? new MutableWrappedArrayList<>(this.mutableJavaCopy(), length)
+                : new MutableWrappedArrayList<>(this.mutableJavaCopy());
     }
 
     @Override

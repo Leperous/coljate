@@ -1,10 +1,9 @@
 package net.coljate.feature;
 
-import net.coljate.Container;
-
 import java.util.Objects;
 import java.util.function.Predicate;
 
+import net.coljate.Container;
 
 /**
  *
@@ -46,7 +45,7 @@ public interface IterableExtension<T> extends Container, Iterable<T> {
      * @param predicate
      * @return true if any elemenet matches the given predicate.
      */
-    default boolean any(final Predicate<? super T> predicate) {
+    default boolean anyMatch(final Predicate<? super T> predicate) {
         for (final T element : this) {
             if (predicate.test(element)) {
                 return true;
@@ -55,8 +54,8 @@ public interface IterableExtension<T> extends Container, Iterable<T> {
         return false;
     }
 
-    default boolean none(final Predicate<? super T> predicate) {
-        return !this.any(predicate);
+    default boolean noneMatch(final Predicate<? super T> predicate) {
+        return !this.anyMatch(predicate);
     }
 
     /**
@@ -65,7 +64,7 @@ public interface IterableExtension<T> extends Container, Iterable<T> {
      * @return true if all elements match the given predicate, or if there are
      * no elements.
      */
-    default boolean all(final Predicate<? super T> predicate) {
+    default boolean allMatch(final Predicate<? super T> predicate) {
         for (final T element : this) {
             if (!predicate.test(element)) {
                 return false;

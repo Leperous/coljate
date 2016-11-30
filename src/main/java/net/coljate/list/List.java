@@ -32,11 +32,8 @@ public interface List<T> extends Ordered<T> {
     }
 
     @Override
-    @Deprecated
-    default java.util.List<T> javaCollectionCopy() {
-        final java.util.List<T> list = new java.util.ArrayList<>(this.count());
-        this.forEach(list::add);
-        return list;
+    default java.util.List<T> mutableJavaCopy() {
+        return this.mutableJavaCopy(java.util.ArrayList::new);
     }
 
     default boolean equals(final List<?> that) {

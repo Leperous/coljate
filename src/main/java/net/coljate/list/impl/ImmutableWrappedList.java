@@ -2,7 +2,6 @@ package net.coljate.list.impl;
 
 import net.coljate.list.ImmutableList;
 import net.coljate.list.MutableList;
-import net.coljate.util.NativeCollections;
 
 /**
  *
@@ -24,17 +23,6 @@ public class ImmutableWrappedList<T>
     }
 
     @Override
-    protected java.util.List<T> mutableDelegateCopy() {
-        return new java.util.ArrayList<>(delegate);
-    }
-
-    @Override
-    @Deprecated
-    public java.util.List<T> javaCollectionCopy() {
-        return NativeCollections.asUnmodifiableList(delegate);
-    }
-
-    @Override
     public ImmutableListIterator<T> iterator() {
         throw new UnsupportedOperationException("Not supported yet.");
     }
@@ -51,7 +39,7 @@ public class ImmutableWrappedList<T>
 
     @Override
     public MutableList<T> mutableCopy() {
-        return MutableWrappedList.viewOf(this.mutableDelegateCopy());
+        return MutableWrappedList.viewOf(this.mutableJavaCopy());
     }
 
     @Override

@@ -16,10 +16,8 @@ public interface Set<T> extends Collection<T> {
     ImmutableSet<T> immutableCopy();
 
     @Override
-    default java.util.Set<T> javaCollectionCopy() {
-        final java.util.Set<T> set = new java.util.HashSet<>(this.count());
-        this.forEach(set::add);
-        return set;
+    default java.util.Set<T> mutableJavaCopy() {
+        return this.mutableJavaCopy(java.util.HashSet::new);
     }
 
     static <T> Set<T> viewOf(final java.util.Set<T> set) {

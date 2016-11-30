@@ -29,7 +29,7 @@ public class MutableWrappedTreeSet<T>
     }
 
     @Override
-    protected java.util.TreeSet<T> mutableDelegateCopy() {
+    public java.util.TreeSet<T> mutableJavaCopy() {
         return new java.util.TreeSet<>(delegate);
     }
 
@@ -50,7 +50,7 @@ public class MutableWrappedTreeSet<T>
 
     @Override
     public MutableWrappedTreeSet<T> mutableCopy() {
-        return new MutableWrappedTreeSet<>(this.mutableDelegateCopy());
+        return new MutableWrappedTreeSet<>(this.mutableJavaCopy());
     }
 
 }

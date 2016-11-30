@@ -37,13 +37,9 @@ public class WrappedCollection<T> implements Collection<T> {
         return UnmodifiableIterator.wrap(delegate.iterator());
     }
 
-    protected java.util.Collection<T> mutableDelegateCopy() {
-        return new java.util.ArrayList<>(delegate);
-    }
-
     @Override
     public MutableCollection<T> mutableCopy() {
-        return new MutableWrappedCollection<>(this.mutableDelegateCopy());
+        return new MutableWrappedCollection<>(this.mutableJavaCopy());
     }
 
     @Override
