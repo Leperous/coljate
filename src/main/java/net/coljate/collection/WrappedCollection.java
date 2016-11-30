@@ -23,6 +23,11 @@ public class WrappedCollection<T> implements Collection<T> {
     }
 
     @Override
+    public Object[] arrayCopy() {
+        return delegate.toArray();
+    }
+
+    @Override
     public java.util.Collection<T> mutableJavaCopy() {
         return new java.util.ArrayList<>(delegate);
     }

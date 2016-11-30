@@ -30,7 +30,7 @@ public class WrappedQueue<T>
         super(delegate);
         this.delegate = delegate;
     }
-
+    
     @Override
     public T head() {
         return delegate.peek();
@@ -53,12 +53,12 @@ public class WrappedQueue<T>
 
     @Override
     public WrappedQueue<T> mutableCopy() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return new WrappedQueue<>(new ArrayDeque<>(delegate));
     }
 
     @Override
     public ImmutableList<T> immutableCopy() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return ImmutableNativeArray.copyOf(this);
     }
 
 }

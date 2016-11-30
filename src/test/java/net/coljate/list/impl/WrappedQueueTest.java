@@ -1,6 +1,5 @@
 package net.coljate.list.impl;
 
-import net.coljate.list.Queue;
 import net.coljate.list.QueueTest;
 
 /**
@@ -11,7 +10,7 @@ import net.coljate.list.QueueTest;
 public class WrappedQueueTest extends QueueTest {
 
     @Override
-    protected <T> Queue<T> create(final T... elements) {
+    protected <T> WrappedQueue<T> create(final T... elements) {
         return WrappedQueue.copyOf(elements);
     }
 
