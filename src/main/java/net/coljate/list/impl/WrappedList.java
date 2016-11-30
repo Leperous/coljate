@@ -27,12 +27,9 @@ public class WrappedList<T> extends WrappedCollection<T> implements List<T> {
         this.delegate = delegate;
     }
 
-    protected java.util.ArrayList<T> mutableArrayListCopy() {
+    @Override
+    public java.util.List<T> mutableJavaCopy() {
         return new java.util.ArrayList<>(delegate);
-    }
-
-    protected java.util.LinkedList<T> mutableLinkedListCopy() {
-        return new java.util.LinkedList<>(delegate);
     }
 
     @Override
