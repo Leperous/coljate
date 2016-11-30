@@ -31,5 +31,5 @@ public interface MutableArray<T> extends Array<T>, MutableList<T> {
     static <T> MutableArray<T> viewOf(final T... elements) {
         return MutableNativeArray.viewOf(elements);
     }
-
+    
 }

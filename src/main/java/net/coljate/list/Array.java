@@ -37,6 +37,11 @@ public interface Array<T> extends List<T>, FastGet<Integer, T> {
     }
 
     @Override
+    default ListIterator<T> iterator() {
+        return new ArrayIterator<>(this);
+    }
+
+    @Override
     default boolean equals(final List<?> list) {
         return list instanceof Array
                 && this.equals((Array) list);
@@ -51,5 +56,36 @@ public interface Array<T> extends List<T>, FastGet<Integer, T> {
 
     @Override
     ImmutableArray<T> immutableCopy();
+
+    class ArrayIterator<T> implements ListIterator<T> {
+
+        final Array<? extends T> array;
+        int index = 0;
+
+        protected ArrayIterator(Array<? extends T> array) {
+            this.array = array;
+        }
+
+        @Override
+        public boolean hasPrevious() {
+            return index > 0;
+        }
+
+        @Override
+        public T previous() {
+            return array.get(--index);
+        }
+
+        @Override
+        public boolean hasNext() {
+            return index < array.count();
+        }
+
+        @Override
+        public T next() {
+            return array.get(index++);
+        }
+
+    }
 
 }
