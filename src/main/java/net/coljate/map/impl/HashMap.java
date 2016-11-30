@@ -1,0 +1,17 @@
+package net.coljate.map.impl;
+
+import net.coljate.feature.FastGet;
+import net.coljate.map.Map;
+
+/**
+ *
+ * @author ollie
+ */
+public interface HashMap<K, V> extends Map<K, V>, FastGet<K, V> {
+
+    @Override
+    default V get(final Object key) {
+        return Map.super.get(key);
+    }
+
+}

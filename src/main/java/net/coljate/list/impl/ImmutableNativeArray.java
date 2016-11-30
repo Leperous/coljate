@@ -1,9 +1,8 @@
 package net.coljate.list.impl;
 
+import net.coljate.collection.Collection;
 import net.coljate.list.AbstractList;
 import net.coljate.list.ImmutableArray;
-import net.coljate.list.ImmutableList;
-import net.coljate.list.MutableArray;
 import net.coljate.util.Arrays;
 
 /**
@@ -12,7 +11,11 @@ import net.coljate.util.Arrays;
  */
 public class ImmutableNativeArray<T>
         extends AbstractList<T>
-        implements ImmutableArray<T>, ImmutableList<T> {
+        implements NativeArray<T>, ImmutableArray<T> {
+
+    public static <T> ImmutableNativeArray<T> copyOf(final Collection<? extends T> collection) {
+        return new ImmutableNativeArray<>(collection.arrayCopy(), collection.count());
+    }
 
     public static <T> ImmutableNativeArray<T> copyOf(final T[] array) {
         return new ImmutableNativeArray<>(Arrays.copyOf(array), array.length);
@@ -52,11 +55,6 @@ public class ImmutableNativeArray<T>
     @Override
     public ImmutableListIterator<T> iterator() {
         return new ArrayIterator();
-    }
-
-    @Override
-    public MutableArray<T> mutableCopy() {
-        return new MutableNativeArray<>(Arrays.copyOf(array), count);
     }
 
     @Override

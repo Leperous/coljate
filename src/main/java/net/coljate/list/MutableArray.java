@@ -11,6 +11,8 @@ import net.coljate.list.impl.MutableNativeArray;
 public interface MutableArray<T> extends Array<T>, MutableList<T> {
 
     T set(int i, T value);
+    
+    void resize(int length);
 
     default boolean replace(int i, T expectedValue, T replacementValue) {
         if (Objects.equals(this.get(i), expectedValue)) {

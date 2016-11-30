@@ -1,6 +1,8 @@
 package net.coljate.list.impl;
 
 import java.io.Serializable;
+import java.lang.reflect.Field;
+import java.util.ArrayList;
 
 import net.coljate.list.MutableArray;
 
@@ -13,17 +15,53 @@ public class MutableWrappedArrayList<T>
         implements MutableArray<T>, Serializable {
 
     private static final long serialVersionUID = 1L;
+    private static final Field arrayListCapacity;
+
+    static {
+        try {
+            arrayListCapacity = ArrayList.class.getDeclaredField("elementData");
+            arrayListCapacity.setAccessible(true);
+        } catch (final NoSuchFieldException | SecurityException ex) {
+            throw new Error("Could not read ArrayList capacity", ex);
+        }
+    }
+
+    @SafeVarargs
+    public static <T> MutableWrappedArrayList<T> copyOf(final T... elements) {
+        final java.util.ArrayList<T> list = new java.util.ArrayList<>(elements.length);
+        for (int i = 0; i < elements.length; i++) {
+            list.add(elements[i]);
+        }
+        return new MutableWrappedArrayList<>(list, elements.length);
+    }
 
     private final java.util.ArrayList<T> delegate;
+    private final boolean lengthManaged;
+    private int length;
+
+    protected MutableWrappedArrayList(final java.util.ArrayList<T> delegate, final int length) {
+        super(delegate);
+        this.delegate = delegate;
+        this.length = length;
+        this.lengthManaged = true;
+    }
 
     protected MutableWrappedArrayList(final java.util.ArrayList<T> delegate) {
         super(delegate);
         this.delegate = delegate;
+        this.lengthManaged = false;
+    }
+
+    @Override
+    protected java.util.ArrayList<T> mutableDelegateCopy() {
+        return new java.util.ArrayList<>(delegate);
     }
 
     @Override
     public T get(final int index) {
-        return delegate.get(index);
+        return index >= this.count()
+                ? null
+                : delegate.get(index);
     }
 
     @Override
@@ -32,18 +70,42 @@ public class MutableWrappedArrayList<T>
     }
 
     @Override
-    public int length() {
+    public int count() {
         return delegate.size();
     }
 
     @Override
+    public int length() {
+        return lengthManaged
+                ? length
+                : capacity(delegate);
+    }
+
+    private static int capacity(final ArrayList<?> list) {
+        try {
+            return ((Object[]) arrayListCapacity.get(list)).length;
+        } catch (final IllegalAccessException iex) {
+            throw new Error(iex);
+        }
+    }
+
+    @Override
+    public void resize(final int length) {
+        this.length = length;
+        delegate.ensureCapacity(length);
+    }
+
+    @Override
     public MutableArray<T> mutableCopy() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return this.lengthManaged
+                ? new MutableWrappedArrayList<>(this.mutableDelegateCopy(), length)
+                : new MutableWrappedArrayList<>(this.mutableDelegateCopy());
     }
 
     @Override
     public ImmutableNativeArray<T> immutableCopy() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        final Object[] array = delegate.toArray();
+        return new ImmutableNativeArray<>(array, delegate.size());
     }
 
 }

@@ -1,7 +1,6 @@
 package net.coljate.list.impl;
 
 import net.coljate.list.Array;
-import net.coljate.list.ImmutableArray;
 import net.coljate.list.ListIterator;
 import net.coljate.list.MutableArray;
 import net.coljate.util.Arrays;
@@ -11,7 +10,8 @@ import net.coljate.util.Arrays;
  * @author ollie
  * @see java.util.ArrayList
  */
-public class MutableNativeArray<T> implements MutableArray<T> {
+public class MutableNativeArray<T>
+        implements NativeArray<T>, MutableArray<T> {
 
     public static <T> MutableNativeArray<T> copyOf(final T[] elements) {
         return new MutableNativeArray<>(Arrays.copyOf(elements), elements.length);
@@ -28,6 +28,11 @@ public class MutableNativeArray<T> implements MutableArray<T> {
     protected MutableNativeArray(final Object[] array, final int count) {
         this.array = array;
         this.count = count;
+    }
+
+    @Override
+    public Object[] arrayCopy() {
+        return Arrays.copyOf(array);
     }
 
     @Override
@@ -94,13 +99,9 @@ public class MutableNativeArray<T> implements MutableArray<T> {
     }
 
     @Override
-    public MutableArray<T> mutableCopy() {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
-
-    @Override
-    public ImmutableArray<T> immutableCopy() {
-        throw new UnsupportedOperationException("Not supported yet.");
+    public void resize(int length) {
+        array = new Object[length];
+        count = Math.min(length, count);
     }
 
     @Override

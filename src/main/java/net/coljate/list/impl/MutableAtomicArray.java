@@ -25,14 +25,19 @@ public class MutableAtomicArray<T> implements ConcurrentArray<T> {
     }
 
     private static <T> AtomicReferenceArray<T> copy(final AtomicReferenceArray<T> current) {
-        final AtomicReferenceArray<T> copy = new AtomicReferenceArray<>(current.length());
-        for (int i = 0; i < current.length(); i++) {
+        return copy(current, current.length());
+    }
+
+    private static <T> AtomicReferenceArray<T> copy(final AtomicReferenceArray<T> current, final int length) {
+        final AtomicReferenceArray<T> copy = new AtomicReferenceArray<>(length);
+        final int max = Math.min(current.length(), length);
+        for (int i = 0; i < max; i++) {
             copy.set(i, current.get(i));
         }
         return copy;
     }
 
-    private AtomicReferenceArray<T> replace(final Function<AtomicReferenceArray<T>, AtomicReferenceArray<T>> replace) {
+    private AtomicReferenceArray<T> spinReplace(final Function<AtomicReferenceArray<T>, AtomicReferenceArray<T>> replace) {
         AtomicReferenceArray<T> current, next;
         do {
             current = this.array();
@@ -87,8 +92,13 @@ public class MutableAtomicArray<T> implements ConcurrentArray<T> {
     }
 
     @Override
+    public void resize(final int size) {
+        this.spinReplace(current -> copy(current, size));
+    }
+
+    @Override
     public void clear() {
-        this.replace(current -> new AtomicReferenceArray<>(current.length()));
+        this.spinReplace(current -> new AtomicReferenceArray<>(current.length()));
     }
 
     @Override

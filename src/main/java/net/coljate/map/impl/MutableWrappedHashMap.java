@@ -8,7 +8,7 @@ import java.io.Serializable;
  */
 public class MutableWrappedHashMap<K, V>
         extends MutableWrappedMap<K, V>
-        implements Serializable {
+        implements HashMap<K, V>, Serializable {
 
     private static final long serialVersionUID = 1L;
 

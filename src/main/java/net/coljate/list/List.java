@@ -1,6 +1,7 @@
 package net.coljate.list;
 
 import net.coljate.feature.Ordered;
+import net.coljate.list.impl.ImmutableNativeArray;
 import net.coljate.list.impl.MutableWrappedList;
 import net.coljate.util.Equality;
 
@@ -17,15 +18,15 @@ public interface List<T> extends Ordered<T> {
     default T first() {
         return this.iterator().next();
     }
-
+    
     @Override
     default MutableList<T> mutableCopy() {
-        throw new UnsupportedOperationException(); //TODO default
+        throw new UnsupportedOperationException(); //TODO
     }
 
     @Override
     default ImmutableList<T> immutableCopy() {
-        throw new UnsupportedOperationException(); //TODO default
+        return ImmutableNativeArray.copyOf(this);
     }
 
     @Override

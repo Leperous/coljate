@@ -8,7 +8,16 @@ import java.io.Serializable;
  */
 public class MutableWrappedHashSet<T>
         extends MutableWrappedSet<T>
-        implements Serializable {
+        implements HashSet<T>, Serializable {
+
+    @SafeVarargs
+    public static <T> MutableWrappedHashSet<T> copyOf(final T... elements) {
+        final java.util.HashSet<T> set = new java.util.HashSet<>(elements.length);
+        for (int i = 0; i < elements.length; i++) {
+            set.add(elements[i]);
+        }
+        return viewOf(set);
+    }
 
     public static <T> MutableWrappedHashSet<T> viewOf(final java.util.HashSet<T> set) {
         return new MutableWrappedHashSet<>(set);

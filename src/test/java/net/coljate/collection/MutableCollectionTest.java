@@ -10,7 +10,7 @@ import org.junit.Test;
  */
 public abstract class MutableCollectionTest extends CollectionTest {
 
-    protected abstract <T> MutableCollection<T> create(T... Elements);
+    protected abstract <T> MutableCollection<T> create(T... elements);
 
     @Test
     public void testClear() {

@@ -12,7 +12,7 @@ import org.junit.Test;
  */
 public abstract class CollectionTest {
 
-    protected abstract <T> Collection<T> create(T... Elements);
+    protected abstract <T> Collection<T> create(T... elements);
 
     @Test
     public void testCount_Empty() {
