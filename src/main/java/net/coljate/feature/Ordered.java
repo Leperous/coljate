@@ -16,11 +16,4 @@ public interface Ordered<T> extends Collection<T> {
      */
     T first();
 
-    /**
-     *
-     * @return the last element in this ordered collection, of {@code null} if
-     * empty.
-     */
-    T last();
-
 }

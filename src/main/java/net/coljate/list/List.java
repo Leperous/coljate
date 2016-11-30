@@ -18,7 +18,9 @@ public interface List<T> extends Ordered<T> {
     default T first() {
         return this.iterator().next();
     }
-    
+
+    T last();
+
     @Override
     default MutableList<T> mutableCopy() {
         throw new UnsupportedOperationException(); //TODO

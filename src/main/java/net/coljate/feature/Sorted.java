@@ -11,4 +11,6 @@ public interface Sorted<T> extends Ordered<T> {
 
     Comparator<? super T> comparator();
 
+    T last();
+
 }
