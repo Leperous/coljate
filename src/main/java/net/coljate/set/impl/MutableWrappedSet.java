@@ -1,6 +1,7 @@
 package net.coljate.set.impl;
 
 import net.coljate.set.MutableSet;
+import net.coljate.set.Set;
 
 /**
  *
@@ -9,6 +10,14 @@ import net.coljate.set.MutableSet;
 public class MutableWrappedSet<T>
         extends WrappedSet<T>
         implements MutableSet<T> {
+
+    public static <T> MutableWrappedSet<T> copyOf(final Set<T> set) {
+        return viewOf(set.mutableJavaCopy());
+    }
+
+    public static <T> MutableWrappedSet<T> viewOf(final java.util.Set<T> set) {
+        return new MutableWrappedSet<>(set);
+    }
 
     private final java.util.Set<T> delegate;
 

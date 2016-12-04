@@ -1,24 +1,12 @@
 package net.coljate.list;
 
-import net.coljate.feature.FastGet;
+import net.coljate.feature.Indexed;
 
 /**
  *
  * @author ollie
  */
-public interface Array<T> extends List<T>, FastGet<Integer, T> {
-
-    /**
-     *
-     * @param index
-     * @return
-     */
-    T get(int index);
-
-    @Override
-    default T get(final Integer i) {
-        return this.get(i.intValue());
-    }
+public interface Array<T> extends Indexed<T>, List<T> {
 
     /**
      * @return the length of this array. It will be equal to or greater than the

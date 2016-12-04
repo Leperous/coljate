@@ -26,7 +26,7 @@ public class MutableWrappedHashSet<T>
     public static <T> MutableWrappedHashSet<T> copyOf(final java.util.Set<T> set) {
         return new MutableWrappedHashSet<>(new java.util.HashSet<>(set));
     }
-
+    
     private static final long serialVersionUID = 1L;
 
     private final java.util.HashSet<T> delegate;
