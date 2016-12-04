@@ -2,11 +2,13 @@ package net.coljate.feature;
 
 import java.util.Optional;
 
+import net.coljate.Container;
+
 /**
  *
  * @author ollie
  */
-public interface Associative<K, V> {
+public interface Associative<K, V> extends Container {
 
     V get(K key);
 

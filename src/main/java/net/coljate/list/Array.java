@@ -30,6 +30,11 @@ public interface Array<T> extends Indexed<T>, List<T> {
     }
 
     @Override
+    default boolean contains(final Object object) {
+        return List.super.contains(object);
+    }
+
+    @Override
     default boolean equals(final List<?> list) {
         return list instanceof Array
                 && this.equals((Array) list);

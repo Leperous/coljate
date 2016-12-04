@@ -37,6 +37,17 @@ public class ConcurrentCache<K, V> implements Cache<K, V> {
     }
 
     @Override
+    @Deprecated
+    public boolean contains(final Object object) {
+        return cache.contains(object);
+    }
+
+    @Override
+    public boolean isEmpty() {
+        return cache.isEmpty();
+    }
+
+    @Override
     public MutableMap<K, V> mutableCopy() {
         throw new UnsupportedOperationException();
     }
