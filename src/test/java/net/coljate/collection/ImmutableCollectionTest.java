@@ -11,10 +11,11 @@ import org.junit.Test;
  */
 public abstract class ImmutableCollectionTest extends CollectionTest {
 
-    protected abstract <T> ImmutableCollection<T> create(T... Elements);
+    @Override
+    protected abstract <T> ImmutableCollection<T> create(T... elements);
 
     @Test
-    public void testMakesImmutableCopy() {
+    public void testImmutableCopy() {
 
         final Object o1 = new Object();
         final Object o2 = new Object();

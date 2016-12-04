@@ -4,6 +4,7 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
+import org.junit.AssumptionViolatedException;
 import org.junit.Test;
 
 /**
@@ -12,12 +13,27 @@ import org.junit.Test;
  */
 public abstract class CollectionTest {
 
-    protected abstract <T> Collection<T> create(T... elements);
+    /**
+     *
+     * @param <T>
+     * @param elements
+     * @return a collection containing the given elements.
+     * @throws AssumptionViolatedException if the collection does not support
+     * containing the given number of elements. In this case the test will be
+     * skipped.
+     */
+    protected abstract <T> Collection<T> create(T... elements) throws AssumptionViolatedException;
 
     @Test
     public void testCount_Empty() {
         final Collection<Object> collection = this.create();
         this.assertEmpty(collection);
+    }
+
+    @Test
+    public void testIterator_Empty() {
+        final Collection<Object> collection = this.create();
+        assertFalse(collection.iterator().hasNext());
     }
 
     @Test

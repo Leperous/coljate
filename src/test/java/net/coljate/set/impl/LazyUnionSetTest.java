@@ -21,7 +21,7 @@ public class LazyUnionSetTest {
         final Object o1 = new Object(), o2 = new Object(), o3 = new Object();
         final Set<Object> s1 = Set.copyOf(o1, o2);
         final Set<Object> s2 = Set.copyOf(o2, o3);
-        final Set<Object> union = LazyUnionSet.unionOf(s1, s2);
+        final Set<Object> union = LazyUnionSet.viewOf(s1, s2);
         assertThat(union, instanceOf(LazyUnionSet.class));
         assertThat(union.count(), is(3));
         assertTrue(union.contains(o1));

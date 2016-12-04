@@ -3,8 +3,10 @@ package net.coljate.collection;
 import java.util.function.IntFunction;
 
 import net.coljate.Container;
+import net.coljate.collection.impl.WrappedCollection;
 import net.coljate.feature.IterableExtension;
 import net.coljate.feature.StreamExtension;
+import net.coljate.set.Set;
 
 /**
  * Some {@link Iterable} {@link Container} with a {@link #count count} of
@@ -72,6 +74,10 @@ public interface Collection<T> extends IterableExtension<T>, StreamExtension<T> 
             into[index++] = element;
         }
         return into;
+    }
+
+    static <T> Collection<T> copyOf(final T element) {
+        return Set.copyOf(element);
     }
 
     static <T> Collection<T> viewOf(final java.util.Collection<T> collection) {

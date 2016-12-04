@@ -3,7 +3,7 @@ package net.coljate.list.impl;
 import java.util.ArrayDeque;
 import java.util.Optional;
 
-import net.coljate.collection.MutableWrappedCollection;
+import net.coljate.collection.impl.MutableWrappedCollection;
 import net.coljate.list.ImmutableList;
 import net.coljate.list.Queue;
 

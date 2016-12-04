@@ -32,8 +32,8 @@ public interface Set<T> extends Collection<T> {
         return this.mutableJavaCopy(java.util.HashSet::new);
     }
 
-    static <T> Set<T> of(final T element) {
-        return new SingletonSet<>(element);
+    static <T> SingletonSet<T> copyOf(final T element) {
+        return SingletonSet.of(element);
     }
 
     @SafeVarargs

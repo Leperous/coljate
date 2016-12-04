@@ -1,5 +1,7 @@
 package net.coljate.collection;
 
+import net.coljate.list.impl.MutableWrappedList;
+
 /**
  *
  * @author ollie
@@ -7,7 +9,7 @@ package net.coljate.collection;
 public interface MutableCollection<T> extends Collection<T> {
 
     void clear();
-    
+
     boolean removeFirst(Object element);
 
     boolean removeAll(Object element);
@@ -18,6 +20,11 @@ public interface MutableCollection<T> extends Collection<T> {
             removed &= this.removeAll(element);
         }
         return removed;
+    }
+
+    @SafeVarargs
+    static <T> MutableCollection<T> copyOf(final T... elements) {
+        return MutableWrappedList.createArrayList(elements);
     }
 
 }

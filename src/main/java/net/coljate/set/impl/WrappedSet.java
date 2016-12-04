@@ -1,6 +1,6 @@
 package net.coljate.set.impl;
 
-import net.coljate.collection.WrappedCollection;
+import net.coljate.collection.impl.WrappedCollection;
 import net.coljate.set.ImmutableSet;
 import net.coljate.set.MutableSet;
 import net.coljate.set.Set;
@@ -9,7 +9,9 @@ import net.coljate.set.Set;
  *
  * @author ollie
  */
-public class WrappedSet<T> extends WrappedCollection<T> implements Set<T> {
+public class WrappedSet<T>
+        extends WrappedCollection<T>
+        implements Set<T> {
 
     public static <T> Set<T> viewOf(final java.util.Set<T> set) {
         return new WrappedSet<>(set);
@@ -34,7 +36,7 @@ public class WrappedSet<T> extends WrappedCollection<T> implements Set<T> {
 
     @Override
     public ImmutableSet<T> immutableCopy() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return Set.super.immutableCopy();
     }
 
 }

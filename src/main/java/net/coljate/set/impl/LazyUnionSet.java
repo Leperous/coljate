@@ -35,7 +35,7 @@ public class LazyUnionSet<T>
     }
 
     @Override
-    public boolean contains(Object object) {
+    public boolean contains(final Object object) {
         return s1.contains(object) || s2.contains(object);
     }
 

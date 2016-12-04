@@ -1,9 +1,12 @@
-package net.coljate.collection;
+package net.coljate.collection.impl;
 
 import java.util.Iterator;
 import java.util.Spliterator;
 
 import net.coljate.UnmodifiableIterator;
+import net.coljate.collection.Collection;
+import net.coljate.collection.ImmutableCollection;
+import net.coljate.collection.MutableCollection;
 import net.coljate.util.Equality;
 
 /**

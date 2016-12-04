@@ -1,58 +1,39 @@
 package net.coljate.set.impl;
 
-import java.util.NoSuchElementException;
-import java.util.Objects;
-
-import net.coljate.UnmodifiableIterator;
-import net.coljate.collection.ImmutableCollection;
-import net.coljate.set.AbstractSet;
+import net.coljate.collection.impl.SingletonCollection;
 import net.coljate.set.ImmutableSet;
+import net.coljate.set.MutableSet;
 
 /**
  *
  * @author ollie
  */
 public class SingletonSet<T>
-        extends AbstractSet<T>
+        extends SingletonCollection<T>
         implements ImmutableSet<T> {
 
-    private final T element;
+    public static <T> SingletonSet<T> of(final T element) {
+        return new SingletonSet<>(element);
+    }
 
-    public SingletonSet(final T element) {
-        this.element = element;
+    protected SingletonSet(final T element) {
+        super(element);
     }
 
     @Override
-    public boolean contains(final Object object) {
-        return Objects.equals(object, element);
+    public ImmutableSet<T> with(final T element) {
+        return ImmutableSet.super.with(element);
     }
 
     @Override
-    public UnmodifiableIterator<T> iterator() {
-        return new UnmodifiableIterator<T>() {
-
-            boolean done = false;
-
-            @Override
-            public boolean hasNext() {
-                return !done;
-            }
-
-            @Override
-            public T next() {
-                if (done) {
-                    throw new NoSuchElementException();
-                }
-                done = true;
-                return element;
-            }
-
-        };
+    public MutableSet<T> mutableCopy() {
+        return ImmutableSet.super.mutableCopy();
     }
 
     @Override
-    public ImmutableCollection<T> with(final T element) {
-        return MutableWrappedHashSet.copyOf(this.element, element).immutableCopy(); //FIXME
+    @Deprecated
+    public SingletonSet<T> immutableCopy() {
+        return this;
     }
 
 }

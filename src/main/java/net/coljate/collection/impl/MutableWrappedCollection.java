@@ -1,7 +1,8 @@
-package net.coljate.collection;
+package net.coljate.collection.impl;
 
 import java.util.Collections;
 
+import net.coljate.collection.MutableCollection;
 import net.coljate.util.NativeCollections;
 
 /**
