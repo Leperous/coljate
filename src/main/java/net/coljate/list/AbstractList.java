@@ -1,12 +1,15 @@
 package net.coljate.list;
 
+import net.coljate.collection.AbstractCollection;
 import net.coljate.util.Hash;
 
 /**
  *
  * @author ollie
  */
-public abstract class AbstractList<T> implements List<T> {
+public abstract class AbstractList<T>
+        extends AbstractCollection<T>
+        implements List<T> {
 
     @Override
     public boolean equals(final Object that) {

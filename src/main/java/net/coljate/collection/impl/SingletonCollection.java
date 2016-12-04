@@ -4,6 +4,7 @@ import java.util.NoSuchElementException;
 import java.util.Objects;
 
 import net.coljate.UnmodifiableIterator;
+import net.coljate.collection.AbstractCollection;
 import net.coljate.collection.ImmutableCollection;
 import net.coljate.collection.MutableCollection;
 
@@ -12,7 +13,12 @@ import net.coljate.collection.MutableCollection;
  * @author ollie
  */
 public class SingletonCollection<T>
+        extends AbstractCollection<T>
         implements ImmutableCollection<T> {
+
+    public static <T> SingletonCollection<T> of(final T element) {
+        return new SingletonCollection<>(element);
+    }
 
     private final T element;
 
@@ -22,6 +28,11 @@ public class SingletonCollection<T>
 
     public T element() {
         return element;
+    }
+
+    @Override
+    public int count() {
+        return 1;
     }
 
     @Override

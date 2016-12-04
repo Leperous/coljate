@@ -48,10 +48,27 @@ public abstract class CollectionTest {
     }
 
     @Test
+    public void testContains_Singleton() {
+        final Object o1 = new Object();
+        final Collection<Object> collection = this.create(o1);
+        assertTrue(collection.contains(o1));
+        assertFalse(collection.contains(new Object()));
+    }
+
+    @Test
     public void testCount_Singleton() {
         final Collection<Object> collection = this.create(new Object());
         assertFalse(collection.isEmpty());
         assertThat(collection.count(), is(1));
+    }
+
+    @Test
+    public void testEquality_Singleton() {
+        final Object o1 = new Object();
+        final Collection<Object> c1 = this.create(o1);
+        final Collection<Object> c2 = this.create(o1);
+        assertThat(c1, is(c2));
+        assertThat(c2, is(c1));
     }
 
     @Test

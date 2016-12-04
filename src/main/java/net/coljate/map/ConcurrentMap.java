@@ -6,6 +6,7 @@ import net.coljate.map.impl.ConcurrentWrappedHashMap;
 /**
  *
  * @author ollie
+ * @see java.util.concurrent.ConcurrentMap
  */
 public interface ConcurrentMap<K, V>
         extends MutableMap<K, V>, ConcurrentCollection<Entry<K, V>> {

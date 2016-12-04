@@ -4,6 +4,7 @@ import java.util.concurrent.atomic.AtomicReference;
 import java.util.concurrent.atomic.AtomicReferenceArray;
 import java.util.function.Function;
 
+import net.coljate.list.AbstractList;
 import net.coljate.list.ConcurrentArray;
 import net.coljate.list.ImmutableArray;
 import net.coljate.list.ListIterator;
@@ -12,7 +13,15 @@ import net.coljate.list.ListIterator;
  *
  * @author ollie
  */
-public class MutableAtomicArray<T> implements ConcurrentArray<T> {
+public class MutableAtomicArray<T>
+        extends AbstractList<T>
+        implements ConcurrentArray<T> {
+
+    @SafeVarargs
+    public static <T> MutableAtomicArray<T> copyOf(final T... elements) {
+        final AtomicReferenceArray<T> array = new AtomicReferenceArray<>(elements);
+        return new MutableAtomicArray<>(array);
+    }
 
     private final AtomicReference<AtomicReferenceArray<T>> arrayRef;
 
@@ -28,11 +37,21 @@ public class MutableAtomicArray<T> implements ConcurrentArray<T> {
         return copy(current, current.length());
     }
 
-    private static <T> AtomicReferenceArray<T> copy(final AtomicReferenceArray<T> current, final int length) {
+    private static <T> AtomicReferenceArray<T> copy(final AtomicReferenceArray<T> source, final int length) {
+        return copy(source, 0, 0, length);
+    }
+
+    /**
+     * @see System#arraycopy(java.lang.Object, int, java.lang.Object, int, int)
+     */
+    private static <T> AtomicReferenceArray<T> copy(
+            final AtomicReferenceArray<T> source,
+            final int sourcePosition,
+            final int destinationPosition,
+            final int length) {
         final AtomicReferenceArray<T> copy = new AtomicReferenceArray<>(length);
-        final int max = Math.min(current.length(), length);
-        for (int i = 0; i < max; i++) {
-            copy.set(i, current.get(i));
+        for (int i = 0; i < source.length(); i++) {
+            copy.set(i + destinationPosition, source.get(i + sourcePosition));
         }
         return copy;
     }
@@ -68,17 +87,29 @@ public class MutableAtomicArray<T> implements ConcurrentArray<T> {
 
     @Override
     public ListIterator<T> iterator() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return new AtomicArrayIterator<>(this.array());
     }
 
     @Override
     public void prefix(final T element) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        this.spinReplace(current -> prefix(element, current));
+    }
+
+    private static <T> AtomicReferenceArray<T> prefix(final T element, final AtomicReferenceArray<T> array) {
+        final AtomicReferenceArray<T> expanded = copy(array, 0, 1, array.length() + 1);
+        expanded.set(expanded.length() - 1, element);
+        return expanded;
     }
 
     @Override
     public void suffix(final T element) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        this.spinReplace(current -> suffix(current, element));
+    }
+
+    private static <T> AtomicReferenceArray<T> suffix(final AtomicReferenceArray<T> array, final T element) {
+        final AtomicReferenceArray<T> expanded = copy(array, array.length() + 1);
+        expanded.set(0, element);
+        return expanded;
     }
 
     @Override
@@ -104,6 +135,37 @@ public class MutableAtomicArray<T> implements ConcurrentArray<T> {
     @Override
     public ConcurrentArray<T> mutableCopy() {
         return new MutableAtomicArray<>(copy(this.array()));
+    }
+
+    private static final class AtomicArrayIterator<T> implements ListIterator<T> {
+
+        private final AtomicReferenceArray<T> array;
+        private int index;
+
+        AtomicArrayIterator(final AtomicReferenceArray<T> array) {
+            this.array = array;
+        }
+
+        @Override
+        public boolean hasNext() {
+            return index < array.length();
+        }
+
+        @Override
+        public T next() {
+            return array.get(index++);
+        }
+
+        @Override
+        public boolean hasPrevious() {
+            return index > 0;
+        }
+
+        @Override
+        public T previous() {
+            return array.get(--index);
+        }
+
     }
 
 }
