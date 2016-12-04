@@ -3,6 +3,7 @@ package net.coljate.set.impl;
 import java.util.Comparator;
 
 import net.coljate.set.SortedSet;
+import net.coljate.util.Arrays;
 import net.coljate.util.Suppliers;
 
 /**
@@ -19,6 +20,20 @@ public class MutableWrappedTreeSet<T>
 
     public static <T> MutableWrappedTreeSet<T> copyOf(final java.util.SortedSet<T> set) {
         return new MutableWrappedTreeSet<>(new java.util.TreeSet<>(set));
+    }
+
+    @SafeVarargs
+    public static <T> MutableWrappedTreeSet<T> copyOf(final Comparator<? super T> comparator, final T... elements) {
+        final java.util.TreeSet<T> set = new java.util.TreeSet<>(comparator);
+        Arrays.copyInto(elements, set::add);
+        return viewOf(set);
+    }
+
+    @SafeVarargs
+    public static <T extends Comparable<? super T>> MutableWrappedTreeSet<T> copyOf(final T... elements) {
+        final java.util.TreeSet<T> set = new java.util.TreeSet<>();
+        Arrays.copyInto(elements, set::add);
+        return viewOf(set);
     }
 
     private final java.util.TreeSet<T> delegate;
