@@ -1,6 +1,7 @@
 package net.coljate.collection;
 
 import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.CoreMatchers.sameInstance;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
 import org.junit.Test;
@@ -15,7 +16,14 @@ public abstract class ImmutableCollectionTest extends CollectionTest {
     protected abstract <T> ImmutableCollection<T> create(T... elements);
 
     @Test
-    public void testImmutableCopy() {
+    public void testImmutableCopy_Singleton() {
+        final ImmutableCollection<Object> c1 = this.create(new Object());
+        final ImmutableCollection<Object> c2 = c1.immutableCopy();
+        assertThat(c1, sameInstance(c2));
+    }
+    
+    @Test
+    public void testCopyIsImmutable_Two() {
 
         final Object o1 = new Object();
         final Object o2 = new Object();

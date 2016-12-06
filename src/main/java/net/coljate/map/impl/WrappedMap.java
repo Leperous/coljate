@@ -5,7 +5,7 @@ import java.util.Iterator;
 import net.coljate.collection.Collection;
 import net.coljate.map.Entry;
 import net.coljate.map.ImmutableMap;
-import net.coljate.map.ImmutableMap.ImmutableEntry;
+import net.coljate.map.ImmutableEntry;
 import net.coljate.map.Map;
 import net.coljate.map.MutableMap;
 import net.coljate.set.Set;

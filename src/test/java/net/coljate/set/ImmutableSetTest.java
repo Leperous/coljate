@@ -22,7 +22,7 @@ public abstract class ImmutableSetTest extends ImmutableCollectionTest {
     @Test
     public void testWith_Singleton() {
         final Object o1 = new Object(), o2 = new Object();
-        final ImmutableSet<Object> s1 = Set.copyOf(o1);
+        final ImmutableSet<Object> s1 = Set.of(o1);
         final ImmutableSet<Object> s2 = s1.with(o2);
         assertThat(s1, is(not(s2)));
         assertTrue(s1.contains(o1));
@@ -34,7 +34,7 @@ public abstract class ImmutableSetTest extends ImmutableCollectionTest {
     @Test
     public void testWith_Singleton_Same() {
         final Object o1 = new Object();
-        final ImmutableSet<Object> s1 = Set.copyOf(o1);
+        final ImmutableSet<Object> s1 = Set.of(o1);
         assertThat(s1.with(o1), sameInstance(s1));
     }
 

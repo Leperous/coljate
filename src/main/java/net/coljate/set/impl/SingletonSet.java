@@ -1,5 +1,7 @@
 package net.coljate.set.impl;
 
+import java.io.Serializable;
+
 import net.coljate.collection.impl.SingletonCollection;
 import net.coljate.set.ImmutableSet;
 import net.coljate.set.MutableSet;
@@ -10,7 +12,9 @@ import net.coljate.set.MutableSet;
  */
 public class SingletonSet<T>
         extends SingletonCollection<T>
-        implements ImmutableSet<T> {
+        implements ImmutableSet<T>, Serializable {
+
+    private static final long serialVersionUID = 1L;
 
     public static <T> SingletonSet<T> of(final T element) {
         return new SingletonSet<>(element);

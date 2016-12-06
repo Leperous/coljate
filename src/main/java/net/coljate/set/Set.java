@@ -32,12 +32,13 @@ public interface Set<T> extends Collection<T> {
         return this.mutableJavaCopy(java.util.HashSet::new);
     }
 
-    static <T> SingletonSet<T> copyOf(final T element) {
+    static <T> SingletonSet<T> of(final T element) {
         return SingletonSet.of(element);
     }
 
     @SafeVarargs
-    static <T> Set<T> copyOf(final T... elements) {
+    static <T> Set<T> of(final T... elements) {
+        //FIXME use immutable set
         return MutableWrappedHashSet.copyOf(elements);
     }
 

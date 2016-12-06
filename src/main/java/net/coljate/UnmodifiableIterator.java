@@ -1,6 +1,7 @@
 package net.coljate;
 
 import java.util.Iterator;
+import java.util.NoSuchElementException;
 
 /**
  *
@@ -12,6 +13,10 @@ public interface UnmodifiableIterator<T> extends Iterator<T> {
         return iterator instanceof UnmodifiableIterator
                 ? (UnmodifiableIterator) iterator
                 : new DelegatedUnmodifiableIterator<>(iterator);
+    }
+
+    static <T> UnmodifiableIterator<T> empty() {
+        return EmptyUnmodifiableIterator.INSTANCE;
     }
 
     @Override
@@ -36,6 +41,25 @@ public interface UnmodifiableIterator<T> extends Iterator<T> {
         @Override
         public T next() {
             return delegate.next();
+        }
+
+    }
+
+    class EmptyUnmodifiableIterator<T> implements UnmodifiableIterator<T> {
+
+        static final EmptyUnmodifiableIterator INSTANCE = new EmptyUnmodifiableIterator();
+
+        protected EmptyUnmodifiableIterator() {
+        }
+
+        @Override
+        public boolean hasNext() {
+            return false;
+        }
+
+        @Override
+        public T next() {
+            throw new NoSuchElementException();
         }
 
     }

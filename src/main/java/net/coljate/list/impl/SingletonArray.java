@@ -1,5 +1,6 @@
 package net.coljate.list.impl;
 
+import java.io.Serializable;
 import java.util.NoSuchElementException;
 
 import net.coljate.list.AbstractList;
@@ -10,17 +11,19 @@ import net.coljate.list.ImmutableListIterator;
  *
  * @author ollie
  */
-public class ImmutableSingletonArray<T>
+public class SingletonArray<T>
         extends AbstractList<T>
-        implements ImmutableArray<T> {
+        implements ImmutableArray<T>, Serializable {
 
-    public static <T> ImmutableSingletonArray<T> of(final T element) {
-        return new ImmutableSingletonArray<>(element);
+    private static final long serialVersionUID = 1L;
+
+    public static <T> SingletonArray<T> of(final T element) {
+        return new SingletonArray<>(element);
     }
 
     private final T element;
 
-    protected ImmutableSingletonArray(final T element) {
+    protected SingletonArray(final T element) {
         this.element = element;
     }
 

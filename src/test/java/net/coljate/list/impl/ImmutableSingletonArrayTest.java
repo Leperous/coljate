@@ -15,7 +15,7 @@ public class ImmutableSingletonArrayTest extends ImmutableArrayTest {
     @Override
     protected <T> ImmutableArray<T> create(final T... elements) {
         Assume.assumeTrue(elements.length == 1);
-        return ImmutableSingletonArray.of(elements[0]);
+        return SingletonArray.of(elements[0]);
     }
 
 }

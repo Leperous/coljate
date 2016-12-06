@@ -1,6 +1,7 @@
 package net.coljate.collection;
 
 import net.coljate.UnmodifiableIterator;
+import net.coljate.collection.impl.EmptyCollection;
 import net.coljate.collection.impl.SingletonCollection;
 import net.coljate.set.Set;
 
@@ -21,8 +22,12 @@ public interface ImmutableCollection<T> extends Collection<T> {
         return this;
     }
 
-    static <T> SingletonCollection<T> copyOf(final T element) {
-        return Set.copyOf(element);
+    static <T> EmptyCollection<T> of() {
+        return EmptyCollection.instance();
+    }
+
+    static <T> SingletonCollection<T> of(final T element) {
+        return Set.of(element);
     }
 
 }

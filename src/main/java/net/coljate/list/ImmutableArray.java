@@ -2,7 +2,7 @@ package net.coljate.list;
 
 import net.coljate.list.impl.EmptyArray;
 import net.coljate.list.impl.ImmutableNativeArray;
-import net.coljate.list.impl.ImmutableSingletonArray;
+import net.coljate.list.impl.SingletonArray;
 
 /**
  *
@@ -23,7 +23,7 @@ public interface ImmutableArray<T>
     }
 
     static <T> ImmutableArray<T> of(final T element) {
-        return ImmutableSingletonArray.of(element);
+        return SingletonArray.of(element);
     }
 
     @SafeVarargs

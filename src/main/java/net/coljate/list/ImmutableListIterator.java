@@ -12,11 +12,16 @@ public interface ImmutableListIterator<T> extends ListIterator<T>, UnmodifiableI
 
     @SuppressWarnings("unchecked")
     static <T> ImmutableListIterator<T> empty() {
-        return EMPTY;
+        return EmptyImmutableListIterator.INSTANCE;
     }
 
     @SuppressWarnings("rawtypes")
-    ImmutableListIterator EMPTY = new ImmutableListIterator() {
+    class EmptyImmutableListIterator<T> extends EmptyUnmodifiableIterator<T> implements ImmutableListIterator<T> {
+
+        static final EmptyImmutableListIterator INSTANCE = new EmptyImmutableListIterator();
+
+        protected EmptyImmutableListIterator() {
+        }
 
         @Override
         public boolean hasPrevious() {
@@ -24,17 +29,7 @@ public interface ImmutableListIterator<T> extends ListIterator<T>, UnmodifiableI
         }
 
         @Override
-        public Object previous() {
-            throw new NoSuchElementException();
-        }
-
-        @Override
-        public boolean hasNext() {
-            return false;
-        }
-
-        @Override
-        public Object next() {
+        public T previous() {
             throw new NoSuchElementException();
         }
 

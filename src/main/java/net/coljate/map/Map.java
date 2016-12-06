@@ -71,7 +71,9 @@ public interface Map<K, V> extends Collection<Entry<K, V>>, Associative<K, V> {
     }
 
     @Override
-    MutableMap<K, V> mutableCopy();
+    default MutableMap<K, V> mutableCopy() {
+        return MutableMap.viewOf(this.javaMapCopy());
+    }
 
     @Override
     ImmutableMap<K, V> immutableCopy();

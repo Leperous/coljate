@@ -36,7 +36,7 @@ public class EmptyCollection<T>
     
     @Override
     public SingletonCollection<T> with(final T element) {
-        return ImmutableCollection.copyOf(element);
+        return ImmutableCollection.of(element);
     }
     
     protected static class EmptyIterator<T> implements UnmodifiableIterator<T> {

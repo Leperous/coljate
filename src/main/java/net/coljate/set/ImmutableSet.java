@@ -3,7 +3,9 @@ package net.coljate.set;
 import java.util.Collections;
 
 import net.coljate.collection.ImmutableCollection;
+import net.coljate.set.impl.EmptySet;
 import net.coljate.set.impl.ImmutableLazyUnionSet;
+import net.coljate.set.impl.SingletonSet;
 
 /**
  *
@@ -15,7 +17,7 @@ public interface ImmutableSet<T> extends Set<T>, ImmutableCollection<T> {
     default ImmutableSet<T> with(final T element) {
         return this.contains(element)
                 ? this
-                : ImmutableLazyUnionSet.viewOf(this, Set.copyOf(element));
+                : ImmutableLazyUnionSet.viewOf(this, Set.of(element));
     }
 
     @Override
@@ -28,6 +30,14 @@ public interface ImmutableSet<T> extends Set<T>, ImmutableCollection<T> {
     @Deprecated
     default java.util.Set<T> mutableJavaCopy() {
         return Collections.unmodifiableSet(Set.super.mutableJavaCopy());
+    }
+
+    static <T> ImmutableSet<T> of() {
+        return EmptySet.instance();
+    }
+
+    static <T> ImmutableSet<T> of(final T element) {
+        return SingletonSet.of(element);
     }
 
 }

@@ -48,6 +48,12 @@ public abstract class CollectionTest {
     }
 
     @Test
+    public void testContains_Empty() {
+        final Collection<Object> collection = this.create();
+        assertFalse(collection.contains(new Object()));
+    }
+
+    @Test
     public void testContains_Singleton() {
         final Object o1 = new Object();
         final Collection<Object> collection = this.create(o1);
