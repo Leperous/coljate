@@ -12,6 +12,10 @@ public class MutableWrappedHashMap<K, V>
 
     private static final long serialVersionUID = 1L;
 
+    public static <K, V> MutableWrappedHashMap<K, V> create(final int initialCapacity) {
+        return viewOf(new java.util.HashMap<>(initialCapacity));
+    }
+
     public static <K, V> MutableWrappedHashMap<K, V> copyOf(final java.util.Map<K, V> map) {
         return viewOf(copyIntoHashMap(map));
     }

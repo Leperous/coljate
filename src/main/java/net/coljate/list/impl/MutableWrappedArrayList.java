@@ -26,6 +26,10 @@ public class MutableWrappedArrayList<T>
         }
     }
 
+    public static <T> MutableWrappedArrayList<T> viewOf(final java.util.ArrayList<T> list) {
+        return new MutableWrappedArrayList<>(list);
+    }
+
     @SafeVarargs
     public static <T> MutableWrappedArrayList<T> copyOf(final T... elements) {
         final java.util.ArrayList<T> list = new java.util.ArrayList<>(elements.length);

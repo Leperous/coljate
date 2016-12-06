@@ -14,7 +14,7 @@ public abstract class AbstractList<T>
     @Override
     public boolean equals(final Object that) {
         return that instanceof List
-                && this.equals((List) that);
+                && this.elementsEqual((List) that);
     }
 
     @Override

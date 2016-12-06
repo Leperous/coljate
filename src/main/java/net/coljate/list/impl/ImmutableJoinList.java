@@ -47,6 +47,14 @@ public class ImmutableJoinList<T> implements ImmutableList<T> {
         return right.last();
     }
 
+    @Override
+    public String toString() {
+        return this.getClass().getSimpleName()
+                + ": [" + left
+                + " union " + right
+                + ']';
+    }
+
     private final class JoinListIterator implements ImmutableListIterator<T> {
 
         private boolean exhaustedLeft = false;

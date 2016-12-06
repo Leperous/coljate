@@ -36,8 +36,13 @@ public interface List<T> extends Ordered<T> {
         return this.mutableJavaCopy(java.util.ArrayList::new);
     }
 
-    default boolean equals(final List<?> that) {
+    default boolean elementsEqual(final List<?> that) {
         return Equality.orderedEquals(this, that);
+    }
+
+    @SafeVarargs
+    static <T> List<T> copyOf(final T... elements) {
+        return ImmutableList.copyOf(elements);
     }
 
     static <T> MutableWrappedList<T> viewOf(final java.util.List<T> list) {

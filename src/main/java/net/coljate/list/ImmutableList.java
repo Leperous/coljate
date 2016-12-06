@@ -1,11 +1,8 @@
 package net.coljate.list;
 
-import java.util.Collections;
-
 import net.coljate.UnmodifiableIterator;
 import net.coljate.collection.ImmutableCollection;
 import net.coljate.list.impl.ImmutableJoinList;
-import net.coljate.list.impl.ImmutableSingletonList;
 import net.coljate.list.impl.ImmutableWrappedList;
 
 /**
@@ -45,13 +42,13 @@ public interface ImmutableList<T> extends List<T>, ImmutableCollection<T> {
         return this.suffixed(element);
     }
 
-    @Override
-    default java.util.List<T> mutableJavaCopy() {
-        return Collections.unmodifiableList(List.super.mutableJavaCopy());
+    static <T> ImmutableList<T> of(final T element) {
+        return ImmutableArray.of(element);
     }
 
-    static <T> ImmutableList<T> of(final T element) {
-        return new ImmutableSingletonList<>(element);
+    @SafeVarargs
+    static <T> ImmutableList<T> copyOf(final T... elements) {
+        return ImmutableArray.copyOf(elements);
     }
 
     static <T> ImmutableList<T> copyOf(final java.util.Collection<? extends T> collection) {

@@ -1,6 +1,7 @@
 package net.coljate.list;
 
 import net.coljate.feature.Indexed;
+import net.coljate.list.impl.MutableWrappedArrayList;
 
 /**
  *
@@ -30,22 +31,19 @@ public interface Array<T> extends Indexed<T>, List<T> {
     }
 
     @Override
+    default java.util.ArrayList<T> mutableJavaCopy() {
+        return this.mutableJavaCopy(java.util.ArrayList::new);
+    }
+
+    @Override
     default boolean contains(final Object object) {
         return List.super.contains(object);
     }
 
     @Override
-    default boolean equals(final List<?> list) {
-        return list instanceof Array
-                && this.equals((Array) list);
+    default MutableArray<T> mutableCopy() {
+        return MutableWrappedArrayList.viewOf(this.mutableJavaCopy());
     }
-
-    default boolean equals(final Array<?> array) {
-        return List.super.equals(array);
-    }
-
-    @Override
-    MutableArray<T> mutableCopy();
 
     @Override
     ImmutableArray<T> immutableCopy();

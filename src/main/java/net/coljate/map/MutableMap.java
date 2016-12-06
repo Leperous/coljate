@@ -70,6 +70,10 @@ public interface MutableMap<K, V> extends Map<K, V>, MutableCollection<Entry<K, 
         }
     }
 
+    static <K, V> MutableMap<K, V> createHashMap(final int initialCapacity) {
+        return MutableWrappedHashMap.create(initialCapacity);
+    }
+
     static <K, V> MutableMap<K, V> copyIntoHashMap(final java.util.Map<K, V> map) {
         return MutableWrappedHashMap.copyOf(map);
     }
