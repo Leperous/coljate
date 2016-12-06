@@ -1,6 +1,5 @@
 package net.coljate.list;
 
-import net.coljate.UnmodifiableIterator;
 import net.coljate.collection.ImmutableCollection;
 import net.coljate.list.impl.ImmutableJoinList;
 import net.coljate.list.impl.ImmutableWrappedList;
@@ -60,36 +59,6 @@ public interface ImmutableList<T> extends List<T>, ImmutableCollection<T> {
             final ImmutableList<? extends T> left,
             final ImmutableList<? extends T> right) {
         return ImmutableJoinList.of(left, right);
-    }
-
-    interface ImmutableListIterator<T> extends ListIterator<T>, UnmodifiableIterator<T> {
-
-        static <T> ImmutableListIterator<T> empty() {
-            return new ImmutableListIterator<T>() {
-
-                @Override
-                public boolean hasPrevious() {
-                    return false;
-                }
-
-                @Override
-                public T previous() {
-                    throw new UnsupportedOperationException("Not supported yet.");
-                }
-
-                @Override
-                public boolean hasNext() {
-                    return false;
-                }
-
-                @Override
-                public T next() {
-                    throw new UnsupportedOperationException("Not supported yet.");
-                }
-
-            };
-        }
-
     }
 
 }

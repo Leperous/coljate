@@ -4,7 +4,7 @@ import java.util.NoSuchElementException;
 
 import net.coljate.list.AbstractList;
 import net.coljate.list.ImmutableArray;
-import net.coljate.list.ImmutableList.ImmutableListIterator;
+import net.coljate.list.ImmutableListIterator;
 
 /**
  *

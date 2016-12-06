@@ -1,7 +1,7 @@
 package net.coljate.list;
 
 import net.coljate.collection.ImmutableCollectionTest;
-import net.coljate.list.ImmutableList.ImmutableListIterator;
+import net.coljate.list.ImmutableListIterator;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertFalse;

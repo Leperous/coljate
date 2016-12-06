@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 import net.coljate.list.AbstractList;
 import net.coljate.list.ImmutableArray;
+import net.coljate.list.ImmutableListIterator;
 
 /**
  *

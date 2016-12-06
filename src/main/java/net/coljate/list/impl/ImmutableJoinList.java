@@ -3,6 +3,7 @@ package net.coljate.list.impl;
 import java.util.Objects;
 
 import net.coljate.list.ImmutableList;
+import net.coljate.list.ImmutableListIterator;
 
 /**
  *
