@@ -13,4 +13,15 @@ public abstract class AbstractCollection<T> implements Collection<T> {
         return this.getClass().getSimpleName() + "[" + Strings.toString(this) + "]";
     }
 
+    @Override
+    public boolean equals(final Object that) {
+        return this == that
+                || (that instanceof AbstractCollection && this.equals((AbstractCollection) that));
+    }
+
+    protected abstract boolean equals(AbstractCollection<?> that);
+
+    @Override
+    public abstract int hashCode();
+
 }

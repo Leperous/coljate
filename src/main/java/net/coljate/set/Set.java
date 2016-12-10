@@ -1,11 +1,13 @@
 package net.coljate.set;
 
 import net.coljate.collection.Collection;
+import net.coljate.set.impl.ImmutableWrappedSet;
 import net.coljate.set.impl.LazyUnionSet;
 import net.coljate.set.impl.MutableWrappedHashSet;
 import net.coljate.set.impl.MutableWrappedSet;
 import net.coljate.set.impl.SingletonSet;
 import net.coljate.set.impl.WrappedSet;
+import net.coljate.util.Equality;
 
 /**
  *
@@ -24,12 +26,16 @@ public interface Set<T> extends Collection<T> {
 
     @Override
     default ImmutableSet<T> immutableCopy() {
-        throw new UnsupportedOperationException();
+        return ImmutableWrappedSet.copyOf(this);
     }
 
     @Override
     default java.util.Set<T> mutableJavaCopy() {
         return this.mutableJavaCopy(java.util.HashSet::new);
+    }
+
+    default boolean elementsEqual(final Set<?> that) {
+        return that != null && Set.elementsEqual(this, that);
     }
 
     static <T> SingletonSet<T> of(final T element) {
@@ -44,6 +50,14 @@ public interface Set<T> extends Collection<T> {
 
     static <T> Set<T> viewOf(final java.util.Set<T> set) {
         return WrappedSet.viewOf(set);
+    }
+
+    static int elementHash(final Set<?> set) {
+        throw new UnsupportedOperationException();
+    }
+
+    static boolean elementsEqual(final Set<?> s1, final Set<?> s2) {
+        return Equality.unorderedEquals(s1, s2);
     }
 
 }

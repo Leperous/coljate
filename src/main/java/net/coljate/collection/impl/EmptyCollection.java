@@ -14,43 +14,53 @@ import net.coljate.collection.MutableCollection;
 public class EmptyCollection<T>
         extends AbstractCollection<T>
         implements ImmutableCollection<T> {
-    
+
     private static final EmptyIterator EMPTY_ITERATOR = new EmptyIterator();
     private static final EmptyCollection EMPTY_COLLECTION = new EmptyCollection();
-    
+
     @SuppressWarnings("unchecked")
     public static <T> EmptyCollection<T> instance() {
         return EMPTY_COLLECTION;
     }
-    
+
     @Override
     public MutableCollection<? extends T> mutableCopy() {
         return MutableCollection.copyOf();
     }
-    
+
     @Override
     @SuppressWarnings("unchecked")
     public UnmodifiableIterator<T> iterator() {
         return EMPTY_ITERATOR;
     }
-    
+
     @Override
     public SingletonCollection<T> with(final T element) {
         return ImmutableCollection.of(element);
     }
-    
+
+    @Override
+    protected boolean equals(final AbstractCollection<?> that) {
+        return that instanceof EmptyCollection;
+    }
+
+    @Override
+    public int hashCode() {
+        return 123;
+    }
+
     protected static class EmptyIterator<T> implements UnmodifiableIterator<T> {
-        
+
         @Override
         public boolean hasNext() {
             return false;
         }
-        
+
         @Override
         public T next() {
             throw new NoSuchElementException();
         }
-        
+
     }
-    
+
 }

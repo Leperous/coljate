@@ -1,18 +1,23 @@
 package net.coljate.list.impl;
 
 import net.coljate.list.ImmutableArray;
-import net.coljate.list.ImmutableArrayTest;
+import net.coljate.list.ImmutableList;
+import net.coljate.list.ImmutableListTest;
 
 /**
  *
  * @author ollie
  */
 @SuppressWarnings({"unchecked", "rawtypes"})
-public class ImmutableJoinListTest extends ImmutableArrayTest {
+public class ImmutableJoinListTest extends ImmutableListTest {
 
     @Override
-    protected <T> ImmutableArray<T> create(final T... elements) {
-        throw new UnsupportedOperationException("Not supported yet.");
+    protected <T> ImmutableList<T> create(final T... elements) {
+        ImmutableList<T> join = ImmutableArray.of();
+        for (final T element : elements) {
+            join = ImmutableJoinList.of(join, ImmutableArray.of(element));
+        }
+        return join;
     }
 
 }

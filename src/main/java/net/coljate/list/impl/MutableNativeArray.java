@@ -1,5 +1,6 @@
 package net.coljate.list.impl;
 
+import net.coljate.list.AbstractList;
 import net.coljate.list.Array;
 import net.coljate.list.ListIterator;
 import net.coljate.list.MutableArray;
@@ -11,6 +12,7 @@ import net.coljate.util.Arrays;
  * @see java.util.ArrayList
  */
 public class MutableNativeArray<T>
+        extends AbstractList<T>
         implements NativeArray<T>, MutableArray<T> {
 
     public static <T> MutableNativeArray<T> copyOf(final T[] elements) {
@@ -117,8 +119,8 @@ public class MutableNativeArray<T>
 
     @Override
     public boolean equals(final Object obj) {
-        return obj instanceof Array
-                && this.equals((Array) obj);
+        return obj instanceof MutableNativeArray
+                && this.elementsEqual((Array) obj);
     }
 
     private final class ArrayListIterator implements ListIterator<T> {

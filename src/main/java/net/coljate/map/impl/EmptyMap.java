@@ -1,5 +1,7 @@
 package net.coljate.map.impl;
 
+import java.io.Serializable;
+
 import net.coljate.UnmodifiableIterator;
 import net.coljate.collection.ImmutableCollection;
 import net.coljate.map.AbstractMap;
@@ -13,7 +15,7 @@ import net.coljate.set.ImmutableSet;
  */
 public class EmptyMap<K, V>
         extends AbstractMap<K, V>
-        implements ImmutableMap<K, V> {
+        implements ImmutableMap<K, V>, Serializable {
 
     @Override
     public Entry<K, V> entry(final Object key) {
@@ -38,6 +40,11 @@ public class EmptyMap<K, V>
     @Override
     public UnmodifiableIterator<Entry<K, V>> iterator() {
         throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    protected boolean equals(final AbstractMap<?, ?> that) {
+        return that instanceof EmptyMap;
     }
 
 }

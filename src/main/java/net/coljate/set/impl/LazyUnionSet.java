@@ -2,6 +2,7 @@ package net.coljate.set.impl;
 
 import java.util.Iterator;
 import java.util.NoSuchElementException;
+import java.util.Objects;
 
 import net.coljate.collection.LazyCollection;
 import net.coljate.set.AbstractSet;
@@ -78,6 +79,17 @@ public class LazyUnionSet<T>
             }
 
         };
+    }
+
+    @Override
+    protected boolean equals(final Set<?> that) {
+        return that instanceof LazyUnionSet
+                && this.equals((LazyUnionSet) that);
+    }
+
+    protected boolean equals(final LazyUnionSet<?> that) {
+        return Objects.equals(s1, that.s1)
+                && Objects.equals(s2, that.s2);
     }
 
 }

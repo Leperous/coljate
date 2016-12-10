@@ -36,7 +36,7 @@ public interface Collection<T> extends IterableExtension<T>, StreamExtension<T> 
         return this.mutableJavaCopy(java.util.ArrayList::new);
     }
 
-    default <C extends java.util.Collection<T>> C mutableJavaCopy(final IntFunction<? extends C> createCollection) {
+    default <C extends java.util.Collection<? super T>> C mutableJavaCopy(final IntFunction<? extends C> createCollection) {
         final C collection = createCollection.apply(this.count());
         this.forEach(collection::add);
         return collection;

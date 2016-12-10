@@ -7,6 +7,7 @@ import net.coljate.UnmodifiableIterator;
 import net.coljate.collection.AbstractCollection;
 import net.coljate.collection.ImmutableCollection;
 import net.coljate.collection.MutableCollection;
+import net.coljate.util.Hash;
 
 /**
  *
@@ -77,6 +78,19 @@ public class SingletonCollection<T>
     @Deprecated
     public SingletonCollection<T> immutableCopy() {
         return this;
+    }
+
+    @Override
+    protected boolean equals(final AbstractCollection<?> that) {
+        return that instanceof SingletonCollection
+                && Objects.equals(this.element(), ((SingletonCollection) that).element());
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 41 * hash + Objects.hashCode(this.element);
+        return hash;
     }
 
 }

@@ -22,6 +22,10 @@ public interface ImmutableArray<T>
         return this;
     }
 
+    static <T> ImmutableArray<T> of() {
+        return EmptyArray.instance();
+    }
+
     static <T> ImmutableArray<T> of(final T element) {
         return SingletonArray.of(element);
     }

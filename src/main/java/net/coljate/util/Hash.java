@@ -14,4 +14,8 @@ public class Hash {
         return hashCode;
     }
 
+    public static int unorderedHash(final Iterable<?> iterable) {
+        throw new UnsupportedOperationException();
+    }
+
 }

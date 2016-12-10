@@ -6,6 +6,12 @@ package net.coljate.feature;
  */
 public interface Indexed<T> extends FastGet<Integer, T> {
 
+    /**
+     *
+     * @param index
+     * @return
+     * @throws IndexOutOfBoundsException
+     */
     T get(int index);
 
     @Override

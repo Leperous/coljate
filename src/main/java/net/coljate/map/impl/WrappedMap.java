@@ -1,8 +1,10 @@
 package net.coljate.map.impl;
 
 import java.util.Iterator;
+import java.util.Objects;
 
 import net.coljate.collection.Collection;
+import net.coljate.map.AbstractMap;
 import net.coljate.map.Entry;
 import net.coljate.map.ImmutableMap;
 import net.coljate.map.ImmutableEntry;
@@ -15,7 +17,9 @@ import net.coljate.util.Iterators;
  *
  * @author ollie
  */
-public class WrappedMap<K, V> implements Map<K, V> {
+public class WrappedMap<K, V>
+        extends AbstractMap<K, V>
+        implements Map<K, V> {
 
     private final java.util.Map<K, V> delegate;
     private Set<K> keys;
@@ -77,6 +81,12 @@ public class WrappedMap<K, V> implements Map<K, V> {
     @Override
     public ImmutableMap<K, V> immutableCopy() {
         throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    protected boolean equals(AbstractMap<?, ?> that) {
+        return that instanceof WrappedMap
+                && Objects.equals(this.delegate, ((WrappedMap) that).delegate);
     }
 
 }

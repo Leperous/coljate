@@ -1,8 +1,11 @@
 package net.coljate.set.impl;
 
+import java.io.Serializable;
+
 import net.coljate.UnmodifiableIterator;
 import net.coljate.set.AbstractSet;
 import net.coljate.set.ImmutableSet;
+import net.coljate.set.Set;
 
 /**
  *
@@ -10,8 +13,9 @@ import net.coljate.set.ImmutableSet;
  */
 public class EmptySet<T>
         extends AbstractSet<T>
-        implements ImmutableSet<T> {
+        implements ImmutableSet<T>, Serializable {
 
+    private static final long serialVersionUID = 1L;
     private static final EmptySet INSTANCE = new EmptySet();
 
     @SuppressWarnings("unchecked")
@@ -30,6 +34,11 @@ public class EmptySet<T>
     @Override
     public UnmodifiableIterator<T> iterator() {
         return UnmodifiableIterator.empty();
+    }
+
+    @Override
+    public boolean equals(final Set<?> that) {
+        return that instanceof EmptySet;
     }
 
 }

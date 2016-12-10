@@ -30,4 +30,12 @@ public class Iterators {
         };
     }
 
+    public static int count(final Iterator<?> iterator) {
+        int count = 0;
+        while (iterator.hasNext()) {
+            count++;
+        }
+        return count;
+    }
+
 }

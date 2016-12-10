@@ -5,6 +5,7 @@ import java.io.Serializable;
 import net.coljate.collection.impl.SingletonCollection;
 import net.coljate.set.ImmutableSet;
 import net.coljate.set.MutableSet;
+import net.coljate.set.Set;
 
 /**
  *
@@ -38,6 +39,17 @@ public class SingletonSet<T>
     @Deprecated
     public SingletonSet<T> immutableCopy() {
         return this;
+    }
+
+    @Override
+    public boolean equals(final Object that) {
+        return that instanceof SingletonSet
+                && this.elementsEqual((Set) that);
+    }
+
+    @Override
+    public int hashCode() {
+        return Set.elementHash(this);
     }
 
 }

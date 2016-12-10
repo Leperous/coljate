@@ -13,7 +13,12 @@ public abstract class AbstractList<T>
 
     @Override
     public boolean equals(final Object that) {
-        return that instanceof List
+        return super.equals(that);
+    }
+
+    @Override
+    protected boolean equals(final AbstractCollection<?> that) {
+        return that instanceof AbstractList
                 && this.elementsEqual((List) that);
     }
 
