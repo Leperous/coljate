@@ -1,20 +1,24 @@
 package net.coljate.collection.impl;
 
-import net.coljate.collection.ImmutableCollectionTest;
-
-import org.junit.Assume;
+import net.coljate.AbstractTest;
+import net.coljate.collection.EmptyCollectionTests;
 
 /**
  *
  * @author ollie
  */
-@SuppressWarnings({"unchecked", "rawtypes"})
-public class EmptyCollectionTest extends ImmutableCollectionTest {
+public class EmptyCollectionTest
+        extends AbstractTest
+        implements EmptyCollectionTests<Object> {
 
     @Override
-    protected <T> EmptyCollection<T> create(final T... elements) {
-        Assume.assumeTrue(elements.length == 0);
+    public EmptyCollection<Object> createEmpty() {
         return EmptyCollection.instance();
+    }
+
+    @Override
+    public Object createObject() {
+        return new Object();
     }
 
 }

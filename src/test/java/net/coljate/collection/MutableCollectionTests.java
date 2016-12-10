@@ -8,32 +8,32 @@ import org.junit.Test;
  *
  * @author ollie
  */
-public abstract class MutableCollectionTest extends CollectionTest {
+public interface MutableCollectionTests<T> extends CollectionTests<T> {
 
-    protected abstract <T> MutableCollection<T> create(T... elements);
+    MutableCollection<T> create(T... elements);
 
     @Test
-    public void testRemoveFirst_Singleton() {
-        final Object element = this.createObject();
-        final MutableCollection<Object> collection = this.create(element);
+    default void testRemoveFirst_Singleton() {
+        final T element = this.createObject();
+        final MutableCollection<T> collection = this.create(element);
         assertTrue("Should remove element", collection.removeFirst(element));
         assertTrue(collection.isEmpty());
         assertFalse(collection.contains(element));
     }
 
     @Test
-    public void testClear() {
+    default void testClear() {
 
         //Given
-        final Object element = this.createObject();
-        final MutableCollection<Object> collection = this.create(element);
+        final T element = this.createObject();
+        final MutableCollection<T> collection = this.create(element);
         assertTrue(collection.contains(element));
 
         //When
         collection.clear();
 
         //Then
-        this.assertEmpty(collection);
+        assertTrue(collection.isEmpty());
         assertFalse(collection.contains(element));
 
     }

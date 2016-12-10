@@ -1,20 +1,19 @@
 package net.coljate.set.impl;
 
-import net.coljate.set.ImmutableSetTest;
-
-import org.junit.Assume;
+import net.coljate.AbstractObjectTest;
+import net.coljate.collection.SingletonCollectionTests;
 
 /**
  *
  * @author ollie
  */
-@SuppressWarnings({"unchecked", "rawtypes"})
-public class SingletonSetTest extends ImmutableSetTest {
+public class SingletonSetTest
+        extends AbstractObjectTest
+        implements SingletonCollectionTests<Object> {
 
     @Override
-    protected <T> SingletonSet<T> create(final T... elements) {
-        Assume.assumeTrue(elements.length == 1);
-        return SingletonSet.of(elements[0]);
+    public SingletonSet<Object> createSingleton(final Object element) {
+        return SingletonSet.of(element);
     }
 
 }
