@@ -10,6 +10,10 @@ public class MutableWrappedHashSet<T>
         extends MutableWrappedSet<T>
         implements HashSet<T>, Serializable {
 
+    public static <T> MutableWrappedHashSet<T> create(final int initialCapacity) {
+        return viewOf(new java.util.HashSet<>(initialCapacity));
+    }
+
     @SafeVarargs
     public static <T> MutableWrappedHashSet<T> copyOf(final T... elements) {
         final java.util.HashSet<T> set = new java.util.HashSet<>(elements.length);
@@ -26,7 +30,7 @@ public class MutableWrappedHashSet<T>
     public static <T> MutableWrappedHashSet<T> copyOf(final java.util.Set<T> set) {
         return new MutableWrappedHashSet<>(new java.util.HashSet<>(set));
     }
-    
+
     private static final long serialVersionUID = 1L;
 
     private final java.util.HashSet<T> delegate;

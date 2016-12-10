@@ -27,7 +27,7 @@ public abstract class ImmutableListTest extends ImmutableCollectionTest {
     
     @Test
     public void testListIterator_Singleton() {
-        final Object element = new Object();
+        final Object element = this.createObject();
         final ImmutableList<Object> list = this.create(element);
         final ImmutableListIterator<Object> iterator = list.iterator();
         assertTrue(iterator.hasNext());

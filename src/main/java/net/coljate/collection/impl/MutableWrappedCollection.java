@@ -13,7 +13,11 @@ public class MutableWrappedCollection<T>
         extends WrappedCollection<T>
         implements MutableCollection<T> {
 
-    public static <T> MutableCollection<T> copyOf(final java.util.Collection<? extends T> collection) {
+    public static <T> MutableWrappedCollection<T> viewOf(final java.util.Collection<T> collection) {
+        return new MutableWrappedCollection<>(collection);
+    }
+
+    public static <T> MutableWrappedCollection<T> copyOf(final java.util.Collection<? extends T> collection) {
         return new MutableWrappedCollection<>(new java.util.ArrayList<>(collection));
     }
 

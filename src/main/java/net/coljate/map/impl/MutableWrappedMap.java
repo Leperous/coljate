@@ -1,5 +1,6 @@
 package net.coljate.map.impl;
 
+import net.coljate.collection.MutableCollection;
 import net.coljate.map.MutableMap;
 
 /**
@@ -48,6 +49,15 @@ public class MutableWrappedMap<K, V>
         return delegate.containsKey(key)
                 ? new MutableWrappedEntry((K) key)
                 : null;
+    }
+
+    private MutableCollection<V> values;
+
+    @Override
+    public MutableCollection<V> values() {
+        return values == null
+                ? (values = MutableCollection.viewOf(delegate.values()))
+                : values;
     }
 
     private final class MutableWrappedEntry implements MutableMap.MutableEntry<K, V> {

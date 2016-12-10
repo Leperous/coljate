@@ -24,6 +24,10 @@ public abstract class CollectionTest {
      */
     protected abstract <T> Collection<T> create(T... elements) throws AssumptionViolatedException;
 
+    protected Object createObject() {
+        return new Object();
+    }
+
     @Test
     public void testCount_Empty() {
         final Collection<Object> collection = this.create();
@@ -50,27 +54,27 @@ public abstract class CollectionTest {
     @Test
     public void testContains_Empty() {
         final Collection<Object> collection = this.create();
-        assertFalse(collection.contains(new Object()));
+        assertFalse(collection.contains(this.createObject()));
     }
 
     @Test
     public void testContains_Singleton() {
-        final Object o1 = new Object();
+        final Object o1 = this.createObject();
         final Collection<Object> collection = this.create(o1);
         assertTrue(collection.contains(o1));
-        assertFalse(collection.contains(new Object()));
+        assertFalse(collection.contains(this.createObject()));
     }
 
     @Test
     public void testCount_Singleton() {
-        final Collection<Object> collection = this.create(new Object());
+        final Collection<Object> collection = this.create(this.createObject());
         assertFalse(collection.isEmpty());
         assertThat(collection.count(), is(1));
     }
 
     @Test
     public void testEquality_Singleton() {
-        final Object o1 = new Object();
+        final Object o1 = this.createObject();
         final Collection<Object> c1 = this.create(o1);
         final Collection<Object> c2 = this.create(o1);
         assertThat(c1, is(c2));

@@ -1,7 +1,9 @@
 package net.coljate.feature;
 
 import java.util.Objects;
+import java.util.function.IntFunction;
 import java.util.function.Predicate;
+import java.util.function.ToIntFunction;
 
 import net.coljate.Container;
 
@@ -23,6 +25,14 @@ public interface IterableExtension<T> extends Container, Iterable<T> {
             }
         }
         return count;
+    }
+
+    default int sum(final ToIntFunction<? super T> intFunction) {
+        int sum = 0;
+        for (final T element : this) {
+            sum += intFunction.applyAsInt(element);
+        }
+        return sum;
     }
 
     @Override
@@ -61,8 +71,7 @@ public interface IterableExtension<T> extends Container, Iterable<T> {
     /**
      *
      * @param predicate
-     * @return true if all elements match the given predicate, or if there are
-     * no elements.
+     * @return true if all elements match the given predicate, or if there are no elements.
      */
     default boolean allMatch(final Predicate<? super T> predicate) {
         for (final T element : this) {

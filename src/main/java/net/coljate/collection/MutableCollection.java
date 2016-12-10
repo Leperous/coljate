@@ -1,5 +1,6 @@
 package net.coljate.collection;
 
+import net.coljate.collection.impl.MutableWrappedCollection;
 import net.coljate.list.impl.MutableWrappedList;
 
 /**
@@ -20,6 +21,10 @@ public interface MutableCollection<T> extends Collection<T> {
             removed &= this.removeAll(element);
         }
         return removed;
+    }
+
+    static <T> MutableCollection<T> viewOf(final java.util.Collection<T> collection) {
+        return MutableWrappedCollection.viewOf(collection);
     }
 
     @SafeVarargs

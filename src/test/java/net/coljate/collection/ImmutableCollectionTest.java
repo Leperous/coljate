@@ -17,7 +17,7 @@ public abstract class ImmutableCollectionTest extends CollectionTest {
 
     @Test
     public void testImmutableCopy_Singleton() {
-        final ImmutableCollection<Object> c1 = this.create(new Object());
+        final ImmutableCollection<Object> c1 = this.create(this.createObject());
         final ImmutableCollection<Object> c2 = c1.immutableCopy();
         assertThat(c1, sameInstance(c2));
     }
@@ -25,8 +25,8 @@ public abstract class ImmutableCollectionTest extends CollectionTest {
     @Test
     public void testCopyIsImmutable_Two() {
 
-        final Object o1 = new Object();
-        final Object o2 = new Object();
+        final Object o1 = this.createObject();
+        final Object o2 = this.createObject();
         final Object[] elements = new Object[]{o1, o2};
 
         final ImmutableCollection<Object> collection = this.create(elements);

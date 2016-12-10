@@ -16,8 +16,8 @@ public abstract class MutableArrayTest extends MutableListTest {
     
     @Test
     public void testElementIndex() {
-        final Object o1 = new Object();
-        final Object o2 = new Object();
+        final Object o1 = this.createObject();
+        final Object o2 = this.createObject();
         final MutableArray<Object> array = this.create(o1, o2);
         assertThat(array.get(0), is(o1));
         assertThat(array.get(1), is(o2));
@@ -25,8 +25,8 @@ public abstract class MutableArrayTest extends MutableListTest {
     
     @Test
     public void testResize_Expand() {
-        final Object o1 = new Object();
-        final Object o2 = new Object();
+        final Object o1 = this.createObject();
+        final Object o2 = this.createObject();
         final MutableArray<Object> array = this.create(o1, o2);
         array.resize(3);
         assertThat(array.length(), is(3));

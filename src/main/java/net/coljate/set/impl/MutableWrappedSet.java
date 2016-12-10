@@ -42,7 +42,7 @@ public class MutableWrappedSet<T>
     }
 
     @Override
-    public boolean removeAll(final Object element) {
+    public boolean remove(final Object element) {
         return delegate.remove(element);
     }
 

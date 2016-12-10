@@ -16,7 +16,7 @@ public abstract class MutableCollectionTest extends CollectionTest {
     public void testClear() {
 
         //Given
-        final Object element = new Object();
+        final Object element = this.createObject();
         final MutableCollection<Object> collection = this.create(element);
         assertTrue(collection.contains(element));
 

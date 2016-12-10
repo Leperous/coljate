@@ -25,7 +25,7 @@ public abstract class QueueTest extends MutableCollectionTest {
 
     @Test
     public void testPoll_Singleton() {
-        final Object element = new Object();
+        final Object element = this.createObject();
         final Queue<Object> queue = this.create(element);
         assertThat(queue.poll(), is(element));
         assertNull(queue.poll());

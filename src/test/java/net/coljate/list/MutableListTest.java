@@ -17,8 +17,8 @@ public abstract class MutableListTest extends MutableCollectionTest {
 
     @Test
     public void testSuffix() {
-        final Object o1 = new Object();
-        final Object o2 = new Object();
+        final Object o1 = this.createObject();
+        final Object o2 = this.createObject();
         final MutableList<Object> list = this.create(o1);
         list.suffix(o2);
         assertThat(list.count(), is(2));
@@ -27,8 +27,8 @@ public abstract class MutableListTest extends MutableCollectionTest {
 
     @Test
     public void testPrefix() {
-        final Object o1 = new Object();
-        final Object o2 = new Object();
+        final Object o1 = this.createObject();
+        final Object o2 = this.createObject();
         final MutableList<Object> list = this.create(o1);
         list.prefix(o2);
         assertThat(list.count(), is(2));
@@ -37,9 +37,9 @@ public abstract class MutableListTest extends MutableCollectionTest {
     
     @Test
     public void testIterator() {
-        final Object o1 = new Object();
-        final Object o2 = new Object();
-        final Object o3 = new Object();
+        final Object o1 = this.createObject();
+        final Object o2 = this.createObject();
+        final Object o3 = this.createObject();
         final MutableList<Object> list = this.create(o1, o2, o3);
     }
 

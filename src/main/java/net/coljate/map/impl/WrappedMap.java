@@ -9,6 +9,7 @@ import net.coljate.map.ImmutableEntry;
 import net.coljate.map.Map;
 import net.coljate.map.MutableMap;
 import net.coljate.set.Set;
+import net.coljate.util.Iterators;
 
 /**
  *
@@ -57,17 +58,24 @@ public class WrappedMap<K, V> implements Map<K, V> {
     }
 
     @Override
+    public boolean isEmpty() {
+        return delegate.isEmpty();
+    }
+
+    @Override
+    public Iterator<Entry<K, V>> iterator() {
+        return Iterators.transform(
+                delegate.entrySet().iterator(),
+                entry -> new ImmutableEntry<>(entry.getKey(), entry.getValue()));
+    }
+
+    @Override
     public MutableMap<K, V> mutableCopy() {
         return new MutableWrappedMap<>(this.mutableDelegateCopy());
     }
 
     @Override
     public ImmutableMap<K, V> immutableCopy() {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
-
-    @Override
-    public Iterator<Entry<K, V>> iterator() {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
