@@ -84,8 +84,9 @@ public class WrappedMap<K, V>
     }
 
     @Override
-    protected boolean equals(AbstractMap<?, ?> that) {
+    protected boolean equals(final AbstractMap<?, ?> that) {
         return that instanceof WrappedMap
+                && this.getClass() == that.getClass()
                 && Objects.equals(this.delegate, ((WrappedMap) that).delegate);
     }
 

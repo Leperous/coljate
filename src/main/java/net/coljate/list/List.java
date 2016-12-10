@@ -2,6 +2,7 @@ package net.coljate.list;
 
 import net.coljate.feature.Ordered;
 import net.coljate.list.impl.ImmutableNativeArray;
+import net.coljate.list.impl.MutableWrappedArrayList;
 import net.coljate.list.impl.MutableWrappedList;
 import net.coljate.util.Equality;
 
@@ -23,7 +24,7 @@ public interface List<T> extends Ordered<T> {
 
     @Override
     default MutableList<T> mutableCopy() {
-        throw new UnsupportedOperationException(); //TODO
+        return MutableWrappedArrayList.viewOf(this.mutableJavaCopy(java.util.ArrayList::new));
     }
 
     @Override

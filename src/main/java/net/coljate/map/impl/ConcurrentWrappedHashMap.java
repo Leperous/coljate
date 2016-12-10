@@ -8,7 +8,7 @@ import net.coljate.map.ConcurrentMap;
  */
 public class ConcurrentWrappedHashMap<K, V>
         extends MutableWrappedMap<K, V>
-        implements HashMap<K,V>, ConcurrentMap<K, V> {
+        implements HashMap<K, V>, ConcurrentMap<K, V> {
 
     public static <K, V> ConcurrentWrappedHashMap<K, V> create(final int initialCapacity) {
         return new ConcurrentWrappedHashMap<>(new java.util.concurrent.ConcurrentHashMap<>(initialCapacity));

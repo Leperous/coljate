@@ -30,6 +30,7 @@ public abstract class MutableListTest extends MutableCollectionTest {
         final Object o1 = this.createObject();
         final Object o2 = this.createObject();
         final MutableList<Object> list = this.create(o1);
+        assertThat(list.count(), is(1));
         list.prefix(o2);
         assertThat(list.count(), is(2));
         assertThat(list, is(this.create(o2, o1)));

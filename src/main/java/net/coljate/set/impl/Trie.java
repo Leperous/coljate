@@ -25,7 +25,7 @@ public class Trie
 
     public static Trie copyOf(final String... strings) {
         final Trie trie = new Trie();
-        Arrays.copyInto(strings, trie::add);
+        Arrays.consume(strings, trie::add);
         return trie;
     }
 

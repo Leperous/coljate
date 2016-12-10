@@ -26,13 +26,4 @@ public abstract class MutableSetTest extends MutableCollectionTest {
         assertThat(set.count(), is(1));
     }
 
-    @Test
-    public void testRemove_Singleton() {
-        final Object element = this.createObject();
-        final MutableSet<Object> set = this.create(element);
-        assertTrue("Should remove element", set.remove(element));
-        assertTrue(set.isEmpty());
-        assertFalse(set.contains(element));
-    }
-
 }

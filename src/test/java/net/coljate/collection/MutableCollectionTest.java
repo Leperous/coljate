@@ -13,6 +13,15 @@ public abstract class MutableCollectionTest extends CollectionTest {
     protected abstract <T> MutableCollection<T> create(T... elements);
 
     @Test
+    public void testRemoveFirst_Singleton() {
+        final Object element = this.createObject();
+        final MutableCollection<Object> collection = this.create(element);
+        assertTrue("Should remove element", collection.removeFirst(element));
+        assertTrue(collection.isEmpty());
+        assertFalse(collection.contains(element));
+    }
+
+    @Test
     public void testClear() {
 
         //Given

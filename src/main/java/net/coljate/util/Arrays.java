@@ -24,7 +24,7 @@ public final class Arrays {
         return false;
     }
 
-    public static <T> void copyInto(final T[] elements, final Consumer<T> consumer) {
+    public static <T> void consume(final T[] elements, final Consumer<T> consumer) {
         for (int i = 0; i < elements.length; i++) {
             consumer.accept(elements[i]);
         }

@@ -5,6 +5,7 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
 import org.junit.AssumptionViolatedException;
+import org.junit.Before;
 import org.junit.Test;
 
 /**
@@ -13,19 +14,33 @@ import org.junit.Test;
  */
 public abstract class CollectionTest {
 
+    private int objectCounter = 0;
+
+    @Before
+    public final void resetObjectCounter() {
+        objectCounter = 0;
+    }
+
     /**
      *
      * @param <T>
      * @param elements
      * @return a collection containing the given elements.
-     * @throws AssumptionViolatedException if the collection does not support
-     * containing the given number of elements. In this case the test will be
-     * skipped.
+     * @throws AssumptionViolatedException if the collection does not support containing the given number of elements.
+     * In this case the test will be skipped.
      */
     protected abstract <T> Collection<T> create(T... elements) throws AssumptionViolatedException;
 
     protected Object createObject() {
-        return new Object();
+        final int id = ++objectCounter;
+        return new Object() {
+
+            @Override
+            public String toString() {
+                return String.valueOf(id) + ":" + super.toString();
+            }
+
+        };
     }
 
     @Test

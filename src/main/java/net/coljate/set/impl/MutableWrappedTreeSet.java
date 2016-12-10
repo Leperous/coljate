@@ -25,14 +25,14 @@ public class MutableWrappedTreeSet<T>
     @SafeVarargs
     public static <T> MutableWrappedTreeSet<T> copyOf(final Comparator<? super T> comparator, final T... elements) {
         final java.util.TreeSet<T> set = new java.util.TreeSet<>(comparator);
-        Arrays.copyInto(elements, set::add);
+        Arrays.consume(elements, set::add);
         return viewOf(set);
     }
 
     @SafeVarargs
     public static <T extends Comparable<? super T>> MutableWrappedTreeSet<T> copyOf(final T... elements) {
         final java.util.TreeSet<T> set = new java.util.TreeSet<>();
-        Arrays.copyInto(elements, set::add);
+        Arrays.consume(elements, set::add);
         return viewOf(set);
     }
 
