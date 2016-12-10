@@ -19,9 +19,9 @@ public class LazyUnionSet<T>
 
     @SuppressWarnings("unchecked")
     public static <T> Set<T> viewOf(final Set<? extends T> s1, final Set<? extends T> s2) {
-        if (s1.isEmpty()) {
+        if (s1 instanceof EmptySet) {
             return (Set<T>) s2;
-        } else if (s2.isEmpty()) {
+        } else if (s2 instanceof EmptySet) {
             return (Set<T>) s1;
         } else {
             return new LazyUnionSet<>(s1, s2);
