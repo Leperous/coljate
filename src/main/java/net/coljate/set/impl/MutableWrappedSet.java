@@ -2,6 +2,7 @@ package net.coljate.set.impl;
 
 import net.coljate.set.MutableSet;
 import net.coljate.set.Set;
+import net.coljate.util.Arrays;
 
 /**
  *
@@ -10,6 +11,17 @@ import net.coljate.set.Set;
 public class MutableWrappedSet<T>
         extends WrappedSet<T>
         implements MutableSet<T> {
+
+    public static <T> MutableWrappedSet<T> of() {
+        return viewOf(new java.util.HashSet<>());
+    }
+
+    @SafeVarargs
+    public static <T> MutableWrappedSet<T> copyOf(final T... elements) {
+        final java.util.Set<T> set = new java.util.HashSet<>(elements.length);
+        Arrays.consume(elements, set::add);
+        return viewOf(set);
+    }
 
     public static <T> MutableWrappedSet<T> copyOf(final Set<T> set) {
         return viewOf(set.mutableJavaCopy());
