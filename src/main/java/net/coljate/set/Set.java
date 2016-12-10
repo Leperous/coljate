@@ -1,6 +1,7 @@
 package net.coljate.set;
 
 import net.coljate.collection.Collection;
+import net.coljate.set.impl.EmptySet;
 import net.coljate.set.impl.ImmutableWrappedSet;
 import net.coljate.set.impl.LazyUnionSet;
 import net.coljate.set.impl.MutableWrappedHashSet;
@@ -36,6 +37,10 @@ public interface Set<T> extends Collection<T> {
 
     default boolean elementsEqual(final Set<?> that) {
         return that != null && Set.elementsEqual(this, that);
+    }
+
+    static <T> EmptySet<T> of() {
+        return EmptySet.instance();
     }
 
     static <T> SingletonSet<T> of(final T element) {

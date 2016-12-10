@@ -3,15 +3,15 @@ package net.coljate.set.impl;
 import java.util.Iterator;
 import java.util.Objects;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import net.coljate.map.Entry;
 import net.coljate.map.MutableMap;
 import net.coljate.set.AbstractSet;
 import net.coljate.set.MutableSet;
 import net.coljate.set.Set;
 import net.coljate.util.Arrays;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  *
@@ -105,6 +105,7 @@ public class Trie
         root.clear();
     }
 
+    @Override
     protected boolean equals(final Set<?> that) {
         return that instanceof Trie
                 && Objects.equals(this.root, ((Trie) that).root);
