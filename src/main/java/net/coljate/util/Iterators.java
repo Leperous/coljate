@@ -2,6 +2,7 @@ package net.coljate.util;
 
 import java.util.Iterator;
 import java.util.function.Function;
+import java.util.function.Predicate;
 
 /**
  *
@@ -25,6 +26,27 @@ public class Iterators {
             @Override
             public void remove() {
                 from.remove();
+            }
+
+        };
+    }
+
+    public static <T> Iterator<T> filter(final Iterator<? extends T> iterator, final Predicate<? super T> predicate) {
+        return new Iterator<T>() {
+
+            @Override
+            public boolean hasNext() {
+                throw new UnsupportedOperationException(); //TODO
+            }
+
+            @Override
+            public T next() {
+                throw new UnsupportedOperationException(); //TODO
+            }
+
+            @Override
+            public void remove() {
+                iterator.remove();
             }
 
         };

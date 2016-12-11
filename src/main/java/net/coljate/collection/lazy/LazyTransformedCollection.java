@@ -14,10 +14,6 @@ import net.coljate.util.Iterators;
 public class LazyTransformedCollection<F, T>
         implements LazyCollection<T> {
 
-    public static <F, T> Function<Collection<F>, ? extends LazyTransformedCollection<F, T>> transform(final Function<? super F, ? extends T> transform) {
-        return (collection) -> new LazyTransformedCollection<>(collection, transform);
-    }
-
     private final Collection<F> collection;
     private final Function<? super F, ? extends T> transformation;
 

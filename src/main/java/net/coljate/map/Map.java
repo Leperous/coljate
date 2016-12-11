@@ -2,7 +2,10 @@ package net.coljate.map;
 
 import java.util.Objects;
 import java.util.function.BiConsumer;
+import java.util.function.BiPredicate;
+import java.util.function.Function;
 import java.util.function.IntFunction;
+import java.util.function.Predicate;
 import java.util.function.Supplier;
 
 import net.coljate.collection.Collection;
@@ -11,6 +14,9 @@ import net.coljate.map.impl.ImmutableWrappedMap;
 import net.coljate.map.impl.MutableWrappedHashMap;
 import net.coljate.map.impl.RepeatedValueMap;
 import net.coljate.map.impl.SingletonMap;
+import net.coljate.map.lazy.LazyFilteredEntryMap;
+import net.coljate.map.lazy.LazyMap;
+import net.coljate.map.lazy.LazyTransformedValueMap;
 import net.coljate.set.Set;
 import net.coljate.util.Functions;
 
@@ -78,6 +84,11 @@ public interface Map<K, V> extends Set<Entry<K, V>>, Associative<K, V> {
         final M map = mapSupplier.apply(this.count());
         this.forEach(map::put);
         return map;
+    }
+
+    @Override
+    default LazyMap<K, V> filter(final Predicate<? super Entry<K, V>> predicate) {
+        return LazyFilteredEntryMap.filter(this, predicate);
     }
 
     @Override

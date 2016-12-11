@@ -15,7 +15,7 @@ public class DelegatedSet<T> extends AbstractSet<T> {
     private final Set<? extends T> delegate;
 
     protected DelegatedSet(final Set<? extends T> delegate) {
-        this.delegate = delegate;
+        this.delegate = Objects.requireNonNull(delegate);
     }
 
     @Override

@@ -2,6 +2,7 @@ package net.coljate.set.lazy;
 
 import java.util.Iterator;
 import java.util.NoSuchElementException;
+import java.util.Objects;
 
 import net.coljate.set.AbstractSet;
 import net.coljate.set.Set;
@@ -29,8 +30,8 @@ public class LazyIntersectionSet<T>
     private final Set<? extends T> s1, s2;
 
     protected LazyIntersectionSet(final Set<? extends T> s1, final Set<? extends T> s2) {
-        this.s1 = s1;
-        this.s2 = s2;
+        this.s1 = Objects.requireNonNull(s1);
+        this.s2 = Objects.requireNonNull(s2);
     }
 
     @Override

@@ -13,16 +13,19 @@ import net.coljate.collection.Collection;
  */
 public class LazyFilteredCollection<T> implements LazyCollection<T> {
 
-    public static <T> Function<Collection<T>, ? extends LazyCollection<T>> filter(final Predicate<? super T> predicate) {
-        return collection -> new LazyFilteredCollection<>(collection, predicate);
-    }
-
     private final Collection<? extends T> collection;
     private final Predicate<? super T> predicate;
 
     protected LazyFilteredCollection(final Collection<? extends T> collection, final Predicate<? super T> predicate) {
         this.collection = collection;
         this.predicate = predicate;
+    }
+
+    @Override
+    @SuppressWarnings("unchecked")
+    public boolean contains(final Object object) {
+        return collection.contains(object)
+                && predicate.test((T) object);
     }
 
     @Override

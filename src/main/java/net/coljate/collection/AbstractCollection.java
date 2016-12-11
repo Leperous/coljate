@@ -1,5 +1,7 @@
 package net.coljate.collection;
 
+import net.coljate.feature.Ordered;
+import net.coljate.util.Hash;
 import net.coljate.util.Strings;
 
 /**
@@ -22,6 +24,10 @@ public abstract class AbstractCollection<T> implements Collection<T> {
     protected abstract boolean equals(AbstractCollection<?> that);
 
     @Override
-    public abstract int hashCode();
+    public int hashCode() {
+        return this instanceof Ordered
+                ? Hash.orderedHash(this)
+                : Hash.unorderedHash(this);
+    }
 
 }

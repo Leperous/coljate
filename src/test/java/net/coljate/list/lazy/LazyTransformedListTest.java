@@ -24,7 +24,7 @@ public class LazyTransformedListTest extends ObjectContainerTest {
 
         final List<Object> list = Array.copyOf(object);
         final Map<Object, Integer> mapped = Map.of(object, value);
-        final LazyList<Integer> lazyList = list.lazily(LazyTransformedList.transform(mapped::get));
+        final LazyList<Integer> lazyList = new LazyTransformedList<>(list, mapped::get);
 
         assertThat(lazyList.count(), is(list.count()));
         assertThat(lazyList.first(), is(value));

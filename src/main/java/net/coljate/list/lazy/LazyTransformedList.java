@@ -2,7 +2,6 @@ package net.coljate.list.lazy;
 
 import java.util.function.Function;
 
-import net.coljate.collection.Collection;
 import net.coljate.collection.lazy.LazyTransformedCollection;
 import net.coljate.list.List;
 import net.coljate.list.ListIterator;
@@ -14,13 +13,6 @@ import net.coljate.list.ListIterator;
 public class LazyTransformedList<F, T>
         extends LazyTransformedCollection<F, T>
         implements LazyList<T> {
-
-    public static <F, T> Function<Collection<F>, ? extends LazyTransformedList<F, T>> transform(final Function<? super F, ? extends T> transformation) {
-        return (collection) -> {
-            final List<F> list = List.copyOrCast(collection);
-            return new LazyTransformedList<>(list, transformation);
-        };
-    }
 
     private final List<F> delegate;
 

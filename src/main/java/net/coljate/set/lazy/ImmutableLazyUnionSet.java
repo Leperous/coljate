@@ -1,5 +1,7 @@
 package net.coljate.set.lazy;
 
+import java.util.Objects;
+
 import net.coljate.UnmodifiableIterator;
 import net.coljate.set.ImmutableSet;
 import net.coljate.set.MutableSet;
@@ -28,8 +30,8 @@ public class ImmutableLazyUnionSet<T>
 
     protected ImmutableLazyUnionSet(final ImmutableSet<T> s1, ImmutableSet<? extends T> s2) {
         super(s1, s2);
-        this.s1 = s1;
-        this.s2 = s2;
+        this.s1 = Objects.requireNonNull(s1);
+        this.s2 = Objects.requireNonNull(s2);
     }
 
     @Override

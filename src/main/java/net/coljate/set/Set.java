@@ -1,5 +1,7 @@
 package net.coljate.set;
 
+import java.util.function.Predicate;
+
 import net.coljate.collection.Collection;
 import net.coljate.set.impl.EmptySet;
 import net.coljate.set.impl.ImmutableWrappedSet;
@@ -7,6 +9,7 @@ import net.coljate.set.impl.MutableWrappedHashSet;
 import net.coljate.set.impl.MutableWrappedSet;
 import net.coljate.set.impl.SingletonSet;
 import net.coljate.set.impl.WrappedSet;
+import net.coljate.set.lazy.LazyFilteredSet;
 import net.coljate.set.lazy.LazyIntersectionSet;
 import net.coljate.set.lazy.LazySet;
 import net.coljate.set.lazy.LazyUnionSet;
@@ -35,6 +38,11 @@ public interface Set<T> extends Collection<T> {
 
     default boolean elementsEqual(final Set<?> that) {
         return that != null && Set.elementsEqual(this, that);
+    }
+
+    @Override
+    default LazySet<T> filter(final Predicate<? super T> predicate) {
+        return LazyFilteredSet.of(this, predicate);
     }
 
     default LazySet<T> intersection(final Set<? extends T> that) {

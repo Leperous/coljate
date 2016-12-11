@@ -31,8 +31,8 @@ public class LazyUnionSet<T>
     private final Set<? extends T> s1, s2;
 
     protected LazyUnionSet(final Set<? extends T> s1, Set<? extends T> s2) {
-        this.s1 = s1;
-        this.s2 = s2;
+        this.s1 = Objects.requireNonNull(s1);
+        this.s2 = Objects.requireNonNull(s2);
     }
 
     @Override

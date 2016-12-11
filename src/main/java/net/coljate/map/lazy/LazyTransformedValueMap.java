@@ -1,6 +1,7 @@
 package net.coljate.map.lazy;
 
 import java.util.Iterator;
+import java.util.Objects;
 import java.util.function.Function;
 
 import net.coljate.collection.Collection;
@@ -28,11 +29,11 @@ public class LazyTransformedValueMap<K, V1, V2> implements LazyMap<K, V2> {
     private final Map<K, V1> map;
     private final Function<? super V1, ? extends V2> transformation;
 
-    protected LazyTransformedValueMap(
+    public LazyTransformedValueMap(
             final Map<K, V1> map,
             final Function<? super V1, ? extends V2> transformation) {
-        this.map = map;
-        this.transformation = transformation;
+        this.map = Objects.requireNonNull(map, "map");
+        this.transformation = Objects.requireNonNull(transformation, "transformation");
     }
 
     @Override
