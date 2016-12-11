@@ -19,26 +19,26 @@ public interface EmptyCollectionTest<T> extends CollectionTest<T> {
     @Override
     default Collection<T> create(final java.util.List<T> elements) {
         Assume.assumeTrue(elements.isEmpty());
-        return this.createEmpty();
+        return this.create();
     }
 
-    Collection<T> createEmpty();
+    Collection<T> create();
 
     @Test
     default void testIsEmpty_Empty() {
-        final Collection<T> collection = this.createEmpty();
+        final Collection<T> collection = this.create();
         assertTrue("Collection should be empty", collection.isEmpty());
     }
 
     @Test
     default void testCount_Empty() {
-        final Collection<T> collection = this.createEmpty();
+        final Collection<T> collection = this.create();
         assertThat(collection.count(), is(0));
     }
 
     @Test
     default void testIterator_Empty() {
-        final Collection<T> collection = this.createEmpty();
+        final Collection<T> collection = this.create();
         final Iterator<T> iterator = collection.iterator();
         assertFalse(iterator.hasNext());
     }

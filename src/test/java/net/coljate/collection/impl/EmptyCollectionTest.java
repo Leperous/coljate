@@ -11,7 +11,7 @@ public class EmptyCollectionTest
         implements net.coljate.collection.EmptyCollectionTest<Object> {
 
     @Override
-    public EmptyCollection<Object> createEmpty() {
+    public EmptyCollection<Object> create() {
         return EmptyCollection.instance();
     }
 

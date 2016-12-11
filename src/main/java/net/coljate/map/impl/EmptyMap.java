@@ -49,7 +49,7 @@ public class EmptyMap<K, V>
 
     @Override
     public UnmodifiableIterator<Entry<K, V>> iterator() {
-        return UnmodifiableIterator.empty();
+        return UnmodifiableIterator.of();
     }
 
     @Override

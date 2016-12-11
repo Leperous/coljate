@@ -16,14 +16,14 @@ public class EmptyMapTest
         implements ImmutableMapTest<Object, Object>, EmptyCollectionTest<Entry<Object, Object>> {
 
     @Override
-    public EmptyMap<Object, Object> createEmpty() {
+    public EmptyMap<Object, Object> create() {
         return EmptyMap.instance();
     }
 
     @Override
     public EmptyMap<Object, Object> create(final java.util.List<Entry<Object, Object>> elements) {
         Assume.assumeTrue(elements.isEmpty());
-        return this.createEmpty();
+        return this.create();
     }
 
 }

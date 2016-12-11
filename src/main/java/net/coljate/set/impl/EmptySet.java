@@ -33,7 +33,7 @@ public class EmptySet<T>
 
     @Override
     public UnmodifiableIterator<T> iterator() {
-        return UnmodifiableIterator.empty();
+        return UnmodifiableIterator.of();
     }
 
     @Override

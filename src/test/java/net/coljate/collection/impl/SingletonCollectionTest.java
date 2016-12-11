@@ -12,7 +12,7 @@ public class SingletonCollectionTest
         implements net.coljate.collection.SingletonCollectionTest<Object> {
 
     @Override
-    public SingletonCollection<Object> createSingleton(final Object element) {
+    public SingletonCollection<Object> create(final Object element) {
         return SingletonCollection.of(element);
     }
 

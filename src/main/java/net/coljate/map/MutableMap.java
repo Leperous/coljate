@@ -93,7 +93,7 @@ public interface MutableMap<K, V> extends Map<K, V>, MutableSet<Entry<K, V>> {
         return this.remove(entry.key(), entry.value());
     }
 
-    default V removeKey(final Object key) {
+    default V removeValue(final Object key) {
         final Entry<K, V> entry = this.entry(key);
         return entry != null && this.remove(entry)
                 ? entry.value()

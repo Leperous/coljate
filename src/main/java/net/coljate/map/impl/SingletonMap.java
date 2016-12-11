@@ -59,7 +59,7 @@ public class SingletonMap<K, V>
 
     @Override
     public UnmodifiableIterator<Entry<K, V>> iterator() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return UnmodifiableIterator.of(this);
     }
 
     @Deprecated

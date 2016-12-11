@@ -15,8 +15,12 @@ public interface UnmodifiableIterator<T> extends Iterator<T> {
                 : new DelegatedUnmodifiableIterator<>(iterator);
     }
 
-    static <T> UnmodifiableIterator<T> empty() {
+    static <T> UnmodifiableIterator<T> of() {
         return EmptyUnmodifiableIterator.INSTANCE;
+    }
+
+    static <T> UnmodifiableIterator<T> of(final T element) {
+        return new UnmodifiableSingletonIterator<>(element);
     }
 
     @Override
@@ -60,6 +64,31 @@ public interface UnmodifiableIterator<T> extends Iterator<T> {
         @Override
         public T next() {
             throw new NoSuchElementException();
+        }
+
+    }
+
+    class UnmodifiableSingletonIterator<T> implements UnmodifiableIterator<T> {
+
+        private final T element;
+        private boolean done;
+
+        protected UnmodifiableSingletonIterator(final T element) {
+            this.element = element;
+        }
+
+        @Override
+        public boolean hasNext() {
+            return !done;
+        }
+
+        @Override
+        public T next() {
+            if (done) {
+                throw new NoSuchElementException();
+            }
+            done = true;
+            return element;
         }
 
     }

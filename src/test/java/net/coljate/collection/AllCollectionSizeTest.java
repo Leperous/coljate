@@ -10,12 +10,12 @@ public interface AllCollectionSizeTest<T>
         extends EmptyCollectionTest<T>, SingletonCollectionTest<T>, CollectionTest<T> {
 
     @Override
-    default Collection<T> createEmpty() {
+    default Collection<T> create() {
         return this.create(java.util.Collections.emptyList());
     }
 
     @Override
-    default Collection<T> createSingleton(final T element) {
+    default Collection<T> create(final T element) {
         return this.create(java.util.Arrays.asList(element));
     }
 

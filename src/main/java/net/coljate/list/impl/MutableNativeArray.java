@@ -1,5 +1,7 @@
 package net.coljate.list.impl;
 
+import java.util.Objects;
+
 import net.coljate.list.AbstractList;
 import net.coljate.list.Array;
 import net.coljate.list.ListIterator;
@@ -91,7 +93,13 @@ public class MutableNativeArray<T>
 
     @Override
     public boolean removeFirst(final Object element) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        for (int i = 0; i < count; i++) {
+            if (Objects.equals(array[i], element)) {
+                System.arraycopy(array, i + 1, array, i, (--count) - i);
+                return true;
+            }
+        }
+        return false;
     }
 
     @Override

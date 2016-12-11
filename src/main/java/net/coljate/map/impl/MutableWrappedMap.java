@@ -3,6 +3,7 @@ package net.coljate.map.impl;
 import java.util.Objects;
 
 import net.coljate.collection.MutableCollection;
+import net.coljate.map.AbstractEntry;
 import net.coljate.map.MutableMap;
 
 /**
@@ -68,7 +69,9 @@ public class MutableWrappedMap<K, V>
                 : values;
     }
 
-    private final class MutableWrappedEntry implements MutableMap.MutableEntry<K, V> {
+    private final class MutableWrappedEntry
+            extends AbstractEntry<K, V>
+            implements MutableMap.MutableEntry<K, V> {
 
         private final K key;
 
@@ -89,31 +92,6 @@ public class MutableWrappedMap<K, V>
         @Override
         public void setValue(final V value) {
             delegate.put(key, value);
-        }
-
-        @Override
-        public int hashCode() {
-            int hash = 3;
-            hash = 23 * hash + Objects.hashCode(this.key);
-            return hash;
-        }
-
-        @Override
-        public boolean equals(Object obj) {
-            if (this == obj) {
-                return true;
-            }
-            if (obj == null) {
-                return false;
-            }
-            if (getClass() != obj.getClass()) {
-                return false;
-            }
-            final MutableWrappedEntry other = (MutableWrappedEntry) obj;
-            if (!Objects.equals(this.key, other.key)) {
-                return false;
-            }
-            return true;
         }
 
     }
