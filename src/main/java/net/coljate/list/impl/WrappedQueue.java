@@ -30,7 +30,7 @@ public class WrappedQueue<T>
         super(delegate);
         this.delegate = delegate;
     }
-    
+
     @Override
     public T head() {
         return delegate.peek();

@@ -7,7 +7,6 @@ import net.coljate.UnmodifiableIterator;
 import net.coljate.collection.AbstractCollection;
 import net.coljate.collection.ImmutableCollection;
 import net.coljate.collection.MutableCollection;
-import net.coljate.util.Hash;
 
 /**
  *

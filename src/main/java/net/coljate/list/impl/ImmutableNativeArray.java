@@ -4,7 +4,6 @@ import net.coljate.collection.Collection;
 import net.coljate.list.AbstractArray;
 import net.coljate.list.ImmutableArray;
 import net.coljate.list.ImmutableListIterator;
-import net.coljate.list.MutableArray;
 import net.coljate.util.Arrays;
 
 /**
@@ -25,6 +24,10 @@ public class ImmutableNativeArray<T>
 
     private final Object[] array;
     private final int count;
+
+    protected ImmutableNativeArray(final Object[] array) {
+        this(array, array.length);
+    }
 
     protected ImmutableNativeArray(final Object[] array, final int count) {
         this.array = array;

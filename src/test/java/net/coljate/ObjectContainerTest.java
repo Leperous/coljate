@@ -23,7 +23,7 @@ public abstract class ObjectContainerTest
 
             @Override
             public String toString() {
-                return (++objectCounter) + ':' + super.toString();
+                return (++objectCounter) + ":" + Integer.toHexString(this.hashCode());
             }
 
         };

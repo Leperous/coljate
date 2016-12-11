@@ -9,6 +9,10 @@ import java.util.Comparator;
  */
 public interface Sorted<T> extends Ordered<T> {
 
+    /**
+     *
+     * @return the comparator used to sort this collection.
+     */
     Comparator<? super T> comparator();
 
     T last();

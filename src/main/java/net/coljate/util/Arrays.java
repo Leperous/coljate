@@ -1,5 +1,6 @@
 package net.coljate.util;
 
+import java.util.Comparator;
 import java.util.Objects;
 import java.util.function.Consumer;
 import java.util.function.Function;
@@ -30,17 +31,16 @@ public final class Arrays {
         }
     }
 
-    public static Object[] copyOf(final Object[] from) {
-        if (from.length == 0) {
-            return EMPTY;
-        }
-        final Object[] to = new Object[from.length];
-        System.arraycopy(from, 0, to, 0, from.length);
-        return to;
+    public static <T> T[] copyOf(final T[] from) {
+        return java.util.Arrays.copyOf(from, from.length);
     }
 
     public static Object[] copyOf(final Object[] from, final int length) {
         return java.util.Arrays.copyOf(from, length);
+    }
+
+    public static <T> void sort(final T[] array, final Comparator<? super T> comparator) {
+        java.util.Arrays.sort(array, comparator);
     }
 
     public static int indexOf(final Object[] array, final Object element) {
@@ -53,7 +53,8 @@ public final class Arrays {
     }
 
     /**
-     * Transform all elements in the source array, resizing the given prototype array if necessary.
+     * Transform all elements in the source array, resizing the given prototype
+     * array if necessary.
      *
      * @param <F>
      * @param <T>
@@ -72,5 +73,5 @@ public final class Arrays {
         }
         return into;
     }
-
+    
 }

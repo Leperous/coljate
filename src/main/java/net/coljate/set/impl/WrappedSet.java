@@ -2,7 +2,6 @@ package net.coljate.set.impl;
 
 import net.coljate.collection.impl.WrappedCollection;
 import net.coljate.set.ImmutableSet;
-import net.coljate.set.MutableSet;
 import net.coljate.set.Set;
 
 /**
@@ -30,7 +29,7 @@ public class WrappedSet<T>
     }
 
     @Override
-    public MutableSet<T> mutableCopy() {
+    public MutableWrappedSet<T> mutableCopy() {
         return new MutableWrappedSet<>(this.mutableJavaCopy());
     }
 

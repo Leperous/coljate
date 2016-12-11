@@ -2,8 +2,6 @@ package net.coljate.map;
 
 import java.util.Objects;
 import java.util.function.BiConsumer;
-import java.util.function.BiPredicate;
-import java.util.function.Function;
 import java.util.function.IntFunction;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
@@ -16,7 +14,6 @@ import net.coljate.map.impl.RepeatedValueMap;
 import net.coljate.map.impl.SingletonMap;
 import net.coljate.map.lazy.LazyFilteredEntryMap;
 import net.coljate.map.lazy.LazyMap;
-import net.coljate.map.lazy.LazyTransformedValueMap;
 import net.coljate.set.Set;
 import net.coljate.util.Functions;
 

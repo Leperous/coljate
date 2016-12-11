@@ -70,6 +70,14 @@ public class Iterators {
         return count;
     }
 
+    public static <T> T last(final Iterator<? extends T> iterator) {
+        T last = null;
+        while (iterator.hasNext()) {
+            last = iterator.next();
+        }
+        return last;
+    }
+
     public static abstract class FilteredIterator<T> implements Iterator<T> {
 
         boolean hasNext;
