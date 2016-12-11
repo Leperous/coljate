@@ -62,4 +62,10 @@ public class SingletonMap<K, V>
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
+    @Deprecated
+    @Override
+    public SingletonMap<K, V> immutableCopy() {
+        return this;
+    }
+
 }

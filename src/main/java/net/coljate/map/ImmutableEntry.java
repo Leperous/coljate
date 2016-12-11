@@ -25,4 +25,10 @@ public class ImmutableEntry<K, V>
         return value;
     }
 
+    @Override
+    @Deprecated
+    public ImmutableEntry<K, V> immutableCopy() {
+        return this;
+    }
+
 }
