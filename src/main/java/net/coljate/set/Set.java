@@ -19,7 +19,7 @@ import net.coljate.util.Equality;
 public interface Set<T> extends Collection<T> {
 
     default Set<T> union(final Set<? extends T> that) {
-        return LazyUnionSet.viewOf(this, that);
+        return LazyUnionSet.of(this, that);
     }
 
     @Override

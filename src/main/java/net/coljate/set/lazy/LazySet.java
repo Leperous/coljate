@@ -26,9 +26,7 @@ public interface LazySet<T> extends LazyCollection<T>, Set<T> {
     }
 
     static <T> LazySet<T> of(final Set<? extends T> set) {
-        return set instanceof LazySet
-                ? (LazySet<T>) set
-                : new LazySetWrapper<>(set);
+        return LazySetWrapper.of(set);
     }
 
 }
