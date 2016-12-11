@@ -3,7 +3,7 @@ package net.coljate.list.lazy;
 import java.util.function.Function;
 
 import net.coljate.collection.Collection;
-import net.coljate.list.AbstractList;
+import net.coljate.collection.lazy.LazyTransformedCollection;
 import net.coljate.list.List;
 import net.coljate.list.ListIterator;
 
@@ -11,37 +11,32 @@ import net.coljate.list.ListIterator;
  *
  * @author Ollie
  */
-public class LazyTransformList<F, T>
-        extends AbstractList<T>
+public class LazyTransformedList<F, T>
+        extends LazyTransformedCollection<F, T>
         implements LazyList<T> {
 
-    public static <F, T> Function<Collection<F>, LazyTransformList<F, T>> transform(final Function<? super F, ? extends T> transform) {
+    public static <F, T> Function<Collection<F>, ? extends LazyTransformedList<F, T>> transform(final Function<? super F, ? extends T> transformation) {
         return (collection) -> {
             final List<F> list = List.copyOrCast(collection);
-            return of(list, transform);
+            return new LazyTransformedList<>(list, transformation);
         };
     }
 
-    static <F, T> LazyTransformList<F, T> of(final List<F> list, final Function<? super F, ? extends T> transform) {
-        return new LazyTransformList<>(list, transform);
-    }
-
     private final List<F> delegate;
-    private final Function<? super F, ? extends T> transform;
 
-    public LazyTransformList(final List<F> delegate, final Function<? super F, ? extends T> transform) {
+    public LazyTransformedList(final List<F> delegate, final Function<? super F, ? extends T> transformation) {
+        super(delegate, transformation);
         this.delegate = delegate;
-        this.transform = transform;
     }
 
     @Override
     public T first() {
-        return transform.apply(delegate.first());
+        return this.transform(delegate.first());
     }
 
     @Override
     public T last() {
-        return transform.apply(delegate.last());
+        return this.transform(delegate.last());
     }
 
     @Override
@@ -60,7 +55,7 @@ public class LazyTransformList<F, T>
 
         @Override
         public T previous() {
-            return transform.apply(iterator.previous());
+            return transform(iterator.previous());
         }
 
         @Override
@@ -70,7 +65,7 @@ public class LazyTransformList<F, T>
 
         @Override
         public T next() {
-            return transform.apply(iterator.next());
+            return transform(iterator.next());
         }
 
     }

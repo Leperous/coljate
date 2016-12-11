@@ -2,6 +2,7 @@ package net.coljate.set.lazy;
 
 import net.coljate.UnmodifiableIterator;
 import net.coljate.set.ImmutableSet;
+import net.coljate.set.MutableSet;
 
 /**
  *
@@ -29,6 +30,17 @@ public class ImmutableLazyUnionSet<T>
     @Override
     public UnmodifiableIterator<T> iterator() {
         return UnmodifiableIterator.wrap(super.iterator());
+    }
+
+    @Override
+    public MutableSet<T> mutableCopy() {
+        return super.mutableCopy();
+    }
+
+    @Override
+    @Deprecated
+    public ImmutableLazyUnionSet<T> immutableCopy() {
+        return this;
     }
 
 }

@@ -1,6 +1,6 @@
 package net.coljate.list.impl;
 
-import net.coljate.list.lazy.LazyTransformList;
+import net.coljate.list.lazy.LazyTransformedList;
 
 import java.util.function.Function;
 
@@ -30,7 +30,7 @@ public class LazyTransformListTest extends ObjectContainerTest {
 
         final List<Object> list = Array.copyOf(object);
         final Map<Object, Integer> mapped = Map.of(object, value);
-        final LazyList<Integer> lazyList = list.lazily(LazyTransformList.transform(mapped::get));
+        final LazyList<Integer> lazyList = list.lazily(LazyTransformedList.transform(mapped::get));
 
         assertThat(lazyList.count(), is(list.count()));
         assertThat(lazyList.first(), is(value));

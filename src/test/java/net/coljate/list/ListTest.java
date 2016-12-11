@@ -3,7 +3,7 @@ package net.coljate.list;
 import org.junit.Test;
 
 import net.coljate.collection.CollectionTest;
-import net.coljate.list.lazy.LazyTransformList;
+import net.coljate.list.lazy.LazyTransformedList;
 import net.coljate.map.Map;
 import net.coljate.map.MutableMap;
 

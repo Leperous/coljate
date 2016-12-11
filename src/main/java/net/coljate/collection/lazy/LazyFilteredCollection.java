@@ -5,8 +5,6 @@ import java.util.NoSuchElementException;
 import java.util.function.Predicate;
 
 import net.coljate.collection.Collection;
-import net.coljate.collection.ImmutableCollection;
-import net.coljate.collection.MutableCollection;
 
 /**
  *
@@ -25,16 +23,6 @@ public class LazyFilteredCollection<T> implements LazyCollection<T> {
     @Override
     public Iterator<T> iterator() {
         return new FilteredIterator();
-    }
-
-    @Override
-    public MutableCollection<? extends T> mutableCopy() {
-        throw new UnsupportedOperationException(); //TODO
-    }
-
-    @Override
-    public ImmutableCollection<? extends T> immutableCopy() {
-        throw new UnsupportedOperationException(); //TODO
     }
 
     protected class FilteredIterator implements Iterator<T> {

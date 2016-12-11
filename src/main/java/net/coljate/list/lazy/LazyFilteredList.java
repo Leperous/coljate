@@ -3,10 +3,8 @@ package net.coljate.list.lazy;
 import java.util.function.Predicate;
 
 import net.coljate.collection.lazy.LazyFilteredCollection;
-import net.coljate.list.ImmutableList;
 import net.coljate.list.List;
 import net.coljate.list.ListIterator;
-import net.coljate.list.MutableList;
 
 /**
  *
@@ -28,16 +26,6 @@ public class LazyFilteredList<T>
     @Override
     public T last() {
         throw new UnsupportedOperationException(); //TODO
-    }
-
-    @Override
-    public MutableList<T> mutableCopy() {
-        return LazyList.super.mutableCopy();
-    }
-
-    @Override
-    public ImmutableList<T> immutableCopy() {
-        return LazyList.super.immutableCopy();
     }
 
 }
