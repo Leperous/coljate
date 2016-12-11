@@ -2,9 +2,7 @@ package net.coljate.set.lazy;
 
 import java.util.Iterator;
 import java.util.NoSuchElementException;
-import java.util.function.Function;
 
-import net.coljate.collection.Collection;
 import net.coljate.set.AbstractSet;
 import net.coljate.set.Set;
 import net.coljate.set.impl.EmptySet;
@@ -17,11 +15,12 @@ public class LazyIntersectionSet<T>
         extends AbstractSet<T>
         implements LazySet<T> {
 
+    @SuppressWarnings("unchecked")
     public static <T> LazySet<T> of(final Set<? extends T> s1, final Set<? extends T> s2) {
-        if (s1 == s2 || s1 instanceof EmptySet) {
-            return new FakeLazySet<>(s1);
-        } else if (s2 instanceof EmptySet) {
-            return new FakeLazySet<>(s2);
+        if (s1 instanceof EmptySet || s2 instanceof EmptySet) {
+            return LazySet.of();
+        } else if (s1 == s2) {
+            return LazySet.of(s1);
         } else {
             return new LazyIntersectionSet<>(s1, s2);
         }

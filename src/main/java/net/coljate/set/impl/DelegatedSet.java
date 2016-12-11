@@ -1,6 +1,7 @@
 package net.coljate.set.impl;
 
 import java.util.Iterator;
+import java.util.Objects;
 
 import net.coljate.set.AbstractSet;
 import net.coljate.set.Set;
@@ -29,8 +30,9 @@ public class DelegatedSet<T> extends AbstractSet<T> {
     }
 
     @Override
-    protected boolean equals(Set<?> that) {
-        throw new UnsupportedOperationException(); //TODO
+    protected boolean equals(final Set<?> that) {
+        return that instanceof DelegatedSet
+                && Objects.equals(delegate, ((DelegatedSet) that).delegate);
     }
 
 }

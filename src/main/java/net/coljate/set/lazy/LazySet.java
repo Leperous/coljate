@@ -21,4 +21,14 @@ public interface LazySet<T> extends LazyCollection<T>, Set<T> {
         return Set.super.immutableCopy();
     }
 
+    static <T> LazySet<T> of() {
+        return LazySetWrapper.of();
+    }
+
+    static <T> LazySet<T> of(final Set<? extends T> set) {
+        return set instanceof LazySet
+                ? (LazySet<T>) set
+                : new LazySetWrapper<>(set);
+    }
+
 }
