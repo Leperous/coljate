@@ -52,11 +52,6 @@ public class MutableWrappedTreeSet<T>
     }
 
     @Override
-    public java.util.TreeSet<T> mutableJavaCopy() {
-        return new java.util.TreeSet<>(delegate);
-    }
-
-    @Override
     @SuppressWarnings("unchecked")
     public Comparator<? super T> comparator() {
         return Suppliers.firstNonNull(
@@ -76,6 +71,16 @@ public class MutableWrappedTreeSet<T>
 
     @Override
     public MutableWrappedTreeSet<T> mutableCopy() {
+        return new MutableWrappedTreeSet<>(this.mutableJavaCopy());
+    }
+
+    @Override
+    public java.util.TreeSet<T> mutableJavaCopy() {
+        return new java.util.TreeSet<>(delegate);
+    }
+
+    @Override
+    public MutableWrappedTreeSet<T> sortedCopy(Comparator<? super T> comparator) {
         return new MutableWrappedTreeSet<>(this.mutableJavaCopy());
     }
 

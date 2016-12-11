@@ -8,7 +8,6 @@ import net.coljate.set.impl.EmptySet;
 import net.coljate.set.impl.ImmutableWrappedSet;
 import net.coljate.set.impl.MutableWrappedHashSet;
 import net.coljate.set.impl.MutableWrappedSet;
-import net.coljate.set.impl.MutableWrappedTreeSet;
 import net.coljate.set.impl.SingletonSet;
 import net.coljate.set.impl.WrappedSet;
 import net.coljate.set.lazy.LazyFilteredSet;
@@ -40,7 +39,7 @@ public interface Set<T> extends Collection<T> {
 
     @Override
     default SortedSet<T> sortedCopy(final Comparator<? super T> comparator) {
-        return MutableWrappedTreeSet.copyOf(comparator, this);
+        return SortedSet.copyOf(comparator, this);
     }
 
     default boolean elementsEqual(final Set<?> that) {
