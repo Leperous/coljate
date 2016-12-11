@@ -9,7 +9,6 @@ import net.coljate.collection.MutableCollection;
 import net.coljate.map.impl.MutableWrappedHashMap;
 import net.coljate.map.impl.MutableWrappedMap;
 import net.coljate.set.MutableSet;
-import net.coljate.util.Functions;
 
 /**
  *
@@ -28,13 +27,8 @@ public interface MutableMap<K, V> extends Map<K, V>, MutableSet<Entry<K, V>> {
     MutableEntry<K, V> entry(Object key);
 
     default boolean add(final K key, final V value) {
-        final V current = Functions.ifNonNull(this.entry(key), Entry::value);
-        if (!Objects.equals(current, value)) {
-            this.put(key, value);
-            return true;
-        } else {
-            return false;
-        }
+        return !this.containsKey(key)
+                && this.putIfAbsent(key, value) == null;
     }
 
     @Override

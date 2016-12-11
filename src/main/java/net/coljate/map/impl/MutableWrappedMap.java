@@ -1,6 +1,7 @@
 package net.coljate.map.impl;
 
 import java.util.Objects;
+import java.util.function.Function;
 
 import net.coljate.collection.MutableCollection;
 import net.coljate.map.AbstractEntry;
@@ -48,8 +49,18 @@ public class MutableWrappedMap<K, V>
     }
 
     @Override
-    public void clear() {
-        delegate.clear();
+    public V putIfAbsent(K key, V value) {
+        return delegate.putIfAbsent(key, value);
+    }
+
+    @Override
+    public V computeIfAbsent(final K key, final Function<K, V> supplier) {
+        return delegate.computeIfAbsent(key, supplier);
+    }
+
+    @Override
+    public boolean replace(final K key, final V expectedValue, final V replacementValue) {
+        return delegate.replace(key, expectedValue, replacementValue);
     }
 
     @Override
@@ -58,6 +69,11 @@ public class MutableWrappedMap<K, V>
         return delegate.containsKey(key)
                 ? new MutableWrappedEntry((K) key)
                 : null;
+    }
+
+    @Override
+    public void clear() {
+        delegate.clear();
     }
 
     private MutableCollection<V> values;
