@@ -7,7 +7,7 @@ import net.coljate.set.ImmutableSet;
  *
  * @author ollie
  */
-public interface ImmutableMap<K, V> extends Map<K, V>, ImmutableCollection<Entry<K, V>> {
+public interface ImmutableMap<K, V> extends Map<K, V>, ImmutableSet<Entry<K, V>> {
 
     @Override
     ImmutableSet<K> keys();

@@ -1,5 +1,7 @@
 package net.coljate.map.impl;
 
+import java.util.Objects;
+
 import net.coljate.collection.MutableCollection;
 import net.coljate.map.MutableMap;
 
@@ -34,8 +36,14 @@ public class MutableWrappedMap<K, V>
     }
 
     @Override
-    public V remove(final Object key) {
-        return delegate.remove(key);
+    public boolean remove(final Object key, final Object value) {
+        final V current = delegate.get(key);
+        if (Objects.equals(current, value)) {
+            delegate.remove(key);
+            return true;
+        } else {
+            return false;
+        }
     }
 
     @Override

@@ -8,22 +8,39 @@ import java.util.function.Function;
 import net.coljate.collection.MutableCollection;
 import net.coljate.map.impl.MutableWrappedHashMap;
 import net.coljate.map.impl.MutableWrappedMap;
+import net.coljate.set.MutableSet;
+import net.coljate.util.Functions;
 
 /**
  *
  * @author ollie
  */
-public interface MutableMap<K, V> extends Map<K, V>, MutableCollection<Entry<K, V>> {
+public interface MutableMap<K, V> extends Map<K, V>, MutableSet<Entry<K, V>> {
 
     V put(K key, V value);
 
-    V remove(Object key);
+    boolean remove(Object key, Object value);
 
     @Override
     MutableCollection<V> values();
 
     @Override
     MutableEntry<K, V> entry(Object key);
+
+    default boolean add(final K key, final V value) {
+        final V current = Functions.ifNonNull(this.entry(key), Entry::value);
+        if (!Objects.equals(current, value)) {
+            this.put(key, value);
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    @Override
+    default boolean add(final Entry<K, V> entry) {
+        return this.add(entry.key(), entry.value());
+    }
 
     default V putIfAbsent(final K key, final V value) {
         final V current = this.get(key);
@@ -66,14 +83,21 @@ public interface MutableMap<K, V> extends Map<K, V>, MutableCollection<Entry<K, 
                 && this.remove((Entry) object);
     }
 
+    @Deprecated
+    default boolean remove(final Object entry) {
+        return entry instanceof Entry
+                && this.remove((Entry) entry);
+    }
+
     default boolean remove(final Entry<?, ?> entry) {
-        final Entry<K, V> current = this.entry(entry.key());
-        if (Objects.equals(current, entry)) {
-            this.remove(entry.key());
-            return true;
-        } else {
-            return false;
-        }
+        return this.remove(entry.key(), entry.value());
+    }
+
+    default V removeKey(final Object key) {
+        final Entry<K, V> entry = this.entry(key);
+        return entry != null && this.remove(entry)
+                ? entry.value()
+                : null;
     }
 
     default boolean removeAllMatchingEntries(final BiPredicate<? super K, ? super V> predicate) {

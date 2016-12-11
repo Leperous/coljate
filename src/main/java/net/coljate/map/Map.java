@@ -14,7 +14,7 @@ import net.coljate.util.Functions;
  *
  * @author ollie
  */
-public interface Map<K, V> extends Collection<Entry<K, V>>, Associative<K, V> {
+public interface Map<K, V> extends Set<Entry<K, V>>, Associative<K, V> {
 
     Entry<K, V> entry(Object key);
 
