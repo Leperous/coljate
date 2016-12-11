@@ -1,4 +1,4 @@
-package net.coljate.set.impl;
+package net.coljate.set.lazy;
 
 import net.coljate.UnmodifiableIterator;
 import net.coljate.set.ImmutableSet;

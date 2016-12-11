@@ -3,7 +3,7 @@ package net.coljate.list.impl;
 import java.io.Serializable;
 import java.util.NoSuchElementException;
 
-import net.coljate.list.AbstractList;
+import net.coljate.list.AbstractArray;
 import net.coljate.list.ImmutableArray;
 import net.coljate.list.ImmutableListIterator;
 
@@ -12,7 +12,7 @@ import net.coljate.list.ImmutableListIterator;
  * @author ollie
  */
 public class SingletonArray<T>
-        extends AbstractList<T>
+        extends AbstractArray<T>
         implements ImmutableArray<T>, Serializable {
 
     private static final long serialVersionUID = 1L;

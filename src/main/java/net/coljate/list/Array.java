@@ -1,6 +1,7 @@
 package net.coljate.list;
 
 import net.coljate.feature.Indexed;
+import net.coljate.list.impl.ImmutableNativeArray;
 import net.coljate.list.impl.MutableWrappedArrayList;
 import net.coljate.list.impl.RepeatedValueArray;
 
@@ -46,10 +47,17 @@ public interface Array<T> extends Indexed<T>, List<T> {
     }
 
     @Override
-    ImmutableArray<T> immutableCopy();
+    default ImmutableArray<T> immutableCopy() {
+        throw new UnsupportedOperationException(); //TODO
+    }
 
     static <T> Array<T> repeated(final T value, final int count) {
         return new RepeatedValueArray<>(value, count);
+    }
+
+    @SafeVarargs
+    static <T> Array<T> copyOf(final T... elements) {
+        return ImmutableNativeArray.copyOf(elements);
     }
 
 }

@@ -4,7 +4,7 @@ import java.util.Collections;
 
 import net.coljate.collection.ImmutableCollection;
 import net.coljate.set.impl.EmptySet;
-import net.coljate.set.impl.ImmutableLazyUnionSet;
+import net.coljate.set.lazy.ImmutableLazyUnionSet;
 import net.coljate.set.impl.SingletonSet;
 
 /**

@@ -1,4 +1,6 @@
-package net.coljate.collection;
+package net.coljate.collection.lazy;
+
+import net.coljate.collection.Collection;
 
 /**
  *

@@ -7,7 +7,9 @@ import java.util.function.Supplier;
 
 import net.coljate.collection.Collection;
 import net.coljate.feature.Associative;
+import net.coljate.map.impl.MutableWrappedHashMap;
 import net.coljate.map.impl.RepeatedValueMap;
+import net.coljate.map.impl.SingletonMap;
 import net.coljate.set.Set;
 import net.coljate.util.Functions;
 
@@ -85,6 +87,14 @@ public interface Map<K, V> extends Set<Entry<K, V>>, Associative<K, V> {
     @Override
     default ImmutableMap<K, V> immutableCopy() {
         throw new UnsupportedOperationException(); //TODO default behaviour
+    }
+
+    static <K, V> MutableMap<K, V> createHashMap(final int initialCapacity) {
+        return MutableWrappedHashMap.create(initialCapacity);
+    }
+
+    static <K, V> ImmutableMap<K, V> of(final K key, final V value) {
+        return SingletonMap.of(key, value);
     }
 
     static <K, V> Map<K, V> repeat(final Set<K> keys, final V value) {

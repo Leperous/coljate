@@ -1,12 +1,12 @@
-package net.coljate.set.impl;
+package net.coljate.set.lazy;
 
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 import java.util.Objects;
 
-import net.coljate.collection.LazyCollection;
 import net.coljate.set.AbstractSet;
 import net.coljate.set.Set;
+import net.coljate.set.impl.EmptySet;
 
 /**
  * View of the union of two (possibly mutable) sets.
@@ -15,7 +15,7 @@ import net.coljate.set.Set;
  */
 public class LazyUnionSet<T>
         extends AbstractSet<T>
-        implements LazyCollection<T> {
+        implements LazySet<T> {
 
     @SuppressWarnings("unchecked")
     public static <T> Set<T> viewOf(final Set<? extends T> s1, final Set<? extends T> s2) {

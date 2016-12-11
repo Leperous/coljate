@@ -125,7 +125,7 @@ public interface MutableMap<K, V> extends Map<K, V>, MutableSet<Entry<K, V>> {
     }
 
     static <K, V> MutableMap<K, V> createHashMap(final int initialCapacity) {
-        return MutableWrappedHashMap.createHashMap(initialCapacity);
+        return MutableWrappedHashMap.create(initialCapacity);
     }
 
     static <K, V> MutableMap<K, V> copyIntoHashMap(final java.util.Map<K, V> map) {

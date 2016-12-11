@@ -1,5 +1,6 @@
 package net.coljate.list;
 
+import net.coljate.collection.Collection;
 import net.coljate.list.impl.EmptyArray;
 import net.coljate.list.impl.ImmutableNativeArray;
 import net.coljate.list.impl.SingletonArray;
@@ -40,6 +41,10 @@ public interface ImmutableArray<T>
             default:
                 return ImmutableNativeArray.copyOf(elements);
         }
+    }
+
+    static <T> ImmutableArray<T> copyOf(final Collection<? extends T> collection) {
+        return ImmutableNativeArray.copyOf(collection);
     }
 
     static class ImmutableArrayIterator<T> extends ArrayIterator<T> implements ImmutableListIterator<T> {

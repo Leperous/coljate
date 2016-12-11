@@ -3,7 +3,7 @@ package net.coljate.set;
 import net.coljate.collection.Collection;
 import net.coljate.set.impl.EmptySet;
 import net.coljate.set.impl.ImmutableWrappedSet;
-import net.coljate.set.impl.LazyUnionSet;
+import net.coljate.set.lazy.LazyUnionSet;
 import net.coljate.set.impl.MutableWrappedHashSet;
 import net.coljate.set.impl.MutableWrappedSet;
 import net.coljate.set.impl.SingletonSet;

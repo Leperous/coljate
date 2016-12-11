@@ -1,5 +1,6 @@
 package net.coljate.list;
 
+import net.coljate.collection.Collection;
 import net.coljate.feature.Ordered;
 import net.coljate.list.impl.ImmutableNativeArray;
 import net.coljate.list.impl.MutableWrappedArrayList;
@@ -44,6 +45,17 @@ public interface List<T> extends Ordered<T> {
     @SafeVarargs
     static <T> List<T> copyOf(final T... elements) {
         return ImmutableList.copyOf(elements);
+    }
+
+    static <T> List<T> copyOf(final Collection<? extends T> collection) {
+        return ImmutableList.copyOf(collection);
+    }
+
+    @SuppressWarnings("unchecked")
+    static <T> List<T> copyOrCast(final Collection<? extends T> collection) {
+        return collection instanceof List
+                ? (List<T>) collection
+                : copyOf(collection);
     }
 
     static <T> MutableWrappedList<T> viewOf(final java.util.List<T> list) {

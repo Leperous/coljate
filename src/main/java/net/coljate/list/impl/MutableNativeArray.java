@@ -2,8 +2,9 @@ package net.coljate.list.impl;
 
 import java.util.Objects;
 
-import net.coljate.list.AbstractList;
+import net.coljate.list.AbstractArray;
 import net.coljate.list.Array;
+import net.coljate.list.ImmutableArray;
 import net.coljate.list.ListIterator;
 import net.coljate.list.MutableArray;
 import net.coljate.util.Arrays;
@@ -14,7 +15,7 @@ import net.coljate.util.Arrays;
  * @see java.util.ArrayList
  */
 public class MutableNativeArray<T>
-        extends AbstractList<T>
+        extends AbstractArray<T>
         implements NativeArray<T>, MutableArray<T> {
 
     public static <T> MutableNativeArray<T> copyOf(final java.util.Collection<? extends T> collection) {
@@ -122,6 +123,16 @@ public class MutableNativeArray<T>
     public void clear() {
         array = new Object[array.length];
         count = 0;
+    }
+
+    @Override
+    public MutableNativeArray<T> mutableCopy() {
+        return NativeArray.super.mutableCopy();
+    }
+
+    @Override
+    public ImmutableNativeArray<T> immutableCopy() {
+        return NativeArray.super.immutableCopy();
     }
 
     @Override

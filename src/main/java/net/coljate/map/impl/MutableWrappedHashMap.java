@@ -20,7 +20,7 @@ public class MutableWrappedHashMap<K, V>
         return viewOf(map);
     }
 
-    public static <K, V> MutableWrappedHashMap<K, V> createHashMap(final int initialCapacity) {
+    public static <K, V> MutableWrappedHashMap<K, V> create(final int initialCapacity) {
         return viewOf(new java.util.HashMap<>(initialCapacity));
     }
 

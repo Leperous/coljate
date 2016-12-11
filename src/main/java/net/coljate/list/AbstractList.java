@@ -27,4 +27,14 @@ public abstract class AbstractList<T>
         return Hash.orderedHash(this);
     }
 
+    @Override
+    public ImmutableList<T> immutableCopy() {
+        return List.super.immutableCopy();
+    }
+
+    @Override
+    public MutableList<T> mutableCopy() {
+        return List.super.mutableCopy();
+    }
+
 }

@@ -1,5 +1,6 @@
 package net.coljate.list;
 
+import net.coljate.collection.Collection;
 import net.coljate.collection.ImmutableCollection;
 import net.coljate.list.impl.ImmutableJoinList;
 import net.coljate.list.impl.ImmutableWrappedList;
@@ -52,6 +53,10 @@ public interface ImmutableList<T> extends List<T>, ImmutableCollection<T> {
 
     static <T> ImmutableList<T> copyOf(final java.util.Collection<? extends T> collection) {
         return ImmutableWrappedList.copyOf(collection);
+    }
+
+    static <T> ImmutableList<T> copyOf(final Collection<? extends T> collection) {
+        return ImmutableArray.copyOf(collection);
     }
 
     @SuppressWarnings("unchecked")
