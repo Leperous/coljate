@@ -5,6 +5,7 @@ import java.util.Objects;
 import java.util.function.Function;
 
 import net.coljate.collection.Collection;
+import net.coljate.util.Iterators;
 
 /**
  *
@@ -20,7 +21,7 @@ public class LazyTransformedCollection<F, T>
     private final Collection<F> collection;
     private final Function<? super F, ? extends T> transformation;
 
-    protected LazyTransformedCollection(final Collection<F> collection, final Function<? super F, ? extends T> transformation) {
+    public LazyTransformedCollection(final Collection<F> collection, final Function<? super F, ? extends T> transformation) {
         this.collection = Objects.requireNonNull(collection);
         this.transformation = Objects.requireNonNull(transformation);
     }
@@ -31,23 +32,7 @@ public class LazyTransformedCollection<F, T>
 
     @Override
     public Iterator<T> iterator() {
-        return new TransformedIterator();
-    }
-
-    private final class TransformedIterator implements Iterator<T> {
-
-        final Iterator<F> iterator = collection.iterator();
-
-        @Override
-        public boolean hasNext() {
-            return iterator.hasNext();
-        }
-
-        @Override
-        public T next() {
-            return transform(iterator.next());
-        }
-
+        return Iterators.transform(collection.iterator(), this::transform);
     }
 
 }

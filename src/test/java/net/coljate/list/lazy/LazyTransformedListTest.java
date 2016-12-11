@@ -1,17 +1,11 @@
-package net.coljate.list.impl;
-
-import net.coljate.list.lazy.LazyTransformedList;
-
-import java.util.function.Function;
+package net.coljate.list.lazy;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 import org.junit.Test;
 
 import net.coljate.ObjectContainerTest;
-import net.coljate.collection.Collection;
 import net.coljate.list.Array;
-import net.coljate.list.lazy.LazyList;
 import net.coljate.list.List;
 import net.coljate.map.Map;
 
@@ -20,7 +14,7 @@ import net.coljate.map.Map;
  * @author Ollie
  */
 @SuppressWarnings({"unchecked", "rawtypes"})
-public class LazyTransformListTest extends ObjectContainerTest {
+public class LazyTransformedListTest extends ObjectContainerTest {
 
     @Test
     public void testLazyTransform_Singleton() {
