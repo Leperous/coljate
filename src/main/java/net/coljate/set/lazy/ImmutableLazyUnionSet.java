@@ -13,7 +13,7 @@ public class ImmutableLazyUnionSet<T>
         implements ImmutableSet<T> {
 
     @SuppressWarnings("unchecked")
-    public static <T> ImmutableSet<T> viewOf(final ImmutableSet<? extends T> s1, final ImmutableSet<? extends T> s2) {
+    public static <T> ImmutableSet<T> of(final ImmutableSet<T> s1, final ImmutableSet<? extends T> s2) {
         if (s1.isEmpty()) {
             return (ImmutableSet<T>) s2;
         } else if (s2.isEmpty()) {
@@ -23,13 +23,23 @@ public class ImmutableLazyUnionSet<T>
         }
     }
 
-    protected ImmutableLazyUnionSet(final ImmutableSet<? extends T> s1, ImmutableSet<? extends T> s2) {
+    private final ImmutableSet<T> s1;
+    private final ImmutableSet<? extends T> s2;
+
+    protected ImmutableLazyUnionSet(final ImmutableSet<T> s1, ImmutableSet<? extends T> s2) {
         super(s1, s2);
+        this.s1 = s1;
+        this.s2 = s2;
     }
 
     @Override
     public UnmodifiableIterator<T> iterator() {
         return UnmodifiableIterator.wrap(super.iterator());
+    }
+
+    @Override
+    public ImmutableLazyUnionSet<T> with(final T element) {
+        return new ImmutableLazyUnionSet<>(s1.with(element), s2);
     }
 
     @Override

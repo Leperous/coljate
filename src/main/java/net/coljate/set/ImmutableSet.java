@@ -17,7 +17,7 @@ public interface ImmutableSet<T> extends Set<T>, ImmutableCollection<T> {
     default ImmutableSet<T> with(final T element) {
         return this.contains(element)
                 ? this
-                : ImmutableLazyUnionSet.viewOf(this, Set.of(element));
+                : ImmutableLazyUnionSet.of(this, Set.of(element));
     }
 
     @Override
