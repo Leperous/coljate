@@ -10,6 +10,7 @@ import org.junit.Test;
  */
 public interface MutableCollectionTests<T> extends CollectionTests<T> {
 
+    @Override
     MutableCollection<T> create(T... elements);
 
     @Test

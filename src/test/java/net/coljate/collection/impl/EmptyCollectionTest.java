@@ -1,14 +1,14 @@
 package net.coljate.collection.impl;
 
-import net.coljate.AbstractTest;
 import net.coljate.collection.EmptyCollectionTests;
+import net.coljate.collection.ObjectCollectionTest;
 
 /**
  *
  * @author ollie
  */
 public class EmptyCollectionTest
-        extends AbstractTest
+        extends ObjectCollectionTest
         implements EmptyCollectionTests<Object> {
 
     @Override

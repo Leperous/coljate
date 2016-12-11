@@ -3,17 +3,23 @@ package net.coljate.collection;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
+import org.junit.Assume;
 import org.junit.Test;
 
 /**
+ * Tests for collections that are empty.
  *
  * @author ollie
  */
-public interface EmptyCollectionTests<T> {
+public interface EmptyCollectionTests<T> extends CollectionTests<T> {
+
+    @Override
+    default Collection<T> create(final T... elements) {
+        Assume.assumeTrue(elements.length == 0);
+        return this.createEmpty();
+    }
 
     Collection<T> createEmpty();
-
-    T createObject();
 
     @Test
     default void testIsEmpty() {

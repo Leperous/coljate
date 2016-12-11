@@ -1,6 +1,7 @@
 package net.coljate.collection;
 
 import net.coljate.Tests;
+import net.coljate.set.Set;
 
 /**
  *

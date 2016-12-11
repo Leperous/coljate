@@ -6,8 +6,8 @@ import org.junit.Before;
  *
  * @author ollie
  */
-public abstract class AbstractObjectTest
-        extends AbstractTest
+public abstract class ObjectContainerTest
+        extends ContainerTest
         implements Tests<Object> {
 
     private int objectCounter;

@@ -9,7 +9,7 @@ import org.junit.Test;
  *
  * @author ollie
  */
-public interface MutableSetTests<T> extends MutableCollectionTests<T> {
+public interface MutableSetTests<T> extends SetTests<T>, MutableCollectionTests<T> {
 
     @Override
     MutableSet<T> create(T... elements);

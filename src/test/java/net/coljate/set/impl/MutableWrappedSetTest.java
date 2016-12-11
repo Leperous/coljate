@@ -1,7 +1,7 @@
 package net.coljate.set.impl;
 
-import net.coljate.AbstractObjectTest;
 import net.coljate.collection.AllCollectionSizeTests;
+import net.coljate.collection.ObjectCollectionTest;
 import net.coljate.set.MutableSetTests;
 
 /**
@@ -10,7 +10,7 @@ import net.coljate.set.MutableSetTests;
  */
 @SuppressWarnings({"unchecked", "rawtypes"})
 public class MutableWrappedSetTest
-        extends AbstractObjectTest
+        extends ObjectCollectionTest
         implements AllCollectionSizeTests<Object>, MutableSetTests<Object> {
 
     @Override
