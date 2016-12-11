@@ -2,6 +2,9 @@ package net.coljate.map.impl;
 
 import java.io.Serializable;
 
+import net.coljate.map.Entry;
+import net.coljate.util.Arrays;
+
 /**
  *
  * @author ollie
@@ -11,6 +14,13 @@ public class MutableWrappedHashMap<K, V>
         implements HashMap<K, V>, Serializable {
 
     private static final long serialVersionUID = 1L;
+
+    @SafeVarargs
+    public static <K, V> MutableWrappedHashMap<K, V> copyOf(final Entry<K, V>... entries) {
+        final java.util.HashMap<K, V> map = new java.util.HashMap<>(entries.length);
+        Arrays.consume(entries, entry -> map.put(entry.key(), entry.value()));
+        return viewOf(map);
+    }
 
     public static <K, V> MutableWrappedHashMap<K, V> create(final int initialCapacity) {
         return viewOf(new java.util.HashMap<>(initialCapacity));

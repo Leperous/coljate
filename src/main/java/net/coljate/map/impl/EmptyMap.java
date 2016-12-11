@@ -17,6 +17,16 @@ public class EmptyMap<K, V>
         extends AbstractMap<K, V>
         implements ImmutableMap<K, V>, Serializable {
 
+    private static final long serialVersionUID = 1L;
+    private static final EmptyMap INSTANCE = new EmptyMap();
+
+    public static <K, V> EmptyMap<K, V> instance() {
+        return INSTANCE;
+    }
+
+    protected EmptyMap() {
+    }
+
     @Override
     public Entry<K, V> entry(final Object key) {
         return null;
@@ -39,7 +49,7 @@ public class EmptyMap<K, V>
 
     @Override
     public UnmodifiableIterator<Entry<K, V>> iterator() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return UnmodifiableIterator.empty();
     }
 
     @Override

@@ -22,13 +22,13 @@ public interface EmptyCollectionTest<T> extends CollectionTest<T> {
     Collection<T> createEmpty();
 
     @Test
-    default void testIsEmpty() {
+    default void testIsEmpty_Empty() {
         final Collection<T> collection = this.createEmpty();
         assertTrue(collection.isEmpty());
     }
 
     @Test
-    default void testCount() {
+    default void testCount_Empty() {
         final Collection<T> collection = this.createEmpty();
         assertThat(collection.count(), is(0));
     }
