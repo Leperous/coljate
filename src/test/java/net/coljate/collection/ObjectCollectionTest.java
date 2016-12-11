@@ -9,6 +9,6 @@ import net.coljate.ObjectContainerTest;
  */
 public abstract class ObjectCollectionTest
         extends ObjectContainerTest
-        implements CollectionTests<Object> {
+        implements CollectionTest<Object> {
 
 }

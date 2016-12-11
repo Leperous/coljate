@@ -11,7 +11,7 @@ import org.junit.Test;
  *
  * @author ollie
  */
-public interface EmptyCollectionTests<T> extends CollectionTests<T> {
+public interface EmptyCollectionTest<T> extends CollectionTest<T> {
 
     @Override
     default Collection<T> create(final T... elements) {

@@ -1,7 +1,6 @@
 package net.coljate.collection.impl;
 
 import net.coljate.collection.ObjectCollectionTest;
-import net.coljate.collection.SingletonCollectionTests;
 
 /**
  *
@@ -10,7 +9,7 @@ import net.coljate.collection.SingletonCollectionTests;
 @SuppressWarnings({"unchecked", "rawtypes"})
 public class SingletonCollectionTest
         extends ObjectCollectionTest
-        implements SingletonCollectionTests<Object> {
+        implements net.coljate.collection.SingletonCollectionTest<Object> {
 
     @Override
     public SingletonCollection<Object> createSingleton(final Object element) {

@@ -12,7 +12,7 @@ import org.junit.Test;
  *
  * @author ollie
  */
-public interface SingletonCollectionTests<T> extends CollectionTests<T> {
+public interface SingletonCollectionTest<T> extends CollectionTest<T> {
 
     @Override
     default Collection<T> create(final T... elements) {

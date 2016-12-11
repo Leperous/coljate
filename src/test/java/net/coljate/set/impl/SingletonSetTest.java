@@ -3,8 +3,8 @@ package net.coljate.set.impl;
 import org.junit.Assume;
 
 import net.coljate.collection.ObjectCollectionTest;
-import net.coljate.collection.SingletonCollectionTests;
-import net.coljate.set.ImmutableSetTests;
+import net.coljate.set.ImmutableSetTest;
+import net.coljate.collection.SingletonCollectionTest;
 
 /**
  *
@@ -12,7 +12,7 @@ import net.coljate.set.ImmutableSetTests;
  */
 public class SingletonSetTest
         extends ObjectCollectionTest
-        implements ImmutableSetTests<Object>, SingletonCollectionTests<Object> {
+        implements ImmutableSetTest<Object>, SingletonCollectionTest<Object> {
 
     @Override
     public SingletonSet<Object> createSingleton(final Object element) {

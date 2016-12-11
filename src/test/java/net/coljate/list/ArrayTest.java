@@ -4,7 +4,7 @@ package net.coljate.list;
  *
  * @author Ollie
  */
-public interface ArrayTests<T> extends ListTests<T> {
+public interface ArrayTest<T> extends ListTest<T> {
 
     @Override
     Array<T> create(T... elements);

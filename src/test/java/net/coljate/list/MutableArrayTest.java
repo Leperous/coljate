@@ -4,7 +4,7 @@ package net.coljate.list;
  *
  * @author Ollie
  */
-public interface MutableArrayTests<T> extends ArrayTests<T>, MutableListTests<T> {
+public interface MutableArrayTest<T> extends ArrayTest<T>, MutableListTest<T> {
 
     @Override
     MutableArray<T> create(T... elements);

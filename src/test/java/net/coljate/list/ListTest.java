@@ -1,12 +1,12 @@
 package net.coljate.list;
 
-import net.coljate.collection.CollectionTests;
+import net.coljate.collection.CollectionTest;
 
 /**
  *
  * @author Ollie
  */
-public interface ListTests<T> extends CollectionTests<T> {
+public interface ListTest<T> extends CollectionTest<T> {
 
     @Override
     List<T> create(T... elements);

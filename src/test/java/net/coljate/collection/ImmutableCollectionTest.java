@@ -8,7 +8,7 @@ import org.junit.Test;
  *
  * @author ollie
  */
-public interface ImmutableCollectionTests<T> extends CollectionTests<T> {
+public interface ImmutableCollectionTest<T> extends CollectionTest<T> {
 
     @Override
     ImmutableCollection<T> create(T... elements);

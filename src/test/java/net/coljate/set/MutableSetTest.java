@@ -1,15 +1,16 @@
 package net.coljate.set;
 
-import net.coljate.collection.MutableCollectionTests;
 
 import static org.junit.Assert.assertFalse;
 import org.junit.Test;
+
+import net.coljate.collection.MutableCollectionTest;
 
 /**
  *
  * @author ollie
  */
-public interface MutableSetTests<T> extends SetTests<T>, MutableCollectionTests<T> {
+public interface MutableSetTest<T> extends SetTest<T>, MutableCollectionTest<T> {
 
     @Override
     MutableSet<T> create(T... elements);

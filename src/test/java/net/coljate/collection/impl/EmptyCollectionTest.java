@@ -1,6 +1,5 @@
 package net.coljate.collection.impl;
 
-import net.coljate.collection.EmptyCollectionTests;
 import net.coljate.collection.ObjectCollectionTest;
 
 /**
@@ -9,7 +8,7 @@ import net.coljate.collection.ObjectCollectionTest;
  */
 public class EmptyCollectionTest
         extends ObjectCollectionTest
-        implements EmptyCollectionTests<Object> {
+        implements net.coljate.collection.EmptyCollectionTest<Object> {
 
     @Override
     public EmptyCollection<Object> createEmpty() {

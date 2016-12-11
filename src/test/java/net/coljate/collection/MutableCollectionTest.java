@@ -8,7 +8,7 @@ import org.junit.Test;
  *
  * @author ollie
  */
-public interface MutableCollectionTests<T> extends CollectionTests<T> {
+public interface MutableCollectionTest<T> extends CollectionTest<T> {
 
     @Override
     MutableCollection<T> create(T... elements);
