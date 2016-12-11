@@ -2,6 +2,7 @@ package net.coljate.set.impl;
 
 import java.util.Comparator;
 
+import net.coljate.collection.Collection;
 import net.coljate.set.SortedSet;
 import net.coljate.util.Arrays;
 import net.coljate.util.Suppliers;
@@ -20,6 +21,13 @@ public class MutableWrappedTreeSet<T>
 
     public static <T> MutableWrappedTreeSet<T> copyOf(final java.util.SortedSet<T> set) {
         return new MutableWrappedTreeSet<>(new java.util.TreeSet<>(set));
+    }
+
+    public static <T> MutableWrappedTreeSet<T> copyOf(
+            final Comparator<? super T> comparator,
+            final Collection<? extends T> collection) {
+        final java.util.TreeSet<T> set = collection.mutableJavaCopy(i -> new java.util.TreeSet<>(comparator));
+        return viewOf(set);
     }
 
     @SafeVarargs
@@ -49,8 +57,11 @@ public class MutableWrappedTreeSet<T>
     }
 
     @Override
+    @SuppressWarnings("unchecked")
     public Comparator<? super T> comparator() {
-        return Suppliers.firstNonNull(delegate.comparator(), (Comparator) Comparator.naturalOrder());
+        return Suppliers.firstNonNull(
+                delegate.comparator(),
+                (Comparator<T>) Comparator.naturalOrder());
     }
 
     @Override

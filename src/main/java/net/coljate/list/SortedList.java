@@ -1,11 +1,11 @@
 package net.coljate.list;
 
-import net.coljate.feature.Sorted;
+import net.coljate.collection.SortedCollection;
 
 /**
  *
  * @author ollie
  */
-public interface SortedList<T> extends Sorted<T>, List<T> {
+public interface SortedList<T> extends SortedCollection<T>, List<T> {
 
 }

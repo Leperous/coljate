@@ -1,5 +1,6 @@
 package net.coljate.collection;
 
+import java.util.Comparator;
 import java.util.function.Function;
 import java.util.function.IntFunction;
 import java.util.function.Predicate;
@@ -9,10 +10,12 @@ import net.coljate.collection.impl.WrappedCollection;
 import net.coljate.collection.lazy.LazyCollection;
 import net.coljate.feature.IterableExtension;
 import net.coljate.feature.StreamExtension;
+import net.coljate.list.impl.ImmutableSortedArray;
 import net.coljate.set.Set;
 
 /**
- * Some {@link Iterable} {@link Container} with a {@link #count count} of elements.
+ * Some {@link Iterable} {@link Container} with a {@link #count count} of
+ * elements.
  *
  * @author ollie
  */
@@ -60,8 +63,9 @@ public interface Collection<T> extends IterableExtension<T>, StreamExtension<T> 
     /**
      *
      * @param array
-     * @return an array containing all the elements in this collection. This will either be the original array if it has
-     * sufficient capacity, or a new array.
+     * @return an array containing all the elements in this collection. This
+     * will either be the original array if it has sufficient capacity, or a new
+     * array.
      * @see java.util.Collection#toArray(T[])
      */
     default T[] arrayCopy(final T[] array) {
@@ -75,6 +79,10 @@ public interface Collection<T> extends IterableExtension<T>, StreamExtension<T> 
             into[index++] = element;
         }
         return into;
+    }
+
+    default SortedCollection<T> sortedCopy(final Comparator<? super T> comparator) {
+        return ImmutableSortedArray.sort(this, comparator);
     }
 
     /**

@@ -1,13 +1,11 @@
 package net.coljate.feature;
 
-import net.coljate.collection.Collection;
-
 /**
  * Has a specific order.
  *
  * @author ollie
  */
-public interface Ordered<T> extends Collection<T> {
+public interface Ordered<T> {
 
     /**
      *

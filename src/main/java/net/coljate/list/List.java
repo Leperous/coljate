@@ -1,11 +1,13 @@
 package net.coljate.list;
 
+import java.util.Comparator;
 import java.util.function.Function;
 import java.util.function.Predicate;
 
 import net.coljate.collection.Collection;
 import net.coljate.feature.Ordered;
 import net.coljate.list.impl.ImmutableNativeArray;
+import net.coljate.list.impl.ImmutableSortedArray;
 import net.coljate.list.impl.MutableWrappedArrayList;
 import net.coljate.list.impl.MutableWrappedList;
 import net.coljate.list.lazy.LazyFilteredList;
@@ -17,7 +19,7 @@ import net.coljate.util.Equality;
  *
  * @author ollie
  */
-public interface List<T> extends Ordered<T> {
+public interface List<T> extends Ordered<T>, Collection<T> {
 
     @Override
     ListIterator<T> iterator();
@@ -28,16 +30,6 @@ public interface List<T> extends Ordered<T> {
     }
 
     T last();
-
-    @Override
-    default MutableList<T> mutableCopy() {
-        return MutableWrappedArrayList.viewOf(this.mutableJavaCopy(java.util.ArrayList::new));
-    }
-
-    @Override
-    default ImmutableList<T> immutableCopy() {
-        return ImmutableNativeArray.copyOf(this);
-    }
 
     @Override
     default java.util.List<T> mutableJavaCopy() {
@@ -56,6 +48,21 @@ public interface List<T> extends Ordered<T> {
     @Override
     default LazyList<T> filter(final Predicate<? super T> predicate) {
         return new LazyFilteredList<>(this, predicate);
+    }
+
+    @Override
+    default SortedList<T> sortedCopy(final Comparator<? super T> comparator) {
+        return ImmutableSortedArray.sort(this, comparator);
+    }
+
+    @Override
+    default MutableList<T> mutableCopy() {
+        return MutableWrappedArrayList.viewOf(this.mutableJavaCopy(java.util.ArrayList::new));
+    }
+
+    @Override
+    default ImmutableList<T> immutableCopy() {
+        return ImmutableNativeArray.copyOf(this);
     }
 
     @SafeVarargs

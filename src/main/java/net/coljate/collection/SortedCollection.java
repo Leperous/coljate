@@ -1,13 +1,15 @@
-package net.coljate.feature;
+package net.coljate.collection;
 
 import java.util.Comparator;
+
+import net.coljate.feature.Ordered;
 
 /**
  * Has a specific order, based on some {@link #comparator}.
  *
  * @author ollie
  */
-public interface Sorted<T> extends Ordered<T> {
+public interface SortedCollection<T> extends Ordered<T> {
 
     /**
      *

@@ -14,10 +14,18 @@ public class ImmutableSortedArray<T>
         extends ImmutableNativeArray<T>
         implements SortedArray<T> {
 
+    public static <T extends Comparable<? super T>> SortedArray<T> sort(final Collection<T> collection) {
+        return sort(collection, Comparator.naturalOrder());
+    }
+
     public static <T> SortedArray<T> sort(
             final Collection<T> collection,
             final Comparator<? super T> comparator) {
         return sort((T[]) collection.arrayCopy(), comparator);
+    }
+
+    public static <T extends Comparable<? super T>> SortedArray<T> sort(final java.util.Collection<T> collection) {
+        return sort(collection, Comparator.naturalOrder());
     }
 
     public static <T> SortedArray<T> sort(
