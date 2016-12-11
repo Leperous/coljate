@@ -10,6 +10,9 @@ import net.coljate.set.ImmutableSet;
 public interface ImmutableMap<K, V> extends Map<K, V>, ImmutableSet<Entry<K, V>> {
 
     @Override
+    ImmutableEntry<K, V> entry(Object key);
+
+    @Override
     ImmutableSet<? extends K> keys();
 
     @Override

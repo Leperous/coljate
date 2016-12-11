@@ -6,6 +6,7 @@ import net.coljate.UnmodifiableIterator;
 import net.coljate.collection.ImmutableCollection;
 import net.coljate.map.AbstractMap;
 import net.coljate.map.Entry;
+import net.coljate.map.ImmutableEntry;
 import net.coljate.map.ImmutableMap;
 import net.coljate.set.ImmutableSet;
 
@@ -28,7 +29,7 @@ public class EmptyMap<K, V>
     }
 
     @Override
-    public Entry<K, V> entry(final Object key) {
+    public ImmutableEntry<K, V> entry(final Object key) {
         return null;
     }
 
