@@ -50,4 +50,8 @@ public interface List<T> extends Ordered<T> {
         return MutableWrappedList.viewOf(list);
     }
 
+    static <T> List<T> repeated(final T value, final int count) {
+        return Array.repeated(value, count);
+    }
+
 }

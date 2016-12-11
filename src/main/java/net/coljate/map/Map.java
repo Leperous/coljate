@@ -7,6 +7,7 @@ import java.util.function.Supplier;
 
 import net.coljate.collection.Collection;
 import net.coljate.feature.Associative;
+import net.coljate.map.impl.RepeatedValueMap;
 import net.coljate.set.Set;
 import net.coljate.util.Functions;
 
@@ -33,7 +34,7 @@ public interface Map<K, V> extends Set<Entry<K, V>>, Associative<K, V> {
         return got == null ? defaultValue : got.value();
     }
 
-    Set<K> keys();
+    Set<? extends K> keys();
 
     Collection<V> values();
 
@@ -82,6 +83,12 @@ public interface Map<K, V> extends Set<Entry<K, V>>, Associative<K, V> {
     }
 
     @Override
-    ImmutableMap<K, V> immutableCopy();
+    default ImmutableMap<K, V> immutableCopy() {
+        throw new UnsupportedOperationException(); //TODO default behaviour
+    }
+
+    static <K, V> Map<K, V> repeat(final Set<K> keys, final V value) {
+        return RepeatedValueMap.viewOf(keys, value);
+    }
 
 }

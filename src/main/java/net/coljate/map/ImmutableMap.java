@@ -10,7 +10,7 @@ import net.coljate.set.ImmutableSet;
 public interface ImmutableMap<K, V> extends Map<K, V>, ImmutableSet<Entry<K, V>> {
 
     @Override
-    ImmutableSet<K> keys();
+    ImmutableSet<? extends K> keys();
 
     @Override
     ImmutableCollection<V> values();
@@ -27,6 +27,5 @@ public interface ImmutableMap<K, V> extends Map<K, V>, ImmutableSet<Entry<K, V>>
     default ImmutableMap<K, V> immutableCopy() {
         return this;
     }
-
 
 }

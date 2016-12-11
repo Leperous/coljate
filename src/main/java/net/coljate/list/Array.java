@@ -2,6 +2,7 @@ package net.coljate.list;
 
 import net.coljate.feature.Indexed;
 import net.coljate.list.impl.MutableWrappedArrayList;
+import net.coljate.list.impl.RepeatedValueArray;
 
 /**
  *
@@ -10,8 +11,7 @@ import net.coljate.list.impl.MutableWrappedArrayList;
 public interface Array<T> extends Indexed<T>, List<T> {
 
     /**
-     * @return the length of this array. It will be equal to or greater than the
-     * {@link #count}.
+     * @return the length of this array. It will be equal to or greater than the {@link #count}.
      */
     int length();
 
@@ -48,35 +48,8 @@ public interface Array<T> extends Indexed<T>, List<T> {
     @Override
     ImmutableArray<T> immutableCopy();
 
-    class ArrayIterator<T> implements ListIterator<T> {
-
-        final Array<? extends T> array;
-        int index = 0;
-
-        protected ArrayIterator(Array<? extends T> array) {
-            this.array = array;
-        }
-
-        @Override
-        public boolean hasPrevious() {
-            return index > 0;
-        }
-
-        @Override
-        public T previous() {
-            return array.get(--index);
-        }
-
-        @Override
-        public boolean hasNext() {
-            return index < array.count();
-        }
-
-        @Override
-        public T next() {
-            return array.get(index++);
-        }
-
+    static <T> Array<T> repeated(final T value, final int count) {
+        return new RepeatedValueArray<>(value, count);
     }
 
 }

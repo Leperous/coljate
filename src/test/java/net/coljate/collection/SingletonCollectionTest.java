@@ -22,8 +22,6 @@ public interface SingletonCollectionTest<T> extends CollectionTest<T> {
         return this.create(elements.get(0));
     }
 
-    Collection<T> create(T element);
-
     @Test
     default void testCount_Singleton() {
         final Collection<T> collection = this.create(this.createObject());

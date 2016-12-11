@@ -22,8 +22,6 @@ public interface EmptyCollectionTest<T> extends CollectionTest<T> {
         return this.create();
     }
 
-    Collection<T> create();
-
     @Test
     default void testIsEmpty_Empty() {
         final Collection<T> collection = this.create();

@@ -19,7 +19,12 @@ public interface MutableMapTest<K, V> extends MapTest<K, V>, MutableCollectionTe
 
     @Override
     default MutableMap<K, V> create(final Entry<K, V> entry) {
-        return this.create(java.util.Arrays.asList(entry));
+        return this.create(singletonList(entry));
+    }
+
+    @Override
+    default MutableMap<K, V> create() {
+        return this.create(emptyList());
     }
 
     @Test

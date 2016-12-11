@@ -19,9 +19,4 @@ public class MutableWrappedHashMapTest
         return MutableWrappedHashMap.copyOf(entries);
     }
 
-    @Override
-    public MutableWrappedHashMap<Object, Object> create(final Entry<Object, Object> entry) {
-        return this.create(java.util.Arrays.asList(entry));
-    }
-
 }

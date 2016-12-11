@@ -15,8 +15,14 @@ public interface MapTest<K, V> extends CollectionTest<Entry<K, V>> {
     @Override
     Map<K, V> create(java.util.List<Entry<K, V>> entries);
 
+    @Override
     default Map<K, V> create(final Entry<K, V> entry) {
         return this.create(java.util.Arrays.asList(entry));
+    }
+
+    @Override
+    default Map<K, V> create() {
+        return this.create(java.util.Collections.emptyList());
     }
 
     @Test
