@@ -40,12 +40,18 @@ public interface Map<K, V> extends Set<Entry<K, V>>, Associative<K, V> {
     @Deprecated
     default boolean contains(final Object object) {
         return object instanceof Entry
-                && this.contains((Entry) object);
+                && this.containsEntry((Entry) object);
     }
 
-    default boolean contains(final Entry<?, ?> entry) {
-        final Entry<K, V> got = this.entry(entry.key());
-        return Objects.equals(got, entry);
+    default boolean contains(final Object key, final Object value) {
+        final Entry<K, V> current = this.entry(key);
+        return current != null
+                && Objects.equals(current.key(), key)
+                && Objects.equals(current.value(), value);
+    }
+
+    default boolean containsEntry(final Entry<?, ?> entry) {
+        return this.contains(entry.key(), entry.value());
     }
 
     default boolean containsKey(final Object key) {

@@ -11,12 +11,12 @@ import org.junit.Test;
 public interface MutableCollectionTest<T> extends CollectionTest<T> {
 
     @Override
-    MutableCollection<T> create(T... elements);
+    MutableCollection<T> create(java.util.List<T> elements);
 
     @Test
     default void testRemoveFirst_Singleton() {
         final T element = this.createObject();
-        final MutableCollection<T> collection = this.create(element);
+        final MutableCollection<T> collection = this.create(java.util.Collections.singletonList(element));
         assertTrue("Should remove element", collection.removeFirst(element));
         assertTrue(collection.isEmpty());
         assertFalse(collection.contains(element));
@@ -27,8 +27,8 @@ public interface MutableCollectionTest<T> extends CollectionTest<T> {
 
         //Given
         final T element = this.createObject();
-        final MutableCollection<T> collection = this.create(element);
-        assertTrue(collection.contains(element));
+        final MutableCollection<T> collection = this.create(java.util.Collections.singletonList(element));
+        assertTrue("Collection should contain " + element, collection.contains(element));
 
         //When
         collection.clear();

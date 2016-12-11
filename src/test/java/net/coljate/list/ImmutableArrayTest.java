@@ -7,6 +7,6 @@ package net.coljate.list;
 public interface ImmutableArrayTest<T> extends ArrayTest<T>, ImmutableListTest<T> {
 
     @Override
-    ImmutableArray<T> create(T... elements);
+    ImmutableArray<T> create(java.util.List<T> elements);
 
 }

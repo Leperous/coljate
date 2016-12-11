@@ -17,10 +17,14 @@ public class MutableWrappedSet<T>
     }
 
     @SafeVarargs
-    public static <T> MutableWrappedSet<T> copyOf(final T... elements) {
+    public static <T> MutableWrappedSet<T> copyIntoHashSet(final T... elements) {
         final java.util.Set<T> set = new java.util.HashSet<>(elements.length);
         Arrays.consume(elements, set::add);
         return viewOf(set);
+    }
+
+    public static <T> MutableWrappedSet<T> copyIntoHashSet(final java.util.Collection<? extends T> collection) {
+        return viewOf(new java.util.HashSet<>(collection));
     }
 
     public static <T> MutableWrappedSet<T> copyOf(final Set<T> set) {

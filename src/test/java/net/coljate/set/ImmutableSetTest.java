@@ -9,6 +9,6 @@ import net.coljate.collection.ImmutableCollectionTest;
 public interface ImmutableSetTest<T> extends SetTest<T>, ImmutableCollectionTest<T> {
     
     @Override
-    ImmutableSet<T> create(T... elements);
+    ImmutableSet<T> create(java.util.List<T> elements);
 
 }

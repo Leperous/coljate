@@ -20,9 +20,9 @@ public class SingletonSetTest
     }
 
     @Override
-    public SingletonSet<Object> create(final Object... elements) {
-        Assume.assumeTrue(elements.length == 1);
-        return this.createSingleton(elements[0]);
+    public SingletonSet<Object> create(final java.util.List<Object> elements) {
+        Assume.assumeTrue(elements.size() == 1);
+        return this.createSingleton(elements.get(0));
     }
 
 }

@@ -3,7 +3,6 @@ package net.coljate.map.impl;
 import java.io.Serializable;
 
 import net.coljate.map.Entry;
-import net.coljate.util.Arrays;
 
 /**
  *
@@ -15,19 +14,18 @@ public class MutableWrappedHashMap<K, V>
 
     private static final long serialVersionUID = 1L;
 
-    @SafeVarargs
-    public static <K, V> MutableWrappedHashMap<K, V> copyOf(final Entry<K, V>... entries) {
-        final java.util.HashMap<K, V> map = new java.util.HashMap<>(entries.length);
-        Arrays.consume(entries, entry -> map.put(entry.key(), entry.value()));
+    public static <K, V> MutableWrappedHashMap<K, V> copyOf(final java.util.Collection<? extends Entry<K, V>> entries) {
+        final java.util.HashMap<K, V> map = new java.util.HashMap<>(entries.size());
+        entries.forEach(entry -> map.put(entry.key(), entry.value()));
         return viewOf(map);
     }
 
-    public static <K, V> MutableWrappedHashMap<K, V> create(final int initialCapacity) {
+    public static <K, V> MutableWrappedHashMap<K, V> createHashMap(final int initialCapacity) {
         return viewOf(new java.util.HashMap<>(initialCapacity));
     }
 
     public static <K, V> MutableWrappedHashMap<K, V> copyOf(final java.util.Map<K, V> map) {
-        return viewOf(copyIntoHashMap(map));
+        return viewOf(MutableWrappedMap.copyIntoHashMap(map));
     }
 
     public static <K, V> MutableWrappedHashMap<K, V> viewOf(final java.util.HashMap<K, V> map) {

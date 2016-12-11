@@ -9,6 +9,6 @@ import net.coljate.collection.CollectionTest;
 public interface ListTest<T> extends CollectionTest<T> {
 
     @Override
-    List<T> create(T... elements);
+    List<T> create(java.util.List<T> elements);
 
 }

@@ -1,5 +1,7 @@
 package net.coljate.collection;
 
+import java.util.Iterator;
+
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertThat;
@@ -15,9 +17,9 @@ import org.junit.Test;
 public interface SingletonCollectionTest<T> extends CollectionTest<T> {
 
     @Override
-    default Collection<T> create(final T... elements) {
-        Assume.assumeTrue(elements.length == 1);
-        return this.createSingleton(elements[0]);
+    default Collection<T> create(final java.util.List<T> elements) {
+        Assume.assumeTrue(elements.size() == 1);
+        return this.createSingleton(elements.get(0));
     }
 
     Collection<T> createSingleton(T element);
@@ -33,7 +35,17 @@ public interface SingletonCollectionTest<T> extends CollectionTest<T> {
     default void testContains_Singleton() {
         final T object = this.createObject();
         final Collection<T> collection = this.createSingleton(object);
-        assertTrue(collection.contains(object));
+        assertTrue("Singleton should contain " + object, collection.contains(object));
+    }
+
+    @Test
+    default void testIterator_Singleton() {
+        final T object = this.createObject();
+        final Collection<T> collection = this.createSingleton(object);
+        final Iterator<T> iterator = collection.iterator();
+        assertTrue(iterator.hasNext());
+        assertThat(iterator.next(), is(object));
+        assertFalse(iterator.hasNext());
     }
 
 }

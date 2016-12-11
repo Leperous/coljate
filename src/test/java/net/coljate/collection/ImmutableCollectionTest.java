@@ -7,6 +7,6 @@ package net.coljate.collection;
 public interface ImmutableCollectionTest<T> extends CollectionTest<T> {
 
     @Override
-    ImmutableCollection<T> create(T... elements);
+    ImmutableCollection<T> create(java.util.List<T> elements);
 
 }

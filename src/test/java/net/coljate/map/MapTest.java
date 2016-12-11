@@ -9,6 +9,6 @@ import net.coljate.collection.CollectionTest;
 public interface MapTest<K, V> extends CollectionTest<Entry<K, V>> {
 
     @Override
-    Map<K, V> create(Entry<K, V>... entries);
+    Map<K, V> create(java.util.List<Entry<K, V>> entries);
 
 }

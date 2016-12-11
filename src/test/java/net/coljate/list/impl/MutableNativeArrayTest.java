@@ -14,8 +14,8 @@ public class MutableNativeArrayTest
         implements MutableArrayTest<Object>, AllCollectionSizeTest<Object> {
 
     @Override
-    public MutableNativeArray<Object> create(final Object... elements) {
-        return MutableNativeArray.viewOf(elements);
+    public MutableNativeArray<Object> create(final java.util.List<Object> elements) {
+        return MutableNativeArray.copyOf(elements);
     }
 
 }

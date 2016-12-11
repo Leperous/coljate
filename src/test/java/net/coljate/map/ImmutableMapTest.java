@@ -9,6 +9,6 @@ import net.coljate.collection.ImmutableCollectionTest;
 public interface ImmutableMapTest<K, V> extends MapTest<K, V>, ImmutableCollectionTest<Entry<K, V>> {
 
     @Override
-    ImmutableMap<K, V> create(Entry<K, V>... elements);
+    ImmutableMap<K, V> create(java.util.List<Entry<K, V>> elements);
 
 }

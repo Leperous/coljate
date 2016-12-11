@@ -9,6 +9,6 @@ import net.coljate.collection.MutableCollectionTest;
 public interface MutableListTest<T> extends ListTest<T>, MutableCollectionTest<T> {
 
     @Override
-    MutableList<T> create(T... elements);
+    MutableList<T> create(java.util.List<T> elements);
 
 }

@@ -1,6 +1,9 @@
 package net.coljate.collection;
 
+import java.util.Iterator;
+
 import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
 import org.junit.Assume;
@@ -14,8 +17,8 @@ import org.junit.Test;
 public interface EmptyCollectionTest<T> extends CollectionTest<T> {
 
     @Override
-    default Collection<T> create(final T... elements) {
-        Assume.assumeTrue(elements.length == 0);
+    default Collection<T> create(final java.util.List<T> elements) {
+        Assume.assumeTrue(elements.isEmpty());
         return this.createEmpty();
     }
 
@@ -24,13 +27,20 @@ public interface EmptyCollectionTest<T> extends CollectionTest<T> {
     @Test
     default void testIsEmpty_Empty() {
         final Collection<T> collection = this.createEmpty();
-        assertTrue(collection.isEmpty());
+        assertTrue("Collection should be empty", collection.isEmpty());
     }
 
     @Test
     default void testCount_Empty() {
         final Collection<T> collection = this.createEmpty();
         assertThat(collection.count(), is(0));
+    }
+
+    @Test
+    default void testIterator_Empty() {
+        final Collection<T> collection = this.createEmpty();
+        final Iterator<T> iterator = collection.iterator();
+        assertFalse(iterator.hasNext());
     }
 
 }

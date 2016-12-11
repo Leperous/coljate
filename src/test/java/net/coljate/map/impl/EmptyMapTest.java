@@ -21,8 +21,8 @@ public class EmptyMapTest
     }
 
     @Override
-    public EmptyMap<Object, Object> create(final Entry<Object, Object>... elements) {
-        Assume.assumeTrue(elements.length == 0);
+    public EmptyMap<Object, Object> create(final java.util.List<Entry<Object, Object>> elements) {
+        Assume.assumeTrue(elements.isEmpty());
         return this.createEmpty();
     }
 

@@ -11,15 +11,15 @@ public interface AllCollectionSizeTest<T>
 
     @Override
     default Collection<T> createEmpty() {
-        return this.create();
+        return this.create(java.util.Collections.emptyList());
     }
 
     @Override
     default Collection<T> createSingleton(final T element) {
-        return this.create(element);
+        return this.create(java.util.Arrays.asList(element));
     }
 
     @Override
-    Collection<T> create(T... elements);
+    Collection<T> create(java.util.List<T> elements);
 
 }

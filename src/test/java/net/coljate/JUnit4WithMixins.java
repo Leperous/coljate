@@ -45,7 +45,7 @@ public class JUnit4WithMixins extends BlockJUnit4ClassRunner {
             for (final Class<?> interfaceClass : getInterfaces(this.getJavaClass(), MutableSet.createHashSet(4))) {
                 for (final Method method : interfaceClass.getDeclaredMethods()) {
                     if (method.isDefault()) {
-                        addToAnnotationLists(new DefaultFrameworkMethod(interfaceClass, method), methodsForAnnotations);
+                        addToAnnotationLists(new FrameworkMethod(method), methodsForAnnotations);
                     }
                 }
             }
@@ -58,22 +58,6 @@ public class JUnit4WithMixins extends BlockJUnit4ClassRunner {
                 }
             }
             return allInterfaces;
-        }
-
-        private static final class DefaultFrameworkMethod extends FrameworkMethod {
-
-            private final Class<?> interfaceClass;
-
-            DefaultFrameworkMethod(final Class<?> interfaceClass, final Method method) {
-                super(method);
-                this.interfaceClass = interfaceClass;
-            }
-
-            @Override
-            public String getName() {
-                return super.getName() + '@' + interfaceClass.getSimpleName();
-            }
-
         }
 
     }

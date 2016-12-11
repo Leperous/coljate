@@ -8,6 +8,6 @@ import net.coljate.Tests;
  */
 public interface CollectionTest<T> extends Tests<T> {
 
-    Collection<T> create(T... elements);
+    Collection<T> create(java.util.List<T> elements);
 
 }

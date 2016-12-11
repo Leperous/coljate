@@ -15,6 +15,10 @@ public class MutableNativeArray<T>
         extends AbstractList<T>
         implements NativeArray<T>, MutableArray<T> {
 
+    public static <T> MutableNativeArray<T> copyOf(final java.util.Collection<? extends T> collection) {
+        return new MutableNativeArray<>(collection.toArray(), collection.size());
+    }
+
     public static <T> MutableNativeArray<T> copyOf(final T[] elements) {
         return new MutableNativeArray<>(Arrays.copyOf(elements), elements.length);
     }

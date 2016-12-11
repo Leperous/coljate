@@ -14,8 +14,8 @@ public class MutableWrappedSetTest
         implements AllCollectionSizeTest<Object>, MutableSetTest<Object> {
 
     @Override
-    public MutableWrappedSet<Object> create(final Object... elements) {
-        return MutableWrappedSet.copyOf(elements);
+    public MutableWrappedSet<Object> create(final java.util.List<Object> elements) {
+        return MutableWrappedSet.copyIntoHashSet(elements);
     }
 
 }

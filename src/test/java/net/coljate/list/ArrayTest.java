@@ -7,6 +7,6 @@ package net.coljate.list;
 public interface ArrayTest<T> extends ListTest<T> {
 
     @Override
-    Array<T> create(T... elements);
+    Array<T> create(java.util.List<T> elements);
 
 }

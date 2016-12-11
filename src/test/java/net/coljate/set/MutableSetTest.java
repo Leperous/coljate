@@ -1,6 +1,5 @@
 package net.coljate.set;
 
-
 import static org.junit.Assert.assertFalse;
 import org.junit.Test;
 
@@ -13,12 +12,12 @@ import net.coljate.collection.MutableCollectionTest;
 public interface MutableSetTest<T> extends SetTest<T>, MutableCollectionTest<T> {
 
     @Override
-    MutableSet<T> create(T... elements);
+    MutableSet<T> create(java.util.List<T> elements);
 
     @Test
     default void testAdd_Twice() {
         final T element = this.createObject();
-        final MutableSet<T> set = this.create(element);
+        final MutableSet<T> set = this.create(java.util.Arrays.asList(element));
         assertFalse(set.add(element));
     }
 

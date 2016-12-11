@@ -9,6 +9,6 @@ import net.coljate.collection.MutableCollectionTest;
 public interface MutableMapTest<K, V> extends MapTest<K, V>, MutableCollectionTest<Entry<K, V>> {
 
     @Override
-    MutableMap<K, V> create(Entry<K, V>... entries);
+    MutableMap<K, V> create(java.util.List<Entry<K, V>> entries);
 
 }
