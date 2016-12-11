@@ -8,6 +8,8 @@ import net.coljate.set.impl.MutableWrappedHashSet;
 import net.coljate.set.impl.MutableWrappedSet;
 import net.coljate.set.impl.SingletonSet;
 import net.coljate.set.impl.WrappedSet;
+import net.coljate.set.lazy.LazyIntersectionSet;
+import net.coljate.set.lazy.LazySet;
 import net.coljate.util.Equality;
 
 /**
@@ -37,6 +39,10 @@ public interface Set<T> extends Collection<T> {
 
     default boolean elementsEqual(final Set<?> that) {
         return that != null && Set.elementsEqual(this, that);
+    }
+
+    default LazySet<T> intersection(final Set<? extends T> that) {
+        return LazyIntersectionSet.of(this, that);
     }
 
     static <T> EmptySet<T> of() {

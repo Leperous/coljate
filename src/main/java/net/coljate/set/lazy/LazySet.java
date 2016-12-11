@@ -12,11 +12,6 @@ import net.coljate.set.Set;
 public interface LazySet<T> extends LazyCollection<T>, Set<T> {
 
     @Override
-    default Set<T> evaluate() {
-        return this.immutableCopy();
-    }
-
-    @Override
     default MutableSet<T> mutableCopy() {
         return Set.super.mutableCopy();
     }

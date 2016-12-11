@@ -13,11 +13,6 @@ import net.coljate.map.MutableMap;
 public interface LazyMap<K, V> extends LazyCollection<Entry<K, V>>, Map<K, V> {
 
     @Override
-    default Map<K, V> evaluate() {
-        return this.immutableCopy();
-    }
-
-    @Override
     default MutableMap<K, V> mutableCopy() {
         return Map.super.mutableCopy();
     }

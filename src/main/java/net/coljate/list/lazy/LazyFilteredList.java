@@ -1,7 +1,9 @@
 package net.coljate.list.lazy;
 
+import java.util.function.Function;
 import java.util.function.Predicate;
 
+import net.coljate.collection.Collection;
 import net.coljate.collection.lazy.LazyFilteredCollection;
 import net.coljate.list.List;
 import net.coljate.list.ListIterator;
@@ -14,7 +16,11 @@ public class LazyFilteredList<T>
         extends LazyFilteredCollection<T>
         implements LazyList<T> {
 
-    protected LazyFilteredList(final List<? extends T> collection, final Predicate<? super T> predicate) {
+    public static <T> Function<Collection<T>, ? extends LazyFilteredList<T>> filter(final Predicate<? super T> predicate) {
+        return list -> new LazyFilteredList<>(List.copyOrCast(list), predicate);
+    }
+
+    public LazyFilteredList(final List<? extends T> collection, final Predicate<? super T> predicate) {
         super(collection, predicate);
     }
 

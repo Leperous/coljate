@@ -2,6 +2,7 @@ package net.coljate.collection.lazy;
 
 import java.util.Iterator;
 import java.util.NoSuchElementException;
+import java.util.function.Function;
 import java.util.function.Predicate;
 
 import net.coljate.collection.Collection;
@@ -11,6 +12,10 @@ import net.coljate.collection.Collection;
  * @author Ollie
  */
 public class LazyFilteredCollection<T> implements LazyCollection<T> {
+
+    public static <T> Function<Collection<T>, ? extends LazyCollection<T>> filter(final Predicate<? super T> predicate) {
+        return collection -> new LazyFilteredCollection<>(collection, predicate);
+    }
 
     private final Collection<? extends T> collection;
     private final Predicate<? super T> predicate;

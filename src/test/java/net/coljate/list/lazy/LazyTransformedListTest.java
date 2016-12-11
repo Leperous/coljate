@@ -29,7 +29,7 @@ public class LazyTransformedListTest extends ObjectContainerTest {
         assertThat(lazyList.count(), is(list.count()));
         assertThat(lazyList.first(), is(value));
 
-        final List<Integer> frozen = lazyList.evaluate();
+        final List<Integer> frozen = lazyList.immutableCopy();
         assertThat(frozen.first(), is(value));
 
     }

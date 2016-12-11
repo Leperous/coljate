@@ -2,10 +2,13 @@ package net.coljate.collection;
 
 import java.util.function.Function;
 import java.util.function.IntFunction;
+import java.util.function.Predicate;
 
 import net.coljate.Container;
 import net.coljate.collection.impl.WrappedCollection;
 import net.coljate.collection.lazy.LazyCollection;
+import net.coljate.collection.lazy.LazyFilteredCollection;
+import net.coljate.collection.lazy.LazyTransformedCollection;
 import net.coljate.feature.IterableExtension;
 import net.coljate.feature.StreamExtension;
 import net.coljate.set.Set;
@@ -85,6 +88,14 @@ public interface Collection<T> extends IterableExtension<T>, StreamExtension<T> 
      */
     default <L extends LazyCollection<?>> L lazily(final Function<Collection<T>, L> intoLazy) {
         return intoLazy.apply(this);
+    }
+
+    default <R> LazyCollection<R> transform(final Function<? super T, ? extends R> transformation) {
+        return this.lazily(LazyTransformedCollection.<T, R>transform(transformation));
+    }
+
+    default LazyCollection<T> filter(final Predicate<? super T> predicate) {
+        return this.lazily(LazyFilteredCollection.filter(predicate));
     }
 
     static <T> Collection<T> of(final T element) {

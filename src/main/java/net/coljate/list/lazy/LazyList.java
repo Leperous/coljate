@@ -12,11 +12,6 @@ import net.coljate.list.MutableList;
 public interface LazyList<T> extends LazyCollection<T>, List<T> {
 
     @Override
-    default List<T> evaluate() {
-        return this.immutableCopy();
-    }
-
-    @Override
     default ImmutableList<T> immutableCopy() {
         return List.super.immutableCopy();
     }
