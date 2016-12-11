@@ -30,4 +30,14 @@ public class ConcurrentWrappedSet<T>
         super(delegate);
     }
 
+    @Override
+    public java.util.Set<T> mutableJavaCopy() {
+        return this.mutableJavaCopy(ConcurrentWrappedSet::createConcurrentHashSet);
+    }
+
+    @Override
+    public ConcurrentWrappedSet<T> mutableCopy() {
+        return new ConcurrentWrappedSet<>(this.mutableJavaCopy());
+    }
+
 }

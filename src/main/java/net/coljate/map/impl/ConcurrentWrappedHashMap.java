@@ -19,7 +19,7 @@ public class ConcurrentWrappedHashMap<K, V>
     }
 
     @Override
-    public ConcurrentMap<K, V> mutableCopy() {
+    public ConcurrentWrappedHashMap<K, V> mutableCopy() {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
