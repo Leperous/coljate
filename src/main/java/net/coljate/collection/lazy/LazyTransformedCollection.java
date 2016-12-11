@@ -31,4 +31,9 @@ public class LazyTransformedCollection<F, T>
         return Iterators.transform(collection.iterator(), this::transform);
     }
 
+    @Override
+    public int count() {
+        return collection.count();
+    }
+
 }

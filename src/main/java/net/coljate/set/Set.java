@@ -67,8 +67,18 @@ public interface Set<T> extends Collection<T> {
         return MutableWrappedHashSet.copyOf(elements);
     }
 
+    static <T> Set<T> copyOrCast(final Collection<T> collection) {
+        return collection instanceof Set
+                ? (Set<T>) collection
+                : copyOf(collection);
+    }
+
     static <T> Set<T> copyOf(final java.util.Collection<? extends T> collection) {
         return MutableWrappedSet.copyIntoHashSet(collection);
+    }
+
+    static <T> Set<T> copyOf(final Collection<? extends T> collection) {
+        return ImmutableSet.copyOf(collection);
     }
 
     static <T> Set<T> viewOf(final java.util.Set<T> set) {

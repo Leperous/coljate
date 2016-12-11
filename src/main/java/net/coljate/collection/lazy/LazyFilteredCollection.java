@@ -1,11 +1,10 @@
 package net.coljate.collection.lazy;
 
 import java.util.Iterator;
-import java.util.NoSuchElementException;
-import java.util.function.Function;
 import java.util.function.Predicate;
 
 import net.coljate.collection.Collection;
+import net.coljate.util.Iterators;
 
 /**
  *
@@ -30,41 +29,7 @@ public class LazyFilteredCollection<T> implements LazyCollection<T> {
 
     @Override
     public Iterator<T> iterator() {
-        return new FilteredIterator();
-    }
-
-    protected class FilteredIterator implements Iterator<T> {
-
-        private final Iterator<? extends T> iterator = collection.iterator();
-        private T next;
-        private boolean needsNext;
-
-        @Override
-        public boolean hasNext() {
-            if (needsNext) {
-                while (iterator.hasNext()) {
-                    final T next = iterator.next();
-                    if (predicate.test(next)) {
-                        this.next = next;
-                        needsNext = false;
-                        return true;
-                    }
-                }
-                needsNext = true;
-                return false;
-            }
-            return true;
-        }
-
-        @Override
-        public T next() {
-            if (!this.hasNext()) {
-                throw new NoSuchElementException();
-            }
-            needsNext = true;
-            return next;
-        }
-
+        return Iterators.filter(collection.iterator(), predicate);
     }
 
 }

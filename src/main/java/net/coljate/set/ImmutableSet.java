@@ -2,8 +2,10 @@ package net.coljate.set;
 
 import java.util.Collections;
 
+import net.coljate.collection.Collection;
 import net.coljate.collection.ImmutableCollection;
 import net.coljate.set.impl.EmptySet;
+import net.coljate.set.impl.ImmutableWrappedSet;
 import net.coljate.set.lazy.ImmutableLazyUnionSet;
 import net.coljate.set.impl.SingletonSet;
 
@@ -38,6 +40,10 @@ public interface ImmutableSet<T> extends Set<T>, ImmutableCollection<T> {
 
     static <T> ImmutableSet<T> of(final T element) {
         return SingletonSet.of(element);
+    }
+
+    static <T> ImmutableSet<T> copyOf(final Collection<? extends T> collection) {
+        return ImmutableWrappedSet.copyOf(collection);
     }
 
 }

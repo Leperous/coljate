@@ -1,8 +1,11 @@
 package net.coljate.util;
 
 import java.util.Iterator;
+import java.util.NoSuchElementException;
+import java.util.function.BooleanSupplier;
 import java.util.function.Function;
 import java.util.function.Predicate;
+import java.util.function.Supplier;
 
 /**
  *
@@ -32,21 +35,28 @@ public class Iterators {
     }
 
     public static <T> Iterator<T> filter(final Iterator<? extends T> iterator, final Predicate<? super T> predicate) {
-        return new Iterator<T>() {
+        return filter(iterator::hasNext, iterator::next, predicate);
+    }
+
+    public static <T> Iterator<T> filter(
+            final BooleanSupplier canGenerateCandidate,
+            final Supplier<? extends T> generateCandidate,
+            final Predicate<? super T> isValid) {
+        return new FilteredIterator<T>() {
 
             @Override
-            public boolean hasNext() {
-                throw new UnsupportedOperationException(); //TODO
+            protected boolean canGenerateCandidate() {
+                return canGenerateCandidate.getAsBoolean();
             }
 
             @Override
-            public T next() {
-                throw new UnsupportedOperationException(); //TODO
+            protected T generateCandidate() {
+                return generateCandidate.get();
             }
 
             @Override
-            public void remove() {
-                iterator.remove();
+            protected boolean isValid(T candidate) {
+                return isValid.test(candidate);
             }
 
         };
@@ -58,6 +68,44 @@ public class Iterators {
             count++;
         }
         return count;
+    }
+
+    public static abstract class FilteredIterator<T> implements Iterator<T> {
+
+        boolean hasNext;
+        T next;
+
+        protected abstract boolean canGenerateCandidate();
+
+        protected abstract T generateCandidate();
+
+        protected abstract boolean isValid(T candidate);
+
+        @Override
+        public boolean hasNext() {
+            if (hasNext) {
+                return true;
+            }
+            while (this.canGenerateCandidate()) {
+                final T candidate = this.generateCandidate();
+                if (this.isValid(candidate)) {
+                    next = candidate;
+                    hasNext = true;
+                    break;
+                }
+            }
+            return hasNext;
+        }
+
+        @Override
+        public T next() {
+            if (!this.hasNext()) {
+                throw new NoSuchElementException();
+            }
+            hasNext = false;
+            return next;
+        }
+
     }
 
 }
