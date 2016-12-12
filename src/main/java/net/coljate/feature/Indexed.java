@@ -12,6 +12,7 @@ public interface Indexed<T> extends FastGet<Integer, T> {
      * @return
      * @throws IndexOutOfBoundsException
      */
+    @Complexity(Complexity.Order.CONSTANT)
     T get(int index);
 
     @Override

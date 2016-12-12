@@ -5,6 +5,7 @@ import java.util.function.Function;
 import java.util.function.Predicate;
 
 import net.coljate.collection.Collection;
+import net.coljate.collection.SortedCollection.SortingAlgorithm;
 import net.coljate.feature.Ordered;
 import net.coljate.list.impl.ImmutableNativeArray;
 import net.coljate.list.impl.ImmutableSortedArray;
@@ -52,7 +53,12 @@ public interface List<T> extends Ordered<T>, Collection<T> {
 
     @Override
     default SortedList<T> sortedCopy(final Comparator<? super T> comparator) {
-        return ImmutableSortedArray.sort(this, comparator);
+        return this.sortedCopy(comparator, SortingAlgorithm.DEFAULT);
+    }
+
+    @Override
+    default SortedList<T> sortedCopy(final Comparator<? super T> comparator, final SortingAlgorithm sortingAlgorithm) {
+        return ImmutableSortedArray.sort(this, comparator, sortingAlgorithm);
     }
 
     @Override

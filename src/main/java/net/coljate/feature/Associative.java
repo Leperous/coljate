@@ -10,6 +10,7 @@ import net.coljate.Container;
  */
 public interface Associative<K, V> extends Container {
 
+    @Complexity(Complexity.Order.UNKNOWN)
     V get(K key);
 
     default Optional<V> maybeGet(final K key) {

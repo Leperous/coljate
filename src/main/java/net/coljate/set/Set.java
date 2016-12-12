@@ -4,6 +4,7 @@ import java.util.Comparator;
 import java.util.function.Predicate;
 
 import net.coljate.collection.Collection;
+import net.coljate.collection.SortedCollection.SortingAlgorithm;
 import net.coljate.set.impl.EmptySet;
 import net.coljate.set.impl.ImmutableWrappedSet;
 import net.coljate.set.impl.MutableWrappedHashSet;

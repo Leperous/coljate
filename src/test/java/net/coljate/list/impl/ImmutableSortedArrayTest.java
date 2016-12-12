@@ -4,6 +4,7 @@ import java.util.Comparator;
 
 import net.coljate.collection.AllCollectionSizeTest;
 import net.coljate.collection.ObjectCollectionTest;
+import net.coljate.collection.SortedCollection.SortingAlgorithm;
 import net.coljate.list.SortedArray;
 import net.coljate.list.SortedArrayTest;
 
@@ -23,7 +24,7 @@ public class ImmutableSortedArrayTest
 
     @Override
     public SortedArray<Object> create(final java.util.List<Object> elements, final Comparator<Object> comparator) {
-        return ImmutableSortedArray.sort(elements, comparator);
+        return ImmutableSortedArray.sort(elements, comparator, SortingAlgorithm.DEFAULT);
     }
 
 }
