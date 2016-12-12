@@ -9,7 +9,7 @@ import net.coljate.feature.Ordered;
  *
  * @author ollie
  */
-public interface SortedCollection<T> extends Ordered<T> {
+public interface SortedCollection<T> extends Ordered<T>, Collection<T> {
 
     /**
      *
