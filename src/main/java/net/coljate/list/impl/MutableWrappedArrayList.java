@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 
+import net.coljate.collection.Collection;
 import net.coljate.list.MutableArray;
 
 /**
@@ -37,6 +38,10 @@ public class MutableWrappedArrayList<T>
             list.add(elements[i]);
         }
         return new MutableWrappedArrayList<>(list, elements.length);
+    }
+
+    public static <T> MutableWrappedArrayList<T> copyOf(final Collection<? extends T> collection) {
+        return viewOf(collection.mutableJavaCopy(java.util.ArrayList::new));
     }
 
     private final java.util.ArrayList<T> delegate;

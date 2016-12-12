@@ -6,6 +6,8 @@ import java.util.function.Predicate;
 import net.coljate.collection.Collection;
 import net.coljate.collection.ImmutableCollection;
 import net.coljate.collection.MutableCollection;
+import net.coljate.list.ImmutableArray;
+import net.coljate.list.impl.MutableWrappedArrayList;
 
 /**
  *
@@ -14,13 +16,13 @@ import net.coljate.collection.MutableCollection;
 public interface LazyCollection<T> extends Collection<T> {
 
     @Override
-    default MutableCollection<? extends T> mutableCopy() {
-        throw new UnsupportedOperationException(); //TODO
+    default MutableCollection<T> mutableCopy() {
+        return MutableWrappedArrayList.copyOf(this);
     }
 
     @Override
-    default ImmutableCollection<? extends T> immutableCopy() {
-        throw new UnsupportedOperationException(); //TODO
+    default ImmutableCollection<T> immutableCopy() {
+        return ImmutableArray.copyOf(this);
     }
 
     static <T> Function<Collection<T>, ? extends LazyCollection<T>> filter(final Predicate<? super T> predicate) {
