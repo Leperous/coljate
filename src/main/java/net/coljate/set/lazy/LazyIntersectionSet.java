@@ -17,11 +17,11 @@ public class LazyIntersectionSet<T>
         implements LazySet<T> {
 
     @SuppressWarnings("unchecked")
-    public static <T> LazySet<T> of(final Set<? extends T> s1, final Set<? extends T> s2) {
+    public static <T> Set<T> of(final Set<? extends T> s1, final Set<? extends T> s2) {
         if (s1 instanceof EmptySet || s2 instanceof EmptySet) {
-            return LazySet.of();
+            return EmptySet.instance();
         } else if (s1 == s2) {
-            return LazySet.of(s1);
+            return Set.unmodifiable(s1);
         } else {
             return new LazyIntersectionSet<>(s1, s2);
         }

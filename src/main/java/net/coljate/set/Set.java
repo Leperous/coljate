@@ -9,6 +9,7 @@ import net.coljate.set.impl.ImmutableWrappedSet;
 import net.coljate.set.impl.MutableWrappedHashSet;
 import net.coljate.set.impl.MutableWrappedSet;
 import net.coljate.set.impl.SingletonSet;
+import net.coljate.set.impl.UnmodifiableSet;
 import net.coljate.set.impl.WrappedSet;
 import net.coljate.set.lazy.LazyFilteredSet;
 import net.coljate.set.lazy.LazyIntersectionSet;
@@ -51,11 +52,11 @@ public interface Set<T> extends Collection<T> {
         return LazyFilteredSet.of(this, predicate);
     }
 
-    default LazySet<T> intersection(final Set<? extends T> that) {
+    default Set<T> intersection(final Set<? extends T> that) {
         return LazyIntersectionSet.of(this, that);
     }
 
-    default LazySet<T> union(final Set<? extends T> that) {
+    default Set<T> union(final Set<? extends T> that) {
         return LazyUnionSet.of(this, that);
     }
 
@@ -71,6 +72,10 @@ public interface Set<T> extends Collection<T> {
     static <T> Set<T> of(final T... elements) {
         //FIXME use immutable set
         return MutableWrappedHashSet.copyOf(elements);
+    }
+
+    static <T> Set<T> unmodifiable(final Set<? extends T> set) {
+        return UnmodifiableSet.viewOf(set);
     }
 
     static <T> Set<T> copyOrCast(final Collection<T> collection) {

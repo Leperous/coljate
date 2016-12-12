@@ -2,6 +2,7 @@ package net.coljate.set;
 
 import net.coljate.collection.MutableCollection;
 import net.coljate.set.impl.MutableWrappedHashSet;
+import net.coljate.set.impl.UnmodifiableSet;
 
 /**
  *

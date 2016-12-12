@@ -18,11 +18,11 @@ public class LazyUnionSet<T>
         implements LazySet<T> {
 
     @SuppressWarnings("unchecked")
-    public static <T> LazySet<T> of(final Set<? extends T> s1, final Set<? extends T> s2) {
+    public static <T> Set<T> of(final Set<? extends T> s1, final Set<? extends T> s2) {
         if (s1 == s2 || s2 instanceof EmptySet) {
-            return LazySet.of(s1);
+            return Set.unmodifiable(s1);
         } else if (s1 instanceof EmptySet) {
-            return LazySet.of(s2);
+            return Set.unmodifiable(s2);
         } else {
             return new LazyUnionSet<>(s1, s2);
         }

@@ -4,17 +4,25 @@ import java.util.Iterator;
 import java.util.Objects;
 
 import net.coljate.set.AbstractSet;
+import net.coljate.set.MutableSet;
 import net.coljate.set.Set;
 
 /**
  *
  * @author Ollie
  */
-public class DelegatedSet<T> extends AbstractSet<T> {
+public class UnmodifiableSet<T> extends AbstractSet<T> {
+
+    @SuppressWarnings("unchecked")
+    public static <T> Set<T> viewOf(final Set<? extends T> set) {
+        return set instanceof MutableSet
+                ? new UnmodifiableSet<>(set)
+                : (Set<T>) set;
+    }
 
     private final Set<? extends T> delegate;
 
-    protected DelegatedSet(final Set<? extends T> delegate) {
+    protected UnmodifiableSet(final Set<? extends T> delegate) {
         this.delegate = Objects.requireNonNull(delegate);
     }
 
@@ -31,8 +39,8 @@ public class DelegatedSet<T> extends AbstractSet<T> {
 
     @Override
     protected boolean equals(final Set<?> that) {
-        return that instanceof DelegatedSet
-                && Objects.equals(delegate, ((DelegatedSet) that).delegate);
+        return that instanceof UnmodifiableSet
+                && Objects.equals(delegate, ((UnmodifiableSet) that).delegate);
     }
 
 }

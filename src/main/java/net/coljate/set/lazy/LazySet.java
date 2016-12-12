@@ -25,14 +25,6 @@ public interface LazySet<T> extends LazyCollection<T>, Set<T> {
         return Set.super.immutableCopy();
     }
 
-    static <T> LazySet<T> of() {
-        return LazySetWrapper.of();
-    }
-
-    static <T> LazySet<T> of(final Set<? extends T> set) {
-        return LazySetWrapper.of(set);
-    }
-
     static <T> Function<Collection<T>, ? extends LazySet<T>> filter(final Predicate<? super T> predicate) {
         return collection -> new LazyFilteredSet<>(Set.copyOrCast(collection), predicate);
     }

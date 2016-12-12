@@ -50,11 +50,6 @@ public class MutableWrappedSet<T>
     }
 
     @Override
-    public boolean addAll(Iterable<? extends T> elements) {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
-
-    @Override
     public Iterator<T> iterator() {
         return delegate.iterator();
     }
