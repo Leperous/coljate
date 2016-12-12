@@ -17,6 +17,10 @@ public class MutableAtomicArray<T>
         extends AbstractList<T>
         implements ConcurrentArray<T> {
 
+    public static <T> MutableAtomicArray<T> create(final int length) {
+        return new MutableAtomicArray<>(new AtomicReferenceArray<>(length));
+    }
+
     @SafeVarargs
     public static <T> MutableAtomicArray<T> copyOf(final T... elements) {
         final AtomicReferenceArray<T> array = new AtomicReferenceArray<>(elements);

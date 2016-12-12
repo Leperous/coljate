@@ -10,7 +10,9 @@ import net.coljate.list.MutableList;
  *
  * @author ollie
  */
-public class WrappedList<T> extends WrappedCollection<T> implements List<T> {
+public class WrappedList<T>
+        extends WrappedCollection<T>
+        implements List<T> {
 
     public static <T> List<T> viewOf(final java.util.List<T> collection) {
         return new WrappedList<>(collection);

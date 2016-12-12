@@ -13,7 +13,7 @@ public interface ConcurrentSet<T>
     @Override
     ConcurrentSet<T> mutableCopy();
 
-    static <T> ConcurrentSet<T> createHashSet(final int initialCapacity) {
+    static <T> ConcurrentSet<T> createConcurrentHashSet(final int initialCapacity) {
         return ConcurrentWrappedSet.createHashSet(initialCapacity);
     }
 

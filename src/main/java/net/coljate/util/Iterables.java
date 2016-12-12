@@ -18,4 +18,8 @@ public class Iterables {
         return Iterators.count(iterable.iterator());
     }
 
+    public static <T> T last(final Iterable<T> iterable) {
+        return Iterators.last(iterable.iterator());
+    }
+
 }
