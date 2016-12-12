@@ -14,7 +14,9 @@ Inspired by the SLF4J re-working of loggers, this project aims to be functionall
 Ordered class hierarchy:
 
 ```
-ImmutableCollection <- Collection -> MutableCollection -> Queue ----------> ConcurrentQueue
+                                     Queue -------------> ConcurrentQueue
+                                       |
+ImmutableCollection <- Collection -> MutableCollection
   |                      |             |
 ImmutableList <------- List -------> MutableList -------> ConcurrentList
   |                      |             |                    |
