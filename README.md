@@ -16,12 +16,22 @@ Wrappers exist for converting to and from:
   * java.util.Collection classes
   * [Guava](https://code.google.com/p/guava-libraries/) classes
 
-Class hierarchies:
+Ordered class hierarchy:
 
 ```
-ImmutableCollection <- Collection -> MutableCollection
+ImmutableCollection <- Collection -> MutableCollection -> Queue
   |                      |             |
 ImmutableList <------- List -------> MutableList
   |                      |             |
 ImmutableArray <------ Array ------> MutableArray
+```
+
+Unordered class hierarchy:
+
+```
+ImmutableCollection <- Collection -> MutableCollection
+  |                      |             |
+ImmutableSet <--------- Set -------> MutableSet
+  |                      |             |
+ImmutableMap <--------- Map -------> MutableMap
 ```
