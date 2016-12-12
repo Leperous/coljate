@@ -11,7 +11,7 @@ Inspired by the SLF4J re-working of loggers, this project aims to be functionall
   * Remaining open for extension.
   * Annotating methods with [FindBugs](https://code.google.com/p/findbugs/) annotations to assist static nullity checks.
 
-Ordered class hierarchy:
+Class hierarchy for ordered collecions:
 
 ```
                                      Queue -------------> ConcurrentQueue
@@ -23,7 +23,7 @@ ImmutableList <------- List -------> MutableList -------> ConcurrentList
 ImmutableArray <------ Array ------> MutableArray ------> ConcurrentArray
 ```
 
-Unordered class hierarchy:
+Class hierarchy for unordered collections:
 
 ```
 ImmutableCollection <- Collection -> MutableCollection
