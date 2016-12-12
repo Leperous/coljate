@@ -1,8 +1,11 @@
 package net.coljate.feature;
 
+import net.coljate.feature.complexity.TimeComplexity;
+
 import java.util.Optional;
 
 import net.coljate.Container;
+import net.coljate.feature.complexity.Complexity;
 
 /**
  *
@@ -10,7 +13,7 @@ import net.coljate.Container;
  */
 public interface Associative<K, V> extends Container {
 
-    @Complexity(Complexity.Order.UNKNOWN)
+    @TimeComplexity(Complexity.UNKNOWN)
     V get(K key);
 
     default Optional<V> maybeGet(final K key) {

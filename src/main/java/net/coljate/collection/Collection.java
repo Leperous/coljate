@@ -9,11 +9,11 @@ import net.coljate.Container;
 import net.coljate.collection.SortedCollection.SortingAlgorithm;
 import net.coljate.collection.impl.WrappedCollection;
 import net.coljate.collection.lazy.LazyCollection;
-import net.coljate.feature.Complexity;
 import net.coljate.feature.IterableExtension;
 import net.coljate.feature.StreamExtension;
 import net.coljate.list.impl.ImmutableSortedArray;
 import net.coljate.set.Set;
+import net.coljate.feature.complexity.TimeComplexity;
 
 /**
  * Some {@link Iterable} {@link Container} with a {@link #count count} of elements.
@@ -81,12 +81,12 @@ public interface Collection<T> extends IterableExtension<T>, StreamExtension<T> 
         return into;
     }
 
-    @Complexity(computed = true)
+    @TimeComplexity(computed = true)
     default SortedCollection<T> sortedCopy(final Comparator<? super T> comparator) {
         return this.sortedCopy(comparator, SortingAlgorithm.DEFAULT);
     }
 
-    @Complexity(computed = true)
+    @TimeComplexity(computed = true)
     default SortedCollection<T> sortedCopy(final Comparator<? super T> comparator, final SortingAlgorithm sortingAlgorithm) {
         return ImmutableSortedArray.sort(this, comparator, sortingAlgorithm);
     }

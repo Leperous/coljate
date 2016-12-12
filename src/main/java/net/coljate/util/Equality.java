@@ -5,6 +5,8 @@ import java.util.Objects;
 
 import net.coljate.Container;
 import net.coljate.feature.FastContains;
+import net.coljate.feature.complexity.Complexity;
+import net.coljate.feature.complexity.TimeComplexity;
 
 /**
  *
@@ -12,6 +14,7 @@ import net.coljate.feature.FastContains;
  */
 public class Equality {
 
+    @TimeComplexity(Complexity.LINEAR)
     public static boolean orderedEquals(final Iterable<?> it1, final Iterable<?> it2) {
         if (it1 == it2) {
             return true;
@@ -27,6 +30,7 @@ public class Equality {
         return !i2.hasNext();
     }
 
+    @TimeComplexity(bestCase = Complexity.LINEAR, worstCase = Complexity.QUADRATIC, computed = true)
     public static <A extends Container & Iterable<?>, B extends Container & Iterable<?>> boolean unorderedEquals(final A a, final B b) {
         if (a == b) {
             return true;

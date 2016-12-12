@@ -4,7 +4,8 @@ import java.util.Comparator;
 import java.util.function.Predicate;
 
 import net.coljate.collection.Collection;
-import net.coljate.collection.SortedCollection.SortingAlgorithm;
+import net.coljate.feature.complexity.Complexity;
+import net.coljate.feature.complexity.TimeComplexity;
 import net.coljate.set.impl.EmptySet;
 import net.coljate.set.impl.ImmutableWrappedSet;
 import net.coljate.set.impl.MutableWrappedHashSet;
@@ -40,6 +41,7 @@ public interface Set<T> extends Collection<T> {
     }
 
     @Override
+    @TimeComplexity(computed = true, bestCase = Complexity.LINEAR)
     default SortedSet<T> sortedCopy(final Comparator<? super T> comparator) {
         return SortedSet.copyOf(comparator, this);
     }

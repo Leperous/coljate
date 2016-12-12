@@ -5,6 +5,9 @@ import java.util.Objects;
 import java.util.function.Consumer;
 import java.util.function.Function;
 
+import net.coljate.feature.complexity.Complexity;
+import net.coljate.feature.complexity.TimeComplexity;
+
 /**
  *
  * @author ollie
@@ -16,6 +19,7 @@ public final class Arrays {
     private Arrays() {
     }
 
+    @TimeComplexity(Complexity.LINEAR)
     public static boolean contains(final Object[] array, final Object element) {
         for (int i = 0; i < array.length; i++) {
             if (Objects.equals(array[i], element)) {
@@ -31,6 +35,7 @@ public final class Arrays {
         }
     }
 
+    @TimeComplexity(Complexity.LINEAR)
     public static <T> T[] copyOf(final T[] from) {
         return java.util.Arrays.copyOf(from, from.length);
     }
@@ -39,10 +44,7 @@ public final class Arrays {
         return java.util.Arrays.copyOf(from, length);
     }
 
-    public static <T> void sort(final T[] array, final Comparator<? super T> comparator) {
-        java.util.Arrays.sort(array, comparator);
-    }
-
+    @TimeComplexity(Complexity.LINEAR)
     public static int indexOf(final Object[] array, final Object element) {
         for (int i = 0; i < array.length; i++) {
             if (Objects.equals(array[i], element)) {
@@ -53,8 +55,7 @@ public final class Arrays {
     }
 
     /**
-     * Transform all elements in the source array, resizing the given prototype
-     * array if necessary.
+     * Transform all elements in the source array, resizing the given prototype array if necessary.
      *
      * @param <F>
      * @param <T>
@@ -63,6 +64,7 @@ public final class Arrays {
      * @param prototype
      * @return
      */
+    @TimeComplexity(bestCase = Complexity.LINEAR, computed = true)
     public static <F, T> T[] transformAllSource(final F[] from, final Function<? super F, ? extends T> transform, final T[] prototype) {
         @SuppressWarnings("unchecked")
         final T[] into = prototype.length >= from.length
@@ -73,5 +75,5 @@ public final class Arrays {
         }
         return into;
     }
-    
+
 }

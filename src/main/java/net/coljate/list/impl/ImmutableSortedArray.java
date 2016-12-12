@@ -3,9 +3,9 @@ package net.coljate.list.impl;
 import java.util.Comparator;
 
 import net.coljate.collection.Collection;
-import net.coljate.feature.Complexity;
 import net.coljate.list.SortedArray;
 import net.coljate.util.Arrays;
+import net.coljate.feature.complexity.TimeComplexity;
 
 /**
  *
@@ -19,7 +19,7 @@ public class ImmutableSortedArray<T>
         return sort(collection, Comparator.naturalOrder(), SortingAlgorithm.DEFAULT);
     }
 
-    @Complexity(computed = true)
+    @TimeComplexity(computed = true)
     public static <T> SortedArray<T> sort(
             final Collection<T> collection,
             final Comparator<? super T> comparator,
@@ -27,12 +27,12 @@ public class ImmutableSortedArray<T>
         return sort((T[]) collection.arrayCopy(), comparator, sortingAlgorithm);
     }
 
-    @Complexity(computed = true)
+    @TimeComplexity(computed = true)
     public static <T extends Comparable<? super T>> SortedArray<T> sort(final java.util.Collection<T> collection) {
         return sort(collection, Comparator.naturalOrder(), SortingAlgorithm.DEFAULT);
     }
 
-    @Complexity(computed = true)
+    @TimeComplexity(computed = true)
     public static <T> SortedArray<T> sort(
             final java.util.Collection<T> collection,
             final Comparator<? super T> comparator,
@@ -40,7 +40,7 @@ public class ImmutableSortedArray<T>
         return sort((T[]) collection.toArray(), comparator, sortingAlgorithm);
     }
 
-    @Complexity(computed = true)
+    @TimeComplexity(computed = true)
     public static <T> SortedArray<T> copyAndSort(
             final T[] array,
             final Comparator<? super T> comparator,
@@ -48,7 +48,7 @@ public class ImmutableSortedArray<T>
         return sort(Arrays.copyOf(array), comparator, sortingAlgorithm);
     }
 
-    @Complexity(computed = true)
+    @TimeComplexity(computed = true)
     private static <T> SortedArray<T> sort(final T[] array, final Comparator<? super T> comparator, final SortingAlgorithm sortingAlgorithm) {
         sortingAlgorithm.sort(array, comparator);
         return new ImmutableSortedArray<>(array, comparator);

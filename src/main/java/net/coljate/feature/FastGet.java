@@ -1,5 +1,8 @@
 package net.coljate.feature;
 
+import net.coljate.feature.complexity.Complexity;
+import net.coljate.feature.complexity.TimeComplexity;
+
 /**
  *
  * @author ollie
@@ -7,7 +10,7 @@ package net.coljate.feature;
 public interface FastGet<K, V> extends Associative<K, V> {
 
     @Override
-    @Complexity(Complexity.Order.CONSTANT)
+    @TimeComplexity(Complexity.CONSTANT)
     V get(K key);
 
 }

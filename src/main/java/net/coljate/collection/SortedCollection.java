@@ -2,8 +2,9 @@ package net.coljate.collection;
 
 import java.util.Comparator;
 
-import net.coljate.feature.Complexity;
 import net.coljate.feature.Ordered;
+import net.coljate.feature.complexity.Complexity;
+import net.coljate.feature.complexity.TimeComplexity;
 
 /**
  * Has a specific order, based on some {@link #comparator}.
@@ -20,7 +21,7 @@ public interface SortedCollection<T> extends Ordered<T>, Collection<T> {
     /**
      * @return the last element in this collection, according to the sort.
      */
-    @Complexity(value = Complexity.Order.CONSTANT, worstCase = Complexity.Order.LINEAR)
+    @TimeComplexity(value = Complexity.CONSTANT, worstCase = Complexity.LINEAR)
     T last();
 
     interface SortingAlgorithm {
@@ -30,7 +31,7 @@ public interface SortedCollection<T> extends Ordered<T>, Collection<T> {
         /**
          * Sort an array of comparable elements.
          */
-        @Complexity(bestCase = Complexity.Order.LINEAR, worstCase = Complexity.Order.QUADRATIC)
+        @TimeComplexity(bestCase = Complexity.LINEAR, worstCase = Complexity.QUADRATIC)
         default <T extends Comparable<? super T>> void sort(final T[] array) {
             this.sort(array, Comparator.naturalOrder());
         }
@@ -38,7 +39,7 @@ public interface SortedCollection<T> extends Ordered<T>, Collection<T> {
         /**
          * Sort an array of elements according to the given comparator.
          */
-        @Complexity(bestCase = Complexity.Order.LINEAR, worstCase = Complexity.Order.QUADRATIC)
+        @TimeComplexity(bestCase = Complexity.LINEAR, worstCase = Complexity.QUADRATIC)
         <T> void sort(T[] array, Comparator<? super T> comparator);
 
     }

@@ -1,5 +1,8 @@
 package net.coljate.feature;
 
+import net.coljate.feature.complexity.Complexity;
+import net.coljate.feature.complexity.TimeComplexity;
+
 /**
  *
  * @author ollie
@@ -12,7 +15,7 @@ public interface Indexed<T> extends FastGet<Integer, T> {
      * @return
      * @throws IndexOutOfBoundsException
      */
-    @Complexity(Complexity.Order.CONSTANT)
+    @TimeComplexity(Complexity.CONSTANT)
     T get(int index);
 
     @Override

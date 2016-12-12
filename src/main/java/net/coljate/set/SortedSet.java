@@ -4,6 +4,8 @@ import java.util.Comparator;
 
 import net.coljate.collection.Collection;
 import net.coljate.collection.SortedCollection;
+import net.coljate.feature.complexity.Complexity;
+import net.coljate.feature.complexity.TimeComplexity;
 import net.coljate.set.impl.MutableWrappedTreeSet;
 
 /**
@@ -13,6 +15,7 @@ import net.coljate.set.impl.MutableWrappedTreeSet;
  */
 public interface SortedSet<T> extends SortedCollection<T>, Set<T> {
 
+    @TimeComplexity(computed = true, bestCase = Complexity.LINEAR)
     static <T> SortedSet<T> copyOf(
             final Comparator<? super T> comparator,
             final Collection<? extends T> collection) {

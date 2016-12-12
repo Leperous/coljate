@@ -3,6 +3,8 @@ package net.coljate.set.impl;
 import java.util.Comparator;
 
 import net.coljate.collection.Collection;
+import net.coljate.feature.complexity.Complexity;
+import net.coljate.feature.complexity.TimeComplexity;
 import net.coljate.set.SortedSet;
 import net.coljate.util.Arrays;
 import net.coljate.util.Suppliers;
@@ -23,6 +25,7 @@ public class MutableWrappedTreeSet<T>
         return new MutableWrappedTreeSet<>(new java.util.TreeSet<>(set));
     }
 
+    @TimeComplexity(Complexity.LINEARITHMIC)
     public static <T> MutableWrappedTreeSet<T> copyOf(
             final Comparator<? super T> comparator,
             final Collection<? extends T> collection) {

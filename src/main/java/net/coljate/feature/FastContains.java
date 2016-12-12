@@ -1,6 +1,8 @@
 package net.coljate.feature;
 
 import net.coljate.Container;
+import net.coljate.feature.complexity.Complexity;
+import net.coljate.feature.complexity.TimeComplexity;
 
 /**
  *
@@ -9,6 +11,7 @@ import net.coljate.Container;
 public interface FastContains extends Container {
 
     @Override
+    @TimeComplexity(value = Complexity.CONSTANT, worstCase = Complexity.LINEAR)
     boolean contains(Object object);
 
 }
