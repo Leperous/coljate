@@ -3,11 +3,11 @@ package net.coljate.collection;
 import java.util.Iterator;
 
 import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertThat;
-import static org.junit.Assert.assertTrue;
-import org.junit.Assume;
-import org.junit.Test;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assumptions.assumeTrue;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for collections containing one element.
@@ -18,7 +18,7 @@ public interface SingletonCollectionTest<T> extends CollectionTest<T> {
 
     @Override
     default Collection<T> create(final java.util.List<T> elements) {
-        Assume.assumeTrue(elements.size() == 1);
+        assumeTrue(elements.size() == 1);
         return this.create(elements.get(0));
     }
 
@@ -33,7 +33,7 @@ public interface SingletonCollectionTest<T> extends CollectionTest<T> {
     default void testContains_Singleton() {
         final T object = this.createObject();
         final Collection<T> collection = this.create(object);
-        assertTrue("Singleton should contain " + object, collection.contains(object));
+        assertTrue(collection.contains(object), () -> "Singleton should contain " + object);
     }
 
     @Test

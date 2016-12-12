@@ -1,10 +1,10 @@
 package net.coljate.map;
 
 import static org.hamcrest.CoreMatchers.not;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertThat;
-import static org.junit.Assert.assertTrue;
-import org.junit.Test;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import org.junit.jupiter.api.Test;
 
 import net.coljate.collection.ImmutableCollectionTest;
 
@@ -17,6 +17,7 @@ public interface ImmutableMapTest<K, V> extends MapTest<K, V>, ImmutableCollecti
     @Override
     ImmutableMap<K, V> create(java.util.List<Entry<K, V>> elements);
 
+    @Override
     default ImmutableMap<K, V> create() {
         return this.create(java.util.Collections.emptyList());
     }

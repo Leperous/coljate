@@ -1,6 +1,6 @@
 package net.coljate.map.impl;
 
-import org.junit.Assume;
+import static org.junit.jupiter.api.Assumptions.assumeTrue;
 
 import net.coljate.collection.EmptyCollectionTest;
 import net.coljate.map.Entry;
@@ -22,7 +22,7 @@ public class EmptyMapTest
 
     @Override
     public EmptyMap<Object, Object> create(final java.util.List<Entry<Object, Object>> elements) {
-        Assume.assumeTrue(elements.isEmpty());
+        assumeTrue(elements.isEmpty());
         return this.create();
     }
 

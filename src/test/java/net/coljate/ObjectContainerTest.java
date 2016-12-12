@@ -1,6 +1,6 @@
 package net.coljate;
 
-import org.junit.Before;
+import org.junit.jupiter.api.BeforeEach;
 
 /**
  *
@@ -12,7 +12,7 @@ public abstract class ObjectContainerTest
 
     private int objectCounter;
 
-    @Before
+    @BeforeEach
     public void resetObjectCounter() {
         objectCounter = 0;
     }

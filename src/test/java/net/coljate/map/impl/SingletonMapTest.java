@@ -1,6 +1,6 @@
 package net.coljate.map.impl;
 
-import org.junit.Assume;
+import static org.junit.jupiter.api.Assumptions.assumeTrue;
 
 import net.coljate.collection.SingletonCollectionTest;
 import net.coljate.map.Entry;
@@ -17,7 +17,7 @@ public class SingletonMapTest
 
     @Override
     public SingletonMap<Object, Object> create(final java.util.List<Entry<Object, Object>> elements) {
-        Assume.assumeTrue(elements.size() == 1);
+        assumeTrue(elements.size() == 1);
         return this.create(elements.get(0));
     }
 

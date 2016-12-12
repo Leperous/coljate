@@ -1,12 +1,12 @@
 package net.coljate.set.impl;
 
-import static org.junit.Assert.assertTrue;
-import org.junit.Assume;
-import org.junit.Test;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assumptions.assumeTrue;
+import org.junit.jupiter.api.Test;
 
 import net.coljate.collection.ObjectCollectionTest;
-import net.coljate.set.ImmutableSetTest;
 import net.coljate.collection.SingletonCollectionTest;
+import net.coljate.set.ImmutableSetTest;
 
 /**
  *
@@ -23,7 +23,7 @@ public class SingletonSetTest
 
     @Override
     public SingletonSet<Object> create(final java.util.List<Object> elements) {
-        Assume.assumeTrue(elements.size() == 1);
+        assumeTrue(elements.size() == 1);
         return this.create(elements.get(0));
     }
 

@@ -1,7 +1,7 @@
 package net.coljate.set;
 
-import static org.junit.Assert.assertFalse;
-import org.junit.Test;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import org.junit.jupiter.api.Test;
 
 import net.coljate.collection.MutableCollectionTest;
 

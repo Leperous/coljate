@@ -3,11 +3,11 @@ package net.coljate.collection;
 import java.util.Iterator;
 
 import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertThat;
-import static org.junit.Assert.assertTrue;
-import org.junit.Assume;
-import org.junit.Test;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assumptions.assumeTrue;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for collections that are empty.
@@ -18,14 +18,14 @@ public interface EmptyCollectionTest<T> extends CollectionTest<T> {
 
     @Override
     default Collection<T> create(final java.util.List<T> elements) {
-        Assume.assumeTrue(elements.isEmpty());
+        assumeTrue(elements.isEmpty());
         return this.create();
     }
 
     @Test
     default void testIsEmpty_Empty() {
         final Collection<T> collection = this.create();
-        assertTrue("Collection should be empty", collection.isEmpty());
+        assertTrue(collection.isEmpty(), "Collection should be empty");
     }
 
     @Test
