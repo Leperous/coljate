@@ -10,7 +10,7 @@ import net.coljate.feature.complexity.TimeComplexity;
 public interface FastGet<K, V> extends Associative<K, V> {
 
     @Override
-    @TimeComplexity(Complexity.CONSTANT)
+    @TimeComplexity(value = Complexity.CONSTANT, worstCase = Complexity.LINEAR)
     V get(K key);
 
 }

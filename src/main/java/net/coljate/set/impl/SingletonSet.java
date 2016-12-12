@@ -24,7 +24,7 @@ public class SingletonSet<T>
     protected SingletonSet(final T element) {
         super(element);
     }
-
+    
     @Override
     public ImmutableSet<T> with(final T element) {
         return ImmutableSet.super.with(element);
