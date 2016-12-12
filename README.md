@@ -26,7 +26,7 @@ Unordered class hierarchy:
 ```
 ImmutableCollection <- Collection -> MutableCollection
   |                      |             |
-ImmutableSet <--------- Set -------> MutableSet
-  |                      |             |
-ImmutableMap <--------- Map -------> MutableMap
+ImmutableSet <--------- Set -------> MutableSet -------> ConcurrentSet
+  |                      |             |                   |
+ImmutableMap <--------- Map -------> MutableMap -------> ConcurrentMap
 ```
