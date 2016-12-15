@@ -83,11 +83,4 @@ public class WrappedMap<K, V>
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
-    @Override
-    protected boolean equals(final AbstractMap<?, ?> that) {
-        return that instanceof WrappedMap
-                && this.getClass() == that.getClass()
-                && Objects.equals(this.delegate, ((WrappedMap) that).delegate);
-    }
-
 }

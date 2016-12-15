@@ -15,6 +15,7 @@ import net.coljate.map.impl.SingletonMap;
 import net.coljate.map.lazy.LazyFilteredEntryMap;
 import net.coljate.map.lazy.LazyMap;
 import net.coljate.set.Set;
+import net.coljate.util.Equality;
 import net.coljate.util.Functions;
 
 /**

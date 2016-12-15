@@ -70,11 +70,6 @@ public class RepeatedValueMap<K, V>
         return new RepeatedValueIterator();
     }
 
-    @Override
-    protected boolean equals(final AbstractMap<?, ?> that) {
-        throw new UnsupportedOperationException(); //TODO
-    }
-
     private class RepeatedValueIterator implements Iterator<Entry<K, V>> {
 
         private final Iterator<? extends K> keyIterator = keys.iterator();

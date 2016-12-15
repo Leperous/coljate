@@ -53,9 +53,4 @@ public class EmptyMap<K, V>
         return UnmodifiableIterator.of();
     }
 
-    @Override
-    protected boolean equals(final AbstractMap<?, ?> that) {
-        return that instanceof EmptyMap;
-    }
-
 }
