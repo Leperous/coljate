@@ -1,16 +1,2 @@
 /target/
-/.idea/
-/coljate-defined/target/
-/coljate-native/target/
-/coljate-guava/target/
-/coljate-wrapped/target/
-/coljate-core/target/
-/coljate-api/target/
-/coljate-learning/target/
-/coljate-api/nbproject/
-/coljate-native/nbproject/
-/coljate-wrapped/nbproject/
-/native/nbproject/
-/native/target/
-/api/target/
 /nbproject/
