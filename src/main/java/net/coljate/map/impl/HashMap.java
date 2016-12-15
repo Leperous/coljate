@@ -15,7 +15,7 @@ public interface HashMap<K, V> extends Map<K, V>, FastGet<K, V> {
     }
 
     @Override
-    default V get(final Object key) {
+    default V get(final K key) {
         return Map.super.get(key);
     }
 

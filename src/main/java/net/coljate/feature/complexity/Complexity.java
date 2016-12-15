@@ -33,27 +33,27 @@ public enum Complexity {
     /**
      * Complexity {@code O(n^x)}.
      */
-    POLYNOMIAL(Double.MAX_VALUE),
+    POLYNOMIAL(3, Double.MAX_VALUE),
     /**
      * Complexity {@code O(2^n)}.
      */
     EXPONENTIAL(Double.POSITIVE_INFINITY);
 
-    private final double pow;
+    private final double pow, maxPow;
 
-    private Complexity(double pow) {
-        this.pow = pow;
+    private Complexity(final double minPow, final double maxPow) {
+        this.pow = minPow;
+        this.maxPow = maxPow;
+    }
+
+    private Complexity(final double pow) {
+        this(pow, pow);
     }
 
     public Complexity times(final Complexity that) {
-        if (!Double.isFinite(this.pow)) {
-            return this;
-        } else if (!Double.isFinite(that.pow)) {
-            return that;
-        }
         final double pow = this.pow + that.pow;
         for (final Complexity value : values()) {
-            if (value.pow >= pow) {
+            if (value.maxPow >= pow) {
                 return value;
             }
         }

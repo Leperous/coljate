@@ -26,7 +26,7 @@ public interface Map<K, V> extends Set<Entry<K, V>>, Associative<K, V> {
     Entry<K, V> entry(Object key);
 
     @Override
-    default V get(final Object key) {
+    default V get(final K key) {
         return Functions.ifNonNull(this.entry(key), Entry::value);
     }
 
