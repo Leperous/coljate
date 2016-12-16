@@ -165,6 +165,11 @@ public class ChainedHashMap<K, V>
             return entryIterator.next();
         }
 
+        @Override
+        public void remove() {
+            entryIterator.remove();
+        }
+
     }
 
     private final class Keys extends AbstractSet<K> {
