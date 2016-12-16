@@ -1,11 +1,11 @@
 package net.coljate.list;
 
+import net.coljate.collection.MutableCollection;
+
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.Test;
-
-import net.coljate.collection.MutableCollection;
 
 /**
  *
@@ -19,6 +19,11 @@ public interface MutableArrayTest<T> extends ArrayTest<T>, MutableListTest<T> {
     @Override
     default MutableArray<T> create(final T element) {
         return this.create(java.util.Arrays.asList(element));
+    }
+
+    @Override
+    default MutableArray<T> create() {
+        return this.create(emptyList());
     }
 
     @Test

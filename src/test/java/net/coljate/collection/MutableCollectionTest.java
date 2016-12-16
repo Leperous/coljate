@@ -1,7 +1,10 @@
 package net.coljate.collection;
 
 import java.util.Arrays;
+import java.util.Iterator;
 
+import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.Test;
@@ -28,7 +31,7 @@ public interface MutableCollectionTest<T> extends CollectionTest<T> {
         assertTrue(collection.isEmpty());
         assertFalse(collection.contains(element));
     }
-    
+
     @Test
     default void testRemoveAll_Singleton() {
         final T o1 = this.createObject();
@@ -37,7 +40,7 @@ public interface MutableCollectionTest<T> extends CollectionTest<T> {
         assertFalse(collection.contains(o1));
         assertTrue(collection.isEmpty());
     }
-    
+
     @Test
     default void testClear_Singleton() {
 
@@ -53,6 +56,18 @@ public interface MutableCollectionTest<T> extends CollectionTest<T> {
         assertTrue(collection.isEmpty());
         assertFalse(collection.contains(element));
 
+    }
+
+    @Test
+    default void testIteratorRemove_Singleton() {
+        final T element = this.createObject();
+        final MutableCollection<T> collection = this.create(element);
+        final Iterator<T> iterator = collection.iterator();
+        assertTrue(iterator.hasNext());
+        assertThat(iterator.next(), is(element));
+        iterator.remove();
+        assertFalse(iterator.hasNext());
+        assertFalse(collection.contains(element));
     }
 
 }

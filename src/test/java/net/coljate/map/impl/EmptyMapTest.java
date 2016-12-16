@@ -1,11 +1,12 @@
 package net.coljate.map.impl;
 
-import static org.junit.jupiter.api.Assumptions.assumeTrue;
-
 import net.coljate.collection.EmptyCollectionTest;
 import net.coljate.map.Entry;
 import net.coljate.map.ImmutableMapTest;
 import net.coljate.map.ObjectMapTest;
+
+import static org.junit.jupiter.api.Assumptions.assumeTrue;
+import org.opentest4j.TestAbortedException;
 
 /**
  *
@@ -18,6 +19,11 @@ public class EmptyMapTest
     @Override
     public EmptyMap<Object, Object> create() {
         return EmptyMap.instance();
+    }
+
+    @Override
+    public EmptyMap<Object, Object> create(final Entry<Object, Object> element) {
+        throw new TestAbortedException();
     }
 
     @Override
