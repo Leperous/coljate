@@ -1,5 +1,8 @@
 package net.coljate.collection;
 
+import java.util.Iterator;
+import java.util.Objects;
+
 import net.coljate.collection.impl.MutableWrappedCollection;
 import net.coljate.list.impl.MutableWrappedList;
 
@@ -11,9 +14,26 @@ public interface MutableCollection<T> extends Collection<T> {
 
     void clear();
 
-    boolean removeFirst(Object element);
+    default boolean removeFirst(final Object element) {
+        for (final Iterator<T> iterator = this.iterator(); iterator.hasNext();) {
+            if (Objects.equals(iterator.next(), element)) {
+                iterator.remove();
+                return true;
+            }
+        }
+        return false;
+    }
 
-    boolean removeAll(Object element);
+    default boolean removeAll(final Object element) {
+        boolean removedAny = false;
+        for (final Iterator<T> iterator = this.iterator(); iterator.hasNext();) {
+            if (Objects.equals(iterator.next(), element)) {
+                iterator.remove();
+                removedAny = true;
+            }
+        }
+        return removedAny;
+    }
 
     default boolean removeAll(final Iterable<?> elements) {
         boolean removed = false;

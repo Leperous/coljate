@@ -43,35 +43,46 @@ public class ChainedHashMap<K, V>
         this.buckets = new MutableList[initialCapacity];
     }
 
-    private int indexOf(final Object key) {
-        return key.hashCode() % buckets.length;
+    private static <T> int indexOf(final Object key, final T[] array) {
+        return key.hashCode() % array.length;
     }
 
     private MutableList<MutableEntry<K, V>> getBucket(final Object key) {
-        return buckets.length == 0 ? null : buckets[indexOf(key)];
+        return getBucket(key, buckets);
     }
 
-    private MutableList<MutableEntry<K, V>> getOrCreateBucket(final Object key) {
-        final int index = this.indexOf(key);
-        MutableList<MutableEntry<K, V>> list = buckets[index];
+    private static <K, V> MutableList<MutableEntry<K, V>> getBucket(
+            final Object key,
+            final MutableList<MutableEntry<K, V>>[] array) {
+        return array.length == 0
+                ? null
+                : array[indexOf(key, array)];
+    }
+
+    private static <K, V> MutableList<MutableEntry<K, V>> getOrCreateBucket(
+            final Object key,
+            final MutableList<MutableEntry<K, V>>[] array) {
+        final int index = indexOf(key, array);
+        MutableList<MutableEntry<K, V>> list = array[index];
         if (list == null) {
             list = new MutableLinkedList<>();
-            buckets[index] = list;
+            array[index] = list;
         }
         return list;
     }
 
     @Override
     public MutableEntry<K, V> entry(final Object key) {
-        final MutableList<MutableEntry<K, V>> list = this.getBucket(key);
-        return list == null
+        final MutableList<MutableEntry<K, V>> bucket = this.getBucket(key);
+        return bucket == null
                 ? null
-                : list.first(entry -> Objects.equals(key, entry.key()));
+                : bucket.first(entry -> Objects.equals(key, entry.key()));
     }
 
     @Override
     public V put(final K key, final V value) {
-        final MutableList<MutableEntry<K, V>> bucket = this.getOrCreateBucket(key);
+        this.ensureCapacity(buckets.length + 1);
+        final MutableList<MutableEntry<K, V>> bucket = getOrCreateBucket(key, buckets);
         MutableEntry<K, V> entry = bucket.first(e -> Objects.equals(e.key(), key));
         if (entry == null) {
             bucket.suffix(new ChainedEntry<>(key, value));
@@ -91,6 +102,22 @@ public class ChainedHashMap<K, V>
         final MutableList<MutableEntry<K, V>> bucket = this.getBucket(entry.key());
         return bucket != null
                 && bucket.removeFirst(entry);
+    }
+
+    private void ensureCapacity(final int size) {
+        if (size > buckets.length * 0.75) {
+            this.resize(Math.max(2, buckets.length * 2));
+        }
+    }
+
+    private void resize(final int newSize) {
+        @SuppressWarnings("unchecked")
+        final MutableList<MutableEntry<K, V>>[] newBuckets = new MutableList[newSize];
+        for (final EntryIterator iterator = new EntryIterator(); iterator.hasNext();) {
+            final MutableEntry<K, V> entry = iterator.next();
+            getOrCreateBucket(entry.key(), newBuckets).suffix(entry);
+        }
+        this.buckets = newBuckets;
     }
 
     @Override
@@ -131,7 +158,7 @@ public class ChainedHashMap<K, V>
         }
 
         @Override
-        public Entry<K, V> next() {
+        public MutableEntry<K, V> next() {
             if (!this.hasNext()) {
                 throw new NoSuchElementException();
             }

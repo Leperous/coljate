@@ -1,8 +1,6 @@
 package net.coljate.list.impl;
 
 import java.util.NoSuchElementException;
-import java.util.Objects;
-import java.util.function.Predicate;
 
 import net.coljate.list.AbstractList;
 import net.coljate.list.ListIterator;
@@ -22,6 +20,12 @@ public class MutableLinkedList<T>
     public static <T> MutableLinkedList<T> copyOf(final T... elements) {
         final MutableLinkedList<T> list = new MutableLinkedList<>();
         Arrays.consume(elements, list::suffix);
+        return list;
+    }
+
+    public static <T> MutableLinkedList<T> copyOf(final Iterable<? extends T> iterable) {
+        final MutableLinkedList<T> list = new MutableLinkedList<>();
+        iterable.forEach(list::suffix);
         return list;
     }
 
@@ -58,28 +62,8 @@ public class MutableLinkedList<T>
     }
 
     @Override
-    public boolean removeFirst(final Object element) {
-        return this.anyNode(node -> node.removeIfHasValue(element));
-    }
-
-    @Override
-    public boolean removeAll(final Object element) {
-        throw new UnsupportedOperationException(); //TODO
-    }
-
-    @Override
     public ListIterator<T> iterator() {
         return new LinkedListIterator();
-    }
-
-    private boolean anyNode(final Predicate<Node> perNode) {
-        boolean any = false;
-        Node node = first;
-        while (node != null) {
-            any &= perNode.test(node);
-            node = node.next;
-        }
-        return any;
     }
 
     private final class Node {
@@ -120,29 +104,38 @@ public class MutableLinkedList<T>
         }
 
         void setNext(final Node that) {
-            if (that != null) {
-                this.next = that;
+            this.next = that;
+            if (that == null) {
+                last = this;
+            } else {
                 that.prior = this;
             }
         }
 
-        boolean removeIfHasValue(final Object value) {
-            if (!Objects.equals(this.value, value)) {
-                return false;
-            }
-            if (prior == null) {
-                first = next;
+        void setPrior(final Node that) {
+            this.prior = that;
+            if (that == null) {
+                first = this;
             } else {
-                prior.setNext(next);
+                that.next = this;
             }
-            return true;
+        }
+
+        void delete() {
+            if (prior != null) {
+                prior.setNext(next);
+            } else if (next != null) {
+                next.setPrior(prior);
+            } else {
+                first = last = null;
+            }
         }
 
     }
 
     private final class LinkedListIterator implements ListIterator<T> {
 
-        private Node current = first;
+        private Node current = first, previous = null;
 
         @Override
         public boolean hasPrevious() {
@@ -151,7 +144,11 @@ public class MutableLinkedList<T>
 
         @Override
         public T previous() {
-            throw new UnsupportedOperationException(); //TODO
+            if (!this.hasPrevious()) {
+                throw new NoSuchElementException();
+            }
+            current = current.prior;
+            return current.value();
         }
 
         @Override
@@ -161,12 +158,21 @@ public class MutableLinkedList<T>
 
         @Override
         public T next() {
-            if (current == null) {
+            if (!this.hasNext()) {
                 throw new NoSuchElementException();
             }
-            final T next = current.value;
+            final T nextValue = current.value;
+            previous = current;
             current = current.next;
-            return next;
+            return nextValue;
+        }
+
+        @Override
+        public void remove() {
+            if (previous == null) {
+                throw new NoSuchElementException();
+            }
+            previous.delete();
         }
 
     }

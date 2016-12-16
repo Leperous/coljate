@@ -117,16 +117,6 @@ public class MutableAtomicArray<T>
     }
 
     @Override
-    public boolean removeFirst(final Object element) {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
-
-    @Override
-    public boolean removeAll(final Object element) {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
-
-    @Override
     public void resize(final int size) {
         this.spinReplace(current -> copy(current, size));
     }
@@ -168,6 +158,11 @@ public class MutableAtomicArray<T>
         @Override
         public T previous() {
             return array.get(--index);
+        }
+
+        @Override
+        public void remove() {
+            throw new UnsupportedOperationException(); //TODO
         }
 
     }
