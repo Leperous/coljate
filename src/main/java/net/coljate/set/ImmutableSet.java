@@ -43,7 +43,7 @@ public interface ImmutableSet<T> extends Set<T>, ImmutableCollection<T> {
     }
 
     static <T> ImmutableSet<T> copyOf(final Collection<? extends T> collection) {
-        return ImmutableWrappedSet.copyOf(collection);
+        return ImmutableWrappedSet.copyIntoHashSet(collection);
     }
 
 }

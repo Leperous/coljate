@@ -32,7 +32,7 @@ public interface Set<T> extends Collection<T> {
 
     @Override
     default ImmutableSet<T> immutableCopy() {
-        return ImmutableWrappedSet.copyOf(this);
+        return ImmutableWrappedSet.copyIntoHashSet(this);
     }
 
     @Override

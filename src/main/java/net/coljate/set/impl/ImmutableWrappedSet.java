@@ -12,7 +12,7 @@ public class ImmutableWrappedSet<T>
         extends WrappedSet<T>
         implements ImmutableSet<T> {
 
-    public static <T> ImmutableWrappedSet<T> copyOf(final Collection<? extends T> collection) {
+    public static <T> ImmutableWrappedSet<T> copyIntoHashSet(final Collection<? extends T> collection) {
         final java.util.Set<T> set = collection.mutableJavaCopy(i -> new java.util.HashSet<>(i));
         return new ImmutableWrappedSet<>(set);
     }
