@@ -1,7 +1,5 @@
 package net.coljate.feature;
 
-import net.coljate.feature.complexity.TimeComplexity;
-
 import java.util.Iterator;
 import java.util.Objects;
 import java.util.function.Predicate;
@@ -9,6 +7,7 @@ import java.util.function.ToIntFunction;
 
 import net.coljate.Container;
 import net.coljate.feature.complexity.Complexity;
+import net.coljate.feature.complexity.TimeComplexity;
 
 /**
  *
@@ -61,7 +60,8 @@ public interface IterableExtension<T> extends Container, Iterable<T> {
     /**
      *
      * @param predicate
-     * @return true if any element in this container matches the given predicate.
+     * @return true if any element in this container matches the given
+     * predicate.
      */
     @TimeComplexity(Complexity.LINEAR)
     default boolean anyMatch(final Predicate<? super T> predicate) {
@@ -87,7 +87,8 @@ public interface IterableExtension<T> extends Container, Iterable<T> {
      *
      * @param predicate
      * @param ifNone the result if this container is empty.
-     * @return true if all elements match the given predicate, or if there are no elements.
+     * @return true if all elements match the given predicate, or if there are
+     * no elements.
      */
     @TimeComplexity(Complexity.LINEAR)
     default boolean allMatch(final Predicate<? super T> predicate, boolean ifNone) {
@@ -101,6 +102,15 @@ public interface IterableExtension<T> extends Container, Iterable<T> {
             }
         }
         return true;
+    }
+
+    default T first(final Predicate<? super T> predicate) {
+        for (final T element : this) {
+            if (predicate.test(element)) {
+                return element;
+            }
+        }
+        return null;
     }
 
 }

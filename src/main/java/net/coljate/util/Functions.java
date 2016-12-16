@@ -11,5 +11,5 @@ public class Functions {
     public static <L, R> R ifNonNull(final L value, final Function<? super L, ? extends R> transform) {
         return value == null ? null : transform.apply(value);
     }
-
+    
 }

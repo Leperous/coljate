@@ -1,18 +1,19 @@
 package net.coljate.map;
 
+import net.coljate.set.MutableSetTest;
+
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.Test;
 
-import net.coljate.collection.MutableCollectionTest;
-
 /**
  *
  * @author Ollie
  */
-public interface MutableMapTest<K, V> extends MapTest<K, V>, MutableCollectionTest<Entry<K, V>> {
+public interface MutableMapTest<K, V>
+        extends MapTest<K, V>, MutableSetTest<Entry<K, V>> {
 
     @Override
     MutableMap<K, V> create(java.util.List<Entry<K, V>> entries);
@@ -44,7 +45,7 @@ public interface MutableMapTest<K, V> extends MapTest<K, V>, MutableCollectionTe
     }
 
     @Test
-    default void testRemove_Singleton() {
+    default void testRemoveEntry_Singleton() {
         final Entry<K, V> entry = this.createObject();
         final MutableMap<K, V> map = this.create(entry);
         assertTrue(map.remove(entry));
@@ -52,11 +53,11 @@ public interface MutableMapTest<K, V> extends MapTest<K, V>, MutableCollectionTe
     }
 
     @Test
-    default void testRemoveKey_Singleton() {
+    default void testEvictKey_Singleton() {
         final Entry<K, V> entry = this.createObject();
         final MutableMap<K, V> map = this.create(entry);
         assertThat(map.get(entry.key()), is(entry.value()));
-        final V removedValue = map.removeValue(entry.key());
+        final V removedValue = map.evict(entry.key());
         assertThat("Remove should return " + entry.value(), removedValue, is(entry.value()));
     }
 

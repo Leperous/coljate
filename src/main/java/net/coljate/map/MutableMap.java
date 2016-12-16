@@ -5,7 +5,6 @@ import java.util.Objects;
 import java.util.function.BiPredicate;
 import java.util.function.Function;
 
-import net.coljate.collection.MutableCollection;
 import net.coljate.map.impl.MutableWrappedHashMap;
 import net.coljate.map.impl.MutableWrappedMap;
 import net.coljate.set.MutableSet;
@@ -19,9 +18,6 @@ public interface MutableMap<K, V> extends Map<K, V>, MutableSet<Entry<K, V>> {
     V put(K key, V value);
 
     boolean remove(Object key, Object value);
-
-    @Override
-    MutableCollection<V> values();
 
     @Override
     MutableEntry<K, V> entry(Object key);
@@ -65,19 +61,6 @@ public interface MutableMap<K, V> extends Map<K, V>, MutableSet<Entry<K, V>> {
     }
 
     @Deprecated
-    @Override
-    default boolean removeAll(final Object object) {
-        return this.removeFirst(object);
-    }
-
-    @Deprecated
-    @Override
-    default boolean removeFirst(final Object object) {
-        return object instanceof Entry
-                && this.remove((Entry) object);
-    }
-
-    @Deprecated
     default boolean remove(final Object entry) {
         return entry instanceof Entry
                 && this.remove((Entry) entry);
@@ -87,7 +70,7 @@ public interface MutableMap<K, V> extends Map<K, V>, MutableSet<Entry<K, V>> {
         return this.remove(entry.key(), entry.value());
     }
 
-    default V removeValue(final Object key) {
+    default V evict(final Object key) {
         final Entry<K, V> entry = this.entry(key);
         return entry != null && this.remove(entry)
                 ? entry.value()
@@ -106,14 +89,6 @@ public interface MutableMap<K, V> extends Map<K, V>, MutableSet<Entry<K, V>> {
         return removed;
     }
 
-    default boolean removeFirstValue(final Object value) {
-        return this.values().removeFirst(value);
-    }
-
-    default boolean removeAllValues(final Object value) {
-        return this.values().removeAll(value);
-    }
-
     static <K, V> MutableMap<K, V> viewOf(final java.util.Map<K, V> map) {
         return MutableWrappedMap.viewOf(map);
     }
@@ -129,6 +104,12 @@ public interface MutableMap<K, V> extends Map<K, V>, MutableSet<Entry<K, V>> {
     public interface MutableEntry<K, V> extends Entry<K, V> {
 
         void setValue(V value);
+
+        default V getAndSetValue(final V value) {
+            final V previous = this.value();
+            this.setValue(value);
+            return previous;
+        }
 
     }
 

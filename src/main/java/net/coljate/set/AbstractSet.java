@@ -25,7 +25,10 @@ public abstract class AbstractSet<T>
                 && this.equals((Set) that);
     }
 
-    protected abstract boolean equals(Set<?> that);
+    protected boolean equals(Set<?> that) {
+        return this.getClass() == that.getClass()
+                && this.elementsEqual(that);
+    }
 
     @Override
     public int hashCode() {

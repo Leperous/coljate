@@ -11,8 +11,8 @@ public interface Cache<K, V> extends Associative<K, V> {
     /**
      *
      * @param key
-     * @return the current value, if any, that is associated with the key. If
-     * the key is currently being computed this method will not wait.
+     * @return the current value, if any, that is associated with the key. If the key is currently being computed this
+     * method will not wait.
      */
     V getIfPresent(K key);
 

@@ -2,7 +2,6 @@ package net.coljate.set;
 
 import net.coljate.collection.MutableCollection;
 import net.coljate.set.impl.MutableWrappedHashSet;
-import net.coljate.set.impl.UnmodifiableSet;
 
 /**
  *
@@ -19,6 +18,13 @@ public interface MutableSet<T> extends Set<T>, MutableCollection<T> {
 
     /**
      *
+     * @param element
+     * @return true if the given element was removed.
+     */
+    boolean remove(Object element);
+
+    /**
+     *
      * @param elements
      * @return true if any element was added.
      */
@@ -29,8 +35,6 @@ public interface MutableSet<T> extends Set<T>, MutableCollection<T> {
         }
         return addedAny;
     }
-
-    boolean remove(Object element);
 
     @Deprecated
     default boolean removeFirst(final Object element) {

@@ -33,7 +33,7 @@ public class ConcurrentCache<K, V> implements Cache<K, V> {
 
     @Override
     public V evict(final Object key) {
-        return Functions.ifNonNull(cache.removeValue(key), Holder::current);
+        return Functions.ifNonNull(cache.evict(key), Holder::current);
     }
 
     @Override
