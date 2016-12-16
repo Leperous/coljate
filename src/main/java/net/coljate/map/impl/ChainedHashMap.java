@@ -13,6 +13,7 @@ import net.coljate.list.impl.MutableLinkedList;
 import net.coljate.map.AbstractEntry;
 import net.coljate.map.AbstractMap;
 import net.coljate.map.Entry;
+import net.coljate.map.MutableEntry;
 import net.coljate.map.MutableMap;
 import net.coljate.set.AbstractSet;
 import net.coljate.set.Set;

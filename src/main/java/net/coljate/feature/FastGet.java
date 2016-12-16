@@ -11,6 +11,8 @@ public interface FastGet<K, V> extends Associative<K, V> {
 
     @Override
     @TimeComplexity(value = Complexity.CONSTANT, worstCase = Complexity.LINEAR)
-    V get(K key);
+    default V get(final K key) {
+        return Associative.super.get(key);
+    }
 
 }

@@ -12,12 +12,12 @@ import net.coljate.feature.complexity.TimeComplexity;
  */
 public interface Associative<K, V> extends Container {
 
-    @TimeComplexity(Complexity.UNKNOWN)
-    V get(K key);
-    
-    default V getIfPresent(final Object key) {
-        return this.contains(key) ? this.get((K)key) : null;
+    @TimeComplexity(bestCase = Complexity.CONSTANT)
+    default V get(K key) {
+        return this.getIfPresent(key);
     }
+
+    V getIfPresent(Object key);
 
     default Optional<V> maybeGet(final K key) {
         return Optional.ofNullable(this.get(key));

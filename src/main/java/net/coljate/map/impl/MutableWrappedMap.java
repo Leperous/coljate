@@ -4,6 +4,7 @@ import java.util.function.Function;
 
 import net.coljate.collection.MutableCollection;
 import net.coljate.map.AbstractEntry;
+import net.coljate.map.MutableEntry;
 import net.coljate.map.MutableMap;
 
 /**
@@ -85,7 +86,7 @@ public class MutableWrappedMap<K, V>
 
     protected class MutableWrappedEntry
             extends AbstractEntry<K, V>
-            implements MutableMap.MutableEntry<K, V> {
+            implements MutableEntry<K, V> {
 
         private final K key;
 

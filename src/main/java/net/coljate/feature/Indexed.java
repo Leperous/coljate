@@ -23,4 +23,12 @@ public interface Indexed<T> extends FastGet<Integer, T> {
         return this.get(i.intValue());
     }
 
+    @Deprecated
+    @Override
+    default T getIfPresent(final Object object) {
+        return object instanceof Integer
+                ? this.get((Integer) object)
+                : null;
+    }
+
 }

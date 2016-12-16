@@ -3,6 +3,7 @@ package net.coljate.map;
 /**
  *
  * @author ollie
+ * @see Map
  */
 public interface Entry<K, V> {
 
