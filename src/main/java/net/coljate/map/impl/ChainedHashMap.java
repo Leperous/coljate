@@ -11,6 +11,7 @@ import net.coljate.collection.MutableCollection;
 import net.coljate.list.MutableList;
 import net.coljate.list.impl.MutableLinkedList;
 import net.coljate.map.AbstractEntry;
+import net.coljate.map.AbstractMap;
 import net.coljate.map.Entry;
 import net.coljate.map.MutableMap;
 import net.coljate.set.AbstractSet;
@@ -24,7 +25,7 @@ import net.coljate.util.Iterators;
  * @see java.util.HashMap
  */
 public class ChainedHashMap<K, V>
-        extends AbstractHashMap<K, V>
+        extends AbstractMap<K, V>
         implements MutableMap<K, V>, HashMap<K, V> {
 
     public static <K, V> ChainedHashMap<K, V> create(final int initialCapacity) {
