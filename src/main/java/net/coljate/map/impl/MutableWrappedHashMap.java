@@ -14,7 +14,7 @@ public class MutableWrappedHashMap<K, V>
 
     private static final long serialVersionUID = 1L;
 
-    public static <K, V> MutableWrappedHashMap<K, V> copyOf(final java.util.Collection<? extends Entry<K, V>> entries) {
+    public static <K, V> MutableWrappedHashMap<K, V> copyOf(final java.util.Collection<? extends Entry<? extends K, ? extends V>> entries) {
         final java.util.HashMap<K, V> map = new java.util.HashMap<>(entries.size());
         entries.forEach(entry -> map.put(entry.key(), entry.value()));
         return viewOf(map);

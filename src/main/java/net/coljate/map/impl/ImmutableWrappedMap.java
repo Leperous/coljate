@@ -18,8 +18,10 @@ public class ImmutableWrappedMap<K, V>
         extends AbstractMap<K, V>
         implements ImmutableMap<K, V> {
 
-    public static <K, V> Map<K, V> createHashMap(final int initialCapacity) {
-        return new ImmutableWrappedMap<>(new java.util.HashMap<>(initialCapacity));
+    public static <K, V> ImmutableMap<K, V> createHashMap(final int initialCapacity) {
+        return initialCapacity == 0
+                ? EmptyMap.instance()
+                : new ImmutableWrappedMap<>(new java.util.HashMap<>(initialCapacity));
     }
 
     public static <K, V> Map<K, V> copyOf(final Collection<? extends Entry<? extends K, ? extends V>> entries) {
