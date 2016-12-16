@@ -1,6 +1,7 @@
 package net.coljate.map.impl;
 
 import net.coljate.map.ConcurrentMap;
+import net.coljate.map.Entry;
 
 /**
  *
@@ -14,13 +15,24 @@ public class ConcurrentWrappedHashMap<K, V>
         return new ConcurrentWrappedHashMap<>(new java.util.concurrent.ConcurrentHashMap<>(initialCapacity));
     }
 
+    public static <K, V> ConcurrentWrappedHashMap<K, V> copyOf(final java.util.Collection<? extends Entry<? extends K, ? extends V>> entries) {
+        final ConcurrentWrappedHashMap<K, V> map = create(entries.size());
+        entries.forEach(entry -> map.put(entry.key(), entry.value()));
+        return map;
+    }
+
     protected ConcurrentWrappedHashMap(final java.util.concurrent.ConcurrentHashMap<K, V> delegate) {
         super(delegate);
     }
 
     @Override
+    public java.util.concurrent.ConcurrentHashMap<K, V> javaMapCopy() {
+        return super.javaMapCopy(java.util.concurrent.ConcurrentHashMap::new);
+    }
+
+    @Override
     public ConcurrentWrappedHashMap<K, V> mutableCopy() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return new ConcurrentWrappedHashMap<>(this.javaMapCopy());
     }
 
 }

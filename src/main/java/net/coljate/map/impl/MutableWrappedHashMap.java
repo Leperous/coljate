@@ -40,13 +40,13 @@ public class MutableWrappedHashMap<K, V>
     }
 
     @Override
-    protected java.util.HashMap<K, V> mutableDelegateCopy() {
+    public java.util.HashMap<K, V> javaMapCopy() {
         return new java.util.HashMap<>(delegate);
     }
 
     @Override
     public MutableWrappedHashMap<K, V> mutableCopy() {
-        return new MutableWrappedHashMap<>(this.mutableDelegateCopy());
+        return new MutableWrappedHashMap<>(this.javaMapCopy());
     }
 
 }

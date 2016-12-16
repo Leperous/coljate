@@ -10,7 +10,7 @@ import net.coljate.map.Map;
 public interface HashMap<K, V> extends Map<K, V>, FastGet<K, V> {
 
     @Override
-    default java.util.HashMap<K, V> javaMapCopy() {
+    default java.util.Map<K, V> javaMapCopy() {
         return this.javaMapCopy(java.util.HashMap::new);
     }
 

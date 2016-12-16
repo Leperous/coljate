@@ -1,13 +1,12 @@
 package net.coljate.map.impl;
 
 import java.util.Iterator;
-import java.util.Objects;
 
 import net.coljate.collection.Collection;
 import net.coljate.map.AbstractMap;
 import net.coljate.map.Entry;
-import net.coljate.map.ImmutableMap;
 import net.coljate.map.ImmutableEntry;
+import net.coljate.map.ImmutableMap;
 import net.coljate.map.Map;
 import net.coljate.map.MutableMap;
 import net.coljate.set.Set;
@@ -29,7 +28,8 @@ public class WrappedMap<K, V>
         this.delegate = delegate;
     }
 
-    protected java.util.Map<K, V> mutableDelegateCopy() {
+    @Override
+    public java.util.Map<K, V> javaMapCopy() {
         return new java.util.HashMap<>(delegate);
     }
 
@@ -75,7 +75,7 @@ public class WrappedMap<K, V>
 
     @Override
     public MutableMap<K, V> mutableCopy() {
-        return new MutableWrappedMap<>(this.mutableDelegateCopy());
+        return new MutableWrappedMap<>(this.javaMapCopy());
     }
 
     @Override
