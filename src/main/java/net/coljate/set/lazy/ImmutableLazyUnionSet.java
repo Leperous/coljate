@@ -41,7 +41,9 @@ public class ImmutableLazyUnionSet<T>
 
     @Override
     public ImmutableLazyUnionSet<T> with(final T element) {
-        return new ImmutableLazyUnionSet<>(s1.with(element), s2);
+        return this.contains(element)
+                ? this
+                : new ImmutableLazyUnionSet<>(s1.with(element), s2);
     }
 
     @Override
