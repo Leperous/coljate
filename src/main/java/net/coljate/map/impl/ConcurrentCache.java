@@ -26,8 +26,8 @@ public class ConcurrentCache<K, V> implements Cache<K, V> {
     }
 
     @Override
-    public V getIfPresent(final K key) {
-        final Holder<K, V> holder = cache.get(key);
+    public V getIfPresent(final Object key) {
+        final Holder<K, V> holder = cache.getIfPresent(key);
         return holder == null ? null : holder.current();
     }
 
