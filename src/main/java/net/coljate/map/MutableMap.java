@@ -2,6 +2,7 @@ package net.coljate.map;
 
 import java.util.Iterator;
 import java.util.Objects;
+import java.util.function.BiFunction;
 import java.util.function.BiPredicate;
 import java.util.function.Function;
 
@@ -53,6 +54,23 @@ public interface MutableMap<K, V> extends Map<K, V>, MutableSet<Entry<K, V>> {
         return current == null
                 ? this.put(key, value)
                 : current;
+    }
+
+    /**
+     * Compute a new value, given the key and previous value.
+     *
+     * Note that this method differs to {@link java.util.Map#compute} in that a null computed value will be stored
+     * against the key, instead of causing the entry to be evicted.
+     *
+     * @param key
+     * @param compute
+     * @return
+     */
+    default V compute(final K key, final BiFunction<K, V, V> compute) {
+        final V previous = this.get(key);
+        final V replacement = compute.apply(key, previous);
+        this.put(key, replacement);
+        return replacement;
     }
 
     default V computeIfAbsent(final K key, final Function<K, V> supplier) {
