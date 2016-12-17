@@ -18,13 +18,13 @@ import org.junit.jupiter.api.Test;
  * @author ollie
  */
 @SuppressWarnings({"unchecked", "rawtypes"})
-public class MultisetTest
+public class MutableHashMultisetTest
         extends ObjectContainerTest
         implements MutableSetTest<Object>, AllCollectionSizeTest<Object> {
 
     @Override
-    public Multiset<Object> create(final java.util.List<Object> elements) {
-        return Multiset.copyOf(elements);
+    public MutableHashMultiset<Object> create(final java.util.List<Object> elements) {
+        return MutableHashMultiset.copyOf(elements);
     }
 
     @Test
@@ -38,14 +38,14 @@ public class MultisetTest
     @Test
     public void testCount_Two() {
         final Object element = this.createObject();
-        final Multiset<Object> set = this.create(Arrays.asList(element, element));
+        final HashMultiset<Object> set = this.create(Arrays.asList(element, element));
         assertThat(set.count(element), is(2));
     }
 
     @Test
     public void testDecrement() {
         final Object element = this.createObject();
-        final Multiset<Object> set = this.create(Arrays.asList(element, element));
+        final MutableHashMultiset<Object> set = this.create(Arrays.asList(element, element));
         assertThat(set.decrement(element), is(1));
         assertThat(set.decrement(element), is(0));
         assertThat(set.decrement(element), is(0));

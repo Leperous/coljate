@@ -116,4 +116,10 @@ public class Iterators {
 
     }
 
+    public interface EnhancedIterator<T> extends Iterator<T> {
+
+        T current();
+
+    }
+
 }

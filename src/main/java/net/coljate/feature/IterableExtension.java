@@ -25,7 +25,7 @@ public interface IterableExtension<T> extends Container, Iterable<T> {
         int count = 0;
         for (final T element : this) {
             if (predicate.test(element)) {
-                count++;
+                count = Math.addExact(count, 1);
             }
         }
         return count;
@@ -60,8 +60,7 @@ public interface IterableExtension<T> extends Container, Iterable<T> {
     /**
      *
      * @param predicate
-     * @return true if any element in this container matches the given
-     * predicate.
+     * @return true if any element in this container matches the given predicate.
      */
     @TimeComplexity(Complexity.LINEAR)
     default boolean anyMatch(final Predicate<? super T> predicate) {
@@ -87,8 +86,7 @@ public interface IterableExtension<T> extends Container, Iterable<T> {
      *
      * @param predicate
      * @param ifNone the result if this container is empty.
-     * @return true if all elements match the given predicate, or if there are
-     * no elements.
+     * @return true if all elements match the given predicate, or if there are no elements.
      */
     @TimeComplexity(Complexity.LINEAR)
     default boolean allMatch(final Predicate<? super T> predicate, boolean ifNone) {
