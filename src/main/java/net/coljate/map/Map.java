@@ -23,7 +23,21 @@ import net.coljate.util.Functions;
  */
 public interface Map<K, V> extends Set<Entry<K, V>>, Associative<K, V> {
 
+    /**
+     * @param key
+     * @return the entry associated with this key, or null if there is no such association.
+     */
     Entry<K, V> entry(Object key);
+
+    /**
+     * @return a view of the keys in this map.
+     */
+    Set<? extends K> keys();
+
+    /**
+     * @return a view of the values in this map.
+     */
+    Collection<V> values();
 
     @Override
     default V getIfPresent(final Object key) {
@@ -39,10 +53,6 @@ public interface Map<K, V> extends Set<Entry<K, V>>, Associative<K, V> {
         final Entry<K, V> got = this.entry(key);
         return got == null ? defaultValue : got.value();
     }
-
-    Set<? extends K> keys();
-
-    Collection<V> values();
 
     @Deprecated
     default boolean contains(final Object object) {
