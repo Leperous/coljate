@@ -11,6 +11,12 @@ public class ConcurrentWrappedHashMap<K, V>
         extends MutableWrappedMap<K, V>
         implements HashMap<K, V>, ConcurrentMap<K, V> {
 
+    public static final int DEFAULT_INITIAL_CAPACITY = 10;
+
+    public static <K, V> ConcurrentWrappedHashMap<K, V> create() {
+        return create(DEFAULT_INITIAL_CAPACITY);
+    }
+
     public static <K, V> ConcurrentWrappedHashMap<K, V> create(final int initialCapacity) {
         return new ConcurrentWrappedHashMap<>(new java.util.concurrent.ConcurrentHashMap<>(initialCapacity));
     }

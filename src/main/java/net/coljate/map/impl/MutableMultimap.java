@@ -3,8 +3,10 @@ package net.coljate.map.impl;
 import java.util.function.Supplier;
 
 import net.coljate.collection.Collection;
+import net.coljate.map.ConcurrentMap;
 import net.coljate.map.MutableEntry;
 import net.coljate.map.MutableMap;
+import net.coljate.set.ConcurrentSet;
 import net.coljate.set.MutableSet;
 
 /**
@@ -17,6 +19,10 @@ public class MutableMultimap<K, C extends Collection<?>>
 
     public static <K, V> MutableMultimap<K, MutableSet<V>> createHashSetMultimap() {
         return new MutableMultimap<>(MutableMap.createHashMap(), MutableSet::createHashSet);
+    }
+
+    public static <K, V> MutableMultimap<K, ConcurrentSet<V>> createConcurrentHashSetMultimap() {
+        return new MutableMultimap<>(ConcurrentMap.createHashMap(), ConcurrentSet::createHashSet);
     }
 
     protected MutableMultimap(final MutableMap<K, C> map, final Supplier<? extends C> createCollection) {

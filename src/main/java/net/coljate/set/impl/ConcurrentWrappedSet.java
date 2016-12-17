@@ -12,6 +12,12 @@ public class ConcurrentWrappedSet<T>
         extends MutableWrappedSet<T>
         implements ConcurrentSet<T> {
 
+    public static final int DEFAULT_INITIAL_CAPACITY = 10;
+
+    public static <T> ConcurrentWrappedSet<T> createHashSet() {
+        return createHashSet(DEFAULT_INITIAL_CAPACITY);
+    }
+
     public static <T> ConcurrentWrappedSet<T> createHashSet(final int initialCapacity) {
         return new ConcurrentWrappedSet<>(createConcurrentHashSet(initialCapacity));
     }
