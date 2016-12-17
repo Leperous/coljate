@@ -24,9 +24,10 @@ public interface MutableTable<R, C, V>
                 : this.put(rowKey, columnKey, value) == null;
     }
 
-    boolean remove(Object rowKey, Object columney, Object value);
+    boolean remove(Object rowKey, Object columnKey, Object value);
 
     @Override
+    @Deprecated
     default boolean remove(final Object object) {
         return object instanceof Cell
                 && this.remove((Cell) object);
@@ -36,7 +37,7 @@ public interface MutableTable<R, C, V>
         return this.remove(cell.rowKey(), cell.columnKey(), cell.value());
     }
 
-    default boolean remove(Object rowKey, Object columnKey) {
+    default boolean remove(final Object rowKey, final Object columnKey) {
         final Cell<R, C, V> cell = this.cellIfPresent(rowKey, columnKey);
         return this.remove(cell);
     }

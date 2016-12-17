@@ -15,20 +15,20 @@ import net.coljate.util.Iterators;
  */
 public class MapBackedTable<R, C, V> implements Table<R, C, V> {
 
-    private final Map<Pair<R, C>, V> map;
+    private final Map<KeyPair<R, C>, V> map;
 
-    protected MapBackedTable(final Map<Pair<R, C>, V> map) {
+    protected MapBackedTable(final Map<KeyPair<R, C>, V> map) {
         this.map = map;
     }
 
     @Override
     public boolean contains(final Object row, final Object column) {
-        return map.containsKey(new Pair<>(row, column));
+        return map.containsKey(new KeyPair<>(row, column));
     }
 
     @Override
     public Cell<R, C, V> cellIfPresent(final Object row, final Object column) {
-        final Entry<Pair<R, C>, V> entry = map.entry(new Pair<>(row, column));
+        final Entry<KeyPair<R, C>, V> entry = map.entry(new KeyPair<>(row, column));
         return entry == null ? null : new EntryBackedCell<>(entry);
     }
 
@@ -37,12 +37,12 @@ public class MapBackedTable<R, C, V> implements Table<R, C, V> {
         return Iterators.transform(map.iterator(), EntryBackedCell::new);
     }
 
-    protected final class Pair<R, C> {
+    protected final class KeyPair<R, C> {
 
         private final R rowKey;
         private final C columnKey;
 
-        Pair(final R rowKey, final C columnKey) {
+        KeyPair(final R rowKey, final C columnKey) {
             this.rowKey = rowKey;
             this.columnKey = columnKey;
         }
@@ -65,11 +65,11 @@ public class MapBackedTable<R, C, V> implements Table<R, C, V> {
 
         @Override
         public boolean equals(final Object object) {
-            return object instanceof Pair
-                    && this.equals((Pair<?, ?>) object);
+            return object instanceof KeyPair
+                    && this.equals((KeyPair<?, ?>) object);
         }
 
-        protected boolean equals(final Pair<?, ?> that) {
+        protected boolean equals(final KeyPair<?, ?> that) {
             return Objects.equals(rowKey, that.rowKey)
                     && Objects.equals(columnKey, that.columnKey);
         }
@@ -78,14 +78,14 @@ public class MapBackedTable<R, C, V> implements Table<R, C, V> {
 
     protected class EntryBackedCell<R, C, V> implements Cell<R, C, V> {
 
-        private final Pair<R, C> keys;
+        private final KeyPair<R, C> keys;
         private final V value;
 
-        public EntryBackedCell(final Entry<Pair<R, C>, V> entry) {
+        public EntryBackedCell(final Entry<KeyPair<R, C>, V> entry) {
             this(entry.key(), entry.value());
         }
 
-        protected EntryBackedCell(final Pair<R, C> keys, final V value) {
+        protected EntryBackedCell(final KeyPair<R, C> keys, final V value) {
             this.keys = keys;
             this.value = value;
         }
