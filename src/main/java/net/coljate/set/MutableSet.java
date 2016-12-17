@@ -35,20 +35,24 @@ public interface MutableSet<T> extends Set<T>, MutableCollection<T> {
         }
         return addedAny;
     }
-
+    
     @Deprecated
     default boolean removeFirst(final Object element) {
         return this.remove(element);
     }
-
+    
     @Override
     @Deprecated
     default boolean removeAll(final Object element) {
         return this.remove(element);
     }
-
+    
+    static <T> MutableSet<T> createHashSet() {
+        return MutableWrappedHashSet.create();
+    }
+    
     static <T> MutableSet<T> createHashSet(final int initialCapacity) {
         return MutableWrappedHashSet.create(initialCapacity);
     }
-
+    
 }

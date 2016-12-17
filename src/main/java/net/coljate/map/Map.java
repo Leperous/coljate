@@ -12,7 +12,7 @@ import net.coljate.map.impl.ImmutableWrappedMap;
 import net.coljate.map.impl.MutableWrappedHashMap;
 import net.coljate.map.impl.RepeatedValueMap;
 import net.coljate.map.impl.SingletonMap;
-import net.coljate.map.lazy.LazyFilteredEntryMap;
+import net.coljate.map.lazy.LazyFilteredMap;
 import net.coljate.map.lazy.LazyMap;
 import net.coljate.set.Set;
 import net.coljate.util.Functions;
@@ -95,7 +95,7 @@ public interface Map<K, V> extends Set<Entry<K, V>>, Associative<K, V> {
 
     @Override
     default LazyMap<K, V> filter(final Predicate<? super Entry<K, V>> predicate) {
-        return LazyFilteredEntryMap.filter(this, predicate);
+        return LazyFilteredMap.filterEntries(this, predicate);
     }
 
     @Override

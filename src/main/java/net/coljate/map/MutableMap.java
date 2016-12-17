@@ -32,6 +32,22 @@ public interface MutableMap<K, V> extends Map<K, V>, MutableSet<Entry<K, V>> {
         return this.add(entry.key(), entry.value());
     }
 
+    default boolean addAll(final Map<? extends K, ? extends V> map) {
+        boolean addedAny = false;
+        for (final Entry<? extends K, ? extends V> entry : map) {
+            addedAny &= this.add(entry.key(), entry.value());
+        }
+        return addedAny;
+    }
+
+    default Map<K, V> putAll(final Map<? extends K, ? extends V> map) {
+        final MutableMap<K, V> put = MutableMap.createHashMap(map.count());
+        for (final Entry<? extends K, ? extends V> entry : map) {
+            put.put(entry.key(), this.put(entry.key(), entry.value()));
+        }
+        return put;
+    }
+
     default V putIfAbsent(final K key, final V value) {
         final V current = this.get(key);
         return current == null
@@ -93,6 +109,10 @@ public interface MutableMap<K, V> extends Map<K, V>, MutableSet<Entry<K, V>> {
         return MutableWrappedMap.viewOf(map);
     }
 
+    static <K, V> MutableMap<K, V> createHashMap() {
+        return MutableWrappedHashMap.create();
+    }
+
     static <K, V> MutableMap<K, V> createHashMap(final int initialCapacity) {
         return MutableWrappedHashMap.create(initialCapacity);
     }
@@ -100,6 +120,5 @@ public interface MutableMap<K, V> extends Map<K, V>, MutableSet<Entry<K, V>> {
     static <K, V> MutableMap<K, V> copyIntoHashMap(final java.util.Map<K, V> map) {
         return MutableWrappedHashMap.copyOf(map);
     }
-
 
 }

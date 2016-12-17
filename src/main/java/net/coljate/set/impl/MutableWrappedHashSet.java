@@ -10,6 +10,12 @@ public class MutableWrappedHashSet<T>
         extends MutableWrappedSet<T>
         implements HashSet<T>, Serializable {
 
+    public static final int DEFAULT_INITIAL_CAPACITY = 10;
+
+    public static <T> MutableWrappedHashSet<T> create() {
+        return create(DEFAULT_INITIAL_CAPACITY);
+    }
+
     public static <T> MutableWrappedHashSet<T> create(final int initialCapacity) {
         return viewOf(new java.util.HashSet<>(initialCapacity));
     }

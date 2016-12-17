@@ -18,20 +18,28 @@ import net.coljate.util.Iterators;
  *
  * @author Ollie
  */
-public class LazyFilteredEntryMap<K, V> implements LazyMap<K, V> {
+public class LazyFilteredMap<K, V> implements LazyMap<K, V> {
 
-    public static <K, V> LazyMap<K, V> filter(final Map<K, V> map, final Predicate<? super Entry<K, V>> predicate) {
-        return new LazyFilteredEntryMap<>(map, predicate);
+    public static <K, V> LazyFilteredMap<K, V> filterKeys(final Map<K, V> map, final Predicate<? super K> predicate) {
+        return filterEntries(map, (key, value) -> predicate.test(key));
     }
 
-    public static <K, V> LazyMap<K, V> filter(final Map<K, V> map, final BiPredicate<? super K, ? super V> predicate) {
-        return new LazyFilteredEntryMap<>(map, entry -> predicate.test(entry.key(), entry.value()));
+    public static <K, V> LazyFilteredMap<K, V> filterValues(final Map<K, V> map, final Predicate<? super V> predicate) {
+        return filterEntries(map, (key, value) -> predicate.test(value));
+    }
+
+    public static <K, V> LazyFilteredMap<K, V> filterEntries(final Map<K, V> map, final Predicate<? super Entry<K, V>> predicate) {
+        return new LazyFilteredMap<>(map, predicate);
+    }
+
+    public static <K, V> LazyFilteredMap<K, V> filterEntries(final Map<K, V> map, final BiPredicate<? super K, ? super V> predicate) {
+        return new LazyFilteredMap<>(map, entry -> predicate.test(entry.key(), entry.value()));
     }
 
     private final Map<K, V> map;
     private final Predicate<? super Entry<K, V>> predicate;
 
-    public LazyFilteredEntryMap(
+    public LazyFilteredMap(
             final Map<K, V> map,
             final Predicate<? super Entry<K, V>> predicate) {
         this.map = Objects.requireNonNull(map, "map");
@@ -78,12 +86,12 @@ public class LazyFilteredEntryMap<K, V> implements LazyMap<K, V> {
 
         @Override
         public boolean contains(final Object object) {
-            return LazyFilteredEntryMap.this.test(LazyFilteredEntryMap.this.entry(object));
+            return LazyFilteredMap.this.test(LazyFilteredMap.this.entry(object));
         }
 
         @Override
         public Iterator<K> iterator() {
-            return Iterators.transform(LazyFilteredEntryMap.this.iterator(), Entry::key);
+            return Iterators.transform(LazyFilteredMap.this.iterator(), Entry::key);
         }
 
         @Override
@@ -99,7 +107,7 @@ public class LazyFilteredEntryMap<K, V> implements LazyMap<K, V> {
 
         @Override
         public Iterator<V> iterator() {
-            return Iterators.transform(LazyFilteredEntryMap.this.iterator(), Entry::value);
+            return Iterators.transform(LazyFilteredMap.this.iterator(), Entry::value);
         }
 
         @Override
