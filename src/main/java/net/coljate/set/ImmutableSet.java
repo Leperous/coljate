@@ -6,8 +6,8 @@ import net.coljate.collection.Collection;
 import net.coljate.collection.ImmutableCollection;
 import net.coljate.set.impl.EmptySet;
 import net.coljate.set.impl.ImmutableWrappedSet;
-import net.coljate.set.lazy.ImmutableLazyUnionSet;
 import net.coljate.set.impl.SingletonSet;
+import net.coljate.set.lazy.ImmutableLazyUnionSet;
 
 /**
  *
@@ -15,7 +15,6 @@ import net.coljate.set.impl.SingletonSet;
  */
 public interface ImmutableSet<T> extends Set<T>, ImmutableCollection<T> {
 
-    @Override
     default ImmutableSet<T> with(final T element) {
         return this.contains(element)
                 ? this

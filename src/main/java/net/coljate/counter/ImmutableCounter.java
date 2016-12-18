@@ -1,14 +1,14 @@
 package net.coljate.counter;
 
+import net.coljate.collection.ImmutableCollection;
 import net.coljate.map.ImmutableMap;
-import net.coljate.set.ImmutableSet;
 
 /**
  *
  * @author ollie
  */
 public interface ImmutableCounter<T>
-        extends Counter<T>, ImmutableSet<T> {
+        extends Counter<T>, ImmutableCollection<T> {
 
     @Override
     ImmutableMap<T, Integer> countElements();

@@ -1,17 +1,13 @@
-package net.coljate.map.impl;
+package net.coljate.counter.impl;
 
 import java.util.Arrays;
 
 import net.coljate.ObjectContainerTest;
 import net.coljate.collection.AllCollectionSizeTest;
-import net.coljate.counter.impl.HashCounter;
-import net.coljate.counter.impl.MutableHashCounter;
-import net.coljate.set.MutableSet;
-import net.coljate.set.MutableSetTest;
+import net.coljate.counter.MutableCounterTest;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
@@ -20,21 +16,13 @@ import org.junit.jupiter.api.Test;
  * @author ollie
  */
 @SuppressWarnings({"unchecked", "rawtypes"})
-public class MutableHashCountTest
+public class MutableHashCounterTest
         extends ObjectContainerTest
-        implements MutableSetTest<Object>, AllCollectionSizeTest<Object> {
+        implements MutableCounterTest<Object>, AllCollectionSizeTest<Object> {
 
     @Override
     public MutableHashCounter<Object> create(final java.util.List<Object> elements) {
         return MutableHashCounter.copyOf(elements);
-    }
-
-    @Test
-    @Override
-    public void testAdd_Twice() {
-        final Object element = this.createObject();
-        final MutableSet<Object> set = this.create(element);
-        assertTrue(set.add(element));
     }
 
     @Test

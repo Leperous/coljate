@@ -41,11 +41,6 @@ public class SingletonCollection<T>
     }
 
     @Override
-    public ImmutableCollection<T> with(final T element) {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
-
-    @Override
     public MutableCollection<? extends T> mutableCopy() {
         throw new UnsupportedOperationException("Not supported yet.");
     }

@@ -3,21 +3,21 @@ package net.coljate.counter.impl;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
+import net.coljate.counter.AbstractCounter;
+import net.coljate.counter.Counter;
+import net.coljate.counter.ImmutableCounter;
+import net.coljate.counter.MutableCounter;
 import net.coljate.map.Entry;
 import net.coljate.map.Map;
-import net.coljate.set.AbstractSet;
 import net.coljate.util.Iterators.EnhancedIterator;
 import net.coljate.util.Suppliers;
-import net.coljate.counter.Counter;
-import net.coljate.counter.MutableCounter;
-import net.coljate.counter.ImmutableCounter;
 
 /**
  *
  * @author ollie
  */
 public class HashCounter<T>
-        extends AbstractSet<T>
+        extends AbstractCounter<T>
         implements Counter<T> {
 
     private final Map<T, Integer> map;

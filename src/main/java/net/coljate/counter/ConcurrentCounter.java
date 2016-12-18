@@ -1,14 +1,14 @@
 package net.coljate.counter;
 
+import net.coljate.collection.ConcurrentCollection;
 import net.coljate.counter.impl.ConcurrentHashCounter;
-import net.coljate.set.ConcurrentSet;
 
 /**
  *
  * @author ollie
  */
 public interface ConcurrentCounter<T>
-        extends MutableCounter<T>, ConcurrentSet<T> {
+        extends MutableCounter<T>, ConcurrentCollection<T> {
 
     @Override
     ConcurrentCounter<T> mutableCopy();

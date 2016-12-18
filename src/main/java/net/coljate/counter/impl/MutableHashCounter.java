@@ -20,7 +20,7 @@ public class MutableHashCounter<T>
 
     public static <T> MutableHashCounter<T> copyOf(final Iterable<? extends T> iterable) {
         final MutableHashCounter<T> set = create();
-        iterable.forEach(set::add);
+        iterable.forEach(set::increment);
         return set;
     }
 
@@ -35,12 +35,6 @@ public class MutableHashCounter<T>
 
     protected boolean evictZeros() {
         return evictZeros;
-    }
-
-    @Override
-    public boolean add(final T element) {
-        this.increment(element);
-        return true;
     }
 
     @Override

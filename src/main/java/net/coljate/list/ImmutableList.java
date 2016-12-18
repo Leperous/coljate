@@ -36,12 +36,6 @@ public interface ImmutableList<T> extends List<T>, ImmutableCollection<T> {
         return join(this, list.immutableCopy());
     }
 
-    @Override
-    @Deprecated
-    default ImmutableCollection<T> with(final T element) {
-        return this.suffixed(element);
-    }
-
     static <T> ImmutableList<T> of(final T element) {
         return ImmutableArray.of(element);
     }

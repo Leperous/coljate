@@ -1,14 +1,14 @@
 package net.coljate.counter;
 
-import net.coljate.map.Map;
+import net.coljate.collection.Collection;
 import net.coljate.counter.impl.MutableHashCounter;
-import net.coljate.set.Set;
+import net.coljate.map.Map;
 
 /**
  *
  * @author ollie
  */
-public interface Counter<T> extends Set<T> {
+public interface Counter<T> extends Collection<T> {
 
     int count(Object element);
 

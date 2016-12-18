@@ -32,11 +32,6 @@ public class EmptyCollection<T>
     }
 
     @Override
-    public SingletonCollection<T> with(final T element) {
-        return ImmutableCollection.of(element);
-    }
-
-    @Override
     protected boolean equals(final AbstractCollection<?> that) {
         return that instanceof EmptyCollection;
     }

@@ -1,13 +1,13 @@
 package net.coljate.counter;
 
-import net.coljate.set.MutableSet;
+import net.coljate.collection.MutableCollection;
 
 /**
  *
  * @author ollie
  */
 public interface MutableCounter<T>
-        extends Counter<T>, MutableSet<T> {
+        extends Counter<T>, MutableCollection<T> {
 
     int increment(T element, int amount);
 
@@ -25,12 +25,6 @@ public interface MutableCounter<T>
 
     default int decrement(final T element) {
         return this.decrement(element, 1);
-    }
-
-    @Override
-    @Deprecated
-    default boolean remove(final Object element) {
-        return this.removeFirst(element);
     }
 
     @Override
