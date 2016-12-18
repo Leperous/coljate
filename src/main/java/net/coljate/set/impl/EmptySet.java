@@ -36,4 +36,29 @@ public class EmptySet<T>
         return that instanceof EmptySet;
     }
 
+    @Override
+    public SingletonSet<T> with(final T element) {
+        return SingletonSet.of(element);
+    }
+
+    @Override
+    public Set<T> xor(final Set<? extends T> that) {
+        return Set.unmodifiable(that);
+    }
+
+    @Override
+    public Set<T> or(final Set<? extends T> that) {
+        return Set.unmodifiable(that);
+    }
+
+    @Override
+    public EmptySet<T> not(final Set<? extends T> that) {
+        return this;
+    }
+
+    @Override
+    public EmptySet<T> and(final Set<? extends T> that) {
+        return this;
+    }
+
 }
