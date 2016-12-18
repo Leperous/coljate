@@ -14,9 +14,8 @@ import net.coljate.set.impl.SingletonSet;
 import net.coljate.set.impl.UnmodifiableSet;
 import net.coljate.set.impl.WrappedSet;
 import net.coljate.set.lazy.LazyFilteredSet;
-import net.coljate.set.lazy.LazyIntersectionSet;
 import net.coljate.set.lazy.LazySet;
-import net.coljate.set.lazy.LazyUnionSet;
+import net.coljate.set.lazy.LazySetUnion;
 import net.coljate.util.Equality;
 
 /**
@@ -55,12 +54,40 @@ public interface Set<T> extends Collection<T> {
         return LazyFilteredSet.of(this, predicate);
     }
 
-    default Set<T> intersection(final Set<? extends T> that) {
-        return LazyIntersectionSet.of(this, that);
+    /**
+     * Intersection.
+     *
+     * @return a set of elements in both this set and the given set.
+     */
+    default Set<T> and(final Set<? extends T> that) {
+        return LazySet.intersection(this, that);
     }
 
-    default Set<T> union(final Set<? extends T> that) {
-        return LazyUnionSet.of(this, that);
+    /**
+     * Relative complement.
+     *
+     * @return a set of elements in this set but not the given set.
+     */
+    default Set<T> not(final Set<? extends T> that) {
+        return LazySet.complement(this, that);
+    }
+
+    /**
+     * Union.
+     *
+     * @return a set of elements in either this set or the given set, or both.
+     */
+    default Set<T> or(final Set<? extends T> that) {
+        return LazySetUnion.of(this, that);
+    }
+
+    /**
+     * Symmetric difference.
+     *
+     * @return a set of elements in either this set or the given set, but not both.
+     */
+    default Set<T> xor(final Set<? extends T> that) {
+        return LazySet.difference(this, that);
     }
 
     static <T> EmptySet<T> of() {

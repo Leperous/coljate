@@ -11,7 +11,7 @@ import net.coljate.set.MutableSet;
  * @author ollie
  */
 public class ImmutableLazyUnionSet<T>
-        extends LazyUnionSet<T>
+        extends LazySetUnion<T>
         implements ImmutableSet<T> {
 
     @SuppressWarnings("unchecked")

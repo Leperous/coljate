@@ -6,31 +6,24 @@ import java.util.Objects;
 
 import net.coljate.set.AbstractSet;
 import net.coljate.set.Set;
-import net.coljate.set.impl.EmptySet;
 
 /**
  * View of the union of two (possibly mutable) sets.
  *
  * @author ollie
  */
-public class LazyUnionSet<T>
+public class LazySetUnion<T>
         extends AbstractSet<T>
         implements LazySet<T> {
 
     @SuppressWarnings("unchecked")
-    public static <T> Set<T> of(final Set<? extends T> s1, final Set<? extends T> s2) {
-        if (s1 == s2 || s2 instanceof EmptySet) {
-            return Set.unmodifiable(s1);
-        } else if (s1 instanceof EmptySet) {
-            return Set.unmodifiable(s2);
-        } else {
-            return new LazyUnionSet<>(s1, s2);
-        }
+    public static <T> LazySet<T> of(final Set<? extends T> s1, final Set<? extends T> s2) {
+        return new LazySetUnion<>(s1, s2);
     }
 
     private final Set<? extends T> s1, s2;
 
-    protected LazyUnionSet(final Set<? extends T> s1, Set<? extends T> s2) {
+    protected LazySetUnion(final Set<? extends T> s1, Set<? extends T> s2) {
         this.s1 = Objects.requireNonNull(s1);
         this.s2 = Objects.requireNonNull(s2);
     }
@@ -79,17 +72,6 @@ public class LazyUnionSet<T>
             }
 
         };
-    }
-
-    @Override
-    protected boolean equals(final Set<?> that) {
-        return that instanceof LazyUnionSet
-                && this.equals((LazyUnionSet) that);
-    }
-
-    protected boolean equals(final LazyUnionSet<?> that) {
-        return Objects.equals(s1, that.s1)
-                && Objects.equals(s2, that.s2);
     }
 
 }

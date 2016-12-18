@@ -28,13 +28,43 @@ public interface LazySet<T> extends LazyCollection<T>, Set<T> {
     static <T> LazySet<T> filter(
             final Collection<T> collection,
             final Predicate<? super T> predicate) {
-        return new LazyFilteredSet<>(Set.copyOrCast(collection), predicate);
+        return LazyFilteredSet.of(Set.copyOrCast(collection), predicate);
     }
 
     static <F, T> LazySet<T> transform(
             final Collection<F> collection,
             final Function<? super F, ? extends T> transformation) {
         return new LazyTransformedSet<>(Set.copyOrCast(collection), transformation);
+    }
+
+    /**
+     * Union {@code a ∪ b} of two sets. Elements must be in either set.
+     */
+    static <T> LazySet<T> union(final Set<? extends T> a, final Set<? extends T> b) {
+        return LazySetUnion.of(a, b);
+    }
+
+    /**
+     * Intersection {@code a ∩ b} of two sets. Elements must be in both sets.
+     */
+    static <T> LazySet<T> intersection(final Set<? extends T> a, final Collection<? extends T> b) {
+        return LazyFilteredSet.of(a, element -> a.contains(element) && b.contains(element));
+    }
+
+    /**
+     * Relative complement {@code a \ b} of two sets. Elements must be in the first set but not the second set.
+     *
+     * Note that the absolute complement can be an "infinite" set (if the universe is) so isn't supported.
+     */
+    static <T> LazySet<T> complement(final Set<? extends T> a, final Collection<? extends T> b) {
+        return LazyFilteredSet.of(a, element -> a.contains(element) && !b.contains(element));
+    }
+
+    /**
+     * Symmetric difference {@code a ∆ b} of two sets. Elements must be in either set but not both.
+     */
+    static <T> LazySet<T> difference(final Set<? extends T> a, final Set<? extends T> b) {
+        return LazyFilteredSet.of(a, element -> a.contains(element) ? !b.contains(element) : b.contains(element));
     }
 
 }
