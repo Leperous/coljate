@@ -25,12 +25,16 @@ public class MutableHashCounter<T>
     }
 
     private final MutableMap<T, Integer> map;
-    private final boolean removeZeros;
+    private final boolean evictZeros;
 
-    protected MutableHashCounter(final MutableMap<T, Integer> map, boolean removeZeros) {
+    protected MutableHashCounter(final MutableMap<T, Integer> map, boolean evictZeros) {
         super(map);
         this.map = map;
-        this.removeZeros = removeZeros;
+        this.evictZeros = evictZeros;
+    }
+
+    protected boolean evictZeros() {
+        return evictZeros;
     }
 
     @Override
@@ -53,8 +57,8 @@ public class MutableHashCounter<T>
     @Override
     public int decrement(final T element, final int amount) {
         final int decremented = map.compute(element, (k, count) -> decrement(count, amount));
-        if (decremented == 0 && removeZeros) {
-            map.evict(element);
+        if (decremented == 0 && evictZeros) {
+            map.remove(element, 0);
         }
         return decremented;
     }
@@ -79,7 +83,7 @@ public class MutableHashCounter<T>
 
     @Override
     public MutableCounter<T> mutableCopy() {
-        return new MutableHashCounter<>(map.mutableCopy(), removeZeros);
+        return new MutableHashCounter<>(map.mutableCopy(), evictZeros);
     }
 
     private class MutableHashMultisetIterator implements EnhancedIterator<T> {
