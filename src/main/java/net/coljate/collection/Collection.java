@@ -6,14 +6,14 @@ import java.util.function.IntFunction;
 import java.util.function.Predicate;
 
 import net.coljate.Container;
+import net.coljate.IterableExtension;
+import net.coljate.StreamExtension;
 import net.coljate.collection.SortedCollection.SortingAlgorithm;
 import net.coljate.collection.impl.WrappedCollection;
 import net.coljate.collection.lazy.LazyCollection;
-import net.coljate.IterableExtension;
-import net.coljate.StreamExtension;
+import net.coljate.feature.complexity.TimeComplexity;
 import net.coljate.list.impl.ImmutableSortedArray;
 import net.coljate.set.Set;
-import net.coljate.feature.complexity.TimeComplexity;
 
 /**
  * Some {@link Iterable} {@link Container} with a {@link #count count} of elements.

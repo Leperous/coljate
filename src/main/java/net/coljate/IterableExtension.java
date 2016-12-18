@@ -5,7 +5,6 @@ import java.util.Objects;
 import java.util.function.Predicate;
 import java.util.function.ToIntFunction;
 
-import net.coljate.Container;
 import net.coljate.feature.complexity.Complexity;
 import net.coljate.feature.complexity.TimeComplexity;
 
