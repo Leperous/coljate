@@ -1,6 +1,7 @@
 package net.coljate.map;
 
 import net.coljate.collection.ImmutableCollection;
+import net.coljate.map.impl.EmptyMap;
 import net.coljate.set.ImmutableSet;
 
 /**
@@ -29,6 +30,10 @@ public interface ImmutableMap<K, V> extends Map<K, V>, ImmutableSet<Entry<K, V>>
     @Deprecated
     default ImmutableMap<K, V> immutableCopy() {
         return this;
+    }
+
+    static <K, V> ImmutableMap<K, V> of() {
+        return EmptyMap.instance();
     }
 
 }

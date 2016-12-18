@@ -121,6 +121,10 @@ public interface Map<K, V> extends Set<Entry<K, V>>, Associative<K, V> {
         return ImmutableWrappedMap.copyOf(entries);
     }
 
+    static <K, V> ImmutableMap<K, V> of() {
+        return ImmutableMap.of();
+    }
+
     static <K, V> ImmutableMap<K, V> of(final K key, final V value) {
         return SingletonMap.of(key, value);
     }

@@ -2,7 +2,7 @@ package net.coljate.set.impl;
 
 import java.io.Serializable;
 
-import net.coljate.UnmodifiableIterator;
+import net.coljate.collection.Empty;
 import net.coljate.set.AbstractSet;
 import net.coljate.set.ImmutableSet;
 import net.coljate.set.Set;
@@ -13,7 +13,7 @@ import net.coljate.set.Set;
  */
 public class EmptySet<T>
         extends AbstractSet<T>
-        implements ImmutableSet<T>, Serializable {
+        implements Empty<T>, ImmutableSet<T>, Serializable {
 
     private static final long serialVersionUID = 1L;
     private static final EmptySet INSTANCE = new EmptySet();
@@ -28,12 +28,7 @@ public class EmptySet<T>
 
     @Override
     public boolean contains(final Object object) {
-        return false;
-    }
-
-    @Override
-    public UnmodifiableIterator<T> iterator() {
-        return UnmodifiableIterator.of();
+        return Empty.super.contains(object);
     }
 
     @Override

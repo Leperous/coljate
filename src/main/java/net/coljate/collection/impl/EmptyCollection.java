@@ -2,7 +2,7 @@ package net.coljate.collection.impl;
 
 import net.coljate.UnmodifiableIterator;
 import net.coljate.collection.AbstractCollection;
-import net.coljate.collection.ImmutableCollection;
+import net.coljate.collection.Empty;
 import net.coljate.collection.MutableCollection;
 
 /**
@@ -11,7 +11,7 @@ import net.coljate.collection.MutableCollection;
  */
 public class EmptyCollection<T>
         extends AbstractCollection<T>
-        implements ImmutableCollection<T> {
+        implements Empty<T> {
 
     private static final EmptyCollection EMPTY_COLLECTION = new EmptyCollection();
 
