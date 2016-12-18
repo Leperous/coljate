@@ -11,7 +11,6 @@ import net.coljate.list.impl.ImmutableSortedArray;
 import net.coljate.list.impl.MutableWrappedArrayList;
 import net.coljate.list.impl.MutableWrappedList;
 import net.coljate.list.lazy.LazyFilteredList;
-import net.coljate.list.lazy.LazyList;
 import net.coljate.list.lazy.LazyTransformedList;
 import net.coljate.util.Equality;
 
@@ -41,12 +40,12 @@ public interface List<T> extends Ordered<T>, Collection<T> {
     }
 
     @Override
-    default <R> LazyList<R> transform(final Function<? super T, ? extends R> transformation) {
+    default <R> List<R> transform(final Function<? super T, ? extends R> transformation) {
         return new LazyTransformedList<>(this, transformation);
     }
 
     @Override
-    default LazyList<T> filter(final Predicate<? super T> predicate) {
+    default List<T> filter(final Predicate<? super T> predicate) {
         return new LazyFilteredList<>(this, predicate);
     }
 

@@ -1,6 +1,8 @@
 package net.coljate.set.impl;
 
 import java.io.Serializable;
+import java.util.function.Function;
+import java.util.function.Predicate;
 
 import net.coljate.collection.Empty;
 import net.coljate.set.AbstractSet;
@@ -59,6 +61,16 @@ public class EmptySet<T>
     @Override
     public EmptySet<T> and(final Set<? extends T> that) {
         return this;
+    }
+
+    @Override
+    public EmptySet<T> filter(final Predicate<? super T> predicate) {
+        return this;
+    }
+
+    @Override
+    public <R> Empty<R> transform(final Function<? super T, ? extends R> transformation) {
+        return instance();
     }
 
 }

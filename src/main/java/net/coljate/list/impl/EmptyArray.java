@@ -1,6 +1,8 @@
 package net.coljate.list.impl;
 
 import java.io.Serializable;
+import java.util.function.Function;
+import java.util.function.Predicate;
 
 import net.coljate.collection.Empty;
 import net.coljate.list.AbstractArray;
@@ -48,6 +50,16 @@ public class EmptyArray<T>
     @Override
     public ImmutableListIterator<T> iterator() {
         return ImmutableListIterator.empty();
+    }
+
+    @Override
+    public <R> EmptyArray<R> transform(final Function<? super T, ? extends R> transformation) {
+        return instance();
+    }
+
+    @Override
+    public EmptyArray<T> filter(final Predicate<? super T> predicate) {
+        return this;
     }
 
 }

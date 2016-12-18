@@ -50,7 +50,7 @@ public interface Set<T> extends Collection<T> {
     }
 
     @Override
-    default LazySet<T> filter(final Predicate<? super T> predicate) {
+    default Set<T> filter(final Predicate<? super T> predicate) {
         return LazyFilteredSet.of(this, predicate);
     }
 

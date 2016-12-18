@@ -94,11 +94,11 @@ public interface Map<K, V> extends Set<Entry<K, V>>, Associative<K, V> {
     }
 
     @Override
-    default LazyMap<K, V> filter(final Predicate<? super Entry<K, V>> predicate) {
+    default Map<K, V> filter(final Predicate<? super Entry<K, V>> predicate) {
         return LazyFilteredMap.filterEntries(this, predicate);
     }
 
-    default <V2> LazyMap<K, V2> transformValues(final Function<? super V, ? extends V2> transform) {
+    default <V2> Map<K, V2> transformValues(final Function<? super V, ? extends V2> transform) {
         return LazyMap.transformValues(this, transform);
     }
 
