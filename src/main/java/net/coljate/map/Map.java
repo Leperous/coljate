@@ -2,6 +2,7 @@ package net.coljate.map;
 
 import java.util.Objects;
 import java.util.function.BiConsumer;
+import java.util.function.Function;
 import java.util.function.IntFunction;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
@@ -95,6 +96,10 @@ public interface Map<K, V> extends Set<Entry<K, V>>, Associative<K, V> {
     @Override
     default LazyMap<K, V> filter(final Predicate<? super Entry<K, V>> predicate) {
         return LazyFilteredMap.filterEntries(this, predicate);
+    }
+
+    default <V2> LazyMap<K, V2> transformValues(final Function<? super V, ? extends V2> transform) {
+        return LazyMap.transformValues(this, transform);
     }
 
     @Override

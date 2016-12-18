@@ -35,7 +35,12 @@ public interface LazyMap<K, V> extends LazySet<Entry<K, V>>, Map<K, V> {
     static <K, V1, V2> LazyMap<K, V2> transformValues(
             final Collection<Entry<K, V1>> collection,
             final Function<? super V1, ? extends V2> transformation) {
-        final Map<K, V1> map = Map.copyOrCast(collection);
+        return transformValues(Map.copyOrCast(collection), transformation);
+    }
+
+    static <K, V1, V2> LazyMap<K, V2> transformValues(
+            final Map<K, V1> map,
+            final Function<? super V1, ? extends V2> transformation) {
         return new LazyTransformedValueMap<>(map, transformation);
     }
 
