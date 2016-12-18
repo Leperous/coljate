@@ -21,11 +21,6 @@ public interface Array<T> extends Indexed<T>, List<T> {
     }
 
     @Override
-    default boolean isEmpty() {
-        return this.count() == 0;
-    }
-
-    @Override
     default ListIterator<T> iterator() {
         return new ArrayIterator<>(this);
     }

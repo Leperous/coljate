@@ -2,6 +2,7 @@ package net.coljate.list.impl;
 
 import java.io.Serializable;
 
+import net.coljate.collection.Empty;
 import net.coljate.list.AbstractArray;
 import net.coljate.list.ImmutableArray;
 import net.coljate.list.ImmutableListIterator;
@@ -12,7 +13,7 @@ import net.coljate.list.ImmutableListIterator;
  */
 public class EmptyArray<T>
         extends AbstractArray<T>
-        implements ImmutableArray<T>, Serializable {
+        implements Empty<T>, ImmutableArray<T>, Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -22,6 +23,11 @@ public class EmptyArray<T>
     @SuppressWarnings("unchecked")
     public static <T> EmptyArray<T> instance() {
         return INSTANCE;
+    }
+
+    @Override
+    public boolean contains(final Object object) {
+        return Empty.super.contains(object);
     }
 
     @Override
