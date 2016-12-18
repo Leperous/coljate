@@ -38,6 +38,22 @@ public class MutableHashCounter<T>
     }
 
     @Override
+    public MutableMap<T, Integer> countElements() {
+        return map;
+    }
+
+    @Override
+    public void set(final T element, final int count) {
+        if (count < 0) {
+            throw new IllegalArgumentException("Tried to set negative count [" + count + "] on [" + element + "]!");
+        } else if (count > 0 || !evictZeros) {
+            map.put(element, count);
+        } else {
+            map.evict(element);
+        }
+    }
+
+    @Override
     @SuppressWarnings("deprecation")
     public boolean removeAll(final Object element) {
         return isPositive(map.evict(element));

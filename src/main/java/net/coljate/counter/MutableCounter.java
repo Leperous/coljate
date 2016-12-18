@@ -10,6 +10,8 @@ import net.coljate.counter.impl.MutableHashCounter;
 public interface MutableCounter<T>
         extends Counter<T>, MutableCollection<T> {
 
+    void set(T element, int count);
+
     int increment(T element, int amount);
 
     default int increment(final T element) {
