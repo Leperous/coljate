@@ -7,7 +7,6 @@ import java.util.function.Predicate;
 import java.util.function.Supplier;
 
 import net.coljate.collection.Collection;
-import net.coljate.feature.Associative;
 import net.coljate.map.impl.ImmutableWrappedMap;
 import net.coljate.map.impl.MutableWrappedHashMap;
 import net.coljate.map.impl.RepeatedValueMap;

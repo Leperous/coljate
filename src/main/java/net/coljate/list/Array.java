@@ -1,6 +1,5 @@
 package net.coljate.list;
 
-import net.coljate.feature.Indexed;
 import net.coljate.list.impl.ImmutableNativeArray;
 import net.coljate.list.impl.MutableWrappedArrayList;
 import net.coljate.list.impl.RepeatedValueArray;

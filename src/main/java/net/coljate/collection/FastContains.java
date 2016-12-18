@@ -1,4 +1,4 @@
-package net.coljate.feature;
+package net.coljate.collection;
 
 import net.coljate.Container;
 import net.coljate.feature.complexity.Complexity;

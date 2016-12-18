@@ -6,7 +6,6 @@ import java.util.function.Predicate;
 
 import net.coljate.collection.Collection;
 import net.coljate.collection.SortedCollection.SortingAlgorithm;
-import net.coljate.feature.Ordered;
 import net.coljate.list.impl.ImmutableNativeArray;
 import net.coljate.list.impl.ImmutableSortedArray;
 import net.coljate.list.impl.MutableWrappedArrayList;

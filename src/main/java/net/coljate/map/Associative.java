@@ -1,4 +1,4 @@
-package net.coljate.feature;
+package net.coljate.map;
 
 import java.util.Optional;
 

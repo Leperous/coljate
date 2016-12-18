@@ -3,7 +3,6 @@ package net.coljate.list;
 import java.util.NoSuchElementException;
 
 import net.coljate.collection.MutableCollection;
-import net.coljate.feature.Ordered;
 
 /**
  * A queue is a mutable, ordered collection, accessed through adding or removing

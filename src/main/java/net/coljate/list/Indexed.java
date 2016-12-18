@@ -1,5 +1,6 @@
-package net.coljate.feature;
+package net.coljate.list;
 
+import net.coljate.map.FastGet;
 import net.coljate.feature.complexity.Complexity;
 import net.coljate.feature.complexity.TimeComplexity;
 

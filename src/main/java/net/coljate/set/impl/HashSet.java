@@ -1,6 +1,6 @@
 package net.coljate.set.impl;
 
-import net.coljate.feature.FastContains;
+import net.coljate.collection.FastContains;
 
 /**
  *

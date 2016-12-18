@@ -4,7 +4,7 @@ import java.util.Iterator;
 import java.util.Objects;
 
 import net.coljate.Container;
-import net.coljate.feature.FastContains;
+import net.coljate.collection.FastContains;
 import net.coljate.feature.complexity.Complexity;
 import net.coljate.feature.complexity.TimeComplexity;
 

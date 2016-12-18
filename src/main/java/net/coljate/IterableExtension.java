@@ -1,4 +1,4 @@
-package net.coljate.feature;
+package net.coljate;
 
 import java.util.Iterator;
 import java.util.Objects;

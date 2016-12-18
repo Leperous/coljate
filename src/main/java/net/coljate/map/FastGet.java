@@ -1,5 +1,6 @@
-package net.coljate.feature;
+package net.coljate.map;
 
+import net.coljate.map.Associative;
 import net.coljate.feature.complexity.Complexity;
 import net.coljate.feature.complexity.TimeComplexity;
 

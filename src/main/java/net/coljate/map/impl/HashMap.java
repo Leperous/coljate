@@ -1,6 +1,6 @@
 package net.coljate.map.impl;
 
-import net.coljate.feature.FastGet;
+import net.coljate.map.FastGet;
 import net.coljate.map.Map;
 
 /**

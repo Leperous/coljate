@@ -1,4 +1,4 @@
-package net.coljate.feature;
+package net.coljate;
 
 import java.util.stream.Stream;
 import java.util.stream.StreamSupport;
