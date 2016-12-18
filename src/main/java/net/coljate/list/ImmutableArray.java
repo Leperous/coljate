@@ -2,6 +2,7 @@ package net.coljate.list;
 
 import net.coljate.collection.Collection;
 import net.coljate.list.impl.EmptyArray;
+import net.coljate.list.impl.ImmutableJoinArray;
 import net.coljate.list.impl.ImmutableNativeArray;
 import net.coljate.list.impl.SingletonArray;
 
@@ -11,6 +12,14 @@ import net.coljate.list.impl.SingletonArray;
  */
 public interface ImmutableArray<T>
         extends Array<T>, ImmutableList<T> {
+
+    default ImmutableArray<T> prefixed(final Array<? extends T> array) {
+        return ImmutableJoinArray.of(array.immutableCopy(), this);
+    }
+
+    default ImmutableArray<T> suffixed(final Array<? extends T> array) {
+        return ImmutableJoinArray.of(this, array.immutableCopy());
+    }
 
     @Override
     default ImmutableListIterator<T> iterator() {

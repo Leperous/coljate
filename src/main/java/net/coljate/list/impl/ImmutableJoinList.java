@@ -17,11 +17,11 @@ public class ImmutableJoinList<T> implements ImmutableList<T> {
             final ImmutableList<? extends T> right) {
         if (right.isEmpty()) {
             return (ImmutableList<T>) left;
-        }
-        if (left.isEmpty()) {
+        } else if (left.isEmpty()) {
             return (ImmutableList<T>) right;
+        } else {
+            return new ImmutableJoinList<>(left, right);
         }
-        return new ImmutableJoinList<>(left, right);
     }
 
     private final ImmutableList<? extends T> left, right;

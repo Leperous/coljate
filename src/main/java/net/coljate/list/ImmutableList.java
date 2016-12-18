@@ -24,7 +24,7 @@ public interface ImmutableList<T> extends List<T>, ImmutableCollection<T> {
         return this.prefixed(of(element));
     }
 
-    default ImmutableList<T> prefixed(final List<T> list) {
+    default ImmutableList<T> prefixed(final List<? extends T> list) {
         return join(list.immutableCopy(), this);
     }
 
@@ -32,7 +32,7 @@ public interface ImmutableList<T> extends List<T>, ImmutableCollection<T> {
         return this.suffixed(of(element));
     }
 
-    default ImmutableList<T> suffixed(final List<T> list) {
+    default ImmutableList<T> suffixed(final List<? extends T> list) {
         return join(this, list.immutableCopy());
     }
 
