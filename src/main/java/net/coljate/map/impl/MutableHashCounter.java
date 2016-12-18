@@ -1,21 +1,25 @@
-package net.coljate.set.impl;
+package net.coljate.map.impl;
 
 import java.util.Iterator;
 
+import net.coljate.map.MutableCounter;
 import net.coljate.map.MutableMap;
-import net.coljate.set.MutableMultiset;
 import net.coljate.util.Iterators.EnhancedIterator;
 
 /**
  *
  * @author ollie
  */
-public class MutableHashMultiset<T>
-        extends HashMultiset<T>
-        implements MutableMultiset<T> {
+public class MutableHashCounter<T>
+        extends HashCounter<T>
+        implements MutableCounter<T> {
 
-    public static <T> MutableHashMultiset<T> copyOf(final Iterable<? extends T> iterable) {
-        final MutableHashMultiset<T> set = new MutableHashMultiset<>(MutableMap.createHashMap(), true);
+    public static <T> MutableHashCounter<T> create() {
+        return new MutableHashCounter<>(MutableMap.createHashMap(), true);
+    }
+
+    public static <T> MutableHashCounter<T> copyOf(final Iterable<? extends T> iterable) {
+        final MutableHashCounter<T> set = create();
         iterable.forEach(set::add);
         return set;
     }
@@ -23,7 +27,7 @@ public class MutableHashMultiset<T>
     private final MutableMap<T, Integer> map;
     private final boolean removeZeros;
 
-    protected MutableHashMultiset(final MutableMap<T, Integer> map, boolean removeZeros) {
+    protected MutableHashCounter(final MutableMap<T, Integer> map, boolean removeZeros) {
         super(map);
         this.map = map;
         this.removeZeros = removeZeros;
@@ -74,13 +78,13 @@ public class MutableHashMultiset<T>
     }
 
     @Override
-    public MutableMultiset<T> mutableCopy() {
-        return new MutableHashMultiset<>(map.mutableCopy(), removeZeros);
+    public MutableCounter<T> mutableCopy() {
+        return new MutableHashCounter<>(map.mutableCopy(), removeZeros);
     }
 
     private class MutableHashMultisetIterator implements EnhancedIterator<T> {
 
-        final EnhancedIterator<T> delegate = MutableHashMultiset.this.enhancedIterator();
+        final EnhancedIterator<T> delegate = MutableHashCounter.this.enhancedIterator();
 
         @Override
         public boolean hasNext() {
@@ -102,7 +106,7 @@ public class MutableHashMultiset<T>
             if (!this.hasNext()) {
                 throw new IllegalStateException();
             }
-            MutableHashMultiset.this.decrement(this.current());
+            MutableHashCounter.this.decrement(this.current());
         }
 
     }

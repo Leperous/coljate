@@ -1,9 +1,11 @@
-package net.coljate.set.impl;
+package net.coljate.map.impl;
 
 import java.util.Arrays;
 
 import net.coljate.ObjectContainerTest;
 import net.coljate.collection.AllCollectionSizeTest;
+import net.coljate.map.impl.HashCounter;
+import net.coljate.map.impl.MutableHashCounter;
 import net.coljate.set.MutableSet;
 import net.coljate.set.MutableSetTest;
 
@@ -18,13 +20,13 @@ import org.junit.jupiter.api.Test;
  * @author ollie
  */
 @SuppressWarnings({"unchecked", "rawtypes"})
-public class MutableHashMultisetTest
+public class MutableHashCountTest
         extends ObjectContainerTest
         implements MutableSetTest<Object>, AllCollectionSizeTest<Object> {
 
     @Override
-    public MutableHashMultiset<Object> create(final java.util.List<Object> elements) {
-        return MutableHashMultiset.copyOf(elements);
+    public MutableHashCounter<Object> create(final java.util.List<Object> elements) {
+        return MutableHashCounter.copyOf(elements);
     }
 
     @Test
@@ -38,14 +40,14 @@ public class MutableHashMultisetTest
     @Test
     public void testCount_Two() {
         final Object element = this.createObject();
-        final HashMultiset<Object> set = this.create(Arrays.asList(element, element));
+        final HashCounter<Object> set = this.create(Arrays.asList(element, element));
         assertThat(set.count(element), is(2));
     }
 
     @Test
     public void testDecrement() {
         final Object element = this.createObject();
-        final MutableHashMultiset<Object> set = this.create(Arrays.asList(element, element));
+        final MutableHashCounter<Object> set = this.create(Arrays.asList(element, element));
         assertThat(set.decrement(element), is(1));
         assertThat(set.decrement(element), is(0));
         assertThat(set.decrement(element), is(0));

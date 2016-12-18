@@ -1,4 +1,4 @@
-package net.coljate.set.impl;
+package net.coljate.map.impl;
 
 import java.util.Iterator;
 import java.util.NoSuchElementException;
@@ -6,23 +6,23 @@ import java.util.NoSuchElementException;
 import net.coljate.map.Entry;
 import net.coljate.map.Map;
 import net.coljate.set.AbstractSet;
-import net.coljate.set.ImmutableMultiset;
-import net.coljate.set.Multiset;
-import net.coljate.set.MutableMultiset;
 import net.coljate.util.Iterators.EnhancedIterator;
 import net.coljate.util.Suppliers;
+import net.coljate.map.Counter;
+import net.coljate.map.MutableCounter;
+import net.coljate.map.ImmutableCounter;
 
 /**
  *
  * @author ollie
  */
-public class HashMultiset<T>
+public class HashCounter<T>
         extends AbstractSet<T>
-        implements Multiset<T> {
+        implements Counter<T> {
 
     private final Map<T, Integer> map;
 
-    protected HashMultiset(final Map<T, Integer> count) {
+    protected HashCounter(final Map<T, Integer> count) {
         this.map = count;
     }
 
@@ -38,7 +38,7 @@ public class HashMultiset<T>
 
     @Override
     public boolean contains(final Object object) {
-        return Multiset.super.contains(object);
+        return Counter.super.contains(object);
     }
 
     protected static boolean isPositive(final Integer integer) {
@@ -55,12 +55,12 @@ public class HashMultiset<T>
     }
 
     @Override
-    public MutableMultiset<T> mutableCopy() {
-        return new MutableHashMultiset<>(map.mutableCopy(), true);
+    public MutableCounter<T> mutableCopy() {
+        return new MutableHashCounter<>(map.mutableCopy(), true);
     }
 
     @Override
-    public ImmutableMultiset<T> immutableCopy() {
+    public ImmutableCounter<T> immutableCopy() {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 

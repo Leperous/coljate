@@ -1,11 +1,13 @@
-package net.coljate.set;
+package net.coljate.map;
+
+import net.coljate.set.MutableSet;
 
 /**
  *
  * @author ollie
  */
-public interface MutableMultiset<T>
-        extends Multiset<T>, MutableSet<T> {
+public interface MutableCounter<T>
+        extends Counter<T>, MutableSet<T> {
 
     int increment(T element, int amount);
 
