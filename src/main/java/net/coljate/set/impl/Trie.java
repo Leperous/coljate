@@ -58,7 +58,7 @@ public class Trie
 
     @Override
     public int count() {
-        return root.count();
+        return Math.toIntExact(root.count());
     }
 
     @Override
@@ -137,8 +137,8 @@ public class Trie
             nodes.clear();
         }
 
-        int count() {
-            return (isWordEnd ? 1 : 0) + nodes.values().sum(Node::count);
+        long count() {
+            return (isWordEnd ? 1L : 0L) + nodes.values().sum(Node::count);
         }
 
         Iterator<Entry<Character, Node>> iterator() {

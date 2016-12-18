@@ -3,7 +3,7 @@ package net.coljate;
 import java.util.Iterator;
 import java.util.Objects;
 import java.util.function.Predicate;
-import java.util.function.ToIntFunction;
+import java.util.function.ToLongFunction;
 
 import net.coljate.feature.complexity.Complexity;
 import net.coljate.feature.complexity.TimeComplexity;
@@ -31,10 +31,10 @@ public interface IterableExtension<T> extends Container, Iterable<T> {
     }
 
     @TimeComplexity(Complexity.LINEAR)
-    default int sum(final ToIntFunction<? super T> intFunction) {
-        int sum = 0;
+    default long sum(final ToLongFunction<? super T> intFunction) {
+        long sum = 0;
         for (final T element : this) {
-            sum += intFunction.applyAsInt(element);
+            sum = Math.addExact(sum, intFunction.applyAsLong(element));
         }
         return sum;
     }
