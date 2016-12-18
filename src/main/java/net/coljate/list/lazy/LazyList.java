@@ -25,15 +25,17 @@ public interface LazyList<T> extends LazyCollection<T>, List<T> {
         return List.super.mutableCopy();
     }
 
-    static <T> Function<Collection<T>, ? extends LazyList<T>> filter(final Predicate<? super T> predicate) {
-        return collection -> new LazyFilteredList<>(List.copyOrCast(collection), predicate);
+    static <T> LazyList<T> filter(
+            final Collection<T> collection,
+            final Predicate<? super T> predicate) {
+        return new LazyFilteredList<>(List.copyOrCast(collection), predicate);
     }
 
-    static <F, T> Function<Collection<F>, ? extends LazyList<T>> transform(final Function<? super F, ? extends T> transformation) {
-        return (final Collection<F> collection) -> {
-            final List<F> list = List.copyOrCast(collection);
-            return new LazyTransformedList<>(list, transformation);
-        };
+    static <F, T> LazyList<T> transform(
+            final Collection<F> collection,
+            final Function<? super F, ? extends T> transformation) {
+        final List<F> list = List.copyOrCast(collection);
+        return new LazyTransformedList<>(list, transformation);
     }
 
 }

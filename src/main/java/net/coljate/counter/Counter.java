@@ -20,10 +20,14 @@ public interface Counter<T> extends Collection<T> {
     Map<T, Integer> countElements();
 
     @Override
-    MutableCounter<T> mutableCopy();
+    default MutableCounter<T> mutableCopy() {
+        return MutableCounter.copyOf(this);
+    }
 
     @Override
-    ImmutableCounter<T> immutableCopy();
+    default ImmutableCounter<T> immutableCopy() {
+        return ImmutableCounter.copyOf(this);
+    }
 
     static <T> MutableCounter<T> create() {
         return MutableHashCounter.create();

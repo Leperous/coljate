@@ -1,6 +1,8 @@
 package net.coljate.collection;
 
 import net.coljate.UnmodifiableIterator;
+import net.coljate.feature.complexity.Complexity;
+import net.coljate.feature.complexity.TimeComplexity;
 
 /**
  *
@@ -9,11 +11,13 @@ import net.coljate.UnmodifiableIterator;
 public interface Empty<T> extends ImmutableCollection<T> {
 
     @Override
+    @TimeComplexity(Complexity.CONSTANT)
     default boolean isEmpty() {
         return true;
     }
 
     @Override
+    @TimeComplexity(Complexity.CONSTANT)
     default boolean contains(final Object object) {
         return false;
     }

@@ -25,12 +25,16 @@ public interface LazySet<T> extends LazyCollection<T>, Set<T> {
         return Set.super.immutableCopy();
     }
 
-    static <T> Function<Collection<T>, ? extends LazySet<T>> filter(final Predicate<? super T> predicate) {
-        return collection -> new LazyFilteredSet<>(Set.copyOrCast(collection), predicate);
+    static <T> LazySet<T> filter(
+            final Collection<T> collection,
+            final Predicate<? super T> predicate) {
+        return new LazyFilteredSet<>(Set.copyOrCast(collection), predicate);
     }
 
-    static <F, T> Function<Collection<F>, ? extends LazySet<T>> transform(final Function<? super F, ? extends T> transformation) {
-        return collection -> new LazyTransformedSet<>(Set.copyOrCast(collection), transformation);
+    static <F, T> LazySet<T> transform(
+            final Collection<F> collection,
+            final Function<? super F, ? extends T> transformation) {
+        return new LazyTransformedSet<>(Set.copyOrCast(collection), transformation);
     }
 
 }

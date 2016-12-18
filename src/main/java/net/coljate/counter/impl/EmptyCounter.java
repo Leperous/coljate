@@ -2,8 +2,10 @@ package net.coljate.counter.impl;
 
 import net.coljate.collection.Empty;
 import net.coljate.counter.AbstractCounter;
-import net.coljate.counter.ConcurrentCounter;
 import net.coljate.counter.ImmutableCounter;
+import net.coljate.counter.MutableCounter;
+import net.coljate.feature.complexity.Complexity;
+import net.coljate.feature.complexity.TimeComplexity;
 import net.coljate.map.ImmutableMap;
 
 /**
@@ -15,6 +17,7 @@ public class EmptyCounter<T>
         implements ImmutableCounter<T>, Empty<T> {
 
     @Override
+    @TimeComplexity(Complexity.CONSTANT)
     public int count(final Object element) {
         return 0;
     }
@@ -36,7 +39,7 @@ public class EmptyCounter<T>
     }
 
     @Override
-    public ConcurrentCounter<T> mutableCopy() {
+    public MutableCounter<T> mutableCopy() {
         throw new UnsupportedOperationException("Not supported yet."); //TODO
     }
 

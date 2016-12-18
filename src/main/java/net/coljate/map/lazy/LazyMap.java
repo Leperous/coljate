@@ -10,8 +10,6 @@ import net.coljate.map.MutableMap;
 import net.coljate.set.Set;
 import net.coljate.set.lazy.LazySet;
 
-import static javafx.scene.input.KeyCode.V;
-
 /**
  *
  * @author Ollie
@@ -34,11 +32,11 @@ public interface LazyMap<K, V> extends LazySet<Entry<K, V>>, Map<K, V> {
     @Override
     Collection<V> values();
 
-    static <K, V1, V2> Function<Collection<Entry<K, V1>>, LazyMap<K, V2>> transformValues(final Function<? super V1, ? extends V2> transformation) {
-        return collection -> {
-            final Map<K, V1> map = Map.copyOrCast(collection);
-            return new LazyTransformedValueMap<>(map, transformation);
-        };
+    static <K, V1, V2> LazyMap<K, V2> transformValues(
+            final Collection<Entry<K, V1>> collection,
+            final Function<? super V1, ? extends V2> transformation) {
+        final Map<K, V1> map = Map.copyOrCast(collection);
+        return new LazyTransformedValueMap<>(map, transformation);
     }
 
 }

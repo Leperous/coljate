@@ -1,6 +1,7 @@
 package net.coljate.counter;
 
 import net.coljate.collection.MutableCollection;
+import net.coljate.counter.impl.MutableHashCounter;
 
 /**
  *
@@ -47,6 +48,14 @@ public interface MutableCounter<T>
         } else {
             return false;
         }
+    }
+
+    static <T> MutableCounter<T> copyOf(final Iterable<? extends T> counter) {
+        return MutableHashCounter.copyOf(counter);
+    }
+
+    static <T> MutableCounter<T> copyOf(final Counter<? extends T> counter) {
+        return MutableHashCounter.copyOf(counter);
     }
 
 }

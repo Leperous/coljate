@@ -78,6 +78,10 @@ public class Iterators {
         return last;
     }
 
+    public static <T> Iterator<T> covariant(final Iterator<? extends T> iterator) {
+        return (Iterator<T>) iterator;
+    }
+
     public static abstract class FilteredIterator<T> implements Iterator<T> {
 
         boolean hasNext;
