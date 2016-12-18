@@ -1,4 +1,4 @@
-package net.coljate.map;
+package net.coljate.table;
 
 import java.util.Objects;
 

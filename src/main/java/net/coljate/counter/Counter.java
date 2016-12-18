@@ -1,6 +1,7 @@
-package net.coljate.map;
+package net.coljate.counter;
 
-import net.coljate.map.impl.MutableHashCounter;
+import net.coljate.map.Map;
+import net.coljate.counter.impl.MutableHashCounter;
 import net.coljate.set.Set;
 
 /**

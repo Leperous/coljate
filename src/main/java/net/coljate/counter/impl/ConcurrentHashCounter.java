@@ -1,6 +1,6 @@
-package net.coljate.map.impl;
+package net.coljate.counter.impl;
 
-import net.coljate.map.ConcurrentCounter;
+import net.coljate.counter.ConcurrentCounter;
 import net.coljate.map.ConcurrentMap;
 
 /**

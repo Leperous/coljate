@@ -4,8 +4,8 @@ import java.util.Arrays;
 
 import net.coljate.ObjectContainerTest;
 import net.coljate.collection.AllCollectionSizeTest;
-import net.coljate.map.impl.HashCounter;
-import net.coljate.map.impl.MutableHashCounter;
+import net.coljate.counter.impl.HashCounter;
+import net.coljate.counter.impl.MutableHashCounter;
 import net.coljate.set.MutableSet;
 import net.coljate.set.MutableSetTest;
 

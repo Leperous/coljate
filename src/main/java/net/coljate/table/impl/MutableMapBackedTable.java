@@ -1,7 +1,7 @@
-package net.coljate.map.impl;
+package net.coljate.table.impl;
 
 import net.coljate.map.MutableMap;
-import net.coljate.map.MutableTable;
+import net.coljate.table.MutableTable;
 
 /**
  *

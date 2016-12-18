@@ -1,4 +1,4 @@
-package net.coljate.map.impl;
+package net.coljate.counter.impl;
 
 import java.util.Iterator;
 import java.util.NoSuchElementException;
@@ -8,9 +8,9 @@ import net.coljate.map.Map;
 import net.coljate.set.AbstractSet;
 import net.coljate.util.Iterators.EnhancedIterator;
 import net.coljate.util.Suppliers;
-import net.coljate.map.Counter;
-import net.coljate.map.MutableCounter;
-import net.coljate.map.ImmutableCounter;
+import net.coljate.counter.Counter;
+import net.coljate.counter.MutableCounter;
+import net.coljate.counter.ImmutableCounter;
 
 /**
  *

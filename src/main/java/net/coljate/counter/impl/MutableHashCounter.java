@@ -1,8 +1,8 @@
-package net.coljate.map.impl;
+package net.coljate.counter.impl;
 
 import java.util.Iterator;
 
-import net.coljate.map.MutableCounter;
+import net.coljate.counter.MutableCounter;
 import net.coljate.map.MutableMap;
 import net.coljate.util.Iterators.EnhancedIterator;
 

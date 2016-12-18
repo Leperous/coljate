@@ -1,12 +1,12 @@
-package net.coljate.map.impl;
+package net.coljate.table.impl;
 
 import java.util.Iterator;
 import java.util.Objects;
 
-import net.coljate.map.Cell;
 import net.coljate.map.Entry;
 import net.coljate.map.Map;
-import net.coljate.map.Table;
+import net.coljate.table.Cell;
+import net.coljate.table.Table;
 import net.coljate.util.Iterators;
 
 /**

@@ -1,9 +1,9 @@
-package net.coljate.map.impl;
+package net.coljate.counter.impl;
 
 import net.coljate.UnmodifiableIterator;
 import net.coljate.map.ImmutableMap;
-import net.coljate.map.Counter;
-import net.coljate.map.ImmutableCounter;
+import net.coljate.counter.Counter;
+import net.coljate.counter.ImmutableCounter;
 
 /**
  *

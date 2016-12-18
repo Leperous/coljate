@@ -1,4 +1,4 @@
-package net.coljate.map;
+package net.coljate.table;
 
 import net.coljate.set.Set;
 import net.coljate.util.Functions;

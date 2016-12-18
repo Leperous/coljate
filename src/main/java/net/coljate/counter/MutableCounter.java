@@ -1,4 +1,4 @@
-package net.coljate.map;
+package net.coljate.counter;
 
 import net.coljate.set.MutableSet;
 
