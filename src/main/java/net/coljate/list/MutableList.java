@@ -2,6 +2,7 @@ package net.coljate.list;
 
 import net.coljate.collection.MutableCollection;
 import net.coljate.list.impl.MutableNativeArray;
+import net.coljate.list.impl.MutableWrappedList;
 import net.coljate.list.impl.SynchronizedList;
 
 /**
@@ -21,6 +22,10 @@ public interface MutableList<T> extends List<T>, MutableCollection<T> {
     @SafeVarargs
     static <T> MutableList<T> copyOf(final T... elements) {
         return MutableNativeArray.viewOf(elements);
+    }
+
+    static <T> MutableList<T> viewOf(final java.util.List<T> list) {
+        return new MutableWrappedList<>(list);
     }
 
     static <T> SynchronizedList<T> synchronize(final MutableList<T> list) {

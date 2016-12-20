@@ -12,13 +12,9 @@ public class WrappedSet<T>
         extends WrappedCollection<T>
         implements Set<T> {
 
-    public static <T> Set<T> viewOf(final java.util.Set<T> set) {
-        return new WrappedSet<>(set);
-    }
-
     private final java.util.Set<? extends T> delegate;
 
-    protected WrappedSet(final java.util.Set<? extends T> delegate) {
+    public WrappedSet(final java.util.Set<? extends T> delegate) {
         super(delegate);
         this.delegate = delegate;
     }
@@ -30,12 +26,12 @@ public class WrappedSet<T>
 
     @Override
     public MutableWrappedSet<T> mutableCopy() {
-        return MutableWrappedSet.copyOf(this);
+        return new MutableWrappedSet<>(this.mutableJavaCopy());
     }
 
     @Override
     public ImmutableSet<T> immutableCopy() {
-        return Set.super.immutableCopy();
+        return new ImmutableWrappedSet<>(this.mutableJavaCopy());
     }
 
 }

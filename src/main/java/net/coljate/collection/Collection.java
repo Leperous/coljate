@@ -114,8 +114,8 @@ public interface Collection<T> extends IterableExtension<T>, StreamExtension<T> 
         return Set.of(element);
     }
 
-    static <T> Collection<T> viewOf(final java.util.Collection<T> collection) {
-        return WrappedCollection.viewOf(collection);
+    static <T> Collection<T> viewOf(final java.util.Collection<? extends T> collection) {
+        return new WrappedCollection<>(collection);
     }
 
 }

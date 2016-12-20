@@ -15,13 +15,9 @@ import net.coljate.util.Equality;
  */
 public class WrappedCollection<T> implements Collection<T> {
 
-    public static <T> Collection<T> viewOf(final java.util.Collection<T> collection) {
-        return new WrappedCollection<>(collection);
-    }
-
     private final java.util.Collection<? extends T> delegate;
 
-    protected WrappedCollection(final java.util.Collection<? extends T> delegate) {
+    public WrappedCollection(final java.util.Collection<? extends T> delegate) {
         this.delegate = delegate;
     }
 
@@ -57,7 +53,7 @@ public class WrappedCollection<T> implements Collection<T> {
 
     @Override
     public ImmutableCollection<T> immutableCopy() {
-        return ImmutableWrappedCollection.copyOf(delegate);
+        return new ImmutableWrappedCollection<>(this.mutableJavaCopy());
     }
 
     @Override

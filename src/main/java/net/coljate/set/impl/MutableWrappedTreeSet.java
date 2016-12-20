@@ -83,7 +83,7 @@ public class MutableWrappedTreeSet<T>
     }
 
     @Override
-    public MutableWrappedTreeSet<T> sortedCopy(Comparator<? super T> comparator) {
+    public MutableWrappedTreeSet<T> sortedCopy(final Comparator<? super T> comparator) {
         return new MutableWrappedTreeSet<>(this.mutableJavaCopy());
     }
 

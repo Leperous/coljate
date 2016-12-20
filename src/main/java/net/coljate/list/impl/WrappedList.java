@@ -14,17 +14,13 @@ public class WrappedList<T>
         extends WrappedCollection<T>
         implements List<T> {
 
-    public static <T> List<T> viewOf(final java.util.List<T> collection) {
-        return new WrappedList<>(collection);
-    }
-
     public static <T> List<T> copyOf(final java.util.Collection<? extends T> collection) {
-        return viewOf(new java.util.ArrayList<>(collection));
+        return new WrappedList<>(new java.util.ArrayList<>(collection));
     }
 
     private final java.util.List<? extends T> delegate;
 
-    protected WrappedList(final java.util.List<? extends T> delegate) {
+    public WrappedList(final java.util.List<? extends T> delegate) {
         super(delegate);
         this.delegate = delegate;
     }
@@ -46,12 +42,12 @@ public class WrappedList<T>
 
     @Override
     public MutableList<T> mutableCopy() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return new MutableWrappedList<>(this.mutableJavaCopy());
     }
 
     @Override
     public ImmutableList<T> immutableCopy() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return new ImmutableWrappedList<>(this.mutableJavaCopy());
     }
 
 }

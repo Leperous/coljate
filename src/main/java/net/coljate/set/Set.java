@@ -122,8 +122,8 @@ public interface Set<T> extends Collection<T> {
         return ImmutableSet.copyOf(collection);
     }
 
-    static <T> Set<T> viewOf(final java.util.Set<T> set) {
-        return WrappedSet.viewOf(set);
+    static <T> Set<T> viewOf(final java.util.Set<? extends T> set) {
+        return new WrappedSet<>(set);
     }
 
     static int elementHash(final Set<?> set) {

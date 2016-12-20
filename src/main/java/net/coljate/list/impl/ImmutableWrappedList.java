@@ -1,8 +1,8 @@
 package net.coljate.list.impl;
 
+import net.coljate.collection.Collection;
 import net.coljate.list.ImmutableList;
 import net.coljate.list.ImmutableListIterator;
-import net.coljate.list.MutableList;
 
 /**
  *
@@ -14,6 +14,12 @@ public class ImmutableWrappedList<T>
 
     public static <T> ImmutableWrappedList<T> copyOf(final java.util.Collection<? extends T> collection) {
         return new ImmutableWrappedList<>(new java.util.ArrayList<>(collection));
+    }
+
+    public static <T> ImmutableWrappedList<T> copyOf(final Collection<? extends T> collection) {
+        final java.util.List<T> list = new java.util.ArrayList<>(collection.count());
+        collection.forEach(list::add);
+        return new ImmutableWrappedList<>(list);
     }
 
     private final java.util.List<T> delegate;
@@ -39,11 +45,7 @@ public class ImmutableWrappedList<T>
     }
 
     @Override
-    public MutableList<T> mutableCopy() {
-        return MutableWrappedList.viewOf(this.mutableJavaCopy());
-    }
-
-    @Override
+    @Deprecated
     public ImmutableWrappedList<T> immutableCopy() {
         return this;
     }

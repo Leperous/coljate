@@ -6,10 +6,9 @@ import java.util.function.Predicate;
 
 import net.coljate.collection.Collection;
 import net.coljate.collection.SortedCollection.SortingAlgorithm;
-import net.coljate.list.impl.ImmutableNativeArray;
 import net.coljate.list.impl.ImmutableSortedArray;
 import net.coljate.list.impl.MutableWrappedArrayList;
-import net.coljate.list.impl.MutableWrappedList;
+import net.coljate.list.impl.WrappedList;
 import net.coljate.list.lazy.LazyFilteredList;
 import net.coljate.list.lazy.LazyTransformedList;
 import net.coljate.util.Equality;
@@ -66,7 +65,7 @@ public interface List<T> extends Ordered<T>, Collection<T> {
 
     @Override
     default ImmutableList<T> immutableCopy() {
-        return ImmutableNativeArray.copyOf(this);
+        return ImmutableList.copyOf(this);
     }
 
     @SafeVarargs
@@ -85,8 +84,8 @@ public interface List<T> extends Ordered<T>, Collection<T> {
                 : copyOf(collection);
     }
 
-    static <T> MutableWrappedList<T> viewOf(final java.util.List<T> list) {
-        return MutableWrappedList.viewOf(list);
+    static <T> List<T> viewOf(final java.util.List<? extends T> list) {
+        return new WrappedList<>(list);
     }
 
     static <T> List<T> repeated(final T value, final int count) {

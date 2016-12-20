@@ -15,31 +15,27 @@ public class MutableWrappedSet<T>
         implements MutableSet<T> {
 
     public static <T> MutableWrappedSet<T> of() {
-        return viewOf(new java.util.HashSet<>());
+        return new MutableWrappedSet<>(new java.util.HashSet<>());
     }
 
     @SafeVarargs
     public static <T> MutableWrappedSet<T> copyIntoHashSet(final T... elements) {
         final java.util.Set<T> set = new java.util.HashSet<>(elements.length);
         Arrays.consume(elements, set::add);
-        return viewOf(set);
+        return new MutableWrappedSet<>(set);
     }
 
     public static <T> MutableWrappedSet<T> copyIntoHashSet(final java.util.Collection<? extends T> collection) {
-        return viewOf(new java.util.HashSet<>(collection));
+        return new MutableWrappedSet<>(new java.util.HashSet<>(collection));
     }
 
     public static <T> MutableWrappedSet<T> copyOf(final Set<T> set) {
-        return viewOf(set.mutableJavaCopy());
-    }
-
-    public static <T> MutableWrappedSet<T> viewOf(final java.util.Set<T> set) {
-        return new MutableWrappedSet<>(set);
+        return new MutableWrappedSet<>(set.mutableJavaCopy());
     }
 
     private final java.util.Set<T> delegate;
 
-    protected MutableWrappedSet(final java.util.Set<T> delegate) {
+    public MutableWrappedSet(final java.util.Set<T> delegate) {
         super(delegate);
         this.delegate = delegate;
     }
