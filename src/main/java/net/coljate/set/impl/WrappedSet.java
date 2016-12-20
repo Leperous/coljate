@@ -16,9 +16,9 @@ public class WrappedSet<T>
         return new WrappedSet<>(set);
     }
 
-    private final java.util.Set<T> delegate;
+    private final java.util.Set<? extends T> delegate;
 
-    protected WrappedSet(final java.util.Set<T> delegate) {
+    protected WrappedSet(final java.util.Set<? extends T> delegate) {
         super(delegate);
         this.delegate = delegate;
     }
@@ -30,7 +30,7 @@ public class WrappedSet<T>
 
     @Override
     public MutableWrappedSet<T> mutableCopy() {
-        return new MutableWrappedSet<>(this.mutableJavaCopy());
+        return MutableWrappedSet.copyOf(this);
     }
 
     @Override

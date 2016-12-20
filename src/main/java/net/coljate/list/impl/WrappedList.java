@@ -22,9 +22,9 @@ public class WrappedList<T>
         return viewOf(new java.util.ArrayList<>(collection));
     }
 
-    private final java.util.List<T> delegate;
+    private final java.util.List<? extends T> delegate;
 
-    protected WrappedList(final java.util.List<T> delegate) {
+    protected WrappedList(final java.util.List<? extends T> delegate) {
         super(delegate);
         this.delegate = delegate;
     }

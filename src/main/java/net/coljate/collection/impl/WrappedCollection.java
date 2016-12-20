@@ -19,9 +19,9 @@ public class WrappedCollection<T> implements Collection<T> {
         return new WrappedCollection<>(collection);
     }
 
-    private final java.util.Collection<T> delegate;
+    private final java.util.Collection<? extends T> delegate;
 
-    protected WrappedCollection(final java.util.Collection<T> delegate) {
+    protected WrappedCollection(final java.util.Collection<? extends T> delegate) {
         this.delegate = delegate;
     }
 
@@ -61,8 +61,9 @@ public class WrappedCollection<T> implements Collection<T> {
     }
 
     @Override
+    @SuppressWarnings("unchecked") //Read-only
     public Spliterator<T> spliterator() {
-        return delegate.spliterator();
+        return (Spliterator<T>) delegate.spliterator();
     }
 
     @Override
