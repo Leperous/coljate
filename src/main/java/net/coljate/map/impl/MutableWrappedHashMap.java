@@ -46,13 +46,13 @@ public class MutableWrappedHashMap<K, V>
     }
 
     @Override
-    public java.util.HashMap<K, V> javaMapCopy() {
+    public java.util.HashMap<K, V> mutableJavaMapCopy() {
         return new java.util.HashMap<>(delegate);
     }
 
     @Override
     public MutableWrappedHashMap<K, V> mutableCopy() {
-        return new MutableWrappedHashMap<>(this.javaMapCopy());
+        return new MutableWrappedHashMap<>(this.mutableJavaMapCopy());
     }
 
 }

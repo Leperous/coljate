@@ -85,7 +85,7 @@ public interface Map<K, V> extends Set<Entry<K, V>>, Associative<K, V> {
         this.forEach(entry -> consumer.accept(entry.key(), entry.value()));
     }
 
-    default java.util.Map<K, V> javaMapCopy() {
+    default java.util.Map<K, V> mutableJavaMapCopy() {
         return this.javaMapCopy(java.util.HashMap::new);
     }
 
@@ -106,7 +106,7 @@ public interface Map<K, V> extends Set<Entry<K, V>>, Associative<K, V> {
 
     @Override
     default MutableMap<K, V> mutableCopy() {
-        return MutableMap.viewOf(this.javaMapCopy());
+        return MutableMap.viewOf(this.mutableJavaMapCopy());
     }
 
     @Override

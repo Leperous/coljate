@@ -32,13 +32,13 @@ public class ConcurrentWrappedHashMap<K, V>
     }
 
     @Override
-    public java.util.concurrent.ConcurrentHashMap<K, V> javaMapCopy() {
+    public java.util.concurrent.ConcurrentHashMap<K, V> mutableJavaMapCopy() {
         return super.javaMapCopy(java.util.concurrent.ConcurrentHashMap::new);
     }
 
     @Override
     public ConcurrentWrappedHashMap<K, V> mutableCopy() {
-        return new ConcurrentWrappedHashMap<>(this.javaMapCopy());
+        return new ConcurrentWrappedHashMap<>(this.mutableJavaMapCopy());
     }
 
 }

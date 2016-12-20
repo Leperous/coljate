@@ -29,7 +29,7 @@ public class WrappedMap<K, V>
     }
 
     @Override
-    public java.util.Map<K, V> javaMapCopy() {
+    public java.util.Map<K, V> mutableJavaMapCopy() {
         return new java.util.HashMap<>(delegate);
     }
 
@@ -75,12 +75,12 @@ public class WrappedMap<K, V>
 
     @Override
     public MutableMap<K, V> mutableCopy() {
-        return new MutableWrappedMap<>(this.javaMapCopy());
+        return new MutableWrappedMap<>(this.mutableJavaMapCopy());
     }
 
     @Override
     public ImmutableMap<K, V> immutableCopy() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return new ImmutableWrappedMap<>(this.mutableJavaMapCopy());
     }
 
 }
