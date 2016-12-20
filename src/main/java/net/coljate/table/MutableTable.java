@@ -15,11 +15,15 @@ public interface MutableTable<R, C, V>
 
     @Override
     default boolean add(final Cell<R, C, V> cell) {
+        return this.addCell(cell);
+    }
+
+    default boolean addCell(final Cell<? extends R, ? extends C, ? extends V> cell) {
         return this.add(cell.rowKey(), cell.columnKey(), cell.value());
     }
 
     default boolean add(final R rowKey, final C columnKey, final V value) {
-        return Objects.equals(this.get(rowKey, columnKey), value)
+        return Objects.equals(this.get(rowKey, columnKey), value) && this.contains(rowKey, columnKey)
                 ? false
                 : this.put(rowKey, columnKey, value) == null;
     }
@@ -40,6 +44,10 @@ public interface MutableTable<R, C, V>
     default boolean remove(final Object rowKey, final Object columnKey) {
         final Cell<R, C, V> cell = this.cellIfPresent(rowKey, columnKey);
         return this.remove(cell);
+    }
+
+    static <R, C, V> MutableTable<R, C, V> copyOf(final Table<? extends R, ? extends C, ? extends V> table) {
+        throw new UnsupportedOperationException(); //TODO
     }
 
 }

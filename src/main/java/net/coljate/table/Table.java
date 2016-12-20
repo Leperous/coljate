@@ -9,7 +9,12 @@ import net.coljate.util.Functions;
  */
 public interface Table<R, C, V> extends Set<Cell<R, C, V>> {
 
-    boolean contains(Object row, Object column);
+    @SuppressWarnings("unchecked")
+    Cell<R, C, V> cellIfPresent(Object row, Object column);
+
+    default boolean contains(final Object row, final Object column) {
+        return this.cellIfPresent(row, column) != null;
+    }
 
     default Cell<R, C, V> cell(final R row, final C column) {
         return this.cellIfPresent(row, column);
@@ -20,11 +25,16 @@ public interface Table<R, C, V> extends Set<Cell<R, C, V>> {
         return cell == null ? null : cell.value();
     }
 
-    @SuppressWarnings("unchecked")
-    Cell<R, C, V> cellIfPresent(Object row, Object column);
-
     default V getIfPresent(final Object row, final Object columnKey) {
         return Functions.ifNonNull(this.cellIfPresent(row, columnKey), Cell::value);
     }
+
+    @Override
+    default MutableTable<R, C, V> mutableCopy() {
+        return MutableTable.copyOf(this);
+    }
+
+    @Override
+    ImmutableTable<R, C, V> immutableCopy();
 
 }

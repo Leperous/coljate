@@ -5,7 +5,10 @@ import java.util.Objects;
 
 import net.coljate.map.Entry;
 import net.coljate.map.Map;
+import net.coljate.table.AbstractCell;
 import net.coljate.table.Cell;
+import net.coljate.table.ImmutableTable;
+import net.coljate.table.MutableTable;
 import net.coljate.table.Table;
 import net.coljate.util.Iterators;
 
@@ -14,7 +17,7 @@ import net.coljate.util.Iterators;
  * @author ollie
  */
 public class MapBackedTable<R, C, V> implements Table<R, C, V> {
-
+    
     private final Map<KeyPair<R, C>, V> map;
 
     protected MapBackedTable(final Map<KeyPair<R, C>, V> map) {
@@ -28,13 +31,30 @@ public class MapBackedTable<R, C, V> implements Table<R, C, V> {
 
     @Override
     public Cell<R, C, V> cellIfPresent(final Object row, final Object column) {
-        final Entry<KeyPair<R, C>, V> entry = map.entry(new KeyPair<>(row, column));
+        return this.toCell(this.entry(row, column));
+    }
+
+    protected Entry<KeyPair<R, C>, V> entry(final Object row, final Object column) {
+        return map.entry(new KeyPair<>(row, column));
+    }
+
+    protected Cell<R, C, V> toCell(final Entry<KeyPair<R, C>, V> entry) {
         return entry == null ? null : new EntryBackedCell<>(entry);
     }
 
     @Override
     public Iterator<Cell<R, C, V>> iterator() {
         return Iterators.transform(map.iterator(), EntryBackedCell::new);
+    }
+
+    @Override
+    public MutableTable<R, C, V> mutableCopy() {
+        return new MutableMapBackedTable<>(map.mutableCopy());
+    }
+
+    @Override
+    public ImmutableTable<R, C, V> immutableCopy() {
+        return new ImmutableMapBackedTable<>(map.immutableCopy());
     }
 
     protected final class KeyPair<R, C> {
@@ -76,7 +96,7 @@ public class MapBackedTable<R, C, V> implements Table<R, C, V> {
 
     }
 
-    protected class EntryBackedCell<R, C, V> implements Cell<R, C, V> {
+    protected class EntryBackedCell<R, C, V> extends AbstractCell<R, C, V> {
 
         private final KeyPair<R, C> keys;
         private final V value;
