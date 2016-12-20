@@ -198,12 +198,12 @@ public class ChainedHashMap<K, V>
         }
 
         @Override
-        public MutableCollection<? extends V> mutableCopy() {
+        public MutableCollection<V> mutableCopy() {
             throw new UnsupportedOperationException("Not supported yet.");
         }
 
         @Override
-        public ImmutableCollection<? extends V> immutableCopy() {
+        public ImmutableCollection<V> immutableCopy() {
             throw new UnsupportedOperationException("Not supported yet.");
         }
 

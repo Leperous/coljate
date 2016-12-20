@@ -53,12 +53,12 @@ public class SynchronizedMutableCollection<T> implements MutableCollection<T> {
     }
 
     @Override
-    public synchronized MutableCollection<? extends T> mutableCopy() {
+    public synchronized MutableCollection<T> mutableCopy() {
         return collection.mutableCopy();
     }
 
     @Override
-    public synchronized ImmutableCollection<? extends T> immutableCopy() {
+    public synchronized ImmutableCollection<T> immutableCopy() {
         return collection.immutableCopy();
     }
 

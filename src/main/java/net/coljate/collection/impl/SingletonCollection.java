@@ -41,7 +41,7 @@ public class SingletonCollection<T>
     }
 
     @Override
-    public MutableCollection<? extends T> mutableCopy() {
+    public MutableCollection<T> mutableCopy() {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 

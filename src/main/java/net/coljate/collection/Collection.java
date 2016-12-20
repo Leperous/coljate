@@ -26,13 +26,13 @@ public interface Collection<T> extends IterableExtension<T>, StreamExtension<T> 
      *
      * @return a mutable copy of this collection.
      */
-    MutableCollection<? extends T> mutableCopy();
+    MutableCollection<T> mutableCopy();
 
     /**
      *
      * @return an immutable copy of this collection.
      */
-    ImmutableCollection<? extends T> immutableCopy();
+    ImmutableCollection<T> immutableCopy();
 
     /**
      *

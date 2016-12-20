@@ -21,7 +21,7 @@ public class EmptyCollection<T>
     }
 
     @Override
-    public MutableCollection<? extends T> mutableCopy() {
+    public MutableCollection<T> mutableCopy() {
         return MutableCollection.copyOf();
     }
 
