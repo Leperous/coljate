@@ -1,6 +1,8 @@
 package net.coljate.collection;
 
 import java.util.Comparator;
+import java.util.Spliterator;
+import java.util.Spliterators;
 import java.util.function.Function;
 import java.util.function.IntFunction;
 import java.util.function.Predicate;
@@ -89,6 +91,11 @@ public interface Collection<T> extends IterableExtension<T>, StreamExtension<T> 
     @TimeComplexity(computed = true)
     default SortedCollection<T> sortedCopy(final Comparator<? super T> comparator, final SortingAlgorithm sortingAlgorithm) {
         return ImmutableSortedArray.sort(this, comparator, sortingAlgorithm);
+    }
+
+    @Override
+    default Spliterator<T> spliterator() {
+        return Spliterators.spliterator(this.iterator(), this.count(), Spliterator.SIZED);
     }
 
     /**

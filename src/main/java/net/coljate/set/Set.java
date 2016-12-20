@@ -1,6 +1,8 @@
 package net.coljate.set;
 
 import java.util.Comparator;
+import java.util.Spliterator;
+import java.util.Spliterators;
 import java.util.function.Predicate;
 
 import net.coljate.collection.Collection;
@@ -88,6 +90,11 @@ public interface Set<T> extends Collection<T> {
      */
     default Set<T> xor(final Set<? extends T> that) {
         return LazySet.difference(this, that);
+    }
+
+    @Override
+    default Spliterator<T> spliterator() {
+        return Spliterators.spliterator(this.iterator(), this.count(), Spliterator.SIZED | Spliterator.DISTINCT);
     }
 
     static <T> EmptySet<T> of() {

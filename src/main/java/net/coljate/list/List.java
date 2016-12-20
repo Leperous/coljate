@@ -1,6 +1,8 @@
 package net.coljate.list;
 
 import java.util.Comparator;
+import java.util.Spliterator;
+import java.util.Spliterators;
 import java.util.function.Function;
 import java.util.function.Predicate;
 
@@ -66,6 +68,11 @@ public interface List<T> extends Ordered<T>, Collection<T> {
     @Override
     default ImmutableList<T> immutableCopy() {
         return ImmutableList.copyOf(this);
+    }
+
+    @Override
+    default Spliterator<T> spliterator() {
+        return Spliterators.spliterator(this.iterator(), this.count(), Spliterator.SIZED | Spliterator.ORDERED);
     }
 
     @SafeVarargs

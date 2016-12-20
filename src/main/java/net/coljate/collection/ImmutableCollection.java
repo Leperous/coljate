@@ -1,5 +1,8 @@
 package net.coljate.collection;
 
+import java.util.Spliterator;
+import java.util.Spliterators;
+
 import net.coljate.UnmodifiableIterator;
 import net.coljate.collection.impl.EmptyCollection;
 import net.coljate.collection.impl.SingletonCollection;
@@ -18,6 +21,11 @@ public interface ImmutableCollection<T> extends Collection<T> {
     @Override
     default ImmutableCollection<T> immutableCopy() {
         return this;
+    }
+
+    @Override
+    default Spliterator<T> spliterator() {
+        return Spliterators.spliterator(this.iterator(), this.count(), Spliterator.SIZED | Spliterator.IMMUTABLE);
     }
 
     static <T> EmptyCollection<T> of() {

@@ -1,6 +1,8 @@
 package net.coljate.set;
 
 import java.util.Collections;
+import java.util.Spliterator;
+import java.util.Spliterators;
 
 import net.coljate.collection.Collection;
 import net.coljate.collection.ImmutableCollection;
@@ -31,6 +33,11 @@ public interface ImmutableSet<T> extends Set<T>, ImmutableCollection<T> {
     @Deprecated
     default java.util.Set<T> mutableJavaCopy() {
         return Collections.unmodifiableSet(Set.super.mutableJavaCopy());
+    }
+
+    @Override
+    default Spliterator<T> spliterator() {
+        return Spliterators.spliterator(this.iterator(), this.count(), Spliterator.SIZED | Spliterator.DISTINCT | Spliterator.IMMUTABLE);
     }
 
     static <T> ImmutableSet<T> of() {

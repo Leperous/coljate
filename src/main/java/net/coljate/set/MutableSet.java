@@ -1,5 +1,8 @@
 package net.coljate.set;
 
+import java.util.Spliterator;
+import java.util.Spliterators;
+
 import net.coljate.collection.MutableCollection;
 import net.coljate.set.impl.MutableWrappedHashSet;
 import net.coljate.set.impl.MutableWrappedSet;
@@ -46,6 +49,11 @@ public interface MutableSet<T> extends Set<T>, MutableCollection<T> {
     @Deprecated
     default boolean removeAll(final Object element) {
         return this.remove(element);
+    }
+
+    @Override
+    default Spliterator<T> spliterator() {
+        return Spliterators.spliterator(this.iterator(), this.count(), Spliterator.SIZED | Spliterator.DISTINCT);
     }
 
     static <T> MutableSet<T> viewOf(final java.util.Set<T> set) {

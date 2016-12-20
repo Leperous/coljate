@@ -1,5 +1,8 @@
 package net.coljate.list;
 
+import java.util.Spliterator;
+import java.util.Spliterators;
+
 import net.coljate.collection.Collection;
 import net.coljate.collection.ImmutableCollection;
 import net.coljate.list.impl.ImmutableJoinList;
@@ -34,6 +37,11 @@ public interface ImmutableList<T> extends List<T>, ImmutableCollection<T> {
 
     default ImmutableList<T> suffixed(final List<? extends T> list) {
         return join(this, list.immutableCopy());
+    }
+
+    @Override
+    default Spliterator<T> spliterator() {
+        return Spliterators.spliterator(this.iterator(), this.count(), Spliterator.SIZED | Spliterator.ORDERED | Spliterator.IMMUTABLE);
     }
 
     static <T> ImmutableList<T> of(final T element) {
