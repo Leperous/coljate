@@ -1,6 +1,8 @@
 package net.coljate.map;
 
 import java.util.Objects;
+import java.util.Spliterator;
+import java.util.Spliterators;
 import java.util.function.BiConsumer;
 import java.util.function.Function;
 import java.util.function.IntFunction;
@@ -110,6 +112,11 @@ public interface Map<K, V> extends Set<Entry<K, V>>, Associative<K, V> {
     @Override
     default ImmutableMap<K, V> immutableCopy() {
         throw new UnsupportedOperationException(); //TODO default behaviour
+    }
+
+    @Override
+    default Spliterator<Entry<K, V>> spliterator() {
+        return Spliterators.spliterator(this.iterator(), this.count(), Spliterator.SIZED | Spliterator.DISTINCT | Spliterator.NONNULL);
     }
 
     static <K, V> MutableMap<K, V> create(final int initialCapacity) {

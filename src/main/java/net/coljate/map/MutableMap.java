@@ -2,6 +2,7 @@ package net.coljate.map;
 
 import java.util.Iterator;
 import java.util.Objects;
+import java.util.Spliterator;
 import java.util.function.BiFunction;
 import java.util.function.BiPredicate;
 import java.util.function.Function;
@@ -121,6 +122,11 @@ public interface MutableMap<K, V> extends Map<K, V>, MutableSet<Entry<K, V>> {
             }
         }
         return removed;
+    }
+
+    @Override
+    default Spliterator<Entry<K, V>> spliterator() {
+        return Map.super.spliterator();
     }
 
     static <K, V> MutableMap<K, V> viewOf(final java.util.Map<K, V> map) {

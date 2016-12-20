@@ -1,5 +1,8 @@
 package net.coljate.map;
 
+import java.util.Spliterator;
+import java.util.Spliterators;
+
 import net.coljate.collection.ImmutableCollection;
 import net.coljate.map.impl.EmptyMap;
 import net.coljate.set.ImmutableSet;
@@ -30,6 +33,11 @@ public interface ImmutableMap<K, V> extends Map<K, V>, ImmutableSet<Entry<K, V>>
     @Deprecated
     default ImmutableMap<K, V> immutableCopy() {
         return this;
+    }
+
+    @Override
+    default Spliterator<Entry<K, V>> spliterator() {
+        return Spliterators.spliterator(this.iterator(), this.count(), Spliterator.SIZED | Spliterator.DISTINCT | Spliterator.NONNULL | Spliterator.IMMUTABLE);
     }
 
     static <K, V> ImmutableMap<K, V> of() {

@@ -1,5 +1,8 @@
 package net.coljate.list;
 
+import java.util.Spliterator;
+import java.util.Spliterators;
+
 import net.coljate.collection.ConcurrentCollection;
 
 /**
@@ -11,5 +14,10 @@ public interface ConcurrentList<T>
 
     @Override
     ConcurrentList<T> mutableCopy();
+
+    @Override
+    default Spliterator<T> spliterator() {
+        return Spliterators.spliterator(this.iterator(), this.count(), Spliterator.ORDERED | Spliterator.CONCURRENT);
+    }
 
 }
