@@ -1,7 +1,9 @@
 package net.coljate.table;
 
 import java.util.Iterator;
+import java.util.function.Function;
 
+import net.coljate.table.lazy.LazyTransformedMatrix;
 import net.coljate.table.lazy.LazyTransposedMatrix;
 
 /**
@@ -52,6 +54,10 @@ public interface Matrix<T> extends Table<Integer, Integer, T> {
 
     default Matrix<T> transpose() {
         return new LazyTransposedMatrix<>(this);
+    }
+
+    default <R> Matrix<R> transformValues(final Function<? super T, ? extends R> transformation) {
+        return new LazyTransformedMatrix<>(this, transformation);
     }
 
     @Override
