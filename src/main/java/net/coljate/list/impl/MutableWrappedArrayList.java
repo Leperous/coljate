@@ -27,6 +27,10 @@ public class MutableWrappedArrayList<T>
         }
     }
 
+    public static <T> MutableWrappedArrayList<T> create(final int size) {
+        return viewOf(new java.util.ArrayList<>(size));
+    }
+
     public static <T> MutableWrappedArrayList<T> viewOf(final java.util.ArrayList<T> list) {
         return new MutableWrappedArrayList<>(list);
     }

@@ -2,6 +2,7 @@ package net.coljate.list;
 
 import net.coljate.collection.MutableCollection;
 import net.coljate.list.impl.MutableNativeArray;
+import net.coljate.list.impl.MutableWrappedArrayList;
 import net.coljate.list.impl.MutableWrappedList;
 import net.coljate.list.impl.SynchronizedList;
 
@@ -17,6 +18,10 @@ public interface MutableList<T> extends List<T>, MutableCollection<T> {
 
     default SynchronizedList<T> synchronizedCopy() {
         return synchronize(this);
+    }
+
+    static <T> MutableList<T> create(final int size) {
+        return MutableWrappedArrayList.create(size);
     }
 
     @SafeVarargs

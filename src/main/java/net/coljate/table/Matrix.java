@@ -1,8 +1,11 @@
 package net.coljate.table;
 
 import java.util.Iterator;
+import java.util.function.BiFunction;
 import java.util.function.Function;
 
+import net.coljate.collection.Collection;
+import net.coljate.table.lazy.LazyProductMatrix;
 import net.coljate.table.lazy.LazyTransformedMatrix;
 import net.coljate.table.lazy.LazyTransposedMatrix;
 
@@ -58,6 +61,13 @@ public interface Matrix<T> extends Table<Integer, Integer, T> {
 
     default <R> Matrix<R> transformValues(final Function<? super T, ? extends R> transformation) {
         return new LazyTransformedMatrix<>(this, transformation);
+    }
+
+    default <T2, P, V> Matrix<V> product(
+            final Matrix<T2> that,
+            final BiFunction<? super T, ? super T2, ? extends P> product,
+            final Function<? super Collection<? extends P>, ? extends V> collate) {
+        return new LazyProductMatrix<>(this, that, product, collate);
     }
 
     @Override
