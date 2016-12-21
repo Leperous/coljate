@@ -27,7 +27,7 @@ public interface LazyMap<K, V> extends LazySet<Entry<K, V>>, Map<K, V> {
     }
 
     @Override
-    Set<? extends K> keys();
+    Set<K> keys();
 
     @Override
     Collection<V> values();

@@ -34,7 +34,7 @@ public interface Map<K, V> extends Set<Entry<K, V>>, Associative<K, V> {
     /**
      * @return a view of the keys in this map.
      */
-    Set<? extends K> keys();
+    Set<K> keys();
 
     /**
      * @return a view of the values in this map.

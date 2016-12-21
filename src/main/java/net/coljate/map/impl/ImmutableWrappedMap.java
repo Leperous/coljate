@@ -46,7 +46,7 @@ public class ImmutableWrappedMap<K, V>
     }
 
     @Override
-    public ImmutableSet<? extends K> keys() {
+    public ImmutableSet<K> keys() {
         throw new UnsupportedOperationException(); //TODO
     }
 

@@ -48,7 +48,7 @@ public class LazyTransformedValueMap<K, V1, V2> implements LazyMap<K, V2> {
     }
 
     @Override
-    public Set<? extends K> keys() {
+    public Set<K> keys() {
         return map.keys();
     }
 

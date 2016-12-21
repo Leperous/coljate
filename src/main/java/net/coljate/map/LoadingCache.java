@@ -14,7 +14,7 @@ public interface LoadingCache<K, V> extends Map<K, V> {
      * @return currently loaded keys.
      */
     @Override
-    Set<? extends K> keys();
+    Set<K> keys();
 
     /**
      * @return currently loaded values.

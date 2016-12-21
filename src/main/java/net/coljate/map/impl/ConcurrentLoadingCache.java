@@ -51,7 +51,7 @@ public class ConcurrentLoadingCache<K, V> implements LoadingCache<K, V> {
     }
 
     @Override
-    public Set<? extends K> keys() {
+    public Set<K> keys() {
         return map.keys();
     }
 

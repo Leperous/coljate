@@ -25,10 +25,10 @@ public class RepeatedValueMap<K, V>
         return new RepeatedValueMap<>(keys, value);
     }
 
-    private final Set<? extends K> keys;
+    private final Set<K> keys;
     private final V value;
 
-    protected RepeatedValueMap(final Set<? extends K> keys, final V value) {
+    protected RepeatedValueMap(final Set<K> keys, final V value) {
         this.keys = keys;
         this.value = value;
     }
@@ -56,7 +56,7 @@ public class RepeatedValueMap<K, V>
     }
 
     @Override
-    public Set<? extends K> keys() {
+    public Set<K> keys() {
         return keys;
     }
 

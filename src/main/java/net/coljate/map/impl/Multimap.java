@@ -37,7 +37,7 @@ public class Multimap<K, C extends Collection<?>>
     }
 
     @Override
-    public Set<? extends K> keys() {
+    public Set<K> keys() {
         return map.keys();
     }
 
@@ -50,5 +50,5 @@ public class Multimap<K, C extends Collection<?>>
     public Iterator<Entry<K, C>> iterator() {
         return map.iterator();
     }
-    
+
 }

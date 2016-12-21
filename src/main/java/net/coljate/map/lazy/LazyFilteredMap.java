@@ -60,7 +60,7 @@ public class LazyFilteredMap<K, V> implements LazyMap<K, V> {
     private KeySet keys;
 
     @Override
-    public LazySet<? extends K> keys() {
+    public LazySet<K> keys() {
         return keys == null
                 ? (keys = new KeySet())
                 : keys;
