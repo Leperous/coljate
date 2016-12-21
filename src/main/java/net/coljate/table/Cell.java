@@ -13,4 +13,8 @@ public interface Cell<R, C, V> {
 
     V value();
 
+    default ImmutableCell<R, C, V> immutableCopy() {
+        return new ImmutableCell<>(this.rowKey(), this.columnKey(), this.value());
+    }
+
 }

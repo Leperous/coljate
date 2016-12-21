@@ -31,4 +31,10 @@ public class ImmutableCell<R, C, V> extends AbstractCell<R, C, V> {
         return value;
     }
 
+    @Override
+    @Deprecated
+    public ImmutableCell<R, C, V> immutableCopy() {
+        return this;
+    }
+
 }
