@@ -39,11 +39,6 @@ public class RowVector<T> implements Matrix<T> {
     }
 
     @Override
-    public Object[][] arrayCopy() {
-        return new Object[][]{array.arrayCopy()};
-    }
-
-    @Override
     public MutableMatrix<T> mutableCopy() {
         throw new UnsupportedOperationException("Not supported yet.");
     }

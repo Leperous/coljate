@@ -1,5 +1,6 @@
 package net.coljate.table;
 
+import net.coljate.UnmodifiableIterator;
 import net.coljate.util.Functions;
 
 /**
@@ -15,6 +16,12 @@ public interface ImmutableMatrix<T>
     }
 
     @Override
+    default UnmodifiableIterator<Cell<Integer, Integer, T>> iterator() {
+        return UnmodifiableIterator.wrap(Matrix.super.iterator());
+    }
+
+    @Override
+    @Deprecated
     default ImmutableMatrix<T> immutableCopy() {
         return this;
     }
