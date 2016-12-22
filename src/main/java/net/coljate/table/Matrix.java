@@ -6,6 +6,7 @@ import java.util.function.Function;
 
 import net.coljate.collection.Collection;
 import net.coljate.table.lazy.LazyProductMatrix;
+import net.coljate.table.lazy.LazySumMatrix;
 import net.coljate.table.lazy.LazyTransformedMatrix;
 import net.coljate.table.lazy.LazyTransposedMatrix;
 
@@ -61,6 +62,12 @@ public interface Matrix<T> extends Table<Integer, Integer, T> {
 
     default <R> Matrix<R> transformValues(final Function<? super T, ? extends R> transformation) {
         return new LazyTransformedMatrix<>(this, transformation);
+    }
+
+    default <T2, V> Matrix<V> plus(
+            final Matrix<T2> that,
+            final BiFunction<? super T, ? super T2, ? extends V> sum) {
+        return new LazySumMatrix<>(this, that, sum);
     }
 
     default <T2, P, V> Matrix<V> product(
