@@ -10,6 +10,7 @@ import net.coljate.set.Set;
 import net.coljate.tree.impl.EmptyTree;
 import net.coljate.tree.impl.SingletonTree;
 import net.coljate.tree.navigation.TreeNavigation;
+import net.coljate.util.Iterators;
 
 /**
  *
@@ -31,29 +32,37 @@ public interface Tree<K, V, E extends Entry<K, V>> extends Map<K, V> {
         return search.findEntry(key, this);
     }
 
+    default Set<E> entries(final TreeNavigation navigation) {
+        return navigation.collect(this, MutableSet.createHashSet());
+    }
+
     @Override
     default Set<K> keys() {
         return this.keys(TreeNavigation.getDefault());
     }
 
     default Set<K> keys(final TreeNavigation navigation) {
-        return navigation.collect(this, MutableSet.createHashSet())
+        return this.entries(navigation)
                 .transform(E::key)
                 .distinct();
     }
 
     @Override
     default Collection<V> values() {
-        throw new UnsupportedOperationException();
+        return this.values(TreeNavigation.getDefault());
     }
 
     default Collection<V> values(final TreeNavigation navigation) {
-        return navigation.collect(this, MutableSet.createHashSet()).transform(E::value);
+        return this.entries(navigation).transform(E::value);
     }
 
     @Override
     default Iterator<Entry<K, V>> iterator() {
-        throw new UnsupportedOperationException(); //TODO
+        return Iterators.covariant(this.iterator(TreeNavigation.getDefault()));
+    }
+
+    default Iterator<E> iterator(final TreeNavigation navigation) {
+        return this.entries(navigation).iterator();
     }
 
     @Override
