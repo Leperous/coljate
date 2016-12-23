@@ -42,7 +42,7 @@ public class LinkedTree<K, V> implements Tree<K, V, Node<K, V>> {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
-    protected interface Node<K, V> extends Entry<K, V> {
+    public interface Node<K, V> extends Entry<K, V> {
 
         Collection<? extends LinkedTree<K, V>> subtrees();
 
