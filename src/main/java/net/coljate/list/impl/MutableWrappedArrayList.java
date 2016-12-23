@@ -45,7 +45,8 @@ public class MutableWrappedArrayList<T>
     }
 
     public static <T> MutableWrappedArrayList<T> copyOf(final Collection<? extends T> collection) {
-        return viewOf(collection.mutableJavaCopy(java.util.ArrayList::new));
+        final java.util.ArrayList<T> list = collection.mutableJavaCopy(java.util.ArrayList::new);
+        return viewOf(list);
     }
 
     private final java.util.ArrayList<T> delegate;
