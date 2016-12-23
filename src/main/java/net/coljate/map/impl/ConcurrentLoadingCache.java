@@ -98,19 +98,13 @@ public class ConcurrentLoadingCache<K, V> implements LoadingCache<K, V> {
 
         @Override
         public V compute(final K key) {
-            try {
-                synchronized (lock) {
-                    lock.wait();
-                    if (timesAccessed++ > 1) {
-                        return ConcurrentLoadingCache.this.get(key);
-                    }
-                    final V value = valueFunction.apply(key);
-                    map.put(key, new Computed<>(value));
-                    lock.notifyAll();
-                    return value;
+            synchronized (lock) {
+                if (timesAccessed++ > 1) {
+                    return ConcurrentLoadingCache.this.get(key);
                 }
-            } catch (final InterruptedException iex) {
-                throw new RuntimeException(iex); //TODO 
+                final V value = valueFunction.apply(key);
+                map.put(key, new Computed<>(value));
+                return value;
             }
         }
 

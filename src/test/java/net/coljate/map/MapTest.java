@@ -4,6 +4,7 @@ import net.coljate.set.SetTest;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -30,8 +31,9 @@ public interface MapTest<K, V> extends SetTest<Entry<K, V>> {
         final Entry<K, V> entry = this.createObject();
         final Map<K, V> map = this.create(entry);
         final Entry<K, V> got = map.getEntry(entry.key());
+        assertNotNull(got);
         assertThat(got.key(), is(entry.key()));
-        assertThat(got.value(), is(entry.value()));
+        assertThat("Value of " + got, got.value(), is(entry.value()));
         assertThat(got, is(entry));
     }
 
