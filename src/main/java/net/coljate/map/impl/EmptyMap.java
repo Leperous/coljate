@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.function.Function;
 import java.util.function.Predicate;
 
+import net.coljate.UnmodifiableIterator;
 import net.coljate.collection.Empty;
 import net.coljate.collection.ImmutableCollection;
 import net.coljate.map.AbstractMap;
@@ -64,6 +65,11 @@ public class EmptyMap<K, V>
     @Override
     public SingletonMap<K, V> with(final K key, final V value) {
         return SingletonMap.of(key, value);
+    }
+
+    @Override
+    public UnmodifiableIterator<Entry<K, V>> iterator() {
+        return Empty.super.iterator();
     }
 
 }

@@ -1,5 +1,7 @@
 package net.coljate.map;
 
+import java.util.Comparator;
+import java.util.Iterator;
 import java.util.Objects;
 import java.util.Spliterator;
 import java.util.Spliterators;
@@ -11,6 +13,8 @@ import java.util.function.Supplier;
 
 import net.coljate.collection.Collection;
 import net.coljate.map.impl.ImmutableWrappedMap;
+import net.coljate.map.impl.KeySortedMap;
+import net.coljate.map.impl.MapIterator;
 import net.coljate.map.impl.MutableWrappedHashMap;
 import net.coljate.map.impl.RepeatedValueMap;
 import net.coljate.map.impl.SingletonMap;
@@ -105,6 +109,10 @@ public interface Map<K, V> extends Set<Entry<K, V>>, Associative<K, V> {
         return LazyMap.transformValues(this, transform);
     }
 
+    default SortedMap<K, V> sortKeys(final Comparator<? super K> comparator) {
+        return KeySortedMap.copyOf(this, comparator);
+    }
+
     @Override
     default MutableMap<K, V> mutableCopy() {
         return MutableMap.viewOf(this.mutableJavaMapCopy());
@@ -113,6 +121,11 @@ public interface Map<K, V> extends Set<Entry<K, V>>, Associative<K, V> {
     @Override
     default ImmutableMap<K, V> immutableCopy() {
         throw new UnsupportedOperationException(); //TODO default behaviour
+    }
+
+    @Override
+    default Iterator<Entry<K, V>> iterator() {
+        return new MapIterator<>(this);
     }
 
     @Override
