@@ -31,10 +31,20 @@ public interface LazySet<T> extends LazyCollection<T>, Set<T> {
         return LazyFilteredSet.of(Set.copyOrCast(collection), predicate);
     }
 
+    static <T> Function<Collection<T>, LazySet<T>> transform() {
+        return collection -> collection instanceof LazySet
+                ? (LazySet<T>) collection
+                : transform(collection, Function.identity());
+    }
+
+    static <F, T> Function<Collection<F>, LazySet<T>> transform(final Function<? super F, ? extends T> transformation) {
+        return collection -> transform(collection, transformation);
+    }
+
     static <F, T> LazySet<T> transform(
             final Collection<F> collection,
             final Function<? super F, ? extends T> transformation) {
-        return new LazyTransformedSet<>(Set.copyOrCast(collection), transformation);
+        return new LazyTransformedSet<>(collection, transformation);
     }
 
     /**

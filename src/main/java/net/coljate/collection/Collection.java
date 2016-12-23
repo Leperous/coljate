@@ -17,6 +17,7 @@ import net.coljate.collection.lazy.LazyCollection;
 import net.coljate.feature.complexity.TimeComplexity;
 import net.coljate.list.impl.ImmutableSortedArray;
 import net.coljate.set.Set;
+import net.coljate.set.lazy.LazySet;
 
 /**
  * Some {@link Iterable} {@link Container} with a {@link #count count} of elements.
@@ -117,6 +118,10 @@ public interface Collection<T> extends IterableExtension<T>, StreamExtension<T> 
 
     default Collection<T> filter(final Predicate<? super T> predicate) {
         return this.lazily(LazyCollection.filter(predicate));
+    }
+
+    default Set<T> distinct() {
+        return this.lazily(LazySet.transform());
     }
 
     static <T> Empty<T> of() {

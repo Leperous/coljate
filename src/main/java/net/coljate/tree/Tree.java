@@ -5,10 +5,11 @@ import java.util.Iterator;
 import net.coljate.collection.Collection;
 import net.coljate.map.Entry;
 import net.coljate.map.Map;
+import net.coljate.set.MutableSet;
 import net.coljate.set.Set;
 import net.coljate.tree.impl.EmptyTree;
 import net.coljate.tree.impl.SingletonTree;
-import net.coljate.tree.search.TreeSearch;
+import net.coljate.tree.navigation.TreeNavigation;
 
 /**
  *
@@ -23,21 +24,31 @@ public interface Tree<K, V, E extends Entry<K, V>> extends Map<K, V> {
 
     @Override
     default E getEntry(final Object key) {
-        return this.getEntry(key, TreeSearch.DEFAULT);
+        return this.getEntry(key, TreeNavigation.getDefault());
     }
 
-    default E getEntry(final Object key, final TreeSearch search) {
+    default E getEntry(final Object key, final TreeNavigation search) {
         return search.findEntry(key, this);
     }
 
     @Override
     default Set<K> keys() {
-        throw new UnsupportedOperationException(); //TODO
+        return this.keys(TreeNavigation.getDefault());
+    }
+
+    default Set<K> keys(final TreeNavigation navigation) {
+        return navigation.collect(this, MutableSet.createHashSet())
+                .transform(E::key)
+                .distinct();
     }
 
     @Override
     default Collection<V> values() {
         throw new UnsupportedOperationException();
+    }
+
+    default Collection<V> values(final TreeNavigation navigation) {
+        return navigation.collect(this, MutableSet.createHashSet()).transform(E::value);
     }
 
     @Override

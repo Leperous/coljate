@@ -98,6 +98,12 @@ public interface Set<T> extends Collection<T> {
         return Spliterators.spliterator(this.iterator(), this.count(), Spliterator.SIZED | Spliterator.DISTINCT);
     }
 
+    @Override
+    @Deprecated
+    default Set<T> distinct() {
+        return this;
+    }
+
     static <T> EmptySet<T> of() {
         return EmptySet.instance();
     }
