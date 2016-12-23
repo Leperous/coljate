@@ -8,17 +8,17 @@ import net.coljate.map.MutableMap;
  *
  * @author ollie
  */
-public interface MutableTree<K, V> extends Tree<K, V>, MutableMap<K, V> {
+public interface MutableTree<K, V, E extends MutableEntry<K, V>> extends Tree<K, V, E>, MutableMap<K, V> {
 
     @Override
-    default MutableEntry<K, V> entry(final Object key) {
-        return (MutableEntry<K, V>) Tree.super.entry(key);
+    default E entry(final Object key) {
+        return Tree.super.entry(key);
     }
 
     @Override
-    MutableEntry<K, V> root();
+    E root();
 
     @Override
-    Collection<? extends MutableTree<K, V>> subtrees(Object key);
+    Collection<? extends MutableTree<K, V, E>> subtrees(Object key);
 
 }

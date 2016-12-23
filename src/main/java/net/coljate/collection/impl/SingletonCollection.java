@@ -5,8 +5,8 @@ import java.util.Objects;
 
 import net.coljate.UnmodifiableIterator;
 import net.coljate.collection.AbstractCollection;
-import net.coljate.collection.ImmutableCollection;
 import net.coljate.collection.MutableCollection;
+import net.coljate.collection.Singleton;
 
 /**
  *
@@ -14,7 +14,7 @@ import net.coljate.collection.MutableCollection;
  */
 public class SingletonCollection<T>
         extends AbstractCollection<T>
-        implements ImmutableCollection<T> {
+        implements Singleton<T> {
 
     public static <T> SingletonCollection<T> of(final T element) {
         return new SingletonCollection<>(element);
@@ -26,6 +26,7 @@ public class SingletonCollection<T>
         this.element = element;
     }
 
+    @Override
     public T element() {
         return element;
     }

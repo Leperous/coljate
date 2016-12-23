@@ -31,6 +31,7 @@ public class EmptyMap<K, V>
     }
 
     @Override
+    @Deprecated
     public boolean contains(final Object object) {
         return Empty.super.contains(object);
     }

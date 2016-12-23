@@ -9,8 +9,9 @@ import net.coljate.tree.Tree;
  */
 public interface TreeSearch {
 
-    <K, V> Entry<K, V> get(Object key, Tree<K, V> tree);
+    <K, V, E extends Entry<K, V>> E findEntry(Object key, Tree<K, V, E> tree);
 
     TreeSearch DEPTH_FIRST_RECURSIVE = new DepthFirstRecursiveTreeSearch();
+    TreeSearch DEFAULT = DEPTH_FIRST_RECURSIVE;
 
 }

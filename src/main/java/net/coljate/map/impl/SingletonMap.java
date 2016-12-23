@@ -5,6 +5,7 @@ import java.util.Objects;
 
 import net.coljate.UnmodifiableIterator;
 import net.coljate.collection.ImmutableCollection;
+import net.coljate.collection.Singleton;
 import net.coljate.map.Entry;
 import net.coljate.map.ImmutableEntry;
 import net.coljate.map.ImmutableMap;
@@ -16,7 +17,7 @@ import net.coljate.set.ImmutableSet;
  */
 public class SingletonMap<K, V>
         extends ImmutableEntry<K, V>
-        implements ImmutableMap<K, V>, Serializable {
+        implements Singleton<Entry<K, V>>, ImmutableMap<K, V>, Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -29,6 +30,16 @@ public class SingletonMap<K, V>
 
     protected SingletonMap(final K key, final V value) {
         super(key, value);
+    }
+
+    @Override
+    public ImmutableEntry<K, V> element() {
+        return this;
+    }
+
+    @Override
+    public boolean contains(final Object object) {
+        return ImmutableMap.super.contains(object);
     }
 
     @Override

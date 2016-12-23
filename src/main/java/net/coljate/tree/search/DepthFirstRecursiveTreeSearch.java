@@ -15,13 +15,13 @@ public class DepthFirstRecursiveTreeSearch implements TreeSearch {
     }
 
     @Override
-    public <K, V> Entry<K, V> get(final Object key, final Tree<K, V> tree) {
-        final Entry<K, V> root = tree.root();
+    public <K, V, E extends Entry<K, V>> E findEntry(final Object key, final Tree<K, V, E> tree) {
+        final E root = tree.root();
         if (root == null || Objects.equals(key, root.key())) {
             return root;
         }
-        for (final Tree<K, V> subtree : tree.subtrees(key)) {
-            final Entry<K, V> found = this.get(key, subtree);
+        for (final Tree<K, V, E> subtree : tree.subtrees(key)) {
+            final E found = this.findEntry(key, subtree);
             if (found != null) {
                 return found;
             }

@@ -1,37 +1,66 @@
 package net.coljate.tree;
 
-import net.coljate.tree.search.TreeSearch;
-
-import java.util.Objects;
+import java.util.Iterator;
 
 import net.coljate.collection.Collection;
 import net.coljate.map.Entry;
 import net.coljate.map.Map;
+import net.coljate.set.Set;
+import net.coljate.tree.impl.EmptyTree;
+import net.coljate.tree.impl.SingletonTree;
+import net.coljate.tree.search.TreeSearch;
 
 /**
  *
  * @author ollie
+ * @since 1.0
  */
-public interface Tree<K, V> extends Map<K, V> {
+public interface Tree<K, V, E extends Entry<K, V>> extends Map<K, V> {
 
-    Entry<K, V> root();
+    E root();
 
-    Collection<? extends Tree<K, V>> subtrees(Object key);
+    Collection<? extends Tree<K, V, E>> subtrees(Object key);
 
     @Override
-    default Entry<K, V> entry(final Object key) {
-        return this.entry(key, TreeSearch.DEPTH_FIRST_RECURSIVE);
+    default E entry(final Object key) {
+        return this.entry(key, TreeSearch.DEFAULT);
     }
 
-    default Entry<K, V> entry(final Object key, final TreeSearch search) {
-        return search.get(key, this);
+    default E entry(final Object key, final TreeSearch search) {
+        return search.findEntry(key, this);
     }
 
     @Override
-    MutableTree<K, V> mutableCopy();
+    default Set<K> keys() {
+        throw new UnsupportedOperationException(); //TODO
+    }
 
     @Override
-    ImmutableTree<K, V> immutableCopy();
+    default Collection<V> values() {
+        throw new UnsupportedOperationException();
+    }
 
+    @Override
+    default Iterator<Entry<K, V>> iterator() {
+        throw new UnsupportedOperationException(); //TODO
+    }
+
+    @Override
+    default MutableTree<K, V, ?> mutableCopy() {
+        throw new UnsupportedOperationException(); //TODO
+    }
+
+    @Override
+    default ImmutableTree<K, V, ?> immutableCopy() {
+        throw new UnsupportedOperationException();
+    }
+
+    static <K, V> EmptyTree<K, V> of() {
+        return EmptyTree.instance();
+    }
+
+    static <K, V> SingletonTree<K, V> of(final K key, final V value) {
+        return new SingletonTree<>(key, value);
+    }
 
 }

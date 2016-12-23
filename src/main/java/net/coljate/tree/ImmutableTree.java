@@ -1,31 +1,52 @@
 package net.coljate.tree;
 
+import net.coljate.UnmodifiableIterator;
 import net.coljate.collection.Collection;
+import net.coljate.collection.ImmutableCollection;
 import net.coljate.map.Entry;
 import net.coljate.map.ImmutableEntry;
 import net.coljate.map.ImmutableMap;
-import net.coljate.util.Functions;
+import net.coljate.set.ImmutableSet;
 
 /**
  *
  * @author ollie
  */
-public interface ImmutableTree<K, V> extends Tree<K, V>, ImmutableMap<K, V> {
+public interface ImmutableTree<K, V, E extends ImmutableEntry<K, V>>
+        extends Tree<K, V, E>, ImmutableMap<K, V> {
 
     @Override
-    ImmutableEntry<K, V> root();
+    E root();
 
     @Override
-    Collection<? extends ImmutableTree<K, V>> subtrees(Object key);
+    Collection<? extends ImmutableTree<K, V, E>> subtrees(Object key);
 
     @Override
-    default ImmutableEntry<K, V> entry(final Object key) {
-        return Functions.ifNonNull(Tree.super.entry(key), Entry::immutableCopy);
+    default E entry(final Object key) {
+        return Tree.super.entry(key);
+    }
+
+    @Override
+    ImmutableTree<K, V, ? extends E> with(K key, V value);
+
+    @Override
+    default ImmutableSet<K> keys() {
+        return Tree.super.keys().immutableCopy();
+    }
+
+    @Override
+    default ImmutableCollection<V> values() {
+        return Tree.super.values().immutableCopy();
+    }
+
+    @Override
+    default UnmodifiableIterator<Entry<K, V>> iterator() {
+        return UnmodifiableIterator.wrap(Tree.super.iterator());
     }
 
     @Override
     @Deprecated
-    default ImmutableTree<K, V> immutableCopy() {
+    default ImmutableTree<K, V, E> immutableCopy() {
         return this;
     }
 

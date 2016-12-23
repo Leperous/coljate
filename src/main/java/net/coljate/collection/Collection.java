@@ -11,6 +11,7 @@ import net.coljate.Container;
 import net.coljate.IterableExtension;
 import net.coljate.StreamExtension;
 import net.coljate.collection.SortedCollection.SortingAlgorithm;
+import net.coljate.collection.impl.EmptyCollection;
 import net.coljate.collection.impl.WrappedCollection;
 import net.coljate.collection.lazy.LazyCollection;
 import net.coljate.feature.complexity.TimeComplexity;
@@ -21,6 +22,7 @@ import net.coljate.set.Set;
  * Some {@link Iterable} {@link Container} with a {@link #count count} of elements.
  *
  * @author ollie
+ * @since 1.0
  */
 public interface Collection<T> extends IterableExtension<T>, StreamExtension<T> {
 
@@ -115,6 +117,10 @@ public interface Collection<T> extends IterableExtension<T>, StreamExtension<T> 
 
     default Collection<T> filter(final Predicate<? super T> predicate) {
         return this.lazily(LazyCollection.filter(predicate));
+    }
+
+    static <T> Empty<T> of() {
+        return EmptyCollection.instance();
     }
 
     static <T> Collection<T> of(final T element) {

@@ -11,6 +11,7 @@ import net.coljate.feature.complexity.TimeComplexity;
 /**
  *
  * @author ollie
+ * @since 1.0
  */
 public interface IterableExtension<T> extends Container, Iterable<T> {
 

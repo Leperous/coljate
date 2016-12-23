@@ -23,6 +23,7 @@ import net.coljate.util.Equality;
 /**
  *
  * @author ollie
+ * @since 1.0
  */
 public interface Set<T> extends Collection<T> {
 
