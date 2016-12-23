@@ -1,5 +1,6 @@
-coljate
-=======
+[![Build Status](https://travis-ci.org/ollierob/coljate.png?branch=master)](https://travis-ci.org/ollierob/coljate)
+
+#coljate
 
 Collections library for Java 8+
 
