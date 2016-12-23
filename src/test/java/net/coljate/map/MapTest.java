@@ -1,16 +1,16 @@
 package net.coljate.map;
 
+import net.coljate.set.SetTest;
+
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 import org.junit.jupiter.api.Test;
-
-import net.coljate.collection.CollectionTest;
 
 /**
  *
  * @author Ollie
  */
-public interface MapTest<K, V> extends CollectionTest<Entry<K, V>> {
+public interface MapTest<K, V> extends SetTest<Entry<K, V>> {
 
     @Override
     Map<K, V> create(java.util.List<Entry<K, V>> entries);

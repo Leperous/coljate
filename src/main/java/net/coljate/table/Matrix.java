@@ -1,6 +1,7 @@
 package net.coljate.table;
 
 import java.util.Iterator;
+import java.util.Objects;
 import java.util.function.BiFunction;
 import java.util.function.Function;
 
@@ -25,6 +26,21 @@ public interface Matrix<T> extends Table<Integer, Integer, T> {
     @Override
     default int count() {
         return Math.multiplyExact(this.width(), this.height());
+    }
+
+    @Override
+    @Deprecated
+    default boolean contains(final Object object) {
+        return object instanceof Cell
+                && this.contains((Cell) object);
+    }
+
+    default boolean contains(final Cell<?, ?, ?> cell) {
+        final Object rowKey = cell.rowKey();
+        final Object columnKey = cell.columnKey();
+        return rowKey instanceof Integer && columnKey instanceof Integer
+                ? Objects.equals(cell.value(), this.get((Integer) rowKey, (Integer) columnKey))
+                : false;
     }
 
     @Override

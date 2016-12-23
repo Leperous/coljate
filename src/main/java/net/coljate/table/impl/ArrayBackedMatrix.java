@@ -1,5 +1,6 @@
 package net.coljate.table.impl;
 
+import net.coljate.table.Cell;
 import net.coljate.table.ImmutableMatrix;
 import net.coljate.table.Matrix;
 import net.coljate.table.MutableMatrix;
@@ -10,6 +11,19 @@ import net.coljate.util.Arrays;
  * @author ollie
  */
 public class ArrayBackedMatrix<T> implements Matrix<T> {
+
+    public static <T> ArrayBackedMatrix<T> copyOf(final Iterable<? extends Cell<Integer, Integer, ? extends T>> cells) {
+        int rows = -1, columns = -1;
+        for (final Cell<Integer, Integer, ?> cell : cells) {
+            rows = Math.max(rows, cell.rowKey());
+            columns = Math.max(columns, cell.columnKey());
+        }
+        final Object[][] array = new Object[rows + 1][columns + 1];
+        for (final Cell<Integer, Integer, ?> cell : cells) {
+            array[cell.rowKey()][cell.columnKey()] = cell.value();
+        }
+        return new ArrayBackedMatrix<>(array);
+    }
 
     private final Object[][] matrix;
 
