@@ -1,6 +1,7 @@
 #coljate
 
 [![Build Status](https://travis-ci.org/ollierob/coljate.png?branch=master)](https://travis-ci.org/ollierob/coljate)
+[![Coverage Status](https://coveralls.io/repos/github/ollierob/coljate/badge.svg?branch=master)](https://coveralls.io/github/ollierob/coljate?branch=master)
 
 Collections library for Java 8+
 
