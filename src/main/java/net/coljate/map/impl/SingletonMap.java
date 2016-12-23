@@ -93,4 +93,15 @@ public class SingletonMap<K, V>
         return this;
     }
 
+    @Override
+    public boolean equals(final Object object) {
+        return super.equals(object)
+                || (!(object instanceof SingletonMap) && object instanceof Entry && object.equals(this));
+    }
+
+    @Override
+    public String toString() {
+        return this.getClass().getSimpleName() + ":[" + key + "=" + value + "]";
+    }
+
 }
