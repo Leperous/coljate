@@ -32,11 +32,6 @@ public class SingletonCollection<T>
     }
 
     @Override
-    public int count() {
-        return 1;
-    }
-
-    @Override
     public boolean contains(final Object object) {
         return Objects.equals(this.element(), object);
     }

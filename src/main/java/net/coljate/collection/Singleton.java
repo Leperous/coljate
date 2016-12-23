@@ -15,5 +15,10 @@ public interface Singleton<T>
     default boolean contains(final Object object) {
         return Objects.equals(object, this.element());
     }
+    
+    @Override
+    default int count() {
+        return 1;
+    }
 
 }
