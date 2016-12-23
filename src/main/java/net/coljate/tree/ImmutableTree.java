@@ -1,7 +1,6 @@
 package net.coljate.tree;
 
 import net.coljate.UnmodifiableIterator;
-import net.coljate.collection.Collection;
 import net.coljate.collection.ImmutableCollection;
 import net.coljate.map.Entry;
 import net.coljate.map.ImmutableEntry;
@@ -20,7 +19,7 @@ public interface ImmutableTree<K, V, E extends ImmutableEntry<K, V>>
     E root();
 
     @Override
-    Collection<? extends ImmutableTree<K, V, E>> subtrees(Object key);
+    ImmutableCollection<? extends ImmutableTree<K, V, E>> subtrees(Object key);
 
     @Override
     default E getEntry(final Object key) {

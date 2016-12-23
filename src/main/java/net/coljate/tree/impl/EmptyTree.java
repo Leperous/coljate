@@ -6,6 +6,7 @@ import java.util.function.Predicate;
 import net.coljate.UnmodifiableIterator;
 import net.coljate.collection.Collection;
 import net.coljate.collection.Empty;
+import net.coljate.collection.ImmutableCollection;
 import net.coljate.map.Entry;
 import net.coljate.map.ImmutableEntry;
 import net.coljate.tree.AbstractTree;
@@ -33,7 +34,7 @@ public class EmptyTree<K, V>
     }
 
     @Override
-    public Collection<? extends ImmutableTree<K, V, ImmutableEntry<K, V>>> subtrees(Object key) {
+    public ImmutableCollection<? extends ImmutableTree<K, V, ImmutableEntry<K, V>>> subtrees(Object key) {
         return Collection.of();
     }
 

@@ -42,7 +42,7 @@ public class ImmutableWrappedMap<K, V>
         final V value = map.get(key);
         return value == null && !map.containsKey(key)
                 ? null
-                : new ImmutableEntry<>((K) key, value);
+                : ImmutableEntry.of((K) key, value);
     }
 
     @Override

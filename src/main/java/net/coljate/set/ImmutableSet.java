@@ -48,8 +48,22 @@ public interface ImmutableSet<T> extends Set<T>, ImmutableCollection<T> {
         return SingletonSet.of(element);
     }
 
+    @SafeVarargs
+    static <T> ImmutableSet<T> copyOf(final T... elements) {
+        switch (elements.length) {
+            case 0:
+                return of();
+            case 1:
+                return of(elements[0]);
+            default:
+                return ImmutableWrappedSet.copyIntoHashSet(elements);
+        }
+    }
+
     static <T> ImmutableSet<T> copyOf(final Collection<? extends T> collection) {
-        return ImmutableWrappedSet.copyIntoHashSet(collection);
+        return collection.isEmpty()
+                ? of()
+                : ImmutableWrappedSet.copyIntoHashSet(collection);
     }
 
 }

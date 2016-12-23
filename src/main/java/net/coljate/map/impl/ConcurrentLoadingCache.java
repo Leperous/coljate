@@ -70,10 +70,10 @@ public class ConcurrentLoadingCache<K, V> implements LoadingCache<K, V> {
         return Iterators.filter(Iterators.transform(map.iterator(), this::translate), Objects::nonNull);
     }
 
-    private Entry<K, V> translate(final Entry<K, Computer<K, V>> entry) {
+    private ImmutableEntry<K, V> translate(final Entry<K, Computer<K, V>> entry) {
         return entry == null || entry.value().isComputing()
                 ? null
-                : new ImmutableEntry<>(entry.key(), entry.value().current());
+                : ImmutableEntry.of(entry.key(), entry.value().current());
     }
 
     private interface Computer<K, V> {

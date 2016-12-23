@@ -1,5 +1,7 @@
 package net.coljate.map;
 
+import net.coljate.map.impl.SimpleImmutableEntry;
+
 /**
  *
  * @author ollie
@@ -12,7 +14,7 @@ public interface Entry<K, V> {
     V value();
 
     default ImmutableEntry<K, V> immutableCopy() {
-        return new ImmutableEntry<>(this.key(), this.value());
+        return new SimpleImmutableEntry<>(this.key(), this.value());
     }
 
 }

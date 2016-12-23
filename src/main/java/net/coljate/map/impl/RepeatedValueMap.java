@@ -51,7 +51,7 @@ public class RepeatedValueMap<K, V>
     @SuppressWarnings("unchecked")
     public Entry<K, V> getEntry(final Object key) {
         return keys.contains(key)
-                ? new ImmutableEntry<>((K) key, value)
+                ? ImmutableEntry.of((K) key, value)
                 : null;
     }
 
@@ -82,7 +82,7 @@ public class RepeatedValueMap<K, V>
         @Override
         public Entry<K, V> next() {
             final K key = keyIterator.next();
-            return new ImmutableEntry<>(key, value);
+            return ImmutableEntry.of(key, value);
         }
 
     }

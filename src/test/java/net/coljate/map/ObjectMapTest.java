@@ -12,7 +12,7 @@ public abstract class ObjectMapTest
 
     @Override
     public Entry<Object, Object> createObject() {
-        return new ImmutableEntry<>(new Object(), new Object());
+        return ImmutableEntry.of(new Object(), new Object());
     }
 
 }

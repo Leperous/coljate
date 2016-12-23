@@ -20,7 +20,7 @@ public class RepeatedValueMapTest
 
     @Override
     public Entry<Object, Object> createObject() {
-        return new ImmutableEntry<>(new Object(), value);
+        return ImmutableEntry.of(new Object(), value);
     }
 
     @Override

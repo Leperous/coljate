@@ -43,7 +43,7 @@ public class WrappedMap<K, V>
     public Entry<K, V> getEntry(final Object key) {
         final V value = this.get(key);
         return value != null || this.containsKey(key)
-                ? new ImmutableEntry<>((K) key, value)
+                ? ImmutableEntry.of((K) key, value)
                 : null;
     }
 
@@ -70,7 +70,7 @@ public class WrappedMap<K, V>
     public Iterator<Entry<K, V>> iterator() {
         return Iterators.transform(
                 delegate.entrySet().iterator(),
-                entry -> new ImmutableEntry<>(entry.getKey(), entry.getValue()));
+                entry -> ImmutableEntry.of(entry.getKey(), entry.getValue()));
     }
 
     @Override

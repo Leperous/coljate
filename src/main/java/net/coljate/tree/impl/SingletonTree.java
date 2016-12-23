@@ -1,6 +1,7 @@
 package net.coljate.tree.impl;
 
 import net.coljate.collection.Collection;
+import net.coljate.collection.ImmutableCollection;
 import net.coljate.map.ImmutableEntry;
 import net.coljate.tree.AbstractTree;
 import net.coljate.tree.ImmutableTree;
@@ -23,11 +24,11 @@ public class SingletonTree<K, V>
 
     @Override
     public ImmutableEntry<K, V> root() {
-        return new ImmutableEntry<>(key, value);
+        return ImmutableEntry.of(key, value);
     }
 
     @Override
-    public Collection<? extends ImmutableTree<K, V, ImmutableEntry<K, V>>> subtrees(Object key) {
+    public ImmutableCollection<? extends ImmutableTree<K, V, ImmutableEntry<K, V>>> subtrees(Object key) {
         return Collection.of();
     }
 

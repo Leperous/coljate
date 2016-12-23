@@ -44,7 +44,7 @@ public class LazyTransformedValueMap<K, V1, V2> implements LazyMap<K, V2> {
     private Entry<K, V2> transform(final Entry<K, V1> entry) {
         return entry == null
                 ? null
-                : new ImmutableEntry<>(entry.key(), transformation.apply(entry.value()));
+                : ImmutableEntry.of(entry.key(), transformation.apply(entry.value()));
     }
 
     @Override

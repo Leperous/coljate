@@ -1,34 +1,21 @@
 package net.coljate.map;
 
+import net.coljate.map.impl.SimpleImmutableEntry;
+
 /**
  *
  * @author ollie
  */
-public class ImmutableEntry<K, V>
-        extends AbstractEntry<K, V> {
-
-    private final K key;
-    private final V value;
-
-    public ImmutableEntry(final K key, final V value) {
-        this.key = key;
-        this.value = value;
-    }
-
-    @Override
-    public K key() {
-        return key;
-    }
-
-    @Override
-    public V value() {
-        return value;
-    }
+public interface ImmutableEntry<K, V> extends Entry<K, V> {
 
     @Override
     @Deprecated
-    public ImmutableEntry<K, V> immutableCopy() {
+    default ImmutableEntry<K, V> immutableCopy() {
         return this;
+    }
+
+    static <K, V> ImmutableEntry<K, V> of(final K key, final V value) {
+        return new SimpleImmutableEntry<>(key, value);
     }
 
 }
