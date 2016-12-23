@@ -11,6 +11,7 @@ import net.coljate.set.ImmutableSet;
 /**
  *
  * @author ollie
+ * @since 1.0
  */
 public interface ImmutableTree<K, V, E extends ImmutableEntry<K, V>>
         extends Tree<K, V, E>, ImmutableMap<K, V> {
@@ -22,8 +23,8 @@ public interface ImmutableTree<K, V, E extends ImmutableEntry<K, V>>
     Collection<? extends ImmutableTree<K, V, E>> subtrees(Object key);
 
     @Override
-    default E entry(final Object key) {
-        return Tree.super.entry(key);
+    default E getEntry(final Object key) {
+        return Tree.super.getEntry(key);
     }
 
     @Override

@@ -37,7 +37,7 @@ public class EmptyMap<K, V>
     }
 
     @Override
-    public ImmutableEntry<K, V> entry(final Object key) {
+    public ImmutableEntry<K, V> getEntry(final Object key) {
         return null;
     }
 

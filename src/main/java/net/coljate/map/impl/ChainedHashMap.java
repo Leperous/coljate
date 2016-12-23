@@ -74,7 +74,7 @@ public class ChainedHashMap<K, V>
     }
 
     @Override
-    public MutableEntry<K, V> entry(final Object key) {
+    public MutableEntry<K, V> getEntry(final Object key) {
         final MutableList<MutableEntry<K, V>> bucket = this.getBucket(key);
         return bucket == null
                 ? null

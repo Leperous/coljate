@@ -57,7 +57,7 @@ public class SingletonMap<K, V>
     }
 
     @Override
-    public SingletonMap<K, V> entry(final Object key) {
+    public SingletonMap<K, V> getEntry(final Object key) {
         return Objects.equals(this.key(), key)
                 ? this
                 : null;

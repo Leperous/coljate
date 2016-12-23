@@ -22,7 +22,7 @@ public interface MutableMap<K, V> extends Map<K, V>, MutableSet<Entry<K, V>> {
     boolean remove(Object key, Object value);
 
     @Override
-    MutableEntry<K, V> entry(Object key);
+    MutableEntry<K, V> getEntry(Object key);
 
     default boolean add(final K key, final V value) {
         return !this.containsKey(key)
@@ -87,7 +87,7 @@ public interface MutableMap<K, V> extends Map<K, V>, MutableSet<Entry<K, V>> {
     }
 
     default boolean replace(final K key, final V expectedValue, final V replacementValue) {
-        final Entry<K, V> current = this.entry(key);
+        final Entry<K, V> current = this.getEntry(key);
         if (current == null || !Objects.equals(current.value(), expectedValue)) {
             return false;
         }
@@ -106,7 +106,7 @@ public interface MutableMap<K, V> extends Map<K, V>, MutableSet<Entry<K, V>> {
     }
 
     default V evict(final Object key) {
-        final Entry<K, V> entry = this.entry(key);
+        final Entry<K, V> entry = this.getEntry(key);
         return entry != null && this.remove(entry)
                 ? entry.value()
                 : null;

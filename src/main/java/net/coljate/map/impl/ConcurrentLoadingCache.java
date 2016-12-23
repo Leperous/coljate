@@ -38,7 +38,7 @@ public class ConcurrentLoadingCache<K, V> implements LoadingCache<K, V> {
 
     @Override
     public boolean containsEntry(final Entry<?, ?> entry) {
-        final Entry<K, Computer<K, V>> current = map.entry(entry.key());
+        final Entry<K, Computer<K, V>> current = map.getEntry(entry.key());
         return current != null
                 && !current.value().isComputing()
                 && Objects.equals(current.key(), entry.key())
@@ -61,8 +61,8 @@ public class ConcurrentLoadingCache<K, V> implements LoadingCache<K, V> {
     }
 
     @Override
-    public Entry<K, V> entry(final Object key) {
-        return this.translate(map.entry(key));
+    public Entry<K, V> getEntry(final Object key) {
+        return this.translate(map.getEntry(key));
     }
 
     @Override

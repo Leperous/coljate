@@ -32,8 +32,8 @@ public class Multimap<K, C extends Collection<?>>
     }
 
     @Override
-    public Entry<K, C> entry(final Object key) {
-        return map.entry(key);
+    public Entry<K, C> getEntry(final Object key) {
+        return map.getEntry(key);
     }
 
     @Override

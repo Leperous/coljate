@@ -35,7 +35,7 @@ public class MapBackedTable<R, C, V> implements Table<R, C, V> {
     }
 
     protected Entry<KeyPair<R, C>, V> entry(final Object row, final Object column) {
-        return map.entry(new KeyPair<>(row, column));
+        return map.getEntry(new KeyPair<>(row, column));
     }
 
     protected Cell<R, C, V> toCell(final Entry<KeyPair<R, C>, V> entry) {

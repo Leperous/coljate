@@ -22,11 +22,11 @@ public interface Tree<K, V, E extends Entry<K, V>> extends Map<K, V> {
     Collection<? extends Tree<K, V, E>> subtrees(Object key);
 
     @Override
-    default E entry(final Object key) {
-        return this.entry(key, TreeSearch.DEFAULT);
+    default E getEntry(final Object key) {
+        return this.getEntry(key, TreeSearch.DEFAULT);
     }
 
-    default E entry(final Object key, final TreeSearch search) {
+    default E getEntry(final Object key, final TreeSearch search) {
         return search.findEntry(key, this);
     }
 

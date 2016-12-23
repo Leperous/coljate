@@ -37,8 +37,8 @@ public class LazyTransformedValueMap<K, V1, V2> implements LazyMap<K, V2> {
     }
 
     @Override
-    public Entry<K, V2> entry(final Object key) {
-        return this.transform(map.entry(key));
+    public Entry<K, V2> getEntry(final Object key) {
+        return this.transform(map.getEntry(key));
     }
 
     private Entry<K, V2> transform(final Entry<K, V1> entry) {

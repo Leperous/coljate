@@ -30,8 +30,8 @@ public class MutableMultimap<K, C extends Collection<?>>
     }
 
     @Override
-    public MutableEntry<K, C> entry(final Object key) {
-        return map.entry(key);
+    public MutableEntry<K, C> getEntry(final Object key) {
+        return map.getEntry(key);
     }
 
     @Override

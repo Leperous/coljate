@@ -30,7 +30,7 @@ public interface Map<K, V> extends Set<Entry<K, V>>, Associative<K, V> {
      * @param key
      * @return the entry associated with this key, or null if there is no such association.
      */
-    Entry<K, V> entry(Object key);
+    Entry<K, V> getEntry(Object key);
 
     /**
      * @return a view of the keys in this map.
@@ -44,16 +44,16 @@ public interface Map<K, V> extends Set<Entry<K, V>>, Associative<K, V> {
 
     @Override
     default V getIfPresent(final Object key) {
-        return Functions.ifNonNull(this.entry(key), Entry::value);
+        return Functions.ifNonNull(this.getEntry(key), Entry::value);
     }
 
     default V getOrDefault(final Object key, final Supplier<? extends V> supplier) {
-        final Entry<K, V> got = this.entry(key);
+        final Entry<K, V> got = this.getEntry(key);
         return got == null ? supplier.get() : got.value();
     }
 
     default V getOrDefault(final Object key, final V defaultValue) {
-        final Entry<K, V> got = this.entry(key);
+        final Entry<K, V> got = this.getEntry(key);
         return got == null ? defaultValue : got.value();
     }
 
@@ -64,7 +64,7 @@ public interface Map<K, V> extends Set<Entry<K, V>>, Associative<K, V> {
     }
 
     default boolean contains(final Object key, final Object value) {
-        final Entry<K, V> current = this.entry(key);
+        final Entry<K, V> current = this.getEntry(key);
         return current != null
                 && Objects.equals(current.key(), key)
                 && Objects.equals(current.value(), value);

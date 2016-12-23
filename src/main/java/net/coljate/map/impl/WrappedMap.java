@@ -40,7 +40,7 @@ public class WrappedMap<K, V>
 
     @Override
     @SuppressWarnings("unchecked")
-    public Entry<K, V> entry(final Object key) {
+    public Entry<K, V> getEntry(final Object key) {
         final V value = this.get(key);
         return value != null || this.containsKey(key)
                 ? new ImmutableEntry<>((K) key, value)

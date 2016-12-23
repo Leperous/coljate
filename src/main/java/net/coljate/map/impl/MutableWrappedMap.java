@@ -64,7 +64,7 @@ public class MutableWrappedMap<K, V>
 
     @Override
     @SuppressWarnings("unchecked")
-    public MutableEntry<K, V> entry(final Object key) {
+    public MutableEntry<K, V> getEntry(final Object key) {
         return delegate.containsKey(key)
                 ? new MutableWrappedEntry((K) key)
                 : null;

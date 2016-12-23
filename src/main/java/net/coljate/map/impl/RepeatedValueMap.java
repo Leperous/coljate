@@ -49,7 +49,7 @@ public class RepeatedValueMap<K, V>
 
     @Override
     @SuppressWarnings("unchecked")
-    public Entry<K, V> entry(final Object key) {
+    public Entry<K, V> getEntry(final Object key) {
         return keys.contains(key)
                 ? new ImmutableEntry<>((K) key, value)
                 : null;

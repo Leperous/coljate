@@ -47,8 +47,8 @@ public class LazyFilteredMap<K, V> implements LazyMap<K, V> {
     }
 
     @Override
-    public Entry<K, V> entry(final Object key) {
-        final Entry<K, V> entry = map.entry(key);
+    public Entry<K, V> getEntry(final Object key) {
+        final Entry<K, V> entry = map.getEntry(key);
         return this.test(entry) ? entry : null;
     }
 
@@ -86,7 +86,7 @@ public class LazyFilteredMap<K, V> implements LazyMap<K, V> {
 
         @Override
         public boolean contains(final Object object) {
-            return LazyFilteredMap.this.test(LazyFilteredMap.this.entry(object));
+            return LazyFilteredMap.this.test(LazyFilteredMap.this.getEntry(object));
         }
 
         @Override

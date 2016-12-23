@@ -38,7 +38,7 @@ public class ImmutableWrappedMap<K, V>
 
     @Override
     @SuppressWarnings({"unchecked", "element-type-mismatch"})
-    public ImmutableEntry<K, V> entry(final Object key) {
+    public ImmutableEntry<K, V> getEntry(final Object key) {
         final V value = map.get(key);
         return value == null && !map.containsKey(key)
                 ? null
