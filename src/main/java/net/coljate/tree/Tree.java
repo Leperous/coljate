@@ -28,8 +28,8 @@ public interface Tree<K, V, E extends Entry<K, V>> extends Map<K, V> {
         return this.getEntry(key, TreeNavigation.getDefault());
     }
 
-    default E getEntry(final Object key, final TreeNavigation search) {
-        return search.findEntry(key, this);
+    default E getEntry(final Object key, final TreeNavigation navigation) {
+        return navigation.findEntry(key, this);
     }
 
     default Set<E> entries(final TreeNavigation navigation) {
