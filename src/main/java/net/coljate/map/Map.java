@@ -120,7 +120,7 @@ public interface Map<K, V> extends Set<Entry<K, V>>, Associative<K, V> {
 
     @Override
     default ImmutableMap<K, V> immutableCopy() {
-        throw new UnsupportedOperationException(); //TODO default behaviour
+        return ImmutableWrappedMap.copyOf(this);
     }
 
     @Override

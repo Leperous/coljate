@@ -42,7 +42,7 @@ public interface Array<T> extends Indexed<T>, List<T> {
 
     @Override
     default ImmutableArray<T> immutableCopy() {
-        throw new UnsupportedOperationException(); //TODO
+        return ImmutableNativeArray.copyOf(this);
     }
 
     static <T> Array<T> repeated(final T value, final int count) {
