@@ -1,13 +1,13 @@
 package net.coljate.table;
 
-import net.coljate.collection.ImmutableCollection;
+import net.coljate.set.ImmutableSet;
 
 /**
  *
  * @author ollie
  */
 public interface ImmutableTable<R, C, V>
-        extends Table<R, C, V>, ImmutableCollection<Cell<R, C, V>> {
+        extends Table<R, C, V>, ImmutableSet<Cell<R, C, V>> {
 
     @Override
     ImmutableCell<R, C, V> cellIfPresent(Object row, Object column);

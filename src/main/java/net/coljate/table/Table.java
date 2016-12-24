@@ -1,13 +1,13 @@
 package net.coljate.table;
 
-import net.coljate.collection.Collection;
+import net.coljate.set.Set;
 import net.coljate.util.Functions;
 
 /**
  *
  * @author ollie
  */
-public interface Table<R, C, V> extends Collection<Cell<R, C, V>> {
+public interface Table<R, C, V> extends Set<Cell<R, C, V>> {
 
     @SuppressWarnings("unchecked")
     Cell<R, C, V> cellIfPresent(Object row, Object column);
