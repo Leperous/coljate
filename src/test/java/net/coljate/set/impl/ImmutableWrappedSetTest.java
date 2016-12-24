@@ -17,7 +17,7 @@ import org.junit.jupiter.api.Nested;
 public class ImmutableWrappedSetTest {
 
     @Nested
-    class OneElementTest extends SameObjectCreator implements ImmutableSetTest.OneElementTest<Object> {
+    class OneElementTest extends SameObjectCreator implements ImmutableSetTest.OneElementTests<Object> {
 
         @Override
         public ImmutableSet<Object> createTestCollection() {

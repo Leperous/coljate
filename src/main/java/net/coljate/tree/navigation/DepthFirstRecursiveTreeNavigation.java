@@ -2,8 +2,8 @@ package net.coljate.tree.navigation;
 
 import java.util.Objects;
 
+import net.coljate.list.MutableList;
 import net.coljate.map.Entry;
-import net.coljate.set.MutableSet;
 import net.coljate.tree.Tree;
 
 /**
@@ -32,17 +32,17 @@ public class DepthFirstRecursiveTreeNavigation implements TreeNavigation {
     }
 
     @Override
-    public <E extends Entry<?, ?>> MutableSet<E> collect(
+    public <E extends Entry<?, ?>> MutableList<E> collect(
             final Tree<?, ?, E> tree,
-            final MutableSet<E> set) {
+            final MutableList<E> list) {
         final E root = tree.root();
         if (root != null) {
-            set.add(root);
+            list.suffix(root);
             for (final Tree<?, ?, E> subtree : tree.subtrees(root.key())) {
-                this.collect(subtree, set);
+                this.collect(subtree, list);
             }
         }
-        return set;
+        return list;
     }
 
 }

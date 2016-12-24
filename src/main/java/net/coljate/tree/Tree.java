@@ -3,9 +3,9 @@ package net.coljate.tree;
 import java.util.Iterator;
 
 import net.coljate.collection.Collection;
+import net.coljate.list.MutableList;
 import net.coljate.map.Entry;
 import net.coljate.map.Map;
-import net.coljate.set.MutableSet;
 import net.coljate.set.Set;
 import net.coljate.tree.impl.EmptyTree;
 import net.coljate.tree.impl.SingletonTree;
@@ -32,8 +32,8 @@ public interface Tree<K, V, E extends Entry<K, V>> extends Map<K, V> {
         return navigation.findEntry(key, this);
     }
 
-    default Set<E> entries(final TreeNavigation navigation) {
-        return navigation.collect(this, MutableSet.createHashSet());
+    default Collection<E> entries(final TreeNavigation navigation) {
+        return navigation.collect(this, MutableList.create(10));
     }
 
     @Override

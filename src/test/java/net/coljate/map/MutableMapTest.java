@@ -16,7 +16,7 @@ public interface MutableMapTest<K, V> extends MapTest<K, V>, MutableSetTest<Entr
     @Override
     MutableMap<K, V> createTestCollection();
 
-    interface ZeroEntryTests<K, V> extends MutableMapTest<K, V>, MapTest.ZeroElementTests<K, V>, MutableSetTest.ZeroElementTests<Entry<K, V>> {
+    interface ZeroEntryTests<K, V> extends MutableMapTest<K, V>, MapTest.ZeroEntryTests<K, V>, MutableSetTest.ZeroElementTests<Entry<K, V>> {
 
         @Test
         default void testPut() {
@@ -29,7 +29,7 @@ public interface MutableMapTest<K, V> extends MapTest<K, V>, MutableSetTest<Entr
 
     }
 
-    interface OneEntryTests<K, V> extends MutableMapTest<K, V>, MapTest.OneElementTests<K, V>, MutableSetTest.OneElementTests<Entry<K, V>> {
+    interface OneEntryTests<K, V> extends MutableMapTest<K, V>, MapTest.OneEntryTests<K, V>, MutableSetTest.OneElementTests<Entry<K, V>> {
 
     }
 

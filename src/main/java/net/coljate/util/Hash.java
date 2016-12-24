@@ -18,8 +18,13 @@ public class Hash {
         return hashCode;
     }
 
+    @TimeComplexity(Complexity.LINEAR)
     public static int unorderedHash(final Iterable<?> iterable) {
-        throw new UnsupportedOperationException();
+        int hashCode = 0;
+        for (final Object element : iterable) {
+            hashCode += (element == null || element == iterable ? 0 : element.hashCode());
+        }
+        return hashCode;
     }
 
 }

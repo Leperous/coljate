@@ -1,6 +1,7 @@
 package net.coljate.tree.impl;
 
 import net.coljate.collection.ImmutableCollection;
+import net.coljate.map.Entry;
 import net.coljate.map.ImmutableEntry;
 import net.coljate.set.ImmutableSet;
 import net.coljate.tree.ImmutableTree;
@@ -12,6 +13,10 @@ import net.coljate.tree.ImmutableTree;
 public class ImmutableSubtree<K, V>
         extends Subtree<K, V, ImmutableSubtree<K, V>>
         implements ImmutableTree<K, V, ImmutableSubtree<K, V>>, ImmutableEntry<K, V> {
+
+    public static <K, V> ImmutableSubtree<K, V> of(final Entry<? extends K, ? extends V> entry) {
+        return of(entry.key(), entry.value());
+    }
 
     public static <K, V> ImmutableSubtree<K, V> of(final K key, final V value) {
         return new ImmutableSubtree<>(key, value, ImmutableSet.of());
@@ -42,6 +47,12 @@ public class ImmutableSubtree<K, V>
     @Override
     public ImmutableSubtree<K, V> with(final K key, final V value) {
         throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    @Deprecated
+    public ImmutableSubtree<K, V> immutableCopy() {
+        return this;
     }
 
 }
