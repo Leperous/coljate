@@ -7,15 +7,15 @@ import java.util.function.BiFunction;
 import java.util.function.BiPredicate;
 import java.util.function.Function;
 
+import net.coljate.collection.MutableCollection;
 import net.coljate.map.impl.MutableWrappedHashMap;
 import net.coljate.map.impl.MutableWrappedMap;
-import net.coljate.set.MutableSet;
 
 /**
  *
  * @author ollie
  */
-public interface MutableMap<K, V> extends Map<K, V>, MutableSet<Entry<K, V>> {
+public interface MutableMap<K, V> extends Map<K, V>, MutableCollection<Entry<K, V>> {
 
     V put(K key, V value);
 
@@ -29,7 +29,6 @@ public interface MutableMap<K, V> extends Map<K, V>, MutableSet<Entry<K, V>> {
                 && this.putIfAbsent(key, value) == null;
     }
 
-    @Override
     default boolean add(final Entry<K, V> entry) {
         return this.add(entry.key(), entry.value());
     }
