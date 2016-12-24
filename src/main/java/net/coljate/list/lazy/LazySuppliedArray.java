@@ -8,19 +8,19 @@ import net.coljate.util.Suppliers;
  *
  * @author ollie
  */
-public class LazyIndexedArray<T>
+public class LazySuppliedArray<T>
         implements LazyArray<T> {
 
     private static final Object COMPUTED_NULL = new Object();
 
-    public static <T> LazyIndexedArray<T> create(final int length, final IntFunction<? extends T> function) {
-        return new LazyIndexedArray<>(function, new Object[length]);
+    public static <T> LazySuppliedArray<T> create(final int length, final IntFunction<? extends T> function) {
+        return new LazySuppliedArray<>(function, new Object[length]);
     }
 
     private final IntFunction<? extends T> supplier;
     private final Object[] store;
 
-    protected LazyIndexedArray(final IntFunction<? extends T> supplier, final Object[] array) {
+    protected LazySuppliedArray(final IntFunction<? extends T> supplier, final Object[] array) {
         this.supplier = supplier;
         this.store = array;
     }
