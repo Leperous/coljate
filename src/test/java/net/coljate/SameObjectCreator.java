@@ -15,7 +15,7 @@ public class SameObjectCreator implements TestObjectCreator<Object> {
         object = new Object();
     }
 
-    public Object testObject() {
+    public Object getTestObject() {
         return object;
     }
 

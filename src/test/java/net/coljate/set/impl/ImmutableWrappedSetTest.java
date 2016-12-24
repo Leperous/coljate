@@ -21,7 +21,7 @@ public class ImmutableWrappedSetTest {
 
         @Override
         public ImmutableSet<Object> createTestCollection() {
-            return ImmutableWrappedSet.copyIntoHashSet(this.testObject());
+            return ImmutableWrappedSet.copyIntoHashSet(this.getTestObject());
         }
 
     }

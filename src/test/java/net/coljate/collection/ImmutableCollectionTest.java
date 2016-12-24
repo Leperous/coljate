@@ -6,7 +6,7 @@ package net.coljate.collection;
  */
 public interface ImmutableCollectionTest<T> extends CollectionTest<T> {
 
-    interface SingleElementTest<T> extends ImmutableCollectionTest<T>, CollectionTest.OneElementTests<T> {
+    interface OneElementTests<T> extends ImmutableCollectionTest<T>, CollectionTest.OneElementTests<T> {
 
     }
 
