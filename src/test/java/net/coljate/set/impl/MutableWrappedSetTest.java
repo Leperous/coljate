@@ -1,27 +1,26 @@
 package net.coljate.set.impl;
 
-import net.coljate.collection.AllCollectionSizeTest;
-import net.coljate.collection.ObjectCollectionTest;
+import net.coljate.NewObjectCreator;
 import net.coljate.set.MutableSet;
 import net.coljate.set.MutableSetTest;
+
+import org.junit.jupiter.api.Nested;
 
 /**
  *
  * @author ollie
  */
 @SuppressWarnings({"unchecked", "rawtypes"})
-public class MutableWrappedSetTest
-        extends ObjectCollectionTest
-        implements AllCollectionSizeTest<Object>, MutableSetTest<Object> {
+public class MutableWrappedSetTest {
 
-    @Override
-    public MutableWrappedSet<Object> create(final java.util.List<Object> elements) {
-        return MutableWrappedSet.copyIntoHashSet(elements);
-    }
+    @Nested
+    class ZeroElementTests extends NewObjectCreator implements MutableSetTest.ZeroElementTests<Object> {
 
-    @Override
-    public MutableSet<Object> create(final Object element) {
-        return MutableSetTest.super.create(element);
+        @Override
+        public MutableSet<Object> createTestCollection() {
+            return MutableWrappedSet.of();
+        }
+
     }
 
 }

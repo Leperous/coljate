@@ -14,7 +14,7 @@ public class ImmutableWrappedSet<T>
         implements ImmutableSet<T> {
 
     @SafeVarargs
-    public static <T> ImmutableSet<T> copyIntoHashSet(final T... elements) {
+    public static <T> ImmutableWrappedSet<T> copyIntoHashSet(final T... elements) {
         final java.util.Set<T> set = new java.util.HashSet<>(elements.length);
         Arrays.consume(elements, set::add);
         return new ImmutableWrappedSet<>(set);

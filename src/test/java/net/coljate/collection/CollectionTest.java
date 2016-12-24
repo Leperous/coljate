@@ -1,29 +1,59 @@
 package net.coljate.collection;
 
-import net.coljate.Tests;
+import java.util.Iterator;
+import java.util.NoSuchElementException;
+
+import static org.hamcrest.CoreMatchers.is;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import org.junit.jupiter.api.Test;
+
+import net.coljate.TestObjectCreator;
+
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
  *
  * @author ollie
  */
-public interface CollectionTest<T> extends Tests<T> {
+public interface CollectionTest<T> {
 
-    Collection<T> create(java.util.List<T> elements);
+    Collection<T> createTestCollection();
 
-    default Collection<T> create() {
-        return this.create(emptyList());
+    interface ZeroElementTests<T> extends CollectionTest<T> {
+
+        @Test
+        default void testCount() {
+            assertThat(this.createTestCollection().count(), is(0));
+        }
+
+        @Test
+        default void testIsEmpty() {
+            assertTrue(this.createTestCollection().isEmpty());
+        }
+
+        @Test
+        default void testIterator() {
+            final Iterator<T> iterator = this.createTestCollection().iterator();
+            assertFalse(iterator.hasNext());
+            assertThrows(NoSuchElementException.class, () -> iterator.next());
+        }
+
     }
 
-    default Collection<T> create(final T element) {
-        return this.create(singletonList(element));
-    }
+    interface OneElementTests<T> extends CollectionTest<T>, TestObjectCreator<T> {
 
-    default <T> java.util.List<T> emptyList() {
-        return java.util.Collections.emptyList();
-    }
+        @Test
+        default void testCount() {
+            assertThat(this.createTestCollection().count(), is(1));
+        }
 
-    default <T> java.util.List<T> singletonList(final T element) {
-        return java.util.Collections.singletonList(element);
+        @Test
+        default void testContains() {
+            assertTrue(this.createTestCollection().contains(this.createTestObject()));
+        }
+
     }
 
 }

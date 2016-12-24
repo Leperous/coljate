@@ -1,23 +1,17 @@
 package net.coljate.collection.impl;
 
-import net.coljate.collection.ObjectCollectionTest;
+import net.coljate.collection.EmptyTest;
 
 /**
  *
  * @author ollie
  */
-public class EmptyCollectionTest
-        extends ObjectCollectionTest
-        implements net.coljate.collection.EmptyCollectionTest<Object> {
+@SuppressWarnings({"unchecked", "rawtypes"})
+public class EmptyCollectionTest implements EmptyTest<Object> {
 
     @Override
-    public EmptyCollection<Object> create() {
+    public EmptyCollection<Object> createTestCollection() {
         return EmptyCollection.instance();
-    }
-
-    @Override
-    public Object createObject() {
-        return new Object();
     }
 
 }
