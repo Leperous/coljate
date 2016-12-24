@@ -1,11 +1,10 @@
-package net.coljate.map.impl;
+package net.coljate.map.lazy;
 
 import java.util.Iterator;
 import java.util.Objects;
 import java.util.function.Function;
 
 import net.coljate.collection.Collection;
-import net.coljate.map.ConcurrentCache;
 import net.coljate.map.ConcurrentMap;
 import net.coljate.map.Entry;
 import net.coljate.map.MutableEntry;

@@ -1,4 +1,6 @@
-package net.coljate.map;
+package net.coljate.map.lazy;
+
+import net.coljate.map.MutableMap;
 
 /**
  *

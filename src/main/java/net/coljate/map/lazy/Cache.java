@@ -1,4 +1,4 @@
-package net.coljate.map;
+package net.coljate.map.lazy;
 
 import net.coljate.collection.Collection;
 import net.coljate.set.Set;
@@ -8,7 +8,7 @@ import net.coljate.set.Set;
  *
  * @author ollie
  */
-public interface Cache<K, V> extends Map<K, V> {
+public interface Cache<K, V> extends LazyMap<K, V> {
 
     /**
      * @return currently loaded keys.

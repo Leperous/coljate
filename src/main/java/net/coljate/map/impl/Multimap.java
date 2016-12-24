@@ -8,7 +8,7 @@ import net.coljate.map.AbstractMap;
 import net.coljate.map.Entry;
 import net.coljate.map.MutableMap;
 import net.coljate.set.Set;
-import net.coljate.map.Cache;
+import net.coljate.map.lazy.Cache;
 
 /**
  *

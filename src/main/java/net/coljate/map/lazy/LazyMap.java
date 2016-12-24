@@ -11,6 +11,7 @@ import net.coljate.set.Set;
 import net.coljate.set.lazy.LazySet;
 
 /**
+ * A map whose key/value mappings are computed on the fly.
  *
  * @author Ollie
  */
