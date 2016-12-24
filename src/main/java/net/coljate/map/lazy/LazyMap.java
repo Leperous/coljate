@@ -3,18 +3,18 @@ package net.coljate.map.lazy;
 import java.util.function.Function;
 
 import net.coljate.collection.Collection;
-import net.coljate.collection.lazy.LazyCollection;
 import net.coljate.map.Entry;
 import net.coljate.map.ImmutableMap;
 import net.coljate.map.Map;
 import net.coljate.map.MutableMap;
 import net.coljate.set.Set;
+import net.coljate.set.lazy.LazySet;
 
 /**
  *
  * @author Ollie
  */
-public interface LazyMap<K, V> extends LazyCollection<Entry<K, V>>, Map<K, V> {
+public interface LazyMap<K, V> extends LazySet<Entry<K, V>>, Map<K, V> {
 
     @Override
     default MutableMap<K, V> mutableCopy() {

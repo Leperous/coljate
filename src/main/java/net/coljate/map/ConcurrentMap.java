@@ -4,8 +4,8 @@ import java.util.Spliterator;
 import java.util.Spliterators;
 import java.util.function.Function;
 
-import net.coljate.collection.ConcurrentCollection;
 import net.coljate.map.impl.ConcurrentWrappedHashMap;
+import net.coljate.set.ConcurrentSet;
 
 /**
  *
@@ -13,7 +13,7 @@ import net.coljate.map.impl.ConcurrentWrappedHashMap;
  * @see java.util.concurrent.ConcurrentMap
  */
 public interface ConcurrentMap<K, V>
-        extends MutableMap<K, V>, ConcurrentCollection<Entry<K, V>> {
+        extends MutableMap<K, V>, ConcurrentSet<Entry<K, V>> {
 
     @Override
     ConcurrentMap<K, V> mutableCopy();

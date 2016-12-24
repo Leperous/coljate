@@ -32,11 +32,11 @@ public interface MutableMap<K, V> extends Map<K, V>, MutableCollection<Entry<K, 
     default boolean add(final Entry<K, V> entry) {
         return this.add(entry.key(), entry.value());
     }
-    
+
     default boolean addAll(final Map<? extends K, ? extends V> map) {
         boolean addedAny = false;
         for (final Entry<? extends K, ? extends V> entry : map) {
-            addedAny |= this.add(entry.key(), entry.value());
+            addedAny &= this.add(entry.key(), entry.value());
         }
         return addedAny;
     }
