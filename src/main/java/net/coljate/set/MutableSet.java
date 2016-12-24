@@ -33,7 +33,7 @@ public interface MutableSet<T> extends Set<T>, MutableCollection<T> {
     default boolean addAll(final Iterable<? extends T> elements) {
         boolean addedAny = false;
         for (final T element : elements) {
-            addedAny &= this.add(element);
+            addedAny |= this.add(element);
         }
         return addedAny;
     }

@@ -60,5 +60,5 @@ public interface MutableMapTest<K, V>
         final V removedValue = map.evict(entry.key());
         assertThat("Remove should return " + entry.value(), removedValue, is(entry.value()));
     }
-
+    
 }
