@@ -2,6 +2,7 @@ package net.coljate.collection;
 
 import java.util.Iterator;
 import java.util.NoSuchElementException;
+import java.util.Objects;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -57,6 +58,10 @@ public interface CollectionTest<T> {
         @Test
         default void testCount() {
             assertThat(this.createTestCollection().count(), is(1));
+        }
+
+        default void testCount_Element() {
+            assertThat(this.createTestCollection().count(e -> Objects.equals(e, this.getCollectionElement())), is(1));
         }
 
         @Test
