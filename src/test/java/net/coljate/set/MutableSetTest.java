@@ -24,7 +24,11 @@ public interface MutableSetTest<T> extends SetTest<T>, MutableCollectionTest<T> 
             assertTrue(set.add(element));
             assertFalse(set.add(element));
         }
-        
+
+    }
+
+    interface OneElementTests<T> extends MutableSetTest<T>, SetTest.OneElementTests<T>, MutableCollectionTest.OneElementTests<T> {
+
     }
 
 }

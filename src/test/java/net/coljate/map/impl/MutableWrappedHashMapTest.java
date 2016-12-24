@@ -14,7 +14,7 @@ import org.junit.jupiter.api.Nested;
 public class MutableWrappedHashMapTest {
 
     @Nested
-    class ZeroElementTest extends NewObjectEntryCreator implements MutableMapTest.ZeroElementTests<Object, Object> {
+    class ZeroElementTest extends NewObjectEntryCreator implements MutableMapTest.ZeroEntryTests<Object, Object> {
 
         @Override
         public MutableMap<Object, Object> createTestCollection() {

@@ -32,7 +32,7 @@ public class ChainedHashMap<K, V>
     public static <K, V> ChainedHashMap<K, V> create(final int initialCapacity) {
         return new ChainedHashMap<>(initialCapacity);
     }
-
+    
     public static <K, V> ChainedHashMap<K, V> copyOf(final java.util.Collection<? extends Entry<K, V>> entries) {
         final ChainedHashMap<K, V> map = create(entries.size());
         map.addAll(entries);

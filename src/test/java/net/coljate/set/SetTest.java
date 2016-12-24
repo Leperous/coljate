@@ -20,7 +20,7 @@ public interface SetTest<T> extends CollectionTest<T> {
 
     }
 
-    interface SingleElementTests<T> extends SetTest<T>, CollectionTest.OneElementTests<T> {
+    interface OneElementTests<T> extends SetTest<T>, CollectionTest.OneElementTests<T> {
 
     }
 

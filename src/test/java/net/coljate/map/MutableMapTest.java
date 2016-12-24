@@ -2,6 +2,11 @@ package net.coljate.map;
 
 import net.coljate.set.MutableSetTest;
 
+import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import org.junit.jupiter.api.Test;
+
 /**
  *
  * @author ollie
@@ -11,7 +16,20 @@ public interface MutableMapTest<K, V> extends MapTest<K, V>, MutableSetTest<Entr
     @Override
     MutableMap<K, V> createTestCollection();
 
-    interface ZeroElementTests<K, V> extends MutableMapTest<K, V>, MapTest.ZeroElementTests<K, V>, MutableSetTest.ZeroElementTests<Entry<K, V>> {
+    interface ZeroEntryTests<K, V> extends MutableMapTest<K, V>, MapTest.ZeroElementTests<K, V>, MutableSetTest.ZeroElementTests<Entry<K, V>> {
+
+        @Test
+        default void testPut() {
+            final MutableMap<K, V> map = this.createTestCollection();
+            final Entry<K, V> entry = this.createTestObject();
+            final V previous = map.put(entry.key(), entry.value());
+            assertNull(previous);
+            assertThat(map.get(entry.key()), is(entry.value()));
+        }
+
+    }
+
+    interface OneEntryTests<K, V> extends MutableMapTest<K, V>, MapTest.OneElementTests<K, V>, MutableSetTest.OneElementTests<Entry<K, V>> {
 
     }
 
