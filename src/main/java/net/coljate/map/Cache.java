@@ -4,11 +4,11 @@ import net.coljate.collection.Collection;
 import net.coljate.set.Set;
 
 /**
- * A map whose values are computed. Also known as a lazy map.
+ * A map whose values are computed. Also known as a lazy map or loading cache.
  *
  * @author ollie
  */
-public interface LoadingCache<K, V> extends Map<K, V> {
+public interface Cache<K, V> extends Map<K, V> {
 
     /**
      * @return currently loaded keys.

@@ -6,9 +6,9 @@ import java.util.function.Supplier;
 import net.coljate.collection.Collection;
 import net.coljate.map.AbstractMap;
 import net.coljate.map.Entry;
-import net.coljate.map.LoadingCache;
 import net.coljate.map.MutableMap;
 import net.coljate.set.Set;
+import net.coljate.map.Cache;
 
 /**
  *
@@ -16,7 +16,7 @@ import net.coljate.set.Set;
  */
 public class Multimap<K, C extends Collection<?>>
         extends AbstractMap<K, C>
-        implements LoadingCache<K, C> {
+        implements Cache<K, C> {
 
     private final Supplier<? extends C> createCollection;
     final MutableMap<K, C> map;

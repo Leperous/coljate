@@ -1,5 +1,6 @@
 package net.coljate.map.impl;
 
+import net.coljate.collection.Collection;
 import net.coljate.map.ConcurrentMap;
 import net.coljate.map.Entry;
 
@@ -23,6 +24,12 @@ public class ConcurrentWrappedHashMap<K, V>
 
     public static <K, V> ConcurrentWrappedHashMap<K, V> copyOf(final java.util.Collection<? extends Entry<? extends K, ? extends V>> entries) {
         final ConcurrentWrappedHashMap<K, V> map = create(entries.size());
+        entries.forEach(entry -> map.put(entry.key(), entry.value()));
+        return map;
+    }
+
+    public static <K, V> ConcurrentWrappedHashMap<K, V> copyOf(final Collection<? extends Entry<? extends K, ? extends V>> entries) {
+        final ConcurrentWrappedHashMap<K, V> map = create(entries.count());
         entries.forEach(entry -> map.put(entry.key(), entry.value()));
         return map;
     }

@@ -5,23 +5,24 @@ import java.util.Objects;
 import java.util.function.Function;
 
 import net.coljate.collection.Collection;
+import net.coljate.map.ConcurrentCache;
 import net.coljate.map.ConcurrentMap;
 import net.coljate.map.Entry;
-import net.coljate.map.ImmutableEntry;
-import net.coljate.map.LoadingCache;
+import net.coljate.map.MutableEntry;
 import net.coljate.set.Set;
+import net.coljate.util.Functions;
 import net.coljate.util.Iterators;
 
 /**
  *
  * @author ollie
  */
-public class ConcurrentLoadingCache<K, V> implements LoadingCache<K, V> {
+public class ConcurrentMutableMapBackedCache<K, V> implements ConcurrentCache<K, V> {
 
     private final ConcurrentMap<K, Computer<K, V>> map = ConcurrentMap.createHashMap(10);
     private final Function<? super K, ? extends V> valueFunction;
 
-    public ConcurrentLoadingCache(final Function<? super K, ? extends V> valueFunction) {
+    public ConcurrentMutableMapBackedCache(final Function<? super K, ? extends V> valueFunction) {
         this.valueFunction = valueFunction;
     }
 
@@ -34,6 +35,21 @@ public class ConcurrentLoadingCache<K, V> implements LoadingCache<K, V> {
     public V getIfPresent(final Object key) {
         final Computer<K, V> holder = map.getIfPresent(key);
         return holder == null ? null : holder.current();
+    }
+
+    @Override
+    public V put(final K key, final V value) {
+        return Functions.ifNonNull(map.put(key, new Computed<>(value)), Computer::current);
+    }
+
+    @Override
+    public boolean remove(final Object key, final Object value) {
+        return map.remove(key, new Computed<>(value));
+    }
+
+    @Override
+    public void clear() {
+        map.clear();
     }
 
     @Override
@@ -61,7 +77,22 @@ public class ConcurrentLoadingCache<K, V> implements LoadingCache<K, V> {
     }
 
     @Override
-    public Entry<K, V> getEntry(final Object key) {
+    public V putIfAbsent(final K key, final V value) {
+        return Functions.ifNonNull(map.putIfAbsent(key, new Computed<>(value)), Computer::current);
+    }
+
+    @Override
+    public V computeIfAbsent(K key, Function<K, V> supplier) {
+        return Functions.ifNonNull(map.computeIfAbsent(key, k -> new Computed<>(supplier.apply(k))), Computer::current);
+    }
+
+    @Override
+    public boolean replace(final K key, final V expectedValue, final V replacementValue) {
+        return map.replace(key, new Computed<>(expectedValue), new Computed<>(replacementValue));
+    }
+
+    @Override
+    public MutableEntry<K, V> getEntry(final Object key) {
         return this.translate(map.getEntry(key));
     }
 
@@ -70,10 +101,10 @@ public class ConcurrentLoadingCache<K, V> implements LoadingCache<K, V> {
         return Iterators.filter(Iterators.transform(map.iterator(), this::translate), Objects::nonNull);
     }
 
-    private ImmutableEntry<K, V> translate(final Entry<K, Computer<K, V>> entry) {
-        return entry == null || entry.value().isComputing()
+    private MutableEntry<K, V> translate(final Entry<K, Computer<K, V>> entry) {
+        return entry == null
                 ? null
-                : ImmutableEntry.of(entry.key(), entry.value().current());
+                : new EntryWriter(entry.key());
     }
 
     private interface Computer<K, V> {
@@ -100,7 +131,7 @@ public class ConcurrentLoadingCache<K, V> implements LoadingCache<K, V> {
         public V compute(final K key) {
             synchronized (lock) {
                 if (timesAccessed++ > 1) {
-                    return ConcurrentLoadingCache.this.get(key);
+                    return ConcurrentMutableMapBackedCache.this.get(key);
                 }
                 final V value = valueFunction.apply(key);
                 map.put(key, new Computed<>(value));
@@ -136,6 +167,44 @@ public class ConcurrentLoadingCache<K, V> implements LoadingCache<K, V> {
         @Override
         public boolean isComputing() {
             return false;
+        }
+
+        @Override
+        public int hashCode() {
+            int hash = 5;
+            hash = 89 * hash + Objects.hashCode(this.value);
+            return hash;
+        }
+
+        @Override
+        public boolean equals(Object obj) {
+            return obj instanceof Computed
+                    && Objects.equals(value, ((Computed) obj).value);
+        }
+
+    }
+
+    private final class EntryWriter implements MutableEntry<K, V> {
+
+        private final K key;
+
+        EntryWriter(final K key) {
+            this.key = key;
+        }
+
+        @Override
+        public K key() {
+            return key;
+        }
+
+        @Override
+        public V value() {
+            return get(key);
+        }
+
+        @Override
+        public void setValue(final V value) {
+            put(key, value);
         }
 
     }
