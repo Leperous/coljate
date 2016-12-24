@@ -64,6 +64,34 @@ public interface CollectionTest<T> {
             assertTrue(this.createTestCollection().contains(this.getCollectionElement()));
         }
 
+        @Test
+        default void testIterator() {
+            final Iterator<T> iterator = this.createTestCollection().iterator();
+            assertTrue(iterator.hasNext());
+            assertThat(iterator.next(), is(this.getCollectionElement()));
+            assertFalse(iterator.hasNext());
+            assertThrows(NoSuchElementException.class, () -> iterator.next());
+        }
+
+        @Test
+        default void testIterator_HasNextRepeatable() {
+            final Iterator<T> iterator = this.createTestCollection().iterator();
+            assertTrue(iterator.hasNext());
+            assertTrue(iterator.hasNext());
+            assertTrue(iterator.hasNext());
+            iterator.next();
+            assertFalse(iterator.hasNext());
+            assertFalse(iterator.hasNext());
+            assertFalse(iterator.hasNext());
+        }
+
+        @Test
+        default void testIterator_NextWithoutHaveNext() {
+            final Iterator<T> iterator = this.createTestCollection().iterator();
+            assertThat(iterator.next(), is(this.getCollectionElement()));
+            assertThrows(NoSuchElementException.class, () -> iterator.next());
+        }
+
     }
 
 }
