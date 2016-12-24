@@ -1,6 +1,6 @@
 package net.coljate.map;
 
-import net.coljate.collection.CollectionTest;
+import net.coljate.set.SetTest;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -12,16 +12,16 @@ import org.junit.jupiter.api.Test;
  *
  * @author ollie
  */
-public interface MapTest<K, V> extends CollectionTest<Entry<K, V>> {
+public interface MapTest<K, V> extends SetTest<Entry<K, V>> {
 
     @Override
     Map<K, V> createTestCollection();
 
-    interface ZeroElementTests<K, V> extends MapTest<K, V>, CollectionTest.ZeroElementTests<Entry<K, V>> {
+    interface ZeroElementTests<K, V> extends MapTest<K, V>, SetTest.ZeroElementTests<Entry<K, V>> {
 
     }
 
-    interface OneElementTests<K, V> extends MapTest<K, V>, CollectionTest.OneElementTests<Entry<K, V>> {
+    interface OneElementTests<K, V> extends MapTest<K, V>, SetTest.OneElementTests<Entry<K, V>> {
 
         @Test
         default void testKeys() {
