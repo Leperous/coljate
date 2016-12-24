@@ -21,6 +21,12 @@ public class MutableAtomicArray<T>
         return new MutableAtomicArray<>(new AtomicReferenceArray<>(length));
     }
 
+    public static <T> MutableAtomicArray<T> copyOf(final java.util.Collection<? extends T> collection) {
+        @SuppressWarnings("unchecked")
+        final AtomicReferenceArray<T> array = new AtomicReferenceArray<>((T[]) collection.toArray());
+        return new MutableAtomicArray<>(array);
+    }
+
     @SafeVarargs
     public static <T> MutableAtomicArray<T> copyOf(final T... elements) {
         final AtomicReferenceArray<T> array = new AtomicReferenceArray<>(elements);

@@ -35,7 +35,7 @@ public class SingletonArray<T>
     @Override
     public T get(final int index) {
         if (index != 0) {
-            throw new NoSuchElementException();
+            throw new IndexOutOfBoundsException("Singleton collection with index = " + index + " != 0");
         }
         return element;
     }
