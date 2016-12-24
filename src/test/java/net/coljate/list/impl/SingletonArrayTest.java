@@ -13,7 +13,7 @@ public class SingletonArrayTest extends SameObjectCreator implements ImmutableAr
 
     @Override
     public ImmutableArray<Object> createTestCollection() {
-        return SingletonArray.of(this.getTestObject());
+        return SingletonArray.of(this.getCollectionElement());
     }
 
 }

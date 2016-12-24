@@ -41,7 +41,7 @@ public interface CollectionTest<T> {
 
     interface OneElementTests<T> extends CollectionTest<T> {
 
-        T getTestObject();
+        T getCollectionElement();
 
         @Test
         default void testCount() {
@@ -50,7 +50,7 @@ public interface CollectionTest<T> {
 
         @Test
         default void testContains() {
-            assertTrue(this.createTestCollection().contains(this.getTestObject()));
+            assertTrue(this.createTestCollection().contains(this.getCollectionElement()));
         }
 
     }

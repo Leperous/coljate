@@ -6,23 +6,17 @@ import org.junit.jupiter.api.BeforeEach;
  *
  * @author ollie
  */
-public class SameObjectCreator implements TestObjectCreator<Object> {
+public class SameObjectCreator extends NewObjectCreator {
 
-    private Object object;
+    private Object sameObject;
 
     @BeforeEach
     public final void resetObject() {
-        object = new Object();
+        sameObject = this.createTestObject();
     }
 
-    public Object getTestObject() {
-        return object;
-    }
-
-    @Override
-    @Deprecated
-    public Object createTestObject() {
-        return object;
+    public Object getCollectionElement() {
+        return sameObject;
     }
 
 }

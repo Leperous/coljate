@@ -22,7 +22,7 @@ public interface ArrayTest<T> extends ListTest<T> {
 
         @Test
         default void testGet() {
-            assertThat(this.createTestCollection().get(0), is(this.getTestObject()));
+            assertThat(this.createTestCollection().get(0), is(this.getCollectionElement()));
         }
 
         @Test
