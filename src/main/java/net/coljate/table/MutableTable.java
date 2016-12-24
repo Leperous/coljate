@@ -2,18 +2,17 @@ package net.coljate.table;
 
 import java.util.Objects;
 
-import net.coljate.set.MutableSet;
+import net.coljate.collection.MutableCollection;
 
 /**
  *
  * @author ollie
  */
 public interface MutableTable<R, C, V>
-        extends Table<R, C, V>, MutableSet<Cell<R, C, V>> {
+        extends Table<R, C, V>, MutableCollection<Cell<R, C, V>> {
 
     V put(R rowKey, C columnKey, V value);
 
-    @Override
     default boolean add(final Cell<R, C, V> cell) {
         return this.addCell(cell);
     }
@@ -29,13 +28,6 @@ public interface MutableTable<R, C, V>
     }
 
     boolean remove(Object rowKey, Object columnKey, Object value);
-
-    @Override
-    @Deprecated
-    default boolean remove(final Object object) {
-        return object instanceof Cell
-                && this.remove((Cell) object);
-    }
 
     default boolean remove(final Cell<?, ?, ?> cell) {
         return this.remove(cell.rowKey(), cell.columnKey(), cell.value());
