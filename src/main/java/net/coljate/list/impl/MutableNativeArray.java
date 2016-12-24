@@ -1,5 +1,6 @@
 package net.coljate.list.impl;
 
+import java.util.NoSuchElementException;
 import java.util.Objects;
 
 import net.coljate.list.AbstractArray;
@@ -45,6 +46,10 @@ public class MutableNativeArray<T>
     @Override
     public Object[] arrayCopy() {
         return Arrays.copyOf(array);
+    }
+
+    public boolean isOutOfBounds(final int index) {
+        return index < 0 || index >= array.length;
     }
 
     @Override
@@ -160,6 +165,9 @@ public class MutableNativeArray<T>
 
         @Override
         public T next() {
+            if (isOutOfBounds(index)) {
+                throw new NoSuchElementException();
+            }
             return get(index++);
         }
 
