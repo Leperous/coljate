@@ -4,7 +4,6 @@ import net.coljate.collection.Collection;
 import net.coljate.collection.MutableCollection;
 import net.coljate.map.Entry;
 import net.coljate.map.MutableEntry;
-import net.coljate.map.MutableMap;
 import net.coljate.map.impl.MapIterator;
 import net.coljate.util.iterator.CovariantIterator;
 
@@ -13,7 +12,7 @@ import net.coljate.util.iterator.CovariantIterator;
  * @author ollie
  */
 public interface MutableMultimap<K, V>
-        extends Multimap<K, V>, MutableMap<K, Collection<V>> {
+        extends Multimap<K, V>, MutableCache<K, Collection<V>> {
 
     @Override
     MutableMultimapEntry<K, V, ?> getEntry(Object key);
