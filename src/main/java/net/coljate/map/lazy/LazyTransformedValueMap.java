@@ -11,7 +11,7 @@ import net.coljate.map.Entry;
 import net.coljate.map.ImmutableEntry;
 import net.coljate.map.Map;
 import net.coljate.set.Set;
-import net.coljate.util.Iterators;
+import net.coljate.util.iterator.Iterators;
 
 /**
  *

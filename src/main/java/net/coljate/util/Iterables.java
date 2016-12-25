@@ -1,5 +1,6 @@
 package net.coljate.util;
 
+import net.coljate.util.iterator.Iterators;
 import net.coljate.collection.Collection;
 
 /**

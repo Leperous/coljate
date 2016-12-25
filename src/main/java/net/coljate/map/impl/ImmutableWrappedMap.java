@@ -1,6 +1,6 @@
 package net.coljate.map.impl;
 
-import net.coljate.UnmodifiableIterator;
+import net.coljate.util.iterator.UnmodifiableIterator;
 import net.coljate.collection.Collection;
 import net.coljate.collection.ImmutableCollection;
 import net.coljate.map.AbstractMap;

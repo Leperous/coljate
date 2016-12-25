@@ -7,9 +7,11 @@ import java.util.function.BiFunction;
 import java.util.function.BiPredicate;
 import java.util.function.Function;
 
+import net.coljate.map.impl.MapIterator;
 import net.coljate.map.impl.MutableWrappedHashMap;
 import net.coljate.map.impl.MutableWrappedMap;
 import net.coljate.set.MutableSet;
+import net.coljate.util.iterator.CovariantIterator;
 
 /**
  *
@@ -127,6 +129,11 @@ public interface MutableMap<K, V> extends Map<K, V>, MutableSet<Entry<K, V>> {
     @Override
     default Spliterator<Entry<K, V>> spliterator() {
         return Map.super.spliterator();
+    }
+
+    @Override
+    default CovariantIterator<Entry<K, V>, ? extends MutableEntry<K, V>> iterator() {
+        return new MapIterator<>(this.keys(), this::getEntry);
     }
 
     static <K, V> MutableMap<K, V> viewOf(final java.util.Map<K, V> map) {

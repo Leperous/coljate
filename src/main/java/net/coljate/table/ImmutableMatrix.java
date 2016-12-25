@@ -1,6 +1,6 @@
 package net.coljate.table;
 
-import net.coljate.UnmodifiableIterator;
+import net.coljate.util.iterator.UnmodifiableIterator;
 import net.coljate.util.Functions;
 
 /**

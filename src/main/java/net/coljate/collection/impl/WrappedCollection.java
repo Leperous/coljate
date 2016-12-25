@@ -3,7 +3,7 @@ package net.coljate.collection.impl;
 import java.util.Iterator;
 import java.util.Spliterator;
 
-import net.coljate.UnmodifiableIterator;
+import net.coljate.util.iterator.UnmodifiableIterator;
 import net.coljate.collection.Collection;
 import net.coljate.collection.ImmutableCollection;
 import net.coljate.collection.MutableCollection;

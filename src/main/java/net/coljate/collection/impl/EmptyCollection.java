@@ -1,6 +1,6 @@
 package net.coljate.collection.impl;
 
-import net.coljate.UnmodifiableIterator;
+import net.coljate.util.iterator.UnmodifiableIterator;
 import net.coljate.collection.AbstractCollection;
 import net.coljate.collection.Empty;
 import net.coljate.collection.MutableCollection;

@@ -4,7 +4,6 @@ import java.io.Serializable;
 import java.util.function.Function;
 import java.util.function.Predicate;
 
-import net.coljate.UnmodifiableIterator;
 import net.coljate.collection.Empty;
 import net.coljate.collection.ImmutableCollection;
 import net.coljate.map.AbstractMap;
@@ -12,6 +11,7 @@ import net.coljate.map.Entry;
 import net.coljate.map.ImmutableEntry;
 import net.coljate.map.ImmutableMap;
 import net.coljate.set.ImmutableSet;
+import net.coljate.util.iterator.UnmodifiableIterator;
 
 /**
  *

@@ -3,7 +3,7 @@ package net.coljate.collection;
 import java.util.function.Function;
 import java.util.function.Predicate;
 
-import net.coljate.UnmodifiableIterator;
+import net.coljate.util.iterator.UnmodifiableIterator;
 import net.coljate.feature.complexity.Complexity;
 import net.coljate.feature.complexity.TimeComplexity;
 

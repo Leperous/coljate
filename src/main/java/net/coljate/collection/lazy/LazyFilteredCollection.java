@@ -4,7 +4,7 @@ import java.util.Iterator;
 import java.util.function.Predicate;
 
 import net.coljate.collection.Collection;
-import net.coljate.util.Iterators;
+import net.coljate.util.iterator.Iterators;
 
 /**
  *

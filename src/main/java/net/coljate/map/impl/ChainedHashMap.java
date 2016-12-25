@@ -17,8 +17,9 @@ import net.coljate.map.MutableEntry;
 import net.coljate.map.MutableMap;
 import net.coljate.set.AbstractSet;
 import net.coljate.set.Set;
+import net.coljate.util.iterator.CovariantIterator;
 import net.coljate.util.Functions;
-import net.coljate.util.Iterators;
+import net.coljate.util.iterator.Iterators;
 
 /**
  *
@@ -32,7 +33,7 @@ public class ChainedHashMap<K, V>
     public static <K, V> ChainedHashMap<K, V> create(final int initialCapacity) {
         return new ChainedHashMap<>(initialCapacity);
     }
-    
+
     public static <K, V> ChainedHashMap<K, V> copyOf(final java.util.Collection<? extends Entry<K, V>> entries) {
         final ChainedHashMap<K, V> map = create(entries.size());
         map.addAll(entries);
@@ -142,11 +143,11 @@ public class ChainedHashMap<K, V>
     }
 
     @Override
-    public Iterator<Entry<K, V>> iterator() {
+    public CovariantIterator<Entry<K, V>, MutableEntry<K, V>> iterator() {
         return new EntryIterator();
     }
 
-    private final class EntryIterator implements Iterator<Entry<K, V>> {
+    private final class EntryIterator implements CovariantIterator<Entry<K, V>, MutableEntry<K, V>> {
 
         int index = 0;
         Iterator<MutableEntry<K, V>> entryIterator;

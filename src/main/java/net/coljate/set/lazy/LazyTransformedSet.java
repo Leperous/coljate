@@ -6,7 +6,7 @@ import java.util.function.Function;
 import net.coljate.collection.Collection;
 import net.coljate.collection.lazy.LazyTransformedCollection;
 import net.coljate.set.MutableSet;
-import net.coljate.util.Iterators;
+import net.coljate.util.iterator.Iterators;
 
 /**
  *

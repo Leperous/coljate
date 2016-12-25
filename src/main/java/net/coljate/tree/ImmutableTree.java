@@ -1,11 +1,11 @@
 package net.coljate.tree;
 
-import net.coljate.UnmodifiableIterator;
 import net.coljate.collection.ImmutableCollection;
 import net.coljate.map.Entry;
 import net.coljate.map.ImmutableEntry;
 import net.coljate.map.ImmutableMap;
 import net.coljate.set.ImmutableSet;
+import net.coljate.util.iterator.UnmodifiableCovariantIterator;
 
 /**
  *
@@ -40,8 +40,8 @@ public interface ImmutableTree<K, V, E extends ImmutableEntry<K, V>>
     }
 
     @Override
-    default UnmodifiableIterator<Entry<K, V>> iterator() {
-        return UnmodifiableIterator.wrap(Tree.super.iterator());
+    default UnmodifiableCovariantIterator<Entry<K, V>, E> iterator() {
+        return UnmodifiableCovariantIterator.wrap(Tree.super.iterator());
     }
 
     @Override

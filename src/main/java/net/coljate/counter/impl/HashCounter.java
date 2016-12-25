@@ -9,7 +9,7 @@ import net.coljate.counter.ImmutableCounter;
 import net.coljate.counter.MutableCounter;
 import net.coljate.map.Entry;
 import net.coljate.map.Map;
-import net.coljate.util.Iterators.EnhancedIterator;
+import net.coljate.util.iterator.Iterators.EnhancedIterator;
 import net.coljate.util.Suppliers;
 
 /**
@@ -50,7 +50,7 @@ public class HashCounter<T>
         return this.enhancedIterator();
     }
 
-    protected EnhancedIterator<T> enhancedIterator() {
+    protected EnhancedIterator<T, T> enhancedIterator() {
         return new MultisetIterator();
     }
 
@@ -64,7 +64,7 @@ public class HashCounter<T>
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
-    private final class MultisetIterator implements EnhancedIterator<T> {
+    private final class MultisetIterator implements EnhancedIterator<T, T> {
 
         final Iterator<Entry<T, Integer>> mapIterator = map.iterator();
         T currentElement;

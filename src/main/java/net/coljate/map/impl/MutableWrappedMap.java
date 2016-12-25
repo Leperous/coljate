@@ -4,8 +4,10 @@ import java.util.function.Function;
 
 import net.coljate.collection.MutableCollection;
 import net.coljate.map.AbstractEntry;
+import net.coljate.map.Entry;
 import net.coljate.map.MutableEntry;
 import net.coljate.map.MutableMap;
+import net.coljate.util.iterator.CovariantIterator;
 
 /**
  *
@@ -82,6 +84,11 @@ public class MutableWrappedMap<K, V>
         return values == null
                 ? (values = MutableCollection.viewOf(delegate.values()))
                 : values;
+    }
+
+    @Override
+    public CovariantIterator<Entry<K, V>, ? extends MutableEntry<K, V>> iterator() {
+        return MutableMap.super.iterator();
     }
 
     protected class MutableWrappedEntry

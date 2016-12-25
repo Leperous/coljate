@@ -3,7 +3,7 @@ package net.coljate.collection.impl;
 import java.util.NoSuchElementException;
 import java.util.Objects;
 
-import net.coljate.UnmodifiableIterator;
+import net.coljate.util.iterator.UnmodifiableIterator;
 import net.coljate.collection.AbstractCollection;
 import net.coljate.collection.MutableCollection;
 import net.coljate.collection.Singleton;

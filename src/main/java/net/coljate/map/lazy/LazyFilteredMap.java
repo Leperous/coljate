@@ -12,7 +12,7 @@ import net.coljate.map.Map;
 import net.coljate.set.AbstractSet;
 import net.coljate.set.Set;
 import net.coljate.set.lazy.LazySet;
-import net.coljate.util.Iterators;
+import net.coljate.util.iterator.Iterators;
 
 /**
  *

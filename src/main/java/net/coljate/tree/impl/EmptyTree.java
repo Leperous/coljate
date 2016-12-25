@@ -3,7 +3,6 @@ package net.coljate.tree.impl;
 import java.io.Serializable;
 import java.util.function.Predicate;
 
-import net.coljate.UnmodifiableIterator;
 import net.coljate.collection.Collection;
 import net.coljate.collection.Empty;
 import net.coljate.collection.ImmutableCollection;
@@ -12,6 +11,7 @@ import net.coljate.map.ImmutableEntry;
 import net.coljate.tree.AbstractTree;
 import net.coljate.tree.ImmutableTree;
 import net.coljate.tree.Tree;
+import net.coljate.util.iterator.UnmodifiableCovariantIterator;
 
 /**
  *
@@ -50,8 +50,8 @@ public class EmptyTree<K, V>
     }
 
     @Override
-    public UnmodifiableIterator<Entry<K, V>> iterator() {
-        return Empty.super.iterator();
+    public UnmodifiableCovariantIterator<Entry<K, V>, ImmutableEntry<K, V>> iterator() {
+        return UnmodifiableCovariantIterator.wrap(Empty.super.iterator(), Entry::immutableCopy);
     }
 
     @Override

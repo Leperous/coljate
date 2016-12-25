@@ -1,5 +1,7 @@
 package net.coljate.util;
 
+import net.coljate.util.iterator.Iterators;
+
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 

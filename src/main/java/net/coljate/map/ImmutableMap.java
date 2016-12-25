@@ -3,10 +3,11 @@ package net.coljate.map;
 import java.util.Spliterator;
 import java.util.Spliterators;
 
-import net.coljate.UnmodifiableIterator;
 import net.coljate.collection.ImmutableCollection;
 import net.coljate.map.impl.EmptyMap;
+import net.coljate.map.impl.ImmutableMapIterator;
 import net.coljate.set.ImmutableSet;
+import net.coljate.util.iterator.UnmodifiableIterator;
 
 /**
  *
@@ -38,7 +39,7 @@ public interface ImmutableMap<K, V> extends Map<K, V>, ImmutableSet<Entry<K, V>>
 
     @Override
     default UnmodifiableIterator<Entry<K, V>> iterator() {
-        return UnmodifiableIterator.wrap(Map.super.iterator());
+        return new ImmutableMapIterator<>(this.keys(), this::getEntry);
     }
 
     @Override

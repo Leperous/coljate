@@ -9,7 +9,7 @@ import net.coljate.feature.complexity.Complexity;
 import net.coljate.feature.complexity.TimeComplexity;
 import net.coljate.map.Map;
 import net.coljate.map.MutableMap;
-import net.coljate.util.Iterators;
+import net.coljate.util.iterator.Iterators;
 
 /**
  *

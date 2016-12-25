@@ -10,8 +10,9 @@ import net.coljate.map.ConcurrentMap;
 import net.coljate.map.Entry;
 import net.coljate.map.MutableEntry;
 import net.coljate.set.Set;
+import net.coljate.util.iterator.CovariantIterator;
 import net.coljate.util.Functions;
-import net.coljate.util.Iterators;
+import net.coljate.util.iterator.Iterators;
 
 /**
  *
@@ -97,8 +98,10 @@ public class ConcurrentMutableMapBackedCache<K, V> implements ConcurrentCache<K,
     }
 
     @Override
-    public Iterator<Entry<K, V>> iterator() {
-        return Iterators.filter(Iterators.transform(map.iterator(), this::translate), Objects::nonNull);
+    public CovariantIterator<Entry<K, V>, MutableEntry<K, V>> iterator() {
+        final Iterator<MutableEntry<K, V>> translated = Iterators.transform(map.iterator(), this::translate);
+        final Iterator<MutableEntry<K, V>> filtered = Iterators.filter(translated, Objects::nonNull);
+        return CovariantIterator.of(filtered);
     }
 
     private MutableEntry<K, V> translate(final Entry<K, Computer<K, V>> entry) {

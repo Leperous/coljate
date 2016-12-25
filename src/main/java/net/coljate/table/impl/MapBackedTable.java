@@ -10,7 +10,7 @@ import net.coljate.table.Cell;
 import net.coljate.table.ImmutableTable;
 import net.coljate.table.MutableTable;
 import net.coljate.table.Table;
-import net.coljate.util.Iterators;
+import net.coljate.util.iterator.Iterators;
 
 /**
  *

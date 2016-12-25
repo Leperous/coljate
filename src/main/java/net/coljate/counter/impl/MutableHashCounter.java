@@ -4,7 +4,7 @@ import java.util.Iterator;
 
 import net.coljate.counter.MutableCounter;
 import net.coljate.map.MutableMap;
-import net.coljate.util.Iterators.EnhancedIterator;
+import net.coljate.util.iterator.Iterators.EnhancedIterator;
 
 /**
  *
@@ -96,9 +96,9 @@ public class MutableHashCounter<T>
         return new MutableHashCounter<>(map.mutableCopy(), evictZeros);
     }
 
-    private class MutableHashMultisetIterator implements EnhancedIterator<T> {
+    private class MutableHashMultisetIterator implements EnhancedIterator<T, T> {
 
-        final EnhancedIterator<T> delegate = MutableHashCounter.this.enhancedIterator();
+        final EnhancedIterator<T, T> delegate = MutableHashCounter.this.enhancedIterator();
 
         @Override
         public boolean hasNext() {

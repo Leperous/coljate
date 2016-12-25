@@ -2,7 +2,7 @@ package net.coljate.set.lazy;
 
 import java.util.Objects;
 
-import net.coljate.UnmodifiableIterator;
+import net.coljate.util.iterator.UnmodifiableIterator;
 import net.coljate.set.ImmutableSet;
 import net.coljate.set.MutableSet;
 

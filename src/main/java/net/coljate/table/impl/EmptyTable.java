@@ -1,6 +1,6 @@
 package net.coljate.table.impl;
 
-import net.coljate.UnmodifiableIterator;
+import net.coljate.util.iterator.UnmodifiableIterator;
 import net.coljate.table.Cell;
 import net.coljate.table.ImmutableCell;
 import net.coljate.table.ImmutableTable;

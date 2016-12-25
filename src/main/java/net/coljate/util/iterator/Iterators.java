@@ -1,4 +1,4 @@
-package net.coljate.util;
+package net.coljate.util.iterator;
 
 import java.util.Iterator;
 import java.util.NoSuchElementException;
@@ -120,9 +120,12 @@ public class Iterators {
 
     }
 
-    public interface EnhancedIterator<T> extends Iterator<T> {
+    public interface EnhancedIterator<T, R extends T> extends Iterator<T> {
 
-        T current();
+        R current();
+
+        @Override
+        R next();
 
     }
 

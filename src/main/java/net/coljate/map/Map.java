@@ -125,7 +125,7 @@ public interface Map<K, V> extends Set<Entry<K, V>>, Associative<K, V> {
 
     @Override
     default Iterator<Entry<K, V>> iterator() {
-        return new MapIterator<>(this);
+        return new MapIterator<>(this.keys(), this::getEntry);
     }
 
     @Override

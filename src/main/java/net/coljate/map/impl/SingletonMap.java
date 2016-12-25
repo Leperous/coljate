@@ -3,7 +3,7 @@ package net.coljate.map.impl;
 import java.io.Serializable;
 import java.util.Objects;
 
-import net.coljate.UnmodifiableIterator;
+import net.coljate.util.iterator.UnmodifiableIterator;
 import net.coljate.collection.ImmutableCollection;
 import net.coljate.collection.Singleton;
 import net.coljate.map.AbstractMap;

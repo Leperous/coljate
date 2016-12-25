@@ -10,7 +10,7 @@ import net.coljate.set.Set;
 import net.coljate.tree.impl.EmptyTree;
 import net.coljate.tree.impl.SingletonTree;
 import net.coljate.tree.navigation.TreeNavigation;
-import net.coljate.util.Iterators;
+import net.coljate.util.iterator.CovariantIterator;
 
 /**
  *
@@ -57,8 +57,8 @@ public interface Tree<K, V, E extends Entry<K, V>> extends Map<K, V> {
     }
 
     @Override
-    default Iterator<Entry<K, V>> iterator() {
-        return Iterators.covariant(this.iterator(TreeNavigation.getDefault()));
+    default CovariantIterator<Entry<K, V>, E> iterator() {
+        return CovariantIterator.of(this.iterator(TreeNavigation.getDefault()));
     }
 
     default Iterator<E> iterator(final TreeNavigation navigation) {

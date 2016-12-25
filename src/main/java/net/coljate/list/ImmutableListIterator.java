@@ -2,7 +2,7 @@ package net.coljate.list;
 
 import java.util.NoSuchElementException;
 
-import net.coljate.UnmodifiableIterator;
+import net.coljate.util.iterator.UnmodifiableIterator;
 
 /**
  *
