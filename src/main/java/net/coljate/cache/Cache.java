@@ -1,7 +1,7 @@
 package net.coljate.cache;
 
 import net.coljate.collection.Collection;
-import net.coljate.map.lazy.LazyMap;
+import net.coljate.map.Map;
 import net.coljate.set.Set;
 
 /**
@@ -9,7 +9,7 @@ import net.coljate.set.Set;
  *
  * @author ollie
  */
-public interface Cache<K, V> extends LazyMap<K, V> {
+public interface Cache<K, V> extends Map<K, V> {
 
     /**
      * @return currently loaded keys.
