@@ -1,6 +1,7 @@
-package net.coljate.map.lazy;
+package net.coljate.cache;
 
 import net.coljate.collection.Collection;
+import net.coljate.map.lazy.LazyMap;
 import net.coljate.set.Set;
 
 /**
