@@ -11,10 +11,13 @@ import net.coljate.util.iterator.CovariantIterator;
 public interface Multimap<K, V> extends Cache<K, Collection<V>> {
 
     @Override
-    MultimapEntry<K, V, ? extends Collection<V>> getEntry(Object key);
+    MultimapEntry<K, V, ?> getEntry(Object key);
 
     @Override
     CovariantIterator<Entry<K, Collection<V>>, ?> iterator();
+
+    @Override
+    MutableMultimap<K, V> mutableCopy();
 
     @Override
     ImmutableMultimap<K, V> immutableCopy();

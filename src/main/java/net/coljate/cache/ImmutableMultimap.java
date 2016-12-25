@@ -16,7 +16,7 @@ public interface ImmutableMultimap<K, V>
         extends Multimap<K, V>, ImmutableMap<K, Collection<V>> {
 
     @Override
-    ImmutableMultimapEntry<K, V, ? extends ImmutableCollection<V>> getEntry(Object key);
+    ImmutableMultimapEntry<K, V, ?> getEntry(Object key);
 
     @Override
     default ImmutableCollection<V> get(Object key) {
@@ -32,8 +32,12 @@ public interface ImmutableMultimap<K, V>
         return this;
     }
 
-    interface ImmutableMultimapEntry<K, V, C extends ImmutableCollection<V>> extends MultimapEntry<K, V, C>, ImmutableEntry<K, Collection<V>> {
+    interface ImmutableMultimapEntry<K, V, C extends ImmutableCollection<V>>
+            extends MultimapEntry<K, V, C>, ImmutableEntry<K, Collection<V>> {
 
+        @Override
+        C value();
+        
     }
 
 }

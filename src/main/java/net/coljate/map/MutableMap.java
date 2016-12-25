@@ -19,12 +19,12 @@ import net.coljate.util.iterator.CovariantIterator;
  */
 public interface MutableMap<K, V> extends Map<K, V>, MutableSet<Entry<K, V>> {
 
+    @Override
+    MutableEntry<K, V> getEntry(Object key);
+
     V put(K key, V value);
 
     boolean remove(Object key, Object value);
-
-    @Override
-    MutableEntry<K, V> getEntry(Object key);
 
     default boolean add(final K key, final V value) {
         return !this.containsKey(key)
