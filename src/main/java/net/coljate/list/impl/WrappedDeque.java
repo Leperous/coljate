@@ -25,7 +25,7 @@ public class WrappedDeque<T>
 
     @Override
     public T first() {
-        return this.head();
+        return super.first();
     }
 
     @Override

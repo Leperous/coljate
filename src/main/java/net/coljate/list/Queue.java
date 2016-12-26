@@ -1,33 +1,41 @@
 package net.coljate.list;
 
 import java.util.NoSuchElementException;
+import java.util.Optional;
 
 import net.coljate.collection.MutableCollection;
 
 /**
- * A queue is a mutable, ordered collection, accessed through adding or removing
- * some head element.
+ * A queue is a mutable, ordered collection, accessed through adding or removing some head element.
  *
  * @author ollie
  * @see java.util.Queue
  */
 public interface Queue<T> extends Ordered<T>, MutableCollection<T> {
 
-    T head();
+    /**
+     * @return the head of this queue.
+     */
+    Optional<T> peek();
 
-    T poll();
+    /**
+     * @return the (detached) head of this queue.
+     */
+    Optional<T> poll();
 
+    @Deprecated
+    default T element() {
+        return this.peek().orElseThrow(() -> new NoSuchElementException());
+    }
+
+    @Deprecated
     default T remove() {
-        if (this.isEmpty()) {
-            throw new NoSuchElementException();
-        }
-        return this.poll();
+        return this.poll().orElseThrow(() -> new NoSuchElementException());
     }
 
     @Override
-    @Deprecated
     default T first() {
-        return this.head();
+        return this.peek().orElse(null);
     }
 
     @Override

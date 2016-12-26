@@ -1,6 +1,7 @@
 package net.coljate.list.impl;
 
 import java.util.ArrayDeque;
+import java.util.Optional;
 
 import net.coljate.collection.impl.MutableWrappedCollection;
 import net.coljate.list.ImmutableList;
@@ -31,18 +32,13 @@ public class WrappedQueue<T>
     }
 
     @Override
-    public T head() {
-        return delegate.peek();
+    public Optional<T> peek() {
+        return Optional.ofNullable(delegate.peek());
     }
 
     @Override
-    public T remove() {
-        return delegate.remove();
-    }
-
-    @Override
-    public T poll() {
-        return delegate.poll();
+    public Optional<T> poll() {
+        return Optional.ofNullable(delegate.poll());
     }
 
     @Override

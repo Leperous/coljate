@@ -35,7 +35,7 @@ public class EmptySet<T>
     }
 
     @Override
-    public boolean equals(final Set<?> that) {
+    protected boolean equals(final Set<?> that) {
         return that instanceof EmptySet;
     }
 
