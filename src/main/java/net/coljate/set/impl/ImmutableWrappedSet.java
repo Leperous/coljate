@@ -1,5 +1,7 @@
 package net.coljate.set.impl;
 
+import java.util.Spliterator;
+
 import net.coljate.collection.Collection;
 import net.coljate.set.ImmutableSet;
 import net.coljate.util.Arrays;
@@ -20,7 +22,7 @@ public class ImmutableWrappedSet<T>
         return new ImmutableWrappedSet<>(set);
     }
 
-    public static <T> ImmutableSet<T> copyIntoHashSet(final java.util.Collection<? extends T> collection) {
+    public static <T> ImmutableWrappedSet<T> copyIntoHashSet(final java.util.Collection<? extends T> collection) {
         return new ImmutableWrappedSet<>(new java.util.HashSet<>(collection));
     }
 
@@ -36,6 +38,11 @@ public class ImmutableWrappedSet<T>
     @Override
     public UnmodifiableIterator<T> iterator() {
         return UnmodifiableIterator.wrap(super.iterator());
+    }
+
+    @Override
+    public Spliterator<T> spliterator() {
+        return super.spliterator();
     }
 
 }

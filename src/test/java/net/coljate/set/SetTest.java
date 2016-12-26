@@ -1,6 +1,7 @@
 package net.coljate.set;
 
 import java.util.Arrays;
+import java.util.Spliterator;
 
 import net.coljate.TestObjectCreator;
 import net.coljate.collection.CollectionTest;
@@ -19,6 +20,15 @@ public interface SetTest<T> extends CollectionTest<T> {
 
     @Override
     Set<T> createTestCollection();
+
+    @Test
+    default void testSpliterator_Characteristics() {
+        final int characteristics = this.createTestCollection().spliterator().characteristics();
+        assertThat(
+                "Spliterator characteristics = " + Integer.toBinaryString(characteristics),
+                characteristics & Spliterator.DISTINCT,
+                is(Spliterator.DISTINCT));
+    }
 
     interface ZeroElementTests<T> extends SetTest<T>, CollectionTest.ZeroElementTests<T> {
 

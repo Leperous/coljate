@@ -1,6 +1,7 @@
 package net.coljate.map.impl;
 
 import java.io.Serializable;
+import java.util.Spliterator;
 import java.util.function.Function;
 import java.util.function.Predicate;
 
@@ -70,6 +71,11 @@ public class EmptyMap<K, V>
     @Override
     public UnmodifiableIterator<Entry<K, V>> iterator() {
         return Empty.super.iterator();
+    }
+
+    @Override
+    public Spliterator<Entry<K, V>> spliterator() {
+        return Empty.super.spliterator();
     }
 
 }

@@ -1,11 +1,13 @@
 package net.coljate.collection;
 
+import java.util.Spliterator;
+import java.util.Spliterators;
 import java.util.function.Function;
 import java.util.function.Predicate;
 
-import net.coljate.util.iterator.UnmodifiableIterator;
 import net.coljate.feature.complexity.Complexity;
 import net.coljate.feature.complexity.TimeComplexity;
+import net.coljate.util.iterator.UnmodifiableIterator;
 
 /**
  *
@@ -38,6 +40,11 @@ public interface Empty<T> extends ImmutableCollection<T> {
     @Override
     default Empty<T> filter(final Predicate<? super T> predicate) {
         return this;
+    }
+
+    @Override
+    default Spliterator<T> spliterator() {
+        return Spliterators.emptySpliterator();
     }
 
 }

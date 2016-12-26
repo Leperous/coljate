@@ -30,6 +30,11 @@ public interface CollectionTest<T> {
         assertNotNull(this.createTestCollection().immutableCopy());
     }
 
+    @Test
+    default void testSpliterator() {
+        assertNotNull(this.createTestCollection().spliterator());
+    }
+
     interface ZeroElementTests<T> extends CollectionTest<T> {
 
         @Test

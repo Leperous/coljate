@@ -1,6 +1,7 @@
 package net.coljate.set.impl;
 
 import java.io.Serializable;
+import java.util.Spliterator;
 import java.util.function.Function;
 import java.util.function.Predicate;
 
@@ -71,6 +72,11 @@ public class EmptySet<T>
     @Override
     public <R> Empty<R> transform(final Function<? super T, ? extends R> transformation) {
         return instance();
+    }
+
+    @Override
+    public Spliterator<T> spliterator() {
+        return Empty.super.spliterator();
     }
 
 }

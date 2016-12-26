@@ -2,7 +2,6 @@ package net.coljate.set.impl;
 
 import net.coljate.NewObjectCreator;
 import net.coljate.SameObjectCreator;
-import net.coljate.set.ImmutableSet;
 import net.coljate.set.ImmutableSetTest;
 
 import org.junit.jupiter.api.Nested;
@@ -18,7 +17,7 @@ public class ImmutableWrappedSetTest {
     class OneElementTest extends SameObjectCreator implements ImmutableSetTest.OneElementTests<Object> {
 
         @Override
-        public ImmutableSet<Object> createTestCollection() {
+        public ImmutableWrappedSet<Object> createTestCollection() {
             return ImmutableWrappedSet.copyIntoHashSet(this.getCollectionElement());
         }
 
@@ -28,8 +27,8 @@ public class ImmutableWrappedSetTest {
     class MultiElementTest extends NewObjectCreator implements ImmutableSetTest.MultiElementTests<Object> {
 
         @Override
-        public ImmutableSet<Object> createTestCollection(final java.util.List<Object> list) {
-            return ImmutableSet.copyOf(list);
+        public ImmutableWrappedSet<Object> createTestCollection(final java.util.List<Object> list) {
+            return ImmutableWrappedSet.copyIntoHashSet(list);
         }
 
     }

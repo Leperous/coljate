@@ -1,6 +1,7 @@
 package net.coljate.list.impl;
 
 import java.io.Serializable;
+import java.util.Spliterator;
 import java.util.function.Function;
 import java.util.function.Predicate;
 
@@ -60,6 +61,11 @@ public class EmptyArray<T>
     @Override
     public EmptyArray<T> filter(final Predicate<? super T> predicate) {
         return this;
+    }
+
+    @Override
+    public Spliterator<T> spliterator() {
+        return Empty.super.spliterator();
     }
 
 }

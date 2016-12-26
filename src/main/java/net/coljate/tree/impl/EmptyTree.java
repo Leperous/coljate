@@ -1,6 +1,7 @@
 package net.coljate.tree.impl;
 
 import java.io.Serializable;
+import java.util.Spliterator;
 import java.util.function.Predicate;
 
 import net.coljate.collection.Collection;
@@ -58,5 +59,12 @@ public class EmptyTree<K, V>
     public boolean contains(Object object) {
         return Empty.super.contains(object);
     }
+
+    @Override
+    public Spliterator<Entry<K, V>> spliterator() {
+        return Empty.super.spliterator();
+    }
+    
+    
 
 }
