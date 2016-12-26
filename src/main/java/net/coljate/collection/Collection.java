@@ -15,7 +15,7 @@ import net.coljate.collection.impl.EmptyCollection;
 import net.coljate.collection.impl.UnmodifiableCollection;
 import net.coljate.collection.impl.WrappedCollection;
 import net.coljate.collection.lazy.LazyCollection;
-import net.coljate.feature.complexity.TimeComplexity;
+import net.coljate.util.complexity.TimeComplexity;
 import net.coljate.list.impl.ImmutableSortedArray;
 import net.coljate.set.Set;
 import net.coljate.set.lazy.LazySet;

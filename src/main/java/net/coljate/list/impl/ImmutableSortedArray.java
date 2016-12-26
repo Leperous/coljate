@@ -5,7 +5,7 @@ import java.util.Comparator;
 import net.coljate.collection.Collection;
 import net.coljate.list.SortedArray;
 import net.coljate.util.Arrays;
-import net.coljate.feature.complexity.TimeComplexity;
+import net.coljate.util.complexity.TimeComplexity;
 
 /**
  *

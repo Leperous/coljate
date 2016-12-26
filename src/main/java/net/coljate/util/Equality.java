@@ -5,8 +5,8 @@ import java.util.Objects;
 
 import net.coljate.Container;
 import net.coljate.collection.FastContains;
-import net.coljate.feature.complexity.Complexity;
-import net.coljate.feature.complexity.TimeComplexity;
+import net.coljate.util.complexity.Complexity;
+import net.coljate.util.complexity.TimeComplexity;
 
 /**
  *

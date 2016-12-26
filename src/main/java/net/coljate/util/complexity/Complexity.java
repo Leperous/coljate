@@ -1,4 +1,4 @@
-package net.coljate.feature.complexity;
+package net.coljate.util.complexity;
 
 /**
  *

@@ -2,8 +2,8 @@ package net.coljate.collection;
 
 import java.util.Comparator;
 
-import net.coljate.feature.complexity.Complexity;
-import net.coljate.feature.complexity.TimeComplexity;
+import net.coljate.util.complexity.Complexity;
+import net.coljate.util.complexity.TimeComplexity;
 import net.coljate.list.Ordered;
 
 /**

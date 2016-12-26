@@ -4,8 +4,8 @@ import java.util.Comparator;
 
 import net.coljate.collection.Collection;
 import net.coljate.collection.SortedCollection;
-import net.coljate.feature.complexity.Complexity;
-import net.coljate.feature.complexity.TimeComplexity;
+import net.coljate.util.complexity.Complexity;
+import net.coljate.util.complexity.TimeComplexity;
 import net.coljate.set.impl.MutableWrappedTreeSet;
 
 /**

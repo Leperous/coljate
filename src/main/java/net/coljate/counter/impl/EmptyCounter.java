@@ -4,8 +4,8 @@ import net.coljate.collection.Empty;
 import net.coljate.counter.AbstractCounter;
 import net.coljate.counter.ImmutableCounter;
 import net.coljate.counter.MutableCounter;
-import net.coljate.feature.complexity.Complexity;
-import net.coljate.feature.complexity.TimeComplexity;
+import net.coljate.util.complexity.Complexity;
+import net.coljate.util.complexity.TimeComplexity;
 import net.coljate.map.ImmutableMap;
 
 /**
