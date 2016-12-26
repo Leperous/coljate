@@ -22,12 +22,13 @@ public interface SetTest<T> extends CollectionTest<T> {
     Set<T> createTestCollection();
 
     @Test
-    default void testSpliterator_Characteristics() {
+    default int testSpliterator_Characteristics() {
         final int characteristics = this.createTestCollection().spliterator().characteristics();
         assertThat(
                 "Spliterator characteristics = " + Integer.toBinaryString(characteristics),
                 characteristics & Spliterator.DISTINCT,
                 is(Spliterator.DISTINCT));
+        return characteristics;
     }
 
     interface ZeroElementTests<T> extends SetTest<T>, CollectionTest.ZeroElementTests<T> {
