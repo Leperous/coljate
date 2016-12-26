@@ -39,4 +39,9 @@ public interface MutableListMultimapTest<K, V>
 
     }
 
+    interface OneEntryTests<K, V>
+            extends MutableListMultimapTest<K, V>, ListMultimapTest.OneEntryTests<K, V>, MutableMultimapTest.OneEntryTests<K, V> {
+
+    }
+
 }
