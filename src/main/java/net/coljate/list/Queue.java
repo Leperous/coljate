@@ -4,6 +4,7 @@ import java.util.NoSuchElementException;
 import java.util.Optional;
 
 import net.coljate.collection.MutableCollection;
+import net.coljate.list.impl.ImmutableNativeArray;
 
 /**
  * A queue is a mutable, ordered collection, accessed through adding or removing some head element.
@@ -42,6 +43,8 @@ public interface Queue<T> extends Ordered<T>, MutableCollection<T> {
     Queue<T> mutableCopy();
 
     @Override
-    ImmutableList<T> immutableCopy();
+    default ImmutableList<T> immutableCopy() {
+        return ImmutableNativeArray.copyOf(this);
+    }
 
 }

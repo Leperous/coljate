@@ -14,7 +14,7 @@ import net.coljate.list.Queue;
 public class WrappedQueue<T>
         extends MutableWrappedCollection<T>
         implements Queue<T> {
-    
+
     private final java.util.Queue<T> delegate;
 
     protected WrappedQueue(final java.util.Queue<T> delegate) {
@@ -33,13 +33,25 @@ public class WrappedQueue<T>
     }
 
     @Override
+    @Deprecated
+    public T remove() {
+        return delegate.remove();
+    }
+
+    @Override
+    @Deprecated
+    public T element() {
+        return delegate.element();
+    }
+
+    @Override
     public WrappedQueue<T> mutableCopy() {
         return new WrappedQueue<>(new ArrayDeque<>(delegate));
     }
 
     @Override
     public ImmutableList<T> immutableCopy() {
-        return ImmutableNativeArray.copyOf(this);
+        return Queue.super.immutableCopy();
     }
 
 }
