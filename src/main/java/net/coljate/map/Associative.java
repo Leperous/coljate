@@ -13,7 +13,7 @@ import net.coljate.util.complexity.TimeComplexity;
 public interface Associative<K, V> extends Container {
 
     @TimeComplexity(bestCase = Complexity.CONSTANT)
-    default V get(K key) {
+    default V get(final K key) {
         return this.getIfPresent(key);
     }
 
