@@ -24,7 +24,7 @@ public class ImmutableSubtree<K, V>
 
     @SafeVarargs
     public static <K, V> ImmutableSubtree<K, V> of(final K key, final V value, final ImmutableSubtree<K, V>... children) {
-        return new ImmutableSubtree<>(key, value, ImmutableSet.copyOf(children));
+        return new ImmutableSubtree<>(key, value, ImmutableSet.of(children));
     }
 
     protected ImmutableSubtree(

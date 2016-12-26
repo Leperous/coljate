@@ -74,7 +74,7 @@ public interface LazySet<T> extends LazyCollection<T>, Set<T> {
      * Symmetric difference {@code a ∆ b} of two sets. Elements must be in either set but not both.
      */
     static <T> LazySet<T> difference(final Set<? extends T> a, final Set<? extends T> b) {
-        return LazyFilteredSet.of(a, element -> a.contains(element) ? !b.contains(element) : b.contains(element));
+        return LazyFilteredSet.of(union(a, b), element -> a.contains(element) ^ b.contains(element));
     }
 
 }

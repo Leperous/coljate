@@ -1,9 +1,9 @@
 package net.coljate.set.impl;
 
-import net.coljate.util.iterator.UnmodifiableIterator;
 import net.coljate.collection.Collection;
 import net.coljate.set.ImmutableSet;
 import net.coljate.util.Arrays;
+import net.coljate.util.iterator.UnmodifiableIterator;
 
 /**
  *
@@ -18,6 +18,10 @@ public class ImmutableWrappedSet<T>
         final java.util.Set<T> set = new java.util.HashSet<>(elements.length);
         Arrays.consume(elements, set::add);
         return new ImmutableWrappedSet<>(set);
+    }
+
+    public static <T> ImmutableSet<T> copyIntoHashSet(final java.util.Collection<? extends T> collection) {
+        return new ImmutableWrappedSet<>(new java.util.HashSet<>(collection));
     }
 
     public static <T> ImmutableSet<T> copyIntoHashSet(final Collection<? extends T> collection) {
