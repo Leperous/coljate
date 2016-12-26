@@ -1,9 +1,9 @@
 package net.coljate.counter.impl;
 
-import net.coljate.util.iterator.UnmodifiableIterator;
-import net.coljate.map.ImmutableMap;
 import net.coljate.counter.Counter;
 import net.coljate.counter.ImmutableCounter;
+import net.coljate.map.ImmutableMap;
+import net.coljate.util.iterator.UnmodifiableIterator;
 
 /**
  *
@@ -13,7 +13,7 @@ public class ImmutableHashCounter<T>
         extends HashCounter<T>
         implements ImmutableCounter<T> {
 
-    public static <T> ImmutableCounter<T> copyOf(final Counter<T> multiset) {
+    public static <T> ImmutableHashCounter<T> copyOf(final Counter<T> multiset) {
         return new ImmutableHashCounter<>(multiset.countElements().immutableCopy());
     }
 

@@ -96,6 +96,11 @@ public class MutableHashCounter<T>
         return new MutableHashCounter<>(map.mutableCopy(), evictZeros);
     }
 
+    @Override
+    public ImmutableHashCounter<T> immutableCopy() {
+        return ImmutableHashCounter.copyOf(this);
+    }
+
     private class MutableHashMultisetIterator implements EnhancedIterator<T, T> {
 
         final EnhancedIterator<T, T> delegate = MutableHashCounter.this.enhancedIterator();

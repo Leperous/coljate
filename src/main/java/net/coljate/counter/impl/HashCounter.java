@@ -9,8 +9,8 @@ import net.coljate.counter.ImmutableCounter;
 import net.coljate.counter.MutableCounter;
 import net.coljate.map.Entry;
 import net.coljate.map.Map;
-import net.coljate.util.iterator.Iterators.EnhancedIterator;
 import net.coljate.util.Suppliers;
+import net.coljate.util.iterator.Iterators.EnhancedIterator;
 
 /**
  *
@@ -61,7 +61,7 @@ public class HashCounter<T>
 
     @Override
     public ImmutableCounter<T> immutableCopy() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return ImmutableHashCounter.copyOf(this);
     }
 
     private final class MultisetIterator implements EnhancedIterator<T, T> {
