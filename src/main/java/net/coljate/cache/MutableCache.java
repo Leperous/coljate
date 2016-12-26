@@ -12,7 +12,7 @@ import net.coljate.map.MutableMap;
 public interface MutableCache<K, V> extends Cache<K, V>, MutableMap<K, V> {
 
     static <K, V> MutableCache<K, V> create(final Function<? super K, ? extends V> valueFunction) {
-        return new ConcurrentMutableMapBackedCache<>(valueFunction);
+        return ConcurrentMutableMapBackedCache.create(valueFunction);
     }
 
 }

@@ -11,7 +11,13 @@ public interface MutableCacheTest<K, V> extends CacheTest<K, V>, MutableMapTest<
     @Override
     MutableCache<K, V> createTestCollection();
 
-    interface ZeroEntryTests<K, V> extends MutableCacheTest<K, V>, CacheTest.ZeroEntryTests<K, V>, MutableMapTest.ZeroEntryTests<K, V> {
+    interface ZeroEntryTests<K, V>
+            extends MutableCacheTest<K, V>, CacheTest.ZeroEntryTests<K, V>, MutableMapTest.ZeroEntryTests<K, V> {
+
+    }
+
+    interface OneEntryTests<K, V>
+            extends MutableCacheTest<K, V>, CacheTest.OneEntryTests<K, V>, MutableMapTest.OneEntryTests<K, V> {
 
     }
 

@@ -17,4 +17,9 @@ public interface MutableMultimapTest<K, V>
 
     }
 
+    interface OneEntryTests<K, V>
+            extends MutableMultimapTest<K, V>, MultimapTest.OneEntryTests<K, V>, MutableCacheTest.OneEntryTests<K, Collection<V>> {
+
+    }
+
 }

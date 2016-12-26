@@ -6,6 +6,7 @@ import java.util.function.Function;
 
 import net.coljate.cache.ConcurrentCache;
 import net.coljate.collection.Collection;
+import net.coljate.map.AbstractEntry;
 import net.coljate.map.AbstractMap;
 import net.coljate.map.ConcurrentMap;
 import net.coljate.map.Entry;
@@ -23,10 +24,25 @@ public class ConcurrentMutableMapBackedCache<K, V>
         extends AbstractMap<K, V>
         implements ConcurrentCache<K, V> {
 
-    private final ConcurrentMap<K, Computer<K, V>> map = ConcurrentMap.createHashMap(10);
+    public static <K, V> ConcurrentMutableMapBackedCache<K, V> create(final Function<? super K, ? extends V> valueFunction) {
+        return new ConcurrentMutableMapBackedCache<>(ConcurrentMap.createHashMap(), valueFunction);
+    }
+
+    public static <K, V> ConcurrentMutableMapBackedCache<K, V> copyOf(
+            final Iterable<? extends Entry<K, V>> map,
+            final Function<? super K, ? extends V> valueFunction) {
+        final ConcurrentMutableMapBackedCache<K, V> cache = create(valueFunction);
+        cache.addAll(map);
+        return cache;
+    }
+
+    private final ConcurrentMap<K, Computer<K, V>> map;
     private final Function<? super K, ? extends V> valueFunction;
 
-    public ConcurrentMutableMapBackedCache(final Function<? super K, ? extends V> valueFunction) {
+    private ConcurrentMutableMapBackedCache(
+            final ConcurrentMap<K, Computer<K, V>> map,
+            final Function<? super K, ? extends V> valueFunction) {
+        this.map = map;
         this.valueFunction = valueFunction;
     }
 
@@ -44,6 +60,11 @@ public class ConcurrentMutableMapBackedCache<K, V>
     @Override
     public V put(final K key, final V value) {
         return Functions.ifNonNull(map.put(key, new Computed<>(value)), Computer::current);
+    }
+
+    @Override
+    public boolean add(final K key, final V value) {
+        return map.add(key, new Computed<>(value));
     }
 
     @Override
@@ -115,7 +136,7 @@ public class ConcurrentMutableMapBackedCache<K, V>
 
     @Override
     public ConcurrentMutableMapBackedCache<K, V> mutableCopy() {
-        final ConcurrentMutableMapBackedCache<K, V> copy = new ConcurrentMutableMapBackedCache<>(valueFunction);
+        final ConcurrentMutableMapBackedCache<K, V> copy = create(valueFunction);
         copy.putAll(this);
         return copy;
     }
@@ -197,7 +218,9 @@ public class ConcurrentMutableMapBackedCache<K, V>
 
     }
 
-    private final class EntryWriter implements MutableEntry<K, V> {
+    private final class EntryWriter
+            extends AbstractEntry<K, V>
+            implements MutableEntry<K, V> {
 
         private final K key;
 
