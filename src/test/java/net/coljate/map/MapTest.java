@@ -8,6 +8,7 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.Test;
 
@@ -33,6 +34,14 @@ public interface MapTest<K, V> extends SetTest<Entry<K, V>> {
 
     interface ZeroEntryTests<K, V> extends MapTest<K, V>, SetTest.ZeroElementTests<Entry<K, V>> {
 
+        @Test
+        default void testGetIfPresent() {
+            final Map<K, V> map = this.createTestCollection();
+            final Object key = new Object();
+            assertNull(map.getIfPresent(key));
+            assertFalse(map.containsKey(key));
+        }
+
     }
 
     interface OneEntryTests<K, V> extends MapTest<K, V>, SetTest.OneElementTests<Entry<K, V>> {
@@ -44,6 +53,13 @@ public interface MapTest<K, V> extends SetTest<Entry<K, V>> {
             final Map<K, V> map = this.createTestCollection();
             assertNotNull(map);
             assertThat(map.getEntry(entry.key()), is(entry));
+        }
+        
+        @Test
+        default void testContainsEntry() {
+            final Map<K,V> map = this.createTestCollection();
+            final Entry<K, V> entry = this.getCollectionElement();
+            assertTrue(map.containsEntry(entry));
         }
 
         @Test
