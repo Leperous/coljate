@@ -17,6 +17,10 @@ public interface MutableList<T> extends List<T>, MutableCollection<T> {
 
     void suffix(T element);
 
+    default void suffixAll(final Iterable<? extends T> iterable) {
+        iterable.forEach(this::suffix);
+    }
+
     default SynchronizedList<T> synchronizedCopy() {
         return synchronize(this);
     }

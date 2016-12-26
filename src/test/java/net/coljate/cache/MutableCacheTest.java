@@ -1,0 +1,18 @@
+package net.coljate.cache;
+
+import net.coljate.map.MutableMapTest;
+
+/**
+ *
+ * @author ollie
+ */
+public interface MutableCacheTest<K, V> extends CacheTest<K, V>, MutableMapTest<K, V> {
+
+    @Override
+    MutableCache<K, V> createTestCollection();
+
+    interface ZeroEntryTests<K, V> extends MutableCacheTest<K, V>, CacheTest.ZeroEntryTests<K, V>, MutableMapTest.ZeroEntryTests<K, V> {
+
+    }
+
+}

@@ -50,6 +50,11 @@ public abstract class AbstractMapBackedMultimap<K, V, C extends Collection<V>>
     }
 
     @Override
+    public C get(final K key) {
+        return cache.get(key);
+    }
+
+    @Override
     public MultimapEntry<K, V, ?> getEntry(final Object key) {
         return Functions.ifNonNull(cache.getEntry(key), WrappedEntry::new);
     }

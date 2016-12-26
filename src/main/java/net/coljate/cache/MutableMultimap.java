@@ -15,6 +15,9 @@ public interface MutableMultimap<K, V>
         extends Multimap<K, V>, MutableCache<K, Collection<V>> {
 
     @Override
+    MutableCollection<V> get(K key);
+
+    @Override
     MutableMultimapEntry<K, V, ?> getEntry(Object key);
 
     @Override
