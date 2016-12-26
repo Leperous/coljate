@@ -101,6 +101,11 @@ public class MutableAtomicArray<T>
     }
 
     @Override
+    public ListIterator<T> reverseIterator() {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
     public void prefix(final T element) {
         this.spinReplace(current -> prefix(element, current));
     }

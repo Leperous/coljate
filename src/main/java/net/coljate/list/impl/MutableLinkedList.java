@@ -67,7 +67,12 @@ public class MutableLinkedList<T>
 
     @Override
     public ListIterator<T> iterator() {
-        return new LinkedListIterator();
+        return new LinkedListForwardIterator();
+    }
+
+    @Override
+    public ListIterator<T> reverseIterator() {
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override
@@ -142,7 +147,7 @@ public class MutableLinkedList<T>
 
     }
 
-    private final class LinkedListIterator implements ListIterator<T> {
+    private final class LinkedListForwardIterator implements ListIterator<T> {
 
         private Node current = first, previous = null;
 

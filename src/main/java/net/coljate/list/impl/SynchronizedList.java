@@ -26,8 +26,13 @@ public class SynchronizedList<T> implements MutableList<T> {
     }
 
     @Override
-    public ListIterator<T> iterator() {
-        throw new UnsupportedOperationException("Not supported yet.");
+    public synchronized ListIterator<T> iterator() {
+        return delegate.iterator();
+    }
+
+    @Override
+    public synchronized ListIterator<T> reverseIterator() {
+        return delegate.reverseIterator();
     }
 
     @Override

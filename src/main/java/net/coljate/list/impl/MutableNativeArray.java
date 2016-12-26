@@ -76,7 +76,12 @@ public class MutableNativeArray<T>
 
     @Override
     public ListIterator<T> iterator() {
-        return new ArrayListIterator();
+        return new MutableNativeArrayForwardIterator();
+    }
+
+    @Override
+    public ListIterator<T> reverseIterator() {
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override
@@ -109,11 +114,15 @@ public class MutableNativeArray<T>
     public boolean removeFirst(final Object element) {
         for (int i = 0; i < count; i++) {
             if (Objects.equals(array[i], element)) {
-                System.arraycopy(array, i + 1, array, i, (--count) - i);
+                delete(i);
                 return true;
             }
         }
         return false;
+    }
+
+    void delete(final int index) {
+        System.arraycopy(array, index + 1, array, index, (--count) - index);
     }
 
     @Override
@@ -159,7 +168,7 @@ public class MutableNativeArray<T>
                 && this.elementsEqual((Array) obj);
     }
 
-    private final class ArrayListIterator implements ListIterator<T> {
+    private final class MutableNativeArrayForwardIterator implements ListIterator<T> {
 
         private int index = 0;
 
@@ -178,12 +187,16 @@ public class MutableNativeArray<T>
 
         @Override
         public boolean hasPrevious() {
-            throw new UnsupportedOperationException("Not supported yet.");
+            return index > 0;
         }
 
         @Override
         public T previous() {
             throw new UnsupportedOperationException("Not supported yet.");
+        }
+
+        public void remove() {
+            delete(index);
         }
 
     }

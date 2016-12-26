@@ -1,5 +1,8 @@
 package net.coljate.list;
 
+import java.util.Iterator;
+import java.util.Objects;
+
 import net.coljate.collection.Collection;
 import net.coljate.collection.MutableCollection;
 import net.coljate.list.impl.MutableNativeArray;
@@ -20,6 +23,18 @@ public interface MutableList<T> extends List<T>, MutableCollection<T> {
     default void suffixAll(final Iterable<? extends T> iterable) {
         iterable.forEach(this::suffix);
     }
+
+    default boolean removeLast(final Object element) {
+        for (final Iterator<T> iterator = this.reverseIterator(); iterator.hasNext();) {
+            if (Objects.equals(iterator.next(), element)) {
+                iterator.remove();
+                return true;
+            }
+        }
+        return false;
+    }
+
+    ListIterator<T> reverseIterator();
 
     default SynchronizedList<T> synchronizedCopy() {
         return synchronize(this);

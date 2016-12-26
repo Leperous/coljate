@@ -22,36 +22,41 @@ public class MutableWrappedList<T>
         return new MutableWrappedList<>(list);
     }
 
-    private final java.util.List<T> delegate;
+    private final java.util.List<T> list;
 
     public MutableWrappedList(final java.util.List<T> delegate) {
         super(delegate);
-        this.delegate = delegate;
+        this.list = delegate;
     }
 
     @Override
     public java.util.List<T> mutableJavaCopy() {
-        return new java.util.ArrayList<>(delegate);
+        return new java.util.ArrayList<>(list);
     }
 
     @Override
     public void prefix(final T element) {
-        delegate.add(0, element);
+        list.add(0, element);
     }
 
     @Override
     public void suffix(final T element) {
-        delegate.add(element);
+        list.add(element);
     }
 
     @Override
     public T last() {
-        return delegate.get(delegate.size() - 1);
+        return list.get(list.size() - 1);
     }
 
     @Override
     public ListIterator<T> iterator() {
-        return new WrappedListIterator();
+        return new ForwardIterator();
+    }
+
+    @Override
+    public ListIterator<T> reverseIterator() {
+        return new ReverseIterator();
     }
 
     @Override
@@ -64,28 +69,64 @@ public class MutableWrappedList<T>
         return MutableList.super.immutableCopy();
     }
 
-    private final class WrappedListIterator implements ListIterator<T> {
+    private final class ReverseIterator implements ListIterator<T> {
 
-        private final java.util.ListIterator<T> delegate = MutableWrappedList.this.delegate.listIterator();
-
-        @Override
-        public boolean hasNext() {
-            return delegate.hasNext();
-        }
-
-        @Override
-        public T next() {
-            return delegate.next();
-        }
+        private final java.util.ListIterator<T> iterator = list.listIterator(list.size() - 1);
 
         @Override
         public boolean hasPrevious() {
-            return delegate.hasPrevious();
+            return iterator.hasNext();
         }
 
         @Override
         public T previous() {
-            return delegate.previous();
+            return iterator.next();
+        }
+
+        @Override
+        public boolean hasNext() {
+            return iterator.hasPrevious();
+        }
+
+        @Override
+        public T next() {
+            return iterator.previous();
+        }
+
+        @Override
+        public void remove() {
+            iterator.remove();
+        }
+
+    }
+
+    private final class ForwardIterator implements ListIterator<T> {
+
+        private final java.util.ListIterator<T> iterator = list.listIterator();
+
+        @Override
+        public boolean hasNext() {
+            return iterator.hasNext();
+        }
+
+        @Override
+        public T next() {
+            return iterator.next();
+        }
+
+        @Override
+        public boolean hasPrevious() {
+            return iterator.hasPrevious();
+        }
+
+        @Override
+        public T previous() {
+            return iterator.previous();
+        }
+
+        @Override
+        public void remove() {
+            iterator.remove();
         }
 
     }
