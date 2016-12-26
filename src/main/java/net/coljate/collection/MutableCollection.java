@@ -4,6 +4,7 @@ import java.util.Iterator;
 import java.util.Objects;
 
 import net.coljate.collection.impl.MutableWrappedCollection;
+import net.coljate.list.MutableList;
 import net.coljate.list.impl.MutableWrappedList;
 
 /**
@@ -50,6 +51,10 @@ public interface MutableCollection<T> extends Collection<T> {
     @SafeVarargs
     static <T> MutableCollection<T> copyOf(final T... elements) {
         return MutableWrappedList.createArrayList(elements);
+    }
+
+    static <T> MutableCollection<T> copyOf(final Collection<? extends T> collection) {
+        return MutableList.copyOf(collection);
     }
 
 }

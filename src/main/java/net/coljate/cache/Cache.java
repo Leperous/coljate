@@ -23,4 +23,7 @@ public interface Cache<K, V> extends Map<K, V> {
     @Override
     Collection<V> values();
 
+    @Override
+    MutableCache<K, V> mutableCopy();
+
 }

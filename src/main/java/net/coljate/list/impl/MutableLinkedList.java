@@ -16,6 +16,10 @@ public class MutableLinkedList<T>
         extends AbstractList<T>
         implements MutableList<T> {
 
+    public static <T> MutableLinkedList<T> create() {
+        return new MutableLinkedList<>();
+    }
+
     @SafeVarargs
     public static <T> MutableLinkedList<T> copyOf(final T... elements) {
         final MutableLinkedList<T> list = new MutableLinkedList<>();
@@ -64,6 +68,11 @@ public class MutableLinkedList<T>
     @Override
     public ListIterator<T> iterator() {
         return new LinkedListIterator();
+    }
+
+    @Override
+    public MutableLinkedList<T> mutableCopy() {
+        return MutableLinkedList.copyOf(this);
     }
 
     private final class Node {

@@ -6,19 +6,22 @@ import java.util.function.Function;
 
 import net.coljate.cache.ConcurrentCache;
 import net.coljate.collection.Collection;
+import net.coljate.map.AbstractMap;
 import net.coljate.map.ConcurrentMap;
 import net.coljate.map.Entry;
 import net.coljate.map.MutableEntry;
 import net.coljate.set.Set;
-import net.coljate.util.iterator.CovariantIterator;
 import net.coljate.util.Functions;
+import net.coljate.util.iterator.CovariantIterator;
 import net.coljate.util.iterator.Iterators;
 
 /**
  *
  * @author ollie
  */
-public class ConcurrentMutableMapBackedCache<K, V> implements ConcurrentCache<K, V> {
+public class ConcurrentMutableMapBackedCache<K, V>
+        extends AbstractMap<K, V>
+        implements ConcurrentCache<K, V> {
 
     private final ConcurrentMap<K, Computer<K, V>> map = ConcurrentMap.createHashMap(10);
     private final Function<? super K, ? extends V> valueFunction;
@@ -108,6 +111,13 @@ public class ConcurrentMutableMapBackedCache<K, V> implements ConcurrentCache<K,
         return entry == null
                 ? null
                 : new EntryWriter(entry.key());
+    }
+
+    @Override
+    public ConcurrentMutableMapBackedCache<K, V> mutableCopy() {
+        final ConcurrentMutableMapBackedCache<K, V> copy = new ConcurrentMutableMapBackedCache<>(valueFunction);
+        copy.putAll(this);
+        return copy;
     }
 
     private interface Computer<K, V> {

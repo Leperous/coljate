@@ -9,8 +9,6 @@ import net.coljate.map.ConcurrentMap;
 public interface ConcurrentCache<K, V> extends MutableCache<K, V>, ConcurrentMap<K, V> {
 
     @Override
-    default ConcurrentMap<K, V> mutableCopy() {
-        return ConcurrentMap.super.mutableCopy();
-    }
+    ConcurrentCache<K, V> mutableCopy();
 
 }

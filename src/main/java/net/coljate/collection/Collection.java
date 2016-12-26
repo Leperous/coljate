@@ -12,6 +12,7 @@ import net.coljate.IterableExtension;
 import net.coljate.StreamExtension;
 import net.coljate.collection.SortedCollection.SortingAlgorithm;
 import net.coljate.collection.impl.EmptyCollection;
+import net.coljate.collection.impl.UnmodifiableCollection;
 import net.coljate.collection.impl.WrappedCollection;
 import net.coljate.collection.lazy.LazyCollection;
 import net.coljate.feature.complexity.TimeComplexity;
@@ -134,6 +135,10 @@ public interface Collection<T> extends IterableExtension<T>, StreamExtension<T> 
 
     static <T> Collection<T> viewOf(final java.util.Collection<? extends T> collection) {
         return new WrappedCollection<>(collection);
+    }
+
+    static <T> Collection<T> viewOf(final Collection<? extends T> collection) {
+        return UnmodifiableCollection.viewOf(collection);
     }
 
 }

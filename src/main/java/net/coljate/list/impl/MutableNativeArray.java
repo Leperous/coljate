@@ -3,6 +3,7 @@ package net.coljate.list.impl;
 import java.util.NoSuchElementException;
 import java.util.Objects;
 
+import net.coljate.collection.Collection;
 import net.coljate.list.AbstractArray;
 import net.coljate.list.Array;
 import net.coljate.list.ListIterator;
@@ -24,6 +25,10 @@ public class MutableNativeArray<T>
 
     public static <T> MutableNativeArray<T> copyOf(final java.util.Collection<? extends T> collection) {
         return new MutableNativeArray<>(collection.toArray(), collection.size());
+    }
+
+    public static <T> MutableNativeArray<T> copyOf(final Collection<? extends T> collection) {
+        return new MutableNativeArray<>(collection.arrayCopy(), collection.count());
     }
 
     public static <T> MutableNativeArray<T> copyOf(final T[] elements) {

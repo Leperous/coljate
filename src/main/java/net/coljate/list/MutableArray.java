@@ -2,6 +2,7 @@ package net.coljate.list;
 
 import java.util.Objects;
 
+import net.coljate.collection.Collection;
 import net.coljate.list.impl.MutableNativeArray;
 
 /**
@@ -29,6 +30,10 @@ public interface MutableArray<T> extends Array<T>, MutableList<T> {
 
     static <T> MutableArray<T> copyOf(final T[] elements) {
         return MutableNativeArray.copyOf(elements);
+    }
+
+    static <T> MutableArray<T> copyOf(final Collection<? extends T> collection) {
+        return MutableNativeArray.copyOf(collection);
     }
 
     @SafeVarargs

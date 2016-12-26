@@ -3,10 +3,10 @@ package net.coljate.collection;
 import java.util.Spliterator;
 import java.util.Spliterators;
 
-import net.coljate.util.iterator.UnmodifiableIterator;
 import net.coljate.collection.impl.EmptyCollection;
 import net.coljate.collection.impl.SingletonCollection;
 import net.coljate.set.Set;
+import net.coljate.util.iterator.UnmodifiableIterator;
 
 /**
  *
@@ -34,6 +34,10 @@ public interface ImmutableCollection<T> extends Collection<T> {
 
     static <T> SingletonCollection<T> of(final T element) {
         return Set.of(element);
+    }
+
+    static <T> ImmutableCollection<T> copyOf(final Collection<? extends T> collection) {
+        throw new UnsupportedOperationException();
     }
 
 }
