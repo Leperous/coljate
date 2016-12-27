@@ -1,5 +1,6 @@
 package net.coljate.set.impl;
 
+import java.util.NoSuchElementException;
 import java.util.Objects;
 
 import net.coljate.set.AbstractSet;
@@ -34,7 +35,32 @@ public class TwoSet<T>
 
     @Override
     public UnmodifiableIterator<T> iterator() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return new TwoSetIterator();
+    }
+
+    private final class TwoSetIterator implements UnmodifiableIterator<T> {
+
+        private boolean doneFirst, doneSecond;
+
+        @Override
+        public boolean hasNext() {
+            return !doneSecond;
+        }
+
+        @Override
+        public T next() {
+            if (!this.hasNext()) {
+                throw new NoSuchElementException();
+            }
+            if (!doneFirst) {
+                doneFirst = true;
+                return a;
+            } else {
+                doneSecond = true;
+                return b;
+            }
+        }
+
     }
 
 }
