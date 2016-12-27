@@ -33,5 +33,7 @@ public interface Graph<V, E> {
     default int degree(final V vertex) {
         return this.neighbours(vertex).count();
     }
+    
+    MutableGraph<V, E> mutableCopy();
 
 }
