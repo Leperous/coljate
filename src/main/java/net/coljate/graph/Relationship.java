@@ -1,24 +1,43 @@
 package net.coljate.graph;
 
+import java.util.Objects;
+
 import net.coljate.set.impl.TwoSet;
 
 /**
+ * Encapsulates an edge between two vertices.
+ *
+ * The vertices are reversible if this is a member of an undirected graph.
  *
  * @param <V> vertex type
  * @param <E> edge type
  */
 public interface Relationship<V, E> {
 
-    TwoSet<V> vertices();
+    V from();
+
+    V to();
 
     E edge();
 
-    default boolean containsVertex(final Object vertex) {
-        return this.vertices().contains(vertex);
+    default TwoSet<V> vertices() {
+        return TwoSet.require(this.from(), this.to());
     }
 
-    default boolean containsVertices(final Object vertex1, final Object vertex2) {
-        return this.vertices().contains(vertex1, vertex2);
+    default boolean containsVertex(final Object vertex) {
+        return this.isFrom(vertex) || this.isTo(vertex);
+    }
+
+    default boolean isBetween(final Object fromVertex, final Object toVertex) {
+        return this.isFrom(fromVertex) && this.isTo(toVertex);
+    }
+
+    default boolean isFrom(final Object vertex) {
+        return Objects.equals(vertex, this.from());
+    }
+
+    default boolean isTo(final Object vertex) {
+        return Objects.equals(vertex, this.to());
     }
 
 }
