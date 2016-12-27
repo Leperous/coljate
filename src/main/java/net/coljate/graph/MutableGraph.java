@@ -1,10 +1,14 @@
 package net.coljate.graph;
 
+import net.coljate.graph.Relationship;
+import net.coljate.set.MutableSet;
+
 /**
  *
  * @author ollie
  */
-public interface MutableGraph<V, E> extends Graph<V, E> {
+public interface MutableGraph<V, E>
+        extends Graph<V, E>, MutableSet<Relationship<V, E>> {
 
     boolean addVertex(V vertex);
 

@@ -10,7 +10,7 @@ import net.coljate.set.Set;
  * @param <V> vertex type
  * @param <E> edge type
  */
-public interface Graph<V, E> {
+public interface Graph<V, E> extends Set<Relationship<V, E>> {
 
     Set<V> vertices();
 
@@ -33,7 +33,11 @@ public interface Graph<V, E> {
     default int degree(final V vertex) {
         return this.neighbours(vertex).count();
     }
-    
+
+    @Override
     MutableGraph<V, E> mutableCopy();
+
+    @Override
+    ImmutableGraph<V, E> immutableCopy();
 
 }
