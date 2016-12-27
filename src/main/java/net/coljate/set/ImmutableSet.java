@@ -9,6 +9,7 @@ import net.coljate.collection.ImmutableCollection;
 import net.coljate.set.impl.EmptySet;
 import net.coljate.set.impl.ImmutableWrappedSet;
 import net.coljate.set.impl.SingletonSet;
+import net.coljate.set.impl.TwoSet;
 import net.coljate.set.lazy.ImmutableLazyUnionSet;
 
 /**
@@ -48,6 +49,10 @@ public interface ImmutableSet<T> extends Set<T>, ImmutableCollection<T> {
         return SingletonSet.of(element);
     }
 
+    static <T> ImmutableSet<T> of(final T a, final T b) {
+        return TwoSet.of(a, b);
+    }
+
     @SafeVarargs
     static <T> ImmutableSet<T> of(final T... elements) {
         switch (elements.length) {
@@ -55,6 +60,8 @@ public interface ImmutableSet<T> extends Set<T>, ImmutableCollection<T> {
                 return of();
             case 1:
                 return of(elements[0]);
+            case 2:
+                return of(elements[0], elements[1]);
             default:
                 return ImmutableWrappedSet.copyIntoHashSet(elements);
         }
