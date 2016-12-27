@@ -1,6 +1,7 @@
 package net.coljate.graph;
 
 import java.util.Objects;
+import java.util.Optional;
 
 import net.coljate.set.impl.TwoSet;
 
@@ -14,30 +15,23 @@ import net.coljate.set.impl.TwoSet;
  */
 public interface Relationship<V, E> {
 
-    V from();
-
-    V to();
-
     E edge();
 
-    default TwoSet<V> vertices() {
-        return TwoSet.require(this.from(), this.to());
-    }
+    TwoSet<V> vertices();
 
-    default boolean containsVertex(final Object vertex) {
-        return this.isFrom(vertex) || this.isTo(vertex);
-    }
+    boolean containsVertex(Object vertex);
 
-    default boolean isBetween(final Object fromVertex, final Object toVertex) {
-        return this.isFrom(fromVertex) && this.isTo(toVertex);
-    }
+    boolean isBetween(Object fromVertex, Object toVertex);
 
-    default boolean isFrom(final Object vertex) {
-        return Objects.equals(vertex, this.from());
-    }
-
-    default boolean isTo(final Object vertex) {
-        return Objects.equals(vertex, this.to());
+    default Optional<V> otherVertex(final Object vertex) {
+        final TwoSet<V> vertices = this.vertices();
+        if (Objects.equals(vertex, vertices.first())) {
+            return Optional.of(vertices.second());
+        } else if (Objects.equals(vertex, vertices.second())) {
+            return Optional.of(vertices.first());
+        } else {
+            return Optional.empty();
+        }
     }
 
 }

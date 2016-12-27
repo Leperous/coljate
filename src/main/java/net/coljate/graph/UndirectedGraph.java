@@ -14,9 +14,7 @@ public interface UndirectedGraph<V, E> extends Graph<V, E> {
 
         @Override
         default boolean isBetween(final Object fromVertex, final Object toVertex) {
-            return this.isFrom(fromVertex)
-                    ? this.isTo(toVertex)
-                    : this.isTo(fromVertex) && this.isFrom(toVertex);
+            return this.vertices().contains(fromVertex, toVertex);
         }
 
     }

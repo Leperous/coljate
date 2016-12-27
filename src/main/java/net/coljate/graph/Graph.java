@@ -46,7 +46,8 @@ public interface Graph<V, E> extends Set<Relationship<V, E>> {
 
     default Map<V, E> neighbours(final V vertex) {
         final MutableMap<V, E> neighbours = MutableMap.createHashMap();
-        this.filter(relationship -> relationship.isFrom(vertex)).forEach(relationship -> neighbours.put(relationship.to(), relationship.edge()));
+        final Set<Relationship<V, E>> relevant = this.filter(relationship -> relationship.containsVertex(vertex));
+        relevant.forEach(relationship -> neighbours.put(relationship.otherVertex(vertex).get(), relationship.edge()));
         return neighbours;
     }
 
@@ -57,5 +58,11 @@ public interface Graph<V, E> extends Set<Relationship<V, E>> {
     default int degree(final V vertex) {
         return this.neighbours(vertex).count();
     }
+
+    @Override
+    MutableGraph<V, E> mutableCopy();
+
+    @Override
+    ImmutableGraph<V, E> immutableCopy();
 
 }
