@@ -19,7 +19,9 @@ public interface Relationship<V, E> {
 
     TwoSet<V> vertices();
 
-    boolean containsVertex(Object vertex);
+    default boolean containsVertex(final Object vertex) {
+        return this.vertices().contains(vertex);
+    }
 
     boolean isBetween(Object fromVertex, Object toVertex);
 

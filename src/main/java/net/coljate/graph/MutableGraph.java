@@ -1,6 +1,5 @@
 package net.coljate.graph;
 
-import net.coljate.graph.Relationship;
 import net.coljate.set.MutableSet;
 
 /**

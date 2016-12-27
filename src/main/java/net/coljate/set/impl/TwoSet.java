@@ -35,6 +35,14 @@ public class TwoSet<T>
         this.b = b;
     }
 
+    public T first() {
+        return a;
+    }
+
+    public T second() {
+        return b;
+    }
+
     @Override
     public boolean contains(final Object object) {
         return Objects.equals(a, object) || Objects.equals(b, object);
