@@ -3,6 +3,7 @@ package net.coljate.util;
 import java.util.OptionalInt;
 import java.util.function.IntFunction;
 
+import net.coljate.IterableExtension;
 import net.coljate.collection.Collection;
 
 /**
@@ -46,7 +47,7 @@ public class NativeCollections {
             return OptionalInt.of(((java.util.Collection) iterable).size());
         }
         if (iterable instanceof Collection) {
-            return OptionalInt.of(((Collection) iterable).count());
+            return OptionalInt.of(((IterableExtension) iterable).count());
         }
         return OptionalInt.empty();
     }

@@ -73,7 +73,7 @@ public class SingletonCollection<T>
     @Override
     protected boolean equals(final AbstractCollection<?> that) {
         return that instanceof SingletonCollection
-                && Objects.equals(this.element(), ((SingletonCollection) that).element());
+                && Objects.equals(this.element(), ((Singleton) that).element());
     }
 
     @Override

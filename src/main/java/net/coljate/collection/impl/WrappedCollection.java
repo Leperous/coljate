@@ -65,7 +65,7 @@ public class WrappedCollection<T> implements Collection<T> {
     @Override
     public boolean equals(final Object obj) {
         return obj instanceof Collection
-                && Equality.orderedEquals(this, (Collection) obj);
+                && Equality.orderedEquals(this, (Iterable<?>) obj);
     }
 
     @Override

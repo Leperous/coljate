@@ -6,6 +6,7 @@ import java.util.Objects;
 import net.coljate.collection.Collection;
 import net.coljate.list.AbstractArray;
 import net.coljate.list.Array;
+import net.coljate.list.List;
 import net.coljate.list.ListIterator;
 import net.coljate.list.MutableArray;
 import net.coljate.util.Arrays;
@@ -37,7 +38,7 @@ public class MutableNativeArray<T>
 
     @SafeVarargs
     public static <T> MutableNativeArray<T> viewOf(final T... elements) {
-        return new MutableNativeArray<>((Object[]) elements, elements.length);
+        return new MutableNativeArray<>(elements, elements.length);
     }
 
     private Object[] array;
@@ -165,7 +166,7 @@ public class MutableNativeArray<T>
     @Override
     public boolean equals(final Object obj) {
         return obj instanceof MutableNativeArray
-                && this.elementsEqual((Array) obj);
+                && this.elementsEqual((List<?>) obj);
     }
 
     private final class MutableNativeArrayForwardIterator implements ListIterator<T> {

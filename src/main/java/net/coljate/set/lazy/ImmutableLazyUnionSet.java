@@ -19,7 +19,7 @@ public class ImmutableLazyUnionSet<T>
         if (s1.isEmpty()) {
             return (ImmutableSet<T>) s2;
         } else if (s2.isEmpty()) {
-            return (ImmutableSet<T>) s1;
+            return s1;
         } else {
             return new ImmutableLazyUnionSet<>(s1, s2);
         }

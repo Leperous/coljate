@@ -1,5 +1,6 @@
 package net.coljate.util;
 
+import net.coljate.IterableExtension;
 import net.coljate.util.iterator.Iterators;
 import net.coljate.collection.Collection;
 
@@ -11,7 +12,7 @@ public class Iterables {
 
     public static int count(final Iterable<?> iterable) {
         if (iterable instanceof Collection) {
-            return ((Collection) iterable).count();
+            return ((IterableExtension) iterable).count();
         }
         if (iterable instanceof java.util.Collection) {
             return ((java.util.Collection) iterable).size();

@@ -15,7 +15,7 @@ public interface DoubleCollection extends Collection<Double> {
     @Override
     default boolean contains(final Object object) {
         return object instanceof Double
-                && this.contains(((Double) object).doubleValue());
+                && this.contains(((Number) object).doubleValue());
     }
 
     @Override
