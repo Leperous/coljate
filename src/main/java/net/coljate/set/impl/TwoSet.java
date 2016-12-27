@@ -21,9 +21,16 @@ public class TwoSet<T>
                 : new TwoSet<>(a, b);
     }
 
+    public static <T> TwoSet<T> require(final T a, final T b) {
+        return new TwoSet<>(a, b);
+    }
+
     private final T a, b;
 
     protected TwoSet(final T a, final T b) {
+        if (Objects.equals(a, b)) {
+            throw new IllegalArgumentException("Cannot construct two-set with [" + a + "] = [" + b + "]!");
+        }
         this.a = a;
         this.b = b;
     }
@@ -31,6 +38,12 @@ public class TwoSet<T>
     @Override
     public boolean contains(final Object object) {
         return Objects.equals(a, object) || Objects.equals(b, object);
+    }
+
+    public boolean contains(final Object o1, final Object o2) {
+        return Objects.equals(a, o1)
+                ? Objects.equals(b, o2)
+                : Objects.equals(b, o1) && Objects.equals(a, o2);
     }
 
     @Override
