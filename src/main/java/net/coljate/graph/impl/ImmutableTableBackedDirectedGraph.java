@@ -20,6 +20,11 @@ public class ImmutableTableBackedDirectedGraph<V, E>
     }
 
     @Override
+    public ImmutableSet<V> vertices() {
+        return super.vertices().immutableCopy();
+    }
+
+    @Override
     public UnmodifiableCovariantIterator<Relationship<V, E>, ? extends DirectedRelationship<V, E>> iterator() {
         return UnmodifiableCovariantIterator.wrap(super.iterator());
     }

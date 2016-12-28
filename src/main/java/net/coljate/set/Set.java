@@ -6,8 +6,6 @@ import java.util.Spliterators;
 import java.util.function.Predicate;
 
 import net.coljate.collection.Collection;
-import net.coljate.util.complexity.Complexity;
-import net.coljate.util.complexity.TimeComplexity;
 import net.coljate.set.impl.EmptySet;
 import net.coljate.set.impl.ImmutableWrappedSet;
 import net.coljate.set.impl.MutableWrappedHashSet;
@@ -19,6 +17,8 @@ import net.coljate.set.lazy.LazyFilteredSet;
 import net.coljate.set.lazy.LazySet;
 import net.coljate.set.lazy.LazySetUnion;
 import net.coljate.util.Equality;
+import net.coljate.util.complexity.Complexity;
+import net.coljate.util.complexity.TimeComplexity;
 
 /**
  *
