@@ -2,6 +2,7 @@ package net.coljate.graph.impl;
 
 import java.util.Objects;
 
+import net.coljate.graph.DirectedGraph;
 import net.coljate.graph.DirectedRelationship;
 import net.coljate.graph.MutableDirectedGraph;
 import net.coljate.set.MutableSet;
@@ -11,18 +12,24 @@ import net.coljate.table.MutableTable;
  *
  * @author ollie
  */
-public class MutableTableBackedDirectedGraph<V, E>
+public class MutableHashBackedDirectedGraph<V, E>
         extends TableBackedDirectedGraph<V, E>
         implements MutableDirectedGraph<V, E> {
 
-    public static <V, E> MutableTableBackedDirectedGraph<V, E> createHashBackedGraph() {
-        return new MutableTableBackedDirectedGraph<>(MutableSet.createHashSet(), MutableTable.createHashMapBackedTable());
+    public static <V, E> MutableHashBackedDirectedGraph<V, E> create() {
+        return new MutableHashBackedDirectedGraph<>(MutableSet.createHashSet(), MutableTable.createHashMapBackedTable());
+    }
+
+    public static <V, E> MutableHashBackedDirectedGraph<V, E> copyOf(final DirectedGraph<V, E> graph) {
+        final MutableHashBackedDirectedGraph<V, E> copy = create();
+        graph.forEach(copy::add);
+        return copy;
     }
 
     private final MutableSet<V> vertices;
     private final MutableTable<V, V, E> edges;
 
-    protected MutableTableBackedDirectedGraph(final MutableSet<V> vertices, final MutableTable<V, V, E> edges) {
+    protected MutableHashBackedDirectedGraph(final MutableSet<V> vertices, final MutableTable<V, V, E> edges) {
         super(vertices, edges);
         this.vertices = vertices;
         this.edges = edges;
@@ -48,12 +55,7 @@ public class MutableTableBackedDirectedGraph<V, E>
     }
 
     @Override
-    public boolean add(final DirectedRelationship<V, E> relationship) {
-        return this.addEdge(relationship.from(), relationship.to(), relationship.edge());
-    }
-
-    @Override
-    public boolean remove(final DirectedRelationship<?, ?> relationship) {
+    public boolean removeDirected(final DirectedRelationship<?, ?> relationship) {
         return edges.remove(relationship.from(), relationship.to(), relationship.edge());
     }
 

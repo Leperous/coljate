@@ -3,7 +3,6 @@ package net.coljate.graph;
 import java.util.Objects;
 
 import net.coljate.collection.Collection;
-import net.coljate.graph.impl.EmptyGraph;
 import net.coljate.map.Map;
 import net.coljate.map.MutableMap;
 import net.coljate.set.MutableSet;
@@ -84,15 +83,9 @@ public interface Graph<V, E> extends Set<Relationship<V, E>> {
     }
 
     @Override
-    default MutableGraph<V, E> mutableCopy() {
-        return MutableGraph.copyOf(this);
-    }
+    MutableGraph<V, E> mutableCopy();
 
     @Override
     ImmutableGraph<V, E> immutableCopy();
-
-    static <V, E> ImmutableGraph<V, E> of() {
-        return EmptyGraph.getInstance();
-    }
 
 }

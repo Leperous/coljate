@@ -59,7 +59,7 @@ public class TableBackedDirectedGraph<V, E>
 
     @Override
     public MutableDirectedGraph<V, E> mutableCopy() {
-        return new MutableTableBackedDirectedGraph<>(vertices.mutableCopy(), edges.mutableCopy());
+        return new MutableHashBackedDirectedGraph<>(vertices.mutableCopy(), edges.mutableCopy());
     }
 
     @Override

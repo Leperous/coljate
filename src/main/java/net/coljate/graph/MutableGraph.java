@@ -24,8 +24,4 @@ public interface MutableGraph<V, E>
 
     boolean remove(Relationship<?, ?> relationship);
 
-    static <V, E> MutableGraph<V, E> copyOf(final Graph<V, E> graph) {
-        throw new UnsupportedOperationException(); //TODO
-    }
-
 }
