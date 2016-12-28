@@ -31,6 +31,11 @@ public interface MutableMap<K, V> extends Map<K, V>, MutableSet<Entry<K, V>> {
                 && this.putIfAbsent(key, value) == null;
     }
 
+    default boolean addIfAbsent(final K key, final Function<? super K, ? extends V> valueFunction) {
+        return !this.containsKey(key)
+                && this.putIfAbsent(key, valueFunction.apply(key)) == null;
+    }
+
     @Override
     default boolean add(final Entry<K, V> entry) {
         return this.add(entry.key(), entry.value());

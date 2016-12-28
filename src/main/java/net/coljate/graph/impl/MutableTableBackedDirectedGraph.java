@@ -3,8 +3,7 @@ package net.coljate.graph.impl;
 import java.util.Objects;
 
 import net.coljate.graph.DirectedRelationship;
-import net.coljate.graph.MutableGraph;
-import net.coljate.graph.Relationship;
+import net.coljate.graph.MutableDirectedGraph;
 import net.coljate.set.MutableSet;
 import net.coljate.table.MutableTable;
 
@@ -14,7 +13,7 @@ import net.coljate.table.MutableTable;
  */
 public class MutableTableBackedDirectedGraph<V, E>
         extends TableBackedDirectedGraph<V, E>
-        implements MutableGraph<V, E> {
+        implements MutableDirectedGraph<V, E> {
 
     private final MutableSet<V> vertices;
     private final MutableTable<V, V, E> edges;
@@ -31,10 +30,10 @@ public class MutableTableBackedDirectedGraph<V, E>
     }
 
     @Override
-    public boolean addEdge(final V vertex1, final V vertex2, final E edge) {
-        vertices.add(vertex1);
-        vertices.add(vertex2);
-        return edges.add(vertex1, vertex2, edge);
+    public boolean addEdge(final V fromVertex, final V toVertex, final E edge) {
+        this.addVertex(fromVertex);
+        this.addVertex(toVertex);
+        return edges.add(fromVertex, toVertex, edge);
     }
 
     @Override
@@ -45,21 +44,11 @@ public class MutableTableBackedDirectedGraph<V, E>
     }
 
     @Override
-    public boolean add(final Relationship<V, E> relationship) {
-        return relationship instanceof DirectedRelationship
-                && this.add((DirectedRelationship<V, E>) relationship);
-    }
-
     public boolean add(final DirectedRelationship<V, E> relationship) {
         return this.addEdge(relationship.from(), relationship.to(), relationship.edge());
     }
 
     @Override
-    public boolean remove(final Relationship<?, ?> relationship) {
-        return relationship instanceof DirectedRelationship
-                && this.remove((DirectedRelationship) relationship);
-    }
-
     public boolean remove(final DirectedRelationship<?, ?> relationship) {
         return edges.remove(relationship.from(), relationship.to(), relationship.edge());
     }

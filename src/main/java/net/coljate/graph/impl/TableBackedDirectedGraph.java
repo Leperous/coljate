@@ -4,7 +4,7 @@ import net.coljate.graph.AbstractGraph;
 import net.coljate.graph.DirectedGraph;
 import net.coljate.graph.DirectedRelationship;
 import net.coljate.graph.ImmutableGraph;
-import net.coljate.graph.MutableGraph;
+import net.coljate.graph.MutableDirectedGraph;
 import net.coljate.graph.Relationship;
 import net.coljate.set.Set;
 import net.coljate.set.impl.TwoSet;
@@ -58,7 +58,7 @@ public class TableBackedDirectedGraph<V, E>
     }
 
     @Override
-    public MutableGraph<V, E> mutableCopy() {
+    public MutableDirectedGraph<V, E> mutableCopy() {
         return new MutableTableBackedDirectedGraph<>(vertices.mutableCopy(), edges.mutableCopy());
     }
 

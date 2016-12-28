@@ -35,5 +35,5 @@ public interface Relationship<V, E> {
             return Optional.empty();
         }
     }
-
+    
 }

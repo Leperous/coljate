@@ -3,6 +3,7 @@ package net.coljate.graph;
 import java.util.Objects;
 import java.util.Optional;
 
+import net.coljate.graph.impl.RegularDirectedRelationship;
 import net.coljate.set.impl.TwoSet;
 
 /**
@@ -47,6 +48,10 @@ public interface DirectedRelationship<V, E> extends Relationship<V, E> {
         } else {
             return Optional.empty();
         }
+    }
+
+    static <V, E> DirectedRelationship<V, E> of(final V fromVertex, final V toVertex, final E edge) {
+        return new RegularDirectedRelationship<>(fromVertex, toVertex, edge);
     }
 
 }
