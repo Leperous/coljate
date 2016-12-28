@@ -29,6 +29,10 @@ public interface Table<R, C, V> extends Set<Cell<R, C, V>> {
         return Functions.ifNonNull(this.cellIfPresent(row, columnKey), Cell::value);
     }
 
+    default void forEach(final CellConsumer<? super R, ? super C, ? super V> consumer) {
+        this.forEach(cell -> consumer.accept(cell));
+    }
+
     @Override
     default MutableTable<R, C, V> mutableCopy() {
         return MutableTable.copyOf(this);
