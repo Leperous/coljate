@@ -15,6 +15,10 @@ public class MutableTableBackedDirectedGraph<V, E>
         extends TableBackedDirectedGraph<V, E>
         implements MutableDirectedGraph<V, E> {
 
+    public static <V, E> MutableTableBackedDirectedGraph<V, E> createHashBackedGraph() {
+        return new MutableTableBackedDirectedGraph<>(MutableSet.createHashSet(), MutableTable.createHashMapBackedTable());
+    }
+
     private final MutableSet<V> vertices;
     private final MutableTable<V, V, E> edges;
 

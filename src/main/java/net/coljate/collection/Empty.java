@@ -1,5 +1,6 @@
 package net.coljate.collection;
 
+import java.io.Serializable;
 import java.util.Spliterator;
 import java.util.Spliterators;
 import java.util.function.Function;
@@ -13,7 +14,7 @@ import net.coljate.util.iterator.UnmodifiableIterator;
  *
  * @author ollie
  */
-public interface Empty<T> extends ImmutableCollection<T> {
+public interface Empty<T> extends ImmutableCollection<T>, Serializable {
 
     @Override
     @TimeComplexity(Complexity.CONSTANT)

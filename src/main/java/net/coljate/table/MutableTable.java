@@ -3,6 +3,7 @@ package net.coljate.table;
 import java.util.Objects;
 
 import net.coljate.set.MutableSet;
+import net.coljate.table.impl.MutableMapBackedTable;
 
 /**
  *
@@ -48,6 +49,10 @@ public interface MutableTable<R, C, V>
 
     static <R, C, V> MutableTable<R, C, V> copyOf(final Table<? extends R, ? extends C, ? extends V> table) {
         throw new UnsupportedOperationException(); //TODO
+    }
+
+    static <R, C, V> MutableTable<R, C, V> createHashMapBackedTable() {
+        return MutableMapBackedTable.createBackedByHashMap();
     }
 
 }
