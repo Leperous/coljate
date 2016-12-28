@@ -88,4 +88,12 @@ public interface Graph<V, E> extends Set<Relationship<V, E>> {
     @Override
     ImmutableGraph<V, E> immutableCopy();
 
+    static <V, E> Graph<V, E> createEmptyDirectedGraph() {
+        return DirectedGraph.of();
+    }
+
+    static <V, E> MutableDirectedGraph<V, E> createHashBackedDirectedGraph() {
+        return MutableDirectedGraph.createHashBackedGraph();
+    }
+
 }

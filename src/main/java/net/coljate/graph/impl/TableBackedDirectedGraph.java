@@ -3,7 +3,7 @@ package net.coljate.graph.impl;
 import net.coljate.graph.AbstractGraph;
 import net.coljate.graph.DirectedGraph;
 import net.coljate.graph.DirectedRelationship;
-import net.coljate.graph.ImmutableGraph;
+import net.coljate.graph.ImmutableDirectedGraph;
 import net.coljate.graph.MutableDirectedGraph;
 import net.coljate.graph.Relationship;
 import net.coljate.set.Set;
@@ -63,7 +63,7 @@ public class TableBackedDirectedGraph<V, E>
     }
 
     @Override
-    public ImmutableGraph<V, E> immutableCopy() {
+    public ImmutableDirectedGraph<V, E> immutableCopy() {
         return new ImmutableTableBackedDirectedGraph<>(vertices.immutableCopy(), edges.immutableCopy());
     }
 

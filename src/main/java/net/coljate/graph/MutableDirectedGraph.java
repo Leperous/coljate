@@ -35,4 +35,8 @@ public interface MutableDirectedGraph<V, E> extends DirectedGraph<V, E>, Mutable
         return MutableHashBackedDirectedGraph.copyOf(graph);
     }
 
+    static <V, E> MutableDirectedGraph<V, E> createHashBackedGraph() {
+        return MutableHashBackedDirectedGraph.create();
+    }
+
 }
