@@ -1,5 +1,6 @@
 package net.coljate.tree.navigation;
 
+import java.util.Objects;
 import java.util.concurrent.atomic.AtomicReference;
 
 import net.coljate.list.MutableList;
@@ -25,6 +26,7 @@ public interface TreeNavigation {
     }
 
     static void setDefault(final TreeNavigation navigation) {
+        Objects.requireNonNull(navigation, "Cannot set null default tree navigation!");
         DEFAULT.set(navigation);
     }
 

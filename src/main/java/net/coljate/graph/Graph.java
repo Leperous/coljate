@@ -12,8 +12,9 @@ import net.coljate.util.Functions;
 /**
  * A data structure where pairs of objects are "related" somehow.
  *
- * We consider graphs to be collections of relationships. As such as their {@link #count} is of the relationships, and a
- * graph with vertices but no relationships is considered to be {@link #isEmpty() empty}.
+ * We consider graphs to be collections of relationships between vertices. As such as their {@link #count} is the number
+ * of relationships, and a graph with zero relationships but non-zero vertices is still considered to be
+ * {@link #isEmpty() empty}.
  *
  * @author ollie
  * @param <V> vertex type
