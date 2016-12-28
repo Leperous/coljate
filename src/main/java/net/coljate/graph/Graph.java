@@ -1,5 +1,7 @@
 package net.coljate.graph;
 
+import java.util.Objects;
+
 import net.coljate.collection.Collection;
 import net.coljate.map.Map;
 import net.coljate.map.MutableMap;
@@ -51,12 +53,22 @@ public interface Graph<V, E> extends Set<Relationship<V, E>> {
         return neighbours;
     }
 
-    default E edgeBetween(final V fromVertex, final V toVertex) {
+    default E edgeBetween(final Object fromVertex, final Object toVertex) {
         return Functions.ifNonNull(this.relationshipBetween(fromVertex, toVertex), Relationship::edge);
     }
 
     default int degree(final V vertex) {
         return this.neighbours(vertex).count();
+    }
+
+    @Deprecated
+    default boolean contains(final Object object) {
+        return object instanceof Relationship
+                && this.contains((Relationship) object);
+    }
+
+    default boolean contains(final Relationship<?, ?> relationship) {
+        return this.anyMatch(r -> Objects.equals(r, relationship));
     }
 
     @Override

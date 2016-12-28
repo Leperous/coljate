@@ -11,8 +11,17 @@ public interface MutableGraph<V, E>
 
     boolean addVertex(V vertex);
 
-    boolean addEdge(V vertex1, V vertex2, E edge);
+    boolean addEdge(V fromVertex, V toVertex, E edge);
 
     boolean removeVertex(Object vertex);
+
+    @Deprecated
+    @Override
+    default boolean remove(final Object object) {
+        return object instanceof Relationship
+                && this.remove((Relationship<?, ?>) object);
+    }
+
+    boolean remove(Relationship<?, ?> relationship);
 
 }

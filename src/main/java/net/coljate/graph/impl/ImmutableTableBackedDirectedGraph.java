@@ -1,0 +1,27 @@
+package net.coljate.graph.impl;
+
+import net.coljate.graph.DirectedRelationship;
+import net.coljate.graph.ImmutableGraph;
+import net.coljate.graph.Relationship;
+import net.coljate.set.ImmutableSet;
+import net.coljate.table.ImmutableTable;
+import net.coljate.util.iterator.UnmodifiableCovariantIterator;
+
+/**
+ *
+ * @author ollie
+ */
+public class ImmutableTableBackedDirectedGraph<V, E>
+        extends TableBackedDirectedGraph<V, E>
+        implements ImmutableGraph<V, E> {
+
+    protected ImmutableTableBackedDirectedGraph(final ImmutableSet<V> vertices, final ImmutableTable<V, V, E> table) {
+        super(vertices, table);
+    }
+
+    @Override
+    public UnmodifiableCovariantIterator<Relationship<V, E>, ? extends DirectedRelationship<V, E>> iterator() {
+        return UnmodifiableCovariantIterator.wrap(super.iterator());
+    }
+
+}

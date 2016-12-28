@@ -2,6 +2,7 @@ package net.coljate.collection;
 
 import java.util.Iterator;
 import java.util.Objects;
+import java.util.function.Predicate;
 
 import net.coljate.collection.impl.MutableWrappedCollection;
 import net.coljate.list.MutableList;
@@ -40,6 +41,17 @@ public interface MutableCollection<T> extends Collection<T> {
         boolean removed = false;
         for (final Object element : elements) {
             removed &= this.removeAll(element);
+        }
+        return removed;
+    }
+
+    default int removeWhere(final Predicate<? super T> predicate) {
+        int removed = 0;
+        for (final Iterator<T> iterator = this.iterator(); iterator.hasNext();) {
+            if (predicate.test(iterator.next())) {
+                iterator.remove();
+                removed++;
+            }
         }
         return removed;
     }

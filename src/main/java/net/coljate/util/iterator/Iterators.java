@@ -13,8 +13,8 @@ import java.util.function.Supplier;
  */
 public class Iterators {
 
-    public static <F, T> Iterator<T> transform(final Iterator<F> from, final Function<? super F, ? extends T> transform) {
-        return new Iterator<T>() {
+    public static <F, T, R extends T> CovariantIterator<T, R> transform(final Iterator<F> from, final Function<? super F, ? extends R> transform) {
+        return new CovariantIterator<T, R>() {
 
             @Override
             public boolean hasNext() {
@@ -22,7 +22,7 @@ public class Iterators {
             }
 
             @Override
-            public T next() {
+            public R next() {
                 return transform.apply(from.next());
             }
 
