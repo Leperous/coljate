@@ -34,7 +34,7 @@ public interface MutableIterableExtension<T> extends Iterable<T> {
     default boolean removeAll(final Iterable<?> elements) {
         boolean removed = false;
         for (final Object element : elements) {
-            removed &= this.removeAll(element);
+            removed |= this.removeAll(element);
         }
         return removed;
     }
