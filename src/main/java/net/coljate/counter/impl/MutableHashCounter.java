@@ -87,7 +87,7 @@ public class MutableHashCounter<T>
 
     @Override
     public Iterator<T> iterator() {
-        return new MutableHashMultisetIterator();
+        return new MutableHashMultisetIterator(super.iterator());
     }
 
     @Override
@@ -102,8 +102,12 @@ public class MutableHashCounter<T>
 
     private class MutableHashMultisetIterator implements Iterator<T> {
 
-        final Iterator<T> delegate = MutableHashCounter.this.iterator();
+        final Iterator<T> delegate;
         private T current;
+
+        MutableHashMultisetIterator(Iterator<T> delegate) {
+            this.delegate = delegate;
+        }
 
         @Override
         public boolean hasNext() {
