@@ -1,17 +1,18 @@
 package net.coljate.graph.impl;
 
-import net.coljate.graph.DirectedRelationship;
+import net.coljate.graph.AbstractDirectedRelationship;
 
 /**
  *
  * @author ollie
  */
-public class RegularDirectedRelationship<V, E> implements DirectedRelationship<V, E> {
+public class RegularDirectedRelationship<V, E>
+        extends AbstractDirectedRelationship<V, E> {
 
     private final V from, to;
     private final E edge;
 
-    public RegularDirectedRelationship(V from, V to, E edge) {
+    public RegularDirectedRelationship(final V from, final V to, final E edge) {
         this.from = from;
         this.to = to;
         this.edge = edge;

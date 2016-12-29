@@ -1,5 +1,6 @@
 package net.coljate.graph.impl;
 
+import net.coljate.graph.AbstractDirectedRelationship;
 import net.coljate.graph.AbstractGraph;
 import net.coljate.graph.DirectedGraph;
 import net.coljate.graph.DirectedRelationship;
@@ -67,7 +68,7 @@ public class TableBackedDirectedGraph<V, E>
         return new ImmutableTableBackedDirectedGraph<>(vertices.immutableCopy(), edges.immutableCopy());
     }
 
-    protected class CellBackedRelationship implements DirectedRelationship<V, E> {
+    protected class CellBackedRelationship extends AbstractDirectedRelationship<V, E> {
 
         private final Cell<V, V, E> cell;
         private TwoSet<V> vertices;
