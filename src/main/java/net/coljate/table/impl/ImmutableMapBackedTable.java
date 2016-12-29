@@ -1,11 +1,12 @@
 package net.coljate.table.impl;
 
-import net.coljate.util.iterator.UnmodifiableIterator;
 import net.coljate.map.Entry;
 import net.coljate.map.ImmutableMap;
 import net.coljate.table.Cell;
 import net.coljate.table.ImmutableCell;
 import net.coljate.table.ImmutableTable;
+import net.coljate.table.Table;
+import net.coljate.util.iterator.UnmodifiableIterator;
 
 /**
  *
@@ -14,6 +15,10 @@ import net.coljate.table.ImmutableTable;
 public class ImmutableMapBackedTable<R, C, V>
         extends MapBackedTable<R, C, V>
         implements ImmutableTable<R, C, V> {
+
+    public static <R, C, V> ImmutableMapBackedTable<R, C, V> copyOf(final Table<? extends R, ? extends C, ? extends V> that) {
+        return MutableMapBackedTable.<R, C, V>copyOf(that).immutableCopy();
+    }
 
     protected ImmutableMapBackedTable(final ImmutableMap<KeyPair<R, C>, V> map) {
         super(map);

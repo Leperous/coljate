@@ -31,7 +31,6 @@ public class MutableHashBackedDirectedGraphTest {
         @BeforeEach
         public final void resetRelationship() {
             this.relationship = DirectedRelationship.of(new Object(), new Object(), new Object());
-
         }
 
         @Override

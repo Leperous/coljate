@@ -48,7 +48,7 @@ public interface MutableTable<R, C, V>
     }
 
     static <R, C, V> MutableTable<R, C, V> copyOf(final Table<? extends R, ? extends C, ? extends V> table) {
-        throw new UnsupportedOperationException(); //TODO
+        return MutableMapBackedTable.copyOf(table);
     }
 
     static <R, C, V> MutableTable<R, C, V> createHashMapBackedTable() {

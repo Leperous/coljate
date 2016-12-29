@@ -19,6 +19,10 @@ public interface Cell<R, C, V> {
         return new ImmutableCell<>(this.rowKey(), this.columnKey(), this.value());
     }
 
+    static <R, C, V> Cell<R, C, V> of(final R rowKey, final C columnKey, final V value) {
+        return new ImmutableCell<>(rowKey, columnKey, value);
+    }
+
     static String toString(final Cell<?, ?, ?> cell) {
         return cell.getClass().getSimpleName()
                 + ":[" + cell.rowKey()

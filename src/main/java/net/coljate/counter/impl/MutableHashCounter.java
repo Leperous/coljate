@@ -4,7 +4,6 @@ import java.util.Iterator;
 
 import net.coljate.counter.MutableCounter;
 import net.coljate.map.MutableMap;
-import net.coljate.util.iterator.Iterators.EnhancedIterator;
 
 /**
  *
@@ -101,9 +100,10 @@ public class MutableHashCounter<T>
         return ImmutableHashCounter.copyOf(this);
     }
 
-    private class MutableHashMultisetIterator implements EnhancedIterator<T, T> {
+    private class MutableHashMultisetIterator implements Iterator<T> {
 
-        final EnhancedIterator<T, T> delegate = MutableHashCounter.this.enhancedIterator();
+        final Iterator<T> delegate = MutableHashCounter.this.iterator();
+        private T current;
 
         @Override
         public boolean hasNext() {
@@ -112,20 +112,14 @@ public class MutableHashCounter<T>
 
         @Override
         public T next() {
-            return delegate.next();
-        }
-
-        @Override
-        public T current() {
-            return delegate.current();
+            current = delegate.next();
+            return current;
         }
 
         @Override
         public void remove() {
-            if (!this.hasNext()) {
-                throw new IllegalStateException();
-            }
-            MutableHashCounter.this.decrement(this.current());
+            //TODO check current state
+            MutableHashCounter.this.decrement(current);
         }
 
     }

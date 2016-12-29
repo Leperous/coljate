@@ -10,7 +10,6 @@ import net.coljate.counter.MutableCounter;
 import net.coljate.map.Entry;
 import net.coljate.map.Map;
 import net.coljate.util.Suppliers;
-import net.coljate.util.iterator.Iterators.EnhancedIterator;
 
 /**
  *
@@ -47,10 +46,6 @@ public class HashCounter<T>
 
     @Override
     public Iterator<T> iterator() {
-        return this.enhancedIterator();
-    }
-
-    protected EnhancedIterator<T, T> enhancedIterator() {
         return new MultisetIterator();
     }
 
@@ -64,7 +59,7 @@ public class HashCounter<T>
         return ImmutableHashCounter.copyOf(this);
     }
 
-    private final class MultisetIterator implements EnhancedIterator<T, T> {
+    private final class MultisetIterator implements Iterator<T> {
 
         final Iterator<Entry<T, Integer>> mapIterator = map.iterator();
         T currentElement;
@@ -86,11 +81,6 @@ public class HashCounter<T>
                 throw new NoSuchElementException();
             }
             currentCount--;
-            return currentElement;
-        }
-
-        @Override
-        public T current() {
             return currentElement;
         }
 

@@ -27,4 +27,13 @@ public class Hash {
         return hashCode;
     }
 
+    @TimeComplexity(Complexity.LINEAR)
+    public static int unorderedHash(final Object... array) {
+        int hashCode = 0;
+        for (final Object element : array) {
+            hashCode += (element == null || element == array ? 0 : element.hashCode());
+        }
+        return hashCode;
+    }
+
 }

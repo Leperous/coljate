@@ -39,6 +39,8 @@ public interface Table<R, C, V> extends Set<Cell<R, C, V>> {
     }
 
     @Override
-    ImmutableTable<R, C, V> immutableCopy();
+    default ImmutableTable<R, C, V> immutableCopy() {
+        return ImmutableTable.copyOf(this);
+    }
 
 }

@@ -120,13 +120,4 @@ public class Iterators {
 
     }
 
-    public interface EnhancedIterator<T, R extends T> extends Iterator<T> {
-
-        R current();
-
-        @Override
-        R next();
-
-    }
-
 }

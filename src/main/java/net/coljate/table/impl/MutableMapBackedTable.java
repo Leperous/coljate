@@ -49,4 +49,9 @@ public class MutableMapBackedTable<R, C, V>
         map.clear();
     }
 
+    @Override
+    public ImmutableMapBackedTable<R, C, V> immutableCopy() {
+        return new ImmutableMapBackedTable<>(map.immutableCopy());
+    }
+
 }

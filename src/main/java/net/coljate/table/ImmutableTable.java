@@ -1,6 +1,7 @@
 package net.coljate.table;
 
 import net.coljate.set.ImmutableSet;
+import net.coljate.table.impl.ImmutableMapBackedTable;
 
 /**
  *
@@ -21,6 +22,10 @@ public interface ImmutableTable<R, C, V>
     @Deprecated
     default ImmutableTable<R, C, V> immutableCopy() {
         return this;
+    }
+
+    static <R, C, V> ImmutableTable<R, C, V> copyOf(final Table<? extends R, ? extends C, ? extends V> table) {
+        return ImmutableMapBackedTable.copyOf(table);
     }
 
 }
