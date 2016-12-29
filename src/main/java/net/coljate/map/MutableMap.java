@@ -156,5 +156,5 @@ public interface MutableMap<K, V> extends Map<K, V>, MutableSet<Entry<K, V>> {
     static <K, V> MutableMap<K, V> copyIntoHashMap(final java.util.Map<K, V> map) {
         return MutableWrappedHashMap.copyOf(map);
     }
-
+    
 }

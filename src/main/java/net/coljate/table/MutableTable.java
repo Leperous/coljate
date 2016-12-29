@@ -4,6 +4,7 @@ import java.util.Objects;
 
 import net.coljate.set.MutableSet;
 import net.coljate.table.impl.MutableMapBackedTable;
+import net.coljate.table.impl.MutableSymmetricTable;
 
 /**
  *
@@ -53,6 +54,10 @@ public interface MutableTable<R, C, V>
 
     static <R, C, V> MutableTable<R, C, V> createHashMapBackedTable() {
         return MutableMapBackedTable.createBackedByHashMap();
+    }
+
+    static <K, V> MutableSymmetricTable<K, V> createSymmetricHashTable() {
+        return MutableSymmetricTable.createHashBackedTable();
     }
 
 }
