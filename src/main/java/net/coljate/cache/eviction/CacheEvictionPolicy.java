@@ -1,4 +1,4 @@
-package net.coljate.cache.policy;
+package net.coljate.cache.eviction;
 
 /**
  *

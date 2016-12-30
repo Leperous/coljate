@@ -7,6 +7,7 @@ import net.coljate.map.AbstractMap;
 import net.coljate.map.Entry;
 import net.coljate.map.ImmutableMap;
 import net.coljate.map.Map;
+import net.coljate.map.MutableSortedMap;
 import net.coljate.map.SortedMap;
 import net.coljate.set.SortedSet;
 
@@ -60,6 +61,11 @@ public class KeySortedMap<K, V>
     @Override
     public Entry<K, V> last() {
         return this.getEntry(keys.last());
+    }
+
+    @Override
+    public MutableSortedMap<K, V> mutableCopy() {
+        throw new UnsupportedOperationException(); //TODO
     }
 
 }

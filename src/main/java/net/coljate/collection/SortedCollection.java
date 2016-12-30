@@ -2,9 +2,9 @@ package net.coljate.collection;
 
 import java.util.Comparator;
 
+import net.coljate.list.Ordered;
 import net.coljate.util.complexity.Complexity;
 import net.coljate.util.complexity.TimeComplexity;
-import net.coljate.list.Ordered;
 
 /**
  * Has a specific order, based on some {@link #comparator}.
