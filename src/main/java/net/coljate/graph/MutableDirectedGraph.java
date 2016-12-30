@@ -9,22 +9,24 @@ import net.coljate.graph.impl.MutableHashBackedDirectedGraph;
 public interface MutableDirectedGraph<V, E> extends DirectedGraph<V, E>, MutableGraph<V, E> {
 
     @Override
+    @Deprecated
     default boolean add(final Relationship<V, E> relationship) {
         return relationship instanceof DirectedRelationship
-                && this.addDirected((DirectedRelationship<V, E>) relationship);
+                && this.add((DirectedRelationship<V, E>) relationship);
     }
 
-    default boolean addDirected(final DirectedRelationship<? extends V, ? extends E> relationship) {
+    default boolean add(final DirectedRelationship<V, E> relationship) {
         return this.addEdge(relationship.from(), relationship.to(), relationship.edge());
     }
 
     @Override
+    @Deprecated
     default boolean remove(final Relationship<?, ?> relationship) {
         return relationship instanceof DirectedRelationship
-                && this.removeDirected((DirectedRelationship) relationship);
+                && this.remove((DirectedRelationship<?, ?>) relationship);
     }
 
-    boolean removeDirected(DirectedRelationship<?, ?> relationship);
+    boolean remove(DirectedRelationship<?, ?> relationship);
 
     @Override
     default MutableDirectedGraph<V, E> mutableCopy() {

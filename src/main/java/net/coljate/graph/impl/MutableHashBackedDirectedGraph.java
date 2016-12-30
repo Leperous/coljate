@@ -55,7 +55,7 @@ public class MutableHashBackedDirectedGraph<V, E>
     }
 
     @Override
-    public boolean removeDirected(final DirectedRelationship<?, ?> relationship) {
+    public boolean remove(final DirectedRelationship<?, ?> relationship) {
         return edges.remove(relationship.from(), relationship.to(), relationship.edge());
     }
 

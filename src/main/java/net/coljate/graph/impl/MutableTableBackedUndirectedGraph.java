@@ -1,7 +1,9 @@
 package net.coljate.graph.impl;
 
+import java.util.Objects;
+
 import net.coljate.graph.MutableUndirectedGraph;
-import net.coljate.graph.Relationship;
+import net.coljate.graph.UndirectedRelationship;
 import net.coljate.set.MutableSet;
 import net.coljate.table.impl.MutableSymmetricTable;
 
@@ -23,33 +25,30 @@ public class MutableTableBackedUndirectedGraph<V, E>
     }
 
     @Override
-    public boolean addVertex(V vertex) {
-        throw new UnsupportedOperationException("Not supported yet.");
+    public boolean addVertex(final V vertex) {
+        return vertices.add(vertex);
     }
 
     @Override
-    public boolean addEdge(V fromVertex, V toVertex, E edge) {
-        throw new UnsupportedOperationException("Not supported yet.");
+    public boolean addEdge(final V fromVertex, final V toVertex, final E edge) {
+        return edges.add(fromVertex, toVertex, edge);
     }
 
     @Override
-    public boolean removeVertex(Object vertex) {
-        throw new UnsupportedOperationException("Not supported yet.");
+    public boolean removeVertex(final Object vertex) {
+        final boolean removed = vertices.remove(vertex);
+        edges.removeWhere(cell -> Objects.equals(vertex, cell.rowKey()) || Objects.equals(vertex, cell.columnKey()));
+        return removed;
     }
 
     @Override
-    public boolean remove(Relationship<?, ?> relationship) {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
-
-    @Override
-    public boolean add(Relationship<V, E> element) {
+    public boolean remove(final UndirectedRelationship<?, ?> relationship) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override
     public void clear() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        edges.clear();
     }
 
 }
