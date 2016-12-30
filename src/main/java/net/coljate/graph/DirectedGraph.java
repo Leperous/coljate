@@ -15,6 +15,11 @@ public interface DirectedGraph<V, E> extends Graph<V, E> {
     CovariantIterator<Relationship<V, E>, ? extends DirectedRelationship<V, E>> iterator();
 
     @Override
+    default DirectedRelationship<V, E> relationshipBetween(final Object fromVertex, final Object toVertex) {
+        return this.iterator().first(relationship -> relationship.isBetween(fromVertex, toVertex));
+    }
+
+    @Override
     default MutableDirectedGraph<V, E> mutableCopy() {
         return MutableDirectedGraph.copyOf(this);
     }

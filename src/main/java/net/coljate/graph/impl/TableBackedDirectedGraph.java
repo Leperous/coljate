@@ -1,7 +1,6 @@
 package net.coljate.graph.impl;
 
 import net.coljate.graph.AbstractDirectedRelationship;
-import net.coljate.graph.AbstractGraph;
 import net.coljate.graph.DirectedGraph;
 import net.coljate.graph.DirectedRelationship;
 import net.coljate.graph.ImmutableDirectedGraph;
@@ -23,29 +22,20 @@ import net.coljate.util.iterator.Iterators;
  * @author ollie
  */
 public class TableBackedDirectedGraph<V, E>
-        extends AbstractGraph<V, E>
+        extends TableBackedGraph<V, E>
         implements DirectedGraph<V, E> {
 
     private final Set<V> vertices;
     private final Table<V, V, E> edges;
 
     protected TableBackedDirectedGraph(final Set<V> vertices, final Table<V, V, E> edges) {
+        super(vertices, edges);
         this.vertices = vertices;
         this.edges = edges;
     }
 
     @Override
-    public Set<V> vertices() {
-        return vertices;
-    }
-
-    @Override
-    public E edgeBetween(final Object fromVertex, final Object toVertex) {
-        return edges.getIfPresent(fromVertex, toVertex);
-    }
-
-    @Override
-    public Relationship<V, E> relationshipBetween(final Object fromVertex, final Object toVertex) {
+    public DirectedRelationship<V, E> relationshipBetween(final Object fromVertex, final Object toVertex) {
         return Functions.ifNonNull(edges.cellIfPresent(fromVertex, toVertex), this::toRelationship);
     }
 

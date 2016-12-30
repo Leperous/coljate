@@ -1,0 +1,20 @@
+package net.coljate.graph;
+
+import net.coljate.util.iterator.UnmodifiableCovariantIterator;
+
+/**
+ *
+ * @author ollie
+ */
+public interface ImmutableUndirectedGraph<V, E>
+        extends ImmutableGraph<V, E>, UndirectedGraph<V, E> {
+
+    @Override
+    UnmodifiableCovariantIterator<Relationship<V, E>, ? extends UndirectedRelationship<V, E>> iterator();
+
+    @Override
+    default ImmutableUndirectedGraph<V, E> immutableCopy() {
+        return this;
+    }
+
+}

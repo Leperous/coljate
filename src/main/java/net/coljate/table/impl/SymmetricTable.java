@@ -66,6 +66,11 @@ public class SymmetricTable<K, V> extends AbstractTable<K, K, V> {
         return new MutableSymmetricTable<>(map.mutableCopy());
     }
 
+    @Override
+    public ImmutableSymmetricTable<K, V> immutableCopy() {
+        return new ImmutableSymmetricTable<>(map.immutableCopy());
+    }
+
     protected static final class OneOrTwoSet<K> {
 
         private final K first, second;
