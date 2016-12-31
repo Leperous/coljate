@@ -13,8 +13,8 @@ import java.util.function.Supplier;
  */
 public class Iterators {
 
-    public static <F, T, R extends T> CovariantIterator<T, R> transform(final Iterator<F> from, final Function<? super F, ? extends R> transform) {
-        return new CovariantIterator<T, R>() {
+    public static <B1, B2, T extends B2> CovariantIterator<B2, T> transform(final Iterator<? extends B1> from, final Function<? super B1, ? extends T> transform) {
+        return new CovariantIterator<B2, T>() {
 
             @Override
             public boolean hasNext() {
@@ -22,7 +22,7 @@ public class Iterators {
             }
 
             @Override
-            public R next() {
+            public T next() {
                 return transform.apply(from.next());
             }
 
@@ -34,15 +34,15 @@ public class Iterators {
         };
     }
 
-    public static <T> Iterator<T> filter(final Iterator<? extends T> iterator, final Predicate<? super T> predicate) {
+    public static <B, T extends B> CovariantIterator<B, T> filter(final Iterator<? extends T> iterator, final Predicate<? super T> predicate) {
         return filter(iterator::hasNext, iterator::next, predicate);
     }
 
-    public static <T> Iterator<T> filter(
+    public static <B, T extends B> CovariantIterator<B, T> filter(
             final BooleanSupplier canGenerateCandidate,
             final Supplier<? extends T> generateCandidate,
             final Predicate<? super T> isValid) {
-        return new FilteredIterator<T>() {
+        return new FilteredIterator<B, T>() {
 
             @Override
             protected boolean canGenerateCandidate() {
@@ -55,7 +55,7 @@ public class Iterators {
             }
 
             @Override
-            protected boolean isValid(T candidate) {
+            protected boolean isValid(final T candidate) {
                 return isValid.test(candidate);
             }
 
@@ -78,14 +78,15 @@ public class Iterators {
         return last;
     }
 
+    @SuppressWarnings("unchecked")
     public static <T> Iterator<T> covariant(final Iterator<? extends T> iterator) {
         return (Iterator<T>) iterator;
     }
 
-    public static abstract class FilteredIterator<T> implements Iterator<T> {
+    public static abstract class FilteredIterator<B, T extends B> implements CovariantIterator<B, T> {
 
-        boolean hasNext;
-        T next;
+        private boolean hasNext;
+        private T next;
 
         protected abstract boolean canGenerateCandidate();
 

@@ -1,6 +1,7 @@
 package net.coljate.util.iterator;
 
 import java.util.Iterator;
+import java.util.function.Function;
 import java.util.function.Predicate;
 
 /**
@@ -8,22 +9,26 @@ import java.util.function.Predicate;
  * {@code <R extends T>} on the elements returned by {@link #next next()}.
  *
  * @author ollie
- * @param <T> inherited type.
- * @param <R> {@link #next} type.
+ * @param <B> base (inherited) type
+ * @param <T> {@link #next} type
  */
-public interface CovariantIterator<T, R extends T> extends Iterator<T> {
+public interface CovariantIterator<B, T extends B> extends Iterator<B> {
 
     @Override
-    R next();
+    T next();
 
-    default R first(final Predicate<? super R> predicate) {
+    default T first(final Predicate<? super T> predicate) {
         while (this.hasNext()) {
-            final R next = this.next();
+            final T next = this.next();
             if (predicate.test(next)) {
                 return next;
             }
         }
         return null;
+    }
+
+    default <T2, R2 extends T2> CovariantIterator<T2, R2> transform(final Function<? super B, ? extends R2> transformation) {
+        return Iterators.transform(this, transformation);
     }
 
     static <T, R extends T> CovariantIterator<T, R> of(final Iterator<R> iterator) {
