@@ -2,6 +2,7 @@ package net.coljate.list.impl;
 
 import java.util.ArrayDeque;
 import java.util.Iterator;
+import java.util.OptionalInt;
 
 import net.coljate.list.ListIterator;
 import net.coljate.list.MutableList;
@@ -17,16 +18,24 @@ public class WrappedDeque<T>
 
     @SafeVarargs
     public static <T> WrappedDeque<T> copyIntoArrayDeque(final T... elements) {
-        final java.util.Deque<T> queue = new ArrayDeque<>(elements.length);
-        Arrays.consume(elements, queue::add);
-        return new WrappedDeque<>(queue);
+        final java.util.ArrayDeque<T> deque = new ArrayDeque<>(elements.length);
+        Arrays.consume(elements, deque::add);
+        return new WrappedDeque<>(deque);
     }
 
     private final java.util.Deque<T> deque;
 
-    public WrappedDeque(final java.util.Deque<T> deque) {
-        super(deque);
+    protected WrappedDeque(final java.util.Deque<T> deque, final OptionalInt capacity) {
+        super(deque, capacity);
         this.deque = deque;
+    }
+
+    public WrappedDeque(final java.util.ArrayDeque<T> deque) {
+        this(deque, OptionalInt.empty());
+    }
+
+    public WrappedDeque(final java.util.LinkedList<T> deque) {
+        this(deque, OptionalInt.empty());
     }
 
     @Override

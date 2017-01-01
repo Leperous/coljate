@@ -2,6 +2,7 @@ package net.coljate.list.impl;
 
 import java.util.ArrayDeque;
 import java.util.Optional;
+import java.util.OptionalInt;
 
 import net.coljate.collection.impl.MutableWrappedCollection;
 import net.coljate.list.ImmutableList;
@@ -15,38 +16,50 @@ public class WrappedQueue<T>
         extends MutableWrappedCollection<T>
         implements Queue<T> {
 
-    private final java.util.Queue<T> delegate;
+    private final java.util.Queue<T> queue;
+    private final OptionalInt capacity;
 
-    protected WrappedQueue(final java.util.Queue<T> delegate) {
-        super(delegate);
-        this.delegate = delegate;
+    protected WrappedQueue(final java.util.Queue<T> queue, final OptionalInt capacity) {
+        super(queue);
+        this.queue = queue;
+        this.capacity = capacity;
+    }
+
+    @Override
+    public boolean add(final T element) {
+        return queue.offer(element);
     }
 
     @Override
     public Optional<T> peek() {
-        return Optional.ofNullable(delegate.peek());
+        return Optional.ofNullable(queue.peek());
     }
 
     @Override
     public Optional<T> poll() {
-        return Optional.ofNullable(delegate.poll());
+        return Optional.ofNullable(queue.poll());
+    }
+
+    @Override
+    public OptionalInt capacity() {
+        return capacity;
     }
 
     @Override
     @Deprecated
     public T remove() {
-        return delegate.remove();
+        return queue.remove();
     }
 
     @Override
     @Deprecated
     public T element() {
-        return delegate.element();
+        return queue.element();
     }
 
     @Override
     public WrappedQueue<T> mutableCopy() {
-        return new WrappedQueue<>(new ArrayDeque<>(delegate));
+        return new WrappedQueue<>(new ArrayDeque<>(queue), OptionalInt.empty());
     }
 
     @Override

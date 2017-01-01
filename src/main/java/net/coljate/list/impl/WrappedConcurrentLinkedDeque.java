@@ -3,6 +3,7 @@ package net.coljate.list.impl;
 import java.util.Collection;
 import java.util.List;
 import java.util.ListIterator;
+import java.util.OptionalInt;
 import java.util.concurrent.ConcurrentLinkedDeque;
 
 import net.coljate.list.ConcurrentList;
@@ -17,7 +18,7 @@ public class WrappedConcurrentLinkedDeque<T>
         implements ConcurrentList<T> {
 
     protected WrappedConcurrentLinkedDeque(final java.util.concurrent.ConcurrentLinkedDeque<T> delegate) {
-        super(delegate);
+        super(delegate, OptionalInt.empty());
     }
 
     @Override
