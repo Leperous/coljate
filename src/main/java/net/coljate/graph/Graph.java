@@ -2,6 +2,11 @@ package net.coljate.graph;
 
 import java.util.Objects;
 
+import javax.annotation.CheckForNull;
+import javax.annotation.Nonnull;
+
+import org.checkerframework.checker.nullness.qual.NonNull;
+
 import net.coljate.collection.Collection;
 import net.coljate.map.Map;
 import net.coljate.map.MutableMap;
@@ -20,7 +25,7 @@ import net.coljate.util.Functions;
  * @param <V> vertex type
  * @param <E> edge type
  */
-public interface Graph<V, E> extends Set<Relationship<V, E>> {
+public interface Graph<@NonNull V, E> extends Set<Relationship<V, E>> {
 
     default Set<V> vertices() {
         final MutableSet<V> vertices = MutableSet.createHashSet();
@@ -35,6 +40,7 @@ public interface Graph<V, E> extends Set<Relationship<V, E>> {
         return this.vertices().count();
     }
 
+    @Nonnull
     default Collection<E> edges() {
         return this.transform(Relationship::edge);
     }
@@ -46,10 +52,12 @@ public interface Graph<V, E> extends Set<Relationship<V, E>> {
         return this.edges().count();
     }
 
+    @CheckForNull
     default Relationship<V, E> relationshipBetween(final Object fromVertex, final Object toVertex) {
         return this.first(relationship -> relationship.isBetween(fromVertex, toVertex));
     }
 
+    @Nonnull
     default Map<V, E> neighbours(final V vertex) {
         final MutableMap<V, E> neighbours = MutableMap.createHashMap();
         final Set<Relationship<V, E>> relevant = this.filter(relationship -> relationship.containsVertex(vertex));
@@ -57,6 +65,7 @@ public interface Graph<V, E> extends Set<Relationship<V, E>> {
         return neighbours;
     }
 
+    @CheckForNull
     default E edgeBetween(final Object fromVertex, final Object toVertex) {
         return Functions.ifNonNull(this.relationshipBetween(fromVertex, toVertex), Relationship::edge);
     }
