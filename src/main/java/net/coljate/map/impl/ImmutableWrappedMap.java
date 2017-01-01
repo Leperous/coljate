@@ -22,13 +22,13 @@ public class ImmutableWrappedMap<K, V>
         return new ImmutableWrappedMap<>(new java.util.HashMap<>(initialCapacity));
     }
 
-    public static <K, V> ImmutableWrappedMap<K, V> copyOf(final Map<? extends K, ? extends V> map) {
+    public static <K, V> ImmutableWrappedMap<K, V> copyIntoHashMap(final Map<? extends K, ? extends V> map) {
         final java.util.Map<K, V> copy = new java.util.HashMap<>(map.count());
         map.forEach(copy::put);
         return new ImmutableWrappedMap<>(copy);
     }
 
-    public static <K, V> ImmutableWrappedMap<K, V> copyOf(final Collection<? extends Entry<? extends K, ? extends V>> entries) {
+    public static <K, V> ImmutableWrappedMap<K, V> copyIntoHashMap(final Collection<? extends Entry<? extends K, ? extends V>> entries) {
         final java.util.Map<K, V> map = new java.util.HashMap<>(entries.count());
         entries.forEach(entry -> map.put(entry.key(), entry.value()));
         return new ImmutableWrappedMap<>(map);

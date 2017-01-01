@@ -126,7 +126,7 @@ public interface Map<K, V> extends Set<Entry<K, V>>, Associative<K, V> {
 
     @Override
     default ImmutableMap<K, V> immutableCopy() {
-        return ImmutableWrappedMap.copyOf(this);
+        return ImmutableWrappedMap.copyIntoHashMap(this);
     }
 
     @Override
@@ -151,7 +151,7 @@ public interface Map<K, V> extends Set<Entry<K, V>>, Associative<K, V> {
     }
 
     static <K, V> Map<K, V> copyOf(final Collection<? extends Entry<? extends K, ? extends V>> entries) {
-        return ImmutableWrappedMap.copyOf(entries);
+        return ImmutableWrappedMap.copyIntoHashMap(entries);
     }
 
     static <K, V> ImmutableMap<K, V> of() {
