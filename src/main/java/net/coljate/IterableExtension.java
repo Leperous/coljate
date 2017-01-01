@@ -43,6 +43,9 @@ public interface IterableExtension<T> extends Container, Iterable<T> {
         return sum;
     }
 
+    /**
+     * @return true if this iterable container is currently empty.
+     */
     @Override
     @TimeComplexity(Complexity.CONSTANT)
     default boolean isEmpty() {

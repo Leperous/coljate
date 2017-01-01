@@ -1,6 +1,5 @@
 package net.coljate.list.impl;
 
-import java.io.Serializable;
 import java.util.Spliterator;
 import java.util.function.Function;
 import java.util.function.Predicate;
@@ -16,7 +15,7 @@ import net.coljate.list.ImmutableListIterator;
  */
 public class EmptyArray<T>
         extends AbstractArray<T>
-        implements Empty<T>, ImmutableArray<T>, Serializable {
+        implements Empty<T>, ImmutableArray<T> {
 
     private static final long serialVersionUID = 1L;
 

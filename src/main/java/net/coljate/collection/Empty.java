@@ -34,6 +34,7 @@ public interface Empty<T> extends ImmutableCollection<T>, Serializable {
     }
 
     @Override
+    @SuppressWarnings("unchecked")
     default <R> Empty<R> transform(final Function<? super T, ? extends R> transformation) {
         return (Empty<R>) this;
     }

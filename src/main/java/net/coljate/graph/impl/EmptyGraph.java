@@ -31,6 +31,7 @@ public abstract class EmptyGraph<V, E>
     }
 
     @Override
+    @Deprecated
     public EmptyGraph<V, E> immutableCopy() {
         return this;
     }

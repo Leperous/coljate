@@ -1,6 +1,5 @@
 package net.coljate.set.impl;
 
-import java.io.Serializable;
 import java.util.Spliterator;
 import java.util.function.Function;
 import java.util.function.Predicate;
@@ -16,7 +15,7 @@ import net.coljate.set.Set;
  */
 public class EmptySet<T>
         extends AbstractSet<T>
-        implements Empty<T>, ImmutableSet<T>, Serializable {
+        implements Empty<T>, ImmutableSet<T> {
 
     private static final long serialVersionUID = 1L;
     private static final EmptySet INSTANCE = new EmptySet();

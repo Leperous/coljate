@@ -1,6 +1,8 @@
 package net.coljate.set.impl;
 
 import java.io.Serializable;
+import java.util.Objects;
+import java.util.Optional;
 
 import net.coljate.collection.impl.SingletonCollection;
 import net.coljate.set.ImmutableSet;
@@ -19,6 +21,24 @@ public class SingletonSet<T>
 
     public static <T> SingletonSet<T> of(final T element) {
         return new SingletonSet<>(element);
+    }
+
+    @SafeVarargs
+    public static <T> Optional<SingletonSet<T>> of(final T... elements) {
+        switch (elements.length) {
+            case 0:
+                return Optional.empty();
+            case 1:
+                return Optional.of(of(elements[0]));
+            default:
+                final T first = elements[0];
+                for (int i = 1; i < elements.length; i++) {
+                    if (!Objects.equals(first, elements[i])) {
+                        return Optional.empty();
+                    }
+                }
+                return Optional.of(of(first));
+        }
     }
 
     protected SingletonSet(final T element) {
