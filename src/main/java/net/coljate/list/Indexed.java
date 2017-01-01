@@ -20,6 +20,7 @@ public interface Indexed<T> extends FastGet<Integer, T> {
     T get(int index);
 
     @Override
+    @Deprecated
     default T get(final Integer i) {
         return this.get(i.intValue());
     }

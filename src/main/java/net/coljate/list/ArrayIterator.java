@@ -13,6 +13,10 @@ public class ArrayIterator<T> implements ListIterator<T> {
         this.array = array;
     }
 
+    protected int index() {
+        return index;
+    }
+
     @Override
     public boolean hasPrevious() {
         return index > 0;

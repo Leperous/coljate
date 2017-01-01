@@ -10,9 +10,17 @@ import net.coljate.collection.Collection;
  */
 public interface DoubleCollection extends Collection<Double> {
 
-    boolean contains(double d);
+    default boolean contains(final double d) {
+        for (final DoubleIterator iterator = this.iterator(); iterator.hasNext();) {
+            if (iterator.nextDouble() == d) {
+                return true;
+            }
+        }
+        return false;
+    }
 
     @Override
+    @Deprecated
     default boolean contains(final Object object) {
         return object instanceof Double
                 && this.contains(((Number) object).doubleValue());
