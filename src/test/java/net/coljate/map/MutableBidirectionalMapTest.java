@@ -17,7 +17,7 @@ public interface MutableBidirectionalMapTest<K, V>
     MutableBidirectionalMap<K, V> createTestCollection();
 
     interface ZeroEntryTests<K, V> extends MutableBidirectionalMapTest<K, V>, BidirectionalMapTest.ZeroEntryTests<K, V>, MutableMapTest.ZeroEntryTests<K, V> {
-
+        
         @Test
         default void testPut_Inverse() {
 

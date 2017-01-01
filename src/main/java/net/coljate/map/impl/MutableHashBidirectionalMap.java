@@ -21,6 +21,12 @@ public class MutableHashBidirectionalMap<K, V>
         return new MutableHashBidirectionalMap<>(MutableMap.createHashMap());
     }
 
+    public static <K, V> MutableHashBidirectionalMap<K, V> create(final Entry<? extends K, ? extends V> entry) {
+        final MutableMap<K, V> map = MutableMap.createHashMap();
+        map.put(entry);
+        return new MutableHashBidirectionalMap<>(map);
+    }
+
     private final MutableMap<K, V> forward;
 
     protected MutableHashBidirectionalMap(final MutableMap<K, V> forward) {
