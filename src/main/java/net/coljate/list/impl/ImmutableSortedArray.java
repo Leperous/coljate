@@ -49,7 +49,7 @@ public class ImmutableSortedArray<T>
     }
 
     @TimeComplexity(computed = true)
-    private static <T> SortedArray<T> sort(final T[] array, final Comparator<? super T> comparator, final SortingAlgorithm sortingAlgorithm) {
+    public static <T> ImmutableSortedArray<T> sort(final T[] array, final Comparator<? super T> comparator, final SortingAlgorithm sortingAlgorithm) {
         sortingAlgorithm.sort(array, comparator);
         return new ImmutableSortedArray<>(array, comparator);
     }

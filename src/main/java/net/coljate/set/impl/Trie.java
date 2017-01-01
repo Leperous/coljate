@@ -10,9 +10,6 @@ import net.coljate.set.MutableSet;
 import net.coljate.set.Set;
 import net.coljate.util.Arrays;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 /**
  *
  * @author ollie
@@ -20,8 +17,6 @@ import org.slf4j.LoggerFactory;
 public class Trie
         extends AbstractSet<String>
         implements MutableSet<String> {
-
-    private static final Logger logger = LoggerFactory.getLogger(Trie.class);
 
     public static Trie copyOf(final String... strings) {
         final Trie trie = new Trie();
@@ -147,7 +142,6 @@ public class Trie
 
         void deleteIfEmpty() {
             if (parent != null && this.isEmpty()) {
-                logger.info("Deleting an empty node");
                 parent.nodes.removeAllMatchingEntries((c, node) -> node == this);
                 parent.deleteIfEmpty();
             }
