@@ -2,6 +2,9 @@ package net.coljate.tree;
 
 import java.util.Iterator;
 
+import javax.annotation.CheckForNull;
+import javax.annotation.Nonnull;
+
 import net.coljate.collection.Collection;
 import net.coljate.list.MutableList;
 import net.coljate.map.Entry;
@@ -19,8 +22,10 @@ import net.coljate.util.iterator.CovariantIterator;
  */
 public interface Tree<K, V, E extends Entry<K, V>> extends Map<K, V> {
 
+    @CheckForNull
     E root();
 
+    @Nonnull
     Collection<? extends Tree<K, V, E>> subtrees(Object key);
 
     @Override

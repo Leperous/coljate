@@ -35,7 +35,8 @@ public class EmptyTree<K, V>
     }
 
     @Override
-    public ImmutableCollection<? extends ImmutableTree<K, V, ImmutableEntry<K, V>>> subtrees(Object key) {
+    @Deprecated
+    public ImmutableCollection<EmptyTree<K, V>> subtrees(final Object key) {
         return Collection.of();
     }
 
@@ -64,7 +65,5 @@ public class EmptyTree<K, V>
     public Spliterator<Entry<K, V>> spliterator() {
         return Empty.super.spliterator();
     }
-    
-    
 
 }

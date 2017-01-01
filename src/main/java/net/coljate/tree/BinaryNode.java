@@ -1,5 +1,7 @@
 package net.coljate.tree;
 
+import javax.annotation.CheckForNull;
+
 import net.coljate.map.Entry;
 
 /**
@@ -9,8 +11,10 @@ import net.coljate.map.Entry;
  */
 public interface BinaryNode<K, V> extends Entry<K, V> {
 
+    @CheckForNull
     BinaryNode<K, V> left();
 
+    @CheckForNull
     BinaryNode<K, V> right();
 
 }
