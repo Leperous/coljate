@@ -70,7 +70,7 @@ public class ImmutableWrappedMap<K, V>
     }
 
     @Override
-    protected boolean equals(AbstractMap<?, ?> that) {
+    protected boolean equals(final Map<?, ?> that) {
         throw new UnsupportedOperationException(); //TODO
     }
 

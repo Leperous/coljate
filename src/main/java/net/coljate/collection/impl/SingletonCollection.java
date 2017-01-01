@@ -5,6 +5,7 @@ import java.util.Objects;
 
 import net.coljate.util.iterator.UnmodifiableIterator;
 import net.coljate.collection.AbstractCollection;
+import net.coljate.collection.Collection;
 import net.coljate.collection.MutableCollection;
 import net.coljate.collection.Singleton;
 
@@ -71,7 +72,12 @@ public class SingletonCollection<T>
     }
 
     @Override
-    protected boolean equals(final AbstractCollection<?> that) {
+    public boolean equals(final Object obj) {
+        return super.equals(obj);
+    }
+
+    @Override
+    protected boolean equals(final Collection<?> that) {
         return that instanceof SingletonCollection
                 && Objects.equals(this.element(), ((Singleton) that).element());
     }

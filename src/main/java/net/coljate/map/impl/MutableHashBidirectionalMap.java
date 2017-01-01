@@ -114,6 +114,7 @@ public class MutableHashBidirectionalMap<K, V>
         }
 
         @Override
+        @SuppressWarnings("override.return.invalid")
         public K key() {
             return forward.key();
         }

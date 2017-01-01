@@ -34,7 +34,7 @@ public class UnmodifiableCollection<T> extends AbstractCollection<T> {
     }
 
     @Override
-    protected boolean equals(final AbstractCollection<?> that) {
+    protected boolean equals(final Collection<?> that) {
         return that instanceof UnmodifiableCollection
                 && Objects.equals(this.collection, ((UnmodifiableCollection) that).collection);
     }

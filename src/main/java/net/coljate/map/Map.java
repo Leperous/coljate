@@ -6,11 +6,13 @@ import java.util.Objects;
 import java.util.Spliterator;
 import java.util.Spliterators;
 import java.util.function.BiConsumer;
-import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.IntFunction;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
+
+import javax.annotation.CheckForNull;
+import javax.annotation.Nonnull;
 
 import net.coljate.collection.Collection;
 import net.coljate.map.impl.ImmutableWrappedMap;
@@ -35,19 +37,23 @@ public interface Map<K, V> extends Set<Entry<K, V>>, Associative<K, V> {
      * @param key
      * @return the entry associated with this key, or null if there is no such association.
      */
+    @CheckForNull
     Entry<K, V> getEntry(Object key);
 
     /**
      * @return a view of the keys in this map.
      */
+    @Nonnull
     Set<K> keys();
 
     /**
      * @return a view of the values in this map.
      */
+    @Nonnull
     Collection<V> values();
 
     @Override
+    @SuppressWarnings("methodref.return.invalid")
     default V getIfPresent(final Object key) {
         return Functions.ifNonNull(this.getEntry(key), Entry::value);
     }

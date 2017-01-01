@@ -31,12 +31,14 @@ public interface SortedCollection<T> extends Ordered<T>, Collection<T> {
 
     interface SortingAlgorithm {
 
+        @SuppressWarnings("methodref.param.invalid")
         SortingAlgorithm DEFAULT = java.util.Arrays::sort;
 
         /**
          * Sort an array of naturally comparable elements.
          */
         @TimeComplexity(bestCase = Complexity.LINEAR, worstCase = Complexity.QUADRATIC)
+        @SuppressWarnings("type.argument.type.incompatible")
         default <T extends Comparable<? super T>> void sort(final T[] array) {
             this.sort(array, Comparator.naturalOrder());
         }

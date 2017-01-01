@@ -19,7 +19,7 @@ public interface ImmutableMultimap<K, V>
     ImmutableMultimapEntry<K, V, ?> getEntry(Object key);
 
     @Override
-    default ImmutableCollection<V> get(Object key) {
+    default ImmutableCollection<V> get(final K key) {
         return Functions.ifNonNull(this.getEntry(key), ImmutableMultimapEntry::value);
     }
 
@@ -37,7 +37,7 @@ public interface ImmutableMultimap<K, V>
 
         @Override
         C value();
-        
+
     }
 
 }

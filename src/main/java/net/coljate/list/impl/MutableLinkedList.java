@@ -2,6 +2,10 @@ package net.coljate.list.impl;
 
 import java.util.NoSuchElementException;
 
+import javax.annotation.Nullable;
+
+import org.checkerframework.checker.nullness.qual.MonotonicNonNull;
+
 import net.coljate.list.AbstractList;
 import net.coljate.list.ListIterator;
 import net.coljate.list.MutableList;
@@ -33,6 +37,7 @@ public class MutableLinkedList<T>
         return list;
     }
 
+    @Nullable
     private Node first, last;
 
     @Override
@@ -82,6 +87,7 @@ public class MutableLinkedList<T>
 
     private final class Node {
 
+        @MonotonicNonNull
         private Node prior, next;
         private T value;
 

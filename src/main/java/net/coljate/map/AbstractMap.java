@@ -1,7 +1,7 @@
 package net.coljate.map;
 
 import net.coljate.collection.AbstractCollection;
-import net.coljate.util.Equality;
+import net.coljate.collection.Collection;
 import net.coljate.util.Hash;
 
 /**
@@ -13,19 +13,20 @@ public abstract class AbstractMap<K, V>
         implements Map<K, V> {
 
     @Override
+    @SuppressWarnings("override.param.invalid")
     public boolean equals(final Object obj) {
         return super.equals(obj);
     }
 
     @Override
-    protected boolean equals(final AbstractCollection<?> that) {
-        return that instanceof AbstractMap
-                && this.equals((AbstractMap) that);
+    protected boolean equals(final Collection<?> that) {
+        return that instanceof Map
+                && this.equals((Map) that);
     }
 
-    protected boolean equals(final AbstractMap<?, ?> that) {
+    protected boolean equals(final Map<?, ?> that) {
         return this.getClass() == that.getClass()
-                && Equality.unorderedEquals(this, that);
+                && this.elementsEqual(that);
     }
 
     @Override

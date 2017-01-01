@@ -107,6 +107,7 @@ public interface MutableMap<K, V> extends Map<K, V>, MutableSet<Entry<K, V>> {
     }
 
     @Deprecated
+    @Override
     default boolean remove(final Object entry) {
         return entry instanceof Entry
                 && this.remove((Entry) entry);

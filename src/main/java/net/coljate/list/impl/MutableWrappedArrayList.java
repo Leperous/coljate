@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 
+import java.util.Objects;
+
 import net.coljate.collection.Collection;
 import net.coljate.list.MutableArray;
 
@@ -95,6 +97,7 @@ public class MutableWrappedArrayList<T>
                 : capacity(delegate);
     }
 
+    @SuppressWarnings("dereference.of.nullable")
     private static int capacity(final ArrayList<?> list) {
         try {
             return ((Object[]) arrayListCapacity.get(list)).length;

@@ -1,6 +1,12 @@
 package net.coljate.map.impl;
 
 import java.util.Iterator;
+import java.util.Objects;
+
+import javax.annotation.Nonnull;
+
+import org.checkerframework.checker.initialization.qual.UnknownInitialization;
+import org.checkerframework.checker.nullness.qual.MonotonicNonNull;
 
 import net.coljate.collection.Collection;
 import net.coljate.map.AbstractMap;
@@ -16,16 +22,20 @@ import net.coljate.util.iterator.Iterators;
  *
  * @author ollie
  */
+@UnknownInitialization
 public class WrappedMap<K, V>
         extends AbstractMap<K, V>
         implements Map<K, V> {
 
+    @Nonnull
     private final java.util.Map<K, V> delegate;
+    @MonotonicNonNull
     private Set<K> keys;
+    @MonotonicNonNull
     private Collection<V> values;
 
     protected WrappedMap(final java.util.Map<K, V> delegate) {
-        this.delegate = delegate;
+        this.delegate = Objects.requireNonNull(delegate);
     }
 
     @Override
@@ -34,16 +44,22 @@ public class WrappedMap<K, V>
     }
 
     @Override
-    public V get(final Object key) {
+    public V get(final K key) {
+        return delegate.get(key);
+    }
+
+    @Override
+    @SuppressWarnings("element-type-mismatch")
+    public V getIfPresent(final Object key) {
         return delegate.get(key);
     }
 
     @Override
     @SuppressWarnings("unchecked")
     public Entry<K, V> getEntry(final Object key) {
-        final V value = this.get(key);
+        final V value = this.getIfPresent(key);
         return value != null || this.containsKey(key)
-                ? ImmutableEntry.of((K) key, value)
+                ? Entry.of((K) key, value)
                 : null;
     }
 

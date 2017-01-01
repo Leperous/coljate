@@ -2,6 +2,8 @@ package net.coljate.map.impl;
 
 import java.util.function.Function;
 
+import org.checkerframework.checker.nullness.qual.MonotonicNonNull;
+
 import net.coljate.collection.MutableCollection;
 import net.coljate.map.AbstractEntry;
 import net.coljate.map.Entry;
@@ -28,6 +30,9 @@ public class MutableWrappedMap<K, V>
     }
 
     private final java.util.Map<K, V> delegate;
+
+    @MonotonicNonNull
+    private MutableCollection<V> values;
 
     protected MutableWrappedMap(final java.util.Map<K, V> delegate) {
         super(delegate);
@@ -76,8 +81,6 @@ public class MutableWrappedMap<K, V>
     public void clear() {
         delegate.clear();
     }
-
-    private MutableCollection<V> values;
 
     @Override
     public MutableCollection<V> values() {

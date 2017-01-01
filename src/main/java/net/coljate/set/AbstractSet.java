@@ -1,6 +1,7 @@
 package net.coljate.set;
 
 import net.coljate.collection.AbstractCollection;
+import net.coljate.collection.Collection;
 import net.coljate.util.Hash;
 
 /**
@@ -20,14 +21,13 @@ public abstract class AbstractSet<T>
     }
 
     @Override
-    protected boolean equals(final AbstractCollection<?> that) {
+    protected boolean equals(final Collection<?> that) {
         return that instanceof Set
                 && this.equals((Set) that);
     }
 
     protected boolean equals(final Set<?> that) {
-        return this.getClass() == that.getClass()
-                && this.elementsEqual(that);
+        return this.elementsEqual(that);
     }
 
     @Override

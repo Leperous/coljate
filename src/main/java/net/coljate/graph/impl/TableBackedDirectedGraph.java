@@ -1,5 +1,7 @@
 package net.coljate.graph.impl;
 
+import org.checkerframework.checker.nullness.qual.MonotonicNonNull;
+
 import net.coljate.graph.AbstractDirectedRelationship;
 import net.coljate.graph.DirectedGraph;
 import net.coljate.graph.DirectedRelationship;
@@ -61,6 +63,7 @@ public class TableBackedDirectedGraph<V, E>
     protected class CellBackedRelationship extends AbstractDirectedRelationship<V, E> {
 
         private final Cell<V, V, E> cell;
+        @MonotonicNonNull
         private TwoSet<V> vertices;
 
         CellBackedRelationship(final Cell<V, V, E> cell) {

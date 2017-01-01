@@ -5,7 +5,10 @@ import java.util.Objects;
 import java.util.function.BiPredicate;
 import java.util.function.Predicate;
 
+import org.checkerframework.checker.nullness.qual.MonotonicNonNull;
+
 import net.coljate.collection.AbstractCollection;
+import net.coljate.collection.Collection;
 import net.coljate.collection.lazy.LazyCollection;
 import net.coljate.map.Entry;
 import net.coljate.map.Map;
@@ -39,6 +42,11 @@ public class LazyFilteredMap<K, V> implements LazyMap<K, V> {
     private final Map<K, V> map;
     private final Predicate<? super Entry<K, V>> predicate;
 
+    @MonotonicNonNull
+    private KeySet keys;
+    @MonotonicNonNull
+    private ValueCollection values;
+
     public LazyFilteredMap(
             final Map<K, V> map,
             final Predicate<? super Entry<K, V>> predicate) {
@@ -57,16 +65,12 @@ public class LazyFilteredMap<K, V> implements LazyMap<K, V> {
                 && predicate.test(entry);
     }
 
-    private KeySet keys;
-
     @Override
     public LazySet<K> keys() {
         return keys == null
                 ? (keys = new KeySet())
                 : keys;
     }
-
-    private ValueCollection values;
 
     @Override
     public LazyCollection<V> values() {
@@ -111,8 +115,8 @@ public class LazyFilteredMap<K, V> implements LazyMap<K, V> {
         }
 
         @Override
-        protected boolean equals(AbstractCollection<?> that) {
-            throw new UnsupportedOperationException(); //TODO
+        protected boolean equals(final Collection<?> that) {
+            return this == that;
         }
 
         @Override

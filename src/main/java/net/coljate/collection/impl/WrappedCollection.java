@@ -1,6 +1,7 @@
 package net.coljate.collection.impl;
 
 import java.util.Iterator;
+import java.util.Objects;
 import java.util.Spliterator;
 
 import net.coljate.util.iterator.UnmodifiableIterator;
@@ -18,7 +19,7 @@ public class WrappedCollection<T> implements Collection<T> {
     private final java.util.Collection<? extends T> delegate;
 
     public WrappedCollection(final java.util.Collection<? extends T> delegate) {
-        this.delegate = delegate;
+        this.delegate = Objects.requireNonNull(delegate);
     }
 
     @Override

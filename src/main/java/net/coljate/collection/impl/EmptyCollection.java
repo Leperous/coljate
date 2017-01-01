@@ -2,6 +2,7 @@ package net.coljate.collection.impl;
 
 import net.coljate.util.iterator.UnmodifiableIterator;
 import net.coljate.collection.AbstractCollection;
+import net.coljate.collection.Collection;
 import net.coljate.collection.Empty;
 import net.coljate.collection.MutableCollection;
 
@@ -32,7 +33,7 @@ public class EmptyCollection<T>
     }
 
     @Override
-    protected boolean equals(final AbstractCollection<?> that) {
+    protected boolean equals(final Collection<?> that) {
         return that instanceof EmptyCollection;
     }
 

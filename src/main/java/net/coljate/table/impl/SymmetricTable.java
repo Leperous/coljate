@@ -4,6 +4,8 @@ import java.util.Iterator;
 import java.util.NoSuchElementException;
 import java.util.Objects;
 
+import org.checkerframework.checker.nullness.qual.MonotonicNonNull;
+
 import net.coljate.collection.Collection;
 import net.coljate.map.Entry;
 import net.coljate.map.Map;
@@ -114,6 +116,7 @@ public class SymmetricTable<K, V> extends AbstractTable<K, K, V> {
     protected class SymmetricIterator implements Iterator<Cell<K, K, V>> {
 
         private final Iterator<Entry<OneOrTwoSet<K>, V>> iterator;
+        @MonotonicNonNull
         private Entry<OneOrTwoSet<K>, V> current;
         private boolean doFirst = true;
 

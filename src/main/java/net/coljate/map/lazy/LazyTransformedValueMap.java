@@ -4,6 +4,8 @@ import java.util.Iterator;
 import java.util.Objects;
 import java.util.function.Function;
 
+import org.checkerframework.checker.nullness.qual.MonotonicNonNull;
+
 import net.coljate.collection.Collection;
 import net.coljate.collection.lazy.LazyCollection;
 import net.coljate.collection.lazy.LazyTransformedCollection;
@@ -28,6 +30,8 @@ public class LazyTransformedValueMap<K, V1, V2> implements LazyMap<K, V2> {
 
     private final Map<K, V1> map;
     private final Function<? super V1, ? extends V2> transformation;
+    @MonotonicNonNull
+    private LazyCollection<V2> values;
 
     public LazyTransformedValueMap(
             final Map<K, V1> map,
@@ -51,8 +55,6 @@ public class LazyTransformedValueMap<K, V1, V2> implements LazyMap<K, V2> {
     public Set<K> keys() {
         return map.keys();
     }
-
-    private LazyCollection<V2> values;
 
     @Override
     public LazyCollection<V2> values() {

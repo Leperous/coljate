@@ -1,6 +1,7 @@
 package net.coljate.list;
 
 import net.coljate.collection.AbstractCollection;
+import net.coljate.collection.Collection;
 import net.coljate.util.Hash;
 
 /**
@@ -17,9 +18,13 @@ public abstract class AbstractList<T>
     }
 
     @Override
-    protected boolean equals(final AbstractCollection<?> that) {
-        return that instanceof AbstractList
-                && this.elementsEqual((List) that);
+    protected boolean equals(final Collection<?> that) {
+        return that instanceof List
+                && this.equals((List<?>) that);
+    }
+
+    protected boolean equals(final List<?> that) {
+        return this.elementsEqual(that);
     }
 
     @Override

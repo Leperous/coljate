@@ -80,10 +80,12 @@ public class ConcurrentMutableMapBackedCache<K, V>
     @Override
     public boolean containsEntry(final Entry<?, ?> entry) {
         final Entry<K, Computer<K, V>> current = map.getEntry(entry.key());
+        final Computer<K, V> computer = current == null ? null : current.value();
         return current != null
-                && !current.value().isComputing()
+                && computer != null
+                && !computer.isComputing()
                 && Objects.equals(current.key(), entry.key())
-                && Objects.equals(current.value().current(), entry.value());
+                && Objects.equals(computer.current(), entry.value());
     }
 
     @Override

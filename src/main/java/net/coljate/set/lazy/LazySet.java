@@ -31,6 +31,7 @@ public interface LazySet<T> extends LazyCollection<T>, Set<T> {
         return LazyFilteredSet.of(Set.copyOrCast(collection), predicate);
     }
 
+    @SuppressWarnings("conditional.type.incompatible")
     static <T> Function<Collection<T>, LazySet<T>> transform() {
         return collection -> collection instanceof LazySet
                 ? (LazySet<T>) collection

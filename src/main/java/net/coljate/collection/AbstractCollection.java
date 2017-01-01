@@ -12,16 +12,17 @@ public abstract class AbstractCollection<T> implements Collection<T> {
 
     @Override
     public String toString() {
-        return this.getClass().getSimpleName() + "[" + Strings.toString(this) + "]";
+        return this.getClass().getSimpleName() + ":[" + Strings.toString(this) + "]";
     }
 
     @Override
+    @SuppressWarnings("override.param.invalid")
     public boolean equals(final Object that) {
         return this == that
-                || (that instanceof AbstractCollection && this.equals((AbstractCollection) that));
+                || (that instanceof Collection && this.equals((Collection) that));
     }
 
-    protected abstract boolean equals(AbstractCollection<?> that);
+    protected abstract boolean equals(Collection<?> that);
 
     @Override
     public int hashCode() {

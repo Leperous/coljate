@@ -7,14 +7,14 @@ import net.coljate.map.ImmutableEntry;
  *
  * @author ollie
  */
-public class SimpleImmutableEntry<K, V> 
+public class SimpleImmutableEntry<K, V>
         extends AbstractEntry<K, V>
         implements ImmutableEntry<K, V> {
 
     private final K key;
     private final V value;
 
-    public SimpleImmutableEntry(K key, V value) {
+    public SimpleImmutableEntry(final K key, final V value) {
         this.key = key;
         this.value = value;
     }

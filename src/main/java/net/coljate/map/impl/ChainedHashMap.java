@@ -4,6 +4,10 @@ import java.util.Iterator;
 import java.util.NoSuchElementException;
 import java.util.Objects;
 
+import javax.annotation.Nonnull;
+
+import org.checkerframework.checker.nullness.qual.MonotonicNonNull;
+
 import net.coljate.collection.AbstractCollection;
 import net.coljate.collection.Collection;
 import net.coljate.collection.ImmutableCollection;
@@ -40,8 +44,14 @@ public class ChainedHashMap<K, V>
         return map;
     }
 
+    @Nonnull
     private MutableList<MutableEntry<K, V>>[] buckets;
+    @MonotonicNonNull
+    private Set<K> keys;
+    @MonotonicNonNull
+    private Collection<V> values;
 
+    @SuppressWarnings({"unchecked", "rawtypes"})
     public ChainedHashMap(final int initialCapacity) {
         this.buckets = new MutableList[initialCapacity];
     }
@@ -128,14 +138,10 @@ public class ChainedHashMap<K, V>
         this.buckets = new MutableList[buckets.length];
     }
 
-    private Set<K> keys;
-
     @Override
     public Set<K> keys() {
         return keys == null ? (keys = new Keys()) : keys;
     }
-
-    private Collection<V> values;
 
     @Override
     public Collection<V> values() {
@@ -150,6 +156,7 @@ public class ChainedHashMap<K, V>
     private final class EntryIterator implements CovariantIterator<Entry<K, V>, MutableEntry<K, V>> {
 
         int index = 0;
+        @MonotonicNonNull
         Iterator<MutableEntry<K, V>> entryIterator;
 
         @Override
@@ -161,6 +168,7 @@ public class ChainedHashMap<K, V>
         }
 
         @Override
+        @SuppressWarnings("dereference.of.nullable")
         public MutableEntry<K, V> next() {
             if (!this.hasNext()) {
                 throw new NoSuchElementException();
@@ -170,6 +178,9 @@ public class ChainedHashMap<K, V>
 
         @Override
         public void remove() {
+            if (entryIterator == null) {
+                throw new NoSuchElementException();
+            }
             entryIterator.remove();
         }
 
@@ -194,7 +205,7 @@ public class ChainedHashMap<K, V>
     private final class Values extends AbstractCollection<V> {
 
         @Override
-        protected boolean equals(final AbstractCollection<?> that) {
+        protected boolean equals(final Collection<?> that) {
             throw new UnsupportedOperationException("Not supported yet.");
         }
 
