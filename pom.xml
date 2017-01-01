@@ -144,7 +144,7 @@
                             </annotationProcessors>
                             <compilerArgs>
                                 <!--These look spurious, and should be caught by javac anyway/-->
-                                <arg>-AsuppressWarnings=argument.type.incompatible,return.type.incompatible,assignment.type.incompatible,override.param.invalid,override.return.invalid,methodref.receiver.invalid</arg>
+                                <arg>-AsuppressWarnings=argument.type.incompatible,return.type.incompatible,assignment.type.incompatible,override.param.invalid,override.return.invalid,methodref.receiver.invalid,methodref.inference.unimplemented</arg>
                                 <arg>-AprintErrorStack</arg>
                                 <arg>-Xbootclasspath/p:${annotatedJdk}</arg>
                             </compilerArgs>

@@ -53,7 +53,6 @@ public interface Map<K, V> extends Set<Entry<K, V>>, Associative<K, V> {
     Collection<V> values();
 
     @Override
-    @SuppressWarnings("methodref.return.invalid")
     default V getIfPresent(final Object key) {
         return Functions.ifNonNull(this.getEntry(key), Entry::value);
     }
@@ -144,6 +143,7 @@ public interface Map<K, V> extends Set<Entry<K, V>>, Associative<K, V> {
         return MutableWrappedHashMap.create(initialCapacity);
     }
 
+    @SuppressWarnings("unchecked")
     static <K, V> Map<K, V> copyOrCast(final Collection<? extends Entry<? extends K, ? extends V>> collection) {
         return collection instanceof Map
                 ? (Map<K, V>) collection
