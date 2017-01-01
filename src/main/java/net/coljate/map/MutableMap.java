@@ -24,6 +24,10 @@ public interface MutableMap<K, V> extends Map<K, V>, MutableSet<Entry<K, V>> {
 
     V put(K key, V value);
 
+    default V put(final Entry<? extends K, ? extends V> entry) {
+        return this.put(entry.key(), entry.value());
+    }
+
     boolean remove(Object key, Object value);
 
     default boolean add(final K key, final V value) {
@@ -156,5 +160,5 @@ public interface MutableMap<K, V> extends Map<K, V>, MutableSet<Entry<K, V>> {
     static <K, V> MutableMap<K, V> copyIntoHashMap(final java.util.Map<K, V> map) {
         return MutableWrappedHashMap.copyOf(map);
     }
-    
+
 }

@@ -57,6 +57,11 @@ public class SingletonMap<K, V>
     }
 
     @Override
+    public boolean contains(Object key, Object value) {
+        return ImmutableEntry.super.contains(key, value);
+    }
+
+    @Override
     public ImmutableSet<K> keys() {
         return keys == null
                 ? (keys = ImmutableSet.of(this.key()))

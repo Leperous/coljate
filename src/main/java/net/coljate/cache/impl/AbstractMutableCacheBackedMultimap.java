@@ -31,7 +31,7 @@ public abstract class AbstractMutableCacheBackedMultimap<K, V, C extends Mutable
     @Override
     protected MutableCache<K, C> mutableCacheCopy(final Function<C, C> makeMutable) {
         final MutableCache<K, C> copy = cache.mutableCopy();
-        cache.forEach(copy::put);
+        cache.forEach(entry -> copy.put(entry));
         return copy;
     }
 

@@ -54,6 +54,11 @@ public class Subtree<K, V, T extends Subtree<K, V, T>>
     }
 
     @Override
+    public boolean contains(final Object key, final Object value) {
+        return Entry.super.contains(key, value);
+    }
+
+    @Override
     public Collection<? extends T> subtrees(final Object key) {
         final T entry = this.getEntry(key);
         return Functions.ifNonNull(entry, T::children);
