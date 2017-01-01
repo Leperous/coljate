@@ -11,7 +11,7 @@ Inspired by the SLF4J re-working of loggers, this project aims to be functionall
   * Avoiding unsuitable & unsafe methods, such as mutators on immutable collections.
   * Maximizing extensibility and minimizing repetition by using mixins.
   * Remaining open for extension.
-  * Annotating methods with ~~[FindBugs](https://code.google.com/p/findbugs/)~~ [Checker Framework](http://types.cs.washington.edu/checker-framework/) annotations to assist static nullity checks.
+  * Annotating with ~~[FindBugs](https://code.google.com/p/findbugs/)~~ [Checker Framework](http://types.cs.washington.edu/checker-framework/) to assist static anaylysis.
 
 Supported collection types:
 
