@@ -3,6 +3,7 @@ package net.coljate.util;
 import java.util.Objects;
 import java.util.function.Consumer;
 import java.util.function.Function;
+import java.util.function.UnaryOperator;
 
 import net.coljate.util.complexity.Complexity;
 import net.coljate.util.complexity.TimeComplexity;
@@ -31,6 +32,12 @@ public final class Arrays {
     public static <T> void consume(final T[] elements, final Consumer<T> consumer) {
         for (int i = 0; i < elements.length; i++) {
             consumer.accept(elements[i]);
+        }
+    }
+
+    public static <T> void update(final T[] elements, final UnaryOperator<T> operator) {
+        for (int i = 0; i < elements.length; i++) {
+            elements[i] = operator.apply(elements[i]);
         }
     }
 

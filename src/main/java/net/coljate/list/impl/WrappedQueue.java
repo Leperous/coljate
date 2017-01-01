@@ -1,7 +1,6 @@
 package net.coljate.list.impl;
 
 import java.util.ArrayDeque;
-import java.util.Optional;
 import java.util.OptionalInt;
 
 import net.coljate.collection.impl.MutableWrappedCollection;
@@ -31,13 +30,17 @@ public class WrappedQueue<T>
     }
 
     @Override
-    public Optional<T> peek() {
-        return Optional.ofNullable(queue.peek());
+    public Element<T> peek() {
+        return queue.isEmpty()
+                ? null
+                : new SimpleElement<>(queue.peek());
     }
 
     @Override
-    public Optional<T> poll() {
-        return Optional.ofNullable(queue.poll());
+    public Element<T> poll() {
+        return queue.isEmpty()
+                ? null
+                : new SimpleElement<>(queue.poll());
     }
 
     @Override
@@ -47,7 +50,7 @@ public class WrappedQueue<T>
 
     @Override
     @Deprecated
-    public T remove() {
+    public T dequeue() {
         return queue.remove();
     }
 
@@ -65,6 +68,21 @@ public class WrappedQueue<T>
     @Override
     public ImmutableList<T> immutableCopy() {
         return Queue.super.immutableCopy();
+    }
+
+    private static final class SimpleElement<T> implements Element<T> {
+
+        private final T value;
+
+        SimpleElement(final T value) {
+            this.value = value;
+        }
+
+        @Override
+        public T value() {
+            return value;
+        }
+
     }
 
 }
