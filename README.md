@@ -20,8 +20,8 @@ Supported collection types:
  * Sets
  * Multisets
  * Maps
- * Caches
  * Multimaps
+ * Caches
  * Trees
  * Graphs 
  * Tables
