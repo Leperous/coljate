@@ -4,6 +4,7 @@ import java.util.Optional;
 
 import javax.annotation.CheckForNull;
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 import net.coljate.Container;
 import net.coljate.util.complexity.Complexity;
@@ -17,12 +18,12 @@ public interface Associative<K, V> extends Container {
 
     @TimeComplexity(bestCase = Complexity.CONSTANT)
     @CheckForNull
-    default V get(final K key) {
+    default V get(@Nullable final K key) {
         return this.getIfPresent(key);
     }
 
     @CheckForNull
-    V getIfPresent(Object key);
+    V getIfPresent(@Nullable Object key);
 
     @Nonnull
     default Optional<V> maybeGet(final K key) {

@@ -1,5 +1,7 @@
 package net.coljate.map.impl;
 
+import javax.annotation.Nonnull;
+
 import net.coljate.collection.Collection;
 import net.coljate.map.AbstractMap;
 import net.coljate.map.Entry;
@@ -15,6 +17,7 @@ import net.coljate.set.Set;
 public abstract class DelegatedMap<K, V>
         extends AbstractMap<K, V> {
 
+    @Nonnull
     protected abstract Map<K, V> delegate();
 
     @Override

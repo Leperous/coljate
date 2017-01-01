@@ -5,8 +5,8 @@ import java.util.Objects;
 
 import javax.annotation.Nonnull;
 
-import org.checkerframework.checker.initialization.qual.UnknownInitialization;
 import org.checkerframework.checker.nullness.qual.MonotonicNonNull;
+import org.checkerframework.checker.nullness.qual.Nullable;
 
 import net.coljate.collection.Collection;
 import net.coljate.map.AbstractMap;
@@ -22,19 +22,18 @@ import net.coljate.util.iterator.Iterators;
  *
  * @author ollie
  */
-@UnknownInitialization
-public class WrappedMap<K, V>
+public class WrappedMap<@Nullable K, @Nullable V>
         extends AbstractMap<K, V>
         implements Map<K, V> {
 
     @Nonnull
-    private final java.util.Map<K, V> delegate;
+    private final java.util.Map<@Nullable K, @Nullable V> delegate;
     @MonotonicNonNull
     private Set<K> keys;
     @MonotonicNonNull
     private Collection<V> values;
 
-    protected WrappedMap(final java.util.Map<K, V> delegate) {
+    protected WrappedMap(final java.util.Map<@Nullable K, @Nullable V> delegate) {
         this.delegate = Objects.requireNonNull(delegate);
     }
 
@@ -56,7 +55,7 @@ public class WrappedMap<K, V>
 
     @Override
     @SuppressWarnings("unchecked")
-    public Entry<K, V> getEntry(final Object key) {
+    public Entry<K, V> getEntry(@Nullable final Object key) {
         final V value = this.getIfPresent(key);
         return value != null || this.containsKey(key)
                 ? Entry.of((K) key, value)

@@ -51,7 +51,7 @@ public class RepeatedValueMap<K, V>
     @SuppressWarnings("unchecked")
     public Entry<K, V> getEntry(final Object key) {
         return keys.contains(key)
-                ? ImmutableEntry.of((K) key, value)
+                ? Entry.of((K) key, value)
                 : null;
     }
 

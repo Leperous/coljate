@@ -6,6 +6,8 @@ import java.util.Spliterators;
 import java.util.function.Function;
 import java.util.function.Predicate;
 
+import org.checkerframework.checker.nullness.qual.Nullable;
+
 import net.coljate.collection.Collection;
 import net.coljate.collection.SortedCollection.SortingAlgorithm;
 import net.coljate.list.impl.ImmutableSortedArray;
@@ -19,7 +21,7 @@ import net.coljate.util.Equality;
  *
  * @author ollie
  */
-public interface List<T> extends Ordered<T>, Collection<T> {
+public interface List<@Nullable T> extends Ordered<T>, Collection<T> {
 
     @Override
     ListIterator<T> iterator();

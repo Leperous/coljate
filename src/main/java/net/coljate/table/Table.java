@@ -1,5 +1,7 @@
 package net.coljate.table;
 
+import javax.annotation.CheckForNull;
+
 import net.coljate.set.Set;
 import net.coljate.util.Functions;
 
@@ -10,6 +12,7 @@ import net.coljate.util.Functions;
 public interface Table<R, C, V> extends Set<Cell<R, C, V>> {
 
     @SuppressWarnings("unchecked")
+    @CheckForNull
     Cell<R, C, V> cellIfPresent(Object row, Object column);
 
     default boolean contains(final Object row, final Object column) {
@@ -42,5 +45,5 @@ public interface Table<R, C, V> extends Set<Cell<R, C, V>> {
     default ImmutableTable<R, C, V> immutableCopy() {
         return ImmutableTable.copyOf(this);
     }
-    
+
 }

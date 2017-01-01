@@ -3,6 +3,10 @@ package net.coljate.map;
 import java.util.Spliterator;
 import java.util.Spliterators;
 
+import javax.annotation.CheckForNull;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+
 import net.coljate.collection.ImmutableCollection;
 import net.coljate.map.impl.EmptyMap;
 import net.coljate.map.impl.ImmutableMapIterator;
@@ -16,7 +20,8 @@ import net.coljate.util.iterator.UnmodifiableIterator;
 public interface ImmutableMap<K, V> extends Map<K, V>, ImmutableSet<Entry<K, V>> {
 
     @Override
-    ImmutableEntry<K, V> getEntry(Object key);
+    @CheckForNull
+    ImmutableEntry<K, V> getEntry(@Nullable Object key);
 
     @Override
     ImmutableSet<K> keys();
@@ -25,10 +30,11 @@ public interface ImmutableMap<K, V> extends Map<K, V>, ImmutableSet<Entry<K, V>>
     ImmutableCollection<V> values();
 
     @Override
-    default ImmutableMap<K, V> with(final Entry<K, V> entry) {
+    default ImmutableMap<K, V> with(@Nonnull final Entry<K, V> entry) {
         return this.with(entry.key(), entry.value());
     }
 
+    @Nonnull
     ImmutableMap<K, V> with(K key, V value);
 
     @Override

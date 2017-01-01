@@ -4,6 +4,8 @@ import java.util.Collections;
 import java.util.Spliterator;
 import java.util.Spliterators;
 
+import javax.annotation.Nonnull;
+
 import net.coljate.collection.Collection;
 import net.coljate.collection.ImmutableCollection;
 import net.coljate.set.impl.EmptySet;
@@ -18,6 +20,7 @@ import net.coljate.set.lazy.ImmutableLazyUnionSet;
  */
 public interface ImmutableSet<T> extends Set<T>, ImmutableCollection<T> {
 
+    @Nonnull
     default ImmutableSet<T> with(final T element) {
         return this.contains(element)
                 ? this

@@ -3,6 +3,10 @@ package net.coljate.set.impl;
 import java.util.Iterator;
 import java.util.Objects;
 
+import javax.annotation.CheckForNull;
+
+import org.checkerframework.checker.nullness.qual.NonNull;
+
 import net.coljate.map.Entry;
 import net.coljate.map.MutableMap;
 import net.coljate.set.AbstractSet;
@@ -15,8 +19,8 @@ import net.coljate.util.Arrays;
  * @author ollie
  */
 public class Trie
-        extends AbstractSet<String>
-        implements MutableSet<String> {
+        extends AbstractSet<@NonNull String>
+        implements MutableSet<@NonNull String> {
 
     public static Trie copyOf(final String... strings) {
         final Trie trie = new Trie();
@@ -116,10 +120,12 @@ public class Trie
             this.parent = parent;
         }
 
+        @CheckForNull
         Node get(final char c) {
             return nodes.get(c);
         }
 
+        @CheckForNull
         Node add(final char c) {
             return nodes.computeIfAbsent(c, ch -> new Node(this));
         }

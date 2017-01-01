@@ -7,6 +7,7 @@ import java.util.function.ToLongFunction;
 
 import javax.annotation.CheckForNull;
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 import net.coljate.util.complexity.Complexity;
 import net.coljate.util.complexity.TimeComplexity;
@@ -54,7 +55,7 @@ public interface IterableExtension<T> extends Container, Iterable<T> {
 
     @Override
     @TimeComplexity(Complexity.LINEAR)
-    default boolean contains(final Object object) {
+    default boolean contains(@Nullable final Object object) {
         for (final T element : this) {
             if (Objects.equals(object, element)) {
                 return true;

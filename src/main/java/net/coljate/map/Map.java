@@ -13,6 +13,7 @@ import java.util.function.Supplier;
 
 import javax.annotation.CheckForNull;
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 import net.coljate.collection.Collection;
 import net.coljate.map.impl.ImmutableWrappedMap;
@@ -38,7 +39,7 @@ public interface Map<K, V> extends Set<Entry<K, V>>, Associative<K, V> {
      * @return the entry associated with this key, or null if there is no such association.
      */
     @CheckForNull
-    Entry<K, V> getEntry(Object key);
+    Entry<K, V> getEntry(@Nullable Object key);
 
     /**
      * @return a view of the keys in this map.
@@ -84,11 +85,11 @@ public interface Map<K, V> extends Set<Entry<K, V>>, Associative<K, V> {
         return this.contains(entry.key(), entry.value());
     }
 
-    default boolean containsKey(final Object key) {
+    default boolean containsKey(@Nullable final Object key) {
         return this.keys().contains(key);
     }
 
-    default boolean containsValue(final Object value) {
+    default boolean containsValue(@Nullable final Object value) {
         return this.values().contains(value);
     }
 

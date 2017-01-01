@@ -7,6 +7,10 @@ import java.util.function.BiFunction;
 import java.util.function.BiPredicate;
 import java.util.function.Function;
 
+import javax.annotation.CheckForNull;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+
 import net.coljate.map.impl.MapIterator;
 import net.coljate.map.impl.MutableWrappedHashMap;
 import net.coljate.map.impl.MutableWrappedMap;
@@ -22,13 +26,15 @@ public interface MutableMap<K, V> extends Map<K, V>, MutableSet<Entry<K, V>> {
     @Override
     MutableEntry<K, V> getEntry(Object key);
 
+    @CheckForNull
     V put(K key, V value);
 
+    @CheckForNull
     default V put(final Entry<? extends K, ? extends V> entry) {
         return this.put(entry.key(), entry.value());
     }
 
-    boolean remove(Object key, Object value);
+    boolean remove(@Nullable Object key, @Nullable Object value);
 
     default boolean add(final K key, final V value) {
         return !this.containsKey(key)
@@ -45,7 +51,7 @@ public interface MutableMap<K, V> extends Map<K, V>, MutableSet<Entry<K, V>> {
         return this.add(entry.key(), entry.value());
     }
 
-    default boolean addAll(final Map<? extends K, ? extends V> map) {
+    default boolean addAll(@Nonnull final Map<? extends K, ? extends V> map) {
         boolean addedAny = false;
         for (final Entry<? extends K, ? extends V> entry : map) {
             addedAny &= this.add(entry.key(), entry.value());
@@ -53,7 +59,7 @@ public interface MutableMap<K, V> extends Map<K, V>, MutableSet<Entry<K, V>> {
         return addedAny;
     }
 
-    default Map<K, V> putAll(final Map<? extends K, ? extends V> map) {
+    default Map<K, V> putAll(@Nonnull final Map<? extends K, ? extends V> map) {
         final MutableMap<K, V> put = MutableMap.createHashMap(map.count());
         for (final Entry<? extends K, ? extends V> entry : map) {
             put.put(entry.key(), this.put(entry.key(), entry.value()));
@@ -61,6 +67,7 @@ public interface MutableMap<K, V> extends Map<K, V>, MutableSet<Entry<K, V>> {
         return put;
     }
 
+    @CheckForNull
     default V putIfAbsent(final K key, final V value) {
         final V current = this.get(key);
         return current == null
@@ -113,11 +120,12 @@ public interface MutableMap<K, V> extends Map<K, V>, MutableSet<Entry<K, V>> {
                 && this.remove((Entry) entry);
     }
 
-    default boolean remove(final Entry<?, ?> entry) {
+    default boolean remove(@Nonnull final Entry<?, ?> entry) {
         return this.remove(entry.key(), entry.value());
     }
 
-    default V evict(final Object key) {
+    @CheckForNull
+    default V evict(@Nullable final Object key) {
         final Entry<K, V> entry = this.getEntry(key);
         return entry != null && this.remove(entry)
                 ? entry.value()

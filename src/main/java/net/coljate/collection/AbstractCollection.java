@@ -19,7 +19,7 @@ public abstract class AbstractCollection<T> implements Collection<T> {
     @SuppressWarnings("override.param.invalid")
     public boolean equals(final Object that) {
         return this == that
-                || (that instanceof Collection && this.equals((Collection) that));
+                || (that instanceof Collection && this.equals((Collection<?>) that));
     }
 
     protected abstract boolean equals(Collection<?> that);

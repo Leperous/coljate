@@ -1,7 +1,6 @@
 package net.coljate.map.impl;
 
 import net.coljate.map.BidirectionalMap;
-import net.coljate.map.Entry;
 import net.coljate.map.Map;
 import net.coljate.set.Set;
 

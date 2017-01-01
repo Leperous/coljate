@@ -2,6 +2,8 @@ package net.coljate.map.impl;
 
 import java.util.Objects;
 
+import javax.annotation.Nonnull;
+
 import net.coljate.map.AbstractEntry;
 import net.coljate.map.Entry;
 import net.coljate.map.MutableBidirectionalMap;
@@ -109,12 +111,11 @@ public class MutableHashBidirectionalMap<K, V>
 
         private final MutableEntry<K, V> forward;
 
-        MutableHashBidirectionalMapEntry(final MutableEntry<K, V> forward) {
-            this.forward = forward;
+        MutableHashBidirectionalMapEntry(@Nonnull final MutableEntry<K, V> forward) {
+            this.forward = Objects.requireNonNull(forward);
         }
 
         @Override
-        @SuppressWarnings("override.return.invalid")
         public K key() {
             return forward.key();
         }

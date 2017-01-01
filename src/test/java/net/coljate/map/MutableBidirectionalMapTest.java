@@ -30,7 +30,7 @@ public interface MutableBidirectionalMapTest<K, V>
             assertNull(previous);
             assertThat(map.getEntry(key), is(entry));
 
-            assertThat(map.inverse().getEntry(value), is(entry.inverse()));
+            assertThat(map.inverse().getEntry(value), is(Entry.of(value, key)));
         }
 
     }
