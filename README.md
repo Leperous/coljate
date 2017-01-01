@@ -13,6 +13,19 @@ Inspired by the SLF4J re-working of loggers, this project aims to be functionall
   * Remaining open for extension.
   * Annotating methods with [FindBugs](https://code.google.com/p/findbugs/) annotations to assist static nullity checks.
 
+Supported collection types:
+
+ * Lists
+ * Arrays
+ * Sets
+ * Multisets
+ * Maps
+ * Caches
+ * Multimaps
+ * Trees
+ * Graphs 
+ * Tables
+
 Class hierarchy for ordered collecions:
 
 ```
@@ -29,8 +42,10 @@ Class hierarchy for unordered collections:
 
 ```
 ImmutableCollection <- Collection -> MutableCollection
-  ↓                      ↓             ↓
-ImmutableSet <--------- Set -------> MutableSet -------> ConcurrentSet
-  ↓                      ↓             ↓                   ↓
-ImmutableMap <--------- Map -------> MutableMap -------> ConcurrentMap
+  ↓                     ↓             ↓
+ImmutableSet <-------- Set ---------> MutableSet ------> ConcurrentSet
+  ↓                     ↓             ↓                   ↓
+ImmutableMap <-------- Map --------> MutableMap -------> ConcurrentMap
+  ↓                     ↓             ↓
+ImmutableTree <------- Tree -------> MutableTree ------> ConcurrentTree
 ```
