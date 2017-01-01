@@ -5,6 +5,9 @@ import java.util.Objects;
 import java.util.function.Predicate;
 import java.util.function.ToLongFunction;
 
+import javax.annotation.CheckForNull;
+import javax.annotation.Nonnull;
+
 import net.coljate.util.complexity.Complexity;
 import net.coljate.util.complexity.TimeComplexity;
 
@@ -21,7 +24,7 @@ public interface IterableExtension<T> extends Container, Iterable<T> {
     }
 
     @TimeComplexity(Complexity.LINEAR)
-    default int count(final Predicate<? super T> predicate) {
+    default int count(@Nonnull final Predicate<? super T> predicate) {
         int count = 0;
         for (final T element : this) {
             if (predicate.test(element)) {
@@ -32,7 +35,7 @@ public interface IterableExtension<T> extends Container, Iterable<T> {
     }
 
     @TimeComplexity(Complexity.LINEAR)
-    default long sum(final ToLongFunction<? super T> intFunction) {
+    default long sum(@Nonnull final ToLongFunction<? super T> intFunction) {
         long sum = 0;
         for (final T element : this) {
             sum = Math.addExact(sum, intFunction.applyAsLong(element));
@@ -63,7 +66,7 @@ public interface IterableExtension<T> extends Container, Iterable<T> {
      * @return true if any element in this container matches the given predicate.
      */
     @TimeComplexity(Complexity.LINEAR)
-    default boolean anyMatch(final Predicate<? super T> predicate) {
+    default boolean anyMatch(@Nonnull final Predicate<? super T> predicate) {
         for (final T element : this) {
             if (predicate.test(element)) {
                 return true;
@@ -78,7 +81,7 @@ public interface IterableExtension<T> extends Container, Iterable<T> {
      * @return true if no element matches the given predicate.
      */
     @TimeComplexity(Complexity.LINEAR)
-    default boolean noneMatch(final Predicate<? super T> predicate) {
+    default boolean noneMatch(@Nonnull final Predicate<? super T> predicate) {
         return !this.anyMatch(predicate);
     }
 
@@ -86,10 +89,10 @@ public interface IterableExtension<T> extends Container, Iterable<T> {
      *
      * @param predicate
      * @param ifNone the result if this container is empty.
-     * @return true if all elements match the given predicate, or if there are no elements.
+     * @return true if all elements match the given predicate, or the given boolean if this is empty.
      */
     @TimeComplexity(Complexity.LINEAR)
-    default boolean allMatch(final Predicate<? super T> predicate, boolean ifNone) {
+    default boolean allMatch(@Nonnull final Predicate<? super T> predicate, final boolean ifNone) {
         final Iterator<T> iterator = this.iterator();
         if (!iterator.hasNext()) {
             return ifNone;
@@ -102,13 +105,25 @@ public interface IterableExtension<T> extends Container, Iterable<T> {
         return true;
     }
 
-    default T first(final Predicate<? super T> predicate) {
+    @CheckForNull
+    default T first(@Nonnull final Predicate<? super T> predicate) {
         for (final T element : this) {
             if (predicate.test(element)) {
                 return element;
             }
         }
         return null;
+    }
+
+    @CheckForNull
+    default T last(@Nonnull final Predicate<? super T> predicate) {
+        T last = null;
+        for (final T element : this) {
+            if (predicate.test(element)) {
+                last = element;
+            }
+        }
+        return last;
     }
 
 }

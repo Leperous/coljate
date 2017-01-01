@@ -4,6 +4,8 @@ import java.util.Iterator;
 import java.util.Objects;
 import java.util.function.Predicate;
 
+import javax.annotation.Nonnull;
+
 /**
  *
  * @author ollie
@@ -31,7 +33,7 @@ public interface MutableIterableExtension<T> extends Iterable<T> {
         return removedAny;
     }
 
-    default boolean removeAll(final Iterable<?> elements) {
+    default boolean removeAll(@Nonnull final Iterable<?> elements) {
         boolean removed = false;
         for (final Object element : elements) {
             removed |= this.removeAll(element);
@@ -39,7 +41,7 @@ public interface MutableIterableExtension<T> extends Iterable<T> {
         return removed;
     }
 
-    default int removeWhere(final Predicate<? super T> predicate) {
+    default int removeWhere(@Nonnull final Predicate<? super T> predicate) {
         int removed = 0;
         for (final Iterator<T> iterator = this.iterator(); iterator.hasNext();) {
             if (predicate.test(iterator.next())) {
