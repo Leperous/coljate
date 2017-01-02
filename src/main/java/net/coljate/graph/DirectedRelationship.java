@@ -3,6 +3,8 @@ package net.coljate.graph;
 import java.util.Objects;
 import java.util.Optional;
 
+import javax.annotation.Nonnull;
+
 import net.coljate.graph.impl.RegularDirectedRelationship;
 import net.coljate.set.impl.TwoSet;
 
@@ -12,8 +14,10 @@ import net.coljate.set.impl.TwoSet;
  */
 public interface DirectedRelationship<V, E> extends Relationship<V, E> {
 
+    @Nonnull
     V from();
 
+    @Nonnull
     V to();
 
     @Override

@@ -29,11 +29,6 @@ public interface Empty<T> extends ImmutableCollection<T>, Serializable {
     }
 
     @Override
-    default UnmodifiableIterator<T> iterator() {
-        return UnmodifiableIterator.of();
-    }
-
-    @Override
     @SuppressWarnings("unchecked")
     default <R> Empty<R> transform(final Function<? super T, ? extends R> transformation) {
         return (Empty<R>) this;
@@ -42,6 +37,11 @@ public interface Empty<T> extends ImmutableCollection<T>, Serializable {
     @Override
     default Empty<T> filter(final Predicate<? super T> predicate) {
         return this;
+    }
+
+    @Override
+    default UnmodifiableIterator<T> iterator() {
+        return UnmodifiableIterator.of();
     }
 
     @Override

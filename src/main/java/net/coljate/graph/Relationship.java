@@ -3,6 +3,8 @@ package net.coljate.graph;
 import java.util.Objects;
 import java.util.Optional;
 
+import javax.annotation.Nonnull;
+
 import net.coljate.set.impl.TwoSet;
 
 /**
@@ -17,6 +19,7 @@ public interface Relationship<V, E> {
 
     E edge();
 
+    @Nonnull
     TwoSet<V> vertices();
 
     default boolean containsVertex(final Object vertex) {

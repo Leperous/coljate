@@ -15,8 +15,10 @@ public class EmptyDirectedGraph<V, E>
 
     private static final long serialVersionUID = 1L;
 
+    @SuppressWarnings("rawtypes")
     private static final EmptyDirectedGraph INSTANCE = new EmptyDirectedGraph();
 
+    @SuppressWarnings("unchecked")
     public static <V, E> EmptyDirectedGraph<V, E> instance() {
         return INSTANCE;
     }
@@ -27,6 +29,7 @@ public class EmptyDirectedGraph<V, E>
     }
 
     @Override
+    @Deprecated
     public EmptyDirectedGraph<V, E> immutableCopy() {
         return this;
     }

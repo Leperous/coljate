@@ -9,12 +9,14 @@ import java.util.NoSuchElementException;
  */
 public interface UnmodifiableIterator<T> extends Iterator<T> {
 
+    @SuppressWarnings("unchecked")
     static <T> UnmodifiableIterator<T> wrap(final Iterator<? extends T> iterator) {
         return iterator instanceof UnmodifiableIterator
                 ? (UnmodifiableIterator) iterator
                 : new DelegatedUnmodifiableIterator<>(iterator);
     }
 
+    @SuppressWarnings("unchecked")
     static <T> UnmodifiableIterator<T> of() {
         return EmptyUnmodifiableIterator.INSTANCE;
     }
