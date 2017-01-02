@@ -7,8 +7,6 @@ import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
 
-import javax.annotation.Nonnull;
-
 /**
  *
  * @author Ollie
@@ -176,6 +174,10 @@ public class Iterators {
             return next;
         }
 
+    }
+
+    public static <T> UnmodifiableIterator<T> of(final T element) {
+        return UnmodifiableIterator.of(element);
     }
 
 }
