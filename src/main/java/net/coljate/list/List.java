@@ -20,6 +20,8 @@ import net.coljate.util.Equality;
 /**
  *
  * @author ollie
+ * @see java.util.Deque
+ * @see Array
  */
 public interface List<@Nullable T> extends Ordered<T>, Collection<T> {
 

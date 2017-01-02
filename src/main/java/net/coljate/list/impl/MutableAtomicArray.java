@@ -86,6 +86,11 @@ public class MutableAtomicArray<T>
     }
 
     @Override
+    public boolean replace(int index, T expectedValue, T replacementValue) {
+        return this.array().compareAndSet(index, expectedValue, replacementValue);
+    }
+
+    @Override
     public int length() {
         return this.array().length();
     }

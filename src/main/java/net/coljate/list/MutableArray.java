@@ -15,9 +15,9 @@ public interface MutableArray<T> extends Array<T>, MutableList<T> {
 
     void resize(int length);
 
-    default boolean replace(int i, T expectedValue, T replacementValue) {
-        if (Objects.equals(this.get(i), expectedValue)) {
-            this.set(i, replacementValue);
+    default boolean replace(final int index, final T expectedValue, final T replacementValue) {
+        if (Objects.equals(this.get(index), expectedValue)) {
+            this.set(index, replacementValue);
             return true;
         } else {
             return false;

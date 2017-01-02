@@ -12,6 +12,9 @@ public interface ConcurrentArray<T>
     @Override
     ConcurrentArray<T> mutableCopy();
 
+    @Override
+    boolean replace(int index, T expectedValue, T replacementValue);
+
     static <T> ConcurrentArray<T> createConcurrentArray(final int length) {
         return MutableAtomicArray.create(length);
     }
