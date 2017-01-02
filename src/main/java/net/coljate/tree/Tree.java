@@ -16,6 +16,7 @@ import net.coljate.tree.navigation.TreeNavigation;
 import net.coljate.util.iterator.CovariantIterator;
 
 /**
+ * A {@link #root rooted} tree.
  *
  * @author ollie
  * @since 1.0

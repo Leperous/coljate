@@ -17,4 +17,9 @@ public interface BinaryNode<K, V> extends Entry<K, V> {
     @CheckForNull
     BinaryNode<K, V> right();
 
+    default boolean isLeaf() {
+        return this.left() == null
+                && this.right() == null;
+    }
+
 }
