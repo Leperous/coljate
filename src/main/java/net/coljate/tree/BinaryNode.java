@@ -9,16 +9,16 @@ import net.coljate.set.Set;
  * @author ollie
  * @since 1.0
  */
-public interface BinaryNode<K, V> extends Node<K, V> {
+public interface BinaryNode<K, V, N extends BinaryNode<K, V, N>> extends Node<K, V, N> {
 
     @CheckForNull
-    BinaryNode<K, V> left();
+    N left();
 
     @CheckForNull
-    BinaryNode<K, V> right();
+    N right();
 
     @Override
-    default Set<? extends Node<K, V>> children() {
+    default Set<? extends N> children() {
         return Set.ofNonNull(this.left(), this.right());
     }
 

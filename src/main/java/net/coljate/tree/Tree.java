@@ -9,8 +9,6 @@ import net.coljate.collection.Collection;
 import net.coljate.map.Entry;
 import net.coljate.map.Map;
 import net.coljate.set.Set;
-import net.coljate.tree.impl.EmptyTree;
-import net.coljate.tree.impl.SingletonTree;
 import net.coljate.tree.navigation.TreeNavigation;
 import net.coljate.util.iterator.CovariantIterator;
 
@@ -20,7 +18,7 @@ import net.coljate.util.iterator.CovariantIterator;
  * @author ollie
  * @since 1.0
  */
-public interface Tree<K, V, N extends Node<K, V>>
+public interface Tree<K, V, N extends Node<K, V, N>>
         extends Map<K, V> {
 
     @CheckForNull
@@ -76,14 +74,6 @@ public interface Tree<K, V, N extends Node<K, V>>
     @Override
     default ImmutableTree<K, V, ?> immutableCopy() {
         throw new UnsupportedOperationException();
-    }
-
-    static <K, V> EmptyTree<K, V> of() {
-        return EmptyTree.instance();
-    }
-
-    static <K, V> SingletonTree<K, V> of(final K key, final V value) {
-        return new SingletonTree<>(key, value);
     }
 
 }

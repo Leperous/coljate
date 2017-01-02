@@ -7,32 +7,26 @@ import net.coljate.tree.ImmutableBinaryTree.ImmutableBinaryNode;
  *
  * @author ollie
  */
-public interface ImmutableBinaryTree<K, V, B extends ImmutableBinaryNode<K, V>>
-        extends BinaryTree<K, V, B>, ImmutableTree<K, V, B> {
+public interface ImmutableBinaryTree<K, V, N extends ImmutableBinaryNode<K, V, N>>
+        extends BinaryTree<K, V, N>, ImmutableTree<K, V, N> {
 
     @Override
     @Deprecated
-    default ImmutableBinaryTree<K, V, B> immutableCopy() {
+    default ImmutableBinaryTree<K, V, N> immutableCopy() {
         return this;
     }
 
-    interface ImmutableBinaryNode<K, V>
-            extends BinaryNode<K, V>, ImmutableNode<K, V> {
+    interface ImmutableBinaryNode<K, V, N extends ImmutableBinaryNode<K, V, N>>
+            extends BinaryNode<K, V, N>, ImmutableNode<K, V, N> {
 
         @Override
-        ImmutableBinaryNode<K, V> left();
-
-        @Override
-        ImmutableBinaryNode<K, V> right();
-
-        @Override
-        public default ImmutableSet<? extends ImmutableNode<K, V>> children() {
-            return ImmutableSet.ofNonNull(this.left(), this.right());
+        public default ImmutableSet<? extends N> children() {
+            return BinaryNode.super.children().immutableCopy();
         }
 
         @Override
         @Deprecated
-        default ImmutableBinaryNode<K, V> immutableCopy() {
+        default ImmutableBinaryNode<K, V, N> immutableCopy() {
             return this;
         }
 

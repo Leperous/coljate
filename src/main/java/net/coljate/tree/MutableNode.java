@@ -6,7 +6,7 @@ import net.coljate.map.MutableEntry;
  *
  * @author ollie
  */
-public interface MutableNode<K, V>
-        extends Node<K, V>, MutableEntry<K, V> {
+public interface MutableNode<K, V, N extends MutableNode<K, V, N>>
+        extends Node<K, V, N>, MutableEntry<K, V> {
 
 }

@@ -4,7 +4,6 @@ import javax.annotation.CheckForNull;
 
 import net.coljate.map.AbstractEntry;
 import net.coljate.tree.AbstractTree;
-import net.coljate.tree.BinaryNode;
 import net.coljate.tree.ImmutableBinaryTree;
 import net.coljate.tree.MutableBinaryTree;
 import net.coljate.tree.MutableBinaryTree.MutableBinaryNode;
@@ -53,7 +52,7 @@ public class RedBlackTree<K, V>
 
     public static class RedBlackNode<K, V>
             extends AbstractEntry<K, V>
-            implements MutableBinaryNode<K, V> {
+            implements MutableBinaryNode<K, V, RedBlackNode<K, V>> {
 
         private final K key;
         @CheckForNull
@@ -84,12 +83,12 @@ public class RedBlackTree<K, V>
         }
 
         @Override
-        public BinaryNode<K, V> left() {
+        public RedBlackNode<K, V> left() {
             return left;
         }
 
         @Override
-        public BinaryNode<K, V> right() {
+        public RedBlackNode<K, V> right() {
             return right;
         }
 

@@ -16,19 +16,19 @@ import net.coljate.tree.Tree;
  */
 public interface TreeNavigation {
 
-    default <K, V, N extends Node<K, V>> N findNode(final Tree<K, V, N> tree, final Predicate<? super N> predicate) {
+    default <N extends Node<?, ?, N>> N findNode(final Tree<?, ?, N> tree, final Predicate<? super N> predicate) {
         return this.findNode(tree.root(), predicate);
     }
 
-    <N extends Node<?, ?>> N findNode(N node, Predicate<? super N> predicate);
+    <N extends Node<?, ?, N>> N findNode(N node, Predicate<? super N> predicate);
 
-    default <N extends Node<?, ?>> List<N> collect(final Tree<?, ?, N> tree) {
+    default <N extends Node<?, ?, N>> List<N> collect(final Tree<?, ?, N> tree) {
         final MutableList<N> nodes = MutableList.create(10);
         this.collect(tree.root(), nodes);
         return nodes;
     }
 
-    <N extends Node<?, ?>> void collect(N node, MutableList<N> nodes);
+    <N extends Node<?, ?, N>> void collect(N node, MutableList<N> nodes);
 
     TreeNavigation DEPTH_FIRST_RECURSIVE = new DepthFirstRecursiveTreeNavigation();
     AtomicReference<TreeNavigation> DEFAULT = new AtomicReference<>(DEPTH_FIRST_RECURSIVE);

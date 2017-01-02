@@ -1,6 +1,6 @@
 package net.coljate.tree.impl;
 
-import net.coljate.map.impl.SimpleImmutableEntry;
+import net.coljate.map.AbstractEntry;
 import net.coljate.set.ImmutableSet;
 import net.coljate.tree.ImmutableNode;
 
@@ -9,22 +9,31 @@ import net.coljate.tree.ImmutableNode;
  * @author ollie
  */
 public class SimpleImmutableNode<K, V>
-        extends SimpleImmutableEntry<K, V>
-        implements ImmutableNode<K, V> {
+        extends AbstractEntry<K, V>
+        implements ImmutableNode<K, V, SimpleImmutableNode<K, V>> {
+    
+    private final K key;
+    private final V value;
+    private final ImmutableSet<? extends SimpleImmutableNode<K, V>> children;
 
-    public static <K, V> ImmutableNode<K, V> of(final K key, final V value) {
-        return new SimpleImmutableNode<>(key, value, ImmutableSet.of());
-    }
-
-    private final ImmutableSet<? extends ImmutableNode<K, V>> children;
-
-    protected SimpleImmutableNode(final K key, final V value, final ImmutableSet<? extends ImmutableNode<K, V>> children) {
-        super(key, value);
+    public SimpleImmutableNode(K key, V value, ImmutableSet<? extends SimpleImmutableNode<K, V>> children) {
+        this.key = key;
+        this.value = value;
         this.children = children;
     }
 
     @Override
-    public ImmutableSet<? extends ImmutableNode<K, V>> children() {
+    public K key() {
+        return key;
+    }
+
+    @Override
+    public V value() {
+        return value;
+    }
+
+    @Override
+    public ImmutableSet<? extends SimpleImmutableNode<K, V>> children() {
         return children;
     }
 

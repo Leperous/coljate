@@ -8,8 +8,8 @@ import net.coljate.tree.navigation.TreeNavigation;
  *
  * @author Ollie
  */
-public interface SortedTree<K, V, E extends Node<K, V>>
-        extends Tree<K, V, E>, SortedMap<K, V> {
+public interface SortedTree<K, V, N extends Node<K, V, N>>
+        extends Tree<K, V, N>, SortedMap<K, V> {
 
     @Override
     default SortedSet<K> keys() {

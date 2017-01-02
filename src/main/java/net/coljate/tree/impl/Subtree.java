@@ -17,7 +17,7 @@ import net.coljate.util.SelfTyped;
  */
 public class Subtree<K, V, T extends Subtree<K, V, T>>
         extends AbstractTree<K, V, T>
-        implements Tree<K, V, T>, Node<K, V>, SelfTyped<T> {
+        implements Tree<K, V, T>, Node<K, V, T>, SelfTyped<T> {
 
     private final K key;
     private final Supplier<? extends V> getValue;

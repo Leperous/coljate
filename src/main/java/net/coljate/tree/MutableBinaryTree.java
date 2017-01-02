@@ -7,8 +7,8 @@ import net.coljate.tree.MutableBinaryTree.MutableBinaryNode;
  *
  * @author ollie
  */
-public interface MutableBinaryTree<K, V, B extends MutableBinaryNode<K, V>>
-        extends BinaryTree<K, V, B>, MutableTree<K, V, B> {
+public interface MutableBinaryTree<K, V, N extends MutableBinaryNode<K, V, N>>
+        extends BinaryTree<K, V, N>, MutableTree<K, V, N> {
 
     /**
      * Mutable node that allows updating of the value.
@@ -16,8 +16,8 @@ public interface MutableBinaryTree<K, V, B extends MutableBinaryNode<K, V>>
      * @param <K>
      * @param <V>
      */
-    interface MutableBinaryNode<K, V>
-            extends BinaryNode<K, V>, MutableNode<K, V> {
+    interface MutableBinaryNode<K, V, N extends MutableBinaryNode<K, V, N>>
+            extends BinaryNode<K, V, N>, MutableNode<K, V, N> {
 
     }
 
