@@ -7,18 +7,31 @@ import java.util.OptionalInt;
 import java.util.concurrent.ConcurrentLinkedDeque;
 
 import net.coljate.list.ConcurrentList;
+import net.coljate.util.Functions;
+
+import org.checkerframework.checker.nullness.qual.NonNull;
 
 /**
  *
  * @author ollie
  * @see ConcurrentLinkedDeque
  */
-public class WrappedConcurrentLinkedDeque<T>
+public class WrappedConcurrentLinkedDeque<@NonNull T>
         extends WrappedDeque<T>
         implements ConcurrentList<T> {
 
-    protected WrappedConcurrentLinkedDeque(final java.util.concurrent.ConcurrentLinkedDeque<T> delegate) {
-        super(delegate, OptionalInt.empty());
+    protected WrappedConcurrentLinkedDeque(final java.util.concurrent.ConcurrentLinkedDeque<T> deque) {
+        super(deque, OptionalInt.empty());
+    }
+
+    @Override
+    public Element<T> poll() {
+        return Functions.ifNonNull(this.nativePoll(), Element::of);
+    }
+
+    @Override
+    public Element<T> peek() {
+        return Functions.ifNonNull(this.nativePeek(), Element::of);
     }
 
     @Override

@@ -1,10 +1,12 @@
 package net.coljate.list.impl;
 
 import java.util.Iterator;
+import java.util.NoSuchElementException;
 import java.util.OptionalInt;
 
 import net.coljate.list.Queue;
 import net.coljate.util.Arrays;
+import net.coljate.util.Functions;
 
 /**
  *
@@ -12,11 +14,25 @@ import net.coljate.util.Arrays;
  */
 public class CircularBuffer<T> implements Queue<T> {
 
+    @SuppressWarnings({"rawtypes", "unchecked"})
+    public static <T> CircularBuffer<T> create(final int capacity) {
+        return new CircularBuffer<>(new Element[capacity + 1]);
+    }
+
     private final Element<T>[] array;
     private int read, write;
 
     protected CircularBuffer(final Element<T>[] array) {
+        this(array, 0, 0);
+    }
+
+    protected CircularBuffer(final Element<T>[] array, final int read, final int write) {
+        if (array.length <= 1) {
+            throw new IllegalArgumentException("Cannot create a queue with zero capacity!");
+        }
         this.array = array;
+        this.read = read;
+        this.write = write;
     }
 
     @Override
@@ -40,7 +56,7 @@ public class CircularBuffer<T> implements Queue<T> {
 
     @Override
     public OptionalInt capacity() {
-        return OptionalInt.of(array.length);
+        return OptionalInt.of(array.length - 1);
     }
 
     @Override
@@ -48,7 +64,7 @@ public class CircularBuffer<T> implements Queue<T> {
         if (this.isFull()) {
             return false;
         } else {
-            array[this.nextWrite()] = new SimpleElement<>(element);
+            array[this.nextWrite()] = Element.of(element);
             return true;
         }
     }
@@ -59,7 +75,7 @@ public class CircularBuffer<T> implements Queue<T> {
 
     @Override
     public Iterator<T> iterator() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return new CircularBufferIterator();
     }
 
     @Override
@@ -67,6 +83,11 @@ public class CircularBuffer<T> implements Queue<T> {
         read = write = 0;
         //Also drop references
         Arrays.update(array, e -> null);
+    }
+
+    @Override
+    public int count() {
+        return write - read;
     }
 
     @Override
@@ -80,21 +101,25 @@ public class CircularBuffer<T> implements Queue<T> {
     }
 
     @Override
-    public Queue<T> mutableCopy() {
-        throw new UnsupportedOperationException("Not supported yet.");
+    public CircularBuffer<T> mutableCopy() {
+        return new CircularBuffer<>(Arrays.copy(array), read, write);
     }
 
-    private static final class SimpleElement<T> implements Element<T> {
+    private final class CircularBufferIterator implements Iterator<T> {
 
-        private final T value;
+        int index = read;
 
-        public SimpleElement(final T value) {
-            this.value = value;
+        @Override
+        public boolean hasNext() {
+            return index < write;
         }
 
         @Override
-        public T value() {
-            return value;
+        public T next() {
+            if (!this.hasNext()) {
+                throw new NoSuchElementException();
+            }
+            return Functions.ifNonNull(array[(index++) % array.length], Element::value);
         }
 
     }

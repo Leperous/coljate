@@ -1,11 +1,11 @@
 package net.coljate.list;
 
-import java.util.Optional;
+import java.util.NoSuchElementException;
 
 import net.coljate.collection.MutableCollectionTest;
 
-import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.MatcherAssert.assertThat;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -22,13 +22,22 @@ public interface QueueTest<T> extends MutableCollectionTest<T> {
 
         @Test
         default void testPoll() {
-            assertThat(this.createTestCollection().poll(), is(Optional.empty()));
+            assertNull(this.createTestCollection().poll());
         }
 
         @Test
         default void testPeek() {
-            assertThat(this.createTestCollection().peek(), is(Optional.empty()));
+            assertNull(this.createTestCollection().peek());
         }
+
+        @Test
+        default void testDequeue() {
+            assertThrows(NoSuchElementException.class, () -> this.createTestCollection().dequeue());
+        }
+
+    }
+
+    interface OneElementTests<T> extends QueueTest<T>, MutableCollectionTest.OneElementTests<T> {
 
     }
 

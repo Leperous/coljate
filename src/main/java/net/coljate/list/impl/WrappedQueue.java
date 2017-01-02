@@ -33,14 +33,22 @@ public class WrappedQueue<T>
     public Element<T> peek() {
         return queue.isEmpty()
                 ? null
-                : new SimpleElement<>(queue.peek());
+                : Element.of(this.nativePeek());
+    }
+
+    protected T nativePeek() {
+        return queue.peek();
     }
 
     @Override
     public Element<T> poll() {
         return queue.isEmpty()
                 ? null
-                : new SimpleElement<>(queue.poll());
+                : Element.of(this.nativePoll());
+    }
+
+    protected T nativePoll() {
+        return queue.poll();
     }
 
     @Override
@@ -49,7 +57,6 @@ public class WrappedQueue<T>
     }
 
     @Override
-    @Deprecated
     public T dequeue() {
         return queue.remove();
     }
@@ -68,21 +75,6 @@ public class WrappedQueue<T>
     @Override
     public ImmutableList<T> immutableCopy() {
         return Queue.super.immutableCopy();
-    }
-
-    private static final class SimpleElement<T> implements Element<T> {
-
-        private final T value;
-
-        SimpleElement(final T value) {
-            this.value = value;
-        }
-
-        @Override
-        public T value() {
-            return value;
-        }
-
     }
 
 }
