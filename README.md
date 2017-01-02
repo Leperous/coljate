@@ -31,11 +31,11 @@ Class hierarchy for ordered collections:
 
 ```
                                      Queue -------------> ConcurrentQueue
-                                       ↑
+                                      ↑
 ImmutableCollection <- Collection -> MutableCollection
-  ↓                      ↓             ↓
+ ↓                      ↓             ↓
 ImmutableList <------- List -------> MutableList -------> ConcurrentList
-  ↓                      ↓             ↓                    ↓
+ ↓                      ↓             ↓                    ↓
 ImmutableArray <------ Array ------> MutableArray ------> ConcurrentArray
 ```
 
@@ -43,10 +43,10 @@ Class hierarchy for unordered collections:
 
 ```
 ImmutableCollection <- Collection -> MutableCollection
-  ↓                     ↓             ↓
-ImmutableSet <-------- Set ---------> MutableSet ------> ConcurrentSet
-  ↓                     ↓             ↓                   ↓
+ ↓                      ↓             ↓
+ImmutableSet <-------- Set --------> MutableSet -------> ConcurrentSet
+ ↓                      ↓             ↓                   ↓
 ImmutableMap <-------- Map --------> MutableMap -------> ConcurrentMap
-  ↓                     ↓             ↓                   ↓
+ ↓                      ↓             ↓                   ↓
 ImmutableTree <------- Tree -------> MutableTree ------> ConcurrentTree
 ```
