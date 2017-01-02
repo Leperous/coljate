@@ -7,11 +7,11 @@ Collections library for Java 8+
 
 Inspired by the SLF4J re-working of loggers, this project aims to be functionally equivalent to Java's collection library but offer syntactic improvements by:
 
-  * Classifying a collection as one of mutable, immutable or unmodifiable.
+  * Classifying collections as one of mutable, immutable, or read-only.
   * Avoiding unsuitable & unsafe methods, such as mutators on immutable collections.
   * Maximizing extensibility and minimizing repetition by using mixins.
-  * Remaining open for extension.
-  * Annotating with ~~[FindBugs](http://findbugs.sourceforge.net/)~~ [Checker Framework](http://types.cs.washington.edu/checker-framework/) to assist static anaylysis.
+  * Remaining open for extension by users.
+  * Using [FindBugs](http://findbugs.sourceforge.net/) & [Checker Framework](http://types.cs.washington.edu/checker-framework/) annotations to assist static anaylysis.
 
 Supported collection types:
 
