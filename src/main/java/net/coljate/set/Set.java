@@ -6,11 +6,8 @@ import java.util.Spliterators;
 import java.util.function.Predicate;
 
 import net.coljate.collection.Collection;
-import net.coljate.set.impl.EmptySet;
 import net.coljate.set.impl.ImmutableWrappedSet;
-import net.coljate.set.impl.MutableWrappedHashSet;
 import net.coljate.set.impl.MutableWrappedSet;
-import net.coljate.set.impl.SingletonSet;
 import net.coljate.set.impl.UnmodifiableSet;
 import net.coljate.set.impl.WrappedSet;
 import net.coljate.set.lazy.LazyFilteredSet;
@@ -104,18 +101,17 @@ public interface Set<T> extends Collection<T> {
         return this;
     }
 
-    static <T> EmptySet<T> of() {
-        return EmptySet.instance();
+    static <T> Set<T> of() {
+        return ImmutableSet.of();
     }
 
-    static <T> SingletonSet<T> of(final T element) {
-        return SingletonSet.of(element);
+    static <T> Set<T> of(final T element) {
+        return ImmutableSet.of(element);
     }
 
     @SafeVarargs
     static <T> Set<T> of(final T... elements) {
-        //FIXME use immutable set
-        return MutableWrappedHashSet.copyOf(elements);
+        return ImmutableSet.of(elements);
     }
 
     static <T> Set<T> unmodifiable(final Set<? extends T> set) {

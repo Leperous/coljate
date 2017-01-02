@@ -6,8 +6,7 @@ import java.util.Spliterators;
 import javax.annotation.concurrent.Immutable;
 
 import net.coljate.collection.impl.EmptyCollection;
-import net.coljate.collection.impl.SingletonCollection;
-import net.coljate.set.Set;
+import net.coljate.set.ImmutableSet;
 import net.coljate.util.iterator.UnmodifiableIterator;
 
 /**
@@ -35,8 +34,8 @@ public interface ImmutableCollection<T> extends Collection<T> {
         return EmptyCollection.instance();
     }
 
-    static <T> SingletonCollection<T> of(final T element) {
-        return Set.of(element);
+    static <T> Singleton<T> of(final T element) {
+        return ImmutableSet.of(element);
     }
 
     static <T> ImmutableCollection<T> copyOf(final Collection<? extends T> collection) {

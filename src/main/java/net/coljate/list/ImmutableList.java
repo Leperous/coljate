@@ -5,8 +5,10 @@ import java.util.Spliterators;
 
 import net.coljate.collection.Collection;
 import net.coljate.collection.ImmutableCollection;
+import net.coljate.list.impl.EmptyArray;
 import net.coljate.list.impl.ImmutableJoinList;
 import net.coljate.list.impl.ImmutableWrappedList;
+import net.coljate.list.impl.SingletonArray;
 
 /**
  *
@@ -44,7 +46,11 @@ public interface ImmutableList<T> extends List<T>, ImmutableCollection<T> {
         return Spliterators.spliterator(this.iterator(), this.count(), Spliterator.SIZED | Spliterator.ORDERED | Spliterator.IMMUTABLE);
     }
 
-    static <T> ImmutableList<T> of(final T element) {
+    static <T> EmptyArray<T> of() {
+        return ImmutableArray.of();
+    }
+
+    static <T> SingletonArray<T> of(final T element) {
         return ImmutableArray.of(element);
     }
 

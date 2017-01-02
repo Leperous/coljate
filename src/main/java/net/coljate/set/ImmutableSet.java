@@ -24,7 +24,7 @@ public interface ImmutableSet<T> extends Set<T>, ImmutableCollection<T> {
     default ImmutableSet<T> with(final T element) {
         return this.contains(element)
                 ? this
-                : ImmutableLazyUnionSet.of(this, Set.of(element));
+                : ImmutableLazyUnionSet.of(this, of(element));
     }
 
     @Override
@@ -44,11 +44,11 @@ public interface ImmutableSet<T> extends Set<T>, ImmutableCollection<T> {
         return Spliterators.spliterator(this.iterator(), this.count(), Spliterator.SIZED | Spliterator.DISTINCT | Spliterator.IMMUTABLE);
     }
 
-    static <T> ImmutableSet<T> of() {
+    static <T> EmptySet<T> of() {
         return EmptySet.instance();
     }
 
-    static <T> ImmutableSet<T> of(final T element) {
+    static <T> SingletonSet<T> of(final T element) {
         return SingletonSet.of(element);
     }
 

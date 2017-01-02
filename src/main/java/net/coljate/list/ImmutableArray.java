@@ -32,7 +32,7 @@ public interface ImmutableArray<T>
         return this;
     }
 
-    static <T> ImmutableArray<T> of() {
+    static <T> EmptyArray<T> of() {
         return EmptyArray.instance();
     }
 

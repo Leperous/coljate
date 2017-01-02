@@ -77,6 +77,10 @@ public interface List<T> extends Ordered<T>, Collection<T> {
         return Spliterators.spliterator(this.iterator(), this.count(), Spliterator.SIZED | Spliterator.ORDERED);
     }
 
+    static <T> List<T> of() {
+        return ImmutableList.of();
+    }
+
     @SafeVarargs
     static <T> List<T> of(final T... elements) {
         return ImmutableList.of(elements);
