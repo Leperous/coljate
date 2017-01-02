@@ -4,6 +4,7 @@ import java.util.Spliterator;
 import java.util.Spliterators;
 
 import net.coljate.collection.ConcurrentCollection;
+import net.coljate.list.impl.WrappedConcurrentLinkedDeque;
 
 /**
  *
@@ -18,6 +19,10 @@ public interface ConcurrentList<T>
     @Override
     default Spliterator<T> spliterator() {
         return Spliterators.spliterator(this.iterator(), this.count(), Spliterator.ORDERED | Spliterator.CONCURRENT);
+    }
+
+    static <T> ConcurrentList<T> createConcurrentLinkedList() {
+        return WrappedConcurrentLinkedDeque.create();
     }
 
 }
