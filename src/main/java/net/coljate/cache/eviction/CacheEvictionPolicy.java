@@ -13,20 +13,16 @@ public interface CacheEvictionPolicy {
 
     @Nonnull
     @CheckReturnValue
-    EvictionList notifyRead(Object key);
+    Iterator<Object> notifyRead(Object key);
 
     @Nonnull
     @CheckReturnValue
-    EvictionList notifyWrite(Object key);
+    Iterator<Object> notifyWrite(Object key);
 
     @Nonnull
     @CheckReturnValue
-    EvictionList notifyRemove(Object key);
+    Iterator<Object> notifyRemove(Object key);
 
     void notifyClear();
-
-    interface EvictionList extends Iterator<Object> {
-
-    }
 
 }

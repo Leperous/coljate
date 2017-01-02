@@ -1,7 +1,8 @@
 package net.coljate.cache.eviction;
 
+import java.util.Iterator;
+
 import net.coljate.cache.MutableCache;
-import net.coljate.cache.eviction.CacheEvictionPolicy.EvictionList;
 import net.coljate.collection.Collection;
 import net.coljate.map.MutableEntry;
 import net.coljate.set.Set;
@@ -58,12 +59,16 @@ public class EvictingMutableCache<K, V> implements MutableCache<K, V> {
     @Override
     public V evict(final Object key) {
         if (cache.containsKey(key)) {
-            final V evicted = cache.evict(key);
+            final V evicted = this.doEvict(key);
             this.process(evictionPolicy.notifyRemove(key));
             return evicted;
         } else {
             return null;
         }
+    }
+
+    private V doEvict(final Object key) {
+        return cache.evict(key);
     }
 
     @Override
@@ -77,9 +82,9 @@ public class EvictingMutableCache<K, V> implements MutableCache<K, V> {
         return cache.mutableCopy();
     }
 
-    private void process(final EvictionList eviction) {
-        while (eviction.hasNext()) {
-            this.evict(eviction.next());
+    private void process(final Iterator<Object> toEvict) {
+        while (toEvict.hasNext()) {
+            this.doEvict(toEvict.next());
         }
     }
 
