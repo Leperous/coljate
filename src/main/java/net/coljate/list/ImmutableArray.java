@@ -41,10 +41,10 @@ public interface ImmutableArray<T>
     }
 
     @SafeVarargs
-    static <T> ImmutableArray<T> copyOf(final T... elements) {
+    static <T> ImmutableArray<T> of(final T... elements) {
         switch (elements.length) {
             case 0:
-                return EmptyArray.instance();
+                return of();
             case 1:
                 return of(elements[0]);
             default:

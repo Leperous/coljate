@@ -78,8 +78,8 @@ public interface List<T> extends Ordered<T>, Collection<T> {
     }
 
     @SafeVarargs
-    static <T> List<T> copyOf(final T... elements) {
-        return ImmutableList.copyOf(elements);
+    static <T> List<T> of(final T... elements) {
+        return ImmutableList.of(elements);
     }
 
     static <T> List<T> copyOf(final Collection<? extends T> collection) {

@@ -24,7 +24,7 @@ public interface ImmutableList<T> extends List<T>, ImmutableCollection<T> {
     }
 
     default ImmutableList<T> prefixed(final T element) {
-        return this.prefixed(of(element));
+        return this.prefixed(ImmutableList.of(element));
     }
 
     default ImmutableList<T> prefixed(final List<? extends T> list) {
@@ -32,7 +32,7 @@ public interface ImmutableList<T> extends List<T>, ImmutableCollection<T> {
     }
 
     default ImmutableList<T> suffixed(final T element) {
-        return this.suffixed(of(element));
+        return this.suffixed(ImmutableList.of(element));
     }
 
     default ImmutableList<T> suffixed(final List<? extends T> list) {
@@ -49,8 +49,8 @@ public interface ImmutableList<T> extends List<T>, ImmutableCollection<T> {
     }
 
     @SafeVarargs
-    static <T> ImmutableList<T> copyOf(final T... elements) {
-        return ImmutableArray.copyOf(elements);
+    static <T> ImmutableList<T> of(final T... elements) {
+        return ImmutableArray.of(elements);
     }
 
     static <T> ImmutableList<T> copyOf(final java.util.Collection<? extends T> collection) {

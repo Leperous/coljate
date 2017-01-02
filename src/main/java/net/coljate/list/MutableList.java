@@ -45,7 +45,7 @@ public interface MutableList<T> extends List<T>, MutableCollection<T> {
     }
 
     @SafeVarargs
-    static <T> MutableList<T> copyOf(final T... elements) {
+    static <T> MutableList<T> of(final T... elements) {
         return MutableNativeArray.viewOf(elements);
     }
 
