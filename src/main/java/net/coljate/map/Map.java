@@ -127,7 +127,7 @@ public interface Map<K, V> extends Set<Entry<K, V>>, Associative<K, V> {
 
     @Override
     default ImmutableMap<K, V> immutableCopy() {
-        return ImmutableWrappedMap.copyIntoHashMap(this);
+        return ImmutableMap.copyIntoHashMap(this);
     }
 
     @Override

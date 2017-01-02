@@ -1,17 +1,32 @@
 package net.coljate.cache.eviction;
 
+import java.util.Iterator;
+
+import javax.annotation.CheckReturnValue;
+import javax.annotation.Nonnull;
+
 /**
  *
  * @author ollie
  */
 public interface CacheEvictionPolicy {
 
-    void notifyRead(Object key);
+    @Nonnull
+    @CheckReturnValue
+    EvictionList notifyRead(Object key);
 
-    Object notifyWrite(Object key);
+    @Nonnull
+    @CheckReturnValue
+    EvictionList notifyWrite(Object key);
 
-    void notifyRemove(Object key);
+    @Nonnull
+    @CheckReturnValue
+    EvictionList notifyRemove(Object key);
 
     void notifyClear();
+
+    interface EvictionList extends Iterator<Object> {
+
+    }
 
 }

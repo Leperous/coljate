@@ -10,6 +10,7 @@ import javax.annotation.Nullable;
 import net.coljate.collection.ImmutableCollection;
 import net.coljate.map.impl.EmptyMap;
 import net.coljate.map.impl.ImmutableMapIterator;
+import net.coljate.map.impl.ImmutableWrappedMap;
 import net.coljate.set.ImmutableSet;
 import net.coljate.util.iterator.UnmodifiableIterator;
 
@@ -55,6 +56,10 @@ public interface ImmutableMap<K, V> extends Map<K, V>, ImmutableSet<Entry<K, V>>
 
     static <K, V> ImmutableMap<K, V> of() {
         return EmptyMap.instance();
+    }
+
+    static <K, V> ImmutableMap<K, V> copyIntoHashMap(final Map<? extends K, ? extends V> map) {
+        return ImmutableWrappedMap.copyIntoHashMap(map);
     }
 
 }

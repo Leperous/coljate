@@ -1,6 +1,7 @@
 package net.coljate.cache;
 
 import net.coljate.collection.Collection;
+import net.coljate.map.ImmutableMap;
 import net.coljate.map.Map;
 import net.coljate.set.Set;
 
@@ -8,6 +9,9 @@ import net.coljate.set.Set;
  * A map whose values are computed. Also known as a lazy map or loading cache.
  *
  * @author ollie
+ * @see MutableCache
+ * @see ConcurrentCache
+ * @see ImmutableMap
  */
 public interface Cache<K, V> extends Map<K, V> {
 
@@ -25,5 +29,10 @@ public interface Cache<K, V> extends Map<K, V> {
 
     @Override
     MutableCache<K, V> mutableCopy();
+
+    @Override
+    default ImmutableMap<K, V> immutableCopy() {
+        return Map.super.immutableCopy();
+    }
 
 }

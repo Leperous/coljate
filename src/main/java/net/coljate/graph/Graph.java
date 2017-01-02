@@ -24,6 +24,7 @@ import net.coljate.util.Functions;
  * @author ollie
  * @param <V> vertex type
  * @param <E> edge type
+ * @since 1.0
  */
 public interface Graph<@NonNull V, E> extends Set<Relationship<V, E>> {
 

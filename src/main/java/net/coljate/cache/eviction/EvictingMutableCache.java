@@ -1,6 +1,7 @@
 package net.coljate.cache.eviction;
 
 import net.coljate.cache.MutableCache;
+import net.coljate.cache.eviction.CacheEvictionPolicy.EvictionList;
 import net.coljate.collection.Collection;
 import net.coljate.map.MutableEntry;
 import net.coljate.set.Set;
@@ -30,37 +31,39 @@ public class EvictingMutableCache<K, V> implements MutableCache<K, V> {
     }
 
     @Override
-    public MutableEntry<K, V> getEntry(Object key) {
+    public MutableEntry<K, V> getEntry(final Object key) {
         final MutableEntry<K, V> entry = cache.getEntry(key);
         if (entry != null) {
-            evictionPolicy.notifyRead(key);
+            this.process(evictionPolicy.notifyRead(key));
         }
         return entry;
     }
 
     @Override
     public V put(final K key, final V value) {
-        final Object remove = evictionPolicy.notifyWrite(key);
         final V put = cache.put(key, value);
-        if (remove != null) {
-            this.evict(remove);
-        }
+        this.process(evictionPolicy.notifyWrite(key));
         return put;
     }
 
     @Override
-    public boolean remove(Object key, Object value) {
+    public boolean remove(final Object key, final Object value) {
         final boolean removed = cache.remove(key, value);
         if (removed) {
-            evictionPolicy.notifyRemove(key);
+            this.process(evictionPolicy.notifyRemove(key));
         }
         return removed;
     }
 
     @Override
     public V evict(final Object key) {
-        evictionPolicy.notifyRemove(key);
-        return cache.evict(key);
+        if (cache.containsKey(key)) {
+            final V evicted = cache.evict(key);
+            this.process(evictionPolicy.notifyRemove(key));
+            return evicted;
+        } else {
+            return null;
+        }
     }
 
     @Override
@@ -72,6 +75,12 @@ public class EvictingMutableCache<K, V> implements MutableCache<K, V> {
     @Override
     public MutableCache<K, V> mutableCopy() {
         return cache.mutableCopy();
+    }
+
+    private void process(final EvictionList eviction) {
+        while (eviction.hasNext()) {
+            this.evict(eviction.next());
+        }
     }
 
 }
