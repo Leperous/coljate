@@ -16,6 +16,7 @@ Inspired by the SLF4J re-working of loggers, this project aims to be functionall
 Supported collection types:
 
  * Lists
+ * Queues
  * Arrays
  * Sets
  * Multisets
