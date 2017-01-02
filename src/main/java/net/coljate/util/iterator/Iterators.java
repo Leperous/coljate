@@ -7,6 +7,8 @@ import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
 
+import javax.annotation.Nonnull;
+
 /**
  *
  * @author Ollie
@@ -81,6 +83,31 @@ public class Iterators {
     @SuppressWarnings("unchecked")
     public static <T> Iterator<T> covariant(final Iterator<? extends T> iterator) {
         return (Iterator<T>) iterator;
+    }
+
+    @SafeVarargs
+    public static <T> Iterator<T> concat(final Iterator<? extends T> first, final Iterator<? extends T> second, final Iterator<? extends T>... rest) {
+        return new Iterator<T>() {
+
+            private int index = -2;
+            @Nonnull
+            Iterator<? extends T> current = first;
+
+            @Override
+            public boolean hasNext() {
+                while (index < rest.length - 1 && !current.hasNext()) {
+                    index += 1;
+                    current = index == -1 ? second : rest[index];
+                }
+                return current.hasNext();
+            }
+
+            @Override
+            public T next() {
+                return current.next();
+            }
+
+        };
     }
 
     public static abstract class FilteredIterator<B, T extends B> implements CovariantIterator<B, T> {

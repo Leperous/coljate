@@ -4,7 +4,6 @@ import java.util.ArrayDeque;
 import java.util.Iterator;
 import java.util.OptionalInt;
 
-import net.coljate.list.List;
 import net.coljate.list.ListIterator;
 import net.coljate.list.MutableList;
 import net.coljate.util.Arrays;

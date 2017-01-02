@@ -1,6 +1,7 @@
 package net.coljate.collection.impl;
 
 import java.util.Collections;
+import java.util.Iterator;
 
 import net.coljate.collection.MutableCollection;
 import net.coljate.util.NativeCollections;
@@ -45,6 +46,11 @@ public class MutableWrappedCollection<T>
     @Override
     public boolean removeAll(final Iterable<?> elements) {
         return delegate.removeAll(NativeCollections.asCollection(elements));
+    }
+
+    @Override
+    public Iterator<T> iterator() {
+        return delegate.iterator();
     }
 
     @Override
