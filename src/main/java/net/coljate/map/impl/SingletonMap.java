@@ -3,8 +3,6 @@ package net.coljate.map.impl;
 import java.io.Serializable;
 import java.util.Objects;
 
-import org.checkerframework.checker.nullness.qual.MonotonicNonNull;
-
 import net.coljate.util.iterator.UnmodifiableIterator;
 import net.coljate.collection.ImmutableCollection;
 import net.coljate.collection.Singleton;
@@ -30,9 +28,7 @@ public class SingletonMap<K, V>
 
     private final K key;
     private final V value;
-    @MonotonicNonNull
     private transient ImmutableSet<K> keys;
-    @MonotonicNonNull
     private transient ImmutableCollection<V> values;
 
     protected SingletonMap(final K key, final V value) {

@@ -6,8 +6,6 @@ import java.util.Objects;
 
 import javax.annotation.Nonnull;
 
-import org.checkerframework.checker.nullness.qual.MonotonicNonNull;
-
 import net.coljate.collection.AbstractCollection;
 import net.coljate.collection.Collection;
 import net.coljate.collection.ImmutableCollection;
@@ -46,9 +44,7 @@ public class ChainedHashMap<K, V>
 
     @Nonnull
     private MutableList<MutableEntry<K, V>>[] buckets;
-    @MonotonicNonNull
     private Set<K> keys;
-    @MonotonicNonNull
     private Collection<V> values;
 
     @SuppressWarnings({"unchecked", "rawtypes"})
@@ -156,7 +152,6 @@ public class ChainedHashMap<K, V>
     private final class EntryIterator implements CovariantIterator<Entry<K, V>, MutableEntry<K, V>> {
 
         int index = 0;
-        @MonotonicNonNull
         Iterator<MutableEntry<K, V>> entryIterator;
 
         @Override

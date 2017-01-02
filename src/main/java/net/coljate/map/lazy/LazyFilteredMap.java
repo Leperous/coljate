@@ -5,8 +5,6 @@ import java.util.Objects;
 import java.util.function.BiPredicate;
 import java.util.function.Predicate;
 
-import org.checkerframework.checker.nullness.qual.MonotonicNonNull;
-
 import net.coljate.collection.AbstractCollection;
 import net.coljate.collection.Collection;
 import net.coljate.collection.lazy.LazyCollection;
@@ -42,9 +40,7 @@ public class LazyFilteredMap<K, V> implements LazyMap<K, V> {
     private final Map<K, V> map;
     private final Predicate<? super Entry<K, V>> predicate;
 
-    @MonotonicNonNull
     private KeySet keys;
-    @MonotonicNonNull
     private ValueCollection values;
 
     public LazyFilteredMap(

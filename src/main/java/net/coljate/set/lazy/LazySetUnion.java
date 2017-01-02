@@ -6,8 +6,6 @@ import java.util.Objects;
 
 import javax.annotation.Nullable;
 
-import org.checkerframework.checker.nullness.qual.MonotonicNonNull;
-
 import net.coljate.set.AbstractSet;
 import net.coljate.set.Set;
 
@@ -45,7 +43,6 @@ public class LazySetUnion<T>
             @Nullable
             T next;
             final Iterator<? extends T> i1 = s1.iterator();
-            @MonotonicNonNull
             Iterator<? extends T> i2;
 
             @Override

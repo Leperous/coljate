@@ -2,8 +2,6 @@ package net.coljate.list.impl;
 
 import java.util.Objects;
 
-import org.checkerframework.checker.nullness.qual.MonotonicNonNull;
-
 import net.coljate.list.ImmutableList;
 import net.coljate.list.ImmutableListIterator;
 
@@ -60,9 +58,7 @@ public class ImmutableJoinList<T> implements ImmutableList<T> {
 
     private final class JoinListIterator implements ImmutableListIterator<T> {
 
-        @MonotonicNonNull
         private ImmutableListIterator<? extends T> l, r;
-        @MonotonicNonNull
         private ImmutableListIterator<? extends T> current;
 
         ImmutableListIterator<? extends T> current() {

@@ -5,8 +5,6 @@ import java.util.Objects;
 
 import javax.annotation.CheckForNull;
 
-import org.checkerframework.checker.nullness.qual.NonNull;
-
 import net.coljate.map.Entry;
 import net.coljate.map.MutableMap;
 import net.coljate.set.AbstractSet;
@@ -19,8 +17,8 @@ import net.coljate.util.Arrays;
  * @author ollie
  */
 public class Trie
-        extends AbstractSet<@NonNull String>
-        implements MutableSet<@NonNull String> {
+        extends AbstractSet<String>
+        implements MutableSet<String> {
 
     public static Trie copyOf(final String... strings) {
         final Trie trie = new Trie();

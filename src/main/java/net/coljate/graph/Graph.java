@@ -5,8 +5,6 @@ import java.util.Objects;
 import javax.annotation.CheckForNull;
 import javax.annotation.Nonnull;
 
-import org.checkerframework.checker.nullness.qual.NonNull;
-
 import net.coljate.collection.Collection;
 import net.coljate.map.Map;
 import net.coljate.map.MutableMap;
@@ -26,7 +24,7 @@ import net.coljate.util.Functions;
  * @param <E> edge type
  * @since 1.0
  */
-public interface Graph<@NonNull V, E> extends Set<Relationship<V, E>> {
+public interface Graph<V, E> extends Set<Relationship<V, E>> {
 
     default Set<V> vertices() {
         final MutableSet<V> vertices = MutableSet.createHashSet();

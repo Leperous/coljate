@@ -4,8 +4,6 @@ import java.util.Iterator;
 import java.util.NoSuchElementException;
 import java.util.OptionalInt;
 
-import org.checkerframework.checker.nullness.qual.Nullable;
-
 import net.coljate.list.Queue;
 import net.coljate.util.Arrays;
 import net.coljate.util.Functions;
@@ -14,7 +12,7 @@ import net.coljate.util.Functions;
  *
  * @author ollie
  */
-public class CircularBuffer<@Nullable T> implements Queue<T> {
+public class CircularBuffer<T> implements Queue<T> {
 
     @SuppressWarnings({"rawtypes", "unchecked"})
     public static <T> CircularBuffer<T> create(final int capacity) {

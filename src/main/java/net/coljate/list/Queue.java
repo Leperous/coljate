@@ -6,8 +6,6 @@ import java.util.OptionalInt;
 import javax.annotation.CheckForNull;
 import javax.annotation.Nonnull;
 
-import org.checkerframework.checker.nullness.qual.Nullable;
-
 import net.coljate.collection.MutableCollection;
 import net.coljate.list.impl.ImmutableNativeArray;
 import net.coljate.util.Functions;
@@ -104,8 +102,9 @@ public interface Queue<T> extends Ordered<T>, MutableCollection<T> {
         return ImmutableNativeArray.copyOf(this);
     }
 
-    interface Element<@Nullable T> {
+    interface Element<T> {
 
+        @CheckForNull
         T value();
 
         static <T> Element<T> of(final T value) {

@@ -3,8 +3,6 @@ package net.coljate.graph;
 import java.util.Objects;
 import java.util.Optional;
 
-import org.checkerframework.checker.nullness.qual.NonNull;
-
 import net.coljate.set.impl.TwoSet;
 
 /**
@@ -15,7 +13,7 @@ import net.coljate.set.impl.TwoSet;
  * @param <V> vertex type
  * @param <E> edge type
  */
-public interface Relationship<@NonNull V, @NonNull E> {
+public interface Relationship<V, E> {
 
     E edge();
 

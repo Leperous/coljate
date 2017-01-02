@@ -3,8 +3,6 @@ package net.coljate.list.impl;
 import java.util.OptionalInt;
 import java.util.concurrent.ConcurrentLinkedDeque;
 
-import org.checkerframework.checker.nullness.qual.NonNull;
-
 import net.coljate.list.ConcurrentList;
 import net.coljate.util.Functions;
 
@@ -13,7 +11,7 @@ import net.coljate.util.Functions;
  * @author ollie
  * @see ConcurrentLinkedDeque
  */
-public class WrappedConcurrentLinkedDeque<@NonNull T>
+public class WrappedConcurrentLinkedDeque<T>
         extends WrappedDeque<T>
         implements ConcurrentList<T> {
 
