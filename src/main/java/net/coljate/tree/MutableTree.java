@@ -1,22 +1,20 @@
 package net.coljate.tree;
 
-import net.coljate.collection.Collection;
 import net.coljate.map.Entry;
-import net.coljate.map.MutableEntry;
 import net.coljate.map.MutableMap;
-import net.coljate.util.iterator.CovariantIterator;
 import net.coljate.util.Functions;
+import net.coljate.util.iterator.CovariantIterator;
 
 /**
  *
  * @author ollie
  * @since 1.0
  */
-public interface MutableTree<K, V, E extends MutableEntry<K, V>>
-        extends Tree<K, V, E>, MutableMap<K, V> {
+public interface MutableTree<K, V, N extends MutableNode<K, V>>
+        extends Tree<K, V, N>, MutableMap<K, V> {
 
     @Override
-    default E getEntry(final Object key) {
+    default N getEntry(final Object key) {
         return Tree.super.getEntry(key);
     }
 
@@ -28,10 +26,7 @@ public interface MutableTree<K, V, E extends MutableEntry<K, V>>
     }
 
     @Override
-    Collection<? extends MutableTree<K, V, E>> subtrees(Object key);
-
-    @Override
-    default CovariantIterator<Entry<K, V>, E> iterator() {
+    default CovariantIterator<Entry<K, V>, N> iterator() {
         return Tree.super.iterator();
     }
 

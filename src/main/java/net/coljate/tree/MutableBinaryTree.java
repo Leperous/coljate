@@ -1,6 +1,5 @@
 package net.coljate.tree;
 
-import net.coljate.map.MutableEntry;
 import net.coljate.tree.MutableBinaryTree.MutableBinaryNode;
 
 /**
@@ -8,8 +7,8 @@ import net.coljate.tree.MutableBinaryTree.MutableBinaryNode;
  *
  * @author ollie
  */
-public interface MutableBinaryTree<K, V>
-        extends BinaryTree<K, V, MutableBinaryNode<K, V>>, MutableTree<K, V, MutableBinaryNode<K, V>> {
+public interface MutableBinaryTree<K, V, B extends MutableBinaryNode<K, V>>
+        extends BinaryTree<K, V, B>, MutableTree<K, V, B> {
 
     /**
      * Mutable node that allows updating of the value.
@@ -18,7 +17,7 @@ public interface MutableBinaryTree<K, V>
      * @param <V>
      */
     interface MutableBinaryNode<K, V>
-            extends BinaryNode<K, V>, MutableEntry<K, V> {
+            extends BinaryNode<K, V>, MutableNode<K, V> {
 
     }
 

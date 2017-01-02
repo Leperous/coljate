@@ -2,14 +2,13 @@ package net.coljate.tree.impl;
 
 import java.util.function.Supplier;
 
-import net.coljate.collection.Collection;
 import net.coljate.map.Entry;
 import net.coljate.map.ImmutableEntry;
 import net.coljate.set.Set;
 import net.coljate.tree.AbstractTree;
 import net.coljate.tree.MutableTree;
+import net.coljate.tree.Node;
 import net.coljate.tree.Tree;
-import net.coljate.util.Functions;
 import net.coljate.util.SelfTyped;
 
 /**
@@ -18,7 +17,7 @@ import net.coljate.util.SelfTyped;
  */
 public class Subtree<K, V, T extends Subtree<K, V, T>>
         extends AbstractTree<K, V, T>
-        implements Tree<K, V, T>, Entry<K, V>, SelfTyped<T> {
+        implements Tree<K, V, T>, Node<K, V>, SelfTyped<T> {
 
     private final K key;
     private final Supplier<? extends V> getValue;
@@ -49,19 +48,14 @@ public class Subtree<K, V, T extends Subtree<K, V, T>>
         return this.self();
     }
 
+    @Override
     public Set<? extends T> children() {
         return children;
     }
 
     @Override
     public boolean contains(final Object key, final Object value) {
-        return Entry.super.contains(key, value);
-    }
-
-    @Override
-    public Collection<? extends T> subtrees(final Object key) {
-        final T entry = this.getEntry(key);
-        return Functions.ifNonNull(entry, T::children);
+        return Node.super.contains(key, value);
     }
 
     @Override

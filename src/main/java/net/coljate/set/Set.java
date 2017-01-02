@@ -114,6 +114,10 @@ public interface Set<T> extends Collection<T> {
         return ImmutableSet.of(elements);
     }
 
+    static <T> Set<T> ofNonNull(final T a, final T b) {
+        return ImmutableSet.ofNonNull(a, b);
+    }
+
     static <T> Set<T> unmodifiable(final Set<? extends T> set) {
         return UnmodifiableSet.viewOf(set);
     }

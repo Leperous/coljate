@@ -1,9 +1,8 @@
 package net.coljate.tree.impl;
 
-import net.coljate.collection.Collection;
-import net.coljate.collection.ImmutableCollection;
 import net.coljate.map.ImmutableEntry;
 import net.coljate.tree.AbstractTree;
+import net.coljate.tree.ImmutableNode;
 import net.coljate.tree.ImmutableTree;
 
 /**
@@ -11,25 +10,18 @@ import net.coljate.tree.ImmutableTree;
  * @author ollie
  */
 public class SingletonTree<K, V>
-        extends AbstractTree<K, V, ImmutableEntry<K, V>>
-        implements ImmutableTree<K, V, ImmutableEntry<K, V>> {
+        extends AbstractTree<K, V, ImmutableNode<K, V>>
+        implements ImmutableTree<K, V, ImmutableNode<K, V>> {
 
-    private final K key;
-    private final V value;
+    private final ImmutableNode<K, V> root;
 
     public SingletonTree(final K key, final V value) {
-        this.key = key;
-        this.value = value;
+        this.root = ImmutableNode.of(key, value);
     }
 
     @Override
-    public ImmutableEntry<K, V> root() {
-        return ImmutableEntry.of(key, value);
-    }
-
-    @Override
-    public ImmutableCollection<? extends ImmutableTree<K, V, ImmutableEntry<K, V>>> subtrees(Object key) {
-        return Collection.of();
+    public ImmutableNode<K, V> root() {
+        return root;
     }
 
     @Override

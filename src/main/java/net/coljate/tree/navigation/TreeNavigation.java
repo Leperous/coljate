@@ -2,9 +2,11 @@ package net.coljate.tree.navigation;
 
 import java.util.Objects;
 import java.util.concurrent.atomic.AtomicReference;
+import java.util.function.Predicate;
 
+import net.coljate.list.List;
 import net.coljate.list.MutableList;
-import net.coljate.map.Entry;
+import net.coljate.tree.Node;
 import net.coljate.tree.Tree;
 
 /**
@@ -14,9 +16,19 @@ import net.coljate.tree.Tree;
  */
 public interface TreeNavigation {
 
-    <K, V, E extends Entry<K, V>> E findEntry(Object key, Tree<K, V, E> tree);
+    default <K, V, N extends Node<K, V>> N findNode(final Tree<K, V, N> tree, final Predicate<? super N> predicate) {
+        return this.findNode(tree.root(), predicate);
+    }
 
-    <E extends Entry<?, ?>> MutableList<E> collect(Tree<?, ?, E> tree, MutableList<E> list);
+    <N extends Node<?, ?>> N findNode(N node, Predicate<? super N> predicate);
+
+    default <N extends Node<?, ?>> List<N> collect(final Tree<?, ?, N> tree) {
+        final MutableList<N> nodes = MutableList.create(10);
+        this.collect(tree.root(), nodes);
+        return nodes;
+    }
+
+    <N extends Node<?, ?>> void collect(N node, MutableList<N> nodes);
 
     TreeNavigation DEPTH_FIRST_RECURSIVE = new DepthFirstRecursiveTreeNavigation();
     AtomicReference<TreeNavigation> DEFAULT = new AtomicReference<>(DEPTH_FIRST_RECURSIVE);

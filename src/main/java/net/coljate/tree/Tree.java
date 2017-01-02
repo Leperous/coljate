@@ -1,12 +1,11 @@
 package net.coljate.tree;
 
 import java.util.Iterator;
+import java.util.Objects;
 
 import javax.annotation.CheckForNull;
-import javax.annotation.Nonnull;
 
 import net.coljate.collection.Collection;
-import net.coljate.list.MutableList;
 import net.coljate.map.Entry;
 import net.coljate.map.Map;
 import net.coljate.set.Set;
@@ -21,25 +20,23 @@ import net.coljate.util.iterator.CovariantIterator;
  * @author ollie
  * @since 1.0
  */
-public interface Tree<K, V, E extends Entry<K, V>> extends Map<K, V> {
+public interface Tree<K, V, N extends Node<K, V>>
+        extends Map<K, V> {
 
     @CheckForNull
-    E root();
-
-    @Nonnull
-    Collection<? extends Tree<K, V, E>> subtrees(Object key);
+    N root();
 
     @Override
-    default E getEntry(final Object key) {
-        return this.getEntry(key, TreeNavigation.getDefault());
+    default N getEntry(final Object key) {
+        return this.getEntry(key, TreeNavigation.getDefault()); //FIXME
     }
 
-    default E getEntry(final Object key, final TreeNavigation navigation) {
-        return navigation.findEntry(key, this);
+    default N getEntry(final Object key, final TreeNavigation navigation) {
+        return navigation.findNode(this, node -> Objects.equals(key, node.key()));
     }
 
-    default Collection<E> entries(final TreeNavigation navigation) {
-        return navigation.collect(this, MutableList.create(10));
+    default Collection<N> entries(final TreeNavigation navigation) { //FIXME type N
+        return navigation.collect(this);
     }
 
     @Override
@@ -49,7 +46,7 @@ public interface Tree<K, V, E extends Entry<K, V>> extends Map<K, V> {
 
     default Set<K> keys(final TreeNavigation navigation) {
         return this.entries(navigation)
-                .transform(E::key)
+                .transform(N::key)
                 .distinct();
     }
 
@@ -59,15 +56,15 @@ public interface Tree<K, V, E extends Entry<K, V>> extends Map<K, V> {
     }
 
     default Collection<V> values(final TreeNavigation navigation) {
-        return this.entries(navigation).transform(E::value);
+        return this.entries(navigation).transform(N::value);
     }
 
     @Override
-    default CovariantIterator<Entry<K, V>, E> iterator() {
+    default CovariantIterator<Entry<K, V>, N> iterator() {
         return CovariantIterator.of(this.iterator(TreeNavigation.getDefault()));
     }
 
-    default Iterator<E> iterator(final TreeNavigation navigation) {
+    default Iterator<N> iterator(final TreeNavigation navigation) {
         return this.entries(navigation).iterator();
     }
 

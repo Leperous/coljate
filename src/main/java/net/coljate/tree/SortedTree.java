@@ -1,6 +1,5 @@
 package net.coljate.tree;
 
-import net.coljate.map.Entry;
 import net.coljate.map.SortedMap;
 import net.coljate.set.SortedSet;
 import net.coljate.tree.navigation.TreeNavigation;
@@ -9,7 +8,7 @@ import net.coljate.tree.navigation.TreeNavigation;
  *
  * @author Ollie
  */
-public interface SortedTree<K, V, E extends Entry<K, V>>
+public interface SortedTree<K, V, E extends Node<K, V>>
         extends Tree<K, V, E>, SortedMap<K, V> {
 
     @Override

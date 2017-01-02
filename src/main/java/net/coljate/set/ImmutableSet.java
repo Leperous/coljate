@@ -52,8 +52,24 @@ public interface ImmutableSet<T> extends Set<T>, ImmutableCollection<T> {
         return SingletonSet.of(element);
     }
 
+    static <T> ImmutableSet<T> ofNonNull(final T element) {
+        return element == null ? of() : of(element);
+    }
+
     static <T> ImmutableSet<T> of(final T a, final T b) {
         return TwoSet.of(a, b);
+    }
+
+    static <T> ImmutableSet<T> ofNonNull(final T a, final T b) {
+        if (a == null && b == null) {
+            return of();
+        } else if (a == null) {
+            return of(b);
+        } else if (b == null) {
+            return of(a);
+        } else {
+            return of(a, b);
+        }
     }
 
     @SafeVarargs

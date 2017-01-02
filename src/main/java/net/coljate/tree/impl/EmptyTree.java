@@ -4,12 +4,10 @@ import java.io.Serializable;
 import java.util.Spliterator;
 import java.util.function.Predicate;
 
-import net.coljate.collection.Collection;
 import net.coljate.collection.Empty;
-import net.coljate.collection.ImmutableCollection;
 import net.coljate.map.Entry;
-import net.coljate.map.ImmutableEntry;
 import net.coljate.tree.AbstractTree;
+import net.coljate.tree.ImmutableNode;
 import net.coljate.tree.ImmutableTree;
 import net.coljate.tree.Tree;
 import net.coljate.util.iterator.UnmodifiableCovariantIterator;
@@ -19,8 +17,8 @@ import net.coljate.util.iterator.UnmodifiableCovariantIterator;
  * @author ollie
  */
 public class EmptyTree<K, V>
-        extends AbstractTree<K, V, ImmutableEntry<K, V>>
-        implements Empty<Entry<K, V>>, ImmutableTree<K, V, ImmutableEntry<K, V>>, Serializable {
+        extends AbstractTree<K, V, ImmutableNode<K, V>>
+        implements Empty<Entry<K, V>>, ImmutableTree<K, V, ImmutableNode<K, V>>, Serializable {
 
     private static final long serialVersionUID = 1L;
     private static final EmptyTree INSTANCE = new EmptyTree();
@@ -30,14 +28,8 @@ public class EmptyTree<K, V>
     }
 
     @Override
-    public ImmutableEntry<K, V> root() {
+    public ImmutableNode<K, V> root() {
         return null;
-    }
-
-    @Override
-    @Deprecated
-    public ImmutableCollection<EmptyTree<K, V>> subtrees(final Object key) {
-        return Collection.of();
     }
 
     @Override
@@ -52,8 +44,8 @@ public class EmptyTree<K, V>
     }
 
     @Override
-    public UnmodifiableCovariantIterator<Entry<K, V>, ImmutableEntry<K, V>> iterator() {
-        return UnmodifiableCovariantIterator.wrap(Empty.super.iterator(), Entry::immutableCopy);
+    public UnmodifiableCovariantIterator<Entry<K, V>, ImmutableNode<K, V>> iterator() {
+        return UnmodifiableCovariantIterator.of();
     }
 
     @Override
