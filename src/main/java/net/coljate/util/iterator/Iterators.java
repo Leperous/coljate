@@ -15,6 +15,10 @@ import javax.annotation.Nonnull;
  */
 public class Iterators {
 
+    public static <B, T extends B> UnmodifiableCovariantIterator<B, T> empty() {
+        return UnmodifiableCovariantIterator.of();
+    }
+
     public static <B1, B2, T extends B2> CovariantIterator<B2, T> transform(final Iterator<? extends B1> from, final Function<? super B1, ? extends T> transform) {
         return new CovariantIterator<B2, T>() {
 
@@ -70,6 +74,28 @@ public class Iterators {
             count++;
         }
         return count;
+    }
+
+    public static <T> UnmodifiableIterator<T> first(final Iterator<? extends T> iterator, final int total) {
+        return new UnmodifiableIterator<T>() {
+
+            int current = 0;
+
+            @Override
+            public boolean hasNext() {
+                return iterator.hasNext() && current < total;
+            }
+
+            @Override
+            public T next() {
+                if (!this.hasNext()) {
+                    throw new NoSuchElementException();
+                }
+                current += 1;
+                return iterator.next();
+            }
+
+        };
     }
 
     public static <T> T last(final Iterator<? extends T> iterator) {

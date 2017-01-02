@@ -8,12 +8,19 @@ import net.coljate.list.ImmutableList;
 import net.coljate.list.Queue;
 
 /**
+ * Queue wrapper around a {@link java.util.LinkedHashSet}.
+ *
+ * Enqueue operations will always put an element on the tail, moving it from elsewhere in the queue if necessary.
  *
  * @author Ollie
  */
 public class WrappedLinkedHashSetQueue<T>
         extends MutableWrappedCollection<T>
         implements Queue<T> {
+
+    public WrappedLinkedHashSetQueue() {
+        this(new java.util.LinkedHashSet<>());
+    }
 
     public WrappedLinkedHashSetQueue(final java.util.LinkedHashSet<T> set) {
         super(set);
@@ -37,6 +44,12 @@ public class WrappedLinkedHashSetQueue<T>
         } else {
             return null;
         }
+    }
+
+    @Override
+    public boolean add(final T element) {
+        super.removeFirst(element);
+        return super.add(element);
     }
 
     @Override
