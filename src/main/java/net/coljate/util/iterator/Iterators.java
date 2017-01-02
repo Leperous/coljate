@@ -77,6 +77,9 @@ public class Iterators {
     }
 
     public static <T> UnmodifiableIterator<T> first(final Iterator<? extends T> iterator, final int total) {
+        if (total == 0) {
+            return empty();
+        }
         return new UnmodifiableIterator<T>() {
 
             int current = 0;

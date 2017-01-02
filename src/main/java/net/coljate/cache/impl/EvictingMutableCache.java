@@ -1,8 +1,9 @@
-package net.coljate.cache.eviction;
+package net.coljate.cache.impl;
 
 import java.util.Iterator;
 
 import net.coljate.cache.MutableCache;
+import net.coljate.cache.eviction.CacheEvictionPolicy;
 import net.coljate.collection.Collection;
 import net.coljate.map.MutableEntry;
 import net.coljate.set.Set;

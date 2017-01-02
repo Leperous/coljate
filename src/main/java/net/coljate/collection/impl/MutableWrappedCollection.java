@@ -33,6 +33,10 @@ public class MutableWrappedCollection<T>
         return delegate.add(element);
     }
 
+    public boolean addAll(final java.util.Collection<? extends T> iterable) {
+        return delegate.addAll(delegate);
+    }
+
     @Override
     public boolean removeFirst(final Object element) {
         return delegate.remove(element);

@@ -25,6 +25,10 @@ public interface CacheEvictionPolicy {
 
     void notifyClear();
 
+    static CacheEvictionPolicy leastRecentlyRead(final int capacity) {
+        return new LeastRecentlyReadEvictionPolicy(capacity);
+    }
+
     static CacheEvictionPolicy leastRecentlyUsed(final int capacity) {
         return new LeastRecentlyUsedEvictionPolicy(capacity);
     }
