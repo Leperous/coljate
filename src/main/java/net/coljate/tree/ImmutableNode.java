@@ -2,7 +2,7 @@ package net.coljate.tree;
 
 import net.coljate.map.ImmutableEntry;
 import net.coljate.set.ImmutableSet;
-import net.coljate.tree.impl.ImmutableLeafNode;
+import net.coljate.tree.impl.SimpleImmutableNode;
 
 /**
  *
@@ -14,8 +14,8 @@ public interface ImmutableNode<K, V, N extends ImmutableNode<K, V, N>>
     @Override
     ImmutableSet<? extends N> children();
 
-    static <K, V> ImmutableLeafNode<K, V> of(final K key, final V value) {
-        return ImmutableLeafNode.of(key, value);
+    static <K, V> SimpleImmutableNode<K, V> leaf(final K key, final V value) {
+        return SimpleImmutableNode.leaf(key, value);
     }
 
 }

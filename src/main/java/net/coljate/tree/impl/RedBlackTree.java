@@ -61,7 +61,7 @@ public class RedBlackTree<K, V>
         private RedBlackNode<K, V> left, right;
         private boolean black = BLACK;
 
-        RedBlackNode(final K key, final V value) {
+        RedBlackNode(final K key, final V value, final boolean black) {
             this.key = key;
             this.value = value;
             this.black = black;
@@ -90,6 +90,11 @@ public class RedBlackTree<K, V>
         @Override
         public RedBlackNode<K, V> right() {
             return right;
+        }
+
+        @Override
+        public RedBlackNode<K, V> self() {
+            return this;
         }
 
     }

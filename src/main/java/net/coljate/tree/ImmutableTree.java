@@ -20,7 +20,7 @@ public interface ImmutableTree<K, V, N extends ImmutableNode<K, V, N>>
     }
 
     @Override
-    ImmutableTree<K, V, N> with(K key, V value);
+    ImmutableTree<K, V, ?> with(K key, V value);
 
     @Override
     default ImmutableSet<K> keys() {

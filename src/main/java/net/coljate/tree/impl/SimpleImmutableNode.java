@@ -11,7 +11,11 @@ import net.coljate.tree.ImmutableNode;
 public class SimpleImmutableNode<K, V>
         extends AbstractEntry<K, V>
         implements ImmutableNode<K, V, SimpleImmutableNode<K, V>> {
-    
+
+    public static <K, V> SimpleImmutableNode<K, V> leaf(final K key, final V value) {
+        return new SimpleImmutableNode<>(key, value, ImmutableSet.of());
+    }
+
     private final K key;
     private final V value;
     private final ImmutableSet<? extends SimpleImmutableNode<K, V>> children;
