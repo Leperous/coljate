@@ -27,7 +27,7 @@ Supported collection types:
  * Graphs 
  * Tables
 
-Class hierarchy for ordered collecions:
+Class hierarchy for ordered collections:
 
 ```
                                      Queue -------------> ConcurrentQueue
@@ -47,6 +47,6 @@ ImmutableCollection <- Collection -> MutableCollection
 ImmutableSet <-------- Set ---------> MutableSet ------> ConcurrentSet
   ↓                     ↓             ↓                   ↓
 ImmutableMap <-------- Map --------> MutableMap -------> ConcurrentMap
-  ↓                     ↓             ↓
+  ↓                     ↓             ↓                   ↓
 ImmutableTree <------- Tree -------> MutableTree ------> ConcurrentTree
 ```
