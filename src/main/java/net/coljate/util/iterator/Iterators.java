@@ -115,18 +115,19 @@ public class Iterators {
     }
 
     @SafeVarargs
-    public static <T> Iterator<T> concat(final Iterator<? extends T> first, final Iterator<? extends T> second, final Iterator<? extends T>... rest) {
+    public static <T> Iterator<T> concat(final Iterator<? extends T>... iterators) {
+        if (iterators.length == 0) {
+            return empty();
+        }
         return new Iterator<T>() {
 
-            private int index = -2;
-            @Nonnull
-            Iterator<? extends T> current = first;
+            int index = 0;
+            Iterator<? extends T> current = iterators[0];
 
             @Override
             public boolean hasNext() {
-                while (index < rest.length - 1 && !current.hasNext()) {
-                    index += 1;
-                    current = index == -1 ? second : rest[index];
+                while (index < iterators.length - 1 && !current.hasNext()) {
+                    current = iterators[++index];
                 }
                 return current.hasNext();
             }

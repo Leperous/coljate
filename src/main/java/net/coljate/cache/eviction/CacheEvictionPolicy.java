@@ -25,6 +25,10 @@ public interface CacheEvictionPolicy {
 
     void notifyClear();
 
+    static CacheEvictionPolicy combine(final CacheEvictionPolicy policy, final CacheEvictionPolicy... rest) {
+        return CombinedCacheEvictionPolicy.create(policy, rest);
+    }
+
     static CacheEvictionPolicy leastRecentlyRead(final int capacity) {
         return new LeastRecentlyReadEvictionPolicy(capacity);
     }

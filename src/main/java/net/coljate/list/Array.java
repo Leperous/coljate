@@ -1,5 +1,7 @@
 package net.coljate.list;
 
+import java.util.function.Consumer;
+
 import net.coljate.list.impl.ImmutableNativeArray;
 import net.coljate.list.impl.MutableWrappedArrayList;
 import net.coljate.list.impl.RepeatedValueArray;
@@ -34,6 +36,13 @@ public interface Array<T> extends Indexed<T>, List<T> {
     @Override
     default boolean contains(final Object object) {
         return List.super.contains(object);
+    }
+
+    @Override
+    default void forEach(final Consumer<? super T> action) {
+        for (int i = 0; i < this.count(); i++) {
+            action.accept(this.get(i));
+        }
     }
 
     @Override

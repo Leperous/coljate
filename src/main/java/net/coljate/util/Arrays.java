@@ -5,6 +5,8 @@ import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.UnaryOperator;
 
+import javax.annotation.Nonnull;
+
 import net.coljate.util.complexity.Complexity;
 import net.coljate.util.complexity.TimeComplexity;
 
@@ -95,6 +97,15 @@ public final class Arrays {
             target[i] = copy(source[i]);
         }
         return target;
+    }
+
+    @SafeVarargs
+    public static <T> T[] concat(@Nonnull final T element, final T... rest) {
+        @SuppressWarnings("unchecked")
+        final T[] array = (T[]) java.lang.reflect.Array.newInstance(element.getClass(), 1 + rest.length);
+        array[0] = element;
+        System.arraycopy(rest, 0, array, 1, rest.length);
+        return array;
     }
 
 }

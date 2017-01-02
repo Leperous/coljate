@@ -196,6 +196,7 @@ public class MutableNativeArray<T>
             throw new UnsupportedOperationException("Not supported yet.");
         }
 
+        @Override
         public void remove() {
             delete(index);
         }
