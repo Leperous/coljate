@@ -10,7 +10,8 @@ import net.coljate.util.iterator.Iterators;
  *
  * @author Ollie
  */
-public class LeastRecentlyUsedEvictionPolicy implements CacheEvictionPolicy {
+public class LeastRecentlyUsedEvictionPolicy
+        extends AbstractCapacityEvictionPolicy {
 
     private final WrappedLinkedHashSetQueue<Object> queue = new WrappedLinkedHashSetQueue<>();
     private final int capacity;
@@ -20,6 +21,16 @@ public class LeastRecentlyUsedEvictionPolicy implements CacheEvictionPolicy {
             throw new IllegalArgumentException("Negative capacity " + capacity + "!");
         }
         this.capacity = capacity;
+    }
+
+    @Override
+    protected int count() {
+        return queue.count();
+    }
+
+    @Override
+    protected int capacity() {
+        return capacity;
     }
 
     @Override
@@ -35,7 +46,7 @@ public class LeastRecentlyUsedEvictionPolicy implements CacheEvictionPolicy {
     }
 
     private Iterator<Object> determineEvictions() {
-        final int evictions = queue.count() - capacity;
+        final int evictions = this.evictions();
         return evictions > 0
                 ? Iterators.first(queue.iterator(), evictions)
                 : Iterators.empty();

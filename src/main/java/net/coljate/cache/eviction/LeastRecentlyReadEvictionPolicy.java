@@ -9,7 +9,8 @@ import net.coljate.util.iterator.Iterators;
  *
  * @author Ollie
  */
-public class LeastRecentlyReadEvictionPolicy implements CacheEvictionPolicy {
+public class LeastRecentlyReadEvictionPolicy
+        extends AbstractCapacityEvictionPolicy {
 
     private final WrappedLinkedHashSetQueue<Object> queue = new WrappedLinkedHashSetQueue<>();
     private final int capacity;
@@ -22,9 +23,19 @@ public class LeastRecentlyReadEvictionPolicy implements CacheEvictionPolicy {
     }
 
     @Override
+    protected int count() {
+        return queue.count();
+    }
+
+    @Override
+    protected int capacity() {
+        return capacity;
+    }
+
+    @Override
     public Iterator<Object> notifyRead(final Object key) {
         queue.add(key);
-        final int evictions = queue.count() - capacity;
+        final int evictions = this.evictions();
         return evictions > 0
                 ? Iterators.first(queue.iterator(), evictions)
                 : Iterators.empty();

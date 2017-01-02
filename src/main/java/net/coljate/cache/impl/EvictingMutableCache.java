@@ -60,16 +60,12 @@ public class EvictingMutableCache<K, V> implements MutableCache<K, V> {
     @Override
     public V evict(final Object key) {
         if (cache.containsKey(key)) {
-            final V evicted = this.doEvict(key);
+            final V evicted = cache.evict(key);
             this.process(evictionPolicy.notifyRemove(key));
             return evicted;
         } else {
             return null;
         }
-    }
-
-    private V doEvict(final Object key) {
-        return cache.evict(key);
     }
 
     @Override
@@ -85,8 +81,13 @@ public class EvictingMutableCache<K, V> implements MutableCache<K, V> {
 
     private void process(final Iterator<Object> toEvict) {
         while (toEvict.hasNext()) {
-            this.doEvict(toEvict.next());
+            cache.evict(toEvict.next());
         }
+    }
+
+    @Override
+    public String toString() {
+        return this.getClass().getSimpleName() + ":cache=[" + cache + "],eviction=[" + evictionPolicy + "]";
     }
 
 }
