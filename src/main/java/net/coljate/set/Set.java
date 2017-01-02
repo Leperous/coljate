@@ -5,8 +5,6 @@ import java.util.Spliterator;
 import java.util.Spliterators;
 import java.util.function.Predicate;
 
-import org.checkerframework.checker.nullness.qual.Nullable;
-
 import net.coljate.collection.Collection;
 import net.coljate.set.impl.EmptySet;
 import net.coljate.set.impl.ImmutableWrappedSet;

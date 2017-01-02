@@ -3,7 +3,10 @@ package net.coljate.list;
 import java.util.NoSuchElementException;
 import java.util.OptionalInt;
 
+import javax.annotation.CheckForNull;
 import javax.annotation.Nonnull;
+
+import org.checkerframework.checker.nullness.qual.Nullable;
 
 import net.coljate.collection.MutableCollection;
 import net.coljate.list.impl.ImmutableNativeArray;
@@ -22,11 +25,13 @@ public interface Queue<T> extends Ordered<T>, MutableCollection<T> {
     /**
      * @return the head of this queue, or null if it is empty.
      */
+    @CheckForNull
     Element<T> peek();
 
     /**
      * @return the (detached) head of this queue, or null if it is empty.
      */
+    @CheckForNull
     Element<T> poll();
 
     /**
@@ -35,6 +40,7 @@ public interface Queue<T> extends Ordered<T>, MutableCollection<T> {
      * @throws NoSuchElementException if this queue is empty.
      */
     @Deprecated
+    @CheckForNull
     default T element() throws NoSuchElementException {
         final Element<T> result = this.peek();
         if (result == null) {
@@ -98,7 +104,7 @@ public interface Queue<T> extends Ordered<T>, MutableCollection<T> {
         return ImmutableNativeArray.copyOf(this);
     }
 
-    interface Element<T> {
+    interface Element<@Nullable T> {
 
         T value();
 

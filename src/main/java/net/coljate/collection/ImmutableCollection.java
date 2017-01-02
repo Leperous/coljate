@@ -3,6 +3,8 @@ package net.coljate.collection;
 import java.util.Spliterator;
 import java.util.Spliterators;
 
+import javax.annotation.concurrent.Immutable;
+
 import net.coljate.collection.impl.EmptyCollection;
 import net.coljate.collection.impl.SingletonCollection;
 import net.coljate.set.Set;
@@ -12,6 +14,7 @@ import net.coljate.util.iterator.UnmodifiableIterator;
  *
  * @author ollie
  */
+@Immutable
 public interface ImmutableCollection<T> extends Collection<T> {
 
     @Override
