@@ -16,12 +16,12 @@ public class DepthFirstRecursiveTreeNavigation implements TreeNavigation {
     }
 
     @Override
-    public <N extends Node<?, ?, N>> N findNode(final N node, final Predicate<? super N> predicate) {
+    public <N extends Node<?, ?, N>> N first(final N node, final Predicate<? super N> predicate) {
         if (node == null || predicate.test(node)) {
             return node;
         }
         for (final N child : node.children()) {
-            final N found = this.findNode(child, predicate);
+            final N found = this.first(child, predicate);
             if (found != null) {
                 return found;
             }
@@ -32,11 +32,14 @@ public class DepthFirstRecursiveTreeNavigation implements TreeNavigation {
     @Override
     public <N extends Node<?, ?, N>> void collect(
             final N node,
-            final MutableList<N> list) {
+            final MutableList<N> list,
+            final Predicate<? super N> predicate) {
         if (node != null) {
-            list.suffix(node);
+            if (predicate.test(node)) {
+                list.suffix(node);
+            }
             for (final N child : node.children()) {
-                this.collect(child, list);
+                this.collect(child, list, predicate);
             }
         }
     }

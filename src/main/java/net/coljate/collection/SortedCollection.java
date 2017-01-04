@@ -22,12 +22,19 @@ public interface SortedCollection<T> extends Ordered<T>, Collection<T> {
     @Nonnull
     Comparator<? super T> comparator();
 
-    /**
-     * @return the last element in this collection, according to the sort.
-     */
-    @TimeComplexity(value = Complexity.CONSTANT, worstCase = Complexity.LINEAR)
     @CheckForNull
-    T last();
+    T least();
+
+    /**
+     * @return the greatest or last element in this collection, according to the sort.
+     */
+    @CheckForNull
+    T greatest();
+
+    @Override
+    default T first() {
+        return this.least();
+    }
 
     interface SortingAlgorithm {
 

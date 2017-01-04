@@ -19,6 +19,11 @@ public interface Array<T> extends Indexed<T>, List<T> {
     int length();
 
     @Override
+    default T first() {
+        return this.isEmpty() ? null : this.get(0);
+    }
+
+    @Override
     default T last() {
         return this.get(this.count());
     }

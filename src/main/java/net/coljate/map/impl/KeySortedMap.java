@@ -54,13 +54,13 @@ public class KeySortedMap<K, V>
     }
 
     @Override
-    public Entry<K, V> first() {
-        return this.getEntry(keys.first());
+    public Entry<K, V> least() {
+        return this.getEntry(keys.least());
     }
 
     @Override
-    public Entry<K, V> last() {
-        return this.getEntry(keys.last());
+    public Entry<K, V> greatest() {
+        return this.getEntry(keys.greatest());
     }
 
     @Override

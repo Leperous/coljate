@@ -4,6 +4,9 @@ import java.util.Objects;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.function.Predicate;
 
+import javax.annotation.CheckForNull;
+import javax.annotation.Nonnull;
+
 import net.coljate.list.List;
 import net.coljate.list.MutableList;
 import net.coljate.tree.Node;
@@ -16,19 +19,22 @@ import net.coljate.tree.Tree;
  */
 public interface TreeNavigation {
 
-    default <N extends Node<?, ?, N>> N findNode(final Tree<?, ?, N> tree, final Predicate<? super N> predicate) {
-        return this.findNode(tree.root(), predicate);
+    @CheckForNull
+    default <N extends Node<?, ?, N>> N first(final Tree<?, ?, N> tree, final Predicate<? super N> predicate) {
+        return this.first(tree.root(), predicate);
     }
 
-    <N extends Node<?, ?, N>> N findNode(N node, Predicate<? super N> predicate);
+    @CheckForNull
+    <N extends Node<?, ?, N>> N first(N node, Predicate<? super N> predicate);
 
-    default <N extends Node<?, ?, N>> List<N> collect(final Tree<?, ?, N> tree) {
+    @Nonnull
+    default <N extends Node<?, ?, N>> List<N> collect(final Tree<?, ?, N> tree, final Predicate<? super N> predicate) {
         final MutableList<N> nodes = MutableList.create(10);
-        this.collect(tree.root(), nodes);
+        this.collect(tree.root(), nodes, predicate);
         return nodes;
     }
 
-    <N extends Node<?, ?, N>> void collect(N node, MutableList<N> nodes);
+    <N extends Node<?, ?, N>> void collect(N node, MutableList<N> nodes, Predicate<? super N> predicate);
 
     TreeNavigation DEPTH_FIRST_RECURSIVE = new DepthFirstRecursiveTreeNavigation();
     AtomicReference<TreeNavigation> DEFAULT = new AtomicReference<>(DEPTH_FIRST_RECURSIVE);

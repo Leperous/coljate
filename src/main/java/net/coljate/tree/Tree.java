@@ -26,15 +26,15 @@ public interface Tree<K, V, N extends Node<K, V, N>>
 
     @Override
     default N getEntry(final Object key) {
-        return this.getEntry(key, TreeNavigation.getDefault()); //FIXME
+        return this.getEntry(key, TreeNavigation.getDefault());
     }
 
     default N getEntry(final Object key, final TreeNavigation navigation) {
-        return navigation.findNode(this, node -> Objects.equals(key, node.key()));
+        return navigation.first(this, node -> Objects.equals(key, node.key()));
     }
 
-    default Collection<N> entries(final TreeNavigation navigation) { //FIXME type N
-        return navigation.collect(this);
+    default Collection<N> entries(final TreeNavigation navigation) {
+        return navigation.collect(this, node -> true);
     }
 
     @Override

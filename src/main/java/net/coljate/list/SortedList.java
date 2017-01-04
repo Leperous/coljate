@@ -8,4 +8,19 @@ import net.coljate.collection.SortedCollection;
  */
 public interface SortedList<T> extends SortedCollection<T>, List<T> {
 
+    @Override
+    default T first() {
+        return List.super.first();
+    }
+
+    @Override
+    default T least() {
+        return this.first();
+    }
+
+    @Override
+    default T greatest() {
+        return this.last();
+    }
+
 }

@@ -2,7 +2,6 @@ package net.coljate.tree;
 
 import net.coljate.map.Entry;
 import net.coljate.map.MutableMap;
-import net.coljate.util.Functions;
 import net.coljate.util.iterator.CovariantIterator;
 
 /**
@@ -19,11 +18,28 @@ public interface MutableTree<K, V, N extends MutableNode<K, V, N>>
     }
 
     @Override
-    default V put(final K key, final V value) {
-        return Functions.ifNonNull(
-                this.getEntry(key),
-                entry -> entry.getAndSetValue(value));
+    V put(K key, V value);
+
+    @Override
+    default V evict(final Object key) {
+        final N node = this.getEntry(key);
+        if (node == null) {
+            return null;
+        } else {
+            this.remove(node);
+            return node.value();
+        }
     }
+
+    @Override
+    default boolean remove(final Object key, Object value) {
+        final N node = this.getEntry(key);
+        return node != null
+                && node.contains(key, value)
+                && this.remove(node);
+    }
+
+    boolean remove(N node);
 
     @Override
     default CovariantIterator<Entry<K, V>, N> iterator() {

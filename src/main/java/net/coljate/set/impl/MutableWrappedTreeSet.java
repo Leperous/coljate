@@ -3,11 +3,11 @@ package net.coljate.set.impl;
 import java.util.Comparator;
 
 import net.coljate.collection.Collection;
-import net.coljate.util.complexity.Complexity;
-import net.coljate.util.complexity.TimeComplexity;
 import net.coljate.set.SortedSet;
 import net.coljate.util.Arrays;
 import net.coljate.util.Suppliers;
+import net.coljate.util.complexity.Complexity;
+import net.coljate.util.complexity.TimeComplexity;
 
 /**
  *
@@ -63,12 +63,12 @@ public class MutableWrappedTreeSet<T>
     }
 
     @Override
-    public T first() {
+    public T least() {
         return delegate.first();
     }
 
     @Override
-    public T last() {
+    public T greatest() {
         return delegate.last();
     }
 
