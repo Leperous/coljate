@@ -19,8 +19,8 @@ import net.coljate.map.MutableEntry;
 import net.coljate.map.MutableMap;
 import net.coljate.set.AbstractSet;
 import net.coljate.set.Set;
-import net.coljate.util.iterator.CovariantIterator;
 import net.coljate.util.Functions;
+import net.coljate.util.iterator.CovariantIterator;
 import net.coljate.util.iterator.Iterators;
 
 /**
@@ -53,7 +53,9 @@ public class ChainedHashMap<K, V>
     }
 
     private static <T> int indexOf(final Object key, final T[] array) {
-        return key.hashCode() % array.length;
+        return key == null
+                ? 0
+                : key.hashCode() % array.length;
     }
 
     private MutableList<MutableEntry<K, V>> getBucket(final Object key) {
@@ -108,7 +110,9 @@ public class ChainedHashMap<K, V>
 
     @Override
     public boolean remove(final Entry<?, ?> entry) {
-        final MutableList<MutableEntry<K, V>> bucket = this.getBucket(entry.key());
+        final MutableList<MutableEntry<K, V>> bucket = entry == null
+                ? null
+                : this.getBucket(entry.key());
         return bucket != null
                 && bucket.removeFirst(entry);
     }

@@ -2,6 +2,8 @@ package net.coljate.map.impl;
 
 import java.util.function.Function;
 
+import javax.annotation.Nonnull;
+
 import net.coljate.collection.MutableCollection;
 import net.coljate.map.AbstractEntry;
 import net.coljate.map.Entry;
@@ -30,7 +32,7 @@ public class MutableWrappedMap<K, V>
     private final java.util.Map<K, V> delegate;
     private MutableCollection<V> values;
 
-    protected MutableWrappedMap(final java.util.Map<K, V> delegate) {
+    protected MutableWrappedMap(@Nonnull final java.util.Map<K, V> delegate) {
         super(delegate);
         this.delegate = delegate;
     }

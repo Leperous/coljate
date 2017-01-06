@@ -79,7 +79,9 @@ public class ConcurrentMutableMapBackedCache<K, V>
 
     @Override
     public V evict(final Object key) {
-        return Functions.ifNonNull(map.evict(key), Computer::current);
+        return key == null
+                ? null
+                : Functions.ifNonNull(map.evict(key), Computer::current);
     }
 
     @Override
@@ -119,18 +121,21 @@ public class ConcurrentMutableMapBackedCache<K, V>
     }
 
     @Override
-    public V computeIfAbsent(K key, Function<K, V> supplier) {
+    public V computeIfAbsent(final K key, final Function<K, V> supplier) {
         return Functions.ifNonNull(map.computeIfAbsent(key, k -> new Computed<>(supplier.apply(k))), Computer::current);
     }
 
     @Override
     public boolean replace(final K key, final V expectedValue, final V replacementValue) {
-        return map.replace(key, new Computed<>(expectedValue), new Computed<>(replacementValue));
+        return key != null
+                && map.replace(key, new Computed<>(expectedValue), new Computed<>(replacementValue));
     }
 
     @Override
     public MutableEntry<K, V> getEntry(final Object key) {
-        return this.translate(map.getEntry(key));
+        return key == null
+                ? null
+                : this.translate(map.getEntry(key));
     }
 
     @Override
