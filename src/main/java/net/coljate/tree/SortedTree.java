@@ -1,11 +1,16 @@
 package net.coljate.tree;
 
+import java.util.Comparator;
 import java.util.Iterator;
 import java.util.Objects;
 
+import javax.annotation.Nonnull;
+
+import net.coljate.map.Entry;
 import net.coljate.map.SortedMap;
 import net.coljate.set.AbstractSet;
 import net.coljate.set.OrderedSet;
+import net.coljate.tree.impl.RedBlackTree;
 import net.coljate.tree.navigation.TreeNavigation;
 import net.coljate.util.Functions;
 import net.coljate.util.iterator.Iterators;
@@ -40,6 +45,18 @@ public interface SortedTree<K, V, N extends Node<K, V, N>>
 
     @Override
     MutableSortedTree<K, V, ?> mutableCopy();
+
+    static <K, V> MutableSortedTree<K, V, ?> create(@Nonnull final Comparator<? super Entry<K, V>> comparator) {
+        return new RedBlackTree<>(comparator);
+    }
+
+    static <K extends Comparable<? super K>, V> MutableSortedTree<K, V, ?> createComparingKeys() {
+        return RedBlackTree.keyComparing();
+    }
+
+    static <K, V> MutableSortedTree<K, V, ?> createComparingKeys(@Nonnull final Comparator<? super K> keyComparator) {
+        return RedBlackTree.keyComparing(keyComparator);
+    }
 
     class SortedTreeKeySet<K, N extends Node<K, ?, N>>
             extends AbstractSet<K>

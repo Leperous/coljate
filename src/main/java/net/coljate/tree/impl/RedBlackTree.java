@@ -33,7 +33,7 @@ public class RedBlackTree<K, V>
         return keyComparing(Comparator.naturalOrder());
     }
 
-    public static <K, V> RedBlackTree<K, V> keyComparing(final Comparator<? super K> comparator) {
+    public static <K, V> RedBlackTree<K, V> keyComparing(@Nonnull final Comparator<? super K> comparator) {
         return new RedBlackTree<>((e1, e2) -> comparator.compare(e1.key(), e2.key()));
     }
 
@@ -49,7 +49,7 @@ public class RedBlackTree<K, V>
     private int count;
     private OrderedSet<K> keys;
 
-    protected RedBlackTree(final Comparator<? super Entry<K, V>> comparator) {
+    public RedBlackTree(final Comparator<? super Entry<K, V>> comparator) {
         this(null, comparator);
     }
 
