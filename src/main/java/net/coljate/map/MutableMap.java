@@ -120,16 +120,19 @@ public interface MutableMap<K, V> extends Map<K, V>, MutableSet<Entry<K, V>> {
                 && this.remove((Entry) entry);
     }
 
-    default boolean remove(@Nonnull final Entry<?, ?> entry) {
-        return this.remove(entry.key(), entry.value());
+    default boolean remove(final Entry<?, ?> entry) {
+        return entry != null
+                && this.remove(entry.key(), entry.value());
+    }
+
+    default boolean removeKey(final Object key) {
+        return this.remove(this.getEntry(key));
     }
 
     @CheckForNull
     default V evict(@Nullable final Object key) {
         final Entry<K, V> entry = this.getEntry(key);
-        return entry != null && this.remove(entry)
-                ? entry.value()
-                : null;
+        return this.removeKey(key) ? entry.value() : null;
     }
 
     default boolean removeAllMatchingEntries(final BiPredicate<? super K, ? super V> predicate) {

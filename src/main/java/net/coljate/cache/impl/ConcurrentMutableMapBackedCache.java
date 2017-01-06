@@ -73,6 +73,16 @@ public class ConcurrentMutableMapBackedCache<K, V>
     }
 
     @Override
+    public boolean removeKey(final Object key) {
+        return map.removeKey(key);
+    }
+
+    @Override
+    public V evict(final Object key) {
+        return Functions.ifNonNull(map.evict(key), Computer::current);
+    }
+
+    @Override
     public void clear() {
         map.clear();
     }

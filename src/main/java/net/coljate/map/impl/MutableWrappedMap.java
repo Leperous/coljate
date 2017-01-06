@@ -46,6 +46,13 @@ public class MutableWrappedMap<K, V>
     }
 
     @Override
+    @SuppressWarnings("element-type-mismatch")
+    public boolean removeKey(final Object key) {
+        return delegate.keySet().remove(key);
+    }
+
+    @Override
+    @SuppressWarnings("element-type-mismatch")
     public V evict(final Object key) {
         return delegate.remove(key);
     }

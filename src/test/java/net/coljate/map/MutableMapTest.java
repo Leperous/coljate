@@ -27,6 +27,11 @@ public interface MutableMapTest<K, V> extends MapTest<K, V>, MutableSetTest<Entr
             assertThat(map.get(entry.key()), is(entry.value()));
         }
 
+        @Test
+        default void testEvict_NullKey() {
+            assertNull(this.createTestCollection().evict(null));
+        }
+
     }
 
     interface OneEntryTests<K, V> extends MutableMapTest<K, V>, MapTest.OneEntryTests<K, V>, MutableSetTest.OneElementTests<Entry<K, V>> {
