@@ -8,13 +8,14 @@ import javax.annotation.Nonnull;
 
 import net.coljate.map.AbstractEntry;
 import net.coljate.map.Entry;
+import net.coljate.map.Map;
+import net.coljate.map.SortedMap;
 import net.coljate.set.OrderedSet;
 import net.coljate.tree.AbstractTree;
 import net.coljate.tree.ImmutableBinaryTree;
 import net.coljate.tree.MutableBinaryTree;
 import net.coljate.tree.MutableBinaryTree.MutableBinaryNode;
 import net.coljate.tree.MutableSortedTree;
-import net.coljate.tree.SortedTree;
 import net.coljate.tree.impl.RedBlackTree.RedBlackNode;
 import net.coljate.tree.navigation.TreeNavigation;
 import net.coljate.util.Functions;
@@ -37,9 +38,15 @@ public class RedBlackTree<K, V>
         return new RedBlackTree<>((e1, e2) -> comparator.compare(e1.key(), e2.key()));
     }
 
-    public static <K, V> RedBlackTree<K, V> copyOf(@Nonnull final SortedTree<K, V, ?> tree) {
-        final RedBlackTree<K, V> redBlackTree = new RedBlackTree<>(tree.comparator());
-        redBlackTree.putAll(tree);
+    public static <K, V> RedBlackTree<K, V> copyOf(@Nonnull final SortedMap<K, V> map) {
+        final RedBlackTree<K, V> redBlackTree = new RedBlackTree<>(map.comparator());
+        redBlackTree.putAll(map);
+        return redBlackTree;
+    }
+
+    public static <K, V> RedBlackTree<K, V> copyOf(@Nonnull final Map<? extends K, ? extends V> map, final Comparator<? super Entry<K, V>> comparator) {
+        final RedBlackTree<K, V> redBlackTree = new RedBlackTree<>(comparator);
+        redBlackTree.putAll(map);
         return redBlackTree;
     }
 

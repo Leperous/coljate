@@ -7,6 +7,7 @@ import java.util.Objects;
 import javax.annotation.Nonnull;
 
 import net.coljate.map.Entry;
+import net.coljate.map.Map;
 import net.coljate.map.SortedMap;
 import net.coljate.set.AbstractSet;
 import net.coljate.set.OrderedSet;
@@ -56,6 +57,14 @@ public interface SortedTree<K, V, N extends Node<K, V, N>>
 
     static <K, V> MutableSortedTree<K, V, ?> createComparingKeys(@Nonnull final Comparator<? super K> keyComparator) {
         return RedBlackTree.keyComparing(keyComparator);
+    }
+
+    static <K, V> MutableSortedTree<K, V, ?> copyOf(final SortedMap<K, V> map) {
+        return RedBlackTree.copyOf(map);
+    }
+
+    static <K, V> MutableSortedTree<K, V, ?> copyOf(final Map<? extends K, ? extends V> map, final Comparator<? super Entry<K, V>> comparator) {
+        return RedBlackTree.copyOf(map, comparator);
     }
 
     class SortedTreeKeySet<K, N extends Node<K, ?, N>>
