@@ -1,11 +1,15 @@
 package net.coljate.set.impl;
 
+import net.coljate.set.OrderedSet;
+import net.coljate.util.iterator.Iterators;
+
 /**
  *
  * @author ollie
  */
 public class MutableWrappedLinkedHashSet<T>
-        extends MutableWrappedSet<T> {
+        extends MutableWrappedSet<T>
+        implements OrderedSet<T> {
 
     public static <T> MutableWrappedLinkedHashSet<T> create(final int initialCapacity) {
         return viewOf(new java.util.LinkedHashSet<>(initialCapacity));
@@ -20,13 +24,18 @@ public class MutableWrappedLinkedHashSet<T>
     }
 
     @Override
-    public MutableWrappedLinkedHashSet<T> mutableCopy() {
-        return new MutableWrappedLinkedHashSet<>(this.mutableJavaCopy());
+    public T first() {
+        return Iterators.first(this.iterator());
     }
 
     @Override
     public java.util.LinkedHashSet<T> mutableJavaCopy() {
         return this.mutableJavaCopy(java.util.LinkedHashSet::new);
+    }
+
+    @Override
+    public MutableWrappedLinkedHashSet<T> mutableCopy() {
+        return new MutableWrappedLinkedHashSet<>(this.mutableJavaCopy());
     }
 
 }

@@ -8,12 +8,16 @@ import javax.annotation.Nonnull;
 
 import net.coljate.map.AbstractEntry;
 import net.coljate.map.Entry;
+import net.coljate.set.OrderedSet;
 import net.coljate.tree.AbstractTree;
 import net.coljate.tree.ImmutableBinaryTree;
 import net.coljate.tree.MutableBinaryTree;
 import net.coljate.tree.MutableBinaryTree.MutableBinaryNode;
 import net.coljate.tree.MutableSortedTree;
+import net.coljate.tree.SortedTree;
 import net.coljate.tree.impl.RedBlackTree.RedBlackNode;
+import net.coljate.tree.navigation.TreeNavigation;
+import net.coljate.util.Functions;
 
 /**
  *
@@ -33,10 +37,17 @@ public class RedBlackTree<K, V>
         return new RedBlackTree<>((e1, e2) -> comparator.compare(e1.key(), e2.key()));
     }
 
+    public static <K, V> RedBlackTree<K, V> copyOf(@Nonnull final SortedTree<K, V, ?> tree) {
+        final RedBlackTree<K, V> redBlackTree = new RedBlackTree<>(tree.comparator());
+        redBlackTree.putAll(tree);
+        return redBlackTree;
+    }
+
     private static final boolean BLACK = true, RED = !BLACK;
     private final Comparator<? super Entry<K, V>> comparator;
     private RedBlackNode<K, V> root;
     private int count;
+    private OrderedSet<K> keys;
 
     protected RedBlackTree(final Comparator<? super Entry<K, V>> comparator) {
         this(null, comparator);
@@ -44,7 +55,7 @@ public class RedBlackTree<K, V>
 
     protected RedBlackTree(final RedBlackNode<K, V> root, final Comparator<? super Entry<K, V>> comparator) {
         this.root = root;
-        this.count = root == null ? 0 : root.count();
+        this.count = root == null ? 0 : root.countDescendents(TreeNavigation.getDefault());
         this.comparator = Objects.requireNonNull(comparator);
     }
 
@@ -61,6 +72,7 @@ public class RedBlackTree<K, V>
     @Override
     public V put(final K key, final V value) {
         final RedBlackNode<K, V> node = new RedBlackNode<>(key, value, BLACK);
+        count++;
         //Set root if there isn't one
         if (root == null) {
             root = node;
@@ -90,61 +102,126 @@ public class RedBlackTree<K, V>
         return null;
     }
 
-    private void rebalance(@Nonnull RedBlackNode<K, V> node) {
-        node.colour = RED;
-        while (node != null && node != root && node.parent.colour != RED) {
-            if(node.parent == left(parent(node.parent))) {
-                
+    private void rebalance(RedBlackNode<K, V> x) {
+        setColour(x, RED);
+        RedBlackNode<K, V> p;
+        while (x != null && x != root && colour(parent(x)) == RED) {
+            p = parent(x);
+            if (p == left(parent(p))) {
+                final RedBlackNode<K, V> y = right(parent(p));
+                if (y == null || colour(y) == BLACK) {
+                    if (x == right(p)) {
+                        x = p;
+                        p = parent(x);
+                        this.rotateLeft(x);
+                    }
+                    setColour(p, BLACK);
+                    setColour(parent(p), RED);
+                    this.rotateRight(parent(p));
+                } else {
+                    setColour(p, BLACK);
+                    setColour(y, BLACK);
+                    setColour(parent(p), RED);
+                    x = parent(p);
+                }
+            } else {
+                final RedBlackNode<K, V> y = left(parent(p));
+                if (y == null || colour(y) == BLACK) {
+                    if (x == left(p)) {
+                        x = p;
+                        p = parent(x);
+                        this.rotateRight(x);
+                    }
+                    setColour(p, BLACK);
+                    setColour(parent(p), RED);
+                    this.rotateLeft(parent(p));
+                } else {
+                    setColour(p, BLACK);
+                    setColour(y, BLACK);
+                    setColour(parent(p), RED);
+                    x = parent(p);
+                }
             }
         }
-        throw new UnsupportedOperationException();
+        setColour(root, BLACK);
     }
-    
+
     @CheckForNull
-    private static <K,V> RedBlackNode<K,V> parent(final RedBlackNode<K,V> node) {
+    private static <K, V> RedBlackNode<K, V> parent(final RedBlackNode<K, V> node) {
         return node == null ? null : node.parent;
     }
+
     @CheckForNull
-    private static <K,V> RedBlackNode<K,V> left(final RedBlackNode<K,V> node) {
+    private static <K, V> RedBlackNode<K, V> left(final RedBlackNode<K, V> node) {
         return node == null ? null : node.left;
     }
 
-    private void rotateLeft(@Nonnull final RedBlackNode<K, V> node) {
-        final RedBlackNode<K, V> previous = node.left;
-        node.right = previous.left;
-        if (previous.left != null) {
-            previous.left.parent = node;
+    @CheckForNull
+    private static <K, V> RedBlackNode<K, V> right(final RedBlackNode<K, V> node) {
+        return node == null ? null : node.right;
+    }
+
+    private static boolean colour(final RedBlackNode<?, ?> node) {
+        return node == null ? BLACK : node.colour;
+    }
+
+    private static void setColour(final RedBlackNode<?, ?> node, final boolean colour) {
+        if (node != null) {
+            node.colour = colour;
         }
-        previous.parent = node.parent;
-        if (node.parent == null) {
-            this.root = previous;
-        } else if (node == node.parent.left) {
-            node.parent.left = previous;
-        } else {
-            node.parent.right = previous;
+    }
+
+    private void rotateLeft(final RedBlackNode<K, V> node) {
+        if (node != null) {
+            final RedBlackNode<K, V> previous = node.left;
+            node.right = left(previous);
+            if (previous.left != null) {
+                previous.left.parent = node;
+            }
+            previous.parent = node.parent;
+            if (node.parent == null) {
+                this.root = previous;
+            } else if (node == node.parent.left) {
+                node.parent.left = previous;
+            } else {
+                node.parent.right = previous;
+            }
+            previous.left = node;
+            node.parent = previous;
         }
-        previous.left = node;
-        node.parent = previous;
+    }
+
+    private void rotateRight(final RedBlackNode<K, V> node) {
+        if (node != null) {
+            final RedBlackNode<K, V> right = node.right;
+            node.right = node.left;
+            if (right.left != null) {
+                right.left.parent = node;
+            }
+            right.parent = node.parent;
+            if (node.parent == null) {
+                root = right;
+            } else if (node.parent.left == node) {
+                node.parent.left = right;
+            } else {
+                node.parent.right = right;
+            }
+            right.left = node;
+            node.parent = right;
+        }
     }
 
     @Override
     public boolean remove(final RedBlackNode<K, V> node) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        if (node == null) {
+            return false;
+        }
+        throw new UnsupportedOperationException("Not supported yet."); //TODO
     }
 
     @Override
     public void clear() {
         root = null;
-    }
-
-    @Override
-    public RedBlackTree<K, V> mutableCopy() {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
-
-    @Override
-    public ImmutableBinaryTree<K, V, ?> immutableCopy() {
-        throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override
@@ -154,11 +231,28 @@ public class RedBlackTree<K, V>
 
     @Override
     public RedBlackNode<K, V> greatest() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return Functions.ifNonNull(root, RedBlackNode::rightMost, root);
     }
 
     @Override
     public RedBlackNode<K, V> least() {
+        return Functions.ifNonNull(root, RedBlackNode::leftMost, root);
+    }
+
+    @Override
+    public OrderedSet<K> keys() {
+        return keys == null
+                ? keys = MutableSortedTree.super.keys()
+                : keys;
+    }
+
+    @Override
+    public RedBlackTree<K, V> mutableCopy() {
+        return new RedBlackTree<>(root == null ? null : root.copy(), comparator);
+    }
+
+    @Override
+    public ImmutableBinaryTree<K, V, ?> immutableCopy() {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
@@ -179,18 +273,14 @@ public class RedBlackTree<K, V>
             this.colour = black;
         }
 
-        void setLeft(final RedBlackNode<K, V> left) {
+        void setLeft(@Nonnull final RedBlackNode<K, V> left) {
             this.left = left;
             left.parent = this;
         }
 
-        void setRight(final RedBlackNode<K, V> right) {
+        void setRight(@Nonnull final RedBlackNode<K, V> right) {
             this.right = right;
             right.parent = this;
-        }
-
-        public int count() {
-            return 1 + (left == null ? 0 : left.count()) + (right == null ? 0 : right.count());
         }
 
         @Override
@@ -221,6 +311,22 @@ public class RedBlackTree<K, V>
         @Override
         public RedBlackNode<K, V> self() {
             return this;
+        }
+
+        public boolean isBlack() {
+            return colour == BLACK;
+        }
+
+        @Nonnull
+        protected RedBlackNode<K, V> copy() {
+            final RedBlackNode<K, V> copy = new RedBlackNode<>(key, value, colour);
+            if (left != null) {
+                copy.setLeft(left.copy());
+            }
+            if (right != null) {
+                copy.setRight(right.copy());
+            }
+            return copy;
         }
 
     }

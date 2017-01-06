@@ -17,6 +17,13 @@ public class Functions {
         return value == null ? null : transform.apply(value);
     }
 
+    public static <L, R> R ifNonNull(
+            @Nullable final L value,
+            @Nonnull final Function<? super L, ? extends R> transform,
+            final R ifNull) {
+        return value == null ? ifNull : transform.apply(value);
+    }
+
     public static <F, T> T ifBothNonNull(
             final F left,
             final F right,

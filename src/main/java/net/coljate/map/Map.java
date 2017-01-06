@@ -41,6 +41,14 @@ public interface Map<K, V> extends Set<Entry<K, V>>, Associative<K, V> {
     @CheckForNull
     Entry<K, V> getEntry(@Nullable Object key);
 
+    @CheckForNull
+    default Entry<K, V> getEntry(@Nullable Object key, @Nullable Object value) {
+        final Entry<K, V> entry = this.getEntry(key);
+        return entry != null && Objects.equals(entry.value(), value)
+                ? entry
+                : null;
+    }
+
     /**
      * @return a view of the keys in this map.
      */
@@ -86,7 +94,7 @@ public interface Map<K, V> extends Set<Entry<K, V>>, Associative<K, V> {
     }
 
     default boolean containsKey(@Nullable final Object key) {
-        return this.keys().contains(key);
+        return this.getEntry(key) != null;
     }
 
     default boolean containsValue(@Nullable final Object value) {

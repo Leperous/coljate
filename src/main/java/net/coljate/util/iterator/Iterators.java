@@ -99,6 +99,12 @@ public class Iterators {
         };
     }
 
+    public static <T> T first(final Iterator<? extends T> iterator) {
+        return iterator.hasNext()
+                ? iterator.next()
+                : null;
+    }
+
     public static <T> T last(final Iterator<? extends T> iterator) {
         T last = null;
         while (iterator.hasNext()) {

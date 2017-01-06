@@ -1,8 +1,9 @@
 package net.coljate.tree.navigation;
 
+import java.util.function.Consumer;
 import java.util.function.Predicate;
 
-import net.coljate.list.MutableList;
+import net.coljate.tree.BinaryNode;
 import net.coljate.tree.Node;
 
 /**
@@ -32,15 +33,29 @@ public class DepthFirstRecursiveTreeNavigation implements TreeNavigation {
     @Override
     public <N extends Node<?, ?, N>> void collect(
             final N node,
-            final MutableList<N> list,
+            final Consumer<? super N> consumer,
             final Predicate<? super N> predicate) {
         if (node != null) {
             if (predicate.test(node)) {
-                list.suffix(node);
+                consumer.accept(node);
             }
             for (final N child : node.children()) {
-                this.collect(child, list, predicate);
+                this.collect(child, consumer, predicate);
             }
+        }
+    }
+
+    @Override
+    public <N extends BinaryNode<?, ?, N>> void collectBinaryNodes(
+            final N node,
+            final Consumer<? super N> consumer,
+            final Predicate<? super N> predicate) {
+        if (node != null) {
+            if (predicate.test(node)) {
+                consumer.accept(node);
+            }
+            this.collectBinaryNodes(node.left(), consumer, predicate);
+            this.collectBinaryNodes(node.right(), consumer, predicate);
         }
     }
 

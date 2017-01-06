@@ -18,7 +18,7 @@ import org.junit.jupiter.api.Nested;
 public class ImmutableSubtreeTest extends SubtreeTest {
 
     @Nested
-    class LeafTreeTest extends NewObjectEntryCreator implements ImmutableTreeTest.OneEntryTests<Object, Object> {
+    class LeafTreeTest extends NewObjectEntryCreator implements ImmutableTreeTest.OneNodeTests<Object, Object> {
 
         private ImmutableSubtree<Object, Object> lastTree;
 
@@ -46,10 +46,8 @@ public class ImmutableSubtreeTest extends SubtreeTest {
         @Override
         @Disabled //TODO
         public void testMutableCopy() {
-            OneEntryTests.super.testMutableCopy();
+            ImmutableTreeTest.OneNodeTests.super.testMutableCopy();
         }
-        
-        
 
     }
 

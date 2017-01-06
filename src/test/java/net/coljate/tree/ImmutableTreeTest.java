@@ -11,7 +11,8 @@ public interface ImmutableTreeTest<K, V> extends TreeTest<K, V>, ImmutableMapTes
     @Override
     ImmutableTree<K, V, ?> createTestCollection();
 
-    interface OneEntryTests<K, V> extends ImmutableTreeTest<K, V>, TreeTest.OneEntryTests<K, V>, ImmutableMapTest.OneEntryTests<K, V> {
+    interface OneNodeTests<K, V>
+            extends ImmutableTreeTest<K, V>, TreeTest.OneNodeTests<K, V>, ImmutableMapTest.OneEntryTests<K, V> {
 
     }
 
