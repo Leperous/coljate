@@ -53,41 +53,8 @@ public class GuavaLoadingCache<K, V>
     }
 
     @Override
-    @SuppressWarnings("unchecked")
-    public MutableEntry<K, V> getEntry(final Object key) {
-        return cache.getIfPresent(key) != null
-                ? new LoadingCacheEntry((K) key)
-                : null;
-    }
-
-    @Override
     public void clear() {
         cache.invalidateAll();
-    }
-
-    private final class LoadingCacheEntry extends AbstractEntry<K, V> implements MutableEntry<K, V> {
-
-        private final K key;
-
-        LoadingCacheEntry(final K key) {
-            this.key = key;
-        }
-
-        @Override
-        public K key() {
-            return key;
-        }
-
-        @Override
-        public V value() {
-            return GuavaLoadingCache.this.get(key);
-        }
-
-        @Override
-        public void setValue(final V value) {
-            GuavaLoadingCache.this.put(key, value);
-        }
-
     }
 
 }
