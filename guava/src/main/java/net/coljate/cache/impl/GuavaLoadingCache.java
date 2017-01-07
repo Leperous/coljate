@@ -11,6 +11,7 @@ import net.coljate.collection.Collection;
 import net.coljate.map.AbstractEntry;
 import net.coljate.map.MutableEntry;
 import net.coljate.map.MutableMap;
+import net.coljate.map.impl.MutableWrappedMap;
 import net.coljate.set.Set;
 
 /**
@@ -19,6 +20,7 @@ import net.coljate.set.Set;
  */
 @SuppressWarnings("element-type-mismatch")
 public class GuavaLoadingCache<K, V>
+        extends MutableWrappedMap<K, V>
         implements MutableCache<K, V> {
 
     public static <K, V> GuavaLoadingCache<K, V> create(final Function<? super K, ? extends V> valueFunction) {
@@ -37,10 +39,9 @@ public class GuavaLoadingCache<K, V>
     }
 
     private final LoadingCache<K, V> cache;
-    private Set<K> keys;
-    private Collection<V> values;
 
     protected GuavaLoadingCache(final LoadingCache<K, V> cache) {
+        super(cache.asMap());
         this.cache = cache;
     }
 
@@ -68,47 +69,8 @@ public class GuavaLoadingCache<K, V>
     }
 
     @Override
-    public V put(final K key, final V value) {
-        return cache.asMap().put(key, value);
-    }
-
-    @Override
-    public boolean remove(final Object key, final Object value) {
-        return cache.asMap().remove(key, value);
-    }
-
-    @Override
-    public boolean removeKey(final Object key) {
-        return cache.asMap().remove(key) != null;
-    }
-
-    @Override
-    public V evict(final Object key) {
-        return cache.asMap().remove(key);
-    }
-
-    @Override
     public void clear() {
         cache.invalidateAll();
-    }
-
-    @Override
-    public Set<K> keys() {
-        return keys == null
-                ? keys = Set.viewOf(cache.asMap().keySet())
-                : keys;
-    }
-
-    @Override
-    public Collection<V> values() {
-        return values == null
-                ? values = Collection.viewOf(cache.asMap().values())
-                : values;
-    }
-
-    @Override
-    public MutableMap<K, V> mutableCopy() {
-        return MutableMap.copyIntoHashMap(cache.asMap());
     }
 
     private final class LoadingCacheEntry extends AbstractEntry<K, V> implements MutableEntry<K, V> {

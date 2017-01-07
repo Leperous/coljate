@@ -4,6 +4,7 @@ import java.util.function.Function;
 
 import javax.annotation.Nonnull;
 
+import net.coljate.collection.Collection;
 import net.coljate.collection.MutableCollection;
 import net.coljate.map.AbstractEntry;
 import net.coljate.map.Entry;
@@ -30,7 +31,6 @@ public class MutableWrappedMap<K, V>
     }
 
     private final java.util.Map<K, V> delegate;
-    private MutableCollection<V> values;
 
     protected MutableWrappedMap(@Nonnull final java.util.Map<K, V> delegate) {
         super(delegate);
@@ -85,13 +85,6 @@ public class MutableWrappedMap<K, V>
     @Override
     public void clear() {
         delegate.clear();
-    }
-
-    @Override
-    public MutableCollection<V> values() {
-        return values == null
-                ? (values = MutableCollection.viewOf(delegate.values()))
-                : values;
     }
 
     @Override
