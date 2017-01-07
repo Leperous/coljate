@@ -59,7 +59,7 @@ public class MutableWrappedMap<K, V>
     }
 
     @Override
-    public V putIfAbsent(K key, V value) {
+    public V putIfAbsent(final K key, final V value) {
         return delegate.putIfAbsent(key, value);
     }
 

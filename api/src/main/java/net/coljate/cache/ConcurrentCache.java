@@ -8,7 +8,4 @@ import net.coljate.map.ConcurrentMap;
  */
 public interface ConcurrentCache<K, V> extends MutableCache<K, V>, ConcurrentMap<K, V> {
 
-    @Override
-    ConcurrentCache<K, V> mutableCopy();
-
 }

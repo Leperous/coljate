@@ -3,3 +3,5 @@
 **/nbactions.xml
 /api/target/
 /trove3/target/
+/guava20/target/
+/guava21/target/

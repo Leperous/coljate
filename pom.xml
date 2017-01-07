@@ -12,7 +12,8 @@
     <modules>
         <module>api</module>
         <module>trove3</module>
-        <module>guava</module>
+        <module>guava20</module>
+        <module>guava21</module>
     </modules>
     
     <properties>
