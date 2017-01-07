@@ -20,6 +20,13 @@ public interface MutableMatrix<T>
 
     T evict(int x, int y);
 
+    @Deprecated
+    default T evict(final Object x, final Object y) {
+        return x instanceof Integer && y instanceof Integer
+                ? this.evict(((Integer) x).intValue(), ((Integer) y).intValue())
+                : null;
+    }
+
     default boolean remove(final int x, final int y, final T value) {
         final T current = this.get(x, y);
         if (Objects.equals(current, value)) {

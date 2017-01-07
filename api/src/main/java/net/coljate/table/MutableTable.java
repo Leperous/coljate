@@ -30,7 +30,14 @@ public interface MutableTable<R, C, V>
                 : this.put(rowKey, columnKey, value) == null;
     }
 
-    boolean remove(Object rowKey, Object columnKey, Object value);
+    default boolean remove(Object rowKey, Object columnKey, Object value) {
+        final V current = this.getIfPresent(rowKey, columnKey);
+        return Objects.equals(current, value)
+                ? Objects.equals(this.evict(rowKey, columnKey), value)
+                : false;
+    }
+
+    V evict(Object rowKey, Object columnKey);
 
     @Override
     @Deprecated

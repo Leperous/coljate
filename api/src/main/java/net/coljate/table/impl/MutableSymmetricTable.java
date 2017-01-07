@@ -23,8 +23,13 @@ public class MutableSymmetricTable<K, V>
     }
 
     @Override
-    public V put(K rowKey, K columnKey, V value) {
+    public V put(final K rowKey, final K columnKey, final V value) {
         return map.put(new OneOrTwoSet<>(rowKey, columnKey), value);
+    }
+
+    @Override
+    public V evict(final Object rowKey, final Object columnKey) {
+        return map.evict(new OneOrTwoSet<>(rowKey, columnKey));
     }
 
     @Override

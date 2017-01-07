@@ -40,6 +40,11 @@ public class MutableMapBackedTable<R, C, V>
     }
 
     @Override
+    public V evict(Object rowKey, Object columnKey) {
+        return map.evict(new KeyPair<>(rowKey, columnKey));
+    }
+
+    @Override
     public boolean remove(final Object rowKey, final Object columnKey, final Object value) {
         return map.remove(new KeyPair<>(rowKey, columnKey), value);
     }

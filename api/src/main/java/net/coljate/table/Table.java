@@ -13,23 +13,23 @@ public interface Table<R, C, V> extends Set<Cell<R, C, V>> {
 
     @SuppressWarnings("unchecked")
     @CheckForNull
-    Cell<R, C, V> cellIfPresent(Object row, Object column);
+    Cell<R, C, V> cellIfPresent(Object rowKey, Object columnKey);
 
-    default boolean contains(final Object row, final Object column) {
-        return this.cellIfPresent(row, column) != null;
+    default boolean contains(final Object rowKey, final Object columnKey) {
+        return this.cellIfPresent(rowKey, columnKey) != null;
     }
 
-    default Cell<R, C, V> cell(final R row, final C column) {
-        return this.cellIfPresent(row, column);
+    default Cell<R, C, V> cell(final R rowKey, final C columnKey) {
+        return this.cellIfPresent(rowKey, columnKey);
     }
 
-    default V get(final R row, final C columnKey) {
-        final Cell<R, C, V> cell = this.cell(row, columnKey);
+    default V get(final R rowKey, final C columnKey) {
+        final Cell<R, C, V> cell = this.cell(rowKey, columnKey);
         return cell == null ? null : cell.value();
     }
 
-    default V getIfPresent(final Object row, final Object columnKey) {
-        return Functions.ifNonNull(this.cellIfPresent(row, columnKey), Cell::value);
+    default V getIfPresent(final Object rowKey, final Object columnKey) {
+        return Functions.ifNonNull(this.cellIfPresent(rowKey, columnKey), Cell::value);
     }
 
     default void forEach(final CellConsumer<? super R, ? super C, ? super V> consumer) {
