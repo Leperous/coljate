@@ -9,7 +9,8 @@ import net.coljate.util.Equality;
  * @author ollie
  */
 public abstract class AbstractCounter<T>
-        extends AbstractCollection<T> {
+        extends AbstractCollection<T>
+        implements Counter<T> {
 
     @Override
     protected boolean equals(final Collection<?> that) {

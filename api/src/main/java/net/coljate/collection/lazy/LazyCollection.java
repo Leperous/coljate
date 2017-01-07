@@ -30,7 +30,7 @@ public interface LazyCollection<T> extends Collection<T> {
     }
 
     static <F, T> Function<Collection<F>, ? extends LazyCollection<T>> transform(final Function<? super F, ? extends T> transform) {
-        return (collection) -> new LazyTransformedCollection<>(collection, transform);
+        return collection -> new LazyTransformedCollection<>(collection, transform);
     }
 
 }
