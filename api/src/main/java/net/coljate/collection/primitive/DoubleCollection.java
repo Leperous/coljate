@@ -26,6 +26,15 @@ public interface DoubleCollection extends Collection<Double> {
                 && this.contains(((Number) object).doubleValue());
     }
 
+    default double[] doubleArrayCopy() {
+        final double[] array = new double[this.count()];
+        int index = 0;
+        for (final DoubleIterator iterator = this.iterator(); iterator.hasNext();) {
+            array[index++] = iterator.nextDouble();
+        }
+        return array;
+    }
+
     @Override
     DoubleIterator iterator();
 

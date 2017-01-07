@@ -40,6 +40,11 @@ public class TroveDoubleCollection
         return collection.size();
     }
 
+    @Override
+    public double[] doubleArrayCopy() {
+        return collection.toArray();
+    }
+
     protected TDoubleIterator troveIterator() {
         return collection.iterator();
     }
