@@ -7,8 +7,6 @@ import com.google.common.cache.CacheLoader;
 import com.google.common.cache.LoadingCache;
 
 import net.coljate.cache.MutableCache;
-import net.coljate.map.AbstractEntry;
-import net.coljate.map.MutableEntry;
 import net.coljate.map.impl.MutableWrappedMap;
 
 /**
