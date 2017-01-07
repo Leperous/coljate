@@ -16,14 +16,14 @@ import net.coljate.util.iterator.Iterators;
  *
  * @author Ollie
  */
-public class GuavaDirectedGraph<V, E>
+public class DirectedGuavaGraph<V, E>
         extends AbstractGraph<V, Set<E>>
         implements DirectedGraph<V, Set<E>> {
 
     private final com.google.common.graph.Network<V, E> graph;
     private Set<V> vertices;
 
-    protected GuavaDirectedGraph(final com.google.common.graph.Network<V, E> graph) {
+    protected DirectedGuavaGraph(final com.google.common.graph.Network<V, E> graph) {
         if (!graph.isDirected()) {
             throw new IllegalArgumentException("Not a directed graph: " + graph);
         }
