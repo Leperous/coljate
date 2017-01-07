@@ -28,9 +28,6 @@ public interface Cache<K, V> extends Map<K, V> {
     Collection<V> values();
 
     @Override
-    MutableCache<K, V> mutableCopy();
-
-    @Override
     default ImmutableMap<K, V> immutableCopy() {
         return Map.super.immutableCopy();
     }

@@ -5,7 +5,9 @@ import java.util.Iterator;
 import net.coljate.cache.MutableCache;
 import net.coljate.cache.eviction.CacheEvictionPolicy;
 import net.coljate.collection.Collection;
+import net.coljate.map.Map;
 import net.coljate.map.MutableEntry;
+import net.coljate.map.MutableMap;
 import net.coljate.set.Set;
 
 /**
@@ -75,7 +77,7 @@ public class EvictingMutableCache<K, V> implements MutableCache<K, V> {
     }
 
     @Override
-    public MutableCache<K, V> mutableCopy() {
+    public MutableMap<K, V> mutableCopy() {
         return cache.mutableCopy();
     }
 

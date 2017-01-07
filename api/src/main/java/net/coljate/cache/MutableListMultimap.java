@@ -1,6 +1,5 @@
 package net.coljate.cache;
 
-import net.coljate.cache.impl.MutableCacheBackedListMultimap;
 import net.coljate.collection.Collection;
 import net.coljate.list.MutableList;
 
@@ -24,7 +23,8 @@ public interface MutableListMultimap<K, V>
     }
 
     static <K, V> MutableListMultimap<K, V> createLinkedListMultimap() {
-        return MutableCacheBackedListMultimap.createLinkedListMultimap();
+        //return MutableCacheBackedListMultimap.createLinkedListMultimap();
+        throw new UnsupportedOperationException();
     }
 
 }
