@@ -5,6 +5,8 @@ import net.coljate.collection.primitive.TroveDoubleIterator;
 import net.coljate.set.ImmutableSet;
 import net.coljate.util.iterator.UnmodifiableIterator;
 
+import gnu.trove.TCollections;
+import gnu.trove.impl.unmodifiable.TUnmodifiableDoubleSet;
 import gnu.trove.iterator.TDoubleIterator;
 import gnu.trove.set.TDoubleSet;
 import gnu.trove.set.hash.TDoubleHashSet;
@@ -18,10 +20,11 @@ public class ImmutableTroveDoubleSet
         implements ImmutableSet<Double> {
 
     public static ImmutableTroveDoubleSet copyOf(final TroveDoubleCollection collection) {
-        return new ImmutableTroveDoubleSet(collection.mutableTroveCopy(TDoubleHashSet::new));
+        final TDoubleSet set = collection.mutableTroveCopy(TDoubleHashSet::new);
+        return new ImmutableTroveDoubleSet(new TUnmodifiableDoubleSet(set));
     }
 
-    protected ImmutableTroveDoubleSet(final TDoubleSet set) {
+    protected ImmutableTroveDoubleSet(final TUnmodifiableDoubleSet set) {
         super(set);
     }
 

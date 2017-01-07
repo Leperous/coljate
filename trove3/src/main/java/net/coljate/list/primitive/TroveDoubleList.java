@@ -40,7 +40,7 @@ public class TroveDoubleList
 
     @Override
     public MutableDoubleList mutableCopy() {
-        throw new UnsupportedOperationException();
+        return new MutableTroveDoubleList(this.mutableTroveCopy());
     }
 
     @Override

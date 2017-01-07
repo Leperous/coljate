@@ -9,6 +9,14 @@ import net.coljate.list.MutableArray;
 public interface MutableDoubleArray
         extends DoubleArray, MutableDoubleList, MutableArray<Double> {
 
+    double set(int index, double d);
+
+    @Override
+    @Deprecated
+    default Double set(final int index, final Double d) {
+        return this.set(index, d.doubleValue());
+    }
+
     @Override
     MutableDoubleArray mutableCopy();
 

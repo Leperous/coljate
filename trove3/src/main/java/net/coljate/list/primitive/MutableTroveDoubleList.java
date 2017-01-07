@@ -2,6 +2,7 @@ package net.coljate.list.primitive;
 
 import net.coljate.list.ListIterator;
 
+import gnu.trove.impl.unmodifiable.TUnmodifiableDoubleList;
 import gnu.trove.list.TDoubleList;
 
 /**
@@ -16,6 +17,9 @@ public class MutableTroveDoubleList
 
     public MutableTroveDoubleList(final TDoubleList list) {
         super(list);
+        if (list instanceof TUnmodifiableDoubleList) {
+            throw new IllegalArgumentException("List is unmodifiable!");
+        }
         this.list = list;
     }
 
