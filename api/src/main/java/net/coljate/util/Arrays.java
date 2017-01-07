@@ -88,6 +88,10 @@ public final class Arrays {
         return java.util.Arrays.copyOf(source, source.length);
     }
 
+    public static byte[] copy(final byte[] source) {
+        return java.util.Arrays.copyOf(source, source.length);
+    }
+
     public static Object[][] copy(final Object[][] source) {
         if (source.length == 0) {
             return source;

@@ -186,4 +186,25 @@ public class Iterators {
         return UnmodifiableIterator.of(element);
     }
 
+    public static <T> Iterator<T> of(final T[] array) {
+        return new Iterator<T>() {
+
+            private int index;
+
+            @Override
+            public boolean hasNext() {
+                return index < array.length;
+            }
+
+            @Override
+            public T next() {
+                if (!this.hasNext()) {
+                    throw new NoSuchElementException();
+                }
+                return array[index++];
+            }
+
+        };
+    }
+
 }

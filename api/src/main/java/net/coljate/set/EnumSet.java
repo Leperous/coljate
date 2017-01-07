@@ -1,6 +1,12 @@
 package net.coljate.set;
 
+import java.util.Iterator;
+
+import javax.annotation.Nonnull;
+
 import net.coljate.set.impl.LargeEnumSet;
+import net.coljate.set.impl.SmallEnumSet;
+import net.coljate.util.iterator.Iterators;
 
 /**
  *
@@ -8,9 +14,13 @@ import net.coljate.set.impl.LargeEnumSet;
  */
 public interface EnumSet<E extends Enum<E>> extends Set<E> {
 
-    boolean contains(E e);
+    boolean contains(@Nonnull E e);
 
     Class<E> enumClass();
+
+    default E[] enumUniverse() {
+        return this.enumClass().getEnumConstants();
+    }
 
     @Override
     @SuppressWarnings("unchecked")
@@ -20,8 +30,16 @@ public interface EnumSet<E extends Enum<E>> extends Set<E> {
                 && this.contains((E) object);
     }
 
+    @Override
+    default Iterator<E> iterator() {
+        return Iterators.filter(Iterators.of(this.enumUniverse()), this::contains);
+    }
+
     static <E extends Enum<E>> EnumSet<E> noneOf(final Class<E> enumClass) {
-        return LargeEnumSet.noneOf(enumClass);
+        final E[] universe = enumClass.getEnumConstants();
+        return universe.length <= 64
+                ? SmallEnumSet.noneOf(enumClass)
+                : LargeEnumSet.noneOf(enumClass);
     }
 
     @SafeVarargs

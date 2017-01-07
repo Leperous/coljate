@@ -1,6 +1,6 @@
 package net.coljate.set.impl;
 
-import java.util.Iterator;
+import java.util.Objects;
 
 import net.coljate.set.AbstractSet;
 import net.coljate.set.EnumSet;
@@ -14,7 +14,7 @@ public class LargeEnumSet<E extends Enum<E>>
         extends AbstractSet<E>
         implements EnumSet<E> {
 
-    private static final byte PRESENT = 1;
+    static final byte MISSING = 0, PRESENT = 1;
 
     public static <E extends Enum<E>> LargeEnumSet<E> noneOf(final Class<E> enumClass) {
         final E[] enums = enumClass.getEnumConstants();
@@ -41,17 +41,16 @@ public class LargeEnumSet<E extends Enum<E>>
     }
 
     private final Class<E> enumClass;
-    private final byte[] values;
+    final byte[] values;
 
     protected LargeEnumSet(final Class<E> enumClass, final byte[] values) {
-        this.enumClass = enumClass;
+        this.enumClass = Objects.requireNonNull(enumClass);
         this.values = values;
     }
 
     @Override
     public boolean contains(final E e) {
-        return e != null
-                && values[e.ordinal()] == PRESENT;
+        return values[e.ordinal()] == PRESENT;
     }
 
     @Override
@@ -65,8 +64,8 @@ public class LargeEnumSet<E extends Enum<E>>
     }
 
     @Override
-    public Iterator<E> iterator() {
-        throw new UnsupportedOperationException(); //TODO
+    public MutableLargeEnumSet<E> mutableCopy() {
+        return new MutableLargeEnumSet<>(enumClass, Arrays.copy(values));
     }
 
 }
