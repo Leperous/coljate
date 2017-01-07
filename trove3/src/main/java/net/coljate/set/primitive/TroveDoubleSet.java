@@ -13,7 +13,7 @@ public class TroveDoubleSet
         extends TroveDoubleCollection
         implements DoubleSet {
 
-    public TroveDoubleSet(final TDoubleSet set) {
+    protected TroveDoubleSet(final TDoubleSet set) {
         super(set);
     }
 
@@ -23,13 +23,13 @@ public class TroveDoubleSet
     }
 
     @Override
-    public MutableDoubleSet mutableCopy() {
-        throw new UnsupportedOperationException(); //TODO
+    public MutableTroveDoubleSet mutableCopy() {
+        return MutableTroveDoubleSet.copyIntoHashSet(this);
     }
 
     @Override
     public ImmutableTroveDoubleSet immutableCopy() {
-        return ImmutableTroveDoubleSet.copyOf(this);
+        return ImmutableTroveDoubleSet.copyIntoHashSet(this);
     }
 
 }
