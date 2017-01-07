@@ -62,5 +62,9 @@ public interface MutableSet<T> extends Set<T>, MutableCollection<T> {
     static <T> MutableSet<T> createHashSet(final int initialCapacity) {
         return MutableWrappedHashSet.create(initialCapacity);
     }
+    
+    static <T> MutableSet<T> copyIntoHashSet(final Iterable<? extends T> iterable) {
+        return MutableWrappedSet.copyIntoHashSet(iterable);
+    }
 
 }

@@ -34,7 +34,6 @@ public interface ImmutableSet<T> extends Set<T>, ImmutableCollection<T> {
     }
 
     @Override
-    @Deprecated
     default java.util.Set<T> mutableJavaCopy() {
         return Collections.unmodifiableSet(Set.super.mutableJavaCopy());
     }

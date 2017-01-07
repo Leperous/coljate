@@ -12,6 +12,7 @@
     <modules>
         <module>api</module>
         <module>trove3</module>
+        <module>guava</module>
     </modules>
     
     <properties>

@@ -4,47 +4,48 @@ import java.util.Iterator;
 import java.util.Objects;
 import java.util.Spliterator;
 
+import net.coljate.collection.AbstractCollection;
 import net.coljate.util.iterator.UnmodifiableIterator;
 import net.coljate.collection.Collection;
 import net.coljate.collection.ImmutableCollection;
 import net.coljate.collection.MutableCollection;
-import net.coljate.util.Equality;
 
 /**
  *
  * @author ollie
  */
-public class WrappedCollection<T> implements Collection<T> {
+public class WrappedCollection<T>
+        extends AbstractCollection<T> {
 
-    private final java.util.Collection<? extends T> delegate;
+    private final java.util.Collection<? extends T> collection;
 
-    public WrappedCollection(final java.util.Collection<? extends T> delegate) {
-        this.delegate = Objects.requireNonNull(delegate);
+    public WrappedCollection(final java.util.Collection<? extends T> collection) {
+        this.collection = Objects.requireNonNull(collection, "collection");
     }
 
     @Override
     public Object[] arrayCopy() {
-        return delegate.toArray();
+        return collection.toArray();
     }
 
     @Override
     public java.util.Collection<T> mutableJavaCopy() {
-        return new java.util.ArrayList<>(delegate);
+        return new java.util.ArrayList<>(collection);
     }
 
     @Override
     public boolean contains(final Object object) {
-        return delegate.contains(object);
+        return collection.contains(object);
     }
 
     @Override
     public int count() {
-        return delegate.size();
+        return collection.size();
     }
 
     @Override
     public Iterator<T> iterator() {
-        return UnmodifiableIterator.wrap(delegate.iterator());
+        return UnmodifiableIterator.wrap(collection.iterator());
     }
 
     @Override
@@ -60,18 +61,18 @@ public class WrappedCollection<T> implements Collection<T> {
     @Override
     @SuppressWarnings("unchecked") //Read-only
     public Spliterator<T> spliterator() {
-        return (Spliterator<T>) delegate.spliterator();
+        return (Spliterator<T>) collection.spliterator();
     }
 
     @Override
-    public boolean equals(final Object obj) {
-        return obj instanceof Collection
-                && Equality.orderedEquals(this, (Iterable<?>) obj);
+    protected boolean equals(final Collection<?> that) {
+        return that instanceof WrappedCollection
+                && Objects.equals(collection, ((WrappedCollection) that).collection);
     }
 
     @Override
     public int hashCode() {
-        throw new UnsupportedOperationException(); //TODO
+        return collection.hashCode();
     }
 
 }

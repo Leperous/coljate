@@ -4,7 +4,6 @@ import java.util.Iterator;
 
 import net.coljate.set.MutableSet;
 import net.coljate.set.Set;
-import net.coljate.util.Arrays;
 
 /**
  *
@@ -18,15 +17,21 @@ public class MutableWrappedSet<T>
         return new MutableWrappedSet<>(new java.util.HashSet<>());
     }
 
-    @SafeVarargs
-    public static <T> MutableWrappedSet<T> copyIntoHashSet(final T... elements) {
-        final java.util.Set<T> set = new java.util.HashSet<>(elements.length);
-        Arrays.consume(elements, set::add);
+    public static <T> MutableWrappedSet<T> viewOf(final java.util.Set<T> set) {
         return new MutableWrappedSet<>(set);
     }
 
+    @SafeVarargs
+    public static <T> MutableWrappedSet<T> copyIntoHashSet(final T... elements) {
+        return MutableWrappedHashSet.copyOf(elements);
+    }
+
     public static <T> MutableWrappedSet<T> copyIntoHashSet(final java.util.Collection<? extends T> collection) {
-        return new MutableWrappedSet<>(new java.util.HashSet<>(collection));
+        return MutableWrappedHashSet.copyOf(collection);
+    }
+
+    public static <T> MutableWrappedSet<T> copyIntoHashSet(final Iterable<? extends T> iterable) {
+        return MutableWrappedHashSet.copyOf(iterable);
     }
 
     public static <T> MutableWrappedSet<T> copyOf(final Set<T> set) {

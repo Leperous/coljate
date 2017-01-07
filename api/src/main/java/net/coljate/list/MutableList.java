@@ -49,7 +49,7 @@ public interface MutableList<T> extends List<T>, MutableCollection<T> {
         return MutableNativeArray.viewOf(elements);
     }
 
-    static <T> MutableList<T> copyOf(final Collection<? extends T> collection) {
+    static <T> MutableList<T> copyIntoArray(final Collection<? extends T> collection) {
         return MutableArray.copyOf(collection);
     }
 

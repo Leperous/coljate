@@ -27,7 +27,7 @@ public interface MutableCollection<T> extends Collection<T>, MutableIterableExte
     }
 
     static <T> MutableCollection<T> copyOf(final Collection<? extends T> collection) {
-        return MutableList.copyOf(collection);
+        return MutableList.copyIntoArray(collection);
     }
 
 }

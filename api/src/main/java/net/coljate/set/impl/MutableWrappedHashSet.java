@@ -2,6 +2,9 @@ package net.coljate.set.impl;
 
 import java.io.Serializable;
 
+import net.coljate.util.Arrays;
+import net.coljate.util.Iterables;
+
 /**
  *
  * @author ollie
@@ -20,21 +23,25 @@ public class MutableWrappedHashSet<T>
         return viewOf(new java.util.HashSet<>(initialCapacity));
     }
 
-    @SafeVarargs
-    public static <T> MutableWrappedHashSet<T> copyOf(final T... elements) {
-        final java.util.HashSet<T> set = new java.util.HashSet<>(elements.length);
-        for (int i = 0; i < elements.length; i++) {
-            set.add(elements[i]);
-        }
-        return viewOf(set);
-    }
-
     public static <T> MutableWrappedHashSet<T> viewOf(final java.util.HashSet<T> set) {
         return new MutableWrappedHashSet<>(set);
     }
 
-    public static <T> MutableWrappedHashSet<T> copyOf(final java.util.Set<T> set) {
+    @SafeVarargs
+    public static <T> MutableWrappedHashSet<T> copyOf(final T... elements) {
+        final java.util.HashSet<T> set = new java.util.HashSet<>(elements.length);
+        Arrays.consume(elements, set::add);
+        return viewOf(set);
+    }
+
+    public static <T> MutableWrappedHashSet<T> copyOf(final java.util.Collection<? extends T> set) {
         return new MutableWrappedHashSet<>(new java.util.HashSet<>(set));
+    }
+
+    public static <T> MutableWrappedHashSet<T> copyOf(final Iterable<? extends T> iterable) {
+        final java.util.HashSet<T> set = new java.util.HashSet<>(Iterables.maybeCount(iterable).orElse(10));
+        iterable.forEach(set::add);
+        return new MutableWrappedHashSet<>(set);
     }
 
     private static final long serialVersionUID = 1L;
