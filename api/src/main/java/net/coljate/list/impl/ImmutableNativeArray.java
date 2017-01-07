@@ -2,6 +2,7 @@ package net.coljate.list.impl;
 
 import net.coljate.collection.Collection;
 import net.coljate.list.AbstractArray;
+import net.coljate.list.Array;
 import net.coljate.list.ImmutableArray;
 import net.coljate.list.ImmutableListIterator;
 import net.coljate.util.Arrays;
@@ -20,6 +21,12 @@ public class ImmutableNativeArray<T>
 
     public static <T> ImmutableNativeArray<T> copyOf(final T[] array) {
         return new ImmutableNativeArray<>(Arrays.copyOf(array), array.length);
+    }
+
+    public static <T> ImmutableNativeArray<T> reverseCopy(final Array<? extends T> array) {
+        final Object[] copy = array.arrayCopy();
+        Arrays.reverseInPlace(copy);
+        return new ImmutableNativeArray<>(copy, array.count()); //FIXME
     }
 
     private final Object[] array;

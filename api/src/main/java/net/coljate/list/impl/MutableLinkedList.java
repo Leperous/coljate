@@ -5,6 +5,7 @@ import java.util.NoSuchElementException;
 import javax.annotation.Nullable;
 
 import net.coljate.list.AbstractList;
+import net.coljate.list.List;
 import net.coljate.list.ListIterator;
 import net.coljate.list.MutableList;
 import net.coljate.util.Arrays;
@@ -66,6 +67,11 @@ public class MutableLinkedList<T>
     @Override
     public void clear() {
         first = last = null;
+    }
+
+    @Override
+    public List<T> reversedCopy() {
+        throw new UnsupportedOperationException(); //TODO
     }
 
     @Override

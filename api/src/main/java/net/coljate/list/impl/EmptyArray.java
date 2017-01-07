@@ -48,6 +48,11 @@ public class EmptyArray<T>
     }
 
     @Override
+    public EmptyArray<T> reversedCopy() {
+        return this;
+    }
+
+    @Override
     public ImmutableListIterator<T> iterator() {
         return ImmutableListIterator.empty();
     }

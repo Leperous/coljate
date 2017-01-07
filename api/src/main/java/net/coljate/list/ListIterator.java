@@ -13,4 +13,8 @@ public interface ListIterator<T> extends Iterator<T> {
 
     T previous();
 
+    static <T> ListIterator<T> wrap(final java.util.ListIterator<? extends T> iterator) {
+        throw new UnsupportedOperationException(); //TODO
+    }
+
 }

@@ -22,11 +22,15 @@ public class ImmutableWrappedList<T>
         return new ImmutableWrappedList<>(list);
     }
 
-    private final java.util.List<T> delegate;
-
     protected ImmutableWrappedList(final java.util.List<T> delegate) {
         super(delegate);
-        this.delegate = delegate;
+    }
+
+    @Override
+    public ImmutableList<T> reversedCopy() {
+        final java.util.List<T> list = this.mutableJavaCopy();
+        java.util.Collections.reverse(list);
+        return new ImmutableWrappedList<>(list);
     }
 
     @Override
@@ -36,12 +40,16 @@ public class ImmutableWrappedList<T>
 
     @Override
     public ImmutableList<T> prefixed(final T element) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        final java.util.List<T> list = this.mutableJavaCopy();
+        list.add(element);
+        return new ImmutableWrappedList<>(list);
     }
 
     @Override
     public ImmutableList<T> suffixed(final T element) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        final java.util.List<T> list = this.mutableJavaCopy();
+        list.add(0, element);
+        return new ImmutableWrappedList<>(list);
     }
 
     @Override

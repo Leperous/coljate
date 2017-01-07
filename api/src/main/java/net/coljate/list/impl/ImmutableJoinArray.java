@@ -33,6 +33,11 @@ public class ImmutableJoinArray<T>
     }
 
     @Override
+    public ImmutableArray<T> reversedCopy() {
+        return new ImmutableJoinArray<>(right.reversedCopy(), left.reversedCopy());
+    }
+
+    @Override
     public int length() {
         return left.length() + right.length();
     }

@@ -49,6 +49,11 @@ public class ImmutableJoinList<T> implements ImmutableList<T> {
     }
 
     @Override
+    public ImmutableList<T> reversedCopy() {
+        return new ImmutableJoinList<>(right.reversedCopy(), left.reversedCopy());
+    }
+
+    @Override
     public String toString() {
         return this.getClass().getSimpleName()
                 + ": [" + left

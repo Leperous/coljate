@@ -38,6 +38,12 @@ public interface List<T> extends Ordered<T>, Collection<T> {
         return this.mutableJavaCopy(java.util.ArrayList::new);
     }
 
+    default List<T> reversedCopy() {
+        final java.util.List<T> list = this.mutableJavaCopy();
+        java.util.Collections.reverse(list);
+        return viewOf(list);
+    }
+
     default boolean elementsEqual(final List<?> that) {
         return Equality.orderedEquals(this, that);
     }

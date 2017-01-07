@@ -108,4 +108,13 @@ public final class Arrays {
         return array;
     }
 
+    public static <T> void reverseInPlace(final T[] array) {
+        T prev;
+        for (int i = 0; i < array.length / 2; i++) {
+            prev = array[i];
+            array[i] = array[array.length - i];
+            array[array.length - 1] = prev;
+        }
+    }
+
 }

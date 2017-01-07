@@ -18,26 +18,31 @@ public class WrappedList<T>
         return new WrappedList<>(new java.util.ArrayList<>(collection));
     }
 
-    private final java.util.List<? extends T> delegate;
+    private final java.util.List<? extends T> list;
 
     public WrappedList(final java.util.List<? extends T> delegate) {
         super(delegate);
-        this.delegate = delegate;
+        this.list = delegate;
+    }
+
+    @Override
+    public List<T> reversedCopy() {
+        throw new UnsupportedOperationException(); //TODO
     }
 
     @Override
     public java.util.List<T> mutableJavaCopy() {
-        return new java.util.ArrayList<>(delegate);
+        return new java.util.ArrayList<>(list);
     }
 
     @Override
     public ListIterator<T> iterator() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return ListIterator.wrap(list.listIterator());
     }
 
     @Override
     public T last() {
-        return delegate.get(delegate.size() - 1);
+        return list.get(list.size() - 1);
     }
 
     @Override

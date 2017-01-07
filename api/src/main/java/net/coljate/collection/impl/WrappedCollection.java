@@ -34,6 +34,7 @@ public class WrappedCollection<T>
     }
 
     @Override
+    @SuppressWarnings("element-type-mismatch")
     public boolean contains(final Object object) {
         return collection.contains(object);
     }
@@ -62,6 +63,11 @@ public class WrappedCollection<T>
     @SuppressWarnings("unchecked") //Read-only
     public Spliterator<T> spliterator() {
         return (Spliterator<T>) collection.spliterator();
+    }
+
+    @Override
+    public boolean equals(final Object that) {
+        return super.equals(that);
     }
 
     @Override

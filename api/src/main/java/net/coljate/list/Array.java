@@ -34,6 +34,11 @@ public interface Array<T> extends Indexed<T>, List<T> {
     }
 
     @Override
+    default Array<T> reversedCopy() {
+        return ImmutableNativeArray.reverseCopy(this);
+    }
+
+    @Override
     default java.util.ArrayList<T> mutableJavaCopy() {
         return this.mutableJavaCopy(java.util.ArrayList::new);
     }

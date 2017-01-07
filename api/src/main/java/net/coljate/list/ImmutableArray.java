@@ -27,6 +27,11 @@ public interface ImmutableArray<T>
     }
 
     @Override
+    default ImmutableArray<T> reversedCopy() {
+        return ImmutableNativeArray.reverseCopy(this);
+    }
+
+    @Override
     @Deprecated
     default ImmutableArray<T> immutableCopy() {
         return this;
