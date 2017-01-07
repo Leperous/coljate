@@ -9,4 +9,7 @@ import net.coljate.set.Set;
  */
 public interface DoubleSet extends Set<Double>, DoubleCollection {
 
+    @Override
+    MutableDoubleSet mutableCopy();
+
 }

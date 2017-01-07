@@ -29,6 +29,9 @@ public interface DoubleCollection extends Collection<Double> {
     @Override
     DoubleIterator iterator();
 
+    @Override
+    MutableDoubleCollection mutableCopy();
+
     interface DoubleIterator extends Iterator<Double> {
 
         double nextDouble();

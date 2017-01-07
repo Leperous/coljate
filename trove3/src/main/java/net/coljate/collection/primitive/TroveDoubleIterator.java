@@ -26,4 +26,9 @@ public class TroveDoubleIterator implements DoubleIterator {
         return iterator.next();
     }
 
+    @Override
+    public void remove() {
+        iterator.remove();
+    }
+
 }

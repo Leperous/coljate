@@ -3,17 +3,13 @@ package net.coljate.collection.primitive;
 import java.util.Objects;
 import java.util.function.IntFunction;
 
-import net.coljate.collection.primitive.TroveDoubleIterator;
-import net.coljate.collection.primitive.DoubleCollection;
+import net.coljate.collection.AbstractCollection;
+import net.coljate.collection.Collection;
+import net.coljate.collection.ImmutableCollection;
 
 import gnu.trove.TDoubleCollection;
 import gnu.trove.iterator.TDoubleIterator;
 import gnu.trove.list.array.TDoubleArrayList;
-
-import net.coljate.collection.AbstractCollection;
-import net.coljate.collection.Collection;
-import net.coljate.collection.ImmutableCollection;
-import net.coljate.collection.MutableCollection;
 
 /**
  *
@@ -52,7 +48,7 @@ public class TroveDoubleCollection
         return this.mutableTroveCopy(TDoubleArrayList::new);
     }
 
-    protected <C extends TDoubleCollection> C mutableTroveCopy(final IntFunction<C> createCollection) {
+    public <C extends TDoubleCollection> C mutableTroveCopy(final IntFunction<C> createCollection) {
         final C collection = createCollection.apply(this.count());
         collection.addAll(this.collection);
         return collection;
@@ -70,7 +66,7 @@ public class TroveDoubleCollection
     }
 
     @Override
-    public MutableCollection<Double> mutableCopy() {
+    public MutableDoubleCollection mutableCopy() {
         throw new UnsupportedOperationException(); //TODO
     }
 

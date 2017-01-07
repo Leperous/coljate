@@ -25,4 +25,7 @@ public interface DoubleArray extends DoubleList, Array<Double> {
     @Override
     DoubleListIterator iterator();
 
+    @Override
+    MutableDoubleArray mutableCopy();
+
 }

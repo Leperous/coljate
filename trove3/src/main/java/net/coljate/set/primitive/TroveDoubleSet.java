@@ -1,7 +1,6 @@
 package net.coljate.set.primitive;
 
 import net.coljate.collection.primitive.TroveDoubleCollection;
-import net.coljate.set.MutableSet;
 
 import gnu.trove.set.TDoubleSet;
 import gnu.trove.set.hash.TDoubleHashSet;
@@ -18,18 +17,19 @@ public class TroveDoubleSet
         super(set);
     }
 
+    @Override
     public TDoubleSet mutableTroveCopy() {
         return this.mutableTroveCopy(TDoubleHashSet::new);
     }
 
     @Override
-    public MutableSet<Double> mutableCopy() {
-        throw new UnsupportedOperationException();
+    public MutableDoubleSet mutableCopy() {
+        throw new UnsupportedOperationException(); //TODO
     }
 
     @Override
     public ImmutableTroveDoubleSet immutableCopy() {
-        return new ImmutableTroveDoubleSet(this.mutableTroveCopy());
+        return ImmutableTroveDoubleSet.copyOf(this);
     }
 
 }
