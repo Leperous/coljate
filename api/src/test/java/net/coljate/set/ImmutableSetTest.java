@@ -11,6 +11,10 @@ public interface ImmutableSetTest<T> extends SetTest<T>, ImmutableCollectionTest
     @Override
     ImmutableSet<T> createTestCollection();
 
+    interface ZeroElementTests<T> extends ImmutableSetTest<T>, SetTest.ZeroElementTests<T> {
+
+    }
+
     interface OneElementTests<T> extends ImmutableSetTest<T>, SetTest.OneElementTests<T> {
 
     }
