@@ -36,10 +36,7 @@ public interface EnumSet<E extends Enum<E>> extends Set<E> {
     }
 
     static <E extends Enum<E>> EnumSet<E> noneOf(final Class<E> enumClass) {
-        final E[] universe = enumClass.getEnumConstants();
-        return universe.length <= 64
-                ? SmallEnumSet.noneOf(enumClass)
-                : LargeEnumSet.noneOf(enumClass);
+        return SmallEnumSet.noneOf(enumClass).orElseGet(() -> LargeEnumSet.noneOf(enumClass));
     }
 
     @SafeVarargs
