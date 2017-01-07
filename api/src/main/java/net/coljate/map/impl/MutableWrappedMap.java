@@ -4,8 +4,6 @@ import java.util.function.Function;
 
 import javax.annotation.Nonnull;
 
-import net.coljate.collection.Collection;
-import net.coljate.collection.MutableCollection;
 import net.coljate.map.AbstractEntry;
 import net.coljate.map.Entry;
 import net.coljate.map.MutableEntry;
@@ -16,6 +14,7 @@ import net.coljate.util.iterator.CovariantIterator;
  *
  * @author ollie
  */
+@SuppressWarnings("element-type-mismatch")
 public class MutableWrappedMap<K, V>
         extends WrappedMap<K, V>
         implements MutableMap<K, V> {

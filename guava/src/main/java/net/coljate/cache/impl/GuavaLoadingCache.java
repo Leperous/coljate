@@ -7,12 +7,9 @@ import com.google.common.cache.CacheLoader;
 import com.google.common.cache.LoadingCache;
 
 import net.coljate.cache.MutableCache;
-import net.coljate.collection.Collection;
 import net.coljate.map.AbstractEntry;
 import net.coljate.map.MutableEntry;
-import net.coljate.map.MutableMap;
 import net.coljate.map.impl.MutableWrappedMap;
-import net.coljate.set.Set;
 
 /**
  *
@@ -43,11 +40,6 @@ public class GuavaLoadingCache<K, V>
     protected GuavaLoadingCache(final LoadingCache<K, V> cache) {
         super(cache.asMap());
         this.cache = cache;
-    }
-
-    @Override
-    public boolean containsKey(final Object key) {
-        return cache.asMap().containsKey(key);
     }
 
     @Override

@@ -19,33 +19,39 @@ import net.coljate.util.iterator.Iterators;
  *
  * @author ollie
  */
+@SuppressWarnings("element-type-mismatch")
 public class WrappedMap<K, V>
         extends AbstractMap<K, V>
         implements Map<K, V> {
 
     @Nonnull
-    private final java.util.Map<K, V> delegate;
+    private final java.util.Map<K, V> map;
     private Set<K> keys;
     private Collection<V> values;
 
     protected WrappedMap(final java.util.Map<K, V> delegate) {
-        this.delegate = Objects.requireNonNull(delegate);
+        this.map = Objects.requireNonNull(delegate);
     }
 
     @Override
     public java.util.Map<K, V> mutableJavaMapCopy() {
-        return new java.util.HashMap<>(delegate);
+        return new java.util.HashMap<>(map);
+    }
+
+    @Override
+    public boolean containsKey(final Object key) {
+        return map.containsKey(key);
     }
 
     @Override
     public V get(final K key) {
-        return delegate.get(key);
+        return map.get(key);
     }
 
     @Override
     @SuppressWarnings("element-type-mismatch")
     public V getIfPresent(final Object key) {
-        return delegate.get(key);
+        return map.get(key);
     }
 
     @Override
@@ -60,26 +66,26 @@ public class WrappedMap<K, V>
     @Override
     public Set<K> keys() {
         return keys == null
-                ? (keys = Set.viewOf(delegate.keySet()))
+                ? (keys = Set.viewOf(map.keySet()))
                 : keys;
     }
 
     @Override
     public Collection<V> values() {
         return values == null
-                ? (values = Collection.viewOf(delegate.values()))
+                ? (values = Collection.viewOf(map.values()))
                 : values;
     }
 
     @Override
     public boolean isEmpty() {
-        return delegate.isEmpty();
+        return map.isEmpty();
     }
 
     @Override
     public Iterator<Entry<K, V>> iterator() {
         return Iterators.transform(
-                delegate.entrySet().iterator(),
+                map.entrySet().iterator(),
                 entry -> ImmutableEntry.of(entry.getKey(), entry.getValue()));
     }
 
