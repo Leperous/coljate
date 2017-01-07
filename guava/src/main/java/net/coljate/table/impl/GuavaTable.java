@@ -5,7 +5,6 @@ import java.util.Iterator;
 import net.coljate.table.AbstractCell;
 import net.coljate.table.AbstractTable;
 import net.coljate.table.Cell;
-import net.coljate.table.ImmutableTable;
 import net.coljate.util.iterator.Iterators;
 
 /**
@@ -50,7 +49,7 @@ public class GuavaTable<R, C, V> extends AbstractTable<R, C, V> {
 
     @Override
     public ImmutableGuavaTable<R, C, V> immutableCopy() {
-        return ImmutableGuavaTable.copyIntoHashTable(table);
+        return ImmutableGuavaTable.copyOf(table);
     }
 
     protected class WrappedCell extends AbstractCell<R, C, V> {
