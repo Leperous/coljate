@@ -1,5 +1,7 @@
 package net.coljate.table;
 
+import java.util.Objects;
+
 import javax.annotation.CheckForNull;
 
 import net.coljate.set.Set;
@@ -15,8 +17,20 @@ public interface Table<R, C, V> extends Set<Cell<R, C, V>> {
     @CheckForNull
     Cell<R, C, V> cellIfPresent(Object rowKey, Object columnKey);
 
+    @Override
+    @Deprecated
+    default boolean contains(final Object object) {
+        return object instanceof Cell
+                && this.contains((Cell) object);
+    }
+
     default boolean contains(final Object rowKey, final Object columnKey) {
         return this.cellIfPresent(rowKey, columnKey) != null;
+    }
+
+    default boolean contains(final Cell<?, ?, ?> cell) {
+        return cell != null
+                && Objects.equals(cell, this.cellIfPresent(cell.rowKey(), cell.columnKey()));
     }
 
     default Cell<R, C, V> cell(final R rowKey, final C columnKey) {

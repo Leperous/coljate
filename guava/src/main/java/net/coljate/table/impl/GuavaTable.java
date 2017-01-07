@@ -15,7 +15,7 @@ public class GuavaTable<R, C, V> extends AbstractTable<R, C, V> {
 
     final com.google.common.collect.Table<R, C, V> table;
 
-    public GuavaTable(final com.google.common.collect.Table<R, C, V> table) {
+    protected GuavaTable(final com.google.common.collect.Table<R, C, V> table) {
         this.table = table;
     }
 
