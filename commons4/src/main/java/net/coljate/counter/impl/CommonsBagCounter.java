@@ -49,6 +49,11 @@ public class CommonsBagCounter<T>
     }
 
     @Override
+    public boolean isEmpty() {
+        return bag.isEmpty();
+    }
+
+    @Override
     public MutableCommonsBagCounter<T> mutableCopy() {
         return new MutableCommonsBagCounter<>(this.mutableJavaCopy());
     }
