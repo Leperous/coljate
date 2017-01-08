@@ -57,10 +57,7 @@ public class WrappedMap<K, V>
     @Override
     @SuppressWarnings("unchecked")
     public Entry<K, V> getEntry(final Object key) {
-        final V value = this.getIfPresent(key);
-        return value != null || this.containsKey(key)
-                ? Entry.of((K) key, value)
-                : null;
+        return ViewEntry.viewOf(key, this);
     }
 
     @Override

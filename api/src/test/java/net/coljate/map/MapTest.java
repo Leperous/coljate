@@ -26,6 +26,11 @@ public interface MapTest<K, V> extends SetTest<Entry<K, V>> {
     }
 
     @Test
+    default void testGetEntry_Missing() {
+        assertNull(this.createTestCollection().getEntry(new Object()));
+    }
+
+    @Test
     default void testContains_Missing() {
         assertFalse(this.createTestCollection().contains(new Object()));
         assertFalse(this.createTestCollection().containsKey(new Object()));
@@ -54,10 +59,10 @@ public interface MapTest<K, V> extends SetTest<Entry<K, V>> {
             assertNotNull(map);
             assertThat(map.getEntry(entry.key()), is(entry));
         }
-        
+
         @Test
         default void testContainsEntry() {
-            final Map<K,V> map = this.createTestCollection();
+            final Map<K, V> map = this.createTestCollection();
             final Entry<K, V> entry = this.getCollectionElement();
             assertTrue(map.containsEntry(entry));
         }

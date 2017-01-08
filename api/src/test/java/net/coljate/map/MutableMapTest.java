@@ -3,6 +3,7 @@ package net.coljate.map;
 import net.coljate.set.MutableSetTest;
 
 import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.CoreMatchers.not;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import org.junit.jupiter.api.Test;
@@ -35,6 +36,24 @@ public interface MutableMapTest<K, V> extends MapTest<K, V>, MutableSetTest<Entr
     }
 
     interface OneEntryTests<K, V> extends MutableMapTest<K, V>, MapTest.OneEntryTests<K, V>, MutableSetTest.OneElementTests<Entry<K, V>> {
+
+        @Test
+        default void testGetEntry_View() {
+
+            final MutableMap<K, V> map = this.createTestCollection();
+            final Entry<K, V> entryWritten = this.getCollectionElement();
+            final Entry<K, V> entryView = map.getEntry(entryWritten.key());
+
+            assertThat(entryView.value(), is(entryWritten.value()));
+
+            final Entry<K, V> newEntry = this.createTestObject();
+            assertThat(newEntry.value(), not(entryWritten.value()));
+
+            map.put(entryWritten.key(), newEntry.value());
+            
+            assertThat(entryView.value(), is(newEntry.value()));
+
+        }
 
     }
 
