@@ -1,7 +1,5 @@
 package net.coljate.map.impl;
 
-import java.util.Map;
-
 import net.coljate.map.AbstractMap;
 import net.coljate.map.BidirectionalMap;
 import net.coljate.map.Entry;
