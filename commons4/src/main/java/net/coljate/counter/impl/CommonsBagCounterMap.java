@@ -1,9 +1,9 @@
 package net.coljate.counter.impl;
 
 import net.coljate.collection.Collection;
-import net.coljate.map.AbstractEntry;
 import net.coljate.map.AbstractMap;
 import net.coljate.map.Entry;
+import net.coljate.map.impl.ViewEntry;
 import net.coljate.set.Set;
 
 /**
@@ -31,9 +31,7 @@ public class CommonsBagCounterMap<T> extends AbstractMap<T, Integer> {
     @Override
     @SuppressWarnings(value = "unchecked")
     public Entry<T, Integer> getEntry(final Object key) {
-        return this.containsKey(key)
-                ? new CommonsBagCounterMapEntry((T) key)
-                : null;
+        return ViewEntry.viewOf(key, this);
     }
 
     @Override
@@ -46,26 +44,6 @@ public class CommonsBagCounterMap<T> extends AbstractMap<T, Integer> {
     @Override
     public Collection<Integer> values() {
         return this.keys().transform(bag::getCount);
-    }
-
-    private final class CommonsBagCounterMapEntry extends AbstractEntry<T, Integer> {
-
-        private final T key;
-
-        public CommonsBagCounterMapEntry(T key) {
-            this.key = key;
-        }
-
-        @Override
-        public T key() {
-            return key;
-        }
-
-        @Override
-        public Integer value() {
-            return bag.getCount(key);
-        }
-
     }
 
 }
