@@ -43,9 +43,7 @@ public class MutableCommonsBidirectionalMap<K, V>
     @Override
     @SuppressWarnings("unchecked")
     public MutableEntry<K, V> getEntry(final Object key) {
-        return this.containsKey(key)
-                ? new MutableCommonsBidirectionalMapEntry((K) key)
-                : null;
+        return ViewEntry.viewOf(key, this);
     }
 
     @Override
@@ -53,19 +51,6 @@ public class MutableCommonsBidirectionalMap<K, V>
         return inverse == null
                 ? inverse = new MutableCommonsBidirectionalMap<>(map.inverseBidiMap(), this)
                 : inverse;
-    }
-
-    private final class MutableCommonsBidirectionalMapEntry extends ViewEntry<K, V> implements MutableEntry<K, V> {
-
-        MutableCommonsBidirectionalMapEntry(final K key) {
-            super(key, MutableCommonsBidirectionalMap.this);
-        }
-
-        @Override
-        public void setValue(final V value) {
-            MutableCommonsBidirectionalMap.this.put(this.key(), value);
-        }
-
     }
 
 }
