@@ -12,6 +12,13 @@ public interface MutableCounter<T>
 
     void set(T element, int count);
 
+    /**
+     * Increment the count of an element by the given amount
+     *
+     * @param element
+     * @param amount
+     * @return the new value.
+     */
     int increment(T element, int amount);
 
     default int increment(final T element) {
