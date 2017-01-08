@@ -2,6 +2,10 @@ package net.coljate.counter;
 
 import net.coljate.collection.MutableCollectionTest;
 
+import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.MatcherAssert.assertThat;
+import org.junit.jupiter.api.Test;
+
 /**
  *
  * @author ollie
@@ -18,6 +22,20 @@ public interface MutableCounterTest<T> extends CounterTest<T>, MutableCollection
 
     interface OneElementTests<T>
             extends MutableCounterTest<T>, CounterTest.OneElementTests<T>, MutableCollectionTest.OneElementTests<T> {
+
+        @Test
+        default void testSet() {
+            final MutableCounter<T> counter = this.createTestCollection();
+            counter.set(this.getCollectionElement(), 5);
+            assertThat(counter.count(this.getCollectionElement()), is(5));
+        }
+
+        @Test
+        default void testSet_Negative() {
+            final MutableCounter<T> counter = this.createTestCollection();
+            counter.set(this.getCollectionElement(), -5);
+            assertThat(counter.count(this.getCollectionElement()), is(0));
+        }
 
     }
 

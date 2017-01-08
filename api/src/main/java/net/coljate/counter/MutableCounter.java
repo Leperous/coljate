@@ -10,6 +10,11 @@ import net.coljate.counter.impl.MutableHashCounter;
 public interface MutableCounter<T>
         extends Counter<T>, MutableCollection<T> {
 
+    /**
+     *
+     * @param element
+     * @param count a new count to set. Floored at 0.
+     */
     void set(T element, int count);
 
     /**
