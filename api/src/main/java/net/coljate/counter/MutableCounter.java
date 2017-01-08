@@ -13,7 +13,8 @@ public interface MutableCounter<T>
     /**
      *
      * @param element
-     * @param count a new count to set. Floored at 0.
+     * @param count a new count to set.
+     * @throws IllegalArgumentException if the count is negative.
      */
     void set(T element, int count);
 

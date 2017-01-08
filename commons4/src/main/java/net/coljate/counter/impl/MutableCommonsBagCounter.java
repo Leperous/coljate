@@ -40,6 +40,9 @@ public class MutableCommonsBagCounter<T>
 
     @Override
     public void set(final T element, final int count) {
+        if (count < 0) {
+            throw new IllegalArgumentException();
+        }
         final int current = this.count(element);
         if (count > current) {
             bag.add(element, count - current);
