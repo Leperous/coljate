@@ -9,6 +9,9 @@ import net.coljate.set.Set;
 /**
  *
  * @author Ollie
+ * @since 1.0
+ * @see org.apache.commons.collections4.Bag
+ * @see CommonsBagCounter
  */
 public class CommonsBagCounterMap<T> extends AbstractMap<T, Integer> {
 

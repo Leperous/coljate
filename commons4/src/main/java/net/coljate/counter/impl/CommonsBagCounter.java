@@ -9,6 +9,7 @@ import net.coljate.map.Map;
  *
  * @author Ollie
  * @see org.apache.commons.collections4.Bag
+ * @since 1.0
  */
 public class CommonsBagCounter<T> implements Counter<T> {
 
