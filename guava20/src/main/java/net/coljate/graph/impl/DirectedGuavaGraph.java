@@ -1,7 +1,5 @@
 package net.coljate.graph.impl;
 
-import com.google.common.graph.EndpointPair;
-
 import net.coljate.graph.AbstractGraph;
 import net.coljate.graph.AbstractRelationship;
 import net.coljate.graph.DirectedGraph;
@@ -44,14 +42,16 @@ public class DirectedGuavaGraph<V, E>
 
     @Override
     public ImmutableDirectedGraph<V, Set<E>> immutableCopy() {
-        throw new UnsupportedOperationException(); //TODO
+        return new ImmutableDirectedGuavaGraph<>(com.google.common.graph.ImmutableNetwork.copyOf(graph));
     }
 
-    public class GuavaRelationship extends AbstractRelationship<V, Set<E>> implements DirectedRelationship<V, Set<E>> {
+    public class GuavaRelationship
+            extends AbstractRelationship<V, Set<E>>
+            implements DirectedRelationship<V, Set<E>> {
 
-        private final EndpointPair<V> endpoints;
+        private final com.google.common.graph.EndpointPair<V> endpoints;
 
-        protected GuavaRelationship(final EndpointPair<V> endpoints) {
+        protected GuavaRelationship(final com.google.common.graph.EndpointPair<V> endpoints) {
             this.endpoints = endpoints;
         }
 
