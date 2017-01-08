@@ -3,6 +3,9 @@ package net.coljate.counter.impl;
 import java.util.Comparator;
 
 import net.coljate.counter.MutableCounter;
+import net.coljate.util.Arrays;
+
+import org.apache.commons.collections4.bag.HashBag;
 
 /**
  *
@@ -14,6 +17,13 @@ public class MutableCommonsBagCounter<T>
 
     public static <T> MutableCommonsBagCounter<T> createHashCounter() {
         return new MutableCommonsBagCounter<>(new org.apache.commons.collections4.bag.HashBag<>());
+    }
+
+    @SafeVarargs
+    public static <T> MutableCommonsBagCounter<T> createHashCounter(final T... elements) {
+        final HashBag<T> bag = new org.apache.commons.collections4.bag.HashBag<>();
+        Arrays.consume(elements, bag::add);
+        return new MutableCommonsBagCounter<>(bag);
     }
 
     public static <T extends Comparable<? super T>> MutableCommonsBagCounter<T> createTreeCounter() {
