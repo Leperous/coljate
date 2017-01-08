@@ -10,14 +10,14 @@ import net.coljate.map.MutableMap;
 /**
  * A {@link Cache} that can also be written to.
  *
- * Implementations might not be thread-safe, unless they are a {@link ConcurrentCache}.
+ * Implementations might not be thread-safe, unless they are a {@link MutableConcurrentCache}.
  *
  * @author ollie
- * @see ConcurrentCache
+ * @see MutableConcurrentCache
  */
 public interface MutableCache<K, V> extends Cache<K, V>, MutableMap<K, V> {
 
-    static <K, V> ConcurrentCache<K, V> create(final Function<? super K, ? extends V> valueFunction) {
+    static <K, V> MutableConcurrentCache<K, V> create(final Function<? super K, ? extends V> valueFunction) {
         return ConcurrentMutableMapBackedCache.create(valueFunction);
     }
 

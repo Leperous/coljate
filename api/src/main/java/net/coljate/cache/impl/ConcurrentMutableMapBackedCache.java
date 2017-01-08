@@ -4,7 +4,6 @@ import java.util.Iterator;
 import java.util.Objects;
 import java.util.function.Function;
 
-import net.coljate.cache.ConcurrentCache;
 import net.coljate.collection.Collection;
 import net.coljate.map.AbstractEntry;
 import net.coljate.map.AbstractMap;
@@ -15,6 +14,7 @@ import net.coljate.set.Set;
 import net.coljate.util.Functions;
 import net.coljate.util.iterator.CovariantIterator;
 import net.coljate.util.iterator.Iterators;
+import net.coljate.cache.MutableConcurrentCache;
 
 /**
  *
@@ -22,7 +22,7 @@ import net.coljate.util.iterator.Iterators;
  */
 public class ConcurrentMutableMapBackedCache<K, V>
         extends AbstractMap<K, V>
-        implements ConcurrentCache<K, V> {
+        implements MutableConcurrentCache<K, V> {
 
     public static <K, V> ConcurrentMutableMapBackedCache<K, V> create(final Function<? super K, ? extends V> valueFunction) {
         return new ConcurrentMutableMapBackedCache<>(ConcurrentMap.createHashMap(), valueFunction);
