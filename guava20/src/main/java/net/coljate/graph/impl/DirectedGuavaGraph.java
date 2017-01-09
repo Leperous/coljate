@@ -1,6 +1,5 @@
 package net.coljate.graph.impl;
 
-import net.coljate.graph.AbstractGraph;
 import net.coljate.graph.AbstractRelationship;
 import net.coljate.graph.DirectedGraph;
 import net.coljate.graph.DirectedRelationship;
@@ -14,41 +13,19 @@ import net.coljate.util.iterator.Iterators;
  * @author Ollie
  */
 public class DirectedGuavaGraph<V, E>
-        extends AbstractGraph<V, Set<E>>
+        extends AbstractGuavaGraph<V, E>
         implements DirectedGraph<V, Set<E>> {
 
-    public static <V, E> DirectedGuavaGraph<V, E> viewOf(final com.google.common.graph.Network<V, E> graph) {
-        return new DirectedGuavaGraph<>(graph);
-    }
-
-    private final com.google.common.graph.Network<V, E> network;
-    private Set<V> vertices;
-
-    protected DirectedGuavaGraph(final com.google.common.graph.Network<V, E> graph) {
-        if (!graph.isDirected()) {
-            throw new IllegalArgumentException("Not a directed graph: " + graph);
+    protected DirectedGuavaGraph(final com.google.common.graph.Network<V, E> network) {
+        super(network);
+        if (!network.isDirected()) {
+            throw new IllegalArgumentException("Not a directed graph: " + network);
         }
-        this.network = graph;
-    }
-
-    @Override
-    public Set<V> vertices() {
-        return vertices == null
-                ? vertices = Set.viewOf(network.nodes())
-                : vertices;
     }
 
     @Override
     public CovariantIterator<Relationship<V, Set<E>>, ? extends DirectedRelationship<V, Set<E>>> iterator() {
-        return Iterators.transform(network.asGraph().edges().iterator(), GuavaRelationship::new);
-    }
-
-    public com.google.common.graph.MutableNetwork<V, E> mutableNetworkCopy() {
-        return com.google.common.graph.NetworkBuilder.from(network).build();
-    }
-
-    public com.google.common.graph.ImmutableNetwork<V, E> immutableNetworkCopy() {
-        return com.google.common.graph.ImmutableNetwork.copyOf(network);
+        return Iterators.transform(network.asGraph().edges().iterator(), DirectedGuavaRelationship::new);
     }
 
     @Override
@@ -61,13 +38,13 @@ public class DirectedGuavaGraph<V, E>
         return new ImmutableDirectedGuavaGraph<>(this.immutableNetworkCopy());
     }
 
-    public class GuavaRelationship
+    protected class DirectedGuavaRelationship
             extends AbstractRelationship<V, Set<E>>
             implements DirectedRelationship<V, Set<E>> {
 
         private final com.google.common.graph.EndpointPair<V> endpoints;
 
-        protected GuavaRelationship(final com.google.common.graph.EndpointPair<V> endpoints) {
+        protected DirectedGuavaRelationship(final com.google.common.graph.EndpointPair<V> endpoints) {
             this.endpoints = endpoints;
         }
 
@@ -83,7 +60,7 @@ public class DirectedGuavaGraph<V, E>
 
         @Override
         public Set<E> edge() {
-            return Set.viewOf(network.edgesConnecting(endpoints.nodeU(), endpoints.nodeV()));
+            return Set.viewOf(network.edgesConnecting(this.from(), this.to()));
         }
 
         @Override

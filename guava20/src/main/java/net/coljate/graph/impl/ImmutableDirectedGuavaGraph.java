@@ -1,8 +1,11 @@
 package net.coljate.graph.impl;
 
+import com.google.common.graph.EndpointPair;
+
 import net.coljate.graph.DirectedRelationship;
 import net.coljate.graph.ImmutableDirectedGraph;
 import net.coljate.graph.Relationship;
+import net.coljate.graph.impl.DirectedGuavaGraph.DirectedGuavaRelationship;
 import net.coljate.set.ImmutableSet;
 import net.coljate.set.Set;
 import net.coljate.util.iterator.UnmodifiableCovariantIterator;

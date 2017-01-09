@@ -9,6 +9,7 @@ import net.coljate.counter.AbstractCounter;
 import net.coljate.map.AbstractMap;
 import net.coljate.map.Entry;
 import net.coljate.map.Map;
+import net.coljate.map.impl.ViewEntry;
 import net.coljate.set.Set;
 
 /**
@@ -54,10 +55,7 @@ public class GuavaCounter<T>
         @Override
         @SuppressWarnings("unchecked")
         public Entry<T, Integer> getEntry(final Object key) {
-            final int count = GuavaCounter.this.count(key);
-            return count > 0
-                    ? Entry.of((T) key, count)
-                    : null;
+            return ViewEntry.viewOf(key, this);
         }
 
         @Override
