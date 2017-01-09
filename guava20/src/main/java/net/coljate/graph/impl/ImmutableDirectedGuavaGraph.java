@@ -15,8 +15,8 @@ public class ImmutableDirectedGuavaGraph<V, E>
         extends DirectedGuavaGraph<V, E>
         implements ImmutableDirectedGraph<V, Set<E>> {
 
-    protected ImmutableDirectedGuavaGraph(final com.google.common.graph.ImmutableNetwork<V, E> graph) {
-        super(graph);
+    protected ImmutableDirectedGuavaGraph(final com.google.common.graph.ImmutableNetwork<V, E> network) {
+        super(network);
     }
 
     @Override
