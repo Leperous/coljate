@@ -67,6 +67,34 @@ public interface IterableExtension<T> extends Container, Iterable<T> {
 
     /**
      *
+     * @param iterable
+     * @return true if this collection contains any element in the given iterable.
+     */
+    default boolean containsAny(final Iterable<?> iterable) {
+        for (final Object element : iterable) {
+            if (this.contains(element)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     *
+     * @param iterable
+     * @return true if this collection contains all of the elements in the given iterable, or if the iterable is empty.
+     */
+    default boolean containsAll(final Iterable<?> iterable) {
+        for (final Object element : iterable) {
+            if (!this.contains(element)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    /**
+     *
      * @param predicate
      * @return true if any element in this container matches the given predicate.
      */
