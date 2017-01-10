@@ -33,6 +33,11 @@ public class SynchronizedMutableCollection<T> implements MutableCollection<T> {
     }
 
     @Override
+    public boolean add(final T element) {
+        return collection.add(element);
+    }
+
+    @Override
     public synchronized void clear() {
         collection.clear();
     }

@@ -9,6 +9,7 @@ import javax.annotation.CheckForNull;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
+import net.coljate.collection.MutableCollection;
 import net.coljate.util.complexity.Complexity;
 import net.coljate.util.complexity.TimeComplexity;
 
@@ -128,6 +129,14 @@ public interface IterableExtension<T> extends Container, Iterable<T> {
             }
         }
         return last;
+    }
+
+    default void copyInto(final java.util.Collection<? super T> collection) {
+        this.forEach(collection::add);
+    }
+
+    default void copyInto(final MutableCollection<? super T> collection) {
+        collection.addAll(this);
     }
 
 }

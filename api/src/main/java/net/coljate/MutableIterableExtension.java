@@ -53,4 +53,11 @@ public interface MutableIterableExtension<T> extends Iterable<T> {
         return removed;
     }
 
+    default void clear() {
+        for (final Iterator<?> iterator = this.iterator(); iterator.hasNext();) {
+            iterator.next();
+            iterator.remove();
+        }
+    }
+
 }

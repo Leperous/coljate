@@ -16,8 +16,9 @@ public interface MutableSet<T> extends Set<T>, MutableCollection<T> {
     /**
      *
      * @param element
-     * @return true if the element was added because it was not previously contained by this set.
+     * @return true if the element was added because it was not previously contained by this set, or false if it was.
      */
+    @Override
     boolean add(T element);
 
     /**
@@ -26,19 +27,6 @@ public interface MutableSet<T> extends Set<T>, MutableCollection<T> {
      * @return true if the given element was removed.
      */
     boolean remove(@Nullable Object element);
-
-    /**
-     *
-     * @param elements
-     * @return true if any element was added.
-     */
-    default boolean addAll(@Nonnull final Iterable<? extends T> elements) {
-        boolean addedAny = false;
-        for (final T element : elements) {
-            addedAny |= this.add(element);
-        }
-        return addedAny;
-    }
 
     @Deprecated
     default boolean removeFirst(@Nullable final Object element) {
@@ -62,7 +50,7 @@ public interface MutableSet<T> extends Set<T>, MutableCollection<T> {
     static <T> MutableSet<T> createHashSet(final int initialCapacity) {
         return MutableWrappedHashSet.create(initialCapacity);
     }
-    
+
     static <T> MutableSet<T> copyIntoHashSet(final Iterable<? extends T> iterable) {
         return MutableWrappedSet.copyIntoHashSet(iterable);
     }

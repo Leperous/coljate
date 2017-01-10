@@ -11,7 +11,20 @@ import net.coljate.list.impl.MutableWrappedList;
  */
 public interface MutableCollection<T> extends Collection<T>, MutableIterableExtension<T> {
 
-    void clear();
+    /**
+     *
+     * @param element
+     * @return true if the element was added, or false if it was not.
+     */
+    boolean add(T element);
+
+    default boolean addAll(final Iterable<? extends T> iterable) {
+        boolean addedAny = false;
+        for (final T element : iterable) {
+            addedAny |= this.add(element);
+        }
+        return addedAny;
+    }
 
     /**
      * Bridge from a Java native collection. This method does not check at run-time if the collection is actually

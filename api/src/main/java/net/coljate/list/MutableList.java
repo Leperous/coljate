@@ -24,6 +24,20 @@ public interface MutableList<T> extends List<T>, MutableCollection<T> {
         iterable.forEach(this::suffix);
     }
 
+    @Override
+    @Deprecated
+    default boolean add(final T element) {
+        this.suffix(element);
+        return true;
+    }
+
+    @Override
+    @Deprecated
+    default boolean addAll(final Iterable<? extends T> iterable) {
+        this.suffixAll(iterable);
+        return true;
+    }
+
     default boolean removeLast(final Object element) {
         for (final Iterator<T> iterator = this.reverseIterator(); iterator.hasNext();) {
             if (Objects.equals(iterator.next(), element)) {

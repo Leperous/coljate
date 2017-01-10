@@ -44,6 +44,13 @@ public interface MutableCounter<T>
     }
 
     @Override
+    @Deprecated
+    default boolean add(final T element) {
+        this.increment(element);
+        return true;
+    }
+
+    @Override
     default boolean removeFirst(final Object element) {
         final int count = this.count(element);
         if (count > 0) {
