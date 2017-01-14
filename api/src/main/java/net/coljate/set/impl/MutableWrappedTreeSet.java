@@ -3,7 +3,7 @@ package net.coljate.set.impl;
 import java.util.Comparator;
 
 import net.coljate.collection.Collection;
-import net.coljate.set.SortedSet;
+import net.coljate.set.MutableSortedSet;
 import net.coljate.util.Arrays;
 import net.coljate.util.Suppliers;
 import net.coljate.util.complexity.Complexity;
@@ -15,7 +15,11 @@ import net.coljate.util.complexity.TimeComplexity;
  */
 public class MutableWrappedTreeSet<T>
         extends MutableWrappedSet<T>
-        implements SortedSet<T> {
+        implements MutableSortedSet<T> {
+
+    public static <T> MutableWrappedTreeSet<T> create(final Comparator<? super T> comparator) {
+        return viewOf(new java.util.TreeSet<>(comparator));
+    }
 
     public static <T> MutableWrappedTreeSet<T> viewOf(final java.util.TreeSet<T> set) {
         return new MutableWrappedTreeSet<>(set);

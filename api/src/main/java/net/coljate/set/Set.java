@@ -1,6 +1,7 @@
 package net.coljate.set;
 
 import java.util.Comparator;
+import java.util.Optional;
 import java.util.Spliterator;
 import java.util.Spliterators;
 import java.util.function.Predicate;
@@ -138,6 +139,10 @@ public interface Set<T> extends Collection<T> {
 
     static <T> Set<T> viewOf(final java.util.Set<? extends T> set) {
         return new WrappedSet<>(set);
+    }
+
+    static <T> Set<T> ofOptional(final Optional<? extends T> optional) {
+        return optional.map(Set::of).orElseGet(Set::of);
     }
 
     static int elementHash(final Set<?> set) {
