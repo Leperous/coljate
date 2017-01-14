@@ -3,6 +3,7 @@ package net.coljate.list;
 import java.util.function.Consumer;
 
 import net.coljate.list.impl.ImmutableNativeArray;
+import net.coljate.list.impl.MutableNativeArray;
 import net.coljate.list.impl.MutableWrappedArrayList;
 import net.coljate.list.impl.RepeatedValueArray;
 
@@ -67,6 +68,10 @@ public interface Array<T> extends Indexed<T>, List<T> {
 
     static <T> Array<T> repeated(final T value, final int count) {
         return new RepeatedValueArray<>(value, count);
+    }
+
+    static <T> Array<T> viewOf(final T... elements) {
+        return MutableNativeArray.viewOf(elements);
     }
 
     @SafeVarargs

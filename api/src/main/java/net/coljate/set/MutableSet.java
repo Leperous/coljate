@@ -51,6 +51,11 @@ public interface MutableSet<T> extends Set<T>, MutableCollection<T> {
         return MutableWrappedHashSet.create(initialCapacity);
     }
 
+    @SafeVarargs
+    static <T> MutableSet<T> copyIntoHashSet(final T... elements) {
+        return MutableWrappedSet.copyIntoHashSet(elements);
+    }
+
     static <T> MutableSet<T> copyIntoHashSet(final Iterable<? extends T> iterable) {
         return MutableWrappedSet.copyIntoHashSet(iterable);
     }

@@ -7,6 +7,7 @@ import java.util.Spliterators;
 import java.util.function.Predicate;
 
 import net.coljate.collection.Collection;
+import net.coljate.list.Array;
 import net.coljate.set.impl.ImmutableWrappedSet;
 import net.coljate.set.impl.MutableWrappedSet;
 import net.coljate.set.impl.UnmodifiableSet;
@@ -143,6 +144,14 @@ public interface Set<T> extends Collection<T> {
 
     static <T> Set<T> ofOptional(final Optional<? extends T> optional) {
         return optional.map(Set::of).orElseGet(Set::of);
+    }
+
+    @SafeVarargs
+    static <T> Set<T> ofOptionals(final Optional<? extends T>... optionals) {
+        return Array.viewOf(optionals)
+                .filter(Optional::isPresent)
+                .transform((Optional<? extends T> o) -> (T) o.get())
+                .distinct();
     }
 
     static int elementHash(final Set<?> set) {

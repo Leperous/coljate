@@ -5,7 +5,6 @@ import java.util.Objects;
 
 import net.coljate.collection.Collection;
 import net.coljate.list.AbstractArray;
-import net.coljate.list.Array;
 import net.coljate.list.List;
 import net.coljate.list.ListIterator;
 import net.coljate.list.MutableArray;
