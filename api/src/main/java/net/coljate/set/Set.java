@@ -149,8 +149,14 @@ public interface Set<T> extends Collection<T> {
                 : copyOf(collection);
     }
 
-    static <T> Set<T> copyOf(final java.util.Collection<? extends T> collection) {
+    static <T> Set<T> copyIntoHashSet(final java.util.Collection<? extends T> collection) {
         return MutableWrappedSet.copyIntoHashSet(collection);
+    }
+
+    static <T> Set<T> flattenIntoHashSet(final Iterable<? extends Iterable<? extends T>> nested) {
+        final MutableSet<T> set = MutableSet.createHashSet();
+        nested.forEach(set::addAll);
+        return set;
     }
 
     static <T> Set<T> copyOf(final Collection<? extends T> collection) {

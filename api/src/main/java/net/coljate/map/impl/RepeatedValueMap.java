@@ -17,7 +17,7 @@ public class RepeatedValueMap<K, V>
         extends AbstractMap<K, V> {
 
     public static <K, V> RepeatedValueMap<K, V> copyOf(final java.util.Collection<? extends K> keys, final V value) {
-        final Set<K> keySet = Set.copyOf(keys);
+        final Set<K> keySet = Set.copyIntoHashSet(keys);
         return viewOf(keySet, value);
     }
 
