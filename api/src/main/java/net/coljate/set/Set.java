@@ -1,6 +1,7 @@
 package net.coljate.set;
 
 import java.util.Comparator;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.Spliterator;
 import java.util.Spliterators;
@@ -152,6 +153,11 @@ public interface Set<T> extends Collection<T> {
                 .filter(Optional::isPresent)
                 .transform((Optional<? extends T> o) -> (T) o.get())
                 .distinct();
+    }
+
+    @SafeVarargs
+    static <T> Set<T> ofNonNull(final T... elements) {
+        return of(elements).filter(Objects::nonNull);
     }
 
     static int elementHash(final Set<?> set) {
