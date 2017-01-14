@@ -34,6 +34,16 @@ public class MappedValueGraph<K, V, E>
     }
 
     @Override
+    public V get(final K key) {
+        return vertexValues.get(key);
+    }
+
+    @Override
+    public V getIfPresent(final Object vertexKey) {
+        return vertexValues.getIfPresent(vertexKey);
+    }
+
+    @Override
     public Entry<K, V> getVertex(final Object vertexKey) {
         return vertexValues.getEntry(vertexKey);
     }

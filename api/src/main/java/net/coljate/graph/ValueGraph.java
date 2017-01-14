@@ -3,6 +3,7 @@ package net.coljate.graph;
 import javax.annotation.CheckForNull;
 
 import net.coljate.graph.impl.MappedValueGraph;
+import net.coljate.map.Associative;
 import net.coljate.map.Entry;
 import net.coljate.map.Map;
 import net.coljate.util.Functions;
@@ -15,12 +16,13 @@ import net.coljate.util.Functions;
  * @param <V> vertex value type
  * @param <E> edge type
  */
-public interface ValueGraph<K, V, E> extends Graph<K, E> {
+public interface ValueGraph<K, V, E> extends Graph<K, E>, Associative<K, V> {
 
     @CheckForNull
     Entry<K, V> getVertex(Object vertexKey);
 
-    default V getVertexValue(final Object vertexKey) {
+    @Override
+    default V getIfPresent(final Object vertexKey) {
         return Functions.ifNonNull(this.getVertex(vertexKey), Entry::value);
     }
 
