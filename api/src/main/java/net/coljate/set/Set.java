@@ -7,8 +7,11 @@ import java.util.Spliterator;
 import java.util.Spliterators;
 import java.util.function.Predicate;
 
+import javax.annotation.CheckReturnValue;
+
 import net.coljate.collection.Collection;
 import net.coljate.list.Array;
+import net.coljate.set.impl.EmptySet;
 import net.coljate.set.impl.ImmutableWrappedSet;
 import net.coljate.set.impl.MutableWrappedSet;
 import net.coljate.set.impl.UnmodifiableSet;
@@ -44,6 +47,7 @@ public interface Set<T> extends Collection<T> {
 
     @Override
     @TimeComplexity(computed = true, bestCase = Complexity.LINEAR)
+    @CheckReturnValue
     default SortedSet<T> sortedCopy(final Comparator<? super T> comparator) {
         return SortedSet.copyOf(comparator, this);
     }
@@ -53,6 +57,7 @@ public interface Set<T> extends Collection<T> {
     }
 
     @Override
+    @CheckReturnValue
     default Set<T> filter(final Predicate<? super T> predicate) {
         return LazyFilteredSet.of(this, predicate);
     }
@@ -62,6 +67,7 @@ public interface Set<T> extends Collection<T> {
      *
      * @return a set of elements in both this set and the given set.
      */
+    @CheckReturnValue
     default Set<T> and(final Set<? extends T> that) {
         return LazySet.intersection(this, that);
     }
@@ -71,6 +77,7 @@ public interface Set<T> extends Collection<T> {
      *
      * @return a set of elements in this set but not the given set.
      */
+    @CheckReturnValue
     default Set<T> not(final Set<? extends T> that) {
         return LazySet.complement(this, that);
     }
@@ -80,6 +87,7 @@ public interface Set<T> extends Collection<T> {
      *
      * @return a set of elements in either this set or the given set, or both.
      */
+    @CheckReturnValue
     default Set<T> or(final Set<? extends T> that) {
         return LazySetUnion.of(this, that);
     }
@@ -89,6 +97,7 @@ public interface Set<T> extends Collection<T> {
      *
      * @return a set of elements in either this set or the given set, but not both.
      */
+    @CheckReturnValue
     default Set<T> xor(final Set<? extends T> that) {
         return LazySet.difference(this, that);
     }
@@ -104,7 +113,7 @@ public interface Set<T> extends Collection<T> {
         return this;
     }
 
-    static <T> Set<T> of() {
+    static <T> EmptySet<T> of() {
         return ImmutableSet.of();
     }
 

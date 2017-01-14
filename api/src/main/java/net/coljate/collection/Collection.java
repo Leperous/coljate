@@ -7,6 +7,7 @@ import java.util.function.Function;
 import java.util.function.IntFunction;
 import java.util.function.Predicate;
 
+import javax.annotation.CheckReturnValue;
 import javax.annotation.Nonnull;
 
 import net.coljate.Container;
@@ -35,6 +36,7 @@ public interface Collection<T> extends IterableExtension<T>, StreamExtension<T> 
      * @return a mutable copy of this collection.
      */
     @Nonnull
+    @CheckReturnValue
     MutableCollection<T> mutableCopy();
 
     /**
@@ -42,6 +44,7 @@ public interface Collection<T> extends IterableExtension<T>, StreamExtension<T> 
      * @return an immutable copy of this collection.
      */
     @Nonnull
+    @CheckReturnValue
     ImmutableCollection<T> immutableCopy();
 
     /**
@@ -49,11 +52,13 @@ public interface Collection<T> extends IterableExtension<T>, StreamExtension<T> 
      * @return a mutable copy of this collection.
      */
     @Nonnull
+    @CheckReturnValue
     default java.util.Collection<T> mutableJavaCopy() {
         return this.mutableJavaCopy(java.util.ArrayList::new);
     }
 
     @Nonnull
+    @CheckReturnValue
     default <C extends java.util.Collection<? super T>> C mutableJavaCopy(@Nonnull final IntFunction<? extends C> createCollection) {
         final C collection = createCollection.apply(this.count());
         this.forEach(collection::add);
@@ -65,6 +70,7 @@ public interface Collection<T> extends IterableExtension<T>, StreamExtension<T> 
      * @return a new array containing the elements in this collection.
      */
     @Nonnull
+    @CheckReturnValue
     default Object[] arrayCopy() {
         final Object[] array = new Object[this.count()];
         int index = 0;
@@ -82,6 +88,7 @@ public interface Collection<T> extends IterableExtension<T>, StreamExtension<T> 
      * @see java.util.Collection#toArray(T[])
      */
     @Nonnull
+    @CheckReturnValue
     default T[] arrayCopy(@Nonnull final T[] array) {
         final int c = this.count();
         @SuppressWarnings("unchecked") //Same as java.util.AbstractCollection
@@ -97,18 +104,21 @@ public interface Collection<T> extends IterableExtension<T>, StreamExtension<T> 
 
     @TimeComplexity(computed = true)
     @Nonnull
+    @CheckReturnValue
     default SortedCollection<T> sortedCopy(@Nonnull final Comparator<? super T> comparator) {
         return this.sortedCopy(comparator, SortingAlgorithm.DEFAULT);
     }
 
     @TimeComplexity(computed = true)
     @Nonnull
+    @CheckReturnValue
     default SortedCollection<T> sortedCopy(@Nonnull final Comparator<? super T> comparator, @Nonnull final SortingAlgorithm sortingAlgorithm) {
         return ImmutableSortedArray.sort(this, comparator, sortingAlgorithm);
     }
 
     @Override
     @Nonnull
+    @CheckReturnValue
     default Spliterator<T> spliterator() {
         return Spliterators.spliterator(this.iterator(), this.count(), Spliterator.SIZED);
     }
@@ -120,21 +130,25 @@ public interface Collection<T> extends IterableExtension<T>, StreamExtension<T> 
      * @param intoLazy
      * @return
      */
+    @CheckReturnValue
     default <L extends LazyCollection<?>> L lazily(final Function<Collection<T>, L> intoLazy) {
         return intoLazy.apply(this);
     }
 
     @Nonnull
+    @CheckReturnValue
     default <R> Collection<R> transform(final Function<? super T, ? extends R> transformation) {
         return this.lazily(LazyCollection.<T, R>transform(transformation));
     }
 
     @Nonnull
+    @CheckReturnValue
     default Collection<T> filter(@Nonnull final Predicate<? super T> predicate) {
         return this.lazily(LazyCollection.filter(predicate));
     }
 
     @Nonnull
+    @CheckReturnValue
     default Set<T> distinct() {
         return this.lazily(LazySet.transform());
     }
