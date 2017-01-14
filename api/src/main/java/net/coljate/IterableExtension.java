@@ -167,4 +167,13 @@ public interface IterableExtension<T> extends Container, Iterable<T> {
         collection.addAll(this);
     }
 
+    /**
+     *
+     * @return the first element returned by this collection's iterator, if any.
+     */
+    default T first() {
+        final Iterator<T> iterator = this.iterator();
+        return iterator.hasNext() ? iterator.next() : null;
+    }
+
 }

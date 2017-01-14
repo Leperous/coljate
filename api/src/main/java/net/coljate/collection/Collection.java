@@ -49,6 +49,15 @@ public interface Collection<T> extends IterableExtension<T>, StreamExtension<T> 
 
     /**
      *
+     * @return true if this collection is empty now and will always be so in future.
+     */
+    default boolean isAlwaysEmpty() {
+        return this instanceof ImmutableCollection
+                && this.isEmpty();
+    }
+
+    /**
+     *
      * @return a mutable copy of this collection.
      */
     @Nonnull

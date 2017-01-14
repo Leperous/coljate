@@ -15,6 +15,11 @@ import net.coljate.util.complexity.TimeComplexity;
  */
 public interface SortedSet<T> extends SortedCollection<T>, OrderedSet<T> {
 
+    @Override
+    default T first() {
+        return SortedCollection.super.first();
+    }
+
     @TimeComplexity(computed = true, bestCase = Complexity.LINEAR)
     static <T> SortedSet<T> copyOf(
             final Comparator<? super T> comparator,

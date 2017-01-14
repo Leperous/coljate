@@ -43,6 +43,11 @@ public class SingletonCollection<T>
     }
 
     @Override
+    public T first() {
+        return element;
+    }
+
+    @Override
     public UnmodifiableIterator<T> iterator() {
         return new UnmodifiableIterator<T>() {
 

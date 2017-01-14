@@ -62,6 +62,13 @@ public interface Set<T> extends Collection<T> {
         return LazyFilteredSet.of(this, predicate);
     }
 
+    @CheckReturnValue
+    default Set<T> and(final T element) {
+        return this.contains(element)
+                ? this
+                : this.and(Set.of(element));
+    }
+
     /**
      * Intersection.
      *
@@ -69,7 +76,9 @@ public interface Set<T> extends Collection<T> {
      */
     @CheckReturnValue
     default Set<T> and(final Set<? extends T> that) {
-        return LazySet.intersection(this, that);
+        return that.isAlwaysEmpty()
+                ? this
+                : LazySet.intersection(this, that);
     }
 
     /**

@@ -12,6 +12,11 @@ import net.coljate.list.Ordered;
  */
 public interface OrderedSet<T> extends Ordered<T>, Set<T> {
 
+    @Override
+    default T first() {
+        return Set.super.first();
+    }
+
     @Nonnull
     default Optional<SortedSet<T>> toSortedSet() {
         return this instanceof SortedSet

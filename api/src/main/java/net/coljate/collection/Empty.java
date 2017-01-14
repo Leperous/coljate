@@ -23,6 +23,11 @@ public interface Empty<T> extends ImmutableCollection<T>, Serializable {
     }
 
     @Override
+    default boolean isAlwaysEmpty() {
+        return true;
+    }
+
+    @Override
     @TimeComplexity(Complexity.CONSTANT)
     default boolean contains(final Object object) {
         return false;
