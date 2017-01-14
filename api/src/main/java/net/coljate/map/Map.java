@@ -172,7 +172,9 @@ public interface Map<K, V> extends Set<Entry<K, V>>, Associative<K, V> {
     }
 
     static <K, V> Map<K, V> repeat(final Set<K> keys, final V value) {
-        return RepeatedValueMap.viewOf(keys, value);
+        return keys.isAlwaysEmpty()
+                ? Map.of()
+                : RepeatedValueMap.viewOf(keys, value);
     }
 
 }
