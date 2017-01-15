@@ -78,5 +78,5 @@ public interface Array<T> extends Indexed<T>, List<T> {
     static <T> Array<T> copyOf(final T... elements) {
         return ImmutableNativeArray.copyOf(elements);
     }
-
+    
 }

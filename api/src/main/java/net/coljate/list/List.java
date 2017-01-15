@@ -92,6 +92,10 @@ public interface List<T> extends Ordered<T>, Collection<T> {
         return ImmutableList.of(elements);
     }
 
+    static <T> List<T> copyOf(final java.util.Collection<? extends T> collection) {
+        return ImmutableList.copyOf(collection);
+    }
+
     static <T> List<T> copyOf(final Collection<? extends T> collection) {
         return ImmutableList.copyOf(collection);
     }
