@@ -85,14 +85,14 @@ public interface MutableMap<K, V> extends Map<K, V>, MutableSet<Entry<K, V>> {
      * @param compute
      * @return
      */
-    default V compute(final K key, final BiFunction<K, V, V> compute) {
+    default V compute(final K key, final BiFunction<? super K, ? super V, ? extends V> compute) {
         final V previous = this.get(key);
         final V replacement = compute.apply(key, previous);
         this.put(key, replacement);
         return replacement;
     }
 
-    default V computeIfAbsent(final K key, final Function<K, V> supplier) {
+    default V computeIfAbsent(final K key, final Function<? super K, ? extends V> supplier) {
         final V current = this.get(key);
         if (current == null) {
             final V newValue = supplier.apply(key);

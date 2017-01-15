@@ -24,7 +24,7 @@ public interface ConcurrentMap<K, V>
     V putIfAbsent(K key, V value);
 
     @Override
-    V computeIfAbsent(K key, Function<K, V> supplier);
+    V computeIfAbsent(K key, Function<? super K, ? extends V> supplier);
 
     @Override
     boolean replace(K key, V expectedValue, V replacementValue);

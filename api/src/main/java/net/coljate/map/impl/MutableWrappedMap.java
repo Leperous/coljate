@@ -64,7 +64,7 @@ public class MutableWrappedMap<K, V>
     }
 
     @Override
-    public V computeIfAbsent(final K key, final Function<K, V> supplier) {
+    public V computeIfAbsent(final K key, final Function<? super K, ? extends V> supplier) {
         return delegate.computeIfAbsent(key, supplier);
     }
 

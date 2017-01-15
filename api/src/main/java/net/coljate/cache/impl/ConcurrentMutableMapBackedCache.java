@@ -4,6 +4,7 @@ import java.util.Iterator;
 import java.util.Objects;
 import java.util.function.Function;
 
+import net.coljate.cache.MutableConcurrentCache;
 import net.coljate.collection.Collection;
 import net.coljate.map.AbstractEntry;
 import net.coljate.map.AbstractMap;
@@ -14,7 +15,6 @@ import net.coljate.set.Set;
 import net.coljate.util.Functions;
 import net.coljate.util.iterator.CovariantIterator;
 import net.coljate.util.iterator.Iterators;
-import net.coljate.cache.MutableConcurrentCache;
 
 /**
  *
@@ -121,7 +121,7 @@ public class ConcurrentMutableMapBackedCache<K, V>
     }
 
     @Override
-    public V computeIfAbsent(final K key, final Function<K, V> supplier) {
+    public V computeIfAbsent(final K key, final Function<? super K, ? extends V> supplier) {
         return Functions.ifNonNull(map.computeIfAbsent(key, k -> new Computed<>(supplier.apply(k))), Computer::current);
     }
 
