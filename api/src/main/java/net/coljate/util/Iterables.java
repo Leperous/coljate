@@ -1,5 +1,6 @@
 package net.coljate.util;
 
+import java.util.Comparator;
 import java.util.OptionalInt;
 
 import net.coljate.IterableExtension;
@@ -34,6 +35,30 @@ public class Iterables {
 
     public static <T> T last(final Iterable<T> iterable) {
         return Iterators.last(iterable.iterator());
+    }
+
+    public static <T> T least(final Iterable<? extends T> iterable, final Comparator<? super T> comparator) {
+        T least = null;
+        for (final T element : iterable) {
+            if (least == null) {
+                least = element;
+            } else if (comparator.compare(element, least) < 0) {
+                least = element;
+            }
+        }
+        return least;
+    }
+
+    public static <T> T greatest(final Iterable<? extends T> iterable, final Comparator<? super T> comparator) {
+        T greatest = null;
+        for (final T element : iterable) {
+            if (greatest == null) {
+                greatest = element;
+            } else if (comparator.compare(element, greatest) > 0) {
+                greatest = element;
+            }
+        }
+        return greatest;
     }
 
 }

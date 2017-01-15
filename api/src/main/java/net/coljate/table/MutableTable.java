@@ -1,6 +1,7 @@
 package net.coljate.table;
 
 import java.util.Objects;
+import java.util.function.BiFunction;
 
 import net.coljate.set.MutableSet;
 import net.coljate.table.impl.MutableMapBackedTable;
@@ -14,6 +15,17 @@ public interface MutableTable<R, C, V>
         extends Table<R, C, V>, MutableSet<Cell<R, C, V>> {
 
     V put(R rowKey, C columnKey, V value);
+
+    default V computeIfAbsent(final R rowKey, final C columnKey, final BiFunction<? super R, ? super C, ? extends V> valueFunction) {
+        Cell<R, C, V> cell = this.cell(rowKey, columnKey);
+        if (cell == null) {
+            final V value = valueFunction.apply(rowKey, columnKey);
+            this.put(rowKey, columnKey, value);
+            return value;
+        } else {
+            return cell.value();
+        }
+    }
 
     @Override
     default boolean add(final Cell<R, C, V> cell) {
