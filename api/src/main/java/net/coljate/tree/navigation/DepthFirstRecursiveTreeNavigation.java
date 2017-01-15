@@ -17,7 +17,7 @@ public class DepthFirstRecursiveTreeNavigation implements TreeNavigation {
     }
 
     @Override
-    public <N extends Node<?, ?, N>> N first(final N node, final Predicate<? super N> predicate) {
+    public <N extends Node<N>> N first(final N node, final Predicate<? super N> predicate) {
         if (node == null || predicate.test(node)) {
             return node;
         }
@@ -31,7 +31,7 @@ public class DepthFirstRecursiveTreeNavigation implements TreeNavigation {
     }
 
     @Override
-    public <N extends Node<?, ?, N>> void collect(
+    public <N extends Node<N>> void collect(
             final N node,
             final Consumer<? super N> consumer,
             final Predicate<? super N> predicate) {

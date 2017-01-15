@@ -41,7 +41,7 @@ public interface MutableTreeMap<K, V, N extends MutableNode<K, V, N>>
     boolean remove(@Nonnull N node);
 
     @Override
-    default CovariantIterator<Entry<K, V>, N> iterator() {
+    default CovariantIterator<Entry<K, V>, ? extends N> iterator() {
         return TreeMap.super.iterator();
     }
 

@@ -12,7 +12,7 @@ import net.coljate.list.List;
 import net.coljate.list.MutableList;
 import net.coljate.tree.BinaryNode;
 import net.coljate.tree.Node;
-import net.coljate.tree.TreeMap;
+import net.coljate.tree.Tree;
 
 /**
  *
@@ -22,7 +22,7 @@ import net.coljate.tree.TreeMap;
 public interface TreeNavigation {
 
     @CheckForNull
-    default <N extends Node<?, ?, N>> N first(final TreeMap<?, ?, N> tree, final Predicate<? super N> predicate) {
+    default <N extends Node<N>> N first(final Tree<N> tree, final Predicate<? super N> predicate) {
         return this.first(tree.root(), predicate);
     }
 
@@ -34,7 +34,7 @@ public interface TreeNavigation {
      * @return
      */
     @CheckForNull
-    <N extends Node<?, ?, N>> N first(N node, Predicate<? super N> predicate);
+    <N extends Node<N>> N first(N node, Predicate<? super N> predicate);
 
     /**
      *
@@ -44,9 +44,13 @@ public interface TreeNavigation {
      * @return
      */
     @Nonnull
-    default <N extends Node<?, ?, N>> List<N> collect(final TreeMap<?, ?, N> tree, final Predicate<? super N> predicate) {
+    default <N extends Node<N>> List<N> collect(final Tree<N> tree, final Predicate<? super N> predicate) {
+        return this.collect(tree.root(), predicate);
+    }
+
+    default <N extends Node<N>> List<N> collect(final N root, final Predicate<? super N> predicate) {
         final MutableList<N> nodes = MutableList.create(10);
-        this.collect(tree.root(), nodes::suffix, predicate);
+        this.collect(root, nodes::suffix, predicate);
         return nodes;
     }
 
@@ -56,7 +60,7 @@ public interface TreeNavigation {
      * @param node
      * @param nodes
      */
-    default <N extends Node<?, ?, N>> void collect(final N node, final Consumer<? super N> nodes) {
+    default <N extends Node<N>> void collect(final N node, final Consumer<? super N> nodes) {
         this.collect(node, nodes, n -> true);
     }
 
@@ -67,7 +71,7 @@ public interface TreeNavigation {
      * @param nodes
      * @param predicate
      */
-    <N extends Node<?, ?, N>> void collect(N node, Consumer<? super N> nodes, Predicate<? super N> predicate);
+    <N extends Node<N>> void collect(N node, Consumer<? super N> nodes, Predicate<? super N> predicate);
 
     /**
      *

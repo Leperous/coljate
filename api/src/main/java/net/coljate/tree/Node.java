@@ -1,10 +1,10 @@
 package net.coljate.tree;
 
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.function.Consumer;
 
 import javax.annotation.Nonnull;
 
-import net.coljate.map.Entry;
 import net.coljate.set.Set;
 import net.coljate.tree.navigation.TreeNavigation;
 import net.coljate.util.SelfTyped;
@@ -13,8 +13,7 @@ import net.coljate.util.SelfTyped;
  *
  * @author ollie
  */
-public interface Node<K, V, N extends Node<K, V, N>>
-        extends Entry<K, V>, SelfTyped<N> {
+public interface Node<N extends Node<N>> extends SelfTyped<N> {
 
     @Nonnull
     Set<? extends N> children();
@@ -29,7 +28,8 @@ public interface Node<K, V, N extends Node<K, V, N>>
 
     default int countDescendents(final TreeNavigation treeNavigation) {
         final AtomicInteger counter = new AtomicInteger(1);
-        treeNavigation.collect((Node) this, node -> counter.incrementAndGet());
+        final Consumer<? super N> consumer = node -> counter.incrementAndGet();
+        treeNavigation.collect(this.self(), consumer);
         return counter.get();
     }
 

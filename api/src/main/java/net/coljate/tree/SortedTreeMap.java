@@ -20,7 +20,7 @@ import net.coljate.util.iterator.Iterators;
  *
  * @author Ollie
  */
-public interface SortedTreeMap<K, V, N extends Node<K, V, N>>
+public interface SortedTreeMap<K, V, N extends EntryNode<K, V, N>>
         extends TreeMap<K, V, N>, SortedMap<K, V> {
 
     @Override
@@ -67,7 +67,7 @@ public interface SortedTreeMap<K, V, N extends Node<K, V, N>>
         return RedBlackTreeMap.copyOf(map, comparator);
     }
 
-    class SortedTreeKeySet<K, N extends Node<K, ?, N>>
+    class SortedTreeKeySet<K, N extends EntryNode<K, ?, N>>
             extends AbstractSet<K>
             implements OrderedSet<K> {
 

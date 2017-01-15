@@ -12,7 +12,7 @@ import net.coljate.tree.navigation.TreeNavigation;
  * @author ollie
  * @since 1.0
  */
-public interface BinaryNode<K, V, N extends BinaryNode<K, V, N>> extends Node<K, V, N> {
+public interface BinaryNode<K, V, N extends BinaryNode<K, V, N>> extends EntryNode<K, V, N> {
 
     @CheckForNull
     N left();

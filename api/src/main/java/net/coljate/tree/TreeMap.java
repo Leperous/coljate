@@ -3,8 +3,6 @@ package net.coljate.tree;
 import java.util.Iterator;
 import java.util.Objects;
 
-import javax.annotation.CheckForNull;
-
 import net.coljate.collection.Collection;
 import net.coljate.map.Entry;
 import net.coljate.map.Map;
@@ -18,10 +16,10 @@ import net.coljate.util.iterator.CovariantIterator;
  * @author ollie
  * @since 1.0
  */
-public interface TreeMap<K, V, N extends Node<K, V, N>>
-        extends Map<K, V> {
+public interface TreeMap<K, V, N extends EntryNode<K, V, N>>
+        extends Map<K, V>, Tree<Entry<K, V>> {
 
-    @CheckForNull
+    @Override
     N root();
 
     @Override
@@ -30,11 +28,11 @@ public interface TreeMap<K, V, N extends Node<K, V, N>>
     }
 
     default N getEntry(final Object key, final TreeNavigation navigation) {
-        return navigation.first(this, node -> Objects.equals(key, node.key()));
+        return navigation.first(this.root(), node -> Objects.equals(key, node.key()));
     }
 
     default Collection<N> entries(final TreeNavigation navigation) {
-        return navigation.collect(this, node -> true);
+        return navigation.collect(this.root(), node -> true);
     }
 
     @Override
@@ -58,7 +56,7 @@ public interface TreeMap<K, V, N extends Node<K, V, N>>
     }
 
     @Override
-    default CovariantIterator<Entry<K, V>, N> iterator() {
+    default CovariantIterator<Entry<K, V>, ? extends N> iterator() {
         return CovariantIterator.of(this.iterator(TreeNavigation.getDefault()));
     }
 

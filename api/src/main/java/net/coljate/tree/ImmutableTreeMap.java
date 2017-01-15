@@ -33,7 +33,7 @@ public interface ImmutableTreeMap<K, V, N extends ImmutableNode<K, V, N>>
     }
 
     @Override
-    default UnmodifiableCovariantIterator<Entry<K, V>, N> iterator() {
+    default UnmodifiableCovariantIterator<Entry<K, V>, ? extends N> iterator() {
         return UnmodifiableCovariantIterator.wrap(TreeMap.super.iterator());
     }
 
