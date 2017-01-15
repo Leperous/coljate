@@ -8,7 +8,7 @@ import net.coljate.tree.ImmutableTreeMap;
  *
  * @author ollie
  */
-public class EmptyTree<K, V>
+public class EmptyTreeMap<K, V>
         extends AbstractTree<K, V, SimpleImmutableNode<K, V>>
         implements ImmutableTreeMap<K, V, SimpleImmutableNode<K, V>> {
 
@@ -18,8 +18,8 @@ public class EmptyTree<K, V>
     }
 
     @Override
-    public SimpleImmutableTree<K, V, SimpleImmutableNode<K, V>> with(final K key, final V value) {
-        return new SimpleImmutableTree<>(ImmutableNode.leaf(key, value));
+    public SimpleImmutableTreeMap<K, V, SimpleImmutableNode<K, V>> with(final K key, final V value) {
+        return new SimpleImmutableTreeMap<>(ImmutableNode.leaf(key, value));
     }
 
 }

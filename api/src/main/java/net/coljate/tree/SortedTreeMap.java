@@ -11,7 +11,7 @@ import net.coljate.map.Map;
 import net.coljate.map.SortedMap;
 import net.coljate.set.AbstractSet;
 import net.coljate.set.OrderedSet;
-import net.coljate.tree.impl.RedBlackTree;
+import net.coljate.tree.impl.RedBlackTreeMap;
 import net.coljate.tree.navigation.TreeNavigation;
 import net.coljate.util.Functions;
 import net.coljate.util.iterator.Iterators;
@@ -48,23 +48,23 @@ public interface SortedTreeMap<K, V, N extends Node<K, V, N>>
     MutableSortedTreeMap<K, V, ?> mutableCopy();
 
     static <K, V> MutableSortedTreeMap<K, V, ?> create(@Nonnull final Comparator<? super Entry<K, V>> comparator) {
-        return new RedBlackTree<>(comparator);
+        return new RedBlackTreeMap<>(comparator);
     }
 
     static <K extends Comparable<? super K>, V> MutableSortedTreeMap<K, V, ?> createComparingKeys() {
-        return RedBlackTree.keyComparing();
+        return RedBlackTreeMap.keyComparing();
     }
 
     static <K, V> MutableSortedTreeMap<K, V, ?> createComparingKeys(@Nonnull final Comparator<? super K> keyComparator) {
-        return RedBlackTree.keyComparing(keyComparator);
+        return RedBlackTreeMap.keyComparing(keyComparator);
     }
 
     static <K, V> MutableSortedTreeMap<K, V, ?> copyOf(final SortedMap<K, V> map) {
-        return RedBlackTree.copyOf(map);
+        return RedBlackTreeMap.copyOf(map);
     }
 
     static <K, V> MutableSortedTreeMap<K, V, ?> copyOf(final Map<? extends K, ? extends V> map, final Comparator<? super Entry<K, V>> comparator) {
-        return RedBlackTree.copyOf(map, comparator);
+        return RedBlackTreeMap.copyOf(map, comparator);
     }
 
     class SortedTreeKeySet<K, N extends Node<K, ?, N>>

@@ -13,7 +13,7 @@ import net.coljate.map.SortedMap;
 import net.coljate.set.OrderedSet;
 import net.coljate.tree.AbstractTree;
 import net.coljate.tree.MutableBinaryTreeMap.MutableBinaryNode;
-import net.coljate.tree.impl.RedBlackTree.RedBlackNode;
+import net.coljate.tree.impl.RedBlackTreeMap.RedBlackNode;
 import net.coljate.tree.navigation.TreeNavigation;
 import net.coljate.util.Functions;
 import net.coljate.tree.ImmutableBinaryTreeMap;
@@ -26,26 +26,26 @@ import net.coljate.tree.MutableSortedTreeMap;
  * @see java.util.TreeMap
  * @see <a href="https://www.cs.auckland.ac.nz/software/AlgAnim/red_black.html">Red-Black Trees</a>
  */
-public class RedBlackTree<K, V>
+public class RedBlackTreeMap<K, V>
         extends AbstractTree<K, V, RedBlackNode<K, V>>
         implements MutableBinaryTreeMap<K, V, RedBlackNode<K, V>>, MutableSortedTreeMap<K, V, RedBlackNode<K, V>> {
 
-    public static <K extends Comparable<? super K>, V> RedBlackTree<K, V> keyComparing() {
+    public static <K extends Comparable<? super K>, V> RedBlackTreeMap<K, V> keyComparing() {
         return keyComparing(Comparator.naturalOrder());
     }
 
-    public static <K, V> RedBlackTree<K, V> keyComparing(@Nonnull final Comparator<? super K> comparator) {
-        return new RedBlackTree<>((e1, e2) -> comparator.compare(e1.key(), e2.key()));
+    public static <K, V> RedBlackTreeMap<K, V> keyComparing(@Nonnull final Comparator<? super K> comparator) {
+        return new RedBlackTreeMap<>((e1, e2) -> comparator.compare(e1.key(), e2.key()));
     }
 
-    public static <K, V> RedBlackTree<K, V> copyOf(@Nonnull final SortedMap<K, V> map) {
-        final RedBlackTree<K, V> redBlackTree = new RedBlackTree<>(map.comparator());
+    public static <K, V> RedBlackTreeMap<K, V> copyOf(@Nonnull final SortedMap<K, V> map) {
+        final RedBlackTreeMap<K, V> redBlackTree = new RedBlackTreeMap<>(map.comparator());
         redBlackTree.putAll(map);
         return redBlackTree;
     }
 
-    public static <K, V> RedBlackTree<K, V> copyOf(@Nonnull final Map<? extends K, ? extends V> map, final Comparator<? super Entry<K, V>> comparator) {
-        final RedBlackTree<K, V> redBlackTree = new RedBlackTree<>(comparator);
+    public static <K, V> RedBlackTreeMap<K, V> copyOf(@Nonnull final Map<? extends K, ? extends V> map, final Comparator<? super Entry<K, V>> comparator) {
+        final RedBlackTreeMap<K, V> redBlackTree = new RedBlackTreeMap<>(comparator);
         redBlackTree.putAll(map);
         return redBlackTree;
     }
@@ -56,11 +56,11 @@ public class RedBlackTree<K, V>
     private int count;
     private OrderedSet<K> keys;
 
-    public RedBlackTree(final Comparator<? super Entry<K, V>> comparator) {
+    public RedBlackTreeMap(final Comparator<? super Entry<K, V>> comparator) {
         this(null, comparator);
     }
 
-    protected RedBlackTree(final RedBlackNode<K, V> root, final Comparator<? super Entry<K, V>> comparator) {
+    protected RedBlackTreeMap(final RedBlackNode<K, V> root, final Comparator<? super Entry<K, V>> comparator) {
         this.root = root;
         this.count = root == null ? 0 : root.countDescendents(TreeNavigation.getDefault());
         this.comparator = Objects.requireNonNull(comparator);
@@ -254,8 +254,8 @@ public class RedBlackTree<K, V>
     }
 
     @Override
-    public RedBlackTree<K, V> mutableCopy() {
-        return new RedBlackTree<>(root == null ? null : root.copy(), comparator);
+    public RedBlackTreeMap<K, V> mutableCopy() {
+        return new RedBlackTreeMap<>(root == null ? null : root.copy(), comparator);
     }
 
     @Override

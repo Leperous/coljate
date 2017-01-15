@@ -38,7 +38,7 @@ public class RedBlackTreeTest {
 
         @Override
         public MutableBinaryTreeMap<Integer, Object, ?> createTestCollection() {
-            return RedBlackTree.keyComparing();
+            return RedBlackTreeMap.keyComparing();
         }
 
         @Override

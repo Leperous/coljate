@@ -8,13 +8,13 @@ import net.coljate.tree.ImmutableTreeMap;
  *
  * @author ollie
  */
-public class SimpleImmutableTree<K, V, N extends ImmutableNode<K, V, N>>
+public class SimpleImmutableTreeMap<K, V, N extends ImmutableNode<K, V, N>>
         extends AbstractTree<K, V, N>
         implements ImmutableTreeMap<K, V, N> {
 
     private final N root;
 
-    public SimpleImmutableTree(final N root) {
+    public SimpleImmutableTreeMap(final N root) {
         this.root = root;
     }
 
@@ -24,7 +24,7 @@ public class SimpleImmutableTree<K, V, N extends ImmutableNode<K, V, N>>
     }
 
     @Override
-    public SimpleImmutableTree<K, V, N> immutableCopy() {
+    public SimpleImmutableTreeMap<K, V, N> immutableCopy() {
         return this;
     }
 
