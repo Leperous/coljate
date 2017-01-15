@@ -67,6 +67,13 @@ public interface MutableMap<K, V> extends Map<K, V>, MutableSet<Entry<K, V>> {
         return put;
     }
 
+    /**
+     * Write a value to this map iff there is no mapping for the given key, or if the current value is null.
+     *
+     * @param key
+     * @param value
+     * @return the value previously associated to the given key, if any.
+     */
     @CheckForNull
     default V putIfAbsent(final K key, final V value) {
         final V current = this.get(key);

@@ -1,14 +1,15 @@
 package net.coljate.tree.impl;
 
 import net.coljate.map.NewObjectEntryCreator;
-import net.coljate.tree.ImmutableTree;
-import net.coljate.tree.ImmutableTreeTest;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assumptions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Nested;
+
+import net.coljate.tree.ImmutableTreeMap;
+import net.coljate.tree.ImmutableTreeMapTest;
 
 /**
  *
@@ -18,7 +19,7 @@ import org.junit.jupiter.api.Nested;
 public class ImmutableSubtreeTest extends SubtreeTest {
 
     @Nested
-    class LeafTreeTest extends NewObjectEntryCreator implements ImmutableTreeTest.OneNodeTests<Object, Object> {
+    class LeafTreeTest extends NewObjectEntryCreator implements ImmutableTreeMapTest.OneNodeTests<Object, Object> {
 
         private ImmutableSubtree<Object, Object> lastTree;
 
@@ -34,7 +35,7 @@ public class ImmutableSubtreeTest extends SubtreeTest {
         }
 
         @Override
-        public ImmutableTree<Object, Object, ?> createTestCollection() {
+        public ImmutableTreeMap<Object, Object, ?> createTestCollection() {
             return lastTree;
         }
 
@@ -46,7 +47,7 @@ public class ImmutableSubtreeTest extends SubtreeTest {
         @Override
         @Disabled //TODO
         public void testMutableCopy() {
-            ImmutableTreeTest.OneNodeTests.super.testMutableCopy();
+            ImmutableTreeMapTest.OneNodeTests.super.testMutableCopy();
         }
 
     }

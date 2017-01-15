@@ -1,14 +1,14 @@
 package net.coljate.tree;
 
-import net.coljate.tree.MutableBinaryTree.MutableBinaryNode;
+import net.coljate.tree.MutableBinaryTreeMap.MutableBinaryNode;
 
 /**
  * Mutable binary tree.
  *
  * @author ollie
  */
-public interface MutableBinaryTree<K, V, N extends MutableBinaryNode<K, V, N>>
-        extends BinaryTree<K, V, N>, MutableTree<K, V, N> {
+public interface MutableBinaryTreeMap<K, V, N extends MutableBinaryNode<K, V, N>>
+        extends BinaryTreeMap<K, V, N>, MutableTreeMap<K, V, N> {
 
     /**
      * Mutable node that allows updating of the value.

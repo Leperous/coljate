@@ -12,7 +12,7 @@ import net.coljate.list.List;
 import net.coljate.list.MutableList;
 import net.coljate.tree.BinaryNode;
 import net.coljate.tree.Node;
-import net.coljate.tree.Tree;
+import net.coljate.tree.TreeMap;
 
 /**
  *
@@ -22,7 +22,7 @@ import net.coljate.tree.Tree;
 public interface TreeNavigation {
 
     @CheckForNull
-    default <N extends Node<?, ?, N>> N first(final Tree<?, ?, N> tree, final Predicate<? super N> predicate) {
+    default <N extends Node<?, ?, N>> N first(final TreeMap<?, ?, N> tree, final Predicate<? super N> predicate) {
         return this.first(tree.root(), predicate);
     }
 
@@ -44,7 +44,7 @@ public interface TreeNavigation {
      * @return
      */
     @Nonnull
-    default <N extends Node<?, ?, N>> List<N> collect(final Tree<?, ?, N> tree, final Predicate<? super N> predicate) {
+    default <N extends Node<?, ?, N>> List<N> collect(final TreeMap<?, ?, N> tree, final Predicate<? super N> predicate) {
         final MutableList<N> nodes = MutableList.create(10);
         this.collect(tree.root(), nodes::suffix, predicate);
         return nodes;

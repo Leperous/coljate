@@ -11,35 +11,35 @@ import net.coljate.util.iterator.UnmodifiableCovariantIterator;
  * @author ollie
  * @since 1.0
  */
-public interface ImmutableTree<K, V, N extends ImmutableNode<K, V, N>>
-        extends Tree<K, V, N>, ImmutableMap<K, V> {
+public interface ImmutableTreeMap<K, V, N extends ImmutableNode<K, V, N>>
+        extends TreeMap<K, V, N>, ImmutableMap<K, V> {
 
     @Override
     default N getEntry(final Object key) {
-        return Tree.super.getEntry(key);
+        return TreeMap.super.getEntry(key);
     }
 
     @Override
-    ImmutableTree<K, V, ?> with(K key, V value);
+    ImmutableTreeMap<K, V, ?> with(K key, V value);
 
     @Override
     default ImmutableSet<K> keys() {
-        return Tree.super.keys().immutableCopy();
+        return TreeMap.super.keys().immutableCopy();
     }
 
     @Override
     default ImmutableCollection<V> values() {
-        return Tree.super.values().immutableCopy();
+        return TreeMap.super.values().immutableCopy();
     }
 
     @Override
     default UnmodifiableCovariantIterator<Entry<K, V>, N> iterator() {
-        return UnmodifiableCovariantIterator.wrap(Tree.super.iterator());
+        return UnmodifiableCovariantIterator.wrap(TreeMap.super.iterator());
     }
 
     @Override
     @Deprecated
-    default ImmutableTree<K, V, N> immutableCopy() {
+    default ImmutableTreeMap<K, V, N> immutableCopy() {
         return this;
     }
 

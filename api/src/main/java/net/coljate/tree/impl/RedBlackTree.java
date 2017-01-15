@@ -12,13 +12,13 @@ import net.coljate.map.Map;
 import net.coljate.map.SortedMap;
 import net.coljate.set.OrderedSet;
 import net.coljate.tree.AbstractTree;
-import net.coljate.tree.ImmutableBinaryTree;
-import net.coljate.tree.MutableBinaryTree;
-import net.coljate.tree.MutableBinaryTree.MutableBinaryNode;
-import net.coljate.tree.MutableSortedTree;
+import net.coljate.tree.MutableBinaryTreeMap.MutableBinaryNode;
 import net.coljate.tree.impl.RedBlackTree.RedBlackNode;
 import net.coljate.tree.navigation.TreeNavigation;
 import net.coljate.util.Functions;
+import net.coljate.tree.ImmutableBinaryTreeMap;
+import net.coljate.tree.MutableBinaryTreeMap;
+import net.coljate.tree.MutableSortedTreeMap;
 
 /**
  *
@@ -28,7 +28,7 @@ import net.coljate.util.Functions;
  */
 public class RedBlackTree<K, V>
         extends AbstractTree<K, V, RedBlackNode<K, V>>
-        implements MutableBinaryTree<K, V, RedBlackNode<K, V>>, MutableSortedTree<K, V, RedBlackNode<K, V>> {
+        implements MutableBinaryTreeMap<K, V, RedBlackNode<K, V>>, MutableSortedTreeMap<K, V, RedBlackNode<K, V>> {
 
     public static <K extends Comparable<? super K>, V> RedBlackTree<K, V> keyComparing() {
         return keyComparing(Comparator.naturalOrder());
@@ -249,7 +249,7 @@ public class RedBlackTree<K, V>
     @Override
     public OrderedSet<K> keys() {
         return keys == null
-                ? keys = MutableSortedTree.super.keys()
+                ? keys = MutableSortedTreeMap.super.keys()
                 : keys;
     }
 
@@ -259,7 +259,7 @@ public class RedBlackTree<K, V>
     }
 
     @Override
-    public ImmutableBinaryTree<K, V, ?> immutableCopy() {
+    public ImmutableBinaryTreeMap<K, V, ?> immutableCopy() {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 

@@ -6,10 +6,10 @@ import net.coljate.map.Entry;
 import net.coljate.map.ImmutableEntry;
 import net.coljate.set.Set;
 import net.coljate.tree.AbstractTree;
-import net.coljate.tree.MutableTree;
 import net.coljate.tree.Node;
-import net.coljate.tree.Tree;
 import net.coljate.util.SelfTyped;
+import net.coljate.tree.TreeMap;
+import net.coljate.tree.MutableTreeMap;
 
 /**
  *
@@ -17,7 +17,7 @@ import net.coljate.util.SelfTyped;
  */
 public class Subtree<K, V, T extends Subtree<K, V, T>>
         extends AbstractTree<K, V, T>
-        implements Tree<K, V, T>, Node<K, V, T>, SelfTyped<T> {
+        implements TreeMap<K, V, T>, Node<K, V, T>, SelfTyped<T> {
 
     private final K key;
     private final Supplier<? extends V> getValue;
@@ -59,7 +59,7 @@ public class Subtree<K, V, T extends Subtree<K, V, T>>
     }
 
     @Override
-    public MutableTree<K, V, ?> mutableCopy() {
+    public MutableTreeMap<K, V, ?> mutableCopy() {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 

@@ -9,6 +9,6 @@ import net.coljate.map.AbstractMap;
  */
 public abstract class AbstractTree<K, V, N extends Node<K, V, N>>
         extends AbstractMap<K, V>
-        implements Tree<K, V, N> {
+        implements TreeMap<K, V, N> {
 
 }

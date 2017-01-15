@@ -1,18 +1,18 @@
 package net.coljate.tree;
 
 import net.coljate.set.ImmutableSet;
-import net.coljate.tree.ImmutableBinaryTree.ImmutableBinaryNode;
+import net.coljate.tree.ImmutableBinaryTreeMap.ImmutableBinaryNode;
 
 /**
  *
  * @author ollie
  */
-public interface ImmutableBinaryTree<K, V, N extends ImmutableBinaryNode<K, V, N>>
-        extends BinaryTree<K, V, N>, ImmutableTree<K, V, N> {
+public interface ImmutableBinaryTreeMap<K, V, N extends ImmutableBinaryNode<K, V, N>>
+        extends BinaryTreeMap<K, V, N>, ImmutableTreeMap<K, V, N> {
 
     @Override
     @Deprecated
-    default ImmutableBinaryTree<K, V, N> immutableCopy() {
+    default ImmutableBinaryTreeMap<K, V, N> immutableCopy() {
         return this;
     }
 

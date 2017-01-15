@@ -18,7 +18,7 @@ import net.coljate.util.iterator.CovariantIterator;
  * @author ollie
  * @since 1.0
  */
-public interface Tree<K, V, N extends Node<K, V, N>>
+public interface TreeMap<K, V, N extends Node<K, V, N>>
         extends Map<K, V> {
 
     @CheckForNull
@@ -67,12 +67,12 @@ public interface Tree<K, V, N extends Node<K, V, N>>
     }
 
     @Override
-    default MutableTree<K, V, ?> mutableCopy() {
+    default MutableTreeMap<K, V, ?> mutableCopy() {
         throw new UnsupportedOperationException(); //TODO
     }
 
     @Override
-    default ImmutableTree<K, V, ?> immutableCopy() {
+    default ImmutableTreeMap<K, V, ?> immutableCopy() {
         throw new UnsupportedOperationException();
     }
 

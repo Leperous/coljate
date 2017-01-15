@@ -2,7 +2,7 @@ package net.coljate.tree.impl;
 
 import net.coljate.tree.AbstractTree;
 import net.coljate.tree.ImmutableNode;
-import net.coljate.tree.ImmutableTree;
+import net.coljate.tree.ImmutableTreeMap;
 
 /**
  *
@@ -10,7 +10,7 @@ import net.coljate.tree.ImmutableTree;
  */
 public class EmptyTree<K, V>
         extends AbstractTree<K, V, SimpleImmutableNode<K, V>>
-        implements ImmutableTree<K, V, SimpleImmutableNode<K, V>> {
+        implements ImmutableTreeMap<K, V, SimpleImmutableNode<K, V>> {
 
     @Override
     public SimpleImmutableNode<K, V> root() {

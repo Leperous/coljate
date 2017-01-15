@@ -20,8 +20,8 @@ import net.coljate.util.iterator.Iterators;
  *
  * @author Ollie
  */
-public interface SortedTree<K, V, N extends Node<K, V, N>>
-        extends Tree<K, V, N>, SortedMap<K, V> {
+public interface SortedTreeMap<K, V, N extends Node<K, V, N>>
+        extends TreeMap<K, V, N>, SortedMap<K, V> {
 
     @Override
     N least();
@@ -45,25 +45,25 @@ public interface SortedTree<K, V, N extends Node<K, V, N>>
     }
 
     @Override
-    MutableSortedTree<K, V, ?> mutableCopy();
+    MutableSortedTreeMap<K, V, ?> mutableCopy();
 
-    static <K, V> MutableSortedTree<K, V, ?> create(@Nonnull final Comparator<? super Entry<K, V>> comparator) {
+    static <K, V> MutableSortedTreeMap<K, V, ?> create(@Nonnull final Comparator<? super Entry<K, V>> comparator) {
         return new RedBlackTree<>(comparator);
     }
 
-    static <K extends Comparable<? super K>, V> MutableSortedTree<K, V, ?> createComparingKeys() {
+    static <K extends Comparable<? super K>, V> MutableSortedTreeMap<K, V, ?> createComparingKeys() {
         return RedBlackTree.keyComparing();
     }
 
-    static <K, V> MutableSortedTree<K, V, ?> createComparingKeys(@Nonnull final Comparator<? super K> keyComparator) {
+    static <K, V> MutableSortedTreeMap<K, V, ?> createComparingKeys(@Nonnull final Comparator<? super K> keyComparator) {
         return RedBlackTree.keyComparing(keyComparator);
     }
 
-    static <K, V> MutableSortedTree<K, V, ?> copyOf(final SortedMap<K, V> map) {
+    static <K, V> MutableSortedTreeMap<K, V, ?> copyOf(final SortedMap<K, V> map) {
         return RedBlackTree.copyOf(map);
     }
 
-    static <K, V> MutableSortedTree<K, V, ?> copyOf(final Map<? extends K, ? extends V> map, final Comparator<? super Entry<K, V>> comparator) {
+    static <K, V> MutableSortedTreeMap<K, V, ?> copyOf(final Map<? extends K, ? extends V> map, final Comparator<? super Entry<K, V>> comparator) {
         return RedBlackTree.copyOf(map, comparator);
     }
 
@@ -71,10 +71,10 @@ public interface SortedTree<K, V, N extends Node<K, V, N>>
             extends AbstractSet<K>
             implements OrderedSet<K> {
 
-        private final SortedTree<K, ?, N> tree;
+        private final SortedTreeMap<K, ?, N> tree;
         private final TreeNavigation navigation;
 
-        protected SortedTreeKeySet(final SortedTree<K, ?, N> tree, final TreeNavigation navigation) {
+        protected SortedTreeKeySet(final SortedTreeMap<K, ?, N> tree, final TreeNavigation navigation) {
             this.tree = Objects.requireNonNull(tree);
             this.navigation = Objects.requireNonNull(navigation);
         }

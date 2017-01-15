@@ -11,12 +11,12 @@ import net.coljate.util.iterator.CovariantIterator;
  * @author ollie
  * @since 1.0
  */
-public interface MutableTree<K, V, N extends MutableNode<K, V, N>>
-        extends Tree<K, V, N>, MutableMap<K, V> {
+public interface MutableTreeMap<K, V, N extends MutableNode<K, V, N>>
+        extends TreeMap<K, V, N>, MutableMap<K, V> {
 
     @Override
     default N getEntry(final Object key) {
-        return Tree.super.getEntry(key);
+        return TreeMap.super.getEntry(key);
     }
 
     @Override
@@ -42,7 +42,7 @@ public interface MutableTree<K, V, N extends MutableNode<K, V, N>>
 
     @Override
     default CovariantIterator<Entry<K, V>, N> iterator() {
-        return Tree.super.iterator();
+        return TreeMap.super.iterator();
     }
 
 }

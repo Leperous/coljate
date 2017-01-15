@@ -2,7 +2,7 @@ package net.coljate.tree.impl;
 
 import net.coljate.tree.AbstractTree;
 import net.coljate.tree.ImmutableNode;
-import net.coljate.tree.ImmutableTree;
+import net.coljate.tree.ImmutableTreeMap;
 
 /**
  *
@@ -10,7 +10,7 @@ import net.coljate.tree.ImmutableTree;
  */
 public class SimpleImmutableTree<K, V, N extends ImmutableNode<K, V, N>>
         extends AbstractTree<K, V, N>
-        implements ImmutableTree<K, V, N> {
+        implements ImmutableTreeMap<K, V, N> {
 
     private final N root;
 
@@ -29,7 +29,7 @@ public class SimpleImmutableTree<K, V, N extends ImmutableNode<K, V, N>>
     }
 
     @Override
-    public ImmutableTree<K, V, ?> with(final K key, final V value) {
+    public ImmutableTreeMap<K, V, ?> with(final K key, final V value) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 

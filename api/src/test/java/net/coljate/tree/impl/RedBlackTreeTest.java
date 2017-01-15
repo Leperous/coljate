@@ -1,12 +1,13 @@
 package net.coljate.tree.impl;
 
 import net.coljate.map.Entry;
-import net.coljate.tree.MutableBinaryTree;
-import net.coljate.tree.MutableBinaryTreeTest;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Nested;
+
+import net.coljate.tree.MutableBinaryTreeMap;
+import net.coljate.tree.MutableBinaryTreeMapTest;
 
 /**
  *
@@ -33,10 +34,10 @@ public class RedBlackTreeTest {
     @Nested
     class EmptyRedBlackTreeTest
             extends BaseIntegerKeyTest
-            implements MutableBinaryTreeTest.ZeroNodeTests<Integer, Object> {
+            implements MutableBinaryTreeMapTest.ZeroNodeTests<Integer, Object> {
 
         @Override
-        public MutableBinaryTree<Integer, Object, ?> createTestCollection() {
+        public MutableBinaryTreeMap<Integer, Object, ?> createTestCollection() {
             return RedBlackTree.keyComparing();
         }
 
