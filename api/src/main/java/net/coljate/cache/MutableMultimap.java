@@ -28,6 +28,10 @@ public interface MutableMultimap<K, V>
         return new MapIterator<>(this.keys(), this::getEntry);
     }
 
+    static <K, V> MutableMultimap<K, V> create() {
+        return MutableListMultimap.createLinkedListMultimap();
+    }
+
     interface MutableMultimapEntry<K, V, C extends MutableCollection<V>>
             extends MutableEntry<K, Collection<V>>, MultimapEntry<K, V, C> {
 
