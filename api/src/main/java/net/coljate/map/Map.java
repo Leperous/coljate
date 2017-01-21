@@ -12,6 +12,7 @@ import java.util.function.Predicate;
 import java.util.function.Supplier;
 
 import javax.annotation.CheckForNull;
+import javax.annotation.CheckReturnValue;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
@@ -113,6 +114,22 @@ public interface Map<K, V> extends Set<Entry<K, V>>, Associative<K, V> {
         final M map = mapSupplier.apply(this.count());
         this.forEach(map::put);
         return map;
+    }
+
+    @Override
+    @CheckReturnValue
+    default Map<K, V> and(final Entry<K, V> entry) {
+        return this.containsEntry(entry)
+                ? this
+                : this.mutableCopy().and(entry);
+    }
+
+    @Nonnull
+    @CheckReturnValue
+    default Map<K, V> and(final K key, final V value) {
+        return this.contains(key, value)
+                ? this
+                : this.mutableCopy().and(key, value);
     }
 
     @Override

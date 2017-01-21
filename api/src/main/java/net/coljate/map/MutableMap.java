@@ -155,6 +155,18 @@ public interface MutableMap<K, V> extends Map<K, V>, MutableSet<Entry<K, V>> {
     }
 
     @Override
+    default Map<K, V> and(final Entry<K, V> entry) {
+        this.put(entry);
+        return this;
+    }
+
+    @Override
+    default Map<K, V> and(final K key, final V value) {
+        this.put(key, value);
+        return this;
+    }
+
+    @Override
     default Spliterator<Entry<K, V>> spliterator() {
         return Map.super.spliterator();
     }
