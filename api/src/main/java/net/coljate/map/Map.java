@@ -177,4 +177,16 @@ public interface Map<K, V> extends Set<Entry<K, V>>, Associative<K, V> {
                 : RepeatedValueMap.viewOf(keys, value);
     }
 
+    static <K, V> Map<K, V> mapValues(final Set<K> keys, final Function<? super K, ? extends V> valueFunction) {
+        return keys.isAlwaysEmpty()
+                ? Map.of()
+                : LazyMap.transformValues(keys, valueFunction);
+    }
+
+    static <K, V> Map<K, V> mapFirstKey(final Collection<V> values, final Function<? super V, ? extends K> keyFunction) {
+        final MutableMap<K, V> map = MutableMap.createHashMap();
+        values.forEach(value -> map.putIfAbsent(keyFunction.apply(value), value));
+        return map;
+    }
+
 }
