@@ -200,7 +200,7 @@ public interface Map<K, V> extends Set<Entry<K, V>>, Associative<K, V> {
                 : LazyMap.transformValues(keys, valueFunction);
     }
 
-    static <K, V> Map<K, V> mapFirstKey(final Collection<V> values, final Function<? super V, ? extends K> keyFunction) {
+    static <K, V> Map<K, V> mapFirstKey(final Iterable<? extends V> values, final Function<? super V, ? extends K> keyFunction) {
         final MutableMap<K, V> map = MutableMap.createHashMap();
         values.forEach(value -> map.putIfAbsent(keyFunction.apply(value), value));
         return map;
