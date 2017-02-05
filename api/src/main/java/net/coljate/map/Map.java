@@ -6,6 +6,7 @@ import java.util.Objects;
 import java.util.Spliterator;
 import java.util.Spliterators;
 import java.util.function.BiConsumer;
+import java.util.function.BiFunction;
 import java.util.function.Function;
 import java.util.function.IntFunction;
 import java.util.function.Predicate;
@@ -135,6 +136,10 @@ public interface Map<K, V> extends Set<Entry<K, V>>, Associative<K, V> {
     @Override
     default Map<K, V> filter(final Predicate<? super Entry<K, V>> predicate) {
         return LazyFilteredMap.filterEntries(this, predicate);
+    }
+
+    default <T> Collection<T> transform(final BiFunction<? super K, ? super V, ? extends T> transform) {
+        return this.transform(entry -> transform.apply(entry.key(), entry.value()));
     }
 
     default <V2> Map<K, V2> transformValues(final Function<? super V, ? extends V2> transform) {
