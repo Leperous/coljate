@@ -111,6 +111,17 @@ public interface Collection<T> extends IterableExtension<T>, StreamExtension<T> 
         return into;
     }
 
+    @Nonnull
+    @CheckReturnValue
+    default T[] arrayCopy(final IntFunction<T[]> arrayConstructor) {
+        final T[] into = arrayConstructor.apply(this.count());
+        int index = 0;
+        for (final T element : this) {
+            into[index++] = element;
+        }
+        return into;
+    }
+
     @TimeComplexity(computed = true)
     @Nonnull
     @CheckReturnValue

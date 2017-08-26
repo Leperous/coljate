@@ -4,10 +4,7 @@ import java.util.Comparator;
 import java.util.Spliterator;
 import java.util.Spliterators;
 import java.util.function.Function;
-import java.util.function.IntFunction;
 import java.util.function.Predicate;
-
-import javax.annotation.Nonnull;
 
 import net.coljate.collection.Collection;
 import net.coljate.collection.SortedCollection.SortingAlgorithm;
@@ -84,16 +81,6 @@ public interface List<T> extends Ordered<T>, Collection<T> {
     @Override
     default Spliterator<T> spliterator() {
         return Spliterators.spliterator(this.iterator(), this.count(), Spliterator.SIZED | Spliterator.ORDERED);
-    }
-
-    @Nonnull
-    default T[] toArray(@Nonnull final IntFunction<T[]> arrayConstructor) {
-        final T[] array = arrayConstructor.apply(this.count());
-        int i = 0;
-        for (final T element : this) {
-            array[i++] = element;
-        }
-        return array;
     }
 
     static <T> List<T> of() {
