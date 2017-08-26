@@ -1,9 +1,8 @@
-package net.coljate.cache.iml;
+package net.coljate.cache.impl;
 
 import com.google.common.cache.LoadingCache;
 
 import net.coljate.cache.ConcurrentCache;
-import net.coljate.cache.impl.GuavaLoadingCache;
 import net.coljate.map.ConcurrentMap;
 
 /**
