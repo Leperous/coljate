@@ -10,11 +10,11 @@ import net.coljate.map.Entry;
 import net.coljate.map.Map;
 import net.coljate.map.SortedMap;
 import net.coljate.set.AbstractSet;
-import net.coljate.set.OrderedSet;
 import net.coljate.tree.impl.RedBlackTreeMap;
 import net.coljate.tree.navigation.TreeNavigation;
 import net.coljate.util.Functions;
 import net.coljate.util.iterator.Iterators;
+import net.coljate.set.SequentialSet;
 
 /**
  *
@@ -35,12 +35,12 @@ public interface SortedTreeMap<K, V, N extends EntryNode<K, V, N>>
     }
 
     @Override
-    default OrderedSet<K> keys() {
+    default SequentialSet<K> keys() {
         return this.keys(TreeNavigation.getDefault());
     }
 
     @Override
-    default OrderedSet<K> keys(final TreeNavigation navigation) {
+    default SequentialSet<K> keys(final TreeNavigation navigation) {
         return new SortedTreeKeySet<>(this, navigation);
     }
 
@@ -69,7 +69,7 @@ public interface SortedTreeMap<K, V, N extends EntryNode<K, V, N>>
 
     class SortedTreeKeySet<K, N extends EntryNode<K, ?, N>>
             extends AbstractSet<K>
-            implements OrderedSet<K> {
+            implements SequentialSet<K> {
 
         private final SortedTreeMap<K, ?, N> tree;
         private final TreeNavigation navigation;

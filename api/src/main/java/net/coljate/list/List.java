@@ -14,15 +14,17 @@ import net.coljate.list.impl.MutableWrappedArrayList;
 import net.coljate.list.impl.WrappedList;
 import net.coljate.list.lazy.LazyFilteredList;
 import net.coljate.list.lazy.LazyTransformedList;
+import net.coljate.sequence.Sequence;
 import net.coljate.util.Equality;
 
 /**
+ * A finite {@link Sequence}.
  *
  * @author ollie
  * @see java.util.Deque
  * @see Array
  */
-public interface List<T> extends Ordered<T>, Collection<T> {
+public interface List<T> extends Sequence<T>, Collection<T> {
 
     @Override
     ListIterator<T> iterator();

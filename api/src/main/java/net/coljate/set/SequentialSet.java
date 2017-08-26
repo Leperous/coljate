@@ -4,13 +4,13 @@ import java.util.Optional;
 
 import javax.annotation.Nonnull;
 
-import net.coljate.list.Ordered;
+import net.coljate.sequence.Sequence;
 
 /**
  *
  * @author ollie
  */
-public interface OrderedSet<T> extends Ordered<T>, Set<T> {
+public interface SequentialSet<T> extends Sequence<T>, Set<T> {
 
     @Override
     default T first() {

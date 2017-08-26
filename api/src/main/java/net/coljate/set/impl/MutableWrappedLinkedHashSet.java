@@ -1,7 +1,7 @@
 package net.coljate.set.impl;
 
-import net.coljate.set.OrderedSet;
 import net.coljate.util.iterator.Iterators;
+import net.coljate.set.SequentialSet;
 
 /**
  *
@@ -9,7 +9,7 @@ import net.coljate.util.iterator.Iterators;
  */
 public class MutableWrappedLinkedHashSet<T>
         extends MutableWrappedSet<T>
-        implements OrderedSet<T> {
+        implements SequentialSet<T> {
 
     public static <T> MutableWrappedLinkedHashSet<T> create(final int initialCapacity) {
         return viewOf(new java.util.LinkedHashSet<>(initialCapacity));

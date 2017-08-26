@@ -5,8 +5,8 @@ import java.util.Objects;
 
 import net.coljate.set.AbstractSet;
 import net.coljate.set.ImmutableSet;
-import net.coljate.set.OrderedSet;
 import net.coljate.util.iterator.UnmodifiableIterator;
+import net.coljate.set.SequentialSet;
 
 /**
  *
@@ -14,7 +14,7 @@ import net.coljate.util.iterator.UnmodifiableIterator;
  */
 public class TwoSet<T>
         extends AbstractSet<T>
-        implements ImmutableSet<T>, OrderedSet<T> {
+        implements ImmutableSet<T>, SequentialSet<T> {
 
     public static <T> ImmutableSet<T> of(final T a, final T b) {
         return Objects.equals(a, b)

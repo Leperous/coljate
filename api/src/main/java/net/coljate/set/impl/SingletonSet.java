@@ -7,8 +7,8 @@ import java.util.Optional;
 import net.coljate.collection.impl.SingletonCollection;
 import net.coljate.set.ImmutableSet;
 import net.coljate.set.MutableSet;
-import net.coljate.set.OrderedSet;
 import net.coljate.set.Set;
+import net.coljate.set.SequentialSet;
 
 /**
  *
@@ -16,7 +16,7 @@ import net.coljate.set.Set;
  */
 public class SingletonSet<T>
         extends SingletonCollection<T>
-        implements ImmutableSet<T>, OrderedSet<T>, Serializable {
+        implements ImmutableSet<T>, SequentialSet<T>, Serializable {
 
     private static final long serialVersionUID = 1L;
 

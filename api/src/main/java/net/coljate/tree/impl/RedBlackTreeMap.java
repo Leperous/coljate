@@ -10,7 +10,6 @@ import net.coljate.map.AbstractEntry;
 import net.coljate.map.Entry;
 import net.coljate.map.Map;
 import net.coljate.map.SortedMap;
-import net.coljate.set.OrderedSet;
 import net.coljate.tree.AbstractTree;
 import net.coljate.tree.MutableBinaryTreeMap.MutableBinaryNode;
 import net.coljate.tree.impl.RedBlackTreeMap.RedBlackNode;
@@ -19,6 +18,7 @@ import net.coljate.util.Functions;
 import net.coljate.tree.ImmutableBinaryTreeMap;
 import net.coljate.tree.MutableBinaryTreeMap;
 import net.coljate.tree.MutableSortedTreeMap;
+import net.coljate.set.SequentialSet;
 
 /**
  *
@@ -54,7 +54,7 @@ public class RedBlackTreeMap<K, V>
     private final Comparator<? super Entry<K, V>> comparator;
     private RedBlackNode<K, V> root;
     private int count;
-    private OrderedSet<K> keys;
+    private SequentialSet<K> keys;
 
     public RedBlackTreeMap(final Comparator<? super Entry<K, V>> comparator) {
         this(null, comparator);
@@ -247,7 +247,7 @@ public class RedBlackTreeMap<K, V>
     }
 
     @Override
-    public OrderedSet<K> keys() {
+    public SequentialSet<K> keys() {
         return keys == null
                 ? keys = MutableSortedTreeMap.super.keys()
                 : keys;

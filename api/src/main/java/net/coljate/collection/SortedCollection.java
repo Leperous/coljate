@@ -5,16 +5,16 @@ import java.util.Comparator;
 import javax.annotation.CheckForNull;
 import javax.annotation.Nonnull;
 
-import net.coljate.list.Ordered;
 import net.coljate.util.complexity.Complexity;
 import net.coljate.util.complexity.TimeComplexity;
+import net.coljate.sequence.Sequence;
 
 /**
  * Has a specific order, based on some {@link #comparator}.
  *
  * @author ollie
  */
-public interface SortedCollection<T> extends Ordered<T>, Collection<T> {
+public interface SortedCollection<T> extends Sequence<T>, Collection<T> {
 
     /**
      * @return the comparator used to sort this collection.

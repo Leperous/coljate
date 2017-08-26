@@ -1,5 +1,7 @@
 package net.coljate.list;
 
+import net.coljate.sequence.Sequence;
+
 import java.util.NoSuchElementException;
 import java.util.OptionalInt;
 
@@ -18,7 +20,7 @@ import net.coljate.util.Functions;
  * @author ollie
  * @see java.util.Queue
  */
-public interface Queue<T> extends Ordered<T>, MutableCollection<T> {
+public interface Queue<T> extends Sequence<T>, MutableCollection<T> {
 
     /**
      * @return the head of this queue, or null if it is empty.

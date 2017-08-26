@@ -13,7 +13,7 @@ import net.coljate.util.complexity.TimeComplexity;
  * @author ollie
  * @see java.util.SortedSet
  */
-public interface SortedSet<T> extends SortedCollection<T>, OrderedSet<T> {
+public interface SortedSet<T> extends SortedCollection<T>, SequentialSet<T> {
 
     @Override
     default T first() {

@@ -2,14 +2,14 @@ package net.coljate.collection;
 
 import java.util.Objects;
 
-import net.coljate.list.Ordered;
+import net.coljate.sequence.Sequence;
 
 /**
  *
  * @author ollie
  */
 public interface Singleton<T>
-        extends ImmutableCollection<T>, Ordered<T> {
+        extends ImmutableCollection<T>, Sequence<T> {
 
     T element();
 

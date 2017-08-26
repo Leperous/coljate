@@ -1,8 +1,8 @@
 package net.coljate.collection;
 
-import net.coljate.list.Ordered;
 import net.coljate.util.Hash;
 import net.coljate.util.Strings;
+import net.coljate.sequence.Sequence;
 
 /**
  *
@@ -26,7 +26,7 @@ public abstract class AbstractCollection<T> implements Collection<T> {
 
     @Override
     public int hashCode() {
-        return this instanceof Ordered
+        return this instanceof Sequence
                 ? Hash.orderedHash(this)
                 : Hash.unorderedHash(this);
     }
