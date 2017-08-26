@@ -1,7 +1,7 @@
 package net.coljate.map;
 
-import net.coljate.set.SortedSet;
 import net.coljate.set.SequentialSet;
+import net.coljate.set.SortedSet;
 
 /**
  *

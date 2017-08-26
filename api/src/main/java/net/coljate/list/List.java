@@ -23,6 +23,7 @@ import net.coljate.util.Equality;
  * @author ollie
  * @see java.util.Deque
  * @see Array
+ * @see Sequence
  */
 public interface List<T> extends Sequence<T>, Collection<T> {
 
