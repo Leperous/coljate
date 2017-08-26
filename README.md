@@ -9,7 +9,7 @@ Inspired by the SLF4J re-working of loggers, this project aims to be functionall
 
   * Classifying collections as one of mutable, immutable, or read-only.
   * Avoiding unsuitable & unsafe methods, such as mutators on immutable collections.
-  * Maximizing extensibility and minimizing repetition by using mixins.
+  * Maximizing extensibility and minimizing repetition through use of mixin.
   * Remaining open for extension by users.
   * Using [FindBugs](http://findbugs.sourceforge.net/) & ~~[Checker Framework](http://types.cs.washington.edu/checker-framework/)~~ annotations to assist static anaylysis.
 
