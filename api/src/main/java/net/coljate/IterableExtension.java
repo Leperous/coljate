@@ -171,6 +171,7 @@ public interface IterableExtension<T> extends Container, Iterable<T> {
      *
      * @return the first element returned by this collection's iterator, if any.
      */
+    @CheckForNull
     default T first() {
         final Iterator<T> iterator = this.iterator();
         return iterator.hasNext() ? iterator.next() : null;
