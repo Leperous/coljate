@@ -1,4 +1,4 @@
-#coljate
+# coljate
 
 [![Travis branch](https://img.shields.io/travis/ollierob/coljate/master.svg)](https://travis-ci.org/ollierob/coljate)
 [![Coveralls branch](https://img.shields.io/coveralls/ollierob/coljate/master.svg)](https://coveralls.io/github/ollierob/coljate?branch=master)
