@@ -13,8 +13,8 @@
         <module>api</module>
         <module>trove3</module>
         <module>guava20</module>
-        <module>guava21</module>
         <module>commons4</module>
+        <module>guava23</module>
     </modules>
     
     <properties>

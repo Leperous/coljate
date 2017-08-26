@@ -2,9 +2,9 @@ package net.coljate.cache.iml;
 
 import com.google.common.cache.LoadingCache;
 
+import net.coljate.cache.ConcurrentCache;
 import net.coljate.cache.impl.GuavaLoadingCache;
 import net.coljate.map.ConcurrentMap;
-import net.coljate.cache.MutableConcurrentCache;
 
 /**
  *
@@ -12,7 +12,7 @@ import net.coljate.cache.MutableConcurrentCache;
  */
 public class GuavaConcurrentLoadingCache<K, V>
         extends GuavaLoadingCache<K, V>
-        implements MutableConcurrentCache<K, V> {
+        implements ConcurrentCache<K, V> {
 
     protected GuavaConcurrentLoadingCache(final LoadingCache<K, V> cache) {
         super(cache);
@@ -20,7 +20,7 @@ public class GuavaConcurrentLoadingCache<K, V>
 
     @Override
     public ConcurrentMap<K, V> mutableCopy() {
-        return MutableConcurrentCache.super.mutableCopy();
+        return ConcurrentCache.super.mutableCopy();
     }
 
 }
