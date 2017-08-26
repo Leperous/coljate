@@ -70,6 +70,7 @@ public interface Array<T> extends Indexed<T>, List<T> {
         return new RepeatedValueArray<>(value, count);
     }
 
+    @SafeVarargs
     static <T> Array<T> viewOf(final T... elements) {
         return MutableNativeArray.viewOf(elements);
     }

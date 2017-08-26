@@ -5,6 +5,7 @@ import java.util.Spliterator;
 import java.util.Spliterators;
 import java.util.function.Function;
 import java.util.function.Predicate;
+import java.util.stream.Collector;
 
 import net.coljate.collection.Collection;
 import net.coljate.collection.SortedCollection.SortingAlgorithm;
@@ -113,6 +114,10 @@ public interface List<T> extends Ordered<T>, Collection<T> {
 
     static <T> List<T> repeated(final T value, final int count) {
         return Array.repeated(value, count);
+    }
+
+    static <T> Collector<T, ?, ImmutableList<T>> collector() {
+        return Collector.of(ImmutableList::of, ImmutableList::suffixed, ImmutableList::suffixed);
     }
 
 }
