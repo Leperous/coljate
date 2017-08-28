@@ -22,12 +22,12 @@ public class ImmutableGuavaList<T>
 
     @Override
     public T last() {
-        return list.get(list.size() - 1);
+        return list.isEmpty() ? null : list.get(list.size() - 1);
     }
 
     @Override
     public ImmutableListIterator<T> iterator() {
-        throw new UnsupportedOperationException(); //TODO
+        return ImmutableListIterator.of(list.listIterator());
     }
 
     @Override

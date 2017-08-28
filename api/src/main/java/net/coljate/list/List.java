@@ -7,6 +7,8 @@ import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.stream.Collector;
 
+import javax.annotation.CheckForNull;
+
 import net.coljate.collection.Collection;
 import net.coljate.collection.SortedCollection.SortingAlgorithm;
 import net.coljate.list.impl.ImmutableSortedArray;
@@ -35,6 +37,7 @@ public interface List<T> extends Sequence<T>, Collection<T> {
         return Collection.super.first();
     }
 
+    @CheckForNull
     T last();
 
     @Override

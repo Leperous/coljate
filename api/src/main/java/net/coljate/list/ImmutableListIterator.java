@@ -2,6 +2,8 @@ package net.coljate.list;
 
 import java.util.NoSuchElementException;
 
+import javax.annotation.Nonnull;
+
 import net.coljate.util.iterator.UnmodifiableIterator;
 
 /**
@@ -13,6 +15,10 @@ public interface ImmutableListIterator<T> extends ListIterator<T>, UnmodifiableI
     @SuppressWarnings("unchecked")
     static <T> ImmutableListIterator<T> empty() {
         return EmptyImmutableListIterator.INSTANCE;
+    }
+
+    static <T> ImmutableListIterator<T> of(final java.util.ListIterator<? extends T> iterator) {
+        return new WrappedImmutableListIterator<>(iterator);
     }
 
     @SuppressWarnings("rawtypes")
@@ -34,5 +40,13 @@ public interface ImmutableListIterator<T> extends ListIterator<T>, UnmodifiableI
         }
 
     };
+
+    class WrappedImmutableListIterator<T> extends WrappedListIterator<T> implements ImmutableListIterator<T> {
+
+        public WrappedImmutableListIterator(@Nonnull final java.util.ListIterator<? extends T> iterator) {
+            super(iterator);
+        }
+
+    }
 
 }
