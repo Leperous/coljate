@@ -44,7 +44,7 @@ public interface Map<K, V> extends Set<Entry<K, V>>, Associative<K, V> {
     Entry<K, V> getEntry(@Nullable Object key);
 
     @CheckForNull
-    default Entry<K, V> getEntry(@Nullable Object key, @Nullable Object value) {
+    default Entry<K, V> getEntry(@Nullable final Object key, @Nullable final Object value) {
         final Entry<K, V> entry = this.getEntry(key);
         return entry != null && Objects.equals(entry.value(), value)
                 ? entry
@@ -78,7 +78,14 @@ public interface Map<K, V> extends Set<Entry<K, V>>, Associative<K, V> {
         return got == null ? defaultValue : got.value();
     }
 
+    /**
+     *
+     * @param object
+     * @return true if the object represents an entry that this {@link #containsEntry contains}.
+     * @deprecated
+     */
     @Deprecated
+    @Override
     default boolean contains(final Object object) {
         return object instanceof Entry
                 && this.containsEntry((Entry) object);
@@ -92,7 +99,7 @@ public interface Map<K, V> extends Set<Entry<K, V>>, Associative<K, V> {
     }
 
     default boolean containsEntry(final Entry<?, ?> entry) {
-        return this.contains(entry.key(), entry.value());
+        return entry != null && this.contains(entry.key(), entry.value());
     }
 
     default boolean containsKey(@Nullable final Object key) {
@@ -103,7 +110,7 @@ public interface Map<K, V> extends Set<Entry<K, V>>, Associative<K, V> {
         return this.values().contains(value);
     }
 
-    default void forEach(final BiConsumer<? super K, ? super V> consumer) {
+    default void forEach(@Nonnull final BiConsumer<? super K, ? super V> consumer) {
         this.forEach(entry -> consumer.accept(entry.key(), entry.value()));
     }
 
@@ -134,7 +141,7 @@ public interface Map<K, V> extends Set<Entry<K, V>>, Associative<K, V> {
     }
 
     @Override
-    default Map<K, V> filter(final Predicate<? super Entry<K, V>> predicate) {
+    default Map<K, V> filter(@Nonnull final Predicate<? super Entry<K, V>> predicate) {
         return LazyFilteredMap.filterEntries(this, predicate);
     }
 
@@ -146,7 +153,7 @@ public interface Map<K, V> extends Set<Entry<K, V>>, Associative<K, V> {
         return LazyMap.transformValues(this, transform);
     }
 
-    default SortedMap<K, V> sortKeys(final Comparator<? super K> comparator) {
+    default SortedMap<K, V> sortKeys(@Nonnull final Comparator<? super K> comparator) {
         return KeySortedMap.copyOf(this, comparator);
     }
 

@@ -16,12 +16,24 @@ import net.coljate.util.complexity.TimeComplexity;
  */
 public interface Associative<K, V> extends Container {
 
+    /**
+     * Typed getter.
+     *
+     * @param key
+     * @return
+     */
     @TimeComplexity(bestCase = Complexity.CONSTANT)
     @CheckForNull
     default V get(@Nullable final K key) {
         return this.getIfPresent(key);
     }
 
+    /**
+     * Untyped getter.
+     *
+     * @param key
+     * @return the value, or {@code null} if there is no association.
+     */
     @CheckForNull
     V getIfPresent(@Nullable Object key);
 
