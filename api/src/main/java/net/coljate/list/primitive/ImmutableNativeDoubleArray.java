@@ -18,7 +18,13 @@ public class ImmutableNativeDoubleArray extends NativeDoubleArray implements Imm
 
     @Override
     public ImmutableDoubleListIterator iterator() {
-        throw new UnsupportedOperationException(); //TODO
+        return ImmutableDoubleArray.super.iterator();
+    }
+
+    @Override
+    @Deprecated
+    public ImmutableNativeDoubleArray immutableCopy() {
+        return this;
     }
 
 }
