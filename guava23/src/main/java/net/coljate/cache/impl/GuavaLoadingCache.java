@@ -6,7 +6,8 @@ import com.google.common.cache.CacheBuilder;
 import com.google.common.cache.CacheLoader;
 import com.google.common.cache.LoadingCache;
 
-import net.coljate.cache.MutableCache;
+import net.coljate.cache.ConcurrentCache;
+import net.coljate.map.ConcurrentMap;
 import net.coljate.map.impl.MutableWrappedMap;
 
 /**
@@ -16,7 +17,7 @@ import net.coljate.map.impl.MutableWrappedMap;
 @SuppressWarnings("element-type-mismatch")
 public class GuavaLoadingCache<K, V>
         extends MutableWrappedMap<K, V>
-        implements MutableCache<K, V> {
+        implements ConcurrentCache<K, V> {
 
     public static <K, V> GuavaLoadingCache<K, V> create(final Function<? super K, ? extends V> valueFunction) {
         return create(CacheBuilder.newBuilder(), valueFunction);
@@ -53,6 +54,11 @@ public class GuavaLoadingCache<K, V>
     @Override
     public void clear() {
         cache.invalidateAll();
+    }
+
+    @Override
+    public ConcurrentMap<K, V> mutableCopy() {
+        return ConcurrentCache.super.mutableCopy();
     }
 
 }
