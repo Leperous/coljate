@@ -12,7 +12,6 @@
     <modules>
         <module>api</module>
         <module>trove3</module>
-        <module>guava20</module>
         <module>commons4</module>
         <module>guava23</module>
     </modules>
@@ -21,8 +20,8 @@
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <junit5.platform.version>1.0.0-M3</junit5.platform.version>
-        <junit5.engine.version>5.0.0-M3</junit5.engine.version>
+        <junit5.platform.version>1.0.0-RC3</junit5.platform.version>
+        <junit5.engine.version>5.0.0-RC3</junit5.engine.version>
     </properties>
 	
     <dependencies>
@@ -49,7 +48,7 @@
             
             <plugin>
                 <artifactId>maven-surefire-plugin</artifactId>
-                <version>2.19.1</version>
+                <version>2.20</version>
                 <configuration>
                     <trimStackTrace>false</trimStackTrace>
                 </configuration>

@@ -13,7 +13,7 @@ public interface MutableGraph<V, E>
 
     boolean addEdge(V fromVertex, V toVertex, E edge);
 
-    boolean removeVertex(Object vertex);
+    boolean removeVertex(V vertex);
 
     @Deprecated
     @Override

@@ -47,7 +47,7 @@ public class MutableDirectedGuavaGraph<V, E>
     }
 
     @Override
-    public boolean removeVertex(final Object vertex) {
+    public boolean removeVertex(final V vertex) {
         return network.removeNode(vertex);
     }
 

@@ -1,7 +1,5 @@
 package net.coljate.set.impl;
 
-import com.google.common.collect.ImmutableSet;
-
 import net.coljate.NewObjectCreator;
 import net.coljate.SameObjectCreator;
 import net.coljate.set.ImmutableSetTest;

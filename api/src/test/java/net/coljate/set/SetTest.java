@@ -25,7 +25,7 @@ public interface SetTest<T> extends CollectionTest<T> {
     default int testSpliterator_Characteristics() {
         final int characteristics = this.createTestCollection().spliterator().characteristics();
         assertThat(
-                "Spliterator characteristics = " + Integer.toBinaryString(characteristics),
+                "Spliterator characteristics (" + Integer.toBinaryString(characteristics) + ") must contain distinct bit.",
                 characteristics & Spliterator.DISTINCT,
                 is(Spliterator.DISTINCT));
         return characteristics;
