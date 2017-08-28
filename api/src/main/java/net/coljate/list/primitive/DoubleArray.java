@@ -8,6 +8,12 @@ import net.coljate.list.Array;
  */
 public interface DoubleArray extends DoubleList, Array<Double> {
 
+    /**
+     *
+     * @param index
+     * @return
+     * @throws ArrayIndexOutOfBoundsException
+     */
     double getDouble(int index);
 
     @Override
@@ -23,7 +29,9 @@ public interface DoubleArray extends DoubleList, Array<Double> {
     }
 
     @Override
-    DoubleListIterator iterator();
+    default DoubleListIterator iterator() {
+        return new DoubleArrayIterator(this);
+    }
 
     @Override
     default double[] doubleArrayCopy() {
@@ -41,6 +49,39 @@ public interface DoubleArray extends DoubleList, Array<Double> {
     }
 
     @Override
-    ImmutableDoubleArray immutableCopy();
+    default ImmutableDoubleArray immutableCopy() {
+        return ImmutableNativeDoubleArray.copyOf(this);
+    }
+
+    class DoubleArrayIterator implements DoubleList.DoubleListIterator {
+
+        private final DoubleArray array;
+        private int index;
+
+        public DoubleArrayIterator(final DoubleArray array) {
+            this.array = array;
+        }
+
+        @Override
+        public double previousDouble() {
+            return array.getDouble(--index);
+        }
+
+        @Override
+        public double nextDouble() {
+            return array.getDouble(index++);
+        }
+
+        @Override
+        public boolean hasNext() {
+            return index < array.length();
+        }
+
+        @Override
+        public boolean hasPrevious() {
+            return index > 0;
+        }
+
+    }
 
 }

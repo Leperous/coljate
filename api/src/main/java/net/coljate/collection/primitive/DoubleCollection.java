@@ -3,6 +3,7 @@ package net.coljate.collection.primitive;
 import java.util.Iterator;
 
 import net.coljate.collection.Collection;
+import net.coljate.list.primitive.ImmutableNativeDoubleArray;
 import net.coljate.list.primitive.MutableNativeDoubleArray;
 
 /**
@@ -48,7 +49,9 @@ public interface DoubleCollection extends Collection<Double> {
     }
 
     @Override
-    ImmutableDoubleCollection immutableCopy();
+    default ImmutableDoubleCollection immutableCopy() {
+        return ImmutableNativeDoubleArray.copyOf(this);
+    }
 
     static DoubleCollection copyOf(final double[] array) {
         return MutableNativeDoubleArray.copyOf(array);
