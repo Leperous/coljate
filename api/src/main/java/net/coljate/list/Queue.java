@@ -1,7 +1,5 @@
 package net.coljate.list;
 
-import net.coljate.sequence.Sequence;
-
 import java.util.NoSuchElementException;
 import java.util.OptionalInt;
 
@@ -10,6 +8,7 @@ import javax.annotation.Nonnull;
 
 import net.coljate.collection.MutableCollection;
 import net.coljate.list.impl.ImmutableNativeArray;
+import net.coljate.sequence.Sequence;
 import net.coljate.util.Functions;
 
 /**
@@ -69,6 +68,7 @@ public interface Queue<T> extends Sequence<T>, MutableCollection<T> {
      * @return true if the element could be added to this queue, or false if it could not, for example because it is
      * full or does not permit null elements.
      */
+    @Override
     boolean add(T element);
 
     /**
