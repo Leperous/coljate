@@ -3,6 +3,7 @@ package net.coljate.collection.primitive;
 import java.util.Iterator;
 
 import net.coljate.collection.Collection;
+import net.coljate.list.primitive.MutableNativeDoubleArray;
 
 /**
  *
@@ -26,6 +27,9 @@ public interface DoubleCollection extends Collection<Double> {
                 && this.contains(((Number) object).doubleValue());
     }
 
+    /**
+     * @return the doubles in this collection copied into a new array.
+     */
     default double[] doubleArrayCopy() {
         final double[] array = new double[this.count()];
         int index = 0;
@@ -39,10 +43,16 @@ public interface DoubleCollection extends Collection<Double> {
     DoubleIterator iterator();
 
     @Override
-    MutableDoubleCollection mutableCopy();
-    
+    default MutableDoubleCollection mutableCopy() {
+        return MutableNativeDoubleArray.copyOf(this);
+    }
+
     @Override
     ImmutableDoubleCollection immutableCopy();
+
+    static DoubleCollection copyOf(final double[] array) {
+        return MutableNativeDoubleArray.copyOf(array);
+    }
 
     interface DoubleIterator extends Iterator<Double> {
 

@@ -26,7 +26,19 @@ public interface DoubleArray extends DoubleList, Array<Double> {
     DoubleListIterator iterator();
 
     @Override
-    MutableDoubleArray mutableCopy();
+    default double[] doubleArrayCopy() {
+        final int length = this.length();
+        final double[] array = new double[length];
+        for (int i = 0; i < length; i++) {
+            array[i] = this.getDouble(i);
+        }
+        return array;
+    }
+
+    @Override
+    default MutableDoubleArray mutableCopy() {
+        return MutableNativeDoubleArray.copyOf(this);
+    }
 
     @Override
     ImmutableDoubleArray immutableCopy();

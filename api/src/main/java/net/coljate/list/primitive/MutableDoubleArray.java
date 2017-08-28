@@ -18,6 +18,8 @@ public interface MutableDoubleArray
     }
 
     @Override
-    MutableDoubleArray mutableCopy();
+    default MutableDoubleArray mutableCopy() {
+        return MutableNativeDoubleArray.copyOf(this);
+    }
 
 }

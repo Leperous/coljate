@@ -14,7 +14,9 @@ public interface DoubleList extends DoubleCollection, List<Double> {
     DoubleListIterator iterator();
 
     @Override
-    MutableDoubleList mutableCopy();
+    default MutableDoubleList mutableCopy() {
+        return MutableNativeDoubleArray.copyOf(this);
+    }
 
     @Override
     ImmutableDoubleList immutableCopy();
