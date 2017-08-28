@@ -24,6 +24,7 @@ import net.coljate.util.complexity.Complexity;
 import net.coljate.util.complexity.TimeComplexity;
 
 /**
+ * A finite set of elements.
  *
  * @author ollie
  * @since 1.0

@@ -10,8 +10,9 @@ import net.coljate.list.primitive.MutableNativeDoubleArray;
  *
  * @author ollie
  */
-public interface DoubleCollection extends Collection<Double> {
+public interface DoubleCollection extends DoubleContainer, Collection<Double> {
 
+    @Override
     default boolean contains(final double d) {
         for (final DoubleIterator iterator = this.iterator(); iterator.hasNext();) {
             if (iterator.nextDouble() == d) {
@@ -24,8 +25,7 @@ public interface DoubleCollection extends Collection<Double> {
     @Override
     @Deprecated
     default boolean contains(final Object object) {
-        return object instanceof Double
-                && this.contains(((Number) object).doubleValue());
+        return DoubleContainer.super.contains(object);
     }
 
     /**
