@@ -11,5 +11,8 @@ public interface DoubleSet extends Set<Double>, DoubleCollection {
 
     @Override
     MutableDoubleSet mutableCopy();
+    
+    @Override
+    ImmutableDoubleSet immutableCopy();
 
 }

@@ -40,6 +40,9 @@ public interface DoubleCollection extends Collection<Double> {
 
     @Override
     MutableDoubleCollection mutableCopy();
+    
+    @Override
+    ImmutableDoubleCollection immutableCopy();
 
     interface DoubleIterator extends Iterator<Double> {
 

@@ -16,6 +16,9 @@ public interface DoubleList extends DoubleCollection, List<Double> {
     @Override
     MutableDoubleList mutableCopy();
 
+    @Override
+    ImmutableDoubleList immutableCopy();
+
     interface DoubleListIterator extends DoubleIterator, ListIterator<Double> {
 
         double previousDouble();
