@@ -2,7 +2,6 @@ package net.coljate.list.primitive;
 
 import net.coljate.collection.primitive.TroveDoubleCollection;
 import net.coljate.collection.primitive.TroveDoubleIterator;
-import net.coljate.list.ImmutableList;
 
 import gnu.trove.iterator.TDoubleIterator;
 import gnu.trove.list.TDoubleList;
@@ -44,7 +43,7 @@ public class TroveDoubleList
     }
 
     @Override
-    public ImmutableList<Double> immutableCopy() {
+    public ImmutableDoubleList immutableCopy() {
         throw new UnsupportedOperationException();
     }
 

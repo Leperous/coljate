@@ -5,7 +5,6 @@ import java.util.function.IntFunction;
 
 import net.coljate.collection.AbstractCollection;
 import net.coljate.collection.Collection;
-import net.coljate.collection.ImmutableCollection;
 
 import gnu.trove.TDoubleCollection;
 import gnu.trove.iterator.TDoubleIterator;
@@ -76,7 +75,7 @@ public class TroveDoubleCollection
     }
 
     @Override
-    public ImmutableCollection<Double> immutableCopy() {
+    public ImmutableDoubleCollection immutableCopy() {
         throw new UnsupportedOperationException(); //TODO
     }
 
