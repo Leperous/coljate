@@ -13,6 +13,9 @@ import net.coljate.set.lazy.LazySet;
 /**
  * A map whose key/value mappings are computed on the fly.
  *
+ * These mappings may or may not be recomputed multiple times. To eagerly evaluate the map, copy it into a
+ * {@link #mutableCopy() mutable} or {@link #immutableCopy() immutable} map.
+ *
  * @author Ollie
  */
 public interface LazyMap<K, V> extends LazySet<Entry<K, V>>, Map<K, V> {
