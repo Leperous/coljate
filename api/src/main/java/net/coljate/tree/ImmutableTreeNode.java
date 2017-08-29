@@ -8,8 +8,8 @@ import net.coljate.tree.impl.SimpleImmutableNode;
  *
  * @author ollie
  */
-public interface ImmutableNode<K, V, N extends ImmutableNode<K, V, N>>
-        extends EntryNode<K, V, N>, ImmutableEntry<K, V> {
+public interface ImmutableTreeNode<K, V, N extends ImmutableTreeNode<K, V, N>>
+        extends TreeMapNode<K, V, N>, ImmutableEntry<K, V> {
 
     @Override
     ImmutableSet<? extends N> children();

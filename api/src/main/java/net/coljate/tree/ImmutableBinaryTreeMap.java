@@ -17,11 +17,11 @@ public interface ImmutableBinaryTreeMap<K, V, N extends ImmutableBinaryNode<K, V
     }
 
     interface ImmutableBinaryNode<K, V, N extends ImmutableBinaryNode<K, V, N>>
-            extends BinaryNode<K, V, N>, ImmutableNode<K, V, N> {
+            extends BinaryTreeMapNode<K, V, N>, ImmutableTreeNode<K, V, N> {
 
         @Override
         public default ImmutableSet<? extends N> children() {
-            return BinaryNode.super.children().immutableCopy();
+            return BinaryTreeMapNode.super.children().immutableCopy();
         }
 
         @Override

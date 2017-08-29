@@ -13,7 +13,7 @@ import net.coljate.util.SelfTyped;
  *
  * @author ollie
  */
-public interface Node<N extends Node<N>> extends SelfTyped<N> {
+public interface TreeNode<N extends TreeNode<N>> extends SelfTyped<N> {
 
     @Nonnull
     Set<? extends N> children();

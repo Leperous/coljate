@@ -2,15 +2,21 @@ package net.coljate.tree;
 
 import javax.annotation.CheckForNull;
 
-import net.coljate.set.Set;
+import net.coljate.Container;
 
 /**
+ * Some set of connected {@link TreeNode nodes}.
  *
  * @author ollie
  */
-public interface Tree<N> extends Set<N> {
+public interface Tree<N extends TreeNode<N>> extends Container {
 
     @CheckForNull
     N root();
+
+    @Override
+    default boolean isEmpty() {
+        return this.root() == null;
+    }
 
 }

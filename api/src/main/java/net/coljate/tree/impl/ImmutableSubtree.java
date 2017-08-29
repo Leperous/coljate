@@ -2,8 +2,8 @@ package net.coljate.tree.impl;
 
 import net.coljate.map.Entry;
 import net.coljate.set.ImmutableSet;
-import net.coljate.tree.ImmutableNode;
 import net.coljate.tree.ImmutableTreeMap;
+import net.coljate.tree.ImmutableTreeNode;
 
 /**
  *
@@ -11,7 +11,7 @@ import net.coljate.tree.ImmutableTreeMap;
  */
 public class ImmutableSubtree<K, V>
         extends Subtree<K, V, ImmutableSubtree<K, V>>
-        implements ImmutableTreeMap<K, V, ImmutableSubtree<K, V>>, ImmutableNode<K, V, ImmutableSubtree<K, V>> {
+        implements ImmutableTreeMap<K, V, ImmutableSubtree<K, V>>, ImmutableTreeNode<K, V, ImmutableSubtree<K, V>> {
 
     public static <K, V> ImmutableSubtree<K, V> of(final Entry<? extends K, ? extends V> entry) {
         return of(entry.key(), entry.value());

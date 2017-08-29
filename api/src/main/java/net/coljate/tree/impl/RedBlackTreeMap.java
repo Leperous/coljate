@@ -10,7 +10,7 @@ import net.coljate.map.AbstractEntry;
 import net.coljate.map.Entry;
 import net.coljate.map.Map;
 import net.coljate.map.SortedMap;
-import net.coljate.tree.AbstractTree;
+import net.coljate.tree.AbstractTreeMap;
 import net.coljate.tree.MutableBinaryTreeMap.MutableBinaryNode;
 import net.coljate.tree.impl.RedBlackTreeMap.RedBlackNode;
 import net.coljate.tree.navigation.TreeNavigation;
@@ -27,7 +27,7 @@ import net.coljate.set.SequentialSet;
  * @see <a href="https://www.cs.auckland.ac.nz/software/AlgAnim/red_black.html">Red-Black Trees</a>
  */
 public class RedBlackTreeMap<K, V>
-        extends AbstractTree<K, V, RedBlackNode<K, V>>
+        extends AbstractTreeMap<K, V, RedBlackNode<K, V>>
         implements MutableBinaryTreeMap<K, V, RedBlackNode<K, V>>, MutableSortedTreeMap<K, V, RedBlackNode<K, V>> {
 
     public static <K extends Comparable<? super K>, V> RedBlackTreeMap<K, V> keyComparing() {

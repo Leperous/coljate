@@ -17,7 +17,7 @@ public interface MutableBinaryTreeMap<K, V, N extends MutableBinaryNode<K, V, N>
      * @param <V>
      */
     interface MutableBinaryNode<K, V, N extends MutableBinaryNode<K, V, N>>
-            extends BinaryNode<K, V, N>, MutableNode<K, V, N> {
+            extends BinaryTreeMapNode<K, V, N>, MutableTreeMapNode<K, V, N> {
 
     }
 

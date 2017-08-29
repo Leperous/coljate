@@ -12,7 +12,7 @@ import net.coljate.tree.navigation.TreeNavigation;
  * @author ollie
  * @since 1.0
  */
-public interface BinaryNode<K, V, N extends BinaryNode<K, V, N>> extends EntryNode<K, V, N> {
+public interface BinaryTreeMapNode<K, V, N extends BinaryTreeMapNode<K, V, N>> extends TreeMapNode<K, V, N> {
 
     @CheckForNull
     N left();
@@ -38,7 +38,7 @@ public interface BinaryNode<K, V, N extends BinaryNode<K, V, N>> extends EntryNo
     @Override
     default int countDescendents(final TreeNavigation treeNavigation) {
         final AtomicInteger counter = new AtomicInteger(1);
-        treeNavigation.collectBinaryNodes((BinaryNode) this, node -> counter.incrementAndGet());
+        treeNavigation.collectBinaryNodes((BinaryTreeMapNode) this, node -> counter.incrementAndGet());
         return counter.get();
     }
 

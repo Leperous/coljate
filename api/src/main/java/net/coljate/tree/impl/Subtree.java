@@ -5,19 +5,19 @@ import java.util.function.Supplier;
 import net.coljate.map.Entry;
 import net.coljate.map.ImmutableEntry;
 import net.coljate.set.Set;
-import net.coljate.tree.AbstractTree;
+import net.coljate.tree.AbstractTreeMap;
 import net.coljate.util.SelfTyped;
 import net.coljate.tree.TreeMap;
 import net.coljate.tree.MutableTreeMap;
-import net.coljate.tree.EntryNode;
+import net.coljate.tree.TreeMapNode;
 
 /**
  *
  * @author ollie
  */
 public class Subtree<K, V, T extends Subtree<K, V, T>>
-        extends AbstractTree<K, V, T>
-        implements TreeMap<K, V, T>, EntryNode<K, V, T>, SelfTyped<T> {
+        extends AbstractTreeMap<K, V, T>
+        implements TreeMap<K, V, T>, TreeMapNode<K, V, T>, SelfTyped<T> {
 
     private final K key;
     private final Supplier<? extends V> getValue;
@@ -55,7 +55,7 @@ public class Subtree<K, V, T extends Subtree<K, V, T>>
 
     @Override
     public boolean contains(final Object key, final Object value) {
-        return EntryNode.super.contains(key, value);
+        return TreeMapNode.super.contains(key, value);
     }
 
     @Override

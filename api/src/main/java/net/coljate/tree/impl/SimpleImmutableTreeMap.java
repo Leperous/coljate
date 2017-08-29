@@ -1,15 +1,15 @@
 package net.coljate.tree.impl;
 
-import net.coljate.tree.AbstractTree;
-import net.coljate.tree.ImmutableNode;
+import net.coljate.tree.AbstractTreeMap;
 import net.coljate.tree.ImmutableTreeMap;
+import net.coljate.tree.ImmutableTreeNode;
 
 /**
  *
  * @author ollie
  */
-public class SimpleImmutableTreeMap<K, V, N extends ImmutableNode<K, V, N>>
-        extends AbstractTree<K, V, N>
+public class SimpleImmutableTreeMap<K, V, N extends ImmutableTreeNode<K, V, N>>
+        extends AbstractTreeMap<K, V, N>
         implements ImmutableTreeMap<K, V, N> {
 
     private final N root;

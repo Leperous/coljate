@@ -2,6 +2,7 @@ package net.coljate.tree;
 
 import java.util.Iterator;
 import java.util.Objects;
+import java.util.function.Predicate;
 
 import net.coljate.collection.Collection;
 import net.coljate.map.Entry;
@@ -16,8 +17,8 @@ import net.coljate.util.iterator.CovariantIterator;
  * @author ollie
  * @since 1.0
  */
-public interface TreeMap<K, V, N extends EntryNode<K, V, N>>
-        extends Map<K, V>, Tree<Entry<K, V>> {
+public interface TreeMap<K, V, N extends TreeMapNode<K, V, N>>
+        extends Map<K, V>, Tree<N> {
 
     @Override
     N root();
@@ -47,6 +48,11 @@ public interface TreeMap<K, V, N extends EntryNode<K, V, N>>
     }
 
     @Override
+    default boolean isEmpty() {
+        return Tree.super.isEmpty();
+    }
+
+    @Override
     default Collection<V> values() {
         return this.values(TreeNavigation.getDefault());
     }
@@ -72,6 +78,11 @@ public interface TreeMap<K, V, N extends EntryNode<K, V, N>>
     @Override
     default ImmutableTreeMap<K, V, ?> immutableCopy() {
         throw new UnsupportedOperationException();
+    }
+
+    @Override
+    default TreeMap<K, V, N> filter(Predicate<? super Entry<K, V>> predicate) {
+        throw new UnsupportedOperationException(); //TODO lazy evaluation
     }
 
 }

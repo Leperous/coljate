@@ -11,7 +11,7 @@ import net.coljate.util.iterator.CovariantIterator;
  * @author ollie
  * @since 1.0
  */
-public interface MutableTreeMap<K, V, N extends MutableNode<K, V, N>>
+public interface MutableTreeMap<K, V, N extends MutableTreeMapNode<K, V, N>>
         extends TreeMap<K, V, N>, MutableMap<K, V> {
 
     @Override

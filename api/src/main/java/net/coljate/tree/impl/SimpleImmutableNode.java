@@ -2,7 +2,7 @@ package net.coljate.tree.impl;
 
 import net.coljate.map.AbstractEntry;
 import net.coljate.set.ImmutableSet;
-import net.coljate.tree.ImmutableNode;
+import net.coljate.tree.ImmutableTreeNode;
 
 /**
  *
@@ -10,7 +10,7 @@ import net.coljate.tree.ImmutableNode;
  */
 public class SimpleImmutableNode<K, V>
         extends AbstractEntry<K, V>
-        implements ImmutableNode<K, V, SimpleImmutableNode<K, V>> {
+        implements ImmutableTreeNode<K, V, SimpleImmutableNode<K, V>> {
 
     public static <K, V> SimpleImmutableNode<K, V> leaf(final K key, final V value) {
         return new SimpleImmutableNode<>(key, value, ImmutableSet.of());
