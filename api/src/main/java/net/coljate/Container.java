@@ -9,6 +9,10 @@ import net.coljate.util.complexity.TimeComplexity;
 /**
  * An object that can "contain" other objects.
  *
+ * Finite containers are normally represented by some {@link Collection}.
+ *
+ * Infinite containers can exist but are not provided.
+ *
  * @author Ollie
  * @see Collection
  * @see FastContains

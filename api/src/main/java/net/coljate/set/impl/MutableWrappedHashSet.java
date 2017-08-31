@@ -1,5 +1,7 @@
 package net.coljate.set.impl;
 
+import net.coljate.set.HashSet;
+
 import java.io.Serializable;
 
 import net.coljate.util.Arrays;
