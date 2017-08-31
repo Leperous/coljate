@@ -21,12 +21,12 @@ public class ColumnVector<T> implements Matrix<T> {
     }
 
     @Override
-    public int width() {
+    public int rows() {
         return 1;
     }
 
     @Override
-    public int height() {
+    public int columns() {
         return array.length();
     }
 

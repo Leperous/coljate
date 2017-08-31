@@ -31,23 +31,23 @@ public class LazyProductMatrix<A, B, P, T>
     }
 
     @Override
-    public int width() {
-        return b.width();
+    public int rows() {
+        return b.rows();
     }
 
     @Override
-    public int height() {
-        return a.height();
+    public int columns() {
+        return a.columns();
     }
 
     public int commonSize() {
-        return a.width();
+        return a.rows();
     }
 
     @Override
     public T get(final int x, final int y) {
         final MutableArray<P> list = MutableArray.create(this.commonSize());
-        for (int r = 0; r < this.width(); r++) {
+        for (int r = 0; r < this.rows(); r++) {
             final P product = this.product.apply(a.get(x, r), b.get(r, y));
             list.suffix(product);
         }

@@ -32,12 +32,12 @@ public class ArrayBackedMatrix<T> implements Matrix<T> {
     }
 
     @Override
-    public int width() {
+    public int rows() {
         return matrix.length == 0 ? 0 : matrix[0].length;
     }
 
     @Override
-    public int height() {
+    public int columns() {
         return matrix.length;
     }
 

@@ -37,6 +37,7 @@ public interface Table<R, C, V> extends Set<Cell<R, C, V>> {
         return this.cellIfPresent(rowKey, columnKey);
     }
 
+    @CheckForNull
     default V get(final R rowKey, final C columnKey) {
         final Cell<R, C, V> cell = this.cell(rowKey, columnKey);
         return cell == null ? null : cell.value();

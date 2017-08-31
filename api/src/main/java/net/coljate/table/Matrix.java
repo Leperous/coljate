@@ -19,28 +19,22 @@ public interface Matrix<T> extends Table<Integer, Integer, T> {
 
     T get(int x, int y);
 
-    int width();
+    int rows();
 
-    int height();
+    int columns();
 
     @Override
     default int count() {
-        return Math.multiplyExact(this.width(), this.height());
+        return Math.multiplyExact(this.rows(), this.columns());
     }
 
     @Override
-    @Deprecated
-    default boolean contains(final Object object) {
-        return object instanceof Cell
-                && this.contains((Cell) object);
-    }
-
     default boolean contains(final Cell<?, ?, ?> cell) {
         final Object rowKey = cell.rowKey();
         final Object columnKey = cell.columnKey();
-        return rowKey instanceof Integer && columnKey instanceof Integer
-                ? Objects.equals(cell.value(), this.get((Integer) rowKey, (Integer) columnKey))
-                : false;
+        return rowKey instanceof Integer
+                && columnKey instanceof Integer
+                && Objects.equals(cell.value(), this.get((Integer) rowKey, (Integer) columnKey));
     }
 
     @Override
@@ -52,8 +46,8 @@ public interface Matrix<T> extends Table<Integer, Integer, T> {
 
     @Override
     default Object[][] arrayCopy() {
-        final int h = this.height();
-        final int w = this.width();
+        final int h = this.columns();
+        final int w = this.rows();
         final Object[][] array = new Object[w][h];
         for (int i = 0; i < w; i++) {
             for (int j = 0; j < h; j++) {
@@ -64,7 +58,7 @@ public interface Matrix<T> extends Table<Integer, Integer, T> {
     }
 
     default boolean isSquare() {
-        return this.width() == this.height();
+        return this.rows() == this.columns();
     }
 
     @Override

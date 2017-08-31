@@ -21,12 +21,12 @@ public class RowVector<T> implements Matrix<T> {
     }
 
     @Override
-    public int width() {
+    public int rows() {
         return array.length();
     }
 
     @Override
-    public int height() {
+    public int columns() {
         return 1;
     }
 

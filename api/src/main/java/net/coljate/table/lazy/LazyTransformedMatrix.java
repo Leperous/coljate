@@ -22,13 +22,13 @@ public class LazyTransformedMatrix<F, T>
     }
 
     @Override
-    public int width() {
-        return delegate.width();
+    public int rows() {
+        return delegate.rows();
     }
 
     @Override
-    public int height() {
-        return delegate.height();
+    public int columns() {
+        return delegate.columns();
     }
 
     @Override

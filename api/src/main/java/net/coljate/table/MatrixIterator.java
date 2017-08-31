@@ -17,14 +17,14 @@ public class MatrixIterator<T> implements Iterator<Cell<Integer, Integer, T>> {
 
     @Override
     public boolean hasNext() {
-        return x < matrix.width() && y < matrix.height();
+        return x < matrix.rows() && y < matrix.columns();
     }
 
     @Override
     public Cell<Integer, Integer, T> next() {
         final int y = this.y++, x = this.x;
         final T next = matrix.get(x, y);
-        if (this.y == matrix.height()) {
+        if (this.y == matrix.columns()) {
             this.x += 1;
             this.y = 0;
         }

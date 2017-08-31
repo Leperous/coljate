@@ -19,7 +19,7 @@ public class LazySumMatrix<A, B, T>
             final Matrix<A> a,
             final Matrix<B> b,
             final BiFunction<? super A, ? super B, ? extends T> sum) {
-        if (a.width() != b.width() || a.height() != b.height()) {
+        if (a.rows() != b.rows() || a.columns() != b.columns()) {
             throw new IllegalArgumentException("Matrices not same size");
         }
         this.a = a;
@@ -33,13 +33,13 @@ public class LazySumMatrix<A, B, T>
     }
 
     @Override
-    public int width() {
-        return a.width();
+    public int rows() {
+        return a.rows();
     }
 
     @Override
-    public int height() {
-        return a.height();
+    public int columns() {
+        return a.columns();
     }
 
 }

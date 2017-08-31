@@ -16,13 +16,13 @@ public class LazyTransposedMatrix<T>
     }
 
     @Override
-    public int width() {
-        return delegate.height();
+    public int rows() {
+        return delegate.columns();
     }
 
     @Override
-    public int height() {
-        return delegate.width();
+    public int columns() {
+        return delegate.rows();
     }
 
     @Override
