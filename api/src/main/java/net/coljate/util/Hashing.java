@@ -7,7 +7,7 @@ import net.coljate.util.complexity.TimeComplexity;
  *
  * @author Ollie
  */
-public class Hash {
+public class Hashing {
 
     @TimeComplexity(Complexity.LINEAR)
     public static int orderedHash(final Iterable<?> iterable) {

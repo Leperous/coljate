@@ -2,7 +2,7 @@ package net.coljate.list;
 
 import net.coljate.collection.AbstractCollection;
 import net.coljate.collection.Collection;
-import net.coljate.util.Hash;
+import net.coljate.util.Hashing;
 
 /**
  *
@@ -29,7 +29,7 @@ public abstract class AbstractList<T>
 
     @Override
     public int hashCode() {
-        return Hash.orderedHash(this);
+        return Hashing.orderedHash(this);
     }
 
     @Override

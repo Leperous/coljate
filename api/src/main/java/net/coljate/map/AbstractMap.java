@@ -2,7 +2,7 @@ package net.coljate.map;
 
 import net.coljate.collection.AbstractCollection;
 import net.coljate.collection.Collection;
-import net.coljate.util.Hash;
+import net.coljate.util.Hashing;
 
 /**
  *
@@ -31,7 +31,7 @@ public abstract class AbstractMap<K, V>
 
     @Override
     public int hashCode() {
-        return Hash.unorderedHash(this);
+        return Hashing.unorderedHash(this);
     }
 
 }

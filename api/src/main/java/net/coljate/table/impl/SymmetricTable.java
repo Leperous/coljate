@@ -10,7 +10,7 @@ import net.coljate.map.Map;
 import net.coljate.table.AbstractTable;
 import net.coljate.table.Cell;
 import net.coljate.util.Functions;
-import net.coljate.util.Hash;
+import net.coljate.util.Hashing;
 
 /**
  * A table whose entry {@code (K1, K2)} is always identical to {@code (K2, K1)}.
@@ -106,7 +106,7 @@ public class SymmetricTable<K, V> extends AbstractTable<K, K, V> {
 
         @Override
         public int hashCode() {
-            return Hash.unorderedHash(first, second);
+            return Hashing.unorderedHash(first, second);
         }
 
     }

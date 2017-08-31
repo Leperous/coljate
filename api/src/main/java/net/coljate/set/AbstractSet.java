@@ -2,7 +2,7 @@ package net.coljate.set;
 
 import net.coljate.collection.AbstractCollection;
 import net.coljate.collection.Collection;
-import net.coljate.util.Hash;
+import net.coljate.util.Hashing;
 
 /**
  *
@@ -32,7 +32,7 @@ public abstract class AbstractSet<T>
 
     @Override
     public int hashCode() {
-        return Hash.unorderedHash(this);
+        return Hashing.unorderedHash(this);
     }
 
 }
