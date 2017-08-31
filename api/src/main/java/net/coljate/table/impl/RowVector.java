@@ -1,9 +1,6 @@
 package net.coljate.table.impl;
 
-import java.util.Iterator;
-
 import net.coljate.list.Array;
-import net.coljate.table.Cell;
 import net.coljate.table.ImmutableMatrix;
 import net.coljate.table.Matrix;
 import net.coljate.table.MutableMatrix;
@@ -32,8 +29,8 @@ public class RowVector<T> implements Matrix<T> {
 
     @Override
     public T get(int x, int y) {
-        if (y != 1) {
-            throw new IndexOutOfBoundsException();
+        if (y != 0) {
+            throw new IndexOutOfBoundsException(y + " != 0");
         }
         return array.get(x);
     }
@@ -45,11 +42,6 @@ public class RowVector<T> implements Matrix<T> {
 
     @Override
     public ImmutableMatrix<T> immutableCopy() {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
-
-    @Override
-    public Iterator<Cell<Integer, Integer, T>> iterator() {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 

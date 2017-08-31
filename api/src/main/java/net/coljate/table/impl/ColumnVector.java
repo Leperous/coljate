@@ -32,8 +32,8 @@ public class ColumnVector<T> implements Matrix<T> {
 
     @Override
     public T get(final int x, final int y) {
-        if (x != 1) {
-            throw new IndexOutOfBoundsException();
+        if (x != 0) {
+            throw new IndexOutOfBoundsException(x + " != 0");
         }
         return array.get(y);
     }
