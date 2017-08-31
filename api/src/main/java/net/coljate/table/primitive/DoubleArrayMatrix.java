@@ -1,8 +1,5 @@
 package net.coljate.table.primitive;
 
-import net.coljate.table.ImmutableMatrix;
-import net.coljate.table.MutableMatrix;
-
 /**
  *
  * @author Ollie
@@ -28,16 +25,6 @@ public class DoubleArrayMatrix implements DoubleMatrix {
     @Override
     public int columns() {
         return array[0].length;
-    }
-
-    @Override
-    public MutableMatrix<Double> mutableCopy() {
-        throw new UnsupportedOperationException(); //TODO
-    }
-
-    @Override
-    public ImmutableMatrix<Double> immutableCopy() {
-        throw new UnsupportedOperationException(); //TODO
     }
 
 }

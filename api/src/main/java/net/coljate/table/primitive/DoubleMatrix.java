@@ -10,6 +10,18 @@ public interface DoubleMatrix extends Matrix<Double> {
 
     double getValue(int x, int y);
 
+    default double[][] array2DCopy() {
+        final int rows = this.rows();
+        final int cols = this.columns();
+        final double[][] copy = new double[rows][cols];
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < cols; j++) {
+                copy[i][j] = this.getValue(i, j);
+            }
+        }
+        return copy;
+    }
+
     @Override
     @Deprecated
     default Double get(final int x, final int y) {
@@ -30,6 +42,16 @@ public interface DoubleMatrix extends Matrix<Double> {
             }
         }
         return new DoubleArrayMatrix(product);
+    }
+
+    @Override
+    default MutableDoubleMatrix mutableCopy() {
+        throw new UnsupportedOperationException(); //TODO
+    }
+
+    @Override
+    default ImmutableDoubleMatrix immutableCopy() {
+        return ImmutableDoubleArrayMatrix.copyOf(this);
     }
 
 }
