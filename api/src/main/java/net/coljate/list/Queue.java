@@ -18,6 +18,7 @@ import net.coljate.util.Functions;
  *
  * @author Ollie
  * @see java.util.Queue
+ * @see ConcurrentQueue
  * @since 1.0
  */
 public interface Queue<T> extends Sequence<T>, MutableCollection<T> {

@@ -14,30 +14,30 @@ import javax.annotation.Nonnull;
 public interface MutableIterableExtension<T> extends Iterable<T> {
 
     default boolean removeFirst(final Object element) {
-        for (final Iterator<T> iterator = this.iterator(); iterator.hasNext();) {
-            if (Objects.equals(iterator.next(), element)) {
-                iterator.remove();
-                return true;
-            }
-        }
-        return false;
+        return this.removeN(element, 1) > 0;
     }
 
     default boolean removeAll(final Object element) {
-        boolean removedAny = false;
+        return this.removeN(element, Integer.MAX_VALUE) > 0;
+    }
+
+    default int removeN(final Object element, final int num) {
+        int removed = 0;
         for (final Iterator<T> iterator = this.iterator(); iterator.hasNext();) {
             if (Objects.equals(iterator.next(), element)) {
                 iterator.remove();
-                removedAny = true;
+                if (++removed == num) {
+                    break;
+                }
             }
         }
-        return removedAny;
+        return removed;
     }
 
     default boolean removeAll(@Nonnull final Iterable<?> elements) {
         boolean removed = false;
         for (final Object element : elements) {
-            removed |= this.removeAll(element);
+            removed = this.removeAll(element) || removed;
         }
         return removed;
     }
