@@ -4,7 +4,7 @@ import net.coljate.map.MapTest;
 
 /**
  *
- * @author ollie
+ * @author Ollie
  */
 public interface CacheTest<K, V> extends MapTest<K, V> {
 

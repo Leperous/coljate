@@ -4,7 +4,7 @@ import net.coljate.set.SetTest;
 
 /**
  *
- * @author ollie
+ * @author Ollie
  */
 public interface TableTest<R, C, V> extends SetTest<Cell<R, C, V>> {
 

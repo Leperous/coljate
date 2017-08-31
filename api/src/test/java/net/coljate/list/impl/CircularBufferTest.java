@@ -18,7 +18,7 @@ import net.coljate.list.Queue;
 
 /**
  *
- * @author ollie
+ * @author Ollie
  */
 public class CircularBufferTest {
 

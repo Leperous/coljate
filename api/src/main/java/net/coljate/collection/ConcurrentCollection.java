@@ -5,7 +5,7 @@ import java.util.Spliterators;
 
 /**
  *
- * @author ollie
+ * @author Ollie
  */
 public interface ConcurrentCollection<T> extends MutableCollection<T> {
 

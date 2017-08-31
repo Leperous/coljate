@@ -11,7 +11,7 @@ import org.junit.jupiter.api.Test;
 
 /**
  *
- * @author ollie
+ * @author Ollie
  */
 public interface MutableListMultimapTest<K, V>
         extends ListMultimapTest<K, V>, MutableMultimapTest<K, V> {

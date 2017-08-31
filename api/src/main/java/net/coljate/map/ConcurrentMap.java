@@ -9,7 +9,7 @@ import net.coljate.set.ConcurrentSet;
 
 /**
  *
- * @author ollie
+ * @author Ollie
  * @see java.util.concurrent.ConcurrentMap
  */
 public interface ConcurrentMap<K, V>

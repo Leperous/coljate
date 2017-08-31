@@ -7,7 +7,7 @@ import net.coljate.table.ImmutableTable;
 
 /**
  *
- * @author ollie
+ * @author Ollie
  */
 public class EmptyTable<R, C, V>
         implements ImmutableTable<R, C, V> {

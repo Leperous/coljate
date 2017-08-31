@@ -5,7 +5,7 @@ import net.coljate.counter.impl.ConcurrentHashCounter;
 
 /**
  *
- * @author ollie
+ * @author Ollie
  */
 public interface ConcurrentCounter<T>
         extends MutableCounter<T>, ConcurrentCollection<T> {

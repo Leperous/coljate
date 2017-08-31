@@ -19,7 +19,7 @@ import net.coljate.util.iterator.CovariantIterator;
 
 /**
  *
- * @author ollie
+ * @author Ollie
  */
 public interface MutableMap<K, V> extends Map<K, V>, MutableSet<Entry<K, V>> {
 

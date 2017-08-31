@@ -13,7 +13,7 @@ import net.coljate.util.Suppliers;
 
 /**
  *
- * @author ollie
+ * @author Ollie
  */
 public class HashCounter<T>
         extends AbstractCounter<T>

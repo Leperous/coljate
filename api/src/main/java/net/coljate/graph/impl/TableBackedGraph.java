@@ -9,7 +9,7 @@ import net.coljate.table.Table;
 
 /**
  *
- * @author ollie
+ * @author Ollie
  */
 public abstract class TableBackedGraph<V, E>
         extends AbstractGraph<V, E> {

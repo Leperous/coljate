@@ -8,7 +8,7 @@ import net.coljate.counter.MutableCounter;
 
 /**
  *
- * @author ollie
+ * @author Ollie
  */
 public interface LazyCounter<T>
         extends LazyCollection<T>, Counter<T> {

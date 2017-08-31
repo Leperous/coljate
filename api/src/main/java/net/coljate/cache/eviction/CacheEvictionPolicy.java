@@ -7,7 +7,7 @@ import javax.annotation.Nonnull;
 
 /**
  *
- * @author ollie
+ * @author Ollie
  */
 public interface CacheEvictionPolicy {
 

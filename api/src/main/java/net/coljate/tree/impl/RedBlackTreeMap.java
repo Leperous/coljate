@@ -22,7 +22,7 @@ import net.coljate.set.SequentialSet;
 
 /**
  *
- * @author ollie
+ * @author Ollie
  * @see java.util.TreeMap
  * @see <a href="https://www.cs.auckland.ac.nz/software/AlgAnim/red_black.html">Red-Black Trees</a>
  */

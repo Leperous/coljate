@@ -7,7 +7,7 @@ import net.coljate.list.impl.MutableNativeArray;
 
 /**
  *
- * @author ollie
+ * @author Ollie
  */
 public interface MutableArray<T> extends Array<T>, MutableList<T> {
 

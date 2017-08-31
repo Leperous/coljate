@@ -4,7 +4,7 @@ import java.util.Objects;
 
 /**
  *
- * @author ollie
+ * @author Ollie
  * @see Table
  */
 public interface Cell<R, C, V> {

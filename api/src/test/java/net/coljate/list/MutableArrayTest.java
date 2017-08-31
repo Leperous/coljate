@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 
 /**
  *
- * @author ollie
+ * @author Ollie
  */
 public interface MutableArrayTest<T> extends ArrayTest<T>, MutableListTest<T> {
 

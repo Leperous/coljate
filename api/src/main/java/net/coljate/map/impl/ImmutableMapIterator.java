@@ -9,7 +9,7 @@ import net.coljate.util.iterator.UnmodifiableIterator;
 
 /**
  *
- * @author ollie
+ * @author Ollie
  */
 public class ImmutableMapIterator<K, V, E extends ImmutableEntry<K, V>>
         extends MapIterator<K, V, E>

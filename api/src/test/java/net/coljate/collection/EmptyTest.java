@@ -2,7 +2,7 @@ package net.coljate.collection;
 
 /**
  *
- * @author ollie
+ * @author Ollie
  */
 @SuppressWarnings({"unchecked", "rawtypes"})
 public interface EmptyTest<T> extends ImmutableCollectionTest<T>, CollectionTest.ZeroElementTests<T> {

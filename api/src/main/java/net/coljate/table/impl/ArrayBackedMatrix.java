@@ -8,7 +8,7 @@ import net.coljate.util.Arrays;
 
 /**
  *
- * @author ollie
+ * @author Ollie
  */
 public class ArrayBackedMatrix<T> implements Matrix<T> {
 

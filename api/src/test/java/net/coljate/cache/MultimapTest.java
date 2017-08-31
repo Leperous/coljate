@@ -4,7 +4,7 @@ import net.coljate.collection.Collection;
 
 /**
  *
- * @author ollie
+ * @author Ollie
  */
 public interface MultimapTest<K, V>
         extends CacheTest<K, Collection<V>> {

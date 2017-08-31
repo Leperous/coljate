@@ -9,7 +9,7 @@ import net.coljate.table.impl.MutableSymmetricTable;
 
 /**
  *
- * @author ollie
+ * @author Ollie
  */
 public class MutableTableBackedUndirectedGraph<V, E>
         extends TableBackedUndirectedGraph<V, E>

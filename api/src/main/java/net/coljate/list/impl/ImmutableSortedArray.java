@@ -9,7 +9,7 @@ import net.coljate.util.complexity.TimeComplexity;
 
 /**
  *
- * @author ollie
+ * @author Ollie
  */
 public class ImmutableSortedArray<T>
         extends ImmutableNativeArray<T>

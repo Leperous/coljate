@@ -7,7 +7,7 @@ import net.coljate.list.impl.MutableWrappedList;
 
 /**
  *
- * @author ollie
+ * @author Ollie
  */
 public interface MutableCollection<T> extends Collection<T>, MutableIterableExtension<T> {
 

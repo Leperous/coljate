@@ -1,6 +1,7 @@
 package net.coljate;
 
 import net.coljate.collection.Collection;
+import net.coljate.collection.FastContains;
 import net.coljate.util.complexity.Complexity;
 import net.coljate.util.complexity.MemoryComplexity;
 import net.coljate.util.complexity.TimeComplexity;
@@ -8,8 +9,9 @@ import net.coljate.util.complexity.TimeComplexity;
 /**
  * An object that can "contain" other objects.
  *
- * @author ollie
+ * @author Ollie
  * @see Collection
+ * @see FastContains
  */
 public interface Container {
 

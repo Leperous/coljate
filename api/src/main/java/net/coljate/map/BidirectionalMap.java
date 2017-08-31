@@ -4,7 +4,7 @@ import net.coljate.set.Set;
 
 /**
  *
- * @author ollie
+ * @author Ollie
  * @see <a href="https://en.wikipedia.org/wiki/Bijection">Bijection</a>
  */
 public interface BidirectionalMap<K, V> extends Map<K, V> {

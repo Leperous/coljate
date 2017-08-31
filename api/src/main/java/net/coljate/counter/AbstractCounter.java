@@ -6,7 +6,7 @@ import net.coljate.util.Equality;
 
 /**
  *
- * @author ollie
+ * @author Ollie
  */
 public abstract class AbstractCounter<T>
         extends AbstractCollection<T>

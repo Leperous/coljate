@@ -2,7 +2,7 @@ package net.coljate.graph;
 
 /**
  *
- * @author ollie
+ * @author Ollie
  */
 public abstract class AbstractUndirectedRelationship<V, E>
         extends AbstractRelationship<V, E>

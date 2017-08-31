@@ -6,7 +6,7 @@ import net.coljate.map.ImmutableMap;
 
 /**
  *
- * @author ollie
+ * @author Ollie
  */
 public interface ImmutableCounter<T>
         extends Counter<T>, ImmutableCollection<T> {

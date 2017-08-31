@@ -14,7 +14,7 @@ import net.coljate.util.Arrays;
 
 /**
  *
- * @author ollie
+ * @author Ollie
  */
 public class Trie
         extends AbstractSet<String>

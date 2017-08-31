@@ -10,7 +10,7 @@ import net.coljate.util.iterator.UnmodifiableCovariantIterator;
 
 /**
  *
- * @author ollie
+ * @author Ollie
  */
 public interface ImmutableMultimap<K, V>
         extends Multimap<K, V>, ImmutableMap<K, Collection<V>> {

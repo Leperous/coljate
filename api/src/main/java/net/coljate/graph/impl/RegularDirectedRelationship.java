@@ -4,7 +4,7 @@ import net.coljate.graph.AbstractDirectedRelationship;
 
 /**
  *
- * @author ollie
+ * @author Ollie
  */
 public class RegularDirectedRelationship<V, E>
         extends AbstractDirectedRelationship<V, E> {

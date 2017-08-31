@@ -10,7 +10,7 @@ import net.coljate.set.impl.TwoSet;
 
 /**
  *
- * @author ollie
+ * @author Ollie
  */
 public interface DirectedRelationship<V, E> extends Relationship<V, E> {
 

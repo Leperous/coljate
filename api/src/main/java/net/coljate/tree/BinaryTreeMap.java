@@ -2,7 +2,7 @@ package net.coljate.tree;
 
 /**
  *
- * @author ollie
+ * @author Ollie
  */
 public interface BinaryTreeMap<K, V, N extends BinaryTreeMapNode<K, V, N>>
         extends TreeMap<K, V, N> {

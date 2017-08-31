@@ -6,7 +6,7 @@ import net.coljate.util.Hash;
 
 /**
  *
- * @author ollie
+ * @author Ollie
  */
 public abstract class AbstractList<T>
         extends AbstractCollection<T>

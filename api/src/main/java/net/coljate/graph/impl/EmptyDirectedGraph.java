@@ -7,7 +7,7 @@ import net.coljate.util.iterator.UnmodifiableCovariantIterator;
 
 /**
  *
- * @author ollie
+ * @author Ollie
  */
 public class EmptyDirectedGraph<V, E>
         extends EmptyGraph<V, E>

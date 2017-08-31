@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 /**
  *
- * @author ollie
+ * @author Ollie
  */
 public class MutableWrappedLinkedList<T>
         extends MutableWrappedList<T>

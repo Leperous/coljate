@@ -4,7 +4,7 @@ import net.coljate.collection.ImmutableCollectionTest;
 
 /**
  *
- * @author ollie
+ * @author Ollie
  */
 public interface ImmutableSetTest<T> extends SetTest<T>, ImmutableCollectionTest<T> {
 

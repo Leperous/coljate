@@ -19,7 +19,7 @@ import net.coljate.util.Functions;
  * of relationships, and a graph with zero relationships but non-zero vertices is still considered to be
  * {@link #isEmpty() empty}.
  *
- * @author ollie
+ * @author Ollie
  * @param <V> vertex type
  * @param <E> edge type
  * @since 1.0

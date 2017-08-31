@@ -4,7 +4,7 @@ import org.junit.jupiter.api.BeforeEach;
 
 /**
  *
- * @author ollie
+ * @author Ollie
  */
 public class SameObjectEntryCreator extends NewObjectEntryCreator {
 

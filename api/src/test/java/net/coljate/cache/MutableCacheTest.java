@@ -4,7 +4,7 @@ import net.coljate.map.MutableMapTest;
 
 /**
  *
- * @author ollie
+ * @author Ollie
  */
 public interface MutableCacheTest<K, V> extends CacheTest<K, V>, MutableMapTest<K, V> {
 

@@ -8,7 +8,7 @@ import net.coljate.util.Functions;
 
 /**
  *
- * @author ollie
+ * @author Ollie
  * @see ConcurrentLinkedDeque
  */
 public class WrappedConcurrentLinkedDeque<T>

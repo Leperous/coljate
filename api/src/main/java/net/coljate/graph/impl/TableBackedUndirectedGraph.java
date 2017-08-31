@@ -14,7 +14,7 @@ import net.coljate.util.iterator.Iterators;
 
 /**
  *
- * @author ollie
+ * @author Ollie
  */
 public class TableBackedUndirectedGraph<V, E>
         extends TableBackedGraph<V, E>

@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 
 /**
  *
- * @author ollie
+ * @author Ollie
  */
 public interface ArrayTest<T> extends ListTest<T> {
 

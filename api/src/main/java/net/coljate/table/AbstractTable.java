@@ -4,7 +4,7 @@ import net.coljate.set.AbstractSet;
 
 /**
  *
- * @author ollie
+ * @author Ollie
  */
 public abstract class AbstractTable<R, C, V>
         extends AbstractSet<Cell<R, C, V>>

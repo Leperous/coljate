@@ -6,7 +6,7 @@ import net.coljate.util.complexity.TimeComplexity;
 
 /**
  *
- * @author ollie
+ * @author Ollie
  */
 public interface FastContains extends Container {
 

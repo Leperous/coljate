@@ -4,7 +4,7 @@ import net.coljate.list.ImmutableArray;
 
 /**
  *
- * @author ollie
+ * @author Ollie
  */
 public class ImmutableJoinArray<T>
         extends ImmutableJoinList<T>

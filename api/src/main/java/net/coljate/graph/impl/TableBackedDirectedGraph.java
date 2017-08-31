@@ -19,7 +19,7 @@ import net.coljate.util.iterator.Iterators;
  *
  * The inverse relationship is not managed by this class, so should be explicitly entered into the table.
  *
- * @author ollie
+ * @author Ollie
  */
 public class TableBackedDirectedGraph<V, E>
         extends TableBackedGraph<V, E>

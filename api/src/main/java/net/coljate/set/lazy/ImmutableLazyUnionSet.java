@@ -8,7 +8,7 @@ import net.coljate.set.MutableSet;
 
 /**
  *
- * @author ollie
+ * @author Ollie
  */
 public class ImmutableLazyUnionSet<T>
         extends LazySetUnion<T>

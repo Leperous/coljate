@@ -5,7 +5,7 @@ import net.coljate.util.Functions;
 
 /**
  *
- * @author ollie
+ * @author Ollie
  */
 public interface SetMultimap<K, V>
         extends Multimap<K, V> {

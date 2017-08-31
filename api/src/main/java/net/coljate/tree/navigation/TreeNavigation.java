@@ -16,7 +16,7 @@ import net.coljate.tree.BinaryTreeMapNode;
 
 /**
  *
- * @author ollie
+ * @author Ollie
  * @since 1.0
  */
 public interface TreeNavigation {

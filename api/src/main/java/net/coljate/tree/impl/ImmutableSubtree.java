@@ -7,7 +7,7 @@ import net.coljate.tree.ImmutableTreeNode;
 
 /**
  *
- * @author ollie
+ * @author Ollie
  */
 public class ImmutableSubtree<K, V>
         extends Subtree<K, V, ImmutableSubtree<K, V>>

@@ -9,7 +9,7 @@ import net.coljate.set.impl.MutableWrappedSet;
 
 /**
  *
- * @author ollie
+ * @author Ollie
  */
 public interface MutableSet<T> extends Set<T>, MutableCollection<T> {
 

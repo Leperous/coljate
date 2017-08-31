@@ -5,7 +5,7 @@ import net.coljate.map.ConcurrentMap;
 
 /**
  *
- * @author ollie
+ * @author Ollie
  */
 public class ConcurrentHashCounter<T>
         extends MutableHashCounter<T>

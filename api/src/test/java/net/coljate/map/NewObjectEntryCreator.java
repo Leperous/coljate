@@ -4,7 +4,7 @@ import net.coljate.TestObjectCreator;
 
 /**
  *
- * @author ollie
+ * @author Ollie
  */
 public class NewObjectEntryCreator implements TestObjectCreator<Entry<Object, Object>> {
 

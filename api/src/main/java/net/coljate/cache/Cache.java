@@ -8,7 +8,7 @@ import net.coljate.set.Set;
 /**
  * A map whose values are computed. Also known as a lazy map or loading cache.
  *
- * @author ollie
+ * @author Ollie
  * @see MutableCache
  * @see ConcurrentCache
  * @see ImmutableMap

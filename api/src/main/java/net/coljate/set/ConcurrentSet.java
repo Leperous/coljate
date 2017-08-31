@@ -8,7 +8,7 @@ import net.coljate.set.impl.ConcurrentWrappedSet;
 
 /**
  *
- * @author ollie
+ * @author Ollie
  */
 public interface ConcurrentSet<T>
         extends MutableSet<T>, ConcurrentCollection<T> {

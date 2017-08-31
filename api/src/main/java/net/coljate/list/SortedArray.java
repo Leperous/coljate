@@ -2,7 +2,7 @@ package net.coljate.list;
 
 /**
  *
- * @author ollie
+ * @author Ollie
  */
 public interface SortedArray<T> extends SortedList<T>, Array<T> {
 

@@ -7,7 +7,7 @@ import net.coljate.set.Set;
 
 /**
  *
- * @author ollie
+ * @author Ollie
  */
 public abstract class DelegatedMutableMap<K, V>
         extends DelegatedMap<K, V>

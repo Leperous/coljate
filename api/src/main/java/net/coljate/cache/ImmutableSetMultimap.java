@@ -5,7 +5,7 @@ import net.coljate.util.Functions;
 
 /**
  *
- * @author ollie
+ * @author Ollie
  */
 public interface ImmutableSetMultimap<K, V>
         extends ImmutableMultimap<K, V>, SetMultimap<K, V> {

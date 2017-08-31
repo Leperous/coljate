@@ -4,7 +4,7 @@ import net.coljate.table.Matrix;
 
 /**
  *
- * @author ollie
+ * @author Ollie
  */
 public class LazyTransposedMatrix<T>
         implements LazyMatrix<T> {

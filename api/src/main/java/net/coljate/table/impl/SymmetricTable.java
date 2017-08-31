@@ -15,7 +15,7 @@ import net.coljate.util.Hash;
 /**
  * A table whose entry {@code (K1, K2)} is always identical to {@code (K2, K1)}.
  *
- * @author ollie
+ * @author Ollie
  */
 public class SymmetricTable<K, V> extends AbstractTable<K, K, V> {
 

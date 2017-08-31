@@ -4,7 +4,7 @@ import net.coljate.collection.Collection;
 
 /**
  *
- * @author ollie
+ * @author Ollie
  */
 public interface MutableMultimapTest<K, V>
         extends MultimapTest<K, V>, MutableCacheTest<K, Collection<V>> {

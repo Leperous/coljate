@@ -4,7 +4,7 @@ import java.util.Objects;
 
 /**
  *
- * @author ollie
+ * @author Ollie
  */
 public abstract class AbstractDirectedRelationship<V, E>
         extends AbstractRelationship<V, E>

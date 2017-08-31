@@ -5,7 +5,7 @@ import net.coljate.set.ImmutableSet;
 
 /**
  *
- * @author ollie
+ * @author Ollie
  */
 public interface ImmutableGraph<V, E>
         extends Graph<V, E>, ImmutableSet<Relationship<V, E>> {

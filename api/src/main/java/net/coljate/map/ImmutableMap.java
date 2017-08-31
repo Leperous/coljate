@@ -16,7 +16,7 @@ import net.coljate.util.iterator.UnmodifiableIterator;
 
 /**
  *
- * @author ollie
+ * @author Ollie
  */
 public interface ImmutableMap<K, V> extends Map<K, V>, ImmutableSet<Entry<K, V>> {
 

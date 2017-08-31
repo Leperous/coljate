@@ -6,7 +6,7 @@ import net.coljate.map.Map;
 
 /**
  *
- * @author ollie
+ * @author Ollie
  */
 public interface Counter<T> extends Collection<T> {
 

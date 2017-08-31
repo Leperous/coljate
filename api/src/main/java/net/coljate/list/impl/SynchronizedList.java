@@ -5,7 +5,7 @@ import net.coljate.list.MutableList;
 
 /**
  *
- * @author ollie
+ * @author Ollie
  */
 public class SynchronizedList<T> implements MutableList<T> {
 

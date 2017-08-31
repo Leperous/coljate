@@ -8,7 +8,7 @@ import net.coljate.list.primitive.MutableNativeDoubleArray;
 
 /**
  *
- * @author ollie
+ * @author Ollie
  */
 public interface DoubleCollection extends DoubleContainer, Collection<Double> {
 

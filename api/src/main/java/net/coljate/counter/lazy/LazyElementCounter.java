@@ -14,7 +14,7 @@ import net.coljate.util.iterator.Iterators;
 
 /**
  *
- * @author ollie
+ * @author Ollie
  */
 public class LazyElementCounter<T>
         extends AbstractCounter<T>

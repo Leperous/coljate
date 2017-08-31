@@ -9,7 +9,7 @@ import net.coljate.util.iterator.UnmodifiableCovariantIterator;
 
 /**
  *
- * @author ollie
+ * @author Ollie
  */
 public class ImmutableTableBackedDirectedGraph<V, E>
         extends TableBackedDirectedGraph<V, E>

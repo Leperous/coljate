@@ -5,7 +5,7 @@ import net.coljate.set.SequentialSet;
 
 /**
  *
- * @author ollie
+ * @author Ollie
  */
 public class MutableWrappedLinkedHashSet<T>
         extends MutableWrappedSet<T>

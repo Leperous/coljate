@@ -6,7 +6,7 @@ import net.coljate.sequence.Sequence;
 
 /**
  *
- * @author ollie
+ * @author Ollie
  */
 public abstract class AbstractCollection<T> implements Collection<T> {
 

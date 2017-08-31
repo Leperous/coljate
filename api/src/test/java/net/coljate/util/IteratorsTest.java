@@ -14,7 +14,7 @@ import org.junit.jupiter.api.Test;
 
 /**
  *
- * @author ollie
+ * @author Ollie
  */
 @SuppressWarnings({"unchecked", "rawtypes"})
 public class IteratorsTest {

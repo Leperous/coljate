@@ -14,7 +14,7 @@ import org.junit.jupiter.api.Test;
 
 /**
  *
- * @author ollie
+ * @author Ollie
  */
 public interface MapTest<K, V> extends SetTest<Entry<K, V>> {
 

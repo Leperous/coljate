@@ -16,8 +16,9 @@ import net.coljate.util.Functions;
  *
  * It may or may not have a {@link #capacity finite capacity}.
  *
- * @author ollie
+ * @author Ollie
  * @see java.util.Queue
+ * @since 1.0
  */
 public interface Queue<T> extends Sequence<T>, MutableCollection<T> {
 
@@ -100,7 +101,7 @@ public interface Queue<T> extends Sequence<T>, MutableCollection<T> {
     Queue<T> mutableCopy();
 
     @Override
-    default ImmutableList<T> immutableCopy() {
+    default ImmutableArray<T> immutableCopy() {
         return ImmutableNativeArray.copyOf(this);
     }
 

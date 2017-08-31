@@ -5,7 +5,7 @@ import java.util.NoSuchElementException;
 
 /**
  *
- * @author ollie
+ * @author Ollie
  */
 public interface UnmodifiableIterator<T> extends Iterator<T> {
 

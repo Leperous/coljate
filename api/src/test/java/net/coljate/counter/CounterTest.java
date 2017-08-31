@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 
 /**
  *
- * @author ollie
+ * @author Ollie
  */
 public interface CounterTest<T> extends CollectionTest<T> {
 

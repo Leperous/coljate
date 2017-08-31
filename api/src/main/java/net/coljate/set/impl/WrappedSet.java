@@ -6,7 +6,7 @@ import net.coljate.set.Set;
 
 /**
  *
- * @author ollie
+ * @author Ollie
  */
 public class WrappedSet<T>
         extends WrappedCollection<T>

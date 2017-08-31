@@ -16,7 +16,7 @@ import net.coljate.set.lazy.ImmutableLazyUnionSet;
 
 /**
  *
- * @author ollie
+ * @author Ollie
  */
 public interface ImmutableSet<T> extends Set<T>, ImmutableCollection<T> {
 

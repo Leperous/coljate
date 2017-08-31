@@ -22,7 +22,7 @@ import net.coljate.util.Equality;
 /**
  * A finite {@link Sequence}.
  *
- * @author ollie
+ * @author Ollie
  * @see java.util.Deque
  * @see Array
  * @see Sequence

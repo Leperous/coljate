@@ -5,7 +5,7 @@ import net.coljate.collection.ImmutableCollection;
 
 /**
  *
- * @author ollie
+ * @author Ollie
  */
 public class ImmutableWrappedCollection<T>
         extends WrappedCollection<T>

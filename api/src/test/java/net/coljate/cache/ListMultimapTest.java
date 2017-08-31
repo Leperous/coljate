@@ -2,7 +2,7 @@ package net.coljate.cache;
 
 /**
  *
- * @author ollie
+ * @author Ollie
  */
 public interface ListMultimapTest<K, V>
         extends MultimapTest<K, V> {

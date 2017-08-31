@@ -4,7 +4,7 @@ import net.coljate.graph.impl.MutableHashBackedDirectedGraph;
 
 /**
  *
- * @author ollie
+ * @author Ollie
  */
 public interface MutableDirectedGraph<V, E> extends DirectedGraph<V, E>, MutableGraph<V, E> {
 

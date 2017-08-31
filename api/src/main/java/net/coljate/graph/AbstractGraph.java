@@ -4,7 +4,7 @@ import net.coljate.set.AbstractSet;
 
 /**
  *
- * @author ollie
+ * @author Ollie
  */
 public abstract class AbstractGraph<V, E> extends AbstractSet<Relationship<V, E>> implements Graph<V, E> {
 

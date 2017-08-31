@@ -6,7 +6,7 @@ import java.util.function.Function;
 
 /**
  *
- * @author ollie
+ * @author Ollie
  */
 public interface UnmodifiableCovariantIterator<T, R extends T>
         extends UnmodifiableIterator<T>, CovariantIterator<T, R> {

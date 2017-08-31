@@ -4,7 +4,7 @@ import net.coljate.list.Array;
 
 /**
  *
- * @author ollie
+ * @author Ollie
  */
 public interface NativeArray<T> extends Array<T> {
 

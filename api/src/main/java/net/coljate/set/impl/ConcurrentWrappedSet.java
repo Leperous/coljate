@@ -6,7 +6,7 @@ import net.coljate.set.ConcurrentSet;
 
 /**
  *
- * @author ollie
+ * @author Ollie
  */
 public class ConcurrentWrappedSet<T>
         extends MutableWrappedSet<T>

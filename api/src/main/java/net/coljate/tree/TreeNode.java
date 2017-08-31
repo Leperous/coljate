@@ -11,7 +11,7 @@ import net.coljate.util.SelfTyped;
 
 /**
  *
- * @author ollie
+ * @author Ollie
  */
 public interface TreeNode<N extends TreeNode<N>> extends SelfTyped<N> {
 

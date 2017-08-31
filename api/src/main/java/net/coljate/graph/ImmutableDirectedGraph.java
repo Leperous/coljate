@@ -4,7 +4,7 @@ import net.coljate.util.iterator.UnmodifiableCovariantIterator;
 
 /**
  *
- * @author ollie
+ * @author Ollie
  */
 public interface ImmutableDirectedGraph<V, E> extends DirectedGraph<V, E>, ImmutableGraph<V, E> {
 

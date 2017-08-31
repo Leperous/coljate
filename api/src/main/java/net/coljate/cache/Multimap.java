@@ -6,7 +6,7 @@ import net.coljate.util.iterator.CovariantIterator;
 
 /**
  *
- * @author ollie
+ * @author Ollie
  */
 public interface Multimap<K, V> extends Cache<K, Collection<V>> {
 

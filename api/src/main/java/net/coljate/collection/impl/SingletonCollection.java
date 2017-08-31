@@ -11,7 +11,7 @@ import net.coljate.collection.Singleton;
 
 /**
  *
- * @author ollie
+ * @author Ollie
  */
 public class SingletonCollection<T>
         extends AbstractCollection<T>

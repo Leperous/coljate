@@ -6,7 +6,7 @@ import net.coljate.list.ImmutableListIterator;
 
 /**
  *
- * @author ollie
+ * @author Ollie
  */
 public class ImmutableWrappedList<T>
         extends WrappedList<T>

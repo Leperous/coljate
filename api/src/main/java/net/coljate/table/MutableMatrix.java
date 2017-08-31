@@ -6,7 +6,7 @@ import net.coljate.table.impl.MutableArrayBackedMatrix;
 
 /**
  *
- * @author ollie
+ * @author Ollie
  */
 public interface MutableMatrix<T>
         extends Matrix<T>, MutableTable<Integer, Integer, T> {

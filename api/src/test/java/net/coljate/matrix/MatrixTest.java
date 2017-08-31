@@ -5,7 +5,7 @@ import net.coljate.table.TableTest;
 
 /**
  *
- * @author ollie
+ * @author Ollie
  */
 public interface MatrixTest<T> extends TableTest<Integer, Integer, T> {
 

@@ -9,7 +9,7 @@ import net.coljate.util.Functions;
 
 /**
  *
- * @author ollie
+ * @author Ollie
  */
 public interface Table<R, C, V> extends Set<Cell<R, C, V>> {
 

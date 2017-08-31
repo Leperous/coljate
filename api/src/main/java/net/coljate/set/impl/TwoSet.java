@@ -10,7 +10,7 @@ import net.coljate.set.SequentialSet;
 
 /**
  *
- * @author ollie
+ * @author Ollie
  */
 public class TwoSet<T>
         extends AbstractSet<T>

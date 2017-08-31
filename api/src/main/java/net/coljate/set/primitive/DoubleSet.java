@@ -5,7 +5,7 @@ import net.coljate.set.Set;
 
 /**
  *
- * @author ollie
+ * @author Ollie
  */
 public interface DoubleSet extends Set<Double>, DoubleCollection {
 

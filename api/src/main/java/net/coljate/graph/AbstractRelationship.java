@@ -4,7 +4,7 @@ import java.util.Objects;
 
 /**
  *
- * @author ollie
+ * @author Ollie
  */
 public abstract class AbstractRelationship<V, E> implements Relationship<V, E> {
 

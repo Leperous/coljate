@@ -10,7 +10,7 @@ import net.coljate.table.MutableMatrix;
 
 /**
  *
- * @author ollie
+ * @author Ollie
  */
 public class ColumnVector<T> implements Matrix<T> {
 

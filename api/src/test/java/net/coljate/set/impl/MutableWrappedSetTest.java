@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Nested;
 
 /**
  *
- * @author ollie
+ * @author Ollie
  */
 @SuppressWarnings({"unchecked", "rawtypes"})
 public class MutableWrappedSetTest {

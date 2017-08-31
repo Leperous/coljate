@@ -11,7 +11,7 @@ import org.junit.jupiter.api.Nested;
 
 /**
  *
- * @author ollie
+ * @author Ollie
  */
 public class MutableHashCounterTest {
 

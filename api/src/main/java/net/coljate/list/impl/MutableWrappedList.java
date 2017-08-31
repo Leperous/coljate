@@ -8,7 +8,7 @@ import net.coljate.list.MutableList;
 
 /**
  *
- * @author ollie
+ * @author Ollie
  */
 public class MutableWrappedList<T>
         extends MutableWrappedCollection<T>

@@ -15,7 +15,7 @@ import net.coljate.util.Functions;
 
 /**
  *
- * @author ollie
+ * @author Ollie
  */
 public abstract class AbstractMapBackedMultimap<K, V, C extends Collection<V>>
         extends AbstractMap<K, Collection<V>>

@@ -4,7 +4,7 @@ import java.util.StringJoiner;
 
 /**
  *
- * @author ollie
+ * @author Ollie
  */
 public class Strings {
 

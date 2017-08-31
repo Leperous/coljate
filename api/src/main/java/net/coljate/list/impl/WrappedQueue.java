@@ -4,12 +4,12 @@ import java.util.ArrayDeque;
 import java.util.OptionalInt;
 
 import net.coljate.collection.impl.MutableWrappedCollection;
-import net.coljate.list.ImmutableList;
+import net.coljate.list.ImmutableArray;
 import net.coljate.list.Queue;
 
 /**
  *
- * @author ollie
+ * @author Ollie
  */
 public class WrappedQueue<T>
         extends MutableWrappedCollection<T>
@@ -73,7 +73,7 @@ public class WrappedQueue<T>
     }
 
     @Override
-    public ImmutableList<T> immutableCopy() {
+    public ImmutableArray<T> immutableCopy() {
         return Queue.super.immutableCopy();
     }
 

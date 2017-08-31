@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test;
 
 /**
  *
- * @author ollie
+ * @author Ollie
  */
 public interface MutableListTest<T> extends ListTest<T>, MutableCollectionTest<T> {
 

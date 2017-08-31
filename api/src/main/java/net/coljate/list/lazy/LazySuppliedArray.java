@@ -6,7 +6,7 @@ import net.coljate.util.Suppliers;
 
 /**
  *
- * @author ollie
+ * @author Ollie
  */
 public class LazySuppliedArray<T>
         implements LazyArray<T> {

@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test;
 
 /**
  *
- * @author ollie
+ * @author Ollie
  */
 public interface MutableCounterTest<T> extends CounterTest<T>, MutableCollectionTest<T> {
 

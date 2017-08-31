@@ -6,7 +6,7 @@ import net.coljate.list.MutableArray;
 
 /**
  *
- * @author ollie
+ * @author Ollie
  */
 public interface LazyArray<T>
         extends LazyList<T>, Array<T> {

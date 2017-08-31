@@ -9,7 +9,7 @@ import net.coljate.table.Matrix;
 
 /**
  *
- * @author ollie
+ * @author Ollie
  */
 public class LazyProductMatrix<A, B, P, T>
         implements LazyMatrix<T> {

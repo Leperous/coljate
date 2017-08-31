@@ -2,7 +2,7 @@ package net.coljate.graph;
 
 /**
  *
- * @author ollie
+ * @author Ollie
  */
 public interface UndirectedRelationship<V, E> extends Relationship<V, E> {
 

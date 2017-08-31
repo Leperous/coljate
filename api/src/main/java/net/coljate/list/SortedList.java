@@ -4,7 +4,7 @@ import net.coljate.collection.SortedCollection;
 
 /**
  *
- * @author ollie
+ * @author Ollie
  */
 public interface SortedList<T> extends SortedCollection<T>, List<T> {
 

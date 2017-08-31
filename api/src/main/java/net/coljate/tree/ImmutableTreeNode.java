@@ -6,7 +6,7 @@ import net.coljate.tree.impl.SimpleImmutableNode;
 
 /**
  *
- * @author ollie
+ * @author Ollie
  */
 public interface ImmutableTreeNode<K, V, N extends ImmutableTreeNode<K, V, N>>
         extends TreeMapNode<K, V, N>, ImmutableEntry<K, V> {

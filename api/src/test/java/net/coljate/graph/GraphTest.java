@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test;
 
 /**
  *
- * @author ollie
+ * @author Ollie
  */
 @SuppressWarnings({"unchecked", "rawtypes"})
 public interface GraphTest<V, E> extends SetTest<Relationship<V, E>> {

@@ -4,7 +4,7 @@ import net.coljate.collection.EmptyTest;
 
 /**
  *
- * @author ollie
+ * @author Ollie
  */
 @SuppressWarnings({"unchecked", "rawtypes"})
 public class EmptyCollectionTest implements EmptyTest<Object> {

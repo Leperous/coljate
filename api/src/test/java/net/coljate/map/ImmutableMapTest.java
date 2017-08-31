@@ -4,7 +4,7 @@ import net.coljate.set.ImmutableSetTest;
 
 /**
  *
- * @author ollie
+ * @author Ollie
  */
 public interface ImmutableMapTest<K, V> extends MapTest<K, V>, ImmutableSetTest<Entry<K, V>> {
 

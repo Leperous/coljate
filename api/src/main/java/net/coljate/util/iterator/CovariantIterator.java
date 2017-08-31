@@ -8,7 +8,7 @@ import java.util.function.Predicate;
  * An iterator that allows generic declaration of a base type {@code <T>} but can be covariantly subclassed as some
  * {@code <R extends T>} on the elements returned by {@link #next next()}.
  *
- * @author ollie
+ * @author Ollie
  * @param <B> base (inherited) type
  * @param <T> {@link #next} type
  */

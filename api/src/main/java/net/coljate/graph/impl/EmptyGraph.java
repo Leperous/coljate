@@ -11,7 +11,7 @@ import net.coljate.graph.Relationship;
 /**
  * An immutable graph with no vertices or relationships.
  *
- * @author ollie
+ * @author Ollie
  */
 public abstract class EmptyGraph<V, E>
         extends AbstractGraph<V, E>

@@ -5,7 +5,7 @@ import net.coljate.table.MutableTable;
 
 /**
  *
- * @author ollie
+ * @author Ollie
  */
 public class MutableSymmetricTable<K, V>
         extends SymmetricTable<K, V>

@@ -13,7 +13,7 @@ import net.coljate.tree.ImmutableTreeMapTest;
 
 /**
  *
- * @author ollie
+ * @author Ollie
  */
 @SuppressWarnings({"unchecked", "rawtypes"})
 public class ImmutableSubtreeTest extends SubtreeTest {

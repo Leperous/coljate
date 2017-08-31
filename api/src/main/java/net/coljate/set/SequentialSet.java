@@ -8,7 +8,7 @@ import net.coljate.sequence.Sequence;
 
 /**
  *
- * @author ollie
+ * @author Ollie
  */
 public interface SequentialSet<T> extends Sequence<T>, Set<T> {
 

@@ -8,7 +8,7 @@ import net.coljate.list.impl.WrappedConcurrentLinkedDeque;
 
 /**
  *
- * @author ollie
+ * @author Ollie
  */
 public interface ConcurrentList<T>
         extends MutableList<T>, ConcurrentCollection<T> {

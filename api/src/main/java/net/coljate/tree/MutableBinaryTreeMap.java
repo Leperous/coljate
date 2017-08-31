@@ -5,7 +5,7 @@ import net.coljate.tree.MutableBinaryTreeMap.MutableBinaryNode;
 /**
  * Mutable binary tree.
  *
- * @author ollie
+ * @author Ollie
  */
 public interface MutableBinaryTreeMap<K, V, N extends MutableBinaryNode<K, V, N>>
         extends BinaryTreeMap<K, V, N>, MutableTreeMap<K, V, N> {

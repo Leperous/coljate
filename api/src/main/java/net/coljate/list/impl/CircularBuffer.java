@@ -10,7 +10,7 @@ import net.coljate.util.Functions;
 
 /**
  *
- * @author ollie
+ * @author Ollie
  */
 public class CircularBuffer<T> implements Queue<T> {
 

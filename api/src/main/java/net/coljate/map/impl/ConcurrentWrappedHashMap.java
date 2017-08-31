@@ -6,7 +6,7 @@ import net.coljate.map.Entry;
 
 /**
  *
- * @author ollie
+ * @author Ollie
  */
 public class ConcurrentWrappedHashMap<K, V>
         extends MutableWrappedMap<K, V>

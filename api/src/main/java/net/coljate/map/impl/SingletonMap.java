@@ -14,7 +14,7 @@ import net.coljate.set.ImmutableSet;
 
 /**
  *
- * @author ollie
+ * @author Ollie
  */
 public class SingletonMap<K, V>
         extends AbstractMap<K, V>

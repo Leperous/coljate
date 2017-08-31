@@ -26,7 +26,7 @@ import net.coljate.util.complexity.TimeComplexity;
 /**
  * A finite set of elements.
  *
- * @author ollie
+ * @author Ollie
  * @since 1.0
  */
 public interface Set<T> extends Collection<T> {

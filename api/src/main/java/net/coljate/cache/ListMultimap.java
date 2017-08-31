@@ -4,7 +4,7 @@ import net.coljate.list.List;
 
 /**
  *
- * @author ollie
+ * @author Ollie
  */
 public interface ListMultimap<K, V>
         extends Multimap<K, V> {

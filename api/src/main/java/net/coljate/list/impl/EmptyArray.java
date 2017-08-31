@@ -11,7 +11,7 @@ import net.coljate.list.ImmutableListIterator;
 
 /**
  *
- * @author ollie
+ * @author Ollie
  */
 public class EmptyArray<T>
         extends AbstractArray<T>

@@ -6,7 +6,7 @@ import net.coljate.table.Table;
 
 /**
  *
- * @author ollie
+ * @author Ollie
  */
 public class MutableMapBackedTable<R, C, V>
         extends MapBackedTable<R, C, V>

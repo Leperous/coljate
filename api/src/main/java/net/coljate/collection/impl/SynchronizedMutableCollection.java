@@ -7,7 +7,7 @@ import net.coljate.collection.MutableCollection;
 
 /**
  *
- * @author ollie
+ * @author Ollie
  */
 public class SynchronizedMutableCollection<T> implements MutableCollection<T> {
 

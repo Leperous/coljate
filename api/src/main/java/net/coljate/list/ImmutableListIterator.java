@@ -8,7 +8,7 @@ import net.coljate.util.iterator.UnmodifiableIterator;
 
 /**
  *
- * @author ollie
+ * @author Ollie
  */
 public interface ImmutableListIterator<T> extends ListIterator<T>, UnmodifiableIterator<T> {
 

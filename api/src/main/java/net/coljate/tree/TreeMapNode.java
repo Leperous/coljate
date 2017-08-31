@@ -4,7 +4,7 @@ import net.coljate.map.Entry;
 
 /**
  *
- * @author ollie
+ * @author Ollie
  */
 public interface TreeMapNode<K, V, N extends TreeMapNode<K, V, N>>
         extends Entry<K, V>, TreeNode<N> {

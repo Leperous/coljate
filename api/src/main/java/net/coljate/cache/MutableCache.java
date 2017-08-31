@@ -12,7 +12,7 @@ import net.coljate.map.MutableMap;
  *
  * Implementations might not be thread-safe, unless they are a {@link ConcurrentCache}.
  *
- * @author ollie
+ * @author Ollie
  * @see ConcurrentCache
  */
 public interface MutableCache<K, V> extends Cache<K, V>, MutableMap<K, V> {

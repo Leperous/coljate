@@ -18,7 +18,7 @@ import net.coljate.cache.ConcurrentCache;
 
 /**
  *
- * @author ollie
+ * @author Ollie
  */
 public class ConcurrentMutableMapBackedCache<K, V>
         extends AbstractMap<K, V>

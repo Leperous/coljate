@@ -8,7 +8,7 @@ import net.coljate.util.iterator.UnmodifiableCovariantIterator;
 
 /**
  *
- * @author ollie
+ * @author Ollie
  * @since 1.0
  */
 public interface ImmutableTreeMap<K, V, N extends ImmutableTreeNode<K, V, N>>

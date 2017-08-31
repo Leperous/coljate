@@ -4,7 +4,7 @@ import net.coljate.list.impl.MutableAtomicArray;
 
 /**
  *
- * @author ollie
+ * @author Ollie
  */
 public interface ConcurrentArray<T>
         extends MutableArray<T>, ConcurrentList<T> {

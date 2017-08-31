@@ -12,7 +12,7 @@ import net.coljate.set.SequentialSet;
 
 /**
  *
- * @author ollie
+ * @author Ollie
  */
 public class SingletonSet<T>
         extends SingletonCollection<T>

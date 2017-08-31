@@ -5,7 +5,7 @@ import net.coljate.set.SortedSet;
 
 /**
  *
- * @author ollie
+ * @author Ollie
  */
 public interface SortedMap<K, V> extends SortedSet<Entry<K, V>>, Map<K, V> {
 

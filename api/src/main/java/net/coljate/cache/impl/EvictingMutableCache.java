@@ -12,7 +12,7 @@ import net.coljate.set.Set;
 
 /**
  *
- * @author ollie
+ * @author Ollie
  */
 public class EvictingMutableCache<K, V> implements MutableCache<K, V> {
 

@@ -11,7 +11,7 @@ import net.coljate.tree.MutableBinaryTreeMapTest;
 
 /**
  *
- * @author ollie
+ * @author Ollie
  */
 @SuppressWarnings({"unchecked", "rawtypes"})
 public class RedBlackTreeTest {

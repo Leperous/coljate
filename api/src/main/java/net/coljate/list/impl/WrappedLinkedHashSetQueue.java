@@ -4,7 +4,7 @@ import java.util.Iterator;
 import java.util.OptionalInt;
 
 import net.coljate.collection.impl.MutableWrappedCollection;
-import net.coljate.list.ImmutableList;
+import net.coljate.list.ImmutableArray;
 import net.coljate.list.Queue;
 
 /**
@@ -68,7 +68,7 @@ public class WrappedLinkedHashSetQueue<T>
     }
 
     @Override
-    public ImmutableList<T> immutableCopy() {
+    public ImmutableArray<T> immutableCopy() {
         return Queue.super.immutableCopy();
     }
 

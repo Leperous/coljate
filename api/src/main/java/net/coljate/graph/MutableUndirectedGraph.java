@@ -4,7 +4,7 @@ import net.coljate.set.impl.TwoSet;
 
 /**
  *
- * @author ollie
+ * @author Ollie
  */
 public interface MutableUndirectedGraph<V, E>
         extends MutableGraph<V, E>, UndirectedGraph<V, E> {

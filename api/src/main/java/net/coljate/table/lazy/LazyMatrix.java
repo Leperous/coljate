@@ -6,7 +6,7 @@ import net.coljate.table.MutableMatrix;
 
 /**
  *
- * @author ollie
+ * @author Ollie
  */
 public interface LazyMatrix<T> extends Matrix<T>, LazyTable<Integer, Integer, T> {
 

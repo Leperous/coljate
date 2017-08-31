@@ -7,7 +7,7 @@ import net.coljate.list.ImmutableListIterator;
 
 /**
  *
- * @author ollie
+ * @author Ollie
  */
 public class ImmutableJoinList<T> implements ImmutableList<T> {
 

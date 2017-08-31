@@ -6,7 +6,7 @@ import net.coljate.map.SameObjectEntryCreator;
 
 /**
  *
- * @author ollie
+ * @author Ollie
  */
 @SuppressWarnings({"unchecked", "rawtypes"})
 public class SingletonMapTest

@@ -12,7 +12,7 @@ import net.coljate.list.impl.SingletonArray;
 
 /**
  *
- * @author ollie
+ * @author Ollie
  */
 public interface ImmutableList<T> extends List<T>, ImmutableCollection<T> {
 

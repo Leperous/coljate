@@ -12,7 +12,7 @@ import net.coljate.util.iterator.UnmodifiableIterator;
 
 /**
  *
- * @author ollie
+ * @author Ollie
  */
 public interface Empty<T> extends ImmutableCollection<T>, Serializable {
 

@@ -4,7 +4,7 @@ import net.coljate.util.iterator.CovariantIterator;
 
 /**
  *
- * @author ollie
+ * @author Ollie
  */
 public interface UndirectedGraph<V, E> extends Graph<V, E> {
 

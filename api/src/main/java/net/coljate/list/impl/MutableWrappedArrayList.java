@@ -11,7 +11,7 @@ import net.coljate.list.MutableArray;
 
 /**
  *
- * @author ollie
+ * @author Ollie
  */
 public class MutableWrappedArrayList<T>
         extends MutableWrappedList<T>

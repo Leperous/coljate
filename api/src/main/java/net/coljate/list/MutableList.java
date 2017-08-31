@@ -12,7 +12,7 @@ import net.coljate.list.impl.SynchronizedList;
 
 /**
  *
- * @author ollie
+ * @author Ollie
  */
 public interface MutableList<T> extends List<T>, MutableCollection<T> {
 

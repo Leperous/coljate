@@ -9,7 +9,7 @@ import net.coljate.util.Arrays;
 
 /**
  *
- * @author ollie
+ * @author Ollie
  */
 public class ImmutableNativeArray<T>
         extends AbstractArray<T>

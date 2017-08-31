@@ -10,7 +10,7 @@ import org.junit.jupiter.api.Test;
 
 /**
  *
- * @author ollie
+ * @author Ollie
  */
 public interface MutableMapTest<K, V> extends MapTest<K, V>, MutableSetTest<Entry<K, V>> {
 

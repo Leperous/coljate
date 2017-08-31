@@ -2,7 +2,7 @@ package net.coljate.util;
 
 /**
  *
- * @author ollie
+ * @author Ollie
  */
 public interface SelfTyped<T extends SelfTyped<T>> {
 

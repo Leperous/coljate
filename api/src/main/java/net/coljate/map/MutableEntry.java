@@ -2,7 +2,7 @@ package net.coljate.map;
 
 /**
  *
- * @author ollie
+ * @author Ollie
  */
 public interface MutableEntry<K, V> extends Entry<K, V> {
 

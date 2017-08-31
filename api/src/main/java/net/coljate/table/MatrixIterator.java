@@ -4,7 +4,7 @@ import java.util.Iterator;
 
 /**
  *
- * @author ollie
+ * @author Ollie
  */
 public class MatrixIterator<T> implements Iterator<Cell<Integer, Integer, T>> {
 

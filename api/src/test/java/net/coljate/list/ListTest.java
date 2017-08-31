@@ -4,7 +4,7 @@ import net.coljate.collection.CollectionTest;
 
 /**
  *
- * @author ollie
+ * @author Ollie
  */
 public interface ListTest<T> extends CollectionTest<T> {
 

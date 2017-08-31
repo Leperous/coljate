@@ -4,7 +4,7 @@ import net.coljate.table.ImmutableMatrix;
 
 /**
  *
- * @author ollie
+ * @author Ollie
  */
 public class ImmutableArrayBackedMatrix<T>
         extends ArrayBackedMatrix<T>

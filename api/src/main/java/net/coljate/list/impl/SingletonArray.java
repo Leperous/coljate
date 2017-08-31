@@ -9,7 +9,7 @@ import net.coljate.list.ImmutableListIterator;
 
 /**
  *
- * @author ollie
+ * @author Ollie
  */
 public class SingletonArray<T>
         extends AbstractArray<T>

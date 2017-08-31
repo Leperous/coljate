@@ -11,7 +11,8 @@ import net.coljate.util.complexity.TimeComplexity;
  *
  * May be {@link List finite} or infinite.
  *
- * @author ollie
+ * @author Ollie
+ * @since 1.0
  */
 public interface Sequence<T> {
 

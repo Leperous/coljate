@@ -13,7 +13,7 @@ import net.coljate.tree.TreeMapNode;
 
 /**
  *
- * @author ollie
+ * @author Ollie
  */
 public class Subtree<K, V, T extends Subtree<K, V, T>>
         extends AbstractTreeMap<K, V, T>

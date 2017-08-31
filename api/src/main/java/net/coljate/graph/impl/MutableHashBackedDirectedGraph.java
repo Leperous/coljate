@@ -10,7 +10,7 @@ import net.coljate.table.MutableTable;
 
 /**
  *
- * @author ollie
+ * @author Ollie
  */
 public class MutableHashBackedDirectedGraph<V, E>
         extends TableBackedDirectedGraph<V, E>

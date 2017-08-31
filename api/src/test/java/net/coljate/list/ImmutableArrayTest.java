@@ -2,7 +2,7 @@ package net.coljate.list;
 
 /**
  *
- * @author ollie
+ * @author Ollie
  */
 public interface ImmutableArrayTest<T> extends ArrayTest<T>, ImmutableListTest<T> {
 

@@ -8,7 +8,7 @@ import net.coljate.list.impl.SingletonArray;
 
 /**
  *
- * @author ollie
+ * @author Ollie
  */
 public interface ImmutableArray<T>
         extends Array<T>, ImmutableList<T> {

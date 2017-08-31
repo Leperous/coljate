@@ -4,7 +4,7 @@ import net.coljate.map.impl.SimpleImmutableEntry;
 
 /**
  *
- * @author ollie
+ * @author Ollie
  */
 public interface ImmutableEntry<K, V> extends Entry<K, V> {
 

@@ -5,7 +5,8 @@ import net.coljate.util.complexity.TimeComplexity;
 
 /**
  *
- * @author ollie
+ * @author Ollie
+ * @since 1.0
  */
 public interface FastGet<K, V> extends Associative<K, V> {
 

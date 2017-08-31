@@ -10,7 +10,7 @@ import net.coljate.util.complexity.TimeComplexity;
 
 /**
  *
- * @author ollie
+ * @author Ollie
  * @see java.util.SortedSet
  */
 public interface SortedSet<T> extends SortedCollection<T>, SequentialSet<T> {

@@ -13,7 +13,7 @@ import net.coljate.set.SortedSet;
 
 /**
  *
- * @author ollie
+ * @author Ollie
  */
 public class KeySortedMap<K, V>
         extends AbstractMap<K, V>

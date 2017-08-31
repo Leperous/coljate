@@ -26,7 +26,7 @@ import net.coljate.util.complexity.TimeComplexity;
 /**
  * Some {@link Iterable} {@link Container} with a {@link #count count} of elements.
  *
- * @author ollie
+ * @author Ollie
  * @since 1.0
  */
 public interface Collection<T> extends IterableExtension<T>, StreamExtension<T> {

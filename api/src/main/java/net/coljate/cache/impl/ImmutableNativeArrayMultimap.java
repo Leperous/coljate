@@ -13,7 +13,7 @@ import net.coljate.util.iterator.UnmodifiableCovariantIterator;
 
 /**
  *
- * @author ollie
+ * @author Ollie
  */
 public class ImmutableNativeArrayMultimap<K, V>
         extends AbstractMapBackedMultimap<K, V, ImmutableNativeArray<V>>

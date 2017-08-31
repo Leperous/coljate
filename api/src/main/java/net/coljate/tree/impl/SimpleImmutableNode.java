@@ -6,7 +6,7 @@ import net.coljate.tree.ImmutableTreeNode;
 
 /**
  *
- * @author ollie
+ * @author Ollie
  */
 public class SimpleImmutableNode<K, V>
         extends AbstractEntry<K, V>

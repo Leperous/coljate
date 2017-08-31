@@ -7,7 +7,7 @@ import net.coljate.util.Iterables;
 
 /**
  *
- * @author ollie
+ * @author Ollie
  */
 public class MutableWrappedHashSet<T>
         extends MutableWrappedSet<T>

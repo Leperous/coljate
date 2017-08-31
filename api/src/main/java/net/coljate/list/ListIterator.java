@@ -7,7 +7,7 @@ import javax.annotation.Nonnull;
 
 /**
  *
- * @author ollie
+ * @author Ollie
  * @see java.util.ListIterator
  */
 public interface ListIterator<T> extends Iterator<T> {

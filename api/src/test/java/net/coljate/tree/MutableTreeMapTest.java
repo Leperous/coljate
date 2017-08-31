@@ -4,7 +4,7 @@ import net.coljate.map.MutableMapTest;
 
 /**
  *
- * @author ollie
+ * @author Ollie
  */
 public interface MutableTreeMapTest<K, V> extends TreeMapTest<K, V>, MutableMapTest<K, V> {
 

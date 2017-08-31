@@ -7,7 +7,7 @@ import net.coljate.set.Set;
 
 /**
  *
- * @author ollie
+ * @author Ollie
  */
 public class MutableWrappedSet<T>
         extends WrappedSet<T>

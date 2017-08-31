@@ -12,7 +12,7 @@ import org.junit.jupiter.api.Disabled;
 
 /**
  *
- * @author ollie
+ * @author Ollie
  */
 @SuppressWarnings({"unchecked", "rawtypes"})
 public class EmptySetTest implements ImmutableSetTest<Object>, SetTest.ZeroElementTests<Object>, EmptyTest<Object> {

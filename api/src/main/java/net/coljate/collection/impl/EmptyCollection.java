@@ -8,7 +8,7 @@ import net.coljate.collection.MutableCollection;
 
 /**
  *
- * @author ollie
+ * @author Ollie
  */
 public class EmptyCollection<T>
         extends AbstractCollection<T>

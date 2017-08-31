@@ -4,7 +4,7 @@ import net.coljate.collection.FastContains;
 
 /**
  *
- * @author ollie
+ * @author Ollie
  */
 public interface HashSet<T> extends FastContains {
 

@@ -5,7 +5,7 @@ import net.coljate.set.Set;
 
 /**
  *
- * @author ollie
+ * @author Ollie
  */
 public interface LongSet extends Set<Long>, LongCollection {
 

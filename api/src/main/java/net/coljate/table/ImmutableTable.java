@@ -5,7 +5,7 @@ import net.coljate.table.impl.ImmutableMapBackedTable;
 
 /**
  *
- * @author ollie
+ * @author Ollie
  */
 public interface ImmutableTable<R, C, V>
         extends Table<R, C, V>, ImmutableSet<Cell<R, C, V>> {

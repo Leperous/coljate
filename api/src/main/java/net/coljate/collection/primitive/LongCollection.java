@@ -6,7 +6,7 @@ import net.coljate.collection.Collection;
 
 /**
  *
- * @author ollie
+ * @author Ollie
  */
 public interface LongCollection extends Collection<Long> {
 

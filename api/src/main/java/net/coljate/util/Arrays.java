@@ -12,7 +12,7 @@ import net.coljate.util.complexity.TimeComplexity;
 
 /**
  *
- * @author ollie
+ * @author Ollie
  */
 public final class Arrays {
 

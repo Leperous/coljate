@@ -17,7 +17,7 @@ import net.coljate.util.iterator.Iterators;
 
 /**
  *
- * @author ollie
+ * @author Ollie
  */
 @SuppressWarnings("element-type-mismatch")
 public class WrappedMap<K, V>

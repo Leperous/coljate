@@ -2,7 +2,7 @@ package net.coljate.tree;
 
 /**
  *
- * @author ollie
+ * @author Ollie
  */
 public interface MutableBinaryTreeMapTest<K, V>
         extends BinaryTreeMapTest<K, V>, MutableTreeMapTest<K, V> {

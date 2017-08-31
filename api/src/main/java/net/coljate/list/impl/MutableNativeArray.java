@@ -12,7 +12,7 @@ import net.coljate.util.Arrays;
 
 /**
  *
- * @author ollie
+ * @author Ollie
  * @see java.util.ArrayList
  */
 public class MutableNativeArray<T>

@@ -14,7 +14,7 @@ import org.junit.jupiter.api.Test;
 
 /**
  *
- * @author ollie
+ * @author Ollie
  */
 public interface SetTest<T> extends CollectionTest<T> {
 

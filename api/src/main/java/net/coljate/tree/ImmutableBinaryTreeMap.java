@@ -5,7 +5,7 @@ import net.coljate.tree.ImmutableBinaryTreeMap.ImmutableBinaryNode;
 
 /**
  *
- * @author ollie
+ * @author Ollie
  */
 public interface ImmutableBinaryTreeMap<K, V, N extends ImmutableBinaryNode<K, V, N>>
         extends BinaryTreeMap<K, V, N>, ImmutableTreeMap<K, V, N> {

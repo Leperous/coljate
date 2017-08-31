@@ -2,7 +2,7 @@ package net.coljate;
 
 /**
  *
- * @author ollie
+ * @author Ollie
  */
 public class NewObjectCreator implements TestObjectCreator<Object> {
 

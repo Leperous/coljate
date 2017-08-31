@@ -2,7 +2,7 @@ package net.coljate.collection;
 
 /**
  *
- * @author ollie
+ * @author Ollie
  */
 public interface ImmutableCollectionTest<T> extends CollectionTest<T> {
 

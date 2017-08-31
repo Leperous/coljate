@@ -11,7 +11,7 @@ import org.junit.jupiter.api.Test;
 
 /**
  *
- * @author ollie
+ * @author Ollie
  */
 public interface MutableCollectionTest<T> extends CollectionTest<T>, TestObjectCreator<T> {
 

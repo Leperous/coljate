@@ -5,7 +5,7 @@ import java.util.stream.StreamSupport;
 
 /**
  *
- * @author ollie
+ * @author Ollie
  * @since 1.0
  */
 public interface StreamExtension<T> extends Iterable<T> {

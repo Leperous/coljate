@@ -9,7 +9,7 @@ import javax.annotation.Nullable;
 
 /**
  *
- * @author ollie
+ * @author Ollie
  */
 public class Functions {
 

@@ -4,7 +4,7 @@ import net.coljate.set.MutableSet;
 
 /**
  *
- * @author ollie
+ * @author Ollie
  */
 public interface MutableGraph<V, E>
         extends Graph<V, E>, MutableSet<Relationship<V, E>> {

@@ -5,7 +5,7 @@ import net.coljate.util.iterator.CovariantIterator;
 
 /**
  *
- * @author ollie
+ * @author Ollie
  * @see MutableDirectedGraph
  * @see ImmutableDirectedGraph
  */

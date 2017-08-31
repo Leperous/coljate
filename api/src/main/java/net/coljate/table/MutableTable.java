@@ -9,7 +9,7 @@ import net.coljate.table.impl.MutableSymmetricTable;
 
 /**
  *
- * @author ollie
+ * @author Ollie
  */
 public interface MutableTable<R, C, V>
         extends Table<R, C, V>, MutableSet<Cell<R, C, V>> {

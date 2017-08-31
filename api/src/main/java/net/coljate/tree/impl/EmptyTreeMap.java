@@ -9,7 +9,7 @@ import net.coljate.tree.ImmutableTreeNode;
 
 /**
  *
- * @author ollie
+ * @author Ollie
  */
 public class EmptyTreeMap<K, V>
         extends AbstractTreeMap<K, V, SimpleImmutableNode<K, V>>

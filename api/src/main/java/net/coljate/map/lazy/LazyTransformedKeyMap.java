@@ -11,7 +11,7 @@ import net.coljate.set.Set;
 
 /**
  *
- * @author ollie
+ * @author Ollie
  */
 public class LazyTransformedKeyMap<K, V>
         implements LazyMap<K, V> {

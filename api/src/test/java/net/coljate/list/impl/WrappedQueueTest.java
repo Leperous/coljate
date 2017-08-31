@@ -2,7 +2,7 @@ package net.coljate.list.impl;
 
 /**
  *
- * @author ollie
+ * @author Ollie
  */
 public class WrappedQueueTest {
 

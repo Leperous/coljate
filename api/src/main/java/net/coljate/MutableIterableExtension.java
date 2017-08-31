@@ -8,7 +8,7 @@ import javax.annotation.Nonnull;
 
 /**
  *
- * @author ollie
+ * @author Ollie
  * @since 1.0
  */
 public interface MutableIterableExtension<T> extends Iterable<T> {

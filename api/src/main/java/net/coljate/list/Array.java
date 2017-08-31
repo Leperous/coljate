@@ -9,8 +9,9 @@ import net.coljate.list.impl.RepeatedValueArray;
 
 /**
  *
- * @author ollie
+ * @author Ollie
  * @see java.util.List
+ * @since 1.0
  */
 public interface Array<T> extends Indexed<T>, List<T> {
 

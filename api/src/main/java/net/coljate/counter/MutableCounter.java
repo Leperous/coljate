@@ -5,7 +5,7 @@ import net.coljate.counter.impl.MutableHashCounter;
 
 /**
  *
- * @author ollie
+ * @author Ollie
  */
 public interface MutableCounter<T>
         extends Counter<T>, MutableCollection<T> {

@@ -10,7 +10,7 @@ import net.coljate.map.ImmutableMap;
 
 /**
  *
- * @author ollie
+ * @author Ollie
  */
 public class EmptyCounter<T>
         extends AbstractCounter<T>

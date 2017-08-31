@@ -12,7 +12,7 @@ import net.coljate.util.iterator.CovariantIterator;
 
 /**
  *
- * @author ollie
+ * @author Ollie
  */
 @SuppressWarnings("element-type-mismatch")
 public class MutableWrappedMap<K, V>

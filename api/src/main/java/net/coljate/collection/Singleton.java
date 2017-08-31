@@ -6,7 +6,7 @@ import net.coljate.sequence.Sequence;
 
 /**
  *
- * @author ollie
+ * @author Ollie
  */
 public interface Singleton<T>
         extends ImmutableCollection<T>, Sequence<T> {

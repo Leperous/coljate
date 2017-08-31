@@ -6,7 +6,7 @@ import net.coljate.util.Hash;
 
 /**
  *
- * @author ollie
+ * @author Ollie
  */
 public abstract class AbstractMap<K, V>
         extends AbstractCollection<Entry<K, V>>

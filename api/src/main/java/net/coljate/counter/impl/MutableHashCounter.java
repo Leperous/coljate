@@ -7,7 +7,7 @@ import net.coljate.map.MutableMap;
 
 /**
  *
- * @author ollie
+ * @author Ollie
  */
 public class MutableHashCounter<T>
         extends HashCounter<T>

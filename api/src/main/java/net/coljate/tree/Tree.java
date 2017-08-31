@@ -7,7 +7,7 @@ import net.coljate.Container;
 /**
  * Some set of connected {@link TreeNode nodes}.
  *
- * @author ollie
+ * @author Ollie
  */
 public interface Tree<N extends TreeNode<N>> extends Container {
 

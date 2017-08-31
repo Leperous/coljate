@@ -6,7 +6,7 @@ import net.coljate.list.ImmutableArrayTest;
 
 /**
  *
- * @author ollie
+ * @author Ollie
  */
 @SuppressWarnings({"unchecked", "rawtypes"})
 public class SingletonArrayTest extends SameObjectCreator implements ImmutableArrayTest.OneElementTests<Object> {

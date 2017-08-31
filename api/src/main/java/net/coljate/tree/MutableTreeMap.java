@@ -8,7 +8,7 @@ import net.coljate.util.iterator.CovariantIterator;
 
 /**
  *
- * @author ollie
+ * @author Ollie
  * @since 1.0
  */
 public interface MutableTreeMap<K, V, N extends MutableTreeMapNode<K, V, N>>

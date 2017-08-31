@@ -2,7 +2,7 @@ package net.coljate.table;
 
 /**
  *
- * @author ollie
+ * @author Ollie
  */
 public interface CellConsumer<R, C, V> {
 

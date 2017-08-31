@@ -8,7 +8,7 @@ import net.coljate.table.Table;
 
 /**
  *
- * @author ollie
+ * @author Ollie
  */
 public interface LazyTable<R, C, V> extends Table<R, C, V>, LazySet<Cell<R, C, V>> {
 

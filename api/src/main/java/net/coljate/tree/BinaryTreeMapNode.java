@@ -9,7 +9,7 @@ import net.coljate.tree.navigation.TreeNavigation;
 
 /**
  *
- * @author ollie
+ * @author Ollie
  * @since 1.0
  */
 public interface BinaryTreeMapNode<K, V, N extends BinaryTreeMapNode<K, V, N>> extends TreeMapNode<K, V, N> {

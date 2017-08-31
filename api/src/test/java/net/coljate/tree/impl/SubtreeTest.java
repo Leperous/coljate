@@ -2,7 +2,7 @@ package net.coljate.tree.impl;
 
 /**
  *
- * @author ollie
+ * @author Ollie
  */
 @SuppressWarnings({"unchecked", "rawtypes"})
 public class SubtreeTest {

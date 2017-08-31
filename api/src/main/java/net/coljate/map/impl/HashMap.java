@@ -5,7 +5,8 @@ import net.coljate.map.Map;
 
 /**
  *
- * @author ollie
+ * @author Ollie
+ * @since 1.0
  */
 public interface HashMap<K, V> extends Map<K, V>, FastGet<K, V> {
 

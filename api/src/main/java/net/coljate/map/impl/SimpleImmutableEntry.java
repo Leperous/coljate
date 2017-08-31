@@ -5,7 +5,7 @@ import net.coljate.map.ImmutableEntry;
 
 /**
  *
- * @author ollie
+ * @author Ollie
  */
 public class SimpleImmutableEntry<K, V>
         extends AbstractEntry<K, V>

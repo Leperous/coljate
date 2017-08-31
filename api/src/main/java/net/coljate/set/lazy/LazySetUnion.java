@@ -12,7 +12,7 @@ import net.coljate.set.Set;
 /**
  * View of the union of two (possibly mutable) sets.
  *
- * @author ollie
+ * @author Ollie
  */
 public class LazySetUnion<T>
         extends AbstractSet<T>

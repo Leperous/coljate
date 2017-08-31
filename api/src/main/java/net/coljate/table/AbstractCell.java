@@ -4,7 +4,7 @@ import java.util.Objects;
 
 /**
  *
- * @author ollie
+ * @author Ollie
  */
 public abstract class AbstractCell<R, C, V> implements Cell<R, C, V> {
 

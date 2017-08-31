@@ -5,7 +5,7 @@ import net.coljate.util.Functions;
 
 /**
  *
- * @author ollie
+ * @author Ollie
  */
 public interface ImmutableMatrix<T>
         extends Matrix<T>, ImmutableTable<Integer, Integer, T> {

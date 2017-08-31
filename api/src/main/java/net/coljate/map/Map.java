@@ -31,7 +31,7 @@ import net.coljate.util.Functions;
 
 /**
  *
- * @author ollie
+ * @author Ollie
  * @since 1.0
  */
 public interface Map<K, V> extends Set<Entry<K, V>>, Associative<K, V> {

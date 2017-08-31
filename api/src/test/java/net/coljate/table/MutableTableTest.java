@@ -4,7 +4,7 @@ import net.coljate.set.MutableSetTest;
 
 /**
  *
- * @author ollie
+ * @author Ollie
  */
 public interface MutableTableTest<R, C, V> extends TableTest<R, C, V>, MutableSetTest<Cell<R, C, V>> {
 

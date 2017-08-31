@@ -5,7 +5,7 @@ import net.coljate.list.MutableList;
 
 /**
  *
- * @author ollie
+ * @author Ollie
  */
 public interface MutableListMultimap<K, V>
         extends ListMultimap<K, V>, MutableMultimap<K, V> {

@@ -2,7 +2,7 @@ package net.coljate.table;
 
 /**
  *
- * @author ollie
+ * @author Ollie
  */
 public class ImmutableCell<R, C, V> extends AbstractCell<R, C, V> {
 

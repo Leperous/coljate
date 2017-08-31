@@ -10,7 +10,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 
 /**
  *
- * @author ollie
+ * @author Ollie
  */
 @SuppressWarnings({"unchecked", "rawtypes"})
 public class EmptyMapTest

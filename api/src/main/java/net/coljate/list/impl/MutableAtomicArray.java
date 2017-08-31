@@ -11,7 +11,7 @@ import net.coljate.list.ListIterator;
 
 /**
  *
- * @author ollie
+ * @author Ollie
  */
 public class MutableAtomicArray<T>
         extends AbstractList<T>

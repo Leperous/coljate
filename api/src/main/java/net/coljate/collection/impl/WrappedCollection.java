@@ -12,7 +12,7 @@ import net.coljate.collection.MutableCollection;
 
 /**
  *
- * @author ollie
+ * @author Ollie
  */
 public class WrappedCollection<T>
         extends AbstractCollection<T> {

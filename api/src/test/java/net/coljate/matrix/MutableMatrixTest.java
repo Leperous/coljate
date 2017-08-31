@@ -5,7 +5,7 @@ import net.coljate.table.MutableTableTest;
 
 /**
  *
- * @author ollie
+ * @author Ollie
  */
 public interface MutableMatrixTest<T> extends MatrixTest<T>, MutableTableTest<Integer, Integer, T> {
 

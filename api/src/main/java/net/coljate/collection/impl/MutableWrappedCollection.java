@@ -8,7 +8,7 @@ import net.coljate.util.NativeCollections;
 
 /**
  *
- * @author ollie
+ * @author Ollie
  */
 public class MutableWrappedCollection<T>
         extends WrappedCollection<T>

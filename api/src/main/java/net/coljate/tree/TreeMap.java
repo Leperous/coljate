@@ -14,7 +14,7 @@ import net.coljate.util.iterator.CovariantIterator;
 /**
  * A {@link #root rooted} tree.
  *
- * @author ollie
+ * @author Ollie
  * @since 1.0
  */
 public interface TreeMap<K, V, N extends TreeMapNode<K, V, N>>

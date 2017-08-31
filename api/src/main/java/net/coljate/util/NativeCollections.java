@@ -8,7 +8,7 @@ import net.coljate.collection.Collection;
 
 /**
  *
- * @author ollie
+ * @author Ollie
  */
 public class NativeCollections {
 

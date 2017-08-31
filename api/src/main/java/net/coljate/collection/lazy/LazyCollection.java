@@ -11,7 +11,7 @@ import net.coljate.list.impl.MutableWrappedArrayList;
 
 /**
  *
- * @author ollie
+ * @author Ollie
  */
 public interface LazyCollection<T> extends Collection<T> {
 

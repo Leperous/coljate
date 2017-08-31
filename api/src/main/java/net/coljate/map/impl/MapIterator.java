@@ -9,7 +9,7 @@ import net.coljate.util.iterator.CovariantIterator;
 
 /**
  *
- * @author ollie
+ * @author Ollie
  */
 public class MapIterator<K, V, E extends Entry<K, V>> implements CovariantIterator<Entry<K, V>, E> {
 

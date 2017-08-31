@@ -10,7 +10,7 @@ import net.coljate.map.impl.SimpleImmutableEntry;
 
 /**
  *
- * @author ollie
+ * @author Ollie
  * @see Map
  */
 public interface Entry<K, V> {

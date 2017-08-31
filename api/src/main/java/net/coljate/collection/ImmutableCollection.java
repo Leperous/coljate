@@ -11,7 +11,7 @@ import net.coljate.util.iterator.UnmodifiableIterator;
 
 /**
  *
- * @author ollie
+ * @author Ollie
  */
 @Immutable
 public interface ImmutableCollection<T> extends Collection<T> {

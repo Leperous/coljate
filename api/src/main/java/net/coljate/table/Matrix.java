@@ -13,7 +13,7 @@ import net.coljate.table.lazy.LazyTransposedMatrix;
 
 /**
  *
- * @author ollie
+ * @author Ollie
  */
 public interface Matrix<T> extends Table<Integer, Integer, T> {
 
