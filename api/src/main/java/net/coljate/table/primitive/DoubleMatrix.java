@@ -17,7 +17,19 @@ public interface DoubleMatrix extends Matrix<Double> {
     }
 
     default DoubleMatrix product(final DoubleMatrix that) {
-        throw new UnsupportedOperationException(); //TODO
+        final int n = this.rows();
+        final int m = this.columns();
+        final double[][] product = new double[n][that.columns()];
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < m; j++) {
+                double sum = 0;
+                for (int k = 0; k < m; k++) {
+                    sum += this.getValue(i, k) * that.getValue(k, j);
+                }
+                product[i][j] = sum;
+            }
+        }
+        return new DoubleArrayMatrix(product);
     }
 
 }
