@@ -6,6 +6,10 @@ package net.coljate.table.primitive;
  */
 public class MutableDoubleArrayMatrix extends DoubleArrayMatrix implements MutableDoubleMatrix {
 
+    public static MutableDoubleMatrix copyOf(final DoubleMatrix matrix) {
+        return new MutableDoubleArrayMatrix(matrix.array2DCopy());
+    }
+
     private final double[][] array;
 
     public MutableDoubleArrayMatrix(final double[][] array) {

@@ -46,7 +46,7 @@ public interface DoubleMatrix extends Matrix<Double> {
 
     @Override
     default MutableDoubleMatrix mutableCopy() {
-        throw new UnsupportedOperationException(); //TODO
+        return MutableDoubleArrayMatrix.copyOf(this);
     }
 
     @Override
