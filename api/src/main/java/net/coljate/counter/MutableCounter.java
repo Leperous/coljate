@@ -62,13 +62,13 @@ public interface MutableCounter<T>
     }
 
     @Override
-    default boolean removeAll(final Object element) {
+    default int removeAll(final Object element) {
         final int count = this.count(element);
         if (count > 0) {
             this.decrement((T) element, count);
-            return true;
+            return 1;
         } else {
-            return false;
+            return 0;
         }
     }
 

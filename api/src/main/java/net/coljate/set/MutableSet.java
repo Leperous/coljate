@@ -35,8 +35,8 @@ public interface MutableSet<T> extends Set<T>, MutableCollection<T> {
 
     @Override
     @Deprecated
-    default boolean removeAll(@Nullable final Object element) {
-        return this.remove(element);
+    default int removeAll(@Nullable final Object element) {
+        return this.remove(element) ? 1 : 0;
     }
 
     static <T> MutableSet<T> viewOf(@Nonnull final java.util.Set<T> set) {

@@ -126,7 +126,7 @@ public class MutableNativeArray<T>
     }
 
     @Override
-    public boolean removeAll(final Object element) {
+    public int removeAll(final Object element) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 

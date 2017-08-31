@@ -48,7 +48,7 @@ public class SynchronizedMutableCollection<T> implements MutableCollection<T> {
     }
 
     @Override
-    public synchronized boolean removeAll(final Object element) {
+    public synchronized int removeAll(final Object element) {
         return collection.removeAll(element);
     }
 

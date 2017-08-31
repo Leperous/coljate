@@ -54,8 +54,8 @@ public class MutableHashCounter<T>
 
     @Override
     @SuppressWarnings("deprecation")
-    public boolean removeAll(final Object element) {
-        return isPositive(map.evict(element));
+    public int removeAll(final Object element) {
+        return isPositive(map.evict(element)) ? 1 : 0;
     }
 
     @Override

@@ -38,13 +38,16 @@ public class MutableWrappedCollection<T>
     }
 
     @Override
+    @SuppressWarnings("element-type-mismatch")
     public boolean removeFirst(final Object element) {
         return delegate.remove(element);
     }
 
     @Override
-    public boolean removeAll(final Object element) {
-        return delegate.removeAll(Collections.singleton(element));
+    public int removeAll(final Object element) {
+        final int startingSize = delegate.size();
+        delegate.removeAll(Collections.singleton(element));
+        return startingSize - delegate.size();
     }
 
     @Override

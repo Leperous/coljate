@@ -4,8 +4,6 @@ import java.io.Serializable;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 
-import java.util.Objects;
-
 import net.coljate.collection.Collection;
 import net.coljate.list.MutableArray;
 

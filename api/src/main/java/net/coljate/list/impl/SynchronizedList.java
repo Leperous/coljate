@@ -51,7 +51,7 @@ public class SynchronizedList<T> implements MutableList<T> {
     }
 
     @Override
-    public boolean removeAll(final Object element) {
+    public int removeAll(final Object element) {
         return delegate.removeAll(element);
     }
 

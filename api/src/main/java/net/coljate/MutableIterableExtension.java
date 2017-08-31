@@ -17,8 +17,8 @@ public interface MutableIterableExtension<T> extends Iterable<T> {
         return this.removeN(element, 1) > 0;
     }
 
-    default boolean removeAll(final Object element) {
-        return this.removeN(element, Integer.MAX_VALUE) > 0;
+    default int removeAll(final Object element) {
+        return this.removeN(element, Integer.MAX_VALUE);
     }
 
     default int removeN(final Object element, final int num) {
@@ -37,7 +37,7 @@ public interface MutableIterableExtension<T> extends Iterable<T> {
     default boolean removeAll(@Nonnull final Iterable<?> elements) {
         boolean removed = false;
         for (final Object element : elements) {
-            removed = this.removeAll(element) || removed;
+            removed = this.removeAll(element) > 0 || removed;
         }
         return removed;
     }
