@@ -4,7 +4,10 @@ import java.util.Iterator;
 import java.util.Objects;
 import java.util.function.Predicate;
 
+import javax.annotation.Nonnegative;
 import javax.annotation.Nonnull;
+
+import net.coljate.util.Integers;
 
 /**
  *
@@ -21,12 +24,16 @@ public interface MutableIterableExtension<T> extends Iterable<T> {
         return this.removeN(element, Integer.MAX_VALUE);
     }
 
-    default int removeN(final Object element, final int num) {
+    default int removeN(final Object element, @Nonnegative final int max) {
+        if (max == 0) {
+            return 0;
+        }
+        Integers.requirePositive(max, i -> "Max must be non-negative but was " + i + "!");
         int removed = 0;
         for (final Iterator<T> iterator = this.iterator(); iterator.hasNext();) {
             if (Objects.equals(iterator.next(), element)) {
                 iterator.remove();
-                if (++removed == num) {
+                if (++removed >= max) {
                     break;
                 }
             }
