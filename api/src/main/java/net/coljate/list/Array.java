@@ -73,7 +73,7 @@ public interface Array<T> extends Indexed<T>, List<T> {
     }
 
     static <T> ImmutableArray<T> repeated(final T value, final int length) {
-        return new RepeatedValueArray<>(value, length);
+        return RepeatedValueArray.of(value, length);
     }
 
     @SafeVarargs

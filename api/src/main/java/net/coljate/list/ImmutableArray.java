@@ -42,8 +42,12 @@ public interface ImmutableArray<T>
         return this;
     }
 
-    static <T> EmptyArray<T> of() {
+    static <T> EmptyArray<T> empty() {
         return EmptyArray.instance();
+    }
+
+    static <T> EmptyArray<T> of() {
+        return empty();
     }
 
     static <T> SingletonArray<T> of(final T element) {
