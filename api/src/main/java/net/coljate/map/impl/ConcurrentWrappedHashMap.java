@@ -1,7 +1,6 @@
 package net.coljate.map.impl;
 
 import net.coljate.collection.Collection;
-import net.coljate.map.ConcurrentMap;
 import net.coljate.map.Entry;
 
 /**
@@ -9,8 +8,8 @@ import net.coljate.map.Entry;
  * @author Ollie
  */
 public class ConcurrentWrappedHashMap<K, V>
-        extends MutableWrappedMap<K, V>
-        implements HashMap<K, V>, ConcurrentMap<K, V> {
+        extends ConcurrentWrappedMap<K, V>
+        implements HashMap<K, V> {
 
     public static final int DEFAULT_INITIAL_CAPACITY = 10;
 
@@ -36,11 +35,6 @@ public class ConcurrentWrappedHashMap<K, V>
 
     protected ConcurrentWrappedHashMap(final java.util.concurrent.ConcurrentHashMap<K, V> delegate) {
         super(delegate);
-    }
-
-    @Override
-    public java.util.concurrent.ConcurrentHashMap<K, V> mutableJavaMapCopy() {
-        return super.javaMapCopy(java.util.concurrent.ConcurrentHashMap::new);
     }
 
     @Override
