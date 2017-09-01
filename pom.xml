@@ -15,6 +15,7 @@
         <module>commons4</module>
         <module>guava23</module>
         <module>eclipse8</module>
+        <module>hazelcast</module>
     </modules>
     
     <properties>
