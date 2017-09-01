@@ -1,5 +1,8 @@
 package net.coljate.map;
 
+import javax.annotation.CheckForNull;
+import javax.annotation.Nonnull;
+
 import net.coljate.set.Set;
 
 /**
@@ -12,15 +15,17 @@ public interface BidirectionalMap<K, V> extends Map<K, V> {
     @Override
     Entry<K, V> getEntry(Object key);
 
-    BidirectionalMap<V, K> inverse();
+    @Nonnull
+    BidirectionalMap<V, K> inverseView();
 
-    default Entry<V, K> getInverseEntry(final Object key) {
-        return this.inverse().getEntry(key);
+    @CheckForNull
+    default Entry<V, K> getInverseEntry(final Object value) {
+        return this.inverseView().getEntry(value);
     }
 
     @Override
     default Set<V> values() {
-        return this.inverse().keys();
+        return this.inverseView().keys();
     }
 
     @Override

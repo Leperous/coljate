@@ -8,7 +8,7 @@ public interface MutableBidirectionalMap<K, V>
         extends BidirectionalMap<K, V>, MutableMap<K, V> {
 
     @Override
-    MutableBidirectionalMap<V, K> inverse();
+    MutableBidirectionalMap<V, K> inverseView();
 
     /**
      *
@@ -28,7 +28,7 @@ public interface MutableBidirectionalMap<K, V>
      * @throws MutableBidirectionalMap.DuplicateValueException
      */
     default Entry<K, V> putBoth(final K key, final V value) throws DuplicateValueException {
-        final K oldKey = this.inverse().put(value, key);
+        final K oldKey = this.inverseView().put(value, key);
         final V oldValue = this.put(key, value);
         return Entry.of(oldKey, oldValue);
     }

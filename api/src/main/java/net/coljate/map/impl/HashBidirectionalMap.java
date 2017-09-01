@@ -30,13 +30,13 @@ public abstract class HashBidirectionalMap<K, V, I extends HashBidirectionalMap<
     }
 
     @Override
-    public I inverse() {
+    public I inverseView() {
         return inverse == null
-                ? inverse = this.createInverse()
+                ? inverse = this.createInverseView()
                 : inverse;
     }
 
-    protected abstract I createInverse();
+    protected abstract I createInverseView();
 
     @Override
     public Set<V> values() {

@@ -19,12 +19,12 @@ public interface BidirectionalMapTest<K, V> extends MapTest<K, V> {
 
         @Test
         default void testCount_Inverse() {
-            assertThat(this.createTestCollection().inverse().count(), is(0));
+            assertThat(this.createTestCollection().inverseView().count(), is(0));
         }
 
         @Test
         default void testIsEmpty_Inverse() {
-            assertTrue(this.createTestCollection().inverse().isEmpty());
+            assertTrue(this.createTestCollection().inverseView().isEmpty());
         }
 
     }
@@ -33,12 +33,12 @@ public interface BidirectionalMapTest<K, V> extends MapTest<K, V> {
 
         @Test
         default void testCount_Inverse() {
-            assertThat(this.createTestCollection().inverse().count(), is(1));
+            assertThat(this.createTestCollection().inverseView().count(), is(1));
         }
 
         @Test
         default void testIsEmpty_Inverse() {
-            assertFalse(this.createTestCollection().inverse().isEmpty());
+            assertFalse(this.createTestCollection().inverseView().isEmpty());
         }
 
     }

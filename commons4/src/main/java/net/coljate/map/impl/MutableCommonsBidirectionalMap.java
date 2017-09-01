@@ -47,7 +47,7 @@ public class MutableCommonsBidirectionalMap<K, V>
     }
 
     @Override
-    public MutableBidirectionalMap<V, K> inverse() {
+    public MutableBidirectionalMap<V, K> inverseView() {
         return inverse == null
                 ? inverse = new MutableCommonsBidirectionalMap<>(map.inverseBidiMap(), this)
                 : inverse;

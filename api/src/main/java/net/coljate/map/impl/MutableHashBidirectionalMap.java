@@ -43,7 +43,7 @@ public class MutableHashBidirectionalMap<K, V>
     }
 
     @Override
-    protected MutableHashBidirectionalMap<V, K> createInverse() {
+    protected MutableHashBidirectionalMap<V, K> createInverseView() {
         final MutableMap<V, K> inverse = MutableMap.createHashMap();
         forward.forEach((k, v) -> inverse.put(v, k));
         return new MutableHashBidirectionalMap<>(inverse, this);
@@ -62,7 +62,7 @@ public class MutableHashBidirectionalMap<K, V>
             return value;
         }
         //Check for duplicate values
-        final MutableBidirectionalMap<V, K> inverse = this.inverse();
+        final MutableBidirectionalMap<V, K> inverse = this.inverseView();
         final Entry<V, K> inverseEntry = inverse.getEntry(value);
         if (inverseEntry != null && !inverse.contains(value, key)) {
             throw new DuplicateValueException(value);
@@ -80,7 +80,7 @@ public class MutableHashBidirectionalMap<K, V>
     public boolean remove(final Object key, final Object value) {
         if (this.containsKey(key)) {
             final boolean removed = forward.remove(key, value);
-            this.inverse().remove(value, key);
+            this.inverseView().remove(value, key);
             return removed;
         } else {
             return false;
@@ -91,7 +91,7 @@ public class MutableHashBidirectionalMap<K, V>
     public V evict(final Object key) {
         if (this.containsKey(key)) {
             final V evicted = forward.evict(key);
-            this.inverse().evict(key);
+            this.inverseView().evict(key);
             return evicted;
         }
         return null;
@@ -101,7 +101,7 @@ public class MutableHashBidirectionalMap<K, V>
     public void clear() {
         if (!this.isEmpty()) {
             forward.clear();
-            this.inverse().clear();
+            this.inverseView().clear();
         }
     }
 

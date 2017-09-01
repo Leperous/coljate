@@ -52,7 +52,7 @@ public class CommonsBidirectionalMap<K, V>
     }
 
     @Override
-    public BidirectionalMap<V, K> inverse() {
+    public BidirectionalMap<V, K> inverseView() {
         return inverse == null
                 ? inverse = new CommonsBidirectionalMap<>(map.inverseBidiMap(), this)
                 : inverse;
