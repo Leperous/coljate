@@ -83,7 +83,7 @@ public interface List<T> extends Sequence<T>, Collection<T> {
 
     @Override
     default MutableList<T> mutableCopy() {
-        return MutableWrappedArrayList.viewOf(this.mutableJavaCopy(java.util.ArrayList::new));
+        return MutableWrappedArrayList.copyOf(this);
     }
 
     @Override
