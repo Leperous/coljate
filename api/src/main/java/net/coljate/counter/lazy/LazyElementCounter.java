@@ -7,6 +7,7 @@ import net.coljate.collection.Collection;
 import net.coljate.counter.AbstractCounter;
 import net.coljate.map.Map;
 import net.coljate.map.MutableMap;
+import net.coljate.set.Set;
 import net.coljate.util.complexity.Complexity;
 import net.coljate.util.complexity.TimeComplexity;
 import net.coljate.util.iterator.Iterators;
@@ -34,6 +35,11 @@ public class LazyElementCounter<T>
     @TimeComplexity(Complexity.LINEAR)
     public int count(final Object element) {
         return collection.count(object -> Objects.equals(object, element));
+    }
+
+    @Override
+    public Set<T> elements() {
+        return Set.viewOf(collection.distinct());
     }
 
     @Override

@@ -2,6 +2,7 @@ package net.coljate.counter.primitive;
 
 import net.coljate.collection.primitive.IntegerCollection;
 import net.coljate.counter.Counter;
+import net.coljate.set.primitive.IntegerSet;
 
 /**
  *
@@ -29,5 +30,8 @@ public interface IntegerCounter extends IntegerCollection, Counter<Integer> {
     default boolean contains(Object element) {
         return Counter.super.contains(element);
     }
+
+    @Override
+    IntegerSet elements();
 
 }

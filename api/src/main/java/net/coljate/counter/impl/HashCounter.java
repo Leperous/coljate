@@ -9,6 +9,7 @@ import net.coljate.counter.ImmutableCounter;
 import net.coljate.counter.MutableCounter;
 import net.coljate.map.Entry;
 import net.coljate.map.Map;
+import net.coljate.set.Set;
 import net.coljate.util.Suppliers;
 
 /**
@@ -28,6 +29,11 @@ public class HashCounter<T>
     @Override
     public int count(final Object object) {
         return Suppliers.firstNonNull(map.getIfPresent(object), 0);
+    }
+
+    @Override
+    public Set<T> elements() {
+        return map.keys();
     }
 
     @Override

@@ -11,6 +11,7 @@ import javax.annotation.CheckReturnValue;
 
 import net.coljate.collection.Collection;
 import net.coljate.list.Array;
+import net.coljate.set.impl.CovariantSet;
 import net.coljate.set.impl.EmptySet;
 import net.coljate.set.impl.ImmutableWrappedSet;
 import net.coljate.set.impl.MutableWrappedSet;
@@ -166,6 +167,16 @@ public interface Set<T> extends Collection<T> {
         final MutableSet<T> set = MutableSet.createHashSet();
         nested.forEach(set::addAll);
         return set;
+    }
+
+    /**
+     *
+     * @param <T>
+     * @param set
+     * @return a covariant view of the given set.
+     */
+    static <T> Set<T> viewOf(final Set<? extends T> set) {
+        return new CovariantSet<>(set);
     }
 
     static <T> Set<T> copyOf(final Collection<? extends T> collection) {

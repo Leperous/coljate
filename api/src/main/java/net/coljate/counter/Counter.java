@@ -5,6 +5,8 @@ import javax.annotation.Nonnull;
 import net.coljate.collection.Collection;
 import net.coljate.counter.impl.MutableHashCounter;
 import net.coljate.map.Map;
+import net.coljate.map.lazy.LazyMap;
+import net.coljate.set.Set;
 
 /**
  *
@@ -20,7 +22,12 @@ public interface Counter<T> extends Collection<T> {
     }
 
     @Nonnull
-    Map<T, Integer> countElements();
+    Set<T> elements();
+
+    @Nonnull
+    default Map<T, Integer> countElements() {
+        return LazyMap.transformValues(this.elements(), this::count);
+    }
 
     @Override
     default MutableCounter<T> mutableCopy() {

@@ -4,9 +4,11 @@ import net.coljate.collection.Empty;
 import net.coljate.counter.AbstractCounter;
 import net.coljate.counter.ImmutableCounter;
 import net.coljate.counter.MutableCounter;
+import net.coljate.map.ImmutableMap;
+import net.coljate.set.ImmutableSet;
+import net.coljate.set.Set;
 import net.coljate.util.complexity.Complexity;
 import net.coljate.util.complexity.TimeComplexity;
-import net.coljate.map.ImmutableMap;
 
 /**
  *
@@ -25,6 +27,11 @@ public class EmptyCounter<T>
     @Override
     public boolean contains(final Object object) {
         return Empty.super.contains(object);
+    }
+
+    @Override
+    public Set<T> elements() {
+        return ImmutableSet.of();
     }
 
     @Override
