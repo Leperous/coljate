@@ -37,7 +37,7 @@ public interface Array<T> extends Indexed<T>, List<T> {
 
     @Override
     public default ListIterator<T> reverseIterator() {
-        throw new UnsupportedOperationException(); //TODO
+        return new ReverseArrayIterator<>(this);
     }
 
     @Override

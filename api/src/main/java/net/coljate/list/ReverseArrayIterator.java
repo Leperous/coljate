@@ -4,22 +4,14 @@ package net.coljate.list;
  *
  * @author Ollie
  */
-public class ArrayIterator<T> implements ListIterator<T> {
+public class ReverseArrayIterator<T> implements ListIterator<T> {
 
     private final Array<? extends T> array;
     private int index;
 
-    public ArrayIterator(final Array<? extends T> array) {
-        this(array, 0);
-    }
-
-    public ArrayIterator(final Array<? extends T> array, final int startIndex) {
+    public ReverseArrayIterator(final Array<? extends T> array) {
         this.array = array;
-        this.index = startIndex;
-    }
-
-    protected int index() {
-        return index;
+        this.index = array.length();
     }
 
     @Override
@@ -34,7 +26,7 @@ public class ArrayIterator<T> implements ListIterator<T> {
 
     @Override
     public boolean hasNext() {
-        return index < array.count();
+        return index < array.length();
     }
 
     @Override
