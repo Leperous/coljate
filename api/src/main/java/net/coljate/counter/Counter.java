@@ -1,5 +1,7 @@
 package net.coljate.counter;
 
+import javax.annotation.Nonnull;
+
 import net.coljate.collection.Collection;
 import net.coljate.counter.impl.MutableHashCounter;
 import net.coljate.map.Map;
@@ -17,6 +19,7 @@ public interface Counter<T> extends Collection<T> {
         return this.count(element) > 0;
     }
 
+    @Nonnull
     Map<T, Integer> countElements();
 
     @Override
