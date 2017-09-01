@@ -1,8 +1,8 @@
 package net.coljate.set.impl;
 
-import java.util.Collections;
-
 import net.coljate.set.ConcurrentSet;
+import net.coljate.util.Native;
+import static net.coljate.util.Native.createConcurrentHashSet;
 
 /**
  *
@@ -19,7 +19,7 @@ public class ConcurrentWrappedSet<T>
     }
 
     public static <T> ConcurrentWrappedSet<T> createHashSet(final int initialCapacity) {
-        return new ConcurrentWrappedSet<>(createConcurrentHashSet(initialCapacity));
+        return new ConcurrentWrappedSet<>(Native.createConcurrentHashSet(initialCapacity));
     }
 
     public static <T> ConcurrentWrappedSet<T> copyIntoHashSet(final java.util.Collection<? extends T> collection) {
@@ -28,17 +28,13 @@ public class ConcurrentWrappedSet<T>
         return new ConcurrentWrappedSet<>(set);
     }
 
-    private static <T> java.util.Set<T> createConcurrentHashSet(final int initialCapacity) {
-        return Collections.newSetFromMap(new java.util.concurrent.ConcurrentHashMap<>(initialCapacity));
-    }
-
     protected ConcurrentWrappedSet(final java.util.Set<T> delegate) {
         super(delegate);
     }
 
     @Override
     public java.util.Set<T> mutableJavaCopy() {
-        return this.mutableJavaCopy(ConcurrentWrappedSet::createConcurrentHashSet);
+        return this.mutableJavaCopy(Native::createConcurrentHashSet);
     }
 
     @Override
