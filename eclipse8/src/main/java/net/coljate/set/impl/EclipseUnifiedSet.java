@@ -23,10 +23,10 @@ public class EclipseUnifiedSet<T> extends MutableWrappedSet<T> {
     public UnifiedSet<T> mutableJavaCopy() {
         return new UnifiedSet<>(delegate);
     }
-
+    
     @Override
     public EclipseUnifiedSet<T> mutableCopy() {
-        return new EclipseUnifiedSet<>(new UnifiedSet<>(delegate));
+        return new EclipseUnifiedSet<>(this.mutableJavaCopy());
     }
 
     @Override
