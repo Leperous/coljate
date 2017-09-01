@@ -29,6 +29,7 @@ public class MutableWrappedCollection<T>
         this.delegate = delegate;
     }
 
+    @Override
     public boolean add(final T element) {
         return delegate.add(element);
     }

@@ -12,6 +12,7 @@ import net.coljate.list.impl.MutableWrappedList;
 public interface MutableCollection<T> extends Collection<T>, MutableIterableExtension<T> {
 
     /**
+     * Add the given element to some location within this collection.
      *
      * @param element
      * @return true if the element was added, or false if it was not.

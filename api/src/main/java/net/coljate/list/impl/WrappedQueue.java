@@ -71,7 +71,7 @@ public class WrappedQueue<T>
     public WrappedQueue<T> mutableCopy() {
         return new WrappedQueue<>(new ArrayDeque<>(queue), OptionalInt.empty());
     }
-
+    
     @Override
     public ImmutableArray<T> immutableCopy() {
         return Queue.super.immutableCopy();
