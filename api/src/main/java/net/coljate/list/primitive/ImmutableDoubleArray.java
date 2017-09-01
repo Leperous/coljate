@@ -15,6 +15,11 @@ public interface ImmutableDoubleArray
     }
 
     @Override
+    default ImmutableDoubleListIterator reverseIterator() {
+        throw new UnsupportedOperationException(); //TODO
+    }
+
+    @Override
     @Deprecated
     default ImmutableDoubleArray immutableCopy() {
         return this;
@@ -22,7 +27,7 @@ public interface ImmutableDoubleArray
 
     class ImmutableDoubleArrayIterator extends DoubleArrayIterator implements ImmutableDoubleListIterator {
 
-        public ImmutableDoubleArrayIterator(DoubleArray array) {
+        public ImmutableDoubleArrayIterator(final DoubleArray array) {
             super(array);
         }
 

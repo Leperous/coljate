@@ -1,6 +1,7 @@
 package net.coljate.list.impl;
 
 import java.util.Objects;
+import java.util.function.Supplier;
 
 import net.coljate.list.ImmutableList;
 import net.coljate.list.ImmutableListIterator;
@@ -35,7 +36,12 @@ public class ImmutableJoinList<T> implements ImmutableList<T> {
 
     @Override
     public ImmutableListIterator<T> iterator() {
-        return new JoinListIterator();
+        return new JoinListIterator(left::iterator, right::iterator);
+    }
+
+    @Override
+    public ImmutableListIterator<T> reverseIterator() {
+        return new JoinListIterator(right::reverseIterator, left::reverseIterator);
     }
 
     @Override
@@ -63,16 +69,22 @@ public class ImmutableJoinList<T> implements ImmutableList<T> {
 
     private final class JoinListIterator implements ImmutableListIterator<T> {
 
+        private final Supplier<ImmutableListIterator<? extends T>> first, second;
         private ImmutableListIterator<? extends T> l, r;
         private ImmutableListIterator<? extends T> current;
 
+        private JoinListIterator(Supplier<ImmutableListIterator<? extends T>> first, Supplier<ImmutableListIterator<? extends T>> second) {
+            this.first = first;
+            this.second = second;
+        }
+
         ImmutableListIterator<? extends T> current() {
             if (current == null) {
-                l = left.iterator();
+                l = first.get();
                 current = l;
             }
             if (current == l && !current.hasNext()) {
-                r = right.iterator();
+                r = second.get();
                 current = r;
             }
             return current;
@@ -80,12 +92,12 @@ public class ImmutableJoinList<T> implements ImmutableList<T> {
 
         @Override
         public boolean hasPrevious() {
-            throw new UnsupportedOperationException("Not supported yet.");
+            return this.current().hasPrevious();
         }
 
         @Override
         public T previous() {
-            throw new UnsupportedOperationException("Not supported yet.");
+            return this.current().previous();
         }
 
         @Override

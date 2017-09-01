@@ -36,6 +36,11 @@ public interface Array<T> extends Indexed<T>, List<T> {
     }
 
     @Override
+    public default ListIterator<T> reverseIterator() {
+        throw new UnsupportedOperationException(); //TODO
+    }
+
+    @Override
     default Array<T> reversedCopy() {
         return ImmutableNativeArray.reverseCopy(this);
     }
@@ -80,5 +85,5 @@ public interface Array<T> extends Indexed<T>, List<T> {
     static <T> Array<T> copyOf(final T... elements) {
         return ImmutableNativeArray.copyOf(elements);
     }
-    
+
 }

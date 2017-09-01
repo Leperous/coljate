@@ -27,6 +27,11 @@ public interface ImmutableArray<T>
     }
 
     @Override
+    default ImmutableListIterator<T> reverseIterator() {
+        throw new UnsupportedOperationException(); //TODO
+    }
+
+    @Override
     default ImmutableArray<T> reversedCopy() {
         return ImmutableNativeArray.reverseCopy(this);
     }
@@ -63,7 +68,7 @@ public interface ImmutableArray<T>
 
     static class ImmutableArrayIterator<T> extends ArrayIterator<T> implements ImmutableListIterator<T> {
 
-        public ImmutableArrayIterator(Array<? extends T> array) {
+        public ImmutableArrayIterator(final Array<? extends T> array) {
             super(array);
         }
 

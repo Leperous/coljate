@@ -32,6 +32,11 @@ public interface DoubleArray extends DoubleList, Array<Double> {
     default DoubleListIterator iterator() {
         return new DoubleArrayIterator(this);
     }
+    
+    @Override
+    default DoubleListIterator reverseIterator() {
+        throw new UnsupportedOperationException(); //TODO
+    }
 
     @Override
     default double[] doubleArrayCopy() {

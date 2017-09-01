@@ -39,6 +39,11 @@ public class ImmutableWrappedList<T>
     }
 
     @Override
+    public ImmutableListIterator<T> reverseIterator() {
+        throw new UnsupportedOperationException(); //TODO
+    }
+
+    @Override
     public ImmutableList<T> prefixed(final T element) {
         final java.util.List<T> list = this.mutableJavaCopy();
         list.add(element);

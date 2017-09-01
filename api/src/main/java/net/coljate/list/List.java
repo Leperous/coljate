@@ -8,6 +8,7 @@ import java.util.function.Predicate;
 import java.util.stream.Collector;
 
 import javax.annotation.CheckForNull;
+import javax.annotation.Nonnull;
 
 import net.coljate.collection.Collection;
 import net.coljate.collection.SortedCollection.SortingAlgorithm;
@@ -31,6 +32,11 @@ public interface List<T> extends Sequence<T>, Collection<T> {
 
     @Override
     ListIterator<T> iterator();
+
+    @Nonnull
+    default ListIterator<T> reverseIterator() {
+        return this.reversedCopy().iterator();
+    }
 
     @Override
     default T first() {

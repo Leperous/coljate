@@ -41,6 +41,11 @@ public class WrappedList<T>
     }
 
     @Override
+    public ListIterator<T> reverseIterator() {
+        throw new UnsupportedOperationException(); //TODO
+    }
+
+    @Override
     public T last() {
         return list.get(list.size() - 1);
     }

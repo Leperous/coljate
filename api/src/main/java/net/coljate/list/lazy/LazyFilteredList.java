@@ -30,6 +30,11 @@ public class LazyFilteredList<T>
     }
 
     @Override
+    public ListIterator<T> reverseIterator() {
+        throw new UnsupportedOperationException(); //TODO
+    }
+    
+    @Override
     public T last() {
         throw new UnsupportedOperationException(); //TODO
     }

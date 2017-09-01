@@ -48,8 +48,6 @@ public interface MutableList<T> extends List<T>, MutableCollection<T> {
         return false;
     }
 
-    ListIterator<T> reverseIterator();
-
     default SynchronizedList<T> synchronizedCopy() {
         return synchronize(this);
     }

@@ -4,7 +4,6 @@ import java.util.Arrays;
 import java.util.Objects;
 
 import net.coljate.collection.primitive.DoubleCollection;
-import net.coljate.list.ListIterator;
 
 /**
  *
@@ -61,11 +60,6 @@ public class MutableNativeDoubleArray implements MutableDoubleArray {
 
     @Override
     public void prefix(double d) {
-        throw new UnsupportedOperationException(); //TODO
-    }
-
-    @Override
-    public ListIterator<Double> reverseIterator() {
         throw new UnsupportedOperationException(); //TODO
     }
 

@@ -36,6 +36,11 @@ public class LazyTransformedList<F, T>
         return new TransformedListIterator();
     }
 
+    @Override
+    public ListIterator<T> reverseIterator() {
+        throw new UnsupportedOperationException(); //TODO
+    }
+
     private final class TransformedListIterator implements ListIterator<T> {
 
         final ListIterator<F> iterator = delegate.iterator();

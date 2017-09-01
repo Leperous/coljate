@@ -2,6 +2,7 @@ package net.coljate.list.primitive;
 
 import net.coljate.collection.primitive.TroveDoubleCollection;
 import net.coljate.collection.primitive.TroveDoubleIterator;
+import net.coljate.list.ListIterator;
 
 import gnu.trove.iterator.TDoubleIterator;
 import gnu.trove.list.TDoubleList;
@@ -30,6 +31,11 @@ public class TroveDoubleList
     @Override
     public DoubleListIterator iterator() {
         return new TroveDoubleListIterator(list.iterator());
+    }
+
+    @Override
+    public ListIterator<Double> reverseIterator() {
+        throw new UnsupportedOperationException(); //TODO
     }
 
     @Override

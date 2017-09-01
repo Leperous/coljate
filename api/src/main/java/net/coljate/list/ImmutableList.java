@@ -20,6 +20,11 @@ public interface ImmutableList<T> extends List<T>, ImmutableCollection<T> {
     ImmutableListIterator<T> iterator();
 
     @Override
+    default ImmutableListIterator<T> reverseIterator() {
+        return this.reversedCopy().iterator();
+    }
+
+    @Override
     default ImmutableList<T> reversedCopy() {
         return List.super.reversedCopy().immutableCopy();
     }
