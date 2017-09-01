@@ -1,5 +1,8 @@
 package net.coljate.list;
 
+import net.coljate.list.impl.ReverseArrayIterator;
+import net.coljate.list.impl.ArrayIterator;
+
 import java.util.function.Consumer;
 
 import net.coljate.list.impl.ImmutableNativeArray;

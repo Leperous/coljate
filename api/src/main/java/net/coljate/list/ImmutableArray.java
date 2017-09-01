@@ -1,5 +1,6 @@
 package net.coljate.list;
 
+import net.coljate.list.impl.ArrayIterator;
 import net.coljate.collection.Collection;
 import net.coljate.list.impl.EmptyArray;
 import net.coljate.list.impl.ImmutableJoinArray;

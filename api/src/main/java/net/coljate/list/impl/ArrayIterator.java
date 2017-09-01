@@ -1,4 +1,7 @@
-package net.coljate.list;
+package net.coljate.list.impl;
+
+import net.coljate.list.Array;
+import net.coljate.list.ListIterator;
 
 /**
  *

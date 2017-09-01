@@ -1,5 +1,7 @@
 package net.coljate.list;
 
+import net.coljate.list.impl.WrappedListIterator;
+
 import java.util.NoSuchElementException;
 
 import javax.annotation.Nonnull;
