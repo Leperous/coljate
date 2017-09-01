@@ -72,8 +72,8 @@ public interface Array<T> extends Indexed<T>, List<T> {
         return ImmutableNativeArray.copyOf(this);
     }
 
-    static <T> Array<T> repeated(final T value, final int count) {
-        return new RepeatedValueArray<>(value, count);
+    static <T> ImmutableArray<T> repeated(final T value, final int length) {
+        return new RepeatedValueArray<>(value, length);
     }
 
     @SafeVarargs

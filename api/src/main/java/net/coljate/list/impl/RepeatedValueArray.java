@@ -26,8 +26,8 @@ public class RepeatedValueArray<T>
 
     @Override
     public T get(final int index) {
-        if (index < 0 || index > length) {
-            throw new IndexOutOfBoundsException();
+        if (index < 0 || index >= length) {
+            throw new IndexOutOfBoundsException("Index " + index + " is out of bounds!");
         }
         return value;
     }
