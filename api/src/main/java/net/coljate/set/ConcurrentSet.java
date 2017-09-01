@@ -14,7 +14,9 @@ public interface ConcurrentSet<T>
         extends MutableSet<T>, ConcurrentCollection<T> {
 
     @Override
-    ConcurrentSet<T> mutableCopy();
+    default ConcurrentSet<T> mutableCopy() {
+        return ConcurrentWrappedSet.copyIntoHashSet(this);
+    }
 
     @Override
     default Spliterator<T> spliterator() {

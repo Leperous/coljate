@@ -1,5 +1,6 @@
 package net.coljate.set.impl;
 
+import net.coljate.collection.Collection;
 import net.coljate.set.ConcurrentSet;
 import net.coljate.util.Native;
 import static net.coljate.util.Native.createConcurrentHashSet;
@@ -26,6 +27,10 @@ public class ConcurrentWrappedSet<T>
         final java.util.Set<T> set = createConcurrentHashSet(collection.size());
         collection.forEach(set::add);
         return new ConcurrentWrappedSet<>(set);
+    }
+
+    public static <T> ConcurrentWrappedSet<T> copyIntoHashSet(final Collection<? extends T> collection) {
+        return new ConcurrentWrappedSet<>(collection.mutableJavaCopy(Native::createConcurrentHashSet));
     }
 
     protected ConcurrentWrappedSet(final java.util.Set<T> delegate) {
