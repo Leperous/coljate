@@ -47,8 +47,8 @@ ImmutableCollection <- Collection -> MutableCollection
 ImmutableSet <-------- Set --------> MutableSet -------> ConcurrentSet
  ↓                      ↓             ↓                   ↓
 ImmutableMap <-------- Map --------> MutableMap -------> ConcurrentMap
- |  ↑                   ↓             ↓                   ↓
- |  └----------------- Cache ------> MutableCache -----> ConcurrentCache
+ |                      ↓             ↓                   ↓
+ |                     Cache ------> MutableCache -----> ConcurrentCache
  ↓                      ↓             ↓                   ↓
 ImmutableMultimap ---> Multimap ---> MutableMultimap --> ConcurrentMultimap
 ```
