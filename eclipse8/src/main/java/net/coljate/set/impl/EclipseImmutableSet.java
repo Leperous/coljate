@@ -5,15 +5,17 @@ import net.coljate.set.ImmutableSet;
 import net.coljate.set.MutableSet;
 import net.coljate.util.iterator.UnmodifiableIterator;
 
+import org.eclipse.collections.impl.set.mutable.UnifiedSet;
+
 /**
  *
  * @author ollie
  */
-public abstract class AbstractEclipseImmutableSet<T>
+public class EclipseImmutableSet<T>
         extends EclipseRichIterableCollection<T>
         implements ImmutableSet<T> {
 
-    protected AbstractEclipseImmutableSet(final org.eclipse.collections.api.set.ImmutableSet<T> set) {
+    public EclipseImmutableSet(final org.eclipse.collections.api.set.ImmutableSet<T> set) {
         super(set);
     }
 
@@ -22,10 +24,17 @@ public abstract class AbstractEclipseImmutableSet<T>
         return UnmodifiableIterator.wrap(super.iterator());
     }
 
-    @Override
-    public abstract MutableSet<T> mutableCopy();
+    public UnifiedSet<T> unifiedSetCopy() {
+        return this.mutableJavaCopy(UnifiedSet::newSet);
+    }
 
     @Override
+    public MutableSet<T> mutableCopy() {
+        return new EclipseUnifiedSet<>(this.unifiedSetCopy());
+    }
+
+    @Override
+    @Deprecated
     public ImmutableSet<T> immutableCopy() {
         return this;
     }
