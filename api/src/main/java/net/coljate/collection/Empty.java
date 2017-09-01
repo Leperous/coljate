@@ -1,6 +1,9 @@
 package net.coljate.collection;
 
-import java.io.Serializable;
+import java.io.Externalizable;
+import java.io.IOException;
+import java.io.ObjectInput;
+import java.io.ObjectOutput;
 import java.util.Spliterator;
 import java.util.Spliterators;
 import java.util.function.Function;
@@ -14,7 +17,7 @@ import net.coljate.util.iterator.UnmodifiableIterator;
  *
  * @author Ollie
  */
-public interface Empty<T> extends ImmutableCollection<T>, Serializable {
+public interface Empty<T> extends ImmutableCollection<T>, Externalizable {
 
     @Override
     @TimeComplexity(Complexity.CONSTANT)
@@ -52,6 +55,14 @@ public interface Empty<T> extends ImmutableCollection<T>, Serializable {
     @Override
     default Spliterator<T> spliterator() {
         return Spliterators.emptySpliterator();
+    }
+
+    @Override
+    default void writeExternal(final ObjectOutput out) throws IOException {
+    }
+
+    @Override
+    default void readExternal(final ObjectInput in) throws IOException, ClassNotFoundException {
     }
 
 }
