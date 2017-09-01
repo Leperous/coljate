@@ -7,7 +7,10 @@ import java.io.Serializable;
 import java.util.Map;
 import java.util.function.BiFunction;
 
+import javax.annotation.Nonnull;
+
 import net.coljate.collection.Collection;
+import net.coljate.set.Set;
 
 /**
  *
@@ -20,6 +23,11 @@ public class HazelcastMap<K, V> extends ConcurrentWrappedMap<K, V> {
     public HazelcastMap(final IMap<K, V> delegate) {
         super(delegate);
         this.delegate = delegate;
+    }
+
+    @Nonnull
+    public Set<K> localKeys() {
+        return Set.viewOf(delegate.localKeySet());
     }
 
     @Override
