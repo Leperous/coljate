@@ -19,7 +19,7 @@ public class MutableNativeArrayTest {
 
         @Override
         public MutableNativeArray<Object> createTestCollection() {
-            return MutableNativeArray.viewOf();
+            return MutableNativeArray.viewOf(new Object[0]);
         }
 
         @Test

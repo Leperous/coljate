@@ -35,8 +35,7 @@ public class MutableNativeArray<T>
         return new MutableNativeArray<>(Arrays.copyOf(elements), elements.length);
     }
 
-    @SafeVarargs
-    public static <T> MutableNativeArray<T> viewOf(final T... elements) {
+    public static <T> MutableNativeArray<T> viewOf(final T[] elements) {
         return new MutableNativeArray<>(elements, elements.length);
     }
 

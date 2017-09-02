@@ -100,6 +100,10 @@ public interface List<T> extends Sequence<T>, Collection<T> {
         return ImmutableList.of();
     }
 
+    static <T> List<T> of(final T element) {
+        return ImmutableList.of(element);
+    }
+
     @SafeVarargs
     static <T> List<T> of(final T... elements) {
         return ImmutableList.of(elements);

@@ -1,14 +1,13 @@
 package net.coljate.list;
 
-import net.coljate.list.impl.ReverseArrayIterator;
-import net.coljate.list.impl.ArrayIterator;
-
 import java.util.function.Consumer;
 
+import net.coljate.list.impl.ArrayIterator;
 import net.coljate.list.impl.ImmutableNativeArray;
 import net.coljate.list.impl.MutableNativeArray;
 import net.coljate.list.impl.MutableWrappedArrayList;
 import net.coljate.list.impl.RepeatedValueArray;
+import net.coljate.list.impl.ReverseArrayIterator;
 
 /**
  *
@@ -79,8 +78,7 @@ public interface Array<T> extends Indexed<T>, List<T> {
         return RepeatedValueArray.of(value, length);
     }
 
-    @SafeVarargs
-    static <T> Array<T> viewOf(final T... elements) {
+    static <T> Array<T> viewOf(final T[] elements) {
         return MutableNativeArray.viewOf(elements);
     }
 
