@@ -1,8 +1,8 @@
 package net.coljate.counter.impl;
 
-import java.util.Iterator;
-
 import com.google.common.collect.Multiset;
+
+import java.util.Iterator;
 
 import net.coljate.collection.Collection;
 import net.coljate.counter.AbstractCounter;
@@ -33,6 +33,11 @@ public class GuavaCounter<T>
     @Override
     public int count(final Object element) {
         return multiset.count(element);
+    }
+
+    @Override
+    public Set<T> elements() {
+        return Set.viewOf(multiset.elementSet());
     }
 
     @Override

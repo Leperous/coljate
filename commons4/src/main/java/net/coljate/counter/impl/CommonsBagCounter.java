@@ -5,6 +5,7 @@ import java.util.Iterator;
 import net.coljate.counter.AbstractCounter;
 import net.coljate.counter.Counter;
 import net.coljate.map.Map;
+import net.coljate.set.Set;
 
 /**
  *
@@ -36,6 +37,11 @@ public class CommonsBagCounter<T>
     @Override
     public int count(final Object element) {
         return bag.getCount(element);
+    }
+
+    @Override
+    public Set<T> elements() {
+        return Set.viewOf(bag.uniqueSet());
     }
 
     @Override
