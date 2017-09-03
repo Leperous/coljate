@@ -6,6 +6,7 @@ import java.util.Optional;
 import java.util.Spliterator;
 import java.util.Spliterators;
 import java.util.function.Predicate;
+import java.util.stream.Collector;
 
 import javax.annotation.CheckReturnValue;
 
@@ -182,7 +183,7 @@ public interface Set<T> extends Collection<T> {
     static <T> Set<T> copyOf(final Collection<? extends T> collection) {
         return ImmutableSet.copyOf(collection);
     }
-    
+
     static <T> Set<T> viewOf(final java.util.Set<? extends T> set) {
         return new WrappedSet<>(set);
     }
@@ -210,6 +211,10 @@ public interface Set<T> extends Collection<T> {
 
     static boolean elementsEqual(final Set<?> s1, final Set<?> s2) {
         return Equality.unorderedEquals(s1, s2);
+    }
+
+    static <T> Collector<T, ?, ? extends Set<T>> collector() {
+        return ImmutableSet.collector();
     }
 
 }

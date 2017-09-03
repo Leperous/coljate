@@ -3,6 +3,7 @@ package net.coljate.set;
 import java.util.Collections;
 import java.util.Spliterator;
 import java.util.Spliterators;
+import java.util.stream.Collector;
 
 import javax.annotation.Nonnull;
 
@@ -95,6 +96,17 @@ public interface ImmutableSet<T> extends Set<T>, ImmutableCollection<T> {
         return collection.isEmpty()
                 ? of()
                 : ImmutableWrappedSet.copyIntoHashSet(collection);
+    }
+
+    static <T> Collector<T, ?, ImmutableSet<T>> collector() {
+        return Collector.<T, MutableSet<T>, ImmutableSet<T>>of(
+                MutableSet::createHashSet,
+                MutableSet::add,
+                (l, r) -> {
+                    l.addAll(r);
+                    return l;
+                },
+                MutableSet::immutableCopy);
     }
 
 }

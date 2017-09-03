@@ -83,6 +83,10 @@ public interface Graph<V, E> extends Set<Relationship<V, E>> {
         return this.anyMatch(r -> Objects.equals(r, relationship));
     }
 
+    default boolean containsVertex(final Object vertex) {
+        return this.vertices().contains(vertex);
+    }
+
     /**
      * @return the count of relationships.
      */
