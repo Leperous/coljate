@@ -19,6 +19,10 @@ public interface Cell<R, C, V> {
         return new ImmutableCell<>(this.rowKey(), this.columnKey(), this.value());
     }
 
+    default boolean containsKey(final Object key) {
+        return Objects.equals(key, this.rowKey()) || Objects.equals(key, this.columnKey());
+    }
+
     static <R, C, V> Cell<R, C, V> of(final R rowKey, final C columnKey, final V value) {
         return new ImmutableCell<>(rowKey, columnKey, value);
     }

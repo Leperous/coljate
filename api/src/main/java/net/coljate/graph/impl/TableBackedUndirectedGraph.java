@@ -70,6 +70,11 @@ public class TableBackedUndirectedGraph<V, E>
             return TwoSet.require(cell.rowKey(), cell.columnKey());
         }
 
+        @Override
+        public boolean containsVertex(final Object vertex) {
+            return cell.containsKey(vertex);
+        }
+
     }
 
 }
