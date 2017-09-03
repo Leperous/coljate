@@ -11,6 +11,7 @@ import java.util.function.Function;
 public interface UnmodifiableCovariantIterator<T, R extends T>
         extends UnmodifiableIterator<T>, CovariantIterator<T, R> {
 
+    @SuppressWarnings("unchecked")
     static <T, R extends T> UnmodifiableCovariantIterator<T, R> of() {
         return EmptyUnmodifiableCovariantIterator.INSTANCE;
     }

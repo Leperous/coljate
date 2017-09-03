@@ -1,6 +1,7 @@
 package net.coljate.graph;
 
 import net.coljate.graph.impl.EmptyDirectedGraph;
+import net.coljate.graph.impl.SingleEdgeDirectedGraph;
 import net.coljate.util.iterator.CovariantIterator;
 
 /**
@@ -27,11 +28,15 @@ public interface DirectedGraph<V, E> extends Graph<V, E> {
     @Override
     ImmutableDirectedGraph<V, E> immutableCopy();
 
-    static <V, E> Graph<V, E> of() {
+    static <V, E> DirectedGraph<V, E> of() {
         return EmptyDirectedGraph.instance();
     }
 
-    static <V, E> Graph<V, E> createHashBackedGraph() {
+    static <V, E> DirectedGraph<V, E> of(final V from, final E edge, final V to) {
+        return new SingleEdgeDirectedGraph<>(from, to, edge);
+    }
+
+    static <V, E> MutableDirectedGraph<V, E> createHashBackedGraph() {
         return MutableDirectedGraph.createHashBackedGraph();
     }
 

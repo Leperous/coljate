@@ -113,4 +113,8 @@ public interface Graph<V, E> extends Set<Relationship<V, E>> {
         return ImmutableGraph.of(vertex);
     }
 
+    static <V, E> Graph<V, E> of(final V v1, final E edge, final V v2) {
+        return DirectedGraph.of(v1, edge, v2);
+    }
+
 }

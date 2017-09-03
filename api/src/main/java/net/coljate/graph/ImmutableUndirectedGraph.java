@@ -13,6 +13,7 @@ public interface ImmutableUndirectedGraph<V, E>
     UnmodifiableCovariantIterator<Relationship<V, E>, ? extends UndirectedRelationship<V, E>> iterator();
 
     @Override
+    @Deprecated
     default ImmutableUndirectedGraph<V, E> immutableCopy() {
         return this;
     }
