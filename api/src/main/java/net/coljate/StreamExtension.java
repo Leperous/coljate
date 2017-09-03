@@ -1,5 +1,7 @@
 package net.coljate;
 
+import java.util.function.BiConsumer;
+import java.util.stream.Collector;
 import java.util.stream.Stream;
 import java.util.stream.StreamSupport;
 
@@ -30,6 +32,13 @@ public interface StreamExtension<T> extends Iterable<T> {
     @Nonnull
     default Stream<T> parallelStream() {
         return StreamSupport.stream(this.spliterator(), true);
+    }
+
+    default <C, R> R collect(final Collector<? super T, C, ? extends R> collector) {
+        final C container = collector.supplier().get();
+        final BiConsumer<C, ? super T> accumulator = collector.accumulator();
+        this.forEach(element -> accumulator.accept(container, element));
+        return collector.finisher().apply(container);
     }
 
 }
