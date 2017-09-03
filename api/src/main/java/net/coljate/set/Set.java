@@ -67,10 +67,10 @@ public interface Set<T> extends Collection<T> {
     }
 
     @CheckReturnValue
-    default Set<T> and(final T element) {
+    default Set<T> intersection(final T element) {
         return this.contains(element)
                 ? this
-                : this.and(Set.of(element));
+                : Set.of();
     }
 
     /**
@@ -79,7 +79,7 @@ public interface Set<T> extends Collection<T> {
      * @return a set of elements in both this set and the given set.
      */
     @CheckReturnValue
-    default Set<T> and(final Set<? extends T> that) {
+    default Set<T> intersection(final Set<? extends T> that) {
         return that.isAlwaysEmpty()
                 ? this
                 : LazySet.intersection(this, that);
@@ -95,13 +95,19 @@ public interface Set<T> extends Collection<T> {
         return LazySet.complement(this, that);
     }
 
+    default Set<T> union(final T element) {
+        return this.contains(element)
+                ? this
+                : this.union(Set.of(element));
+    }
+
     /**
      * Union.
      *
      * @return a set of elements in either this set or the given set, or both.
      */
     @CheckReturnValue
-    default Set<T> or(final Set<? extends T> that) {
+    default Set<T> union(final Set<? extends T> that) {
         return LazySetUnion.of(this, that);
     }
 

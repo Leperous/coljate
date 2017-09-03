@@ -126,10 +126,10 @@ public interface Map<K, V> extends Set<Entry<K, V>>, Associative<K, V> {
 
     @Override
     @CheckReturnValue
-    default Map<K, V> and(final Entry<K, V> entry) {
+    default Map<K, V> intersection(final Entry<K, V> entry) {
         return this.containsEntry(entry)
                 ? this
-                : this.mutableCopy().and(entry);
+                : this.mutableCopy().intersection(entry);
     }
 
     @Nonnull

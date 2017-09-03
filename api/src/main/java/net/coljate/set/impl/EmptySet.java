@@ -49,7 +49,7 @@ public class EmptySet<T>
     }
 
     @Override
-    public Set<T> or(final Set<? extends T> that) {
+    public Set<T> union(final Set<? extends T> that) {
         return Set.unmodifiable(that);
     }
 
@@ -59,7 +59,7 @@ public class EmptySet<T>
     }
 
     @Override
-    public EmptySet<T> and(final Set<? extends T> that) {
+    public EmptySet<T> intersection(final Set<? extends T> that) {
         return this;
     }
 

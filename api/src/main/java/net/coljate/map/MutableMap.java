@@ -155,7 +155,7 @@ public interface MutableMap<K, V> extends Map<K, V>, MutableSet<Entry<K, V>> {
     }
 
     @Override
-    default Map<K, V> and(final Entry<K, V> entry) {
+    default Map<K, V> intersection(final Entry<K, V> entry) {
         this.put(entry);
         return this;
     }

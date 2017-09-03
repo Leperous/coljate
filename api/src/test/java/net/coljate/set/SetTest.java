@@ -62,11 +62,11 @@ public interface SetTest<T> extends CollectionTest<T> {
         }
 
         @Test
-        default void testAnd() {
+        default void testIntersection() {
             final T a = this.createTestObject(), b = this.createTestObject(), c = this.createTestObject();
             final Set<T> first = this.createTestCollection(a, b);
             final Set<T> second = this.createTestCollection(b, c);
-            final Set<T> and = first.and(second);
+            final Set<T> and = first.intersection(second);
             assertThat(and.count(), is(1));
             assertFalse(and.contains(a));
             assertTrue(and.contains(b));
@@ -78,7 +78,7 @@ public interface SetTest<T> extends CollectionTest<T> {
             final T a = this.createTestObject(), b = this.createTestObject(), c = this.createTestObject();
             final Set<T> first = this.createTestCollection(a, b);
             final Set<T> second = this.createTestCollection(b, c);
-            final Set<T> or = first.or(second);
+            final Set<T> or = first.union(second);
             assertThat(or.count(), is(3));
         }
 
