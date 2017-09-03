@@ -2,6 +2,7 @@ package net.coljate;
 
 import java.util.Iterator;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.function.Predicate;
 import java.util.function.ToLongFunction;
 
@@ -175,6 +176,19 @@ public interface IterableExtension<T> extends Container, Iterable<T> {
     default T first() {
         final Iterator<T> iterator = this.iterator();
         return iterator.hasNext() ? iterator.next() : null;
+    }
+
+    @Nonnull
+    default Optional<T> only() {
+        final Iterator<T> iterator = this.iterator();
+        if (!iterator.hasNext()) {
+            return Optional.empty();
+        }
+        final T next = iterator.next();
+        if (iterator.hasNext()) {
+            throw new IllegalArgumentException();
+        }
+        return Optional.of(next);
     }
 
 }
