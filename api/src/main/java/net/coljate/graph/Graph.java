@@ -105,4 +105,8 @@ public interface Graph<V, E> extends Set<Relationship<V, E>> {
         return MutableDirectedGraph.createHashBackedGraph();
     }
 
+    static <V, E> Graph<V, E> of(final V vertex) {
+        return ImmutableGraph.of(vertex);
+    }
+
 }

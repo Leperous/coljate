@@ -1,6 +1,7 @@
 package net.coljate.graph;
 
 import net.coljate.collection.ImmutableCollection;
+import net.coljate.graph.impl.SingletonGraph;
 import net.coljate.set.ImmutableSet;
 
 /**
@@ -24,6 +25,10 @@ public interface ImmutableGraph<V, E>
     @Deprecated
     default ImmutableGraph<V, E> immutableCopy() {
         return this;
+    }
+
+    static <V, E> ImmutableGraph<V, E> of(final V vertex) {
+        return new SingletonGraph<>(vertex);
     }
 
 }
