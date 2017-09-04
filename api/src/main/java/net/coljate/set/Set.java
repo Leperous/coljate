@@ -14,7 +14,6 @@ import net.coljate.collection.Collection;
 import net.coljate.list.Array;
 import net.coljate.set.impl.CovariantSet;
 import net.coljate.set.impl.EmptySet;
-import net.coljate.set.impl.ImmutableWrappedSet;
 import net.coljate.set.impl.MutableWrappedSet;
 import net.coljate.set.impl.TwoSet;
 import net.coljate.set.impl.UnmodifiableSet;
@@ -41,7 +40,7 @@ public interface Set<T> extends Collection<T> {
 
     @Override
     default ImmutableSet<T> immutableCopy() {
-        return ImmutableWrappedSet.copyIntoHashSet(this);
+        return ImmutableSet.copyOf(this);
     }
 
     @Override

@@ -78,8 +78,16 @@ public interface Array<T> extends Indexed<T>, List<T> {
         return RepeatedValueArray.of(value, length);
     }
 
+    static <T> Array<T> of() {
+        return ImmutableArray.of();
+    }
+
     static <T> Array<T> viewOf(final T[] elements) {
         return MutableNativeArray.viewOf(elements);
+    }
+
+    static <T> Array<T> viewOf(final T[] elements, final int fromInclusive, final int toExlusive) {
+        throw new UnsupportedOperationException(); //TODO
     }
 
     @SafeVarargs
