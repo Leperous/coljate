@@ -94,6 +94,12 @@ public interface Set<T> extends Collection<T> {
         return LazySet.complement(this, that);
     }
 
+    default Set<T> not(final T element) {
+        return this.contains(element)
+                ? this.not(of(element))
+                : this;
+    }
+
     default Set<T> union(final T element) {
         return this.contains(element)
                 ? this
