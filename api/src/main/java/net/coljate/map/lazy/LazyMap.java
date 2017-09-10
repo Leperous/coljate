@@ -36,6 +36,11 @@ public interface LazyMap<K, V> extends LazySet<Entry<K, V>>, Map<K, V> {
     @Override
     Collection<V> values();
 
+    @Override
+    default LazyMap<K, V> union(final K key, final V value) {
+        return new LazyOverrideMap<>(this, key, value);
+    }
+
     static <K, V> LazyMap<K, V> transformValues(
             final Set<K> keys,
             final Function<? super K, ? extends V> valueFunction) {

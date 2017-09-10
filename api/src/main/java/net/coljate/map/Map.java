@@ -26,6 +26,8 @@ import net.coljate.map.impl.RepeatedValueMap;
 import net.coljate.map.impl.SingletonMap;
 import net.coljate.map.lazy.LazyFilteredMap;
 import net.coljate.map.lazy.LazyMap;
+import net.coljate.map.lazy.LazyOverrideMap;
+import net.coljate.map.lazy.LazyUnionMap;
 import net.coljate.set.Set;
 import net.coljate.util.Functions;
 
@@ -134,10 +136,14 @@ public interface Map<K, V> extends Set<Entry<K, V>>, Associative<K, V> {
 
     @Nonnull
     @CheckReturnValue
-    default Map<K, V> and(final K key, final V value) {
+    default Map<K, V> union(final K key, final V value) {
         return this.contains(key, value)
                 ? this
-                : this.mutableCopy().and(key, value);
+                : new LazyOverrideMap<>(this, key, value);
+    }
+
+    default Map<K, V> union(final Map<? extends K, ? extends V> map) {
+        return LazyUnionMap.of(this, map);
     }
 
     @Override
@@ -216,6 +222,10 @@ public interface Map<K, V> extends Set<Entry<K, V>>, Associative<K, V> {
         final MutableMap<K, V> map = MutableMap.createHashMap();
         values.forEach(value -> map.putIfAbsent(keyFunction.apply(value), value));
         return map;
+    }
+
+    static <K, V> Map<K, V> covariantValues(final Map<K, ? extends V> map) {
+        return map.transformValues(v -> v);
     }
 
 }
