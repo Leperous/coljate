@@ -35,4 +35,11 @@ public interface Entry<K, V> {
         return ImmutableEntry.of(key, value);
     }
 
+    @SuppressWarnings("unchecked")
+    static <K, V> Entry<K, V> copyOf(@Nonnull final Entry<? extends K, ? extends V> entry) {
+        return entry instanceof ImmutableEntry
+                ? (ImmutableEntry<K, V>) entry
+                : of(entry.key(), entry.value());
+    }
+
 }
