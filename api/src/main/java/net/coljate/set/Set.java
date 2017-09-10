@@ -65,10 +65,16 @@ public interface Set<T> extends Collection<T> {
         return LazyFilteredSet.of(this, predicate);
     }
 
+    /**
+     * "And" operator.
+     *
+     * @param element
+     * @return a set containing the given element if it is contained in this set, otherwise an empty set.
+     */
     @CheckReturnValue
     default Set<T> intersection(final T element) {
         return this.contains(element)
-                ? this
+                ? Set.of(element)
                 : Set.of();
     }
 
@@ -94,6 +100,12 @@ public interface Set<T> extends Collection<T> {
         return LazySet.complement(this, that);
     }
 
+    /**
+     * "Or" operator.
+     *
+     * @param element
+     * @return
+     */
     default Set<T> union(final T element) {
         return this.contains(element)
                 ? this
