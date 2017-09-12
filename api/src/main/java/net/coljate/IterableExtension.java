@@ -3,6 +3,7 @@ package net.coljate;
 import java.util.Iterator;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.function.BinaryOperator;
 import java.util.function.Predicate;
 import java.util.function.ToLongFunction;
 
@@ -189,6 +190,19 @@ public interface IterableExtension<T> extends Container, Iterable<T> {
             throw new IllegalArgumentException();
         }
         return Optional.of(next);
+    }
+
+    default T reduce(final BinaryOperator<T> operator) {
+        return this.reduce(null, operator);
+    }
+
+    @CheckForNull
+    default T reduce(final T initialValue, final BinaryOperator<T> operator) {
+        T value = initialValue;
+        for (final T element : this) {
+            value = operator.apply(value, element);
+        }
+        return value;
     }
 
 }
