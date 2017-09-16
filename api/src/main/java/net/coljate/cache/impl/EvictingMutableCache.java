@@ -82,8 +82,9 @@ public class EvictingMutableCache<K, V> implements MutableCache<K, V> {
 
     private void evictAll(final Iterator<Object> toEvict) {
         while (toEvict.hasNext()) {
-            cache.evict(toEvict.next());
-            toEvict.remove();
+            if (cache.removeKey(toEvict.next())) {
+                toEvict.remove();
+            }
         }
     }
 
