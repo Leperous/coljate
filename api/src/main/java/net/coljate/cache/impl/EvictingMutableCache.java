@@ -5,7 +5,6 @@ import java.util.Iterator;
 import net.coljate.cache.MutableCache;
 import net.coljate.cache.eviction.CacheEvictionPolicy;
 import net.coljate.collection.Collection;
-import net.coljate.map.Map;
 import net.coljate.map.MutableEntry;
 import net.coljate.map.MutableMap;
 import net.coljate.set.Set;
@@ -38,7 +37,7 @@ public class EvictingMutableCache<K, V> implements MutableCache<K, V> {
     public MutableEntry<K, V> getEntry(final Object key) {
         final MutableEntry<K, V> entry = cache.getEntry(key);
         if (entry != null) {
-            this.process(evictionPolicy.notifyRead(key));
+            this.evictAll(evictionPolicy.notifyRead(key));
         }
         return entry;
     }
@@ -46,7 +45,7 @@ public class EvictingMutableCache<K, V> implements MutableCache<K, V> {
     @Override
     public V put(final K key, final V value) {
         final V put = cache.put(key, value);
-        this.process(evictionPolicy.notifyWrite(key));
+        this.evictAll(evictionPolicy.notifyWrite(key));
         return put;
     }
 
@@ -54,7 +53,7 @@ public class EvictingMutableCache<K, V> implements MutableCache<K, V> {
     public boolean remove(final Object key, final Object value) {
         final boolean removed = cache.remove(key, value);
         if (removed) {
-            this.process(evictionPolicy.notifyRemove(key));
+            this.evictAll(evictionPolicy.notifyRemove(key));
         }
         return removed;
     }
@@ -63,7 +62,7 @@ public class EvictingMutableCache<K, V> implements MutableCache<K, V> {
     public V evict(final Object key) {
         if (cache.containsKey(key)) {
             final V evicted = cache.evict(key);
-            this.process(evictionPolicy.notifyRemove(key));
+            this.evictAll(evictionPolicy.notifyRemove(key));
             return evicted;
         } else {
             return null;
@@ -81,7 +80,7 @@ public class EvictingMutableCache<K, V> implements MutableCache<K, V> {
         return cache.mutableCopy();
     }
 
-    private void process(final Iterator<Object> toEvict) {
+    private void evictAll(final Iterator<Object> toEvict) {
         while (toEvict.hasNext()) {
             cache.evict(toEvict.next());
         }
