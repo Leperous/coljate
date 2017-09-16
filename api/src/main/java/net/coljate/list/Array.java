@@ -2,6 +2,7 @@ package net.coljate.list;
 
 import java.util.function.Consumer;
 
+import net.coljate.collection.Collection;
 import net.coljate.list.impl.ArrayIterator;
 import net.coljate.list.impl.ImmutableNativeArray;
 import net.coljate.list.impl.MutableNativeArray;
@@ -93,6 +94,10 @@ public interface Array<T> extends Indexed<T>, List<T> {
     @SafeVarargs
     static <T> Array<T> copyOf(final T... elements) {
         return ImmutableNativeArray.copyOf(elements);
+    }
+
+    static <T> Array<T> copyOf(final Collection<? extends T> collection) {
+        return ImmutableArray.copyOf(collection);
     }
 
 }
