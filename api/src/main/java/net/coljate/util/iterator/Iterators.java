@@ -74,11 +74,11 @@ public class Iterators {
         return count;
     }
 
-    public static <T> UnmodifiableIterator<T> first(final Iterator<? extends T> iterator, final int total) {
+    public static <T> Iterator<T> first(final Iterator<? extends T> iterator, final int total) {
         if (total == 0) {
             return empty();
         }
-        return new UnmodifiableIterator<T>() {
+        return new Iterator<T>() {
 
             int current = 0;
 
@@ -94,6 +94,11 @@ public class Iterators {
                 }
                 current += 1;
                 return iterator.next();
+            }
+
+            @Override
+            public void remove() {
+                iterator.remove();
             }
 
         };
@@ -139,6 +144,11 @@ public class Iterators {
             @Override
             public T next() {
                 return current.next();
+            }
+
+            @Override
+            public void remove() {
+                current.remove();
             }
 
         };
