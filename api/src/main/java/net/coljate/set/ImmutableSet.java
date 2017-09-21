@@ -98,7 +98,7 @@ public interface ImmutableSet<T> extends Set<T>, ImmutableCollection<T> {
                 : ImmutableWrappedSet.copyIntoHashSet(collection);
     }
 
-    static <T> Collector<T, ?, ImmutableSet<T>> collector() {
+    static <T> Collector<T, ?, ? extends ImmutableSet<T>> collector() {
         return Collector.<T, MutableSet<T>, ImmutableSet<T>>of(
                 MutableSet::createHashSet,
                 MutableSet::add,
