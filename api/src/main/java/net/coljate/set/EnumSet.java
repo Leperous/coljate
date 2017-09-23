@@ -41,7 +41,10 @@ public interface EnumSet<E extends Enum<E>> extends Set<E> {
 
     @SafeVarargs
     static <E extends Enum<E>> EnumSet<E> of(final E first, final E... rest) {
-        return LargeEnumSet.of(first, rest);
+        final Class<E> enumClass = (Class<E>)first.getClass();
+        return SmallEnumSet.supports(enumClass)
+                ? SmallEnumSet.of(first, rest)
+                : LargeEnumSet.of(first, rest);
     }
 
     static <E extends Enum<E>> EnumSet<E> allOf(final Class<E> enumClass) {

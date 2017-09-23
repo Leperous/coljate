@@ -27,6 +27,15 @@ public class SmallEnumSet<E extends Enum<E>>
                 : Optional.empty();
     }
 
+    @SafeVarargs
+    public static <E extends Enum<E>> SmallEnumSet<E> of(final E first, final E... rest) {
+        long e = 1L << first.ordinal();
+        for (final E element : rest) {
+            e &= 1L << element.ordinal();
+        }
+        return new SmallEnumSet<>((Class<E>) first.getClass(), e);
+    }
+
     private final Class<E> enumClass;
     private final long value;
 
