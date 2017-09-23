@@ -78,4 +78,10 @@ public class EmptyMap<K, V>
         return Empty.super.spliterator();
     }
 
+    @Override
+    @Deprecated
+    public EmptyMap<K, V> immutableCopy() {
+        return this;
+    }
+
 }
