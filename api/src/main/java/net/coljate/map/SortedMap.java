@@ -2,6 +2,7 @@ package net.coljate.map;
 
 import net.coljate.set.SequentialSet;
 import net.coljate.set.SortedSet;
+import net.coljate.tree.impl.RedBlackTreeMap;
 
 /**
  *
@@ -13,6 +14,8 @@ public interface SortedMap<K, V> extends SortedSet<Entry<K, V>>, Map<K, V> {
     SequentialSet<K> keys();
 
     @Override
-    MutableSortedMap<K, V> mutableCopy();
+    default MutableSortedMap<K, V> mutableCopy() {
+        return RedBlackTreeMap.copyOf(this);
+    }
 
 }

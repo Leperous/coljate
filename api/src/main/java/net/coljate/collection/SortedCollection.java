@@ -1,6 +1,7 @@
 package net.coljate.collection;
 
 import java.util.Comparator;
+import java.util.Iterator;
 
 import javax.annotation.CheckForNull;
 import javax.annotation.Nonnull;
@@ -23,7 +24,9 @@ public interface SortedCollection<T> extends Sequence<T>, Collection<T> {
     Comparator<? super T> comparator();
 
     @CheckForNull
-    T least();
+    default T least() {
+        return this.first();
+    }
 
     /**
      * @return the greatest or last element in this collection, according to the sort.
@@ -33,7 +36,8 @@ public interface SortedCollection<T> extends Sequence<T>, Collection<T> {
 
     @Override
     default T first() {
-        return this.least();
+        final Iterator<T> iterator = this.iterator();
+        return iterator.hasNext() ? null : iterator.next();
     }
 
     interface SortingAlgorithm {

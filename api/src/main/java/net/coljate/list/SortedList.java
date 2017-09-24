@@ -14,11 +14,6 @@ public interface SortedList<T> extends SortedCollection<T>, List<T> {
     }
 
     @Override
-    default T least() {
-        return this.first();
-    }
-
-    @Override
     default T greatest() {
         return this.last();
     }
