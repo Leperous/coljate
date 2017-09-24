@@ -17,6 +17,8 @@ public interface SequentialSet<T> extends Sequence<T>, Set<T> {
         return Set.super.first();
     }
 
+    T last();
+
     @Nonnull
     default Optional<SortedSet<T>> toSortedSet() {
         return this instanceof SortedSet

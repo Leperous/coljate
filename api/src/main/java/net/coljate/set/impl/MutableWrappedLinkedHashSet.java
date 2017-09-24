@@ -1,7 +1,7 @@
 package net.coljate.set.impl;
 
-import net.coljate.util.iterator.Iterators;
 import net.coljate.set.SequentialSet;
+import net.coljate.util.iterator.Iterators;
 
 /**
  *
@@ -26,6 +26,11 @@ public class MutableWrappedLinkedHashSet<T>
     @Override
     public T first() {
         return Iterators.first(this.iterator());
+    }
+
+    @Override
+    public T last() {
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override

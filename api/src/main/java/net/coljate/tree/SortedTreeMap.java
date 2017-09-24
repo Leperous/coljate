@@ -3,6 +3,7 @@ package net.coljate.tree;
 import java.util.Comparator;
 import java.util.Iterator;
 import java.util.Objects;
+import java.util.function.Predicate;
 
 import javax.annotation.Nonnull;
 
@@ -10,11 +11,11 @@ import net.coljate.map.Entry;
 import net.coljate.map.Map;
 import net.coljate.map.SortedMap;
 import net.coljate.set.AbstractSet;
+import net.coljate.set.SequentialSet;
 import net.coljate.tree.impl.RedBlackTreeMap;
 import net.coljate.tree.navigation.TreeNavigation;
 import net.coljate.util.Functions;
 import net.coljate.util.iterator.Iterators;
-import net.coljate.set.SequentialSet;
 
 /**
  *
@@ -30,11 +31,6 @@ public interface SortedTreeMap<K, V, N extends TreeMapNode<K, V, N>>
     N greatest();
 
     @Override
-    default N first() {
-        return this.least();
-    }
-
-    @Override
     default SequentialSet<K> keys() {
         return this.keys(TreeNavigation.getDefault());
     }
@@ -42,6 +38,11 @@ public interface SortedTreeMap<K, V, N extends TreeMapNode<K, V, N>>
     @Override
     default SequentialSet<K> keys(final TreeNavigation navigation) {
         return new SortedTreeKeySet<>(this, navigation);
+    }
+
+    @Override
+    default SortedTreeMap<K, V, N> filter(final Predicate<? super Entry<K, V>> predicate) {
+        throw new UnsupportedOperationException(); //TODO
     }
 
     @Override
@@ -91,7 +92,12 @@ public interface SortedTreeMap<K, V, N extends TreeMapNode<K, V, N>>
 
         @Override
         public K first() {
-            return Functions.ifNonNull(tree.first(), N::key);
+            return Functions.ifNonNull(tree.least(), N::key);
+        }
+
+        @Override
+        public K last() {
+            return Functions.ifNonNull(tree.greatest(), N::key);
         }
 
     }

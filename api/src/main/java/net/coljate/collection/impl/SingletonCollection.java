@@ -3,11 +3,11 @@ package net.coljate.collection.impl;
 import java.util.NoSuchElementException;
 import java.util.Objects;
 
-import net.coljate.util.iterator.UnmodifiableIterator;
 import net.coljate.collection.AbstractCollection;
 import net.coljate.collection.Collection;
 import net.coljate.collection.MutableCollection;
 import net.coljate.collection.Singleton;
+import net.coljate.util.iterator.UnmodifiableIterator;
 
 /**
  *
@@ -46,7 +46,7 @@ public class SingletonCollection<T>
     public T first() {
         return element;
     }
-
+    
     @Override
     public UnmodifiableIterator<T> iterator() {
         return new UnmodifiableIterator<T>() {

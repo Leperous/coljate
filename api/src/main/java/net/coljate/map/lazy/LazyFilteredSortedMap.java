@@ -16,7 +16,7 @@ import net.coljate.util.iterator.Iterators;
  */
 public class LazyFilteredSortedMap<K, V>
         extends LazyFilteredMap<K, V>
-        implements SortedMap<K, V> {
+        implements LazySortedMap<K, V> {
 
     private final SortedMap<K, V> map;
     private Keys keys;
@@ -33,7 +33,7 @@ public class LazyFilteredSortedMap<K, V>
 
     @Override
     public MutableSortedMap<K, V> mutableCopy() {
-        return SortedMap.super.mutableCopy();
+        return LazySortedMap.super.mutableCopy();
     }
 
     @Override

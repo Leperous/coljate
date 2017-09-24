@@ -1,6 +1,8 @@
 package net.coljate.set;
 
 import java.util.Comparator;
+import java.util.function.IntPredicate;
+import java.util.function.Predicate;
 
 import javax.annotation.CheckReturnValue;
 import javax.annotation.Nonnull;
@@ -20,20 +22,34 @@ import net.coljate.util.complexity.TimeComplexity;
 public interface SortedSet<T> extends SortedCollection<T>, SequentialSet<T> {
 
     @Override
+    @Deprecated
     default T first() {
         return SortedCollection.super.first();
     }
 
-    @Nonnull
-    @CheckReturnValue
-    default SortedSet<T> greaterThan(final T element) {
-        return LazyFilteredSortedSet.of(this, e -> this.comparator().compare(e, element) > 0);
+    @Override
+    @Deprecated
+    default T last() {
+        return this.greatest();
+    }
+
+    @Override
+    default SortedSet<T> filter(final Predicate<? super T> predicate) {
+        return LazyFilteredSortedSet.of(this, predicate);
     }
 
     @Nonnull
     @CheckReturnValue
-    default SortedSet<T> lessThan(final T element) {
-        return LazyFilteredSortedSet.of(this, e -> this.comparator().compare(e, element) < 0);
+    default SortedSet<T> greaterThan(final T element, final boolean inclusive) {
+        final IntPredicate comparison = inclusive ? i -> i >= 0 : i -> i > 0;
+        return this.filter(e -> comparison.test(this.comparator().compare(e, element)));
+    }
+
+    @Nonnull
+    @CheckReturnValue
+    default SortedSet<T> lessThan(final T element, final boolean inclusive) {
+        final IntPredicate comparison = inclusive ? i -> i <= 0 : i -> i < 0;
+        return this.filter(e -> comparison.test(this.comparator().compare(e, element)));
     }
 
     @TimeComplexity(computed = true, bestCase = Complexity.LINEAR)

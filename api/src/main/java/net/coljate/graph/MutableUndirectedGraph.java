@@ -18,7 +18,7 @@ public interface MutableUndirectedGraph<V, E>
 
     default boolean add(final UndirectedRelationship<V, E> relationship) {
         final TwoSet<? extends V> vertices = relationship.vertices();
-        return this.addEdge(vertices.first(), vertices.second(), relationship.edge());
+        return this.addEdge(vertices.first(), vertices.last(), relationship.edge());
     }
 
     @Override

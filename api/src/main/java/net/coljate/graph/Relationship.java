@@ -31,8 +31,8 @@ public interface Relationship<V, E> {
     default Optional<V> otherVertex(final Object vertex) {
         final TwoSet<V> vertices = this.vertices();
         if (Objects.equals(vertex, vertices.first())) {
-            return Optional.of(vertices.second());
-        } else if (Objects.equals(vertex, vertices.second())) {
+            return Optional.of(vertices.last());
+        } else if (Objects.equals(vertex, vertices.last())) {
             return Optional.of(vertices.first());
         } else {
             return Optional.empty();
