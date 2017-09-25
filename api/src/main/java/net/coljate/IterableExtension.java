@@ -196,7 +196,6 @@ public interface IterableExtension<T> extends Container, Iterable<T> {
         return this.reduce(null, operator);
     }
 
-    @CheckForNull
     default T reduce(final T initialValue, final BinaryOperator<T> operator) {
         T value = initialValue;
         for (final T element : this) {

@@ -16,11 +16,11 @@ import net.coljate.set.Set;
 public class LazyTransformedKeyMap<K, V>
         implements LazyMap<K, V> {
 
-    private final Set<K> keys;
+    private final Set<? extends K> keys;
     private final Function<? super K, ? extends V> toValue;
 
     public LazyTransformedKeyMap(
-            @Nonnull final Set<K> keys,
+            @Nonnull final Set<? extends K> keys,
             @Nonnull final Function<? super K, ? extends V> toValue) {
         this.keys = Objects.requireNonNull(keys);
         this.toValue = Objects.requireNonNull(toValue);
@@ -28,7 +28,7 @@ public class LazyTransformedKeyMap<K, V>
 
     @Override
     public Set<K> keys() {
-        return keys;
+        return Set.viewOf(keys);
     }
 
     @Override

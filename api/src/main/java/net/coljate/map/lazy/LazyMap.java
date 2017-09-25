@@ -42,7 +42,7 @@ public interface LazyMap<K, V> extends LazySet<Entry<K, V>>, Map<K, V> {
     }
 
     static <K, V> LazyMap<K, V> transformValues(
-            final Set<K> keys,
+            final Set<? extends K> keys,
             final Function<? super K, ? extends V> valueFunction) {
         return new LazyTransformedKeyMap<>(keys, valueFunction);
     }
