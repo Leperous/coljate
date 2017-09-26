@@ -11,6 +11,7 @@ import net.coljate.collection.ImmutableCollection;
 import net.coljate.map.impl.EmptyMap;
 import net.coljate.map.impl.ImmutableMapIterator;
 import net.coljate.map.impl.ImmutableWrappedMap;
+import net.coljate.map.impl.SingletonMap;
 import net.coljate.set.ImmutableSet;
 import net.coljate.util.iterator.UnmodifiableIterator;
 
@@ -56,6 +57,17 @@ public interface ImmutableMap<K, V> extends Map<K, V>, ImmutableSet<Entry<K, V>>
 
     static <K, V> ImmutableMap<K, V> of() {
         return EmptyMap.instance();
+    }
+
+    static <K, V> SingletonMap<K, V> of(final K key, final V value) {
+        return SingletonMap.of(key, value);
+    }
+
+    static <K, V> ImmutableMap<K, V> of(final K k1, final V v1, final K k2, final V v2) {
+        final MutableMap<K, V> map = MutableMap.createHashMap(2);
+        map.put(k1, v1);
+        map.put(k2, v2);
+        return map.immutableCopy();
     }
 
     static <K, V> ImmutableMap<K, V> copyIntoHashMap(final Map<? extends K, ? extends V> map) {
