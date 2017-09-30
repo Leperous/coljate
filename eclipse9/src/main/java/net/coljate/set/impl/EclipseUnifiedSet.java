@@ -3,7 +3,7 @@ package net.coljate.set.impl;
 import org.eclipse.collections.impl.set.mutable.UnifiedSet;
 
 /**
- * Wrapper around a {@link UnifiedSet} (a general {@link java.util.HashMap} replacement).
+ * Wrapper around a {@link UnifiedSet} (a general {@link java.util.HashSet} replacement).
  *
  * @author ollie
  */
@@ -31,8 +31,8 @@ public class EclipseUnifiedSet<T> extends MutableWrappedSet<T> {
     }
 
     @Override
-    public EclipseImmutableSet<T> immutableCopy() {
-        return new EclipseImmutableSet<>(delegate.toImmutable());
+    public ImmutableEclipseSet<T> immutableCopy() {
+        return new ImmutableEclipseSet<>(delegate.toImmutable());
     }
 
 }

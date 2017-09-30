@@ -11,11 +11,11 @@ import org.eclipse.collections.impl.set.mutable.UnifiedSet;
  *
  * @author ollie
  */
-public class EclipseImmutableSet<T>
+public class ImmutableEclipseSet<T>
         extends EclipseRichIterableCollection<T>
         implements ImmutableSet<T> {
 
-    public EclipseImmutableSet(final org.eclipse.collections.api.set.ImmutableSet<T> set) {
+    public ImmutableEclipseSet(final org.eclipse.collections.api.set.ImmutableSet<T> set) {
         super(set);
     }
 
