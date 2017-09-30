@@ -34,4 +34,9 @@ public abstract class AbstractMap<K, V>
         return Hashing.unorderedHash(this);
     }
 
+    @Override
+    public String toString() {
+        return Map.toString(this);
+    }
+
 }

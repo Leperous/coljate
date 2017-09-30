@@ -20,11 +20,6 @@ public interface IntegerCollection extends IntegerContainer, Collection<Long>, L
         return false;
     }
 
-    default boolean contains(final long l) {
-        return (l >= Integer.MIN_VALUE && l <= Integer.MAX_VALUE)
-                && this.contains((int) l);
-    }
-
     @Override
     default boolean contains(final Object object) {
         return IntegerContainer.super.contains(object);

@@ -13,6 +13,10 @@ public class TroveDoubleSet
         extends TroveDoubleCollection
         implements DoubleSet {
 
+    public static DoubleSet viewOf(final TDoubleSet set) {
+        return new TroveDoubleSet(set);
+    }
+
     protected TroveDoubleSet(final TDoubleSet set) {
         super(set);
     }
