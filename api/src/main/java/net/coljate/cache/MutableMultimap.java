@@ -4,8 +4,8 @@ import net.coljate.collection.Collection;
 import net.coljate.collection.MutableCollection;
 import net.coljate.map.Entry;
 import net.coljate.map.MutableEntry;
-import net.coljate.map.impl.MapIterator;
 import net.coljate.util.iterator.CovariantIterator;
+import net.coljate.util.iterator.Iterators;
 
 /**
  *
@@ -25,7 +25,7 @@ public interface MutableMultimap<K, V>
 
     @Override
     default CovariantIterator<Entry<K, Collection<V>>, ? extends MutableEntry<K, Collection<V>>> iterator() {
-        return new MapIterator<>(this.keys(), this::getEntry);
+        return Iterators.transform(this.keys().iterator(), this::getEntry);
     }
 
     static <K, V> MutableMultimap<K, V> create() {

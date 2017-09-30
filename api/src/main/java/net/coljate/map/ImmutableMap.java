@@ -9,10 +9,10 @@ import javax.annotation.Nullable;
 
 import net.coljate.collection.ImmutableCollection;
 import net.coljate.map.impl.EmptyMap;
-import net.coljate.map.impl.ImmutableMapIterator;
 import net.coljate.map.impl.ImmutableWrappedMap;
 import net.coljate.map.impl.SingletonMap;
 import net.coljate.set.ImmutableSet;
+import net.coljate.util.iterator.Iterators;
 import net.coljate.util.iterator.UnmodifiableIterator;
 
 /**
@@ -47,7 +47,7 @@ public interface ImmutableMap<K, V> extends Map<K, V>, ImmutableSet<Entry<K, V>>
 
     @Override
     default UnmodifiableIterator<Entry<K, V>> iterator() {
-        return new ImmutableMapIterator<>(this.keys(), this::getEntry);
+        return Iterators.transform(this.keys().iterator(), this::getEntry);
     }
 
     @Override

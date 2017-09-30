@@ -20,7 +20,6 @@ import javax.annotation.Nullable;
 import net.coljate.collection.Collection;
 import net.coljate.map.impl.ImmutableWrappedMap;
 import net.coljate.map.impl.KeySortedMap;
-import net.coljate.map.impl.MapIterator;
 import net.coljate.map.impl.MutableWrappedHashMap;
 import net.coljate.map.impl.RepeatedValueMap;
 import net.coljate.map.impl.SingletonMap;
@@ -31,6 +30,7 @@ import net.coljate.map.lazy.LazyUnionMap;
 import net.coljate.set.Set;
 import net.coljate.util.Functions;
 import net.coljate.util.Strings;
+import net.coljate.util.iterator.Iterators;
 
 /**
  *
@@ -176,7 +176,7 @@ public interface Map<K, V> extends Set<Entry<K, V>>, Associative<K, V> {
 
     @Override
     default Iterator<Entry<K, V>> iterator() {
-        return new MapIterator<>(this.keys(), this::getEntry);
+        return Iterators.transform(this.keys().iterator(), this::getEntry);
     }
 
     @Override

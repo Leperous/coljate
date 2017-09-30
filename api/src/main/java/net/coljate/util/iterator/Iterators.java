@@ -38,6 +38,27 @@ public class Iterators {
         };
     }
 
+    public static <B1, B2, T extends B2> UnmodifiableCovariantIterator<B2, T> transform(final UnmodifiableIterator<? extends B1> from, final Function<? super B1, ? extends T> transform) {
+        return new UnmodifiableCovariantIterator<B2, T>() {
+
+            @Override
+            public boolean hasNext() {
+                return from.hasNext();
+            }
+
+            @Override
+            public T next() {
+                return transform.apply(from.next());
+            }
+
+            @Override
+            public void remove() {
+                from.remove();
+            }
+
+        };
+    }
+
     public static <B, T extends B> CovariantIterator<B, T> filter(final Iterator<? extends T> iterator, final Predicate<? super T> predicate) {
         return filter(iterator::hasNext, iterator::next, predicate);
     }

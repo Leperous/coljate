@@ -5,6 +5,8 @@ import javax.annotation.CheckForNull;
 import net.coljate.map.Entry;
 import net.coljate.map.Map;
 import net.coljate.set.primitive.DoubleSet;
+import net.coljate.util.iterator.CovariantIterator;
+import net.coljate.util.iterator.Iterators;
 
 /**
  *
@@ -29,6 +31,11 @@ public interface DoubleKeyMap<V> extends Map<Double, V> {
 
     @Override
     DoubleSet keys();
+
+    @Override
+    default CovariantIterator<Entry<Double, V>, ? extends DoubleKeyEntry<V>> iterator() {
+        return Iterators.transform(this.keys().iterator(), this::getEntry);
+    }
 
     interface DoubleKeyEntry<V> extends Entry<Double, V> {
 

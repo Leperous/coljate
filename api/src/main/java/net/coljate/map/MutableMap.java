@@ -11,11 +11,11 @@ import javax.annotation.CheckForNull;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-import net.coljate.map.impl.MapIterator;
 import net.coljate.map.impl.MutableWrappedHashMap;
 import net.coljate.map.impl.MutableWrappedMap;
 import net.coljate.set.MutableSet;
 import net.coljate.util.iterator.CovariantIterator;
+import net.coljate.util.iterator.Iterators;
 
 /**
  *
@@ -173,7 +173,7 @@ public interface MutableMap<K, V> extends Map<K, V>, MutableSet<Entry<K, V>> {
 
     @Override
     default CovariantIterator<Entry<K, V>, ? extends MutableEntry<K, V>> iterator() {
-        return new MapIterator<>(this.keys(), this::getEntry);
+        return Iterators.transform(this.keys().iterator(), this::getEntry);
     }
 
     static <K, V> MutableMap<K, V> viewOf(final java.util.Map<K, V> map) {
