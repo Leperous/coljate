@@ -15,6 +15,10 @@ public interface DoubleKeyMap<V> extends Map<Double, V> {
     @CheckForNull
     DoubleKeyEntry<V> getEntry(double key);
 
+    default boolean containsKey(final double key) {
+        return this.getEntry(key) != null;
+    }
+
     @Override
     @Deprecated
     default DoubleKeyEntry<V> getEntry(final Object key) {

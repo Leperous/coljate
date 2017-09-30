@@ -5,7 +5,7 @@ import java.util.OptionalDouble;
 
 import net.coljate.collection.primitive.DoubleCollection;
 import net.coljate.collection.primitive.TroveDoubleCollection;
-import net.coljate.map.Map;
+import net.coljate.map.AbstractMap;
 import net.coljate.set.Set;
 
 import gnu.trove.map.TObjectDoubleMap;
@@ -15,7 +15,7 @@ import gnu.trove.map.hash.TObjectDoubleHashMap;
  *
  * @author Ollie
  */
-public class TroveDoubleValueMap<K> implements DoubleValueMap<K> {
+public class TroveDoubleValueMap<K> extends AbstractMap<K, Double> implements DoubleValueMap<K> {
 
     public static <K> DoubleValueMap<K> createHashMap(final int initialCapacity) {
         return new TroveDoubleValueMap<>(new TObjectDoubleHashMap<>(initialCapacity));
@@ -73,8 +73,8 @@ public class TroveDoubleValueMap<K> implements DoubleValueMap<K> {
     }
 
     @Override
-    public String toString() {
-        return Map.toString(this);
+    public boolean isEmpty() {
+        return map.isEmpty();
     }
 
     private final class Entry implements DoubleValueEntry<K> {

@@ -22,6 +22,11 @@ public class TroveDoubleKeyMap<V> extends AbstractMap<Double, V> implements Doub
     }
 
     @Override
+    public boolean containsKey(final double key) {
+        return map.containsKey(key);
+    }
+
+    @Override
     public DoubleKeyEntry<V> getEntry(final double key) {
         return map.containsKey(key)
                 ? new Entry(key)
@@ -40,6 +45,11 @@ public class TroveDoubleKeyMap<V> extends AbstractMap<Double, V> implements Doub
         return values == null
                 ? (values = Collection.viewOf(map.valueCollection()))
                 : values;
+    }
+
+    @Override
+    public boolean isEmpty() {
+        return map.isEmpty();
     }
 
     private final class Entry implements DoubleKeyEntry<V> {
