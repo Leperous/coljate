@@ -9,6 +9,8 @@ import javax.annotation.Nonnull;
 import net.coljate.collection.primitive.DoubleCollection;
 import net.coljate.map.Entry;
 import net.coljate.map.Map;
+import net.coljate.util.iterator.CovariantIterator;
+import net.coljate.util.iterator.Iterators;
 
 /**
  *
@@ -48,6 +50,11 @@ public interface DoubleValueMap<K> extends Map<K, Double> {
 
     @Override
     DoubleCollection values();
+
+    @Override
+    default CovariantIterator<Entry<K, Double>, ? extends DoubleValueEntry<K>> iterator() {
+        return Iterators.transform(this.keys().iterator(), this::getEntry);
+    }
 
     interface DoubleValueEntry<K> extends Entry<K, Double> {
 
