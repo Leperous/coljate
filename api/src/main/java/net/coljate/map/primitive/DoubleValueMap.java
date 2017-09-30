@@ -4,6 +4,7 @@ import java.util.Optional;
 import java.util.OptionalDouble;
 import java.util.function.DoubleSupplier;
 
+import net.coljate.collection.primitive.DoubleCollection;
 import net.coljate.map.Entry;
 import net.coljate.map.Map;
 
@@ -13,6 +14,9 @@ import net.coljate.map.Map;
  */
 public interface DoubleValueMap<K> extends Map<K, Double> {
 
+    @Override
+    DoubleValueEntry<K> getEntry(Object key);
+
     default double defaultValue() {
         return 0d;
     }
@@ -21,12 +25,14 @@ public interface DoubleValueMap<K> extends Map<K, Double> {
         return this.getDouble(key, this::defaultValue);
     }
 
-    double getDouble(K key, DoubleSupplier ifNull);
+    default double getDouble(final K key, final DoubleSupplier ifAbsent) {
+        return this.maybeGetDouble(key).orElseGet(ifAbsent);
+    }
 
-    OptionalDouble maybeGetDouble(Object key);
-
-    @Override
-    DoubleValueEntry<K> getEntry(Object key);
+    default OptionalDouble maybeGetDouble(final Object key) {
+        final DoubleValueEntry<K> entry = this.getEntry(key);
+        return entry == null ? OptionalDouble.empty() : OptionalDouble.of(entry.doubleValue());
+    }
 
     @Override
     @Deprecated
@@ -40,6 +46,9 @@ public interface DoubleValueMap<K> extends Map<K, Double> {
     default double sumValues() {
         return this.values().serialStream().mapToDouble(Double::valueOf).sum();
     }
+
+    @Override
+    DoubleCollection values();
 
     interface DoubleValueEntry<K> extends Entry<K, Double> {
 

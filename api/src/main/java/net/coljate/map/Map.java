@@ -30,6 +30,7 @@ import net.coljate.map.lazy.LazyOverrideMap;
 import net.coljate.map.lazy.LazyUnionMap;
 import net.coljate.set.Set;
 import net.coljate.util.Functions;
+import net.coljate.util.Strings;
 
 /**
  *
@@ -226,6 +227,10 @@ public interface Map<K, V> extends Set<Entry<K, V>>, Associative<K, V> {
 
     static <K, V> Map<K, V> covariantValues(final Map<K, ? extends V> map) {
         return map.transformValues(v -> v);
+    }
+
+    static String toString(final Map<?, ?> map) {
+        return Strings.toStringWithClass(map);
     }
 
 }

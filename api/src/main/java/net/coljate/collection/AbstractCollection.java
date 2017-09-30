@@ -12,7 +12,7 @@ public abstract class AbstractCollection<T> implements Collection<T> {
 
     @Override
     public String toString() {
-        return this.getClass().getSimpleName() + ":[" + Strings.toString(this) + "]";
+        return this.getClass().getSimpleName() + ":[" + Strings.elementsToString(this) + "]";
     }
 
     @Override

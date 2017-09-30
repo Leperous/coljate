@@ -18,6 +18,10 @@ public class TroveDoubleCollection
         extends AbstractCollection<Double>
         implements DoubleCollection {
 
+    public static DoubleCollection viewOf(final TDoubleCollection collection) {
+        return new TroveDoubleCollection(collection);
+    }
+
     private final TDoubleCollection collection;
 
     protected TroveDoubleCollection(final TDoubleCollection collection) {
