@@ -1,12 +1,10 @@
 package net.coljate.collection.primitive;
 
-import net.coljate.Container;
-
 /**
  *
  * @author Ollie
  */
-public interface IntegerContainer extends Container {
+public interface IntegerContainer extends LongContainer {
 
     boolean contains(int i);
 
@@ -16,6 +14,7 @@ public interface IntegerContainer extends Container {
                 && this.contains(((Integer) object).intValue());
     }
 
+    @Override
     default boolean contains(final long l) {
         return (l >= Integer.MIN_VALUE && l <= Integer.MAX_VALUE)
                 && this.contains((int) l);

@@ -7,7 +7,7 @@ import java.util.function.LongBinaryOperator;
  *
  * @author Ollie
  */
-public interface LongIterable extends Iterable<Long> {
+public interface LongIterable extends Iterable<Long>, LongContainer {
 
     @Override
     LongIterator iterator();
