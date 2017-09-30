@@ -7,6 +7,6 @@ import net.coljate.set.Set;
  *
  * @author ollie
  */
-public interface IntegerSet extends IntegerCollection, Set<Integer> {
+public interface IntegerSet extends IntegerCollection, Set<Long> {
 
 }

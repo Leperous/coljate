@@ -8,7 +8,7 @@ import net.coljate.set.primitive.IntegerSet;
  *
  * @author ollie
  */
-public interface IntegerCounter extends IntegerCollection, Counter<Integer> {
+public interface IntegerCounter extends IntegerCollection, Counter<Long> {
 
     int count(int value);
 

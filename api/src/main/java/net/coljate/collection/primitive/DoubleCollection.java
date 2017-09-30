@@ -1,6 +1,8 @@
 package net.coljate.collection.primitive;
 
 import java.util.Iterator;
+import java.util.function.BinaryOperator;
+import java.util.function.DoubleBinaryOperator;
 
 import net.coljate.collection.Collection;
 import net.coljate.list.primitive.ImmutableNativeDoubleArray;
@@ -42,6 +44,29 @@ public interface DoubleCollection extends DoubleContainer, Collection<Double> {
 
     @Override
     DoubleIterator iterator();
+
+    @Override
+    @Deprecated
+    default Double reduce(final BinaryOperator<Double> operator) {
+        return Collection.super.reduce(operator);
+    }
+
+    default double reduce(final DoubleBinaryOperator operator, final double initialValue) {
+        final DoubleIterator iterator = this.iterator();
+        double current = initialValue;
+        while (iterator.hasNext()) {
+            current = operator.applyAsDouble(current, iterator.nextDouble());
+        }
+        return current;
+    }
+
+    default double sum() {
+        return this.reduce((final double d1, final double d2) -> d1 + d2, 0d);
+    }
+
+    default double product() {
+        return this.reduce((final double d1, final double d2) -> d1 + d2, 1d);
+    }
 
     @Override
     default MutableDoubleCollection mutableCopy() {
