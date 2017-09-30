@@ -51,11 +51,6 @@ public class Iterators {
                 return transform.apply(from.next());
             }
 
-            @Override
-            public void remove() {
-                from.remove();
-            }
-
         };
     }
 
