@@ -214,4 +214,13 @@ public interface IterableExtension<T> extends Container, Iterable<T> {
         return max;
     }
 
+    @CheckForNull
+    default T minBy(final Comparator<? super T> comparator) {
+        T min = null;
+        for (final T element : this) {
+            min = min == null || comparator.compare(element, min) < 0 ? element : min;
+        }
+        return min;
+    }
+
 }
