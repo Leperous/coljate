@@ -1,5 +1,6 @@
 package net.coljate;
 
+import java.util.Comparator;
 import java.util.Iterator;
 import java.util.Objects;
 import java.util.Optional;
@@ -202,6 +203,15 @@ public interface IterableExtension<T> extends Container, Iterable<T> {
             value = operator.apply(value, element);
         }
         return value;
+    }
+
+    @CheckForNull
+    default T maxBy(final Comparator<? super T> comparator) {
+        T max = null;
+        for (final T element : this) {
+            max = max == null || comparator.compare(element, max) > 0 ? element : max;
+        }
+        return max;
     }
 
 }
