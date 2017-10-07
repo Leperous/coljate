@@ -39,38 +39,28 @@ public class MutableNativeDoubleArray implements MutableDoubleArray {
     }
 
     @Override
-    public DoubleListIterator iterator() {
-        throw new UnsupportedOperationException(); //TODO
-    }
-
-    @Override
-    public ImmutableDoubleArray immutableCopy() {
-        throw new UnsupportedOperationException(); //TODO
-    }
-
-    @Override
     public int length() {
         return array.length;
     }
 
     @Override
-    public void suffix(double d) {
+    public void suffix(final double d) {
         throw new UnsupportedOperationException(); //TODO
     }
 
     @Override
-    public void prefix(double d) {
+    public void prefix(final double d) {
         throw new UnsupportedOperationException(); //TODO
     }
 
     @Override
-    public boolean removeFirst(double d) {
+    public boolean removeFirst(final double d) {
         throw new UnsupportedOperationException(); //TODO
     }
 
     @Override
     public void resize(final int length) {
-        throw new UnsupportedOperationException(); //TODO
+        array = Arrays.copyOf(array, length);
     }
 
 }

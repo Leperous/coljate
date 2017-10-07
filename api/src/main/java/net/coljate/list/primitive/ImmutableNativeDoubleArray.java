@@ -1,5 +1,7 @@
 package net.coljate.list.primitive;
 
+import javax.annotation.Nonnull;
+
 import net.coljate.collection.primitive.DoubleCollection;
 
 /**
@@ -8,8 +10,8 @@ import net.coljate.collection.primitive.DoubleCollection;
  */
 public class ImmutableNativeDoubleArray extends NativeDoubleArray implements ImmutableDoubleArray {
 
-    public static ImmutableDoubleArray copyOf(final DoubleCollection collection) {
-        throw new UnsupportedOperationException();
+    public static ImmutableDoubleArray copyOf(@Nonnull final DoubleCollection collection) {
+        return new ImmutableNativeDoubleArray(DoubleCollection.toArray(collection));
     }
 
     protected ImmutableNativeDoubleArray(final double[] array) {

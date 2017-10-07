@@ -18,16 +18,6 @@ public class NativeDoubleArray implements DoubleArray {
     }
 
     @Override
-    public DoubleListIterator iterator() {
-        throw new UnsupportedOperationException(); //TODO
-    }
-
-    @Override
-    public ImmutableDoubleArray immutableCopy() {
-        throw new UnsupportedOperationException(); //TODO
-    }
-
-    @Override
     public int length() {
         return array.length;
     }

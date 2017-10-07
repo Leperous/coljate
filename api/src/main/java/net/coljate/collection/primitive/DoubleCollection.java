@@ -34,12 +34,7 @@ public interface DoubleCollection extends DoubleContainer, Collection<Double> {
      * @return the doubles in this collection copied into a new array.
      */
     default double[] doubleArrayCopy() {
-        final double[] array = new double[this.count()];
-        int index = 0;
-        for (final DoubleIterator iterator = this.iterator(); iterator.hasNext();) {
-            array[index++] = iterator.nextDouble();
-        }
-        return array;
+        return toArray(this);
     }
 
     @Override
@@ -80,6 +75,15 @@ public interface DoubleCollection extends DoubleContainer, Collection<Double> {
 
     static DoubleCollection copyOf(final double[] array) {
         return MutableNativeDoubleArray.copyOf(array);
+    }
+
+    static double[] toArray(final DoubleCollection collection) {
+        final double[] array = new double[collection.count()];
+        int index = 0;
+        for (final DoubleIterator iterator = collection.iterator(); iterator.hasNext();) {
+            array[index++] = iterator.nextDouble();
+        }
+        return array;
     }
 
     interface DoubleIterator extends Iterator<Double> {
