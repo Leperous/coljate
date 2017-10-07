@@ -7,7 +7,7 @@ import javax.annotation.CheckReturnValue;
 import javax.annotation.Nonnull;
 
 import net.coljate.map.lazy.LazyFilteredKeySortedMap;
-import net.ollie.goat.functions.Predicates;
+import net.coljate.util.functions.Predicates;
 
 /**
  * Map sorted by keys.

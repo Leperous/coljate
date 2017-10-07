@@ -30,7 +30,7 @@ import net.coljate.map.lazy.LazyUnionMap;
 import net.coljate.set.Set;
 import net.coljate.util.Strings;
 import net.coljate.util.iterator.Iterators;
-import net.ollie.goat.functions.Functions;
+import net.coljate.util.functions.Functions;
 
 /**
  *

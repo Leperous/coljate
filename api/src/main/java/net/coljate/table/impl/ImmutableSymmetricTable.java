@@ -5,7 +5,7 @@ import net.coljate.table.Cell;
 import net.coljate.table.ImmutableCell;
 import net.coljate.table.ImmutableTable;
 import net.coljate.util.iterator.UnmodifiableIterator;
-import net.ollie.goat.functions.Functions;
+import net.coljate.util.functions.Functions;
 
 /**
  *

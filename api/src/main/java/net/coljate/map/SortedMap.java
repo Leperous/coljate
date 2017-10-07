@@ -8,8 +8,8 @@ import net.coljate.map.lazy.LazyFilteredSortedMap;
 import net.coljate.set.SequentialSet;
 import net.coljate.set.SortedSet;
 import net.coljate.tree.impl.RedBlackTreeMap;
-import net.ollie.goat.functions.Predicates;
-import net.ollie.goat.suppliers.Suppliers;
+import net.coljate.util.functions.Predicates;
+import net.coljate.util.suppliers.Suppliers;
 
 /**
  * Map sorted by entries.

@@ -10,7 +10,7 @@ import net.coljate.map.Map;
 import net.coljate.map.MutableMap;
 import net.coljate.set.MutableSet;
 import net.coljate.set.Set;
-import net.ollie.goat.functions.Functions;
+import net.coljate.util.functions.Functions;
 
 /**
  * A data structure where pairs of objects are "related" somehow.

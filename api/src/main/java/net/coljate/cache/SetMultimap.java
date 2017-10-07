@@ -1,7 +1,7 @@
 package net.coljate.cache;
 
 import net.coljate.set.Set;
-import net.ollie.goat.functions.Functions;
+import net.coljate.util.functions.Functions;
 
 /**
  *

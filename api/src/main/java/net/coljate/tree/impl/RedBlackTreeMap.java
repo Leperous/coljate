@@ -18,7 +18,7 @@ import net.coljate.tree.ImmutableBinaryTreeMap;
 import net.coljate.tree.MutableBinaryTreeMap;
 import net.coljate.tree.MutableSortedTreeMap;
 import net.coljate.set.SequentialSet;
-import net.ollie.goat.functions.Functions;
+import net.coljate.util.functions.Functions;
 
 /**
  *

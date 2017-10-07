@@ -10,7 +10,7 @@ import net.coljate.counter.MutableCounter;
 import net.coljate.map.Entry;
 import net.coljate.map.Map;
 import net.coljate.set.Set;
-import net.ollie.goat.suppliers.Suppliers;
+import net.coljate.util.suppliers.Suppliers;
 
 /**
  * 

@@ -1,7 +1,7 @@
 package net.coljate.table;
 
 import net.coljate.util.iterator.UnmodifiableIterator;
-import net.ollie.goat.functions.Functions;
+import net.coljate.util.functions.Functions;
 
 /**
  *

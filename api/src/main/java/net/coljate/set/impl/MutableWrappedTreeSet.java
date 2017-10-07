@@ -7,7 +7,7 @@ import net.coljate.set.MutableSortedSet;
 import net.coljate.util.Arrays;
 import net.coljate.util.complexity.Complexity;
 import net.coljate.util.complexity.TimeComplexity;
-import net.ollie.goat.suppliers.Suppliers;
+import net.coljate.util.suppliers.Suppliers;
 
 /**
  *

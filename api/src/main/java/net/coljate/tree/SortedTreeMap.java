@@ -15,7 +15,7 @@ import net.coljate.set.SequentialSet;
 import net.coljate.tree.impl.RedBlackTreeMap;
 import net.coljate.tree.navigation.TreeNavigation;
 import net.coljate.util.iterator.Iterators;
-import net.ollie.goat.functions.Functions;
+import net.coljate.util.functions.Functions;
 
 /**
  *

@@ -6,7 +6,7 @@ import java.util.OptionalInt;
 
 import net.coljate.list.Queue;
 import net.coljate.util.Arrays;
-import net.ollie.goat.functions.Functions;
+import net.coljate.util.functions.Functions;
 
 /**
  *

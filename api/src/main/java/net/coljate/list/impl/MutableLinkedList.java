@@ -9,7 +9,7 @@ import net.coljate.list.List;
 import net.coljate.list.ListIterator;
 import net.coljate.list.MutableList;
 import net.coljate.util.Arrays;
-import net.ollie.goat.functions.Functions;
+import net.coljate.util.functions.Functions;
 
 /**
  *

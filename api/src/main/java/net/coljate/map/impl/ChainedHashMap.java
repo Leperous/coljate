@@ -21,7 +21,7 @@ import net.coljate.set.AbstractSet;
 import net.coljate.set.Set;
 import net.coljate.util.iterator.CovariantIterator;
 import net.coljate.util.iterator.Iterators;
-import net.ollie.goat.functions.Functions;
+import net.coljate.util.functions.Functions;
 
 /**
  *

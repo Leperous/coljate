@@ -12,7 +12,7 @@ import net.coljate.table.Cell;
 import net.coljate.table.Table;
 import net.coljate.util.iterator.CovariantIterator;
 import net.coljate.util.iterator.Iterators;
-import net.ollie.goat.functions.Functions;
+import net.coljate.util.functions.Functions;
 
 /**
  * A graph backed by a {@link Table}, where rows represent "from" vertices and columns "to" vertices.

@@ -2,7 +2,7 @@ package net.coljate.list.lazy;
 
 import java.util.function.IntFunction;
 
-import net.ollie.goat.suppliers.Suppliers;
+import net.coljate.util.suppliers.Suppliers;
 
 /**
  *
