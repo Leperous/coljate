@@ -46,6 +46,11 @@ public class LazyFilteredSortedMap<K, V>
         return map.getEntry(this.keys().greatest());
     }
 
+    @Override
+    public Entry<K, V> least() {
+        return map.getEntry(this.keys().least());
+    }
+
     private final class Keys implements LazySortedSet<K> {
 
         @Override
@@ -55,7 +60,7 @@ public class LazyFilteredSortedMap<K, V>
 
         @Override
         public Comparator<? super K> comparator() {
-            return (k1, k2) -> LazyFilteredSortedMap.this.comparator().compare(map.getEntry(k1), map.getEntry(k2));
+            return Comparator.comparing(map::getEntry, LazyFilteredSortedMap.this.comparator());
         }
 
         @Override

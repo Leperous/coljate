@@ -12,8 +12,10 @@ import net.ollie.goat.functions.Predicates;
 import net.ollie.goat.suppliers.Suppliers;
 
 /**
+ * Map sorted by entries.
  *
  * @author Ollie
+ * @see KeySortedMap
  * @see java.util.SortedMap
  * @see java.util.NavigableMap
  */
@@ -32,10 +34,15 @@ public interface SortedMap<K, V> extends SortedSet<Entry<K, V>>, Map<K, V> {
         return this.filter(Predicates.greaterThan(entry, orEqual, this.comparator()));
     }
 
+    @Override
+    default SortedMap<K, V> lessThan(final Entry<K, V> entry, final boolean orEqual) {
+        return this.filter(Predicates.lessThan(entry, orEqual, this.comparator()));
+    }
+
     @CheckForNull
     default Entry<K, V> ceilingEntry(final K key) {
         final Entry<K, V> entry = Suppliers.firstNonNull(this.getEntry(key), () -> Entry.of(key, null));
-        return this.greaterThan(entry, true).first();
+        return this.greaterThan(entry, true).least();
     }
 
     @Override
