@@ -1,8 +1,10 @@
 package net.coljate.counter.impl;
 
-import com.google.common.collect.Multiset;
-
 import java.util.Iterator;
+
+import com.google.common.collect.ConcurrentHashMultiset;
+import com.google.common.collect.HashMultiset;
+import com.google.common.collect.Multiset;
 
 import net.coljate.collection.Collection;
 import net.coljate.counter.AbstractCounter;
@@ -50,6 +52,19 @@ public class GuavaCounter<T>
     @Override
     public Iterator<T> iterator() {
         return multiset.iterator();
+    }
+
+    @Override
+    public Multiset<T> mutableJavaCopy() {
+        return this.hashCopy();
+    }
+
+    protected HashMultiset<T> hashCopy() {
+        return HashMultiset.create(multiset);
+    }
+
+    protected ConcurrentHashMultiset<T> concurrentHashCopy() {
+        return ConcurrentHashMultiset.create(multiset);
     }
 
     private final class GuavaCounterMap extends AbstractMap<T, Integer> {

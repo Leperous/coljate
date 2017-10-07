@@ -28,7 +28,7 @@ public interface Counter<T> extends Collection<T> {
     default Map<T, Integer> countElements() {
         return LazyMap.transformValues(this.elements(), this::count);
     }
-
+    
     @Override
     default MutableCounter<T> mutableCopy() {
         return MutableCounter.copyOf(this);
