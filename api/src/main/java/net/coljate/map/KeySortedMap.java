@@ -3,8 +3,10 @@ package net.coljate.map;
 import java.util.Comparator;
 import java.util.function.Predicate;
 
+import javax.annotation.CheckReturnValue;
 import javax.annotation.Nonnull;
 
+import net.coljate.map.lazy.LazyFilteredKeySortedMap;
 import net.ollie.goat.functions.Predicates;
 
 /**
@@ -24,12 +26,19 @@ public interface KeySortedMap<K, V> extends SortedMap<K, V> {
         return Comparator.comparing(Entry::key, this.keyComparator());
     }
 
-    KeySortedMap<K, V> filterKeys(Predicate<? super K> keyPredicate);
+    @Nonnull
+    @CheckReturnValue
+    default KeySortedMap<K, V> filterKeys(final Predicate<? super K> keyPredicate) {
+        return this.filter(entry -> keyPredicate.test(entry.key()));
+    }
 
     @Override
-    KeySortedMap<K, V> filter(Predicate<? super Entry<K, V>> predicate);
+    default KeySortedMap<K, V> filter(final Predicate<? super Entry<K, V>> predicate) {
+        return new LazyFilteredKeySortedMap<>(this, predicate);
+    }
 
     @Nonnull
+    @CheckReturnValue
     default KeySortedMap<K, V> greaterThanKey(final K key, final boolean orEqual) {
         return this.filterKeys(Predicates.greaterThan(key, orEqual, this.keyComparator()));
     }
@@ -41,6 +50,7 @@ public interface KeySortedMap<K, V> extends SortedMap<K, V> {
     }
 
     @Nonnull
+    @CheckReturnValue
     default KeySortedMap<K, V> lessThanKey(final K key, final boolean orEqual) {
         return this.filterKeys(Predicates.lessThan(key, orEqual, this.keyComparator()));
     }
