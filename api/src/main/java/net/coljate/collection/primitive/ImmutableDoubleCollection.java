@@ -19,8 +19,5 @@ public interface ImmutableDoubleCollection
     @Override
     UnmodifiableDoubleIterator iterator();
 
-    interface UnmodifiableDoubleIterator extends DoubleIterator, UnmodifiableIterator<Double> {
-
-    }
 
 }

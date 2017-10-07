@@ -1,6 +1,7 @@
 package net.coljate.list.primitive;
 
 import net.coljate.collection.primitive.ImmutableDoubleCollection;
+import net.coljate.collection.primitive.UnmodifiableDoubleIterator;
 import net.coljate.list.ImmutableList;
 import net.coljate.list.ImmutableListIterator;
 

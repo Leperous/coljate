@@ -9,4 +9,12 @@ import net.coljate.set.Set;
  */
 public interface LongSet extends Set<Long>, LongCollection {
 
+    @Override
+    MutableLongSet mutableCopy();
+
+    @Override
+    default ImmutableLongSet immutableCopy() {
+        throw new UnsupportedOperationException(); //TODO
+    }
+
 }

@@ -6,8 +6,7 @@ import net.coljate.collection.MutableCollection;
  *
  * @author Ollie
  */
-public interface MutableDoubleCollection
-        extends DoubleCollection, MutableCollection<Double> {
+public interface MutableDoubleCollection extends DoubleCollection, MutableCollection<Double> {
 
     boolean removeFirst(double d);
 

@@ -13,4 +13,10 @@ public interface LongCollection extends Collection<Long>, LongIterable {
         return LongIterable.super.contains(object);
     }
 
+    @Override
+    MutableLongCollection mutableCopy();
+
+    @Override
+    ImmutableLongCollection immutableCopy();
+
 }
