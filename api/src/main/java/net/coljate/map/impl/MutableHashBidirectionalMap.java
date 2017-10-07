@@ -9,7 +9,7 @@ import net.coljate.map.Entry;
 import net.coljate.map.MutableBidirectionalMap;
 import net.coljate.map.MutableEntry;
 import net.coljate.map.MutableMap;
-import net.coljate.util.Functions;
+import net.ollie.goat.functions.Functions;
 
 /**
  *

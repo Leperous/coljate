@@ -5,9 +5,9 @@ import java.util.Comparator;
 import net.coljate.collection.Collection;
 import net.coljate.set.MutableSortedSet;
 import net.coljate.util.Arrays;
-import net.coljate.util.Suppliers;
 import net.coljate.util.complexity.Complexity;
 import net.coljate.util.complexity.TimeComplexity;
+import net.ollie.goat.suppliers.Suppliers;
 
 /**
  *

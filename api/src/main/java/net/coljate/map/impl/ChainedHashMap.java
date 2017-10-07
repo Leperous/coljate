@@ -19,9 +19,9 @@ import net.coljate.map.MutableEntry;
 import net.coljate.map.MutableMap;
 import net.coljate.set.AbstractSet;
 import net.coljate.set.Set;
-import net.coljate.util.Functions;
 import net.coljate.util.iterator.CovariantIterator;
 import net.coljate.util.iterator.Iterators;
+import net.ollie.goat.functions.Functions;
 
 /**
  *

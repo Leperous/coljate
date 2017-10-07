@@ -6,7 +6,7 @@ import net.coljate.graph.impl.MappedValueGraph;
 import net.coljate.map.Associative;
 import net.coljate.map.Entry;
 import net.coljate.map.Map;
-import net.coljate.util.Functions;
+import net.ollie.goat.functions.Functions;
 
 /**
  * A graph of vertices {@code Entry<K,V>} with a key/value association.

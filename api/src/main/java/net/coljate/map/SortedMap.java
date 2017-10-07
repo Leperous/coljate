@@ -8,7 +8,8 @@ import net.coljate.map.lazy.LazyFilteredSortedMap;
 import net.coljate.set.SequentialSet;
 import net.coljate.set.SortedSet;
 import net.coljate.tree.impl.RedBlackTreeMap;
-import net.coljate.util.Suppliers;
+import net.ollie.goat.functions.Predicates;
+import net.ollie.goat.suppliers.Suppliers;
 
 /**
  *
@@ -27,8 +28,8 @@ public interface SortedMap<K, V> extends SortedSet<Entry<K, V>>, Map<K, V> {
     }
 
     @Override
-    default SortedMap<K, V> greaterThan(final Entry<K, V> entry, final boolean inclusive) {
-        return this.filter(e -> this.comparator().compare(e, entry) > 0);
+    default SortedMap<K, V> greaterThan(final Entry<K, V> entry, final boolean orEqual) {
+        return this.filter(Predicates.greaterThan(entry, orEqual, this.comparator()));
     }
 
     @CheckForNull

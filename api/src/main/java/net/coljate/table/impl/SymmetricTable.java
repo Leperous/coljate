@@ -9,8 +9,8 @@ import net.coljate.map.Entry;
 import net.coljate.map.Map;
 import net.coljate.table.AbstractTable;
 import net.coljate.table.Cell;
-import net.coljate.util.Functions;
 import net.coljate.util.Hashing;
+import net.ollie.goat.functions.Functions;
 
 /**
  * A table whose entry {@code (K1, K2)} is always identical to {@code (K2, K1)}.

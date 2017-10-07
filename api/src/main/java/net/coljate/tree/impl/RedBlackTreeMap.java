@@ -14,11 +14,11 @@ import net.coljate.tree.AbstractTreeMap;
 import net.coljate.tree.MutableBinaryTreeMap.MutableBinaryNode;
 import net.coljate.tree.impl.RedBlackTreeMap.RedBlackNode;
 import net.coljate.tree.navigation.TreeNavigation;
-import net.coljate.util.Functions;
 import net.coljate.tree.ImmutableBinaryTreeMap;
 import net.coljate.tree.MutableBinaryTreeMap;
 import net.coljate.tree.MutableSortedTreeMap;
 import net.coljate.set.SequentialSet;
+import net.ollie.goat.functions.Functions;
 
 /**
  *

@@ -9,7 +9,7 @@ import javax.annotation.Nonnull;
 import net.coljate.collection.MutableCollection;
 import net.coljate.list.impl.ImmutableNativeArray;
 import net.coljate.sequence.Sequence;
-import net.coljate.util.Functions;
+import net.ollie.goat.functions.Functions;
 
 /**
  * A queue is a mutable, ordered collection, accessed through adding or removing some head element.

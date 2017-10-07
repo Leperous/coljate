@@ -4,8 +4,8 @@ import net.coljate.map.ImmutableMap;
 import net.coljate.table.Cell;
 import net.coljate.table.ImmutableCell;
 import net.coljate.table.ImmutableTable;
-import net.coljate.util.Functions;
 import net.coljate.util.iterator.UnmodifiableIterator;
+import net.ollie.goat.functions.Functions;
 
 /**
  *

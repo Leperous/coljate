@@ -4,7 +4,7 @@ import java.util.OptionalInt;
 import java.util.concurrent.ConcurrentLinkedDeque;
 
 import net.coljate.list.ConcurrentList;
-import net.coljate.util.Functions;
+import net.ollie.goat.functions.Functions;
 
 /**
  *

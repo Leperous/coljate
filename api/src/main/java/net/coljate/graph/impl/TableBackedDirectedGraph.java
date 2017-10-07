@@ -10,9 +10,9 @@ import net.coljate.set.Set;
 import net.coljate.set.impl.TwoSet;
 import net.coljate.table.Cell;
 import net.coljate.table.Table;
-import net.coljate.util.Functions;
 import net.coljate.util.iterator.CovariantIterator;
 import net.coljate.util.iterator.Iterators;
+import net.ollie.goat.functions.Functions;
 
 /**
  * A graph backed by a {@link Table}, where rows represent "from" vertices and columns "to" vertices.

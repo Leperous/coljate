@@ -10,9 +10,10 @@ import net.coljate.counter.MutableCounter;
 import net.coljate.map.Entry;
 import net.coljate.map.Map;
 import net.coljate.set.Set;
-import net.coljate.util.Suppliers;
+import net.ollie.goat.suppliers.Suppliers;
 
 /**
+ * 
  *
  * @author Ollie
  */

@@ -5,7 +5,7 @@ import java.util.Objects;
 import javax.annotation.CheckForNull;
 
 import net.coljate.set.Set;
-import net.coljate.util.Functions;
+import net.ollie.goat.functions.Functions;
 
 /**
  *

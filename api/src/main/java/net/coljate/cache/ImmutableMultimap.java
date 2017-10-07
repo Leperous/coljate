@@ -5,8 +5,8 @@ import net.coljate.collection.ImmutableCollection;
 import net.coljate.map.Entry;
 import net.coljate.map.ImmutableEntry;
 import net.coljate.map.ImmutableMap;
-import net.coljate.util.Functions;
 import net.coljate.util.iterator.UnmodifiableCovariantIterator;
+import net.ollie.goat.functions.Functions;
 
 /**
  *

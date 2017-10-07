@@ -11,7 +11,7 @@ import net.coljate.map.ImmutableMap;
 import net.coljate.map.Map;
 import net.coljate.map.MutableMap;
 import net.coljate.set.Set;
-import net.coljate.util.Functions;
+import net.ollie.goat.functions.Functions;
 
 /**
  *
