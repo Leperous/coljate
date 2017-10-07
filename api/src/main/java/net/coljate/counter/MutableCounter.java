@@ -25,28 +25,36 @@ public interface MutableCounter<T>
      * @param amount
      * @return the new value.
      */
-    int increment(T element, int amount);
+    int incrementAndGet(T element, int amount);
 
-    default int increment(final T element) {
-        return this.increment(element, 1);
+    default int incrementAndGet(final T element) {
+        return this.incrementAndGet(element, 1);
+    }
+
+    default int getAndIncrement(final T element) {
+        return this.incrementAndGet(element) - 1;
+    }
+
+    default int getAndIncrement(final T element, final int amount) {
+        return this.incrementAndGet(element, amount) - amount;
     }
 
     default int incrementIfPresent(final Object element) {
         return this.contains(element)
-                ? this.increment((T) element)
+                ? this.incrementAndGet((T) element)
                 : 0;
     }
 
-    int decrement(T element, int amount);
+    int decrementAndGet(T element, int amount);
 
-    default int decrement(final T element) {
-        return this.decrement(element, 1);
+    default int decrementAndGet(final T element) {
+        return this.decrementAndGet(element, 1);
     }
 
     @Override
     @Deprecated
     default boolean add(final T element) {
-        this.increment(element);
+        this.incrementAndGet(element);
         return true;
     }
 
@@ -54,7 +62,7 @@ public interface MutableCounter<T>
     default boolean removeFirst(final Object element) {
         final int count = this.count(element);
         if (count > 0) {
-            this.decrement((T) element);
+            this.decrementAndGet((T) element);
             return true;
         } else {
             return false;
@@ -65,7 +73,7 @@ public interface MutableCounter<T>
     default int removeAll(final Object element) {
         final int count = this.count(element);
         if (count > 0) {
-            this.decrement((T) element, count);
+            this.decrementAndGet((T) element, count);
             return 1;
         } else {
             return 0;

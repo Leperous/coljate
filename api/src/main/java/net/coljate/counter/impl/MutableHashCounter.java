@@ -19,7 +19,7 @@ public class MutableHashCounter<T>
 
     public static <T> MutableHashCounter<T> copyOf(final Iterable<? extends T> iterable) {
         final MutableHashCounter<T> set = create();
-        iterable.forEach(set::increment);
+        iterable.forEach(set::incrementAndGet);
         return set;
     }
 
@@ -59,12 +59,12 @@ public class MutableHashCounter<T>
     }
 
     @Override
-    public int increment(final T element, final int amount) {
+    public int incrementAndGet(final T element, final int amount) {
         return map.compute(element, (k, count) -> increment(count, amount));
     }
 
     @Override
-    public int decrement(final T element, final int amount) {
+    public int decrementAndGet(final T element, final int amount) {
         final int decremented = map.compute(element, (k, count) -> decrement(count, amount));
         if (decremented == 0 && evictZeros) {
             map.remove(element, 0);
@@ -123,7 +123,7 @@ public class MutableHashCounter<T>
         @Override
         public void remove() {
             //TODO check current state
-            MutableHashCounter.this.decrement(current);
+            MutableHashCounter.this.decrementAndGet(current);
         }
 
     }

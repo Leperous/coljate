@@ -52,13 +52,13 @@ public class MutableCommonsBagCounter<T>
     }
 
     @Override
-    public int increment(final T element, final int amount) {
+    public int incrementAndGet(final T element, final int amount) {
         bag.add(element, amount);
         return this.count(element);
     }
 
     @Override
-    public int decrement(final T element, final int amount) {
+    public int decrementAndGet(final T element, final int amount) {
         bag.remove(amount, amount);
         return this.count(element);
     }
