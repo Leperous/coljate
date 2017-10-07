@@ -1,10 +1,9 @@
 package net.coljate.set.primitive;
 
+import net.coljate.collection.primitive.ImmutableTroveDoubleIterator;
 import net.coljate.collection.primitive.TroveDoubleCollection;
-import net.coljate.collection.primitive.TroveDoubleIterator;
 
 import gnu.trove.impl.unmodifiable.TUnmodifiableDoubleSet;
-import gnu.trove.iterator.TDoubleIterator;
 import gnu.trove.set.TDoubleSet;
 import gnu.trove.set.hash.TDoubleHashSet;
 
@@ -32,16 +31,8 @@ public class ImmutableTroveDoubleSet
     }
 
     @Override
-    public ImmutableTroveDoubleSetIterator iterator() {
-        return new ImmutableTroveDoubleSetIterator(this.troveIterator());
-    }
-
-    public static class ImmutableTroveDoubleSetIterator extends TroveDoubleIterator implements UnmodifiableDoubleIterator {
-
-        ImmutableTroveDoubleSetIterator(final TDoubleIterator iterator) {
-            super(iterator);
-        }
-
+    public ImmutableTroveDoubleIterator iterator() {
+        return new ImmutableTroveDoubleIterator(this.troveIterator());
     }
 
 }
