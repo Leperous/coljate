@@ -35,8 +35,8 @@ public class LazySuppliedArray<T>
     public T get(final int index) {
         Object got = store[index];
         if (got == null) {
-            got = Suppliers.firstNonNull(supplier.apply(index), COMPUTED_NULL);
-            store[index] = got;
+            got = supplier.apply(index);
+            store[index] = Suppliers.firstNonNull(got, COMPUTED_NULL);
         }
         return got == COMPUTED_NULL ? null : (T) got;
     }
