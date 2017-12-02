@@ -164,13 +164,13 @@ public interface Collection<T> extends IterableExtension<T>, StreamExtension<T> 
     @Nonnull
     @CheckReturnValue
     default <R> Collection<R> transform(final Function<? super T, ? extends R> transformation) {
-        return this.lazily(LazyCollection.<T, R>transform(transformation));
+        return this.lazily(LazyCollection.<T, R>lazyTransform(transformation));
     }
 
     @Nonnull
     @CheckReturnValue
     default Collection<T> filter(@Nonnull final Predicate<? super T> predicate) {
-        return this.lazily(LazyCollection.filter(predicate));
+        return this.lazily(LazyCollection.<T>lazyFilter(predicate));
     }
 
     @Nonnull
