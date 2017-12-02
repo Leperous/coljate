@@ -1,15 +1,5 @@
 package net.coljate.list;
 
-import java.util.Comparator;
-import java.util.Spliterator;
-import java.util.Spliterators;
-import java.util.function.Function;
-import java.util.function.Predicate;
-import java.util.stream.Collector;
-
-import javax.annotation.CheckForNull;
-import javax.annotation.Nonnull;
-
 import net.coljate.collection.Collection;
 import net.coljate.collection.SortedCollection.SortingAlgorithm;
 import net.coljate.list.impl.ImmutableSortedArray;
@@ -17,8 +7,18 @@ import net.coljate.list.impl.MutableWrappedArrayList;
 import net.coljate.list.impl.WrappedList;
 import net.coljate.list.lazy.LazyFilteredList;
 import net.coljate.list.lazy.LazyTransformedList;
+import net.coljate.sequence.FiniteSequence;
 import net.coljate.sequence.Sequence;
 import net.coljate.util.Equality;
+
+import javax.annotation.CheckForNull;
+import javax.annotation.Nonnull;
+import java.util.Comparator;
+import java.util.Spliterator;
+import java.util.Spliterators;
+import java.util.function.Function;
+import java.util.function.Predicate;
+import java.util.stream.Collector;
 
 /**
  * A finite {@link Sequence}.
@@ -28,7 +28,7 @@ import net.coljate.util.Equality;
  * @see Array
  * @see Sequence
  */
-public interface List<T> extends Sequence<T>, Collection<T> {
+public interface List<T> extends FiniteSequence<T> {
 
     @Override
     ListIterator<T> iterator();
@@ -40,7 +40,7 @@ public interface List<T> extends Sequence<T>, Collection<T> {
 
     @Override
     default T first() {
-        return Collection.super.first();
+        return FiniteSequence.super.first();
     }
 
     @CheckForNull

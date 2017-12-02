@@ -1,15 +1,5 @@
 package net.coljate.collection;
 
-import java.util.Comparator;
-import java.util.Spliterator;
-import java.util.Spliterators;
-import java.util.function.Function;
-import java.util.function.IntFunction;
-import java.util.function.Predicate;
-
-import javax.annotation.CheckReturnValue;
-import javax.annotation.Nonnull;
-
 import net.coljate.Container;
 import net.coljate.IterableExtension;
 import net.coljate.StreamExtension;
@@ -18,10 +8,22 @@ import net.coljate.collection.impl.EmptyCollection;
 import net.coljate.collection.impl.UnmodifiableCollection;
 import net.coljate.collection.impl.WrappedCollection;
 import net.coljate.collection.lazy.LazyCollection;
+import net.coljate.list.Array;
+import net.coljate.list.MutableArray;
 import net.coljate.list.impl.ImmutableSortedArray;
 import net.coljate.set.Set;
 import net.coljate.set.lazy.LazySet;
 import net.coljate.util.complexity.TimeComplexity;
+
+import javax.annotation.CheckReturnValue;
+import javax.annotation.Nonnull;
+import java.util.Comparator;
+import java.util.Iterator;
+import java.util.Spliterator;
+import java.util.Spliterators;
+import java.util.function.Function;
+import java.util.function.IntFunction;
+import java.util.function.Predicate;
 
 /**
  * Some {@link Iterable} {@link Container} with a {@link #count count} of elements.
@@ -32,7 +34,6 @@ import net.coljate.util.complexity.TimeComplexity;
 public interface Collection<T> extends IterableExtension<T>, StreamExtension<T> {
 
     /**
-     *
      * @return a mutable copy of this collection.
      */
     @Nonnull
@@ -40,7 +41,6 @@ public interface Collection<T> extends IterableExtension<T>, StreamExtension<T> 
     MutableCollection<T> mutableCopy();
 
     /**
-     *
      * @return an immutable copy of this collection.
      */
     @Nonnull
@@ -48,7 +48,6 @@ public interface Collection<T> extends IterableExtension<T>, StreamExtension<T> 
     ImmutableCollection<T> immutableCopy();
 
     /**
-     *
      * @return true if this collection is empty now and will always be so in future.
      */
     default boolean isAlwaysEmpty() {
@@ -57,7 +56,6 @@ public interface Collection<T> extends IterableExtension<T>, StreamExtension<T> 
     }
 
     /**
-     *
      * @return a mutable copy of this collection.
      */
     @Nonnull
@@ -75,7 +73,6 @@ public interface Collection<T> extends IterableExtension<T>, StreamExtension<T> 
     }
 
     /**
-     *
      * @return a new array containing the elements in this collection.
      */
     @Nonnull
@@ -90,7 +87,6 @@ public interface Collection<T> extends IterableExtension<T>, StreamExtension<T> 
     }
 
     /**
-     *
      * @param array
      * @return an array containing all the elements in this collection. This will either be the original array if it has
      * sufficient capacity, or a new array.
@@ -120,6 +116,16 @@ public interface Collection<T> extends IterableExtension<T>, StreamExtension<T> 
             into[index++] = element;
         }
         return into;
+    }
+
+    @Nonnull
+    default Array<T> arrayCopy(final int length) {
+        final MutableArray<T> array = MutableArray.create(length);
+        int i = 0;
+        for (final Iterator<T> iterator = this.iterator(); iterator.hasNext() && i < length; i++) {
+            array.set(i, iterator.next());
+        }
+        return array;
     }
 
     @TimeComplexity(computed = true)

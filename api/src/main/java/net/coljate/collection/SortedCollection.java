@@ -1,21 +1,20 @@
 package net.coljate.collection;
 
-import java.util.Comparator;
-import java.util.Iterator;
+import net.coljate.sequence.FiniteSequence;
+import net.coljate.util.complexity.Complexity;
+import net.coljate.util.complexity.TimeComplexity;
 
 import javax.annotation.CheckForNull;
 import javax.annotation.Nonnull;
-
-import net.coljate.sequence.Sequence;
-import net.coljate.util.complexity.Complexity;
-import net.coljate.util.complexity.TimeComplexity;
+import java.util.Comparator;
+import java.util.Iterator;
 
 /**
  * Has a specific order, based on some {@link #comparator}.
  *
  * @author Ollie
  */
-public interface SortedCollection<T> extends Sequence<T>, Collection<T> {
+public interface SortedCollection<T> extends FiniteSequence<T> {
 
     /**
      * @return the comparator used to sort this collection. (Not the {@link SortingAlgorithm} algorithm!)

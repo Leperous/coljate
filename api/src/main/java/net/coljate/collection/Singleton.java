@@ -1,15 +1,15 @@
 package net.coljate.collection;
 
-import java.util.Objects;
+import net.coljate.sequence.FiniteSequence;
 
-import net.coljate.sequence.Sequence;
+import java.util.Objects;
 
 /**
  *
  * @author Ollie
  */
 public interface Singleton<T>
-        extends ImmutableCollection<T>, Sequence<T> {
+        extends ImmutableCollection<T>, FiniteSequence<T> {
 
     T element();
 

@@ -1,15 +1,14 @@
 package net.coljate.list;
 
-import java.util.NoSuchElementException;
-import java.util.OptionalInt;
+import net.coljate.collection.MutableCollection;
+import net.coljate.list.impl.ImmutableNativeArray;
+import net.coljate.sequence.FiniteSequence;
+import net.coljate.util.functions.Functions;
 
 import javax.annotation.CheckForNull;
 import javax.annotation.Nonnull;
-
-import net.coljate.collection.MutableCollection;
-import net.coljate.list.impl.ImmutableNativeArray;
-import net.coljate.sequence.Sequence;
-import net.coljate.util.functions.Functions;
+import java.util.NoSuchElementException;
+import java.util.OptionalInt;
 
 /**
  * A queue is a mutable, ordered collection, accessed through adding or removing some head element.
@@ -21,7 +20,7 @@ import net.coljate.util.functions.Functions;
  * @see ConcurrentQueue
  * @since 1.0
  */
-public interface Queue<T> extends Sequence<T>, MutableCollection<T> {
+public interface Queue<T> extends FiniteSequence<T>, MutableCollection<T> {
 
     /**
      * @return the head of this queue, or null if it is empty.
