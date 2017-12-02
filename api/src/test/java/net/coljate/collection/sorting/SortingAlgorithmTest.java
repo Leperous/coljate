@@ -16,12 +16,14 @@ public interface SortingAlgorithmTest {
     default void shouldSortEmpty() {
         final int[] ints = new int[0];
         this.algorithm().sort(ints);
+        assertThat(ints, is(new int[0]));
     }
 
     @Test
     default void shouldSortSingleton() {
         final int[] ints = {1};
         this.algorithm().sort(ints);
+        assertThat(ints, is(new int[]{1}));
     }
 
     @Test
