@@ -1,11 +1,12 @@
 package net.coljate.list.impl;
 
-import java.util.Comparator;
-
 import net.coljate.collection.Collection;
+import net.coljate.collection.sorting.SortingAlgorithm;
 import net.coljate.list.SortedArray;
 import net.coljate.util.Arrays;
 import net.coljate.util.complexity.TimeComplexity;
+
+import java.util.Comparator;
 
 /**
  *

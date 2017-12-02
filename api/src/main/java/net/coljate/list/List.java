@@ -1,7 +1,7 @@
 package net.coljate.list;
 
 import net.coljate.collection.Collection;
-import net.coljate.collection.SortedCollection.SortingAlgorithm;
+import net.coljate.collection.sorting.SortingAlgorithm;
 import net.coljate.list.impl.ImmutableSortedArray;
 import net.coljate.list.impl.MutableWrappedArrayList;
 import net.coljate.list.impl.WrappedList;

@@ -1,17 +1,15 @@
 package net.coljate.util;
 
+import net.coljate.util.complexity.Complexity;
+import net.coljate.util.complexity.TimeComplexity;
+
+import javax.annotation.Nonnull;
 import java.util.Objects;
 import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.UnaryOperator;
 
-import javax.annotation.Nonnull;
-
-import net.coljate.util.complexity.Complexity;
-import net.coljate.util.complexity.TimeComplexity;
-
 /**
- *
  * @author Ollie
  */
 public final class Arrays {
@@ -74,8 +72,7 @@ public final class Arrays {
      */
     @TimeComplexity(bestCase = Complexity.LINEAR, computed = true)
     public static <F, T> T[] transformAllSource(final F[] from, final Function<? super F, ? extends T> transform, final T[] prototype) {
-        @SuppressWarnings("unchecked")
-        final T[] into = prototype.length >= from.length
+        @SuppressWarnings("unchecked") final T[] into = prototype.length >= from.length
                 ? prototype
                 : (T[]) java.lang.reflect.Array.newInstance(prototype.getClass().getComponentType(), from.length);
         for (int i = 0; i < from.length; i++) {
@@ -105,8 +102,7 @@ public final class Arrays {
 
     @SafeVarargs
     public static <T> T[] concat(@Nonnull final T element, final T... rest) {
-        @SuppressWarnings("unchecked")
-        final T[] array = (T[]) java.lang.reflect.Array.newInstance(element.getClass(), 1 + rest.length);
+        @SuppressWarnings("unchecked") final T[] array = (T[]) java.lang.reflect.Array.newInstance(element.getClass(), 1 + rest.length);
         array[0] = element;
         System.arraycopy(rest, 0, array, 1, rest.length);
         return array;
@@ -118,6 +114,21 @@ public final class Arrays {
             prev = array[i];
             array[i] = array[array.length - i];
             array[array.length - 1] = prev;
+        }
+    }
+
+    public static Integer[] copyIntArray(final int[] array) {
+        final Integer[] integers = new Integer[array.length];
+        for (int i = 0; i < array.length; i++) {
+            integers[i] = array[i];
+        }
+        return integers;
+    }
+
+    public static void writeIntArray(final Integer[] integers, final int[] array) {
+        final int length = Math.min(integers.length, array.length);
+        for (int i = 0; i < length; i++) {
+            array[i] = integers[i];
         }
     }
 
