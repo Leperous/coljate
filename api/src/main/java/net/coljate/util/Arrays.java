@@ -117,7 +117,7 @@ public final class Arrays {
         }
     }
 
-    public static Integer[] copyIntArray(final int[] array) {
+    public static Integer[] copyNativeArray(final int[] array) {
         final Integer[] integers = new Integer[array.length];
         for (int i = 0; i < array.length; i++) {
             integers[i] = array[i];
@@ -125,10 +125,25 @@ public final class Arrays {
         return integers;
     }
 
-    public static void writeIntArray(final Integer[] integers, final int[] array) {
-        final int length = Math.min(integers.length, array.length);
+    public static Double[] copyNativeArray(final double[] array) {
+        final Double[] doubles = new Double[array.length];
+        for (int i = 0; i < array.length; i++) {
+            doubles[i] = array[i];
+        }
+        return doubles;
+    }
+
+    public static void writeNativeArray(final Number[] numbers, final int[] array) {
+        final int length = Math.min(numbers.length, array.length);
         for (int i = 0; i < length; i++) {
-            array[i] = integers[i];
+            array[i] = numbers[i].intValue();
+        }
+    }
+
+    public static void writeNativeArray(final Number[] numbers, final double[] array) {
+        final int length = Math.min(numbers.length, array.length);
+        for (int i = 0; i < length; i++) {
+            array[i] = numbers[i].doubleValue();
         }
     }
 

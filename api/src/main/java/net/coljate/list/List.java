@@ -73,7 +73,7 @@ public interface List<T> extends FiniteSequence<T> {
 
     @Override
     default SortedList<T> sortedCopy(final Comparator<? super T> comparator) {
-        return this.sortedCopy(comparator, SortingAlgorithm.DEFAULT);
+        return this.sortedCopy(comparator, SortingAlgorithm.JAVA_DEFAULT);
     }
 
     @Override

@@ -17,7 +17,7 @@ public class ImmutableSortedArray<T>
         implements SortedArray<T> {
 
     public static <T extends Comparable<? super T>> SortedArray<T> sort(final Collection<T> collection) {
-        return sort(collection, Comparator.naturalOrder(), SortingAlgorithm.DEFAULT);
+        return sort(collection, Comparator.naturalOrder(), SortingAlgorithm.JAVA_DEFAULT);
     }
 
     @TimeComplexity(computed = true)
@@ -30,7 +30,7 @@ public class ImmutableSortedArray<T>
 
     @TimeComplexity(computed = true)
     public static <T extends Comparable<? super T>> SortedArray<T> sort(final java.util.Collection<T> collection) {
-        return sort(collection, Comparator.naturalOrder(), SortingAlgorithm.DEFAULT);
+        return sort(collection, Comparator.naturalOrder(), SortingAlgorithm.JAVA_DEFAULT);
     }
 
     @TimeComplexity(computed = true)

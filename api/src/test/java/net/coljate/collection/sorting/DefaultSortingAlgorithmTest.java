@@ -7,7 +7,7 @@ public class DefaultSortingAlgorithmTest implements SortingAlgorithmTest {
     @Nonnull
     @Override
     public SortingAlgorithm algorithm() {
-        return SortingAlgorithm.DEFAULT;
+        return SortingAlgorithm.JAVA_DEFAULT;
     }
 
 }

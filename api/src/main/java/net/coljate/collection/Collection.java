@@ -132,7 +132,7 @@ public interface Collection<T> extends IterableExtension<T>, StreamExtension<T> 
     @Nonnull
     @CheckReturnValue
     default SortedCollection<T> sortedCopy(@Nonnull final Comparator<? super T> comparator) {
-        return this.sortedCopy(comparator, SortingAlgorithm.DEFAULT);
+        return this.sortedCopy(comparator, SortingAlgorithm.JAVA_DEFAULT);
     }
 
     @TimeComplexity(computed = true)
