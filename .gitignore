@@ -3,3 +3,5 @@
 **/nbactions.xml
 /*/nbproject/
 /*/target/
+.idea/*
+**/*.iml
