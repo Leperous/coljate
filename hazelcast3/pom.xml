@@ -13,7 +13,7 @@
     <name>Coljate/Hazelcast 3 Integration</name>
 
     <properties>
-        <hazelcast.version>3.8.6</hazelcast.version>
+        <hazelcast.version>3.9.1</hazelcast.version>
     </properties>
 
     <dependencies>
