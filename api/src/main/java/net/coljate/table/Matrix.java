@@ -1,17 +1,18 @@
 package net.coljate.table;
 
-import java.util.Iterator;
-import java.util.Objects;
-import java.util.function.BiFunction;
-import java.util.function.Function;
-
 import net.coljate.collection.Collection;
 import net.coljate.table.lazy.LazyProductMatrix;
 import net.coljate.table.lazy.LazySumMatrix;
 import net.coljate.table.lazy.LazyTransformedMatrix;
 import net.coljate.table.lazy.LazyTransposedMatrix;
 
+import java.util.Iterator;
+import java.util.Objects;
+import java.util.function.BiFunction;
+import java.util.function.Function;
+
 /**
+ * Two-dimensional array.
  *
  * @author Ollie
  */

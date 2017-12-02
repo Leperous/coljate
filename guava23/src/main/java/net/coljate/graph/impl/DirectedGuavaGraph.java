@@ -9,7 +9,6 @@ import net.coljate.util.iterator.CovariantIterator;
 import net.coljate.util.iterator.Iterators;
 
 /**
- *
  * @author Ollie
  */
 public class DirectedGuavaGraph<V, E>
@@ -61,11 +60,6 @@ public class DirectedGuavaGraph<V, E>
         @Override
         public Set<E> edge() {
             return Set.viewOf(network.edgesConnecting(this.from(), this.to()));
-        }
-
-        @Override
-        protected boolean equals(final Relationship<?, ?> that) {
-            throw new UnsupportedOperationException(); //TODO
         }
 
     }

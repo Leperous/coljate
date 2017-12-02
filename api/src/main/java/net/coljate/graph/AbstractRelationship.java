@@ -3,7 +3,6 @@ package net.coljate.graph;
 import java.util.Objects;
 
 /**
- *
  * @author Ollie
  */
 public abstract class AbstractRelationship<V, E> implements Relationship<V, E> {
@@ -14,7 +13,10 @@ public abstract class AbstractRelationship<V, E> implements Relationship<V, E> {
                 && this.equals((Relationship) that);
     }
 
-    protected abstract boolean equals(Relationship<?, ?> that);
+    protected boolean equals(final Relationship<?, ?> that) {
+        return Objects.equals(this.vertices(), that.vertices())
+                && Objects.equals(this.edge(), that.edge());
+    }
 
     @Override
     public int hashCode() {

@@ -1,5 +1,12 @@
 package net.coljate;
 
+import net.coljate.collection.MutableCollection;
+import net.coljate.util.complexity.Complexity;
+import net.coljate.util.complexity.TimeComplexity;
+
+import javax.annotation.CheckForNull;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import java.util.Comparator;
 import java.util.Iterator;
 import java.util.Objects;
@@ -7,14 +14,6 @@ import java.util.Optional;
 import java.util.function.BinaryOperator;
 import java.util.function.Predicate;
 import java.util.function.ToLongFunction;
-
-import javax.annotation.CheckForNull;
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
-import net.coljate.collection.MutableCollection;
-import net.coljate.util.complexity.Complexity;
-import net.coljate.util.complexity.TimeComplexity;
 
 /**
  *
@@ -71,7 +70,7 @@ public interface IterableExtension<T> extends Container, Iterable<T> {
     /**
      *
      * @param iterable
-     * @return true if this collection contains any element in the given iterable.
+     * @return true if this collection contains any element in the given iterable, false if it is empty.
      */
     default boolean containsAny(final Iterable<?> iterable) {
         for (final Object element : iterable) {
@@ -101,7 +100,7 @@ public interface IterableExtension<T> extends Container, Iterable<T> {
      * @param predicate
      * @return true if any element in this container matches the given predicate.
      */
-    @TimeComplexity(Complexity.LINEAR)
+    @TimeComplexity(bestCase = Complexity.LINEAR)
     default boolean anyMatch(@Nonnull final Predicate<? super T> predicate) {
         for (final T element : this) {
             if (predicate.test(element)) {

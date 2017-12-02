@@ -1,11 +1,6 @@
 package net.coljate.graph.impl;
 
-import net.coljate.graph.AbstractRelationship;
-import net.coljate.graph.ImmutableUndirectedGraph;
-import net.coljate.graph.MutableUndirectedGraph;
-import net.coljate.graph.Relationship;
-import net.coljate.graph.UndirectedGraph;
-import net.coljate.graph.UndirectedRelationship;
+import net.coljate.graph.*;
 import net.coljate.set.Set;
 import net.coljate.set.impl.TwoSet;
 import net.coljate.util.iterator.CovariantIterator;
@@ -59,11 +54,6 @@ public class UndirectedGuavaGraph<V, E>
         @Override
         public Set<E> edge() {
             return Set.viewOf(network.edgesConnecting(endpoints.nodeU(), endpoints.nodeV()));
-        }
-
-        @Override
-        protected boolean equals(final Relationship<?, ?> that) {
-            throw new UnsupportedOperationException(); //TODO
         }
 
     }

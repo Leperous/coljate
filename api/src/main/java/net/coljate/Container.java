@@ -8,10 +8,10 @@ import net.coljate.util.complexity.TimeComplexity;
 
 /**
  * An object that can "contain" other objects.
- *
+ * <p>
  * Finite containers are normally represented by some {@link Collection}.
- *
- * Infinite containers can exist but are not provided.
+ * <p>
+ * Infinite containers (essentially {@link java.util.function.Predicate predicates}) can exist but are not provided as they will generally be bespoke.
  *
  * @author Ollie
  * @see Collection
