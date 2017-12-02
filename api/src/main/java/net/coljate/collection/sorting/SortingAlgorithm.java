@@ -8,7 +8,19 @@ import java.util.Comparator;
 
 public interface SortingAlgorithm {
 
-    SortingAlgorithm DEFAULT = java.util.Arrays::sort;
+    SortingAlgorithm DEFAULT = new SortingAlgorithm() {
+
+        @Override
+        public <T> void sort(final T[] array, final Comparator<? super T> comparator) {
+            java.util.Arrays.sort(array, comparator);
+        }
+
+        @Override
+        public void sort(final int[] array) {
+            java.util.Arrays.sort(array);
+        }
+
+    };
 
     /**
      * Sort an array of elements according to the given comparator.
