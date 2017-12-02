@@ -1,16 +1,13 @@
 package net.coljate.collection;
 
+import org.junit.jupiter.api.Test;
+
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 import java.util.Objects;
 
-import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import org.junit.jupiter.api.Test;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  *
@@ -39,7 +36,7 @@ public interface CollectionTest<T> {
 
         @Test
         default void testCount() {
-            assertThat(this.createTestCollection().count(), is(0));
+            assertThat(this.createTestCollection().count()).isEqualTo(0);
         }
 
         @Test
@@ -62,11 +59,11 @@ public interface CollectionTest<T> {
 
         @Test
         default void testCount() {
-            assertThat(this.createTestCollection().count(), is(1));
+            assertThat(this.createTestCollection().count()).isEqualTo(1);
         }
 
         default void testCount_Element() {
-            assertThat(this.createTestCollection().count(e -> Objects.equals(e, this.getCollectionElement())), is(1));
+            assertThat(this.createTestCollection().count(e -> Objects.equals(e, this.getCollectionElement()))).isEqualTo(1);
         }
 
         @Test
@@ -78,7 +75,7 @@ public interface CollectionTest<T> {
         default void testIterator() {
             final Iterator<T> iterator = this.createTestCollection().iterator();
             assertTrue(iterator.hasNext());
-            assertThat(iterator.next(), is(this.getCollectionElement()));
+            assertThat(iterator.next()).isEqualTo(this.getCollectionElement());
             assertFalse(iterator.hasNext());
             assertThrows(NoSuchElementException.class, () -> iterator.next());
         }
@@ -98,7 +95,7 @@ public interface CollectionTest<T> {
         @Test
         default void testIterator_NextWithoutHaveNext() {
             final Iterator<T> iterator = this.createTestCollection().iterator();
-            assertThat(iterator.next(), is(this.getCollectionElement()));
+            assertThat(iterator.next()).isEqualTo(this.getCollectionElement());
             assertThrows(NoSuchElementException.class, () -> iterator.next());
         }
 

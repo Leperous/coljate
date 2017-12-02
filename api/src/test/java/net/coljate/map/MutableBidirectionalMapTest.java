@@ -1,10 +1,9 @@
 package net.coljate.map;
 
-import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.junit.jupiter.api.Assertions.assertNull;
 import org.junit.jupiter.api.Test;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertNull;
 /**
  *
  * @author Ollie
@@ -28,9 +27,9 @@ public interface MutableBidirectionalMapTest<K, V>
             final MutableBidirectionalMap<K, V> map = this.createTestCollection();
             final V previous = map.put(entry);
             assertNull(previous);
-            assertThat(map.getEntry(key), is(entry));
+            assertThat(map.getEntry(key)).isEqualTo(entry);
 
-            assertThat(map.inverseView().getEntry(value), is(Entry.of(value, key)));
+            assertThat(map.inverseView().getEntry(value)).isEqualTo(Entry.of(value, key));
         }
 
     }

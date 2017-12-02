@@ -1,10 +1,9 @@
 package net.coljate.list;
 
-import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 import org.junit.jupiter.api.Test;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 /**
  *
  * @author Ollie
@@ -22,7 +21,7 @@ public interface ArrayTest<T> extends ListTest<T> {
 
         @Test
         default void testGet() {
-            assertThat(this.createTestCollection().get(0), is(this.getCollectionElement()));
+            assertThat(this.createTestCollection().get(0)).isEqualTo(this.getCollectionElement());
         }
 
         @Test

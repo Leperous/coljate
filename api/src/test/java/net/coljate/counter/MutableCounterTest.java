@@ -1,11 +1,10 @@
 package net.coljate.counter;
 
 import net.coljate.collection.MutableCollectionTest;
-
-import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 import org.junit.jupiter.api.Test;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 /**
  *
@@ -28,14 +27,14 @@ public interface MutableCounterTest<T> extends CounterTest<T>, MutableCollection
         default void testSet() {
             final MutableCounter<T> counter = this.createTestCollection();
             counter.set(this.getCollectionElement(), 5);
-            assertThat(counter.count(this.getCollectionElement()), is(5));
+            assertThat(counter.count(this.getCollectionElement())).isEqualTo(5);
         }
 
         @Test
         default void testSet_Negative() {
             final MutableCounter<T> counter = this.createTestCollection();
             assertThrows(IllegalArgumentException.class, () -> counter.set(this.getCollectionElement(), -5));
-            assertThat(counter.count(this.getCollectionElement()), is(1));
+            assertThat(counter.count(this.getCollectionElement())).isEqualTo(1);
         }
 
         @Test
@@ -43,7 +42,7 @@ public interface MutableCounterTest<T> extends CounterTest<T>, MutableCollection
             final MutableCounter<T> counter = this.createTestCollection();
             final T newElement = this.createTestObject();
             counter.set(newElement, 2);
-            assertThat(counter.count(newElement), is(2));
+            assertThat(counter.count(newElement)).isEqualTo(2);
         }
 
     }

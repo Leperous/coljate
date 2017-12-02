@@ -1,11 +1,10 @@
 package net.coljate.map;
 
-import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.Test;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 /**
  *
  * @author Ollie
@@ -19,7 +18,7 @@ public interface BidirectionalMapTest<K, V> extends MapTest<K, V> {
 
         @Test
         default void testCount_Inverse() {
-            assertThat(this.createTestCollection().inverseView().count(), is(0));
+            assertThat(this.createTestCollection().inverseView().count()).isEqualTo(0);
         }
 
         @Test
@@ -33,7 +32,7 @@ public interface BidirectionalMapTest<K, V> extends MapTest<K, V> {
 
         @Test
         default void testCount_Inverse() {
-            assertThat(this.createTestCollection().inverseView().count(), is(1));
+            assertThat(this.createTestCollection().inverseView().count()).isEqualTo(1);
         }
 
         @Test

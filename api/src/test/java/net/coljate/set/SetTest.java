@@ -1,19 +1,17 @@
 package net.coljate.set;
 
+import net.coljate.TestObjectCreator;
+import net.coljate.collection.CollectionTest;
+import org.junit.jupiter.api.Test;
+
 import java.util.Arrays;
 import java.util.Spliterator;
 
-import net.coljate.TestObjectCreator;
-import net.coljate.collection.CollectionTest;
-
-import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.MatcherAssert.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import org.junit.jupiter.api.Test;
 
 /**
- *
  * @author Ollie
  */
 public interface SetTest<T> extends CollectionTest<T> {
@@ -24,10 +22,9 @@ public interface SetTest<T> extends CollectionTest<T> {
     @Test
     default int testSpliterator_Characteristics() {
         final int characteristics = this.createTestCollection().spliterator().characteristics();
-        assertThat(
-                "Spliterator characteristics (" + Integer.toBinaryString(characteristics) + ") must contain distinct bit.",
-                characteristics & Spliterator.DISTINCT,
-                is(Spliterator.DISTINCT));
+        assertThat(characteristics & Spliterator.DISTINCT)
+                .isEqualTo(Spliterator.DISTINCT)
+                .describedAs("Spliterator characteristics %s must contain distinct bit.", Integer.toBinaryString(characteristics));
         return characteristics;
     }
 
@@ -58,7 +55,7 @@ public interface SetTest<T> extends CollectionTest<T> {
 
         @Test
         default void testCount() {
-            assertThat(this.createTestCollection(this.createTestObject(), this.createTestObject()).count(), is(2));
+            assertThat(this.createTestCollection(this.createTestObject(), this.createTestObject()).count()).isEqualTo(2);
         }
 
         @Test
@@ -67,7 +64,7 @@ public interface SetTest<T> extends CollectionTest<T> {
             final Set<T> first = this.createTestCollection(a, b);
             final Set<T> second = this.createTestCollection(b, c);
             final Set<T> and = first.intersection(second);
-            assertThat(and.count(), is(1));
+            assertThat(and.count()).isEqualTo(1);
             assertFalse(and.contains(a));
             assertTrue(and.contains(b));
             assertFalse(and.contains(c));
@@ -79,7 +76,7 @@ public interface SetTest<T> extends CollectionTest<T> {
             final Set<T> first = this.createTestCollection(a, b);
             final Set<T> second = this.createTestCollection(b, c);
             final Set<T> or = first.union(second);
-            assertThat(or.count(), is(3));
+            assertThat(or.count()).isEqualTo(3);
         }
 
         @Test
@@ -91,7 +88,7 @@ public interface SetTest<T> extends CollectionTest<T> {
             assertTrue(not.contains(a));
             assertFalse(not.contains(b));
             assertFalse(not.contains(c));
-            assertThat(not.count(), is(1));
+            assertThat(not.count()).isEqualTo(1);
         }
 
         @Test
@@ -103,7 +100,7 @@ public interface SetTest<T> extends CollectionTest<T> {
             assertTrue(xor.contains(a));
             assertFalse(xor.contains(b));
             assertTrue(xor.contains(c));
-            assertThat(xor.count(), is(2));
+            assertThat(xor.count()).isEqualTo(2);
         }
 
     }

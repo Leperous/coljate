@@ -1,12 +1,12 @@
 package net.coljate.util.iterator;
 
+import org.junit.jupiter.api.Test;
+
 import java.util.Iterator;
 
-import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.MatcherAssert.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import org.junit.jupiter.api.Test;
 
 /**
  *
@@ -27,9 +27,9 @@ public class IteratorsTest {
         final Iterator<Object> concat = Iterators.concat(i1, i2);
 
         assertTrue(concat.hasNext());
-        assertThat(concat.next(), is(o1));
+        assertThat(concat.next()).isEqualTo(o1);
         assertTrue(concat.hasNext());
-        assertThat(concat.next(), is(o2));
+        assertThat(concat.next()).isEqualTo(o2);
         assertFalse(concat.hasNext());
 
     }

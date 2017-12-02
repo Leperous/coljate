@@ -1,13 +1,11 @@
 package net.coljate.collection;
 
-import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.MatcherAssert.assertThat;
-
 import net.coljate.TestObjectCreator;
+import org.junit.jupiter.api.Test;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import org.junit.jupiter.api.Test;
 
 /**
  *
@@ -41,7 +39,7 @@ public interface MutableCollectionTest<T> extends CollectionTest<T>, TestObjectC
             assertTrue(collection.contains(element));
             collection.clear();
             assertFalse(collection.contains(element));
-            assertThat(collection.count(), is(0));
+            assertThat(collection.count()).isEqualTo(0);
         }
 
     }

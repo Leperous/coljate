@@ -1,9 +1,8 @@
 package net.coljate.list;
 
-import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.MatcherAssert.assertThat;
 import org.junit.jupiter.api.Test;
 
+import static org.assertj.core.api.Assertions.assertThat;
 /**
  *
  * @author Ollie
@@ -18,11 +17,11 @@ public interface MutableArrayTest<T> extends ArrayTest<T>, MutableListTest<T> {
         @Test
         default void testResize() {
             final MutableArray<T> array = this.createTestCollection();
-            assertThat(array.length(), is(0));
+            assertThat(array.length()).isEqualTo(0);
             array.resize(1);
-            assertThat(array.length(), is(1));
+            assertThat(array.length()).isEqualTo(1);
             array.resize(1);
-            assertThat(array.length(), is(1));
+            assertThat(array.length()).isEqualTo(1);
         }
 
     }

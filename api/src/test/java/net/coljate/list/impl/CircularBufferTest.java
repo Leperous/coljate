@@ -1,21 +1,16 @@
 package net.coljate.list.impl;
 
-import java.util.OptionalInt;
-
 import net.coljate.NewObjectCreator;
+import net.coljate.SameObjectCreator;
+import net.coljate.list.Queue;
 import net.coljate.list.QueueTest;
-
-import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
-import net.coljate.SameObjectCreator;
-import net.coljate.list.Queue;
+import java.util.OptionalInt;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.*;
 /**
  *
  * @author Ollie
@@ -37,7 +32,7 @@ public class CircularBufferTest {
 
         @Test
         public void testCapacity() {
-            assertThat(this.createTestCollection().capacity(), is(OptionalInt.of(1)));
+            assertThat(this.createTestCollection().capacity()).isEqualTo(OptionalInt.of(1));
         }
 
         @Test

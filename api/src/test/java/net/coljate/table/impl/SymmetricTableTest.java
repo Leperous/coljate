@@ -2,13 +2,12 @@ package net.coljate.table.impl;
 
 import net.coljate.table.Cell;
 import net.coljate.table.TableTest;
-
-import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.MatcherAssert.assertThat;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  *
@@ -77,7 +76,7 @@ public class SymmetricTableTest {
         @Test
         @Override
         public void testCount() {
-            assertThat(this.createTestCollection().count(), is(2));
+            assertThat(this.createTestCollection().count()).isEqualTo(2);
         }
 
         @Override

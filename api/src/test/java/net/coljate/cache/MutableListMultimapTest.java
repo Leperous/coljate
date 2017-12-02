@@ -3,11 +3,10 @@ package net.coljate.cache;
 import net.coljate.collection.Collection;
 import net.coljate.list.List;
 import net.coljate.map.Entry;
-
-import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.Test;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
  *
@@ -33,7 +32,7 @@ public interface MutableListMultimapTest<K, V>
             assertTrue(multimap.add(entry));
 
             final List<V> got = multimap.get(entry.key());
-            assertThat(got.count(), is(2));
+            assertThat(got.count()).isEqualTo(2);
 
         }
 

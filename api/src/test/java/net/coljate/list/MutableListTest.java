@@ -1,12 +1,10 @@
 package net.coljate.list;
 
 import net.coljate.collection.MutableCollectionTest;
-
-import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.Test;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 /**
  *
  * @author Ollie
@@ -26,10 +24,10 @@ public interface MutableListTest<T> extends ListTest<T>, MutableCollectionTest<T
         list.prefix(element);
 
         assertTrue(list.contains(element));
-        assertThat(list.count(), is(initialCount + 1));
-        assertThat(list.first(), is(element));
+        assertThat(list.count()).isEqualTo(initialCount + 1);
+        assertThat(list.first()).isEqualTo(element);
         if (initialCount == 0) {
-            assertThat(list.last(), is(element));
+            assertThat(list.last()).isEqualTo(element);
         }
 
     }
@@ -44,10 +42,10 @@ public interface MutableListTest<T> extends ListTest<T>, MutableCollectionTest<T
         list.suffix(element);
 
         assertTrue(list.contains(element));
-        assertThat(list.count(), is(initialCount + 1));
-        assertThat(list.last(), is(element));
+        assertThat(list.count()).isEqualTo(initialCount + 1);
+        assertThat(list.last()).isEqualTo(element);
         if (initialCount == 0) {
-            assertThat(list.first(), is(element));
+            assertThat(list.first()).isEqualTo(element);
         }
 
     }

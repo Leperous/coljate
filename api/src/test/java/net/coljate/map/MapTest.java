@@ -1,16 +1,12 @@
 package net.coljate.map;
 
+import net.coljate.set.SetTest;
+import org.junit.jupiter.api.Test;
+
 import java.util.Objects;
 
-import net.coljate.set.SetTest;
-
-import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import org.junit.jupiter.api.Test;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  *
@@ -57,7 +53,7 @@ public interface MapTest<K, V> extends SetTest<Entry<K, V>> {
             assertNotNull(entry);
             final Map<K, V> map = this.createTestCollection();
             assertNotNull(map);
-            assertThat(map.getEntry(entry.key()), is(entry));
+            assertThat(map.getEntry(entry.key())).isEqualTo(entry);
         }
 
         @Test
@@ -70,7 +66,7 @@ public interface MapTest<K, V> extends SetTest<Entry<K, V>> {
         @Test
         default void testKeys() {
             final Map<K, V> map = this.createTestCollection();
-            assertThat(map.keys().count(), is(1));
+            assertThat(map.keys().count()).isEqualTo(1);
             assertTrue(map.keys().contains(this.getCollectionElement().key()));
             assertFalse(map.keys().contains(this.getCollectionElement().value()));
         }

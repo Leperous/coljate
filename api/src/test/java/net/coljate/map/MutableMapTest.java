@@ -1,13 +1,10 @@
 package net.coljate.map;
 
 import net.coljate.set.MutableSetTest;
-
-import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.CoreMatchers.not;
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.junit.jupiter.api.Assertions.assertNull;
 import org.junit.jupiter.api.Test;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertNull;
 /**
  *
  * @author Ollie
@@ -25,7 +22,7 @@ public interface MutableMapTest<K, V> extends MapTest<K, V>, MutableSetTest<Entr
             final Entry<K, V> entry = this.createTestObject();
             final V previous = map.put(entry.key(), entry.value());
             assertNull(previous);
-            assertThat(map.get(entry.key()), is(entry.value()));
+            assertThat(map.get(entry.key())).isEqualTo(entry.value());
         }
 
         @Test
@@ -44,14 +41,14 @@ public interface MutableMapTest<K, V> extends MapTest<K, V>, MutableSetTest<Entr
             final Entry<K, V> entryWritten = this.getCollectionElement();
             final Entry<K, V> entryView = map.getEntry(entryWritten.key());
 
-            assertThat(entryView.value(), is(entryWritten.value()));
+            assertThat(entryView.value()).isEqualTo(entryWritten.value());
 
             final Entry<K, V> newEntry = this.createTestObject();
-            assertThat(newEntry.value(), not(entryWritten.value()));
+            assertThat(newEntry.value()).isNotEqualTo(entryWritten.value());
 
             map.put(entryWritten.key(), newEntry.value());
-            
-            assertThat(entryView.value(), is(newEntry.value()));
+
+            assertThat(entryView.value()).isEqualTo(newEntry.value());
 
         }
 

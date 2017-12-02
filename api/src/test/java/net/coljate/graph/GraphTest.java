@@ -1,11 +1,10 @@
 package net.coljate.graph;
 
 import net.coljate.set.SetTest;
-
-import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.Test;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
  *
@@ -23,14 +22,14 @@ public interface GraphTest<V, E> extends SetTest<Relationship<V, E>> {
         default void testEdges() {
             final Graph<V, E> graph = this.createTestCollection();
             assertTrue(graph.edges().isEmpty());
-            assertThat(graph.size(), is(0));
+            assertThat(graph.size()).isEqualTo(0);
         }
 
         @Test
         default void testVertices() {
             final Graph<V, E> graph = this.createTestCollection();
             assertTrue(graph.vertices().isEmpty());
-            assertThat(graph.order(), is(0));
+            assertThat(graph.order()).isEqualTo(0);
         }
 
     }
@@ -40,15 +39,15 @@ public interface GraphTest<V, E> extends SetTest<Relationship<V, E>> {
         @Test
         default void testVertices() {
             final Graph<V, E> graph = this.createTestCollection();
-            assertThat(graph.vertices().count(), is(2));
-            assertThat(graph.order(), is(2));
+            assertThat(graph.vertices().count()).isEqualTo(2);
+            assertThat(graph.order()).isEqualTo(2);
         }
 
         @Test
         default void testEdges() {
             final Graph<V, E> graph = this.createTestCollection();
-            assertThat(graph.edges().count(), is(1));
-            assertThat(graph.size(), is(1));
+            assertThat(graph.edges().count()).isEqualTo(1);
+            assertThat(graph.size()).isEqualTo(1);
         }
 
     }
