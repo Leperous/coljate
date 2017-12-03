@@ -1,15 +1,14 @@
 package net.coljate.set.impl;
 
-import java.util.NoSuchElementException;
-import java.util.Objects;
-
 import net.coljate.set.AbstractSet;
 import net.coljate.set.ImmutableSet;
 import net.coljate.set.SequentialSet;
 import net.coljate.util.iterator.UnmodifiableIterator;
 
+import java.util.NoSuchElementException;
+import java.util.Objects;
+
 /**
- *
  * @author Ollie
  */
 public class TwoSet<T>

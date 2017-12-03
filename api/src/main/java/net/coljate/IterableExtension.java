@@ -7,16 +7,13 @@ import net.coljate.util.complexity.TimeComplexity;
 import javax.annotation.CheckForNull;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-import java.util.Comparator;
-import java.util.Iterator;
-import java.util.Objects;
-import java.util.Optional;
+import java.util.*;
 import java.util.function.BinaryOperator;
 import java.util.function.Predicate;
+import java.util.function.Supplier;
 import java.util.function.ToLongFunction;
 
 /**
- *
  * @author Ollie
  * @since 1.0
  */
@@ -68,7 +65,6 @@ public interface IterableExtension<T> extends Container, Iterable<T> {
     }
 
     /**
-     *
      * @param iterable
      * @return true if this collection contains any element in the given iterable, false if it is empty.
      */
@@ -82,7 +78,6 @@ public interface IterableExtension<T> extends Container, Iterable<T> {
     }
 
     /**
-     *
      * @param iterable
      * @return true if this collection contains all of the elements in the given iterable, or if the iterable is empty.
      */
@@ -96,7 +91,6 @@ public interface IterableExtension<T> extends Container, Iterable<T> {
     }
 
     /**
-     *
      * @param predicate
      * @return true if any element in this container matches the given predicate.
      */
@@ -111,7 +105,6 @@ public interface IterableExtension<T> extends Container, Iterable<T> {
     }
 
     /**
-     *
      * @param predicate
      * @return true if no element matches the given predicate.
      */
@@ -121,9 +114,8 @@ public interface IterableExtension<T> extends Container, Iterable<T> {
     }
 
     /**
-     *
      * @param predicate
-     * @param ifNone the result if this container is empty.
+     * @param ifNone    the result if this container is empty.
      * @return true if all elements match the given predicate, or the given boolean if this is empty.
      */
     @TimeComplexity(Complexity.LINEAR)
@@ -170,13 +162,19 @@ public interface IterableExtension<T> extends Container, Iterable<T> {
     }
 
     /**
-     *
-     * @return the first element returned by this collection's iterator, if any.
+     * @return the first element returned by this iterable's iterator.
+     * @throws NoSuchElementException if this iterable is empty.
+     * @see #firstOr
      */
-    @CheckForNull
     default T first() {
+        return this.firstOr(() -> {
+            throw new NoSuchElementException("No first element in this empty iterable!");
+        });
+    }
+
+    default T firstOr(final Supplier<? extends T> supplier) {
         final Iterator<T> iterator = this.iterator();
-        return iterator.hasNext() ? iterator.next() : null;
+        return iterator.hasNext() ? iterator.next() : supplier.get();
     }
 
     @Nonnull

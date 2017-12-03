@@ -1,15 +1,14 @@
 package net.coljate.graph;
 
+import net.coljate.set.impl.TwoSet;
+
+import javax.annotation.Nonnull;
 import java.util.Objects;
 import java.util.Optional;
 
-import javax.annotation.Nonnull;
-
-import net.coljate.set.impl.TwoSet;
-
 /**
  * Encapsulates an edge between two vertices.
- *
+ * <p>
  * The vertices are reversible if this is a member of an undirected graph.
  *
  * @param <V> vertex type
