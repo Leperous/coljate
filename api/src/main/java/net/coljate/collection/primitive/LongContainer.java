@@ -1,6 +1,8 @@
 package net.coljate.collection.primitive;
 
 import net.coljate.Container;
+import net.coljate.util.complexity.Complexity;
+import net.coljate.util.complexity.TimeComplexity;
 
 /**
  *
@@ -8,6 +10,7 @@ import net.coljate.Container;
  */
 public interface LongContainer extends Container {
 
+    @TimeComplexity(bestCase = Complexity.CONSTANT, worstCase = Complexity.LINEAR)
     boolean contains(long i);
 
     @Override

@@ -28,6 +28,16 @@ public interface LongIterable extends Iterable<Long>, LongContainer {
         return this.reduce((final long i1, final long i2) -> Math.multiplyExact(i1, i2), 1);
     }
 
+    @Override
+    public default boolean contains(final long i) {
+        for (final LongIterator iterator = this.iterator(); iterator.hasNext();) {
+            if (iterator.nextLong() == i) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     interface LongIterator extends Iterator<Long> {
 
         long nextLong();
