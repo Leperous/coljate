@@ -147,4 +147,10 @@ public final class Arrays {
         }
     }
 
+    public static <T> T[] chop(final T[] array, final int maxLength) {
+        return array.length > maxLength
+                ? java.util.Arrays.copyOf(array, maxLength)
+                : array;
+    }
+
 }

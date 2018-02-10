@@ -13,6 +13,7 @@ import net.coljate.list.MutableArray;
 import net.coljate.list.impl.ImmutableSortedArray;
 import net.coljate.set.Set;
 import net.coljate.set.lazy.LazySet;
+import net.coljate.util.Arrays;
 import net.coljate.util.complexity.TimeComplexity;
 
 import javax.annotation.CheckReturnValue;
@@ -110,12 +111,16 @@ public interface Collection<T> extends IterableExtension<T>, StreamExtension<T> 
     @Nonnull
     @CheckReturnValue
     default T[] arrayCopy(final IntFunction<T[]> arrayConstructor) {
-        final T[] into = arrayConstructor.apply(this.count());
+        final int count = this.count();
+        final T[] into = arrayConstructor.apply(count);
         int index = 0;
         for (final T element : this) {
             into[index++] = element;
+            if (index == count) {
+                break;
+            }
         }
-        return into;
+        return Arrays.chop(into, Math.min(index, count));
     }
 
     @Nonnull
