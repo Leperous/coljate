@@ -1,20 +1,16 @@
 package net.coljate.tree.navigation;
 
+import net.coljate.tree.BinaryTreeMapNode;
+import net.coljate.tree.TreeNode;
+
 import java.util.function.Consumer;
 import java.util.function.Predicate;
 
-import net.coljate.tree.TreeNode;
-import net.coljate.tree.BinaryTreeMapNode;
-
 /**
- *
  * @author Ollie
  * @since 1.0
  */
-public class DepthFirstRecursiveTreeNavigation implements TreeNavigation {
-
-    protected DepthFirstRecursiveTreeNavigation() {
-    }
+class DepthFirstRecursiveTreeNavigation implements TreeNavigation {
 
     @Override
     public <N extends TreeNode<N>> N first(final N node, final Predicate<? super N> predicate) {

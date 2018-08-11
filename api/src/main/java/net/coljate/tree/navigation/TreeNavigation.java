@@ -1,21 +1,19 @@
 package net.coljate.tree.navigation;
 
+import net.coljate.list.List;
+import net.coljate.list.MutableList;
+import net.coljate.tree.BinaryTreeMapNode;
+import net.coljate.tree.Tree;
+import net.coljate.tree.TreeNode;
+
+import javax.annotation.CheckForNull;
+import javax.annotation.Nonnull;
 import java.util.Objects;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
 
-import javax.annotation.CheckForNull;
-import javax.annotation.Nonnull;
-
-import net.coljate.list.List;
-import net.coljate.list.MutableList;
-import net.coljate.tree.Tree;
-import net.coljate.tree.TreeNode;
-import net.coljate.tree.BinaryTreeMapNode;
-
 /**
- *
  * @author Ollie
  * @since 1.0
  */
@@ -27,7 +25,6 @@ public interface TreeNavigation {
     }
 
     /**
-     *
      * @param <N>
      * @param node
      * @param predicate
@@ -37,7 +34,6 @@ public interface TreeNavigation {
     <N extends TreeNode<N>> N first(N node, Predicate<? super N> predicate);
 
     /**
-     *
      * @param <N>
      * @param tree
      * @param predicate
@@ -55,7 +51,6 @@ public interface TreeNavigation {
     }
 
     /**
-     *
      * @param <N>
      * @param node
      * @param nodes
@@ -65,7 +60,6 @@ public interface TreeNavigation {
     }
 
     /**
-     *
      * @param <N>
      * @param node
      * @param nodes
@@ -74,7 +68,6 @@ public interface TreeNavigation {
     <N extends TreeNode<N>> void collect(N node, Consumer<? super N> nodes, Predicate<? super N> predicate);
 
     /**
-     *
      * @param <N>
      * @param node
      * @param nodes
@@ -86,7 +79,6 @@ public interface TreeNavigation {
     }
 
     /**
-     *
      * @param <N>
      * @param node
      * @param nodes
@@ -100,15 +92,26 @@ public interface TreeNavigation {
     }
 
     TreeNavigation DEPTH_FIRST_RECURSIVE = new DepthFirstRecursiveTreeNavigation();
-    AtomicReference<TreeNavigation> DEFAULT = new AtomicReference<>(DEPTH_FIRST_RECURSIVE);
+    TreeNavigation BREADTH_FIRST_RECURSIVE = new BreadthFirstRecursiveTreeNavigation();
+    AtomicReference<PrivateContainer> DEFAULT = new AtomicReference<>(new PrivateContainer(DEPTH_FIRST_RECURSIVE));
 
     static TreeNavigation getDefault() {
-        return DEFAULT.get();
+        return DEFAULT.get().navigation;
     }
 
     static void setDefault(final TreeNavigation navigation) {
-        Objects.requireNonNull(navigation, "Cannot set null default tree navigation!");
-        DEFAULT.set(navigation);
+        DEFAULT.set(new PrivateContainer(navigation));
+    }
+
+    class PrivateContainer {
+
+        private final TreeNavigation navigation;
+
+        private PrivateContainer(final TreeNavigation navigation) {
+            Objects.requireNonNull(navigation, "Cannot set null default tree navigation!");
+            this.navigation = navigation;
+        }
+
     }
 
 }
