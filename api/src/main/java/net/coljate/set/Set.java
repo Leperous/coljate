@@ -1,15 +1,5 @@
 package net.coljate.set;
 
-import java.util.Comparator;
-import java.util.Objects;
-import java.util.Optional;
-import java.util.Spliterator;
-import java.util.Spliterators;
-import java.util.function.Predicate;
-import java.util.stream.Collector;
-
-import javax.annotation.CheckReturnValue;
-
 import net.coljate.collection.Collection;
 import net.coljate.list.Array;
 import net.coljate.set.impl.CovariantSet;
@@ -24,6 +14,15 @@ import net.coljate.set.lazy.LazySetUnion;
 import net.coljate.util.Equality;
 import net.coljate.util.complexity.Complexity;
 import net.coljate.util.complexity.TimeComplexity;
+
+import javax.annotation.CheckReturnValue;
+import java.util.Comparator;
+import java.util.Objects;
+import java.util.Optional;
+import java.util.Spliterator;
+import java.util.Spliterators;
+import java.util.function.Predicate;
+import java.util.stream.Collector;
 
 /**
  * A finite set of elements.
@@ -203,7 +202,6 @@ public interface Set<T> extends Collection<T> {
     }
 
     /**
-     *
      * @param <T>
      * @param set
      * @return a covariant view of the given set.
@@ -221,14 +219,14 @@ public interface Set<T> extends Collection<T> {
     }
 
     static <T> Set<T> ofOptional(final Optional<? extends T> optional) {
-        return optional.map(Set::of).orElseGet(Set::of);
+        return optional.map(Set::<T>of).orElseGet(Set::of);
     }
 
     @SafeVarargs
     static <T> Set<T> ofOptionals(final Optional<? extends T>... optionals) {
         return Array.viewOf(optionals)
                 .filter(Optional::isPresent)
-                .transform((Optional<? extends T> o) -> (T) o.get())
+                .<T>transform(Optional::get)
                 .distinct();
     }
 
