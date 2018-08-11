@@ -1,13 +1,12 @@
 package net.coljate.collection.lazy;
 
-import java.util.Iterator;
-import java.util.function.Predicate;
-
 import net.coljate.collection.Collection;
 import net.coljate.util.iterator.Iterators;
 
+import java.util.Iterator;
+import java.util.function.Predicate;
+
 /**
- *
  * @author Ollie
  */
 public class LazyFilteredCollection<T> implements LazyCollection<T> {
@@ -20,11 +19,15 @@ public class LazyFilteredCollection<T> implements LazyCollection<T> {
         this.predicate = predicate;
     }
 
+    protected Predicate<? super T> predicate() {
+        return predicate;
+    }
+
     @Override
     @SuppressWarnings("unchecked")
     public boolean contains(final Object object) {
         return collection.contains(object)
-                && predicate.test((T) object);
+                && predicate.test((T) object); //"Ensures" correct type.
     }
 
     @Override

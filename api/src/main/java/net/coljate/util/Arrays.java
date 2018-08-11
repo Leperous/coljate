@@ -7,6 +7,7 @@ import javax.annotation.Nonnull;
 import java.util.Objects;
 import java.util.function.Consumer;
 import java.util.function.Function;
+import java.util.function.Predicate;
 import java.util.function.UnaryOperator;
 
 /**
@@ -151,6 +152,25 @@ public final class Arrays {
         return array.length > maxLength
                 ? java.util.Arrays.copyOf(array, maxLength)
                 : array;
+    }
+
+    public static <T> boolean any(final T[] array, final Predicate<? super T> predicate) {
+        for (int i = 0; i < array.length; i++) {
+            if (predicate.test(array[i])) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public static <T> int count(final T[] array, final Predicate<? super T> predicate) {
+        int count = 0;
+        for (int i = 0; i < array.length; i++) {
+            if (predicate.test(array[i])) {
+                count++;
+            }
+        }
+        return count;
     }
 
 }
