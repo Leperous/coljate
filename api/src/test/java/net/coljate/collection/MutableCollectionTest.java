@@ -8,7 +8,6 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
- *
  * @author Ollie
  */
 public interface MutableCollectionTest<T> extends CollectionTest<T>, TestObjectCreator<T> {
@@ -40,6 +39,17 @@ public interface MutableCollectionTest<T> extends CollectionTest<T>, TestObjectC
             collection.clear();
             assertFalse(collection.contains(element));
             assertThat(collection.count()).isEqualTo(0);
+        }
+
+        @Test
+        default void testRemoveFirst() {
+            final MutableCollection<T> collection = this.createTestCollection();
+            final T element = this.getCollectionElement();
+            assertTrue(collection.contains(element));
+
+            assertTrue(collection.removeFirst(element));
+            assertFalse(collection.contains(element));
+            assertTrue(collection.isEmpty());
         }
 
     }

@@ -46,7 +46,7 @@ public class StringTrie<V>
         if (!(key instanceof String)) {
             return false;
         }
-        return root.remove((String) key, value);
+        return root.remove((String) key, 0, value);
     }
 
     @Override
@@ -144,21 +144,24 @@ public class StringTrie<V>
             return previous;
         }
 
-        boolean remove(final String key, final Object value) {
-            TrieEntry<V> entry = this;
-            for (int i = 0; i < key.length(); i++) {
-                final char c = key.charAt(i);
-                entry = entry.children.get(c);
-                if (entry == null) {
+        boolean remove(final String key, final int i, final Object value) {
+            if (this.end && i == word.length()) {
+                assert word.equals(key) : word + " != " + key;
+                if (Objects.equals(this.value, value)) {
+                    this.end = false;
+                    this.value = null;
+                    return true;
+                } else {
                     return false;
                 }
             }
-            if (entry.end && Objects.equals(entry.value, value)) {
-                entry.value = null;
-                entry.end = false;
-                return true;
+            final char c = key.charAt(i);
+            final TrieEntry<V> child = children.get(c);
+            final boolean removed = child != null && child.remove(key, i + 1, value);
+            if (removed && this.isEmpty()) {
+                children.remove(c);
             }
-            return false;
+            return removed;
         }
 
         boolean isEmpty() {

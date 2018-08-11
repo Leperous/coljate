@@ -8,6 +8,7 @@ import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class StringTrieTest {
 
@@ -55,6 +56,28 @@ class StringTrieTest {
         @Override
         public MutableMap<String, Object> createTestCollection() {
             return new StringTrie<>(entry);
+        }
+
+    }
+
+    @Nested
+    class GeneralTrieTests {
+
+        @Test
+        void testRemoveSubstring() {
+
+            final StringTrie<Integer> trie = new StringTrie<>();
+            trie.put("foo", 1);
+            trie.put("foobar", 2);
+
+            assertTrue(trie.containsKey("foo"));
+            assertTrue(trie.containsKey("foobar"));
+
+            trie.removeKey("foo");
+
+            assertFalse(trie.containsKey("foo"));
+            assertTrue(trie.containsKey("foobar"));
+
         }
 
     }
