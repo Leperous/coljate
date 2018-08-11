@@ -1,5 +1,7 @@
 package net.coljate.map.impl;
 
+import net.coljate.collection.AbstractCollection;
+import net.coljate.collection.Collection;
 import net.coljate.list.MutableList;
 import net.coljate.map.AbstractMap;
 import net.coljate.map.Entry;
@@ -22,6 +24,7 @@ public class StringTrie<V>
 
     private TrieEntry<V> root = new TrieEntry<>("");
     private TrieKeys keys;
+    private TrieValues values;
 
     public StringTrie() {
     }
@@ -80,6 +83,14 @@ public class StringTrie<V>
         return keys == null
                 ? (keys = new TrieKeys())
                 : keys;
+    }
+
+    @Nonnull
+    @Override
+    public Collection<V> values() {
+        return values == null
+                ? (values = new TrieValues())
+                : values;
     }
 
     private static class TrieEntry<V> {
@@ -186,6 +197,22 @@ public class StringTrie<V>
             final MutableList<TrieEntry<V>> wordEntries = MutableList.create(10);
             root.collectWords(wordEntries::add);
             return Iterators.transform(wordEntries.iterator(), e -> e.word);
+        }
+
+    }
+
+    private class TrieValues extends AbstractCollection<V> {
+
+        @Override
+        protected boolean equals(Collection<?> that) {
+            throw new UnsupportedOperationException(); //TODO
+        }
+
+        @Override
+        public Iterator<V> iterator() {
+            final MutableList<TrieEntry<V>> wordEntries = MutableList.create(10);
+            root.collectWords(wordEntries::add);
+            return Iterators.transform(wordEntries.iterator(), e -> e.value);
         }
 
     }
