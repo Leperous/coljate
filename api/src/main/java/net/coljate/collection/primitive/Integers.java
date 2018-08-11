@@ -3,21 +3,23 @@ package net.coljate.collection.primitive;
 import java.util.function.LongPredicate;
 
 /**
- *
  * @author ollie
  */
 public enum Integers implements LongContainer {
 
+    ALL(l -> true),
     POSITIVE(l -> l > 0),
     NON_ZERO(l -> l != 0),
-    EVEN(l -> l % 2 == 0);
+    NEGATIVE(l -> l < 0),
+    EVEN(l -> l % 2 == 0),
+    ODD(l -> l % 2 == 1),
+    NONE(l -> false);
 
     private final LongPredicate p;
 
-    private Integers(LongPredicate p) {
+    Integers(final LongPredicate p) {
         this.p = p;
     }
-    
 
     @Override
     public boolean contains(long i) {
