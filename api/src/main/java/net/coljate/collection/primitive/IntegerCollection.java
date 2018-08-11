@@ -1,19 +1,23 @@
 package net.coljate.collection.primitive;
 
-import java.util.function.IntBinaryOperator;
-
 import net.coljate.collection.Collection;
 
+import java.util.function.IntBinaryOperator;
+
 /**
- *
  * @author Ollie
  */
 public interface IntegerCollection extends IntegerContainer, Collection<Long>, LongIterable {
 
     @Override
     default boolean contains(final int i) {
-        for (final IntegerIterator iterator = this.iterator(); iterator.hasNext();) {
-            if (iterator.nextInt() == i) {
+        return this.contains((long) i);
+    }
+
+    @Override
+    default boolean contains(final long l) {
+        for (final IntegerIterator iterator = this.iterator(); iterator.hasNext(); ) {
+            if (iterator.nextLong() == l) {
                 return true;
             }
         }
@@ -30,7 +34,7 @@ public interface IntegerCollection extends IntegerContainer, Collection<Long>, L
 
     default int reduce(final IntBinaryOperator operator, final int initialValue) {
         int current = initialValue;
-        for (final IntegerIterator iterator = this.iterator(); iterator.hasNext();) {
+        for (final IntegerIterator iterator = this.iterator(); iterator.hasNext(); ) {
             current = operator.applyAsInt(current, iterator.nextInt());
         }
         return current;
