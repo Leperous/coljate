@@ -1,15 +1,7 @@
 package net.coljate.map.impl;
 
-import java.util.Iterator;
-import java.util.NoSuchElementException;
-import java.util.Objects;
-
-import javax.annotation.Nonnull;
-
 import net.coljate.collection.AbstractCollection;
 import net.coljate.collection.Collection;
-import net.coljate.collection.ImmutableCollection;
-import net.coljate.collection.MutableCollection;
 import net.coljate.list.MutableList;
 import net.coljate.list.impl.MutableLinkedList;
 import net.coljate.map.AbstractEntry;
@@ -19,12 +11,16 @@ import net.coljate.map.MutableEntry;
 import net.coljate.map.MutableMap;
 import net.coljate.set.AbstractSet;
 import net.coljate.set.Set;
+import net.coljate.util.functions.Functions;
 import net.coljate.util.iterator.CovariantIterator;
 import net.coljate.util.iterator.Iterators;
-import net.coljate.util.functions.Functions;
+
+import javax.annotation.Nonnull;
+import java.util.Iterator;
+import java.util.NoSuchElementException;
+import java.util.Objects;
 
 /**
- *
  * @author Ollie
  * @see java.util.HashMap
  */
@@ -124,9 +120,8 @@ public class ChainedHashMap<K, V>
     }
 
     private void resize(final int newSize) {
-        @SuppressWarnings("unchecked")
-        final MutableList<MutableEntry<K, V>>[] newBuckets = new MutableList[newSize];
-        for (final EntryIterator iterator = new EntryIterator(); iterator.hasNext();) {
+        @SuppressWarnings("unchecked") final MutableList<MutableEntry<K, V>>[] newBuckets = new MutableList[newSize];
+        for (final EntryIterator iterator = new EntryIterator(); iterator.hasNext(); ) {
             final MutableEntry<K, V> entry = iterator.next();
             getOrCreateBucket(entry.key(), newBuckets).suffix(entry);
         }
@@ -204,23 +199,13 @@ public class ChainedHashMap<K, V>
     private final class Values extends AbstractCollection<V> {
 
         @Override
-        protected boolean equals(final Collection<?> that) {
-            throw new UnsupportedOperationException("Not supported yet.");
-        }
-
-        @Override
-        public MutableCollection<V> mutableCopy() {
-            throw new UnsupportedOperationException("Not supported yet.");
-        }
-
-        @Override
-        public ImmutableCollection<V> immutableCopy() {
-            throw new UnsupportedOperationException("Not supported yet.");
-        }
-
-        @Override
         public Iterator<V> iterator() {
             return Iterators.transform(ChainedHashMap.this.iterator(), Entry::value);
+        }
+
+        @Override
+        protected boolean equals(final Collection<?> that) {
+            throw new UnsupportedOperationException("Not supported yet.");
         }
 
     }

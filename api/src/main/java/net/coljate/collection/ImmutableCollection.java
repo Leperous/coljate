@@ -1,16 +1,15 @@
 package net.coljate.collection;
 
-import java.util.Spliterator;
-import java.util.Spliterators;
-
-import javax.annotation.concurrent.Immutable;
-
 import net.coljate.collection.impl.EmptyCollection;
+import net.coljate.list.ImmutableList;
 import net.coljate.set.ImmutableSet;
 import net.coljate.util.iterator.UnmodifiableIterator;
 
+import javax.annotation.concurrent.Immutable;
+import java.util.Spliterator;
+import java.util.Spliterators;
+
 /**
- *
  * @author Ollie
  */
 @Immutable
@@ -39,7 +38,7 @@ public interface ImmutableCollection<T> extends Collection<T> {
     }
 
     static <T> ImmutableCollection<T> copyOf(final Collection<? extends T> collection) {
-        throw new UnsupportedOperationException();
+        return ImmutableList.copyOf(collection);
     }
 
 }

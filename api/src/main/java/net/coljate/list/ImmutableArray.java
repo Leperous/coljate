@@ -8,17 +8,16 @@ import net.coljate.list.impl.ImmutableNativeArray;
 import net.coljate.list.impl.SingletonArray;
 
 /**
- *
  * @author Ollie
  */
 public interface ImmutableArray<T>
         extends Array<T>, ImmutableList<T> {
 
-    default ImmutableArray<T> prefixed(final Array<? extends T> array) {
+    default ImmutableArray<T> withPrefix(final Array<? extends T> array) {
         return ImmutableJoinArray.of(array.immutableCopy(), this);
     }
 
-    default ImmutableArray<T> suffixed(final Array<? extends T> array) {
+    default ImmutableArray<T> withSuffix(final Array<? extends T> array) {
         return ImmutableJoinArray.of(this, array.immutableCopy());
     }
 
@@ -75,7 +74,7 @@ public interface ImmutableArray<T>
         return ImmutableNativeArray.copyOf(collection);
     }
 
-    static class ImmutableArrayIterator<T> extends ArrayIterator<T> implements ImmutableListIterator<T> {
+    class ImmutableArrayIterator<T> extends ArrayIterator<T> implements ImmutableListIterator<T> {
 
         public ImmutableArrayIterator(final Array<? extends T> array) {
             super(array);

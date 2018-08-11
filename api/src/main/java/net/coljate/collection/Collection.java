@@ -39,14 +39,18 @@ public interface Collection<T> extends IterableExtension<T>, StreamExtension<T> 
      */
     @Nonnull
     @CheckReturnValue
-    MutableCollection<T> mutableCopy();
+    default MutableCollection<T> mutableCopy() {
+        return MutableCollection.copyOf(this);
+    }
 
     /**
      * @return an immutable copy of this collection.
      */
     @Nonnull
     @CheckReturnValue
-    ImmutableCollection<T> immutableCopy();
+    default ImmutableCollection<T> immutableCopy() {
+        return ImmutableCollection.copyOf(this);
+    }
 
     /**
      * @return true if this collection is empty now and will always be so in future.
