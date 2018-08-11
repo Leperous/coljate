@@ -68,7 +68,9 @@ public interface Map<K, V> extends Set<Entry<K, V>>, Associative<K, V> {
      * @return a view of the values in this map.
      */
     @Nonnull
-    Collection<V> values();
+    default Collection<V> values() {
+        return this.keys().transform(this::get);
+    }
 
     @Override
     default V getIfPresent(final Object key) {
