@@ -1,12 +1,5 @@
 package net.coljate.map;
 
-import java.util.Spliterator;
-import java.util.Spliterators;
-
-import javax.annotation.CheckForNull;
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
 import net.coljate.collection.ImmutableCollection;
 import net.coljate.map.impl.EmptyMap;
 import net.coljate.map.impl.ImmutableWrappedMap;
@@ -15,9 +8,17 @@ import net.coljate.set.ImmutableSet;
 import net.coljate.util.iterator.Iterators;
 import net.coljate.util.iterator.UnmodifiableIterator;
 
+import javax.annotation.CheckForNull;
+import javax.annotation.CheckReturnValue;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import java.util.Spliterator;
+import java.util.Spliterators;
+
 /**
- *
  * @author Ollie
+ * @see EmptyMap
+ * @see SingletonMap
  */
 public interface ImmutableMap<K, V> extends Map<K, V>, ImmutableSet<Entry<K, V>> {
 
@@ -37,6 +38,7 @@ public interface ImmutableMap<K, V> extends Map<K, V>, ImmutableSet<Entry<K, V>>
     }
 
     @Nonnull
+    @CheckReturnValue
     ImmutableMap<K, V> with(K key, V value);
 
     @Override
@@ -55,7 +57,7 @@ public interface ImmutableMap<K, V> extends Map<K, V>, ImmutableSet<Entry<K, V>>
         return Spliterators.spliterator(this.iterator(), this.count(), Spliterator.SIZED | Spliterator.DISTINCT | Spliterator.NONNULL | Spliterator.IMMUTABLE);
     }
 
-    static <K, V> ImmutableMap<K, V> of() {
+    static <K, V> EmptyMap<K, V> of() {
         return EmptyMap.instance();
     }
 
