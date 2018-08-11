@@ -1,12 +1,13 @@
 package net.coljate.collection.primitive;
 
-public enum Characters implements LongContainer {
+public enum Characters implements CharContainer {
 
     ALL(c -> true),
     DIGITS(Character::isDigit),
     LOWERCASE(Character::isLowerCase),
     UPPERCASE(Character::isUpperCase),
     WHITESPACE(Character::isWhitespace),
+    CURRENCY_SYMBOL(c -> Character.getType(c) == Character.CURRENCY_SYMBOL),
     NONE(c -> false) {
         @Override
         public boolean isEmpty() {
@@ -21,8 +22,8 @@ public enum Characters implements LongContainer {
     }
 
     @Override
-    public boolean contains(long i) {
-        throw new UnsupportedOperationException(); //TODO
+    public boolean contains(final char c) {
+        return predicate.testChar(c);
     }
 
     @Override
