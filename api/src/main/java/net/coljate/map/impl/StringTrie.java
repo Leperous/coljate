@@ -5,6 +5,7 @@ import net.coljate.collection.Collection;
 import net.coljate.list.MutableList;
 import net.coljate.map.AbstractMap;
 import net.coljate.map.Entry;
+import net.coljate.map.Map;
 import net.coljate.map.MutableEntry;
 import net.coljate.map.MutableMap;
 import net.coljate.set.AbstractSet;
@@ -21,6 +22,12 @@ import java.util.function.Consumer;
 public class StringTrie<V>
         extends AbstractMap<String, V>
         implements MutableMap<String, V> {
+
+    public static <V> StringTrie<V> copyOf(final Map<String, ? extends V> map) {
+        final StringTrie<V> trie = new StringTrie<>();
+        trie.putAll(map);
+        return trie;
+    }
 
     private TrieEntry<V> root = new TrieEntry<>("");
     private TrieKeys keys;
