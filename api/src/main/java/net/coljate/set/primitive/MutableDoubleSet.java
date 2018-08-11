@@ -4,7 +4,6 @@ import net.coljate.collection.primitive.MutableDoubleCollection;
 import net.coljate.set.MutableSet;
 
 /**
- *
  * @author Ollie
  */
 public interface MutableDoubleSet
@@ -42,5 +41,8 @@ public interface MutableDoubleSet
 
     @Override
     MutableDoubleSet mutableCopy();
+
+    @Override
+    ImmutableDoubleSet immutableCopy();
 
 }
