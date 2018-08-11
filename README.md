@@ -50,5 +50,5 @@ ImmutableMap <-------- Map --------> MutableMap -------> ConcurrentMap
  |                      ↓             ↓                   ↓
  |                     Cache ------> MutableCache -----> ConcurrentCache
  ↓                      ↓             ↓                   ↓
-ImmutableMultimap ---> Multimap ---> MutableMultimap --> ConcurrentMultimap
+ImmutableMultimap <--- Multimap ---> MutableMultimap --> ConcurrentMultimap
 ```
