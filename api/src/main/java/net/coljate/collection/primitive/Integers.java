@@ -12,7 +12,7 @@ public enum Integers implements LongContainer {
     NON_ZERO(l -> l != 0),
     NEGATIVE(l -> l < 0),
     EVEN(l -> l % 2 == 0),
-    ODD(l -> l % 2 == 1),
+    ODD(l -> l % 2 != 0),
     NONE(l -> false) {
         @Override
         public boolean isEmpty() {
