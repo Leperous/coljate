@@ -15,14 +15,6 @@ public interface SortingAlgorithm {
     @TimeComplexity(bestCase = Complexity.LINEAR, worstCase = Complexity.QUADRATIC)
     <T> void sort(@Nonnull T[] array, Comparator<? super T> comparator);
 
-    @Nonnull
-    @TimeComplexity(bestCase = Complexity.LINEAR, worstCase = Complexity.QUADRATIC)
-    default <T> T[] sortedCopy(@Nonnull final T[] array, final Comparator<? super T> comparator) {
-        final T[] copy = Arrays.copy(array);
-        this.sort(copy, comparator);
-        return copy;
-    }
-
     /**
      * Sort an array of naturally comparable elements.
      */
@@ -44,10 +36,26 @@ public interface SortingAlgorithm {
         Arrays.writeNativeArray(doubles, array);
     }
 
+    @Nonnull
+    @TimeComplexity(bestCase = Complexity.LINEAR, worstCase = Complexity.QUADRATIC)
+    default <T> T[] sortedCopy(@Nonnull final T[] array, final Comparator<? super T> comparator) {
+        final T[] copy = Arrays.copy(array);
+        this.sort(copy, comparator);
+        return copy;
+    }
+
+    @Nonnull
+    @TimeComplexity(bestCase = Complexity.LINEAR, worstCase = Complexity.QUADRATIC)
+    default <T extends Comparable<? super T>> T[] sortedCopy(@Nonnull final T[] array) {
+        return this.sortedCopy(array, Comparator.naturalOrder());
+    }
+
     static <T> void swap(final T[] array, final int from, final int to) {
-        final T temp = array[from];
-        array[from] = array[to];
-        array[to] = temp;
+        if (from != to) {
+            final T temp = array[from];
+            array[from] = array[to];
+            array[to] = temp;
+        }
     }
 
     SortingAlgorithm JAVA_DEFAULT = new JdkSortingAlgorithm();
