@@ -1,22 +1,5 @@
 package net.coljate.map;
 
-import java.util.Comparator;
-import java.util.Iterator;
-import java.util.Objects;
-import java.util.Spliterator;
-import java.util.Spliterators;
-import java.util.function.BiConsumer;
-import java.util.function.BiFunction;
-import java.util.function.Function;
-import java.util.function.IntFunction;
-import java.util.function.Predicate;
-import java.util.function.Supplier;
-
-import javax.annotation.CheckForNull;
-import javax.annotation.CheckReturnValue;
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
 import net.coljate.collection.Collection;
 import net.coljate.map.impl.ImmutableWrappedMap;
 import net.coljate.map.impl.KeySortedMap;
@@ -29,12 +12,29 @@ import net.coljate.map.lazy.LazyOverrideMap;
 import net.coljate.map.lazy.LazyUnionMap;
 import net.coljate.set.Set;
 import net.coljate.util.Strings;
-import net.coljate.util.iterator.Iterators;
 import net.coljate.util.functions.Functions;
+import net.coljate.util.iterator.Iterators;
+
+import javax.annotation.CheckForNull;
+import javax.annotation.CheckReturnValue;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import java.util.Comparator;
+import java.util.Iterator;
+import java.util.Objects;
+import java.util.Spliterator;
+import java.util.Spliterators;
+import java.util.function.BiConsumer;
+import java.util.function.BiFunction;
+import java.util.function.Function;
+import java.util.function.IntFunction;
+import java.util.function.Predicate;
+import java.util.function.Supplier;
 
 /**
- *
  * @author Ollie
+ * @see MutableMap
+ * @see ImmutableMap
  * @since 1.0
  */
 public interface Map<K, V> extends Set<Entry<K, V>>, Associative<K, V> {
@@ -82,7 +82,6 @@ public interface Map<K, V> extends Set<Entry<K, V>>, Associative<K, V> {
     }
 
     /**
-     *
      * @param object
      * @return true if the object represents an entry that this {@link #containsEntry contains}.
      * @deprecated

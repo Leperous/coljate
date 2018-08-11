@@ -17,8 +17,10 @@ import java.util.Spliterators;
 
 /**
  * @author Ollie
+ * @see MutableMap
  * @see EmptyMap
  * @see SingletonMap
+ * @since 1.0
  */
 public interface ImmutableMap<K, V> extends Map<K, V>, ImmutableSet<Entry<K, V>> {
 

@@ -1,5 +1,14 @@
 package net.coljate.map;
 
+import net.coljate.map.impl.MutableWrappedHashMap;
+import net.coljate.map.impl.MutableWrappedMap;
+import net.coljate.set.MutableSet;
+import net.coljate.util.iterator.CovariantIterator;
+import net.coljate.util.iterator.Iterators;
+
+import javax.annotation.CheckForNull;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import java.util.Iterator;
 import java.util.Objects;
 import java.util.Spliterator;
@@ -7,19 +16,10 @@ import java.util.function.BiFunction;
 import java.util.function.BiPredicate;
 import java.util.function.Function;
 
-import javax.annotation.CheckForNull;
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
-import net.coljate.map.impl.MutableWrappedHashMap;
-import net.coljate.map.impl.MutableWrappedMap;
-import net.coljate.set.MutableSet;
-import net.coljate.util.iterator.CovariantIterator;
-import net.coljate.util.iterator.Iterators;
-
 /**
- *
  * @author Ollie
+ * @see ImmutableMap
+ * @since 1.0
  */
 public interface MutableMap<K, V> extends Map<K, V>, MutableSet<Entry<K, V>> {
 
@@ -84,7 +84,7 @@ public interface MutableMap<K, V> extends Map<K, V>, MutableSet<Entry<K, V>> {
 
     /**
      * Compute a new value, given the key and previous value.
-     *
+     * <p>
      * Note that this method differs to {@link java.util.Map#compute} in that a null computed value will be stored
      * against the key, instead of causing the entry to be evicted.
      *
@@ -144,7 +144,7 @@ public interface MutableMap<K, V> extends Map<K, V>, MutableSet<Entry<K, V>> {
 
     default boolean removeAllMatchingEntries(final BiPredicate<? super K, ? super V> predicate) {
         boolean removed = false;
-        for (final Iterator<Entry<K, V>> iterator = this.iterator(); iterator.hasNext();) {
+        for (final Iterator<Entry<K, V>> iterator = this.iterator(); iterator.hasNext(); ) {
             final Entry<K, V> entry = iterator.next();
             if (predicate.test(entry.key(), entry.value())) {
                 iterator.remove();
