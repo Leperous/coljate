@@ -4,6 +4,7 @@ import net.coljate.util.Arrays;
 import net.coljate.util.complexity.Complexity;
 import net.coljate.util.complexity.TimeComplexity;
 
+import javax.annotation.Nonnull;
 import java.util.Comparator;
 
 public interface SortingAlgorithm {
@@ -12,7 +13,15 @@ public interface SortingAlgorithm {
      * Sort an array of elements according to the given comparator.
      */
     @TimeComplexity(bestCase = Complexity.LINEAR, worstCase = Complexity.QUADRATIC)
-    <T> void sort(T[] array, Comparator<? super T> comparator);
+    <T> void sort(@Nonnull T[] array, Comparator<? super T> comparator);
+
+    @Nonnull
+    @TimeComplexity(bestCase = Complexity.LINEAR, worstCase = Complexity.QUADRATIC)
+    default <T> T[] sortedCopy(@Nonnull final T[] array, final Comparator<? super T> comparator) {
+        final T[] copy = Arrays.copy(array);
+        this.sort(copy, comparator);
+        return copy;
+    }
 
     /**
      * Sort an array of naturally comparable elements.
@@ -35,7 +44,14 @@ public interface SortingAlgorithm {
         Arrays.writeNativeArray(doubles, array);
     }
 
+    static <T> void swap(final T[] array, final int from, final int to) {
+        final T temp = array[from];
+        array[from] = array[to];
+        array[to] = temp;
+    }
+
     SortingAlgorithm JAVA_DEFAULT = new JdkSortingAlgorithm();
     SortingAlgorithm MERGE_SORT = new MergeSortAlgorithm();
+    SortingAlgorithm QUICK_SORT = new QuicksortAlgorithm();
 
 }
