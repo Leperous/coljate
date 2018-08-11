@@ -13,7 +13,12 @@ public enum Integers implements LongContainer {
     NEGATIVE(l -> l < 0),
     EVEN(l -> l % 2 == 0),
     ODD(l -> l % 2 == 1),
-    NONE(l -> false);
+    NONE(l -> false) {
+        @Override
+        public boolean isEmpty() {
+            return true;
+        }
+    };
 
     private final LongPredicate p;
 
