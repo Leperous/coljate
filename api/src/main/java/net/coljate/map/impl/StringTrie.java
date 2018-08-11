@@ -100,6 +100,11 @@ public class StringTrie<V>
                 : values;
     }
 
+    @Override
+    public StringTrie<V> mutableCopy() {
+        return copyOf(this);
+    }
+
     private static class TrieEntry<V> {
 
         private final MutableMap<Character, TrieEntry<V>> children = MutableMap.createHashMap();
