@@ -119,6 +119,7 @@ public interface Map<K, V> extends Set<Entry<K, V>>, Associative<K, V> {
     }
 
     default void forEach(@Nonnull final BiConsumer<? super K, ? super V> consumer) {
+        Objects.requireNonNull(consumer);
         this.forEach(entry -> consumer.accept(entry.key(), entry.value()));
     }
 

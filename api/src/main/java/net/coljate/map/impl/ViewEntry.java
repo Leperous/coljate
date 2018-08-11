@@ -1,15 +1,14 @@
 package net.coljate.map.impl;
 
-import javax.annotation.CheckForNull;
-
 import net.coljate.map.AbstractEntry;
 import net.coljate.map.Entry;
 import net.coljate.map.Map;
 import net.coljate.map.MutableEntry;
 import net.coljate.map.MutableMap;
 
+import javax.annotation.CheckForNull;
+
 /**
- *
  * @author Ollie
  */
 public abstract class ViewEntry<K, V> extends AbstractEntry<K, V> {

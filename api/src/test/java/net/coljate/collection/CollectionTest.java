@@ -10,7 +10,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 
 /**
- *
  * @author Ollie
  */
 public interface CollectionTest<T> {
@@ -75,7 +74,7 @@ public interface CollectionTest<T> {
         default void testIterator() {
             final Iterator<T> iterator = this.createTestCollection().iterator();
             assertTrue(iterator.hasNext());
-            assertThat(iterator.next()).isEqualTo(this.getCollectionElement());
+            assertEquals(this.getCollectionElement(), iterator.next());
             assertFalse(iterator.hasNext());
             assertThrows(NoSuchElementException.class, () -> iterator.next());
         }
