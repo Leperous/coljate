@@ -5,7 +5,6 @@ import net.coljate.map.ImmutableMapTest;
 import net.coljate.map.SameObjectEntryCreator;
 
 /**
- *
  * @author Ollie
  */
 @SuppressWarnings({"unchecked", "rawtypes"})

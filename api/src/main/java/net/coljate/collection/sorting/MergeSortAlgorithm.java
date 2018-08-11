@@ -9,28 +9,26 @@ class MergeSortAlgorithm implements SortingAlgorithm {
     @Override
     public <T> void sort(final T[] array, final Comparator<? super T> comparator) {
         final T[] work = Arrays.copy(array);
-        this.topDownSplitMerge(work, 0, work.length, array, comparator);
+        this.topDownSplitThenMerge(work, 0, work.length, array, comparator);
     }
 
-    private <T> void topDownSplitMerge(final T[] left, final int start, final int end, final T[] right, final Comparator<? super T> comparator) {
+    private <T> void topDownSplitThenMerge(final T[] work, final int start, final int end, final T[] out, final Comparator<? super T> comparator) {
         if (end - start < 2) {
             return;
         }
         final int middle = (start + end) / 2;
-        this.topDownSplitMerge(right, start, middle, left, comparator);
-        this.topDownSplitMerge(right, middle, end, left, comparator);
-        this.topDownMerge(left, start, middle, end, right, comparator);
+        this.topDownSplitThenMerge(out, start, middle, work, comparator);
+        this.topDownSplitThenMerge(out, middle, end, work, comparator);
+        this.topDownMerge(work, start, middle, end, out, comparator);
     }
 
-    private <T> void topDownMerge(final T[] left, final int start, final int middle, final int end, final T[] right, final Comparator<? super T> comparator) {
+    private <T> void topDownMerge(final T[] source, final int start, final int middle, final int end, final T[] out, final Comparator<? super T> comparator) {
         int i = start, j = middle;
         for (int k = start; k < end; k++) {
-            if (i < middle && (j >= end || comparator.compare(left[i], right[j]) <= 0)) {
-                right[k] = left[i];
-                i++;
+            if (i < middle && (j >= end || comparator.compare(source[i], source[j]) <= 0)) {
+                out[k] = source[i++];
             } else {
-                right[k] = left[j];
-                j++;
+                out[k] = source[j++];
             }
         }
     }
