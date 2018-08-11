@@ -3,13 +3,13 @@ package net.coljate.map;
 import net.coljate.set.SetTest;
 import org.junit.jupiter.api.Test;
 
+import java.util.List;
 import java.util.Objects;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 
 /**
- *
  * @author Ollie
  */
 public interface MapTest<K, V> extends SetTest<Entry<K, V>> {
@@ -70,6 +70,18 @@ public interface MapTest<K, V> extends SetTest<Entry<K, V>> {
             assertTrue(map.keys().contains(this.getCollectionElement().key()));
             assertFalse(map.keys().contains(this.getCollectionElement().value()));
         }
+
+    }
+
+    interface TwoEntryTests<K, V> extends MapTest<K, V>, SetTest.MultiElementTests<Entry<K, V>> {
+
+        @Override
+        default Map<K, V> createTestCollection() {
+            return this.createTestCollection(java.util.Collections.emptyList());
+        }
+
+        @Override
+        Map<K, V> createTestCollection(List<Entry<K, V>> entries);
 
     }
 

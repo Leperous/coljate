@@ -47,8 +47,11 @@ public interface SetTest<T> extends CollectionTest<T> {
             return this.createTestCollection(Arrays.asList(t1));
         }
 
-        default Set<T> createTestCollection(final T... elements) {
-            return this.createTestCollection(Arrays.asList(elements));
+        default Set<T> createTestCollection(final T t1, final T t2) {
+            final java.util.List<T> list = new java.util.ArrayList<>();
+            list.add(t1);
+            list.add(t2);
+            return this.createTestCollection(list);
         }
 
         Set<T> createTestCollection(java.util.List<T> list);

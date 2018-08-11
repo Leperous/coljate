@@ -4,12 +4,12 @@ import net.coljate.map.Entry;
 import net.coljate.map.MutableMap;
 import net.coljate.map.MutableMapTest;
 import net.coljate.map.NewObjectEntryCreator;
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Nested;
 
+import java.util.List;
+
 /**
- *
  * @author Ollie
  */
 @SuppressWarnings({"unchecked", "rawtypes"})
@@ -45,6 +45,18 @@ public class ChainedHashMapTest {
         @Override
         public Entry<Object, Object> getCollectionElement() {
             return entry;
+        }
+
+    }
+
+    @Nested
+    class DualMapTest extends NewObjectEntryCreator implements MutableMapTest.TwoEntryTests<Object, Object> {
+
+        @Override
+        public MutableMap<Object, Object> createTestCollection(final List<Entry<Object, Object>> list) {
+            final MutableMap<Object, Object> map = ChainedHashMap.create(list.size());
+            list.forEach(map::put);
+            return map;
         }
 
     }
