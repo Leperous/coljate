@@ -70,11 +70,13 @@ class StringTrieTest {
             trie.put("foo", 1);
             trie.put("foobar", 2);
 
+            assertFalse(trie.containsKey("fo"));
             assertTrue(trie.containsKey("foo"));
             assertTrue(trie.containsKey("foobar"));
 
             trie.removeKey("foo");
 
+            assertFalse(trie.containsKey("fo"));
             assertFalse(trie.containsKey("foo"));
             assertTrue(trie.containsKey("foobar"));
 
