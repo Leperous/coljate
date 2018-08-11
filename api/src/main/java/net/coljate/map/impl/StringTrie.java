@@ -103,6 +103,7 @@ public class StringTrie<V>
                     return false;
                 }
             }
+            assert Objects.equals(entry.word, key) : entry.word + " != " + key;
             return entry.end;
         }
 
@@ -115,6 +116,7 @@ public class StringTrie<V>
                     return null;
                 }
             }
+            assert Objects.equals(entry.word, key) : entry.word + " != " + key;
             return entry.end ? entry.value : null;
         }
 
@@ -123,7 +125,7 @@ public class StringTrie<V>
             for (int i = 0; i < key.length(); i++) {
                 final char c = key.charAt(i);
                 final int j = i;
-                entry = entry.children.computeIfAbsent(c, cc -> new TrieEntry<>(key.substring(0, j)));
+                entry = entry.children.computeIfAbsent(c, cc -> new TrieEntry<>(key.substring(0, j + 1)));
             }
             final V previous = entry.value;
             entry.end = true;
@@ -171,7 +173,7 @@ public class StringTrie<V>
 
         @Override
         public boolean contains(final Object object) {
-            return StringTrie.this.contains(object);
+            return StringTrie.this.containsKey(object);
         }
 
         @Override

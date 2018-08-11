@@ -67,7 +67,7 @@ public interface MapTest<K, V> extends SetTest<Entry<K, V>> {
         default void testKeys() {
             final Map<K, V> map = this.createTestCollection();
             assertThat(map.keys().count()).isEqualTo(1);
-            assertTrue(map.keys().contains(this.getCollectionElement().key()));
+            assertTrue(map.keys().contains(this.getCollectionElement().key()), map.keys() + " should contain " + this.getCollectionElement().key());
             assertFalse(map.keys().contains(this.getCollectionElement().value()));
         }
 
