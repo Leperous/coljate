@@ -7,7 +7,7 @@ class MergeSortAlgorithmTest implements SortingAlgorithmTest {
     @Nonnull
     @Override
     public MergeSortAlgorithm algorithm() {
-        return MergeSortAlgorithm.INSTANCE;
+        return new MergeSortAlgorithm();
     }
 
 }

@@ -4,12 +4,7 @@ import net.coljate.util.Arrays;
 
 import java.util.Comparator;
 
-public class MergeSortAlgorithm implements SortingAlgorithm {
-
-    public static final MergeSortAlgorithm INSTANCE = new MergeSortAlgorithm();
-
-    private MergeSortAlgorithm() {
-    }
+class MergeSortAlgorithm implements SortingAlgorithm {
 
     @Override
     public <T> void sort(final T[] array, final Comparator<? super T> comparator) {

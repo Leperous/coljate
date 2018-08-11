@@ -35,24 +35,7 @@ public interface SortingAlgorithm {
         Arrays.writeNativeArray(doubles, array);
     }
 
-    SortingAlgorithm JAVA_DEFAULT = new SortingAlgorithm() {
-
-        @Override
-        public <T> void sort(final T[] array, final Comparator<? super T> comparator) {
-            java.util.Arrays.sort(array, comparator);
-        }
-
-        @Override
-        public void sort(final int[] array) {
-            java.util.Arrays.sort(array);
-        }
-
-        @Override
-        public void sort(double[] array) {
-            java.util.Arrays.sort(array);
-        }
-    };
-
-    SortingAlgorithm MERGE_SORT = MergeSortAlgorithm.INSTANCE;
+    SortingAlgorithm JAVA_DEFAULT = new JdkSortingAlgorithm();
+    SortingAlgorithm MERGE_SORT = new MergeSortAlgorithm();
 
 }
