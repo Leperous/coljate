@@ -32,7 +32,11 @@ import java.util.function.Predicate;
 import java.util.function.Supplier;
 
 /**
+ * A map is an one-to-many associative container (lookup a single value associated to a given key).
+ * It can also be considered to be a {@link Set set} of these {@link Entry associations}.
+ *
  * @author Ollie
+ * @see Entry
  * @see MutableMap
  * @see ImmutableMap
  * @since 1.0
